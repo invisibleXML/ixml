@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+      "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+ xmlns:owl="http://www.w3.org/2002/07/owl#"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Invisible XML Specification</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
+  <style type="text/css">
+    body {margin-left: 3em; max-width: 50em;}
+    h1, h2 {font-family: sans-serif; clear: both}
+    pre {margin-left: 2em; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
+    code {color: #A00}
+    table {border-collapse: collapse;}
+    th {color: white; background-color: #88f} 
+    div {border: thin red solid}
+
+    tr:nth-child(even) {background-color: #ddd}
+    img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
+    iframe  {height: 50ex; width: 108ex; margin-left: 2ex; border: none}
+    iframe.short  {height: 10ex;}
+    .source {text-align: right}
+  </style>
+</head>
+
+<body>
+<h1>Invisible XML Specification (Draft)</h1>
+
+<p>Steven Pemberton, CWI, Amsterdam</p>
+
+<p>Version:  <!--$date=-->2020-07-23<!--$--> </p>
+
+<h2 id="L3397">Status</h2>
+
+<p>This is the current state of the ixml base grammar; it is close to final.</p>
+
+<div class="toc">
+<ul>
+  <li><a href="#L3397">Status</a></li>
+  <li><a href="#L3403">Introduction</a></li>
+  <li><a href="#L3718">How it works</a></li>
+  <li><a href="#L3469">The Grammar</a> 
+    <ul>
+      <li><a href="#L5696">Rules</a></li>
+      <li><a href="#L5705">Nonterminals</a></li>
+      <li><a href="#L3571">Terminals</a></li>
+      <li><a href="#L3595">Character sets</a></li>
+      <li><a href="#L3649">Complete</a></li>
+    </ul>
+  </li>
+  <li><a href="#L3653">Parsing</a></li>
+  <li><a href="#L3662">Serialisation</a></li>
+  <li><a href="#L5773">Hints for Implementors</a></li>
+  <li><a href="#L6790">IXML in IXML</a></li>
+  <li><a href="#L1005">Conformance</a></li>
+  <li><a href="#L1029">References</a></li>
+  <li><a href="#L654">Acknowledgments</a></li>
+</ul>
+</div>
+
+<h2 id="L3403">Introduction</h2>
+
+<p>Data is an abstraction: there is no essential difference between the JSON</p>
+<pre>{"temperature": {"scale": "C"; "value": 21}}</pre>
+
+<p>and an equivalent XML</p>
+<pre>&lt;temperature scale="C" value="21"/&gt;</pre>
+
+<p>or</p>
+<pre>&lt;temperature&gt;
+   &lt;scale&gt;C&lt;/scale&gt;
+   &lt;value&gt;21&lt;/value&gt;
+&lt;/temperature&gt;</pre>
+
+<p>since the underlying abstractions being represented are the same. </p>
+
+<p>We choose which representations of our data to use, JSON, CSV, XML, or
+whatever, depending on habit, convenience, and the context we want to use that
+data in. On the other hand, having an interoperable generic toolchain such as
+that provided by XML to process data is of immense value. How do we resolve the
+conflicting requirements of convenience, habit, and context, and still enable a
+generic toolchain? </p>
+
+<p>Invisible XML (ixml) is a method for treating non-XML documents as if they
+were XML, enabling authors to write documents and data in a format they prefer
+while providing XML for processes that are more effective with XML content. For
+example, it can turn CSS code like</p>
+<pre>body {color: blue; font-weight: bold}</pre>
+
+<p>into XML like</p>
+<pre>&lt;css&gt;
+   &lt;rule&gt;
+      &lt;selector&gt;body&lt;/selector&gt;
+      &lt;block&gt;
+         &lt;property&gt;
+            &lt;name&gt;color&lt;/name&gt;
+            &lt;value&gt;blue&lt;/value&gt;
+         &lt;/property&gt;
+         &lt;property&gt;
+            &lt;name&gt;font-weight&lt;/name&gt;
+            &lt;value&gt;bold&lt;/value&gt;
+         &lt;/property&gt;
+      &lt;/block&gt;
+   &lt;/rule&gt;
+&lt;/css&gt;</pre>
+
+<p>or, if preferred, as:</p>
+<pre>&lt;css&gt;
+   &lt;rule&gt;
+      &lt;simple-selector name="body"/&gt;
+      &lt;property name="color" value="blue"/&gt;
+      &lt;property name="font-weight" value="bold"/&gt;
+   &lt;/rule&gt;
+&lt;/css&gt;</pre>
+
+<p>As another example, the expression</p>
+<pre>pi×(10+b)</pre>
+
+<p>can result in the XML</p>
+<pre>&lt;prod&gt;
+   &lt;id&gt;pi&lt;/id&gt;
+   &lt;sum&gt;
+      &lt;number&gt;10&lt;/number&gt;
+      &lt;id&gt;b&lt;/id&gt;
+   &lt;/sum&gt;
+&lt;/prod&gt;</pre>
+
+<p>or</p>
+<pre>&lt;prod&gt;
+   &lt;id name='pi'/&gt;
+   &lt;sum&gt;
+      &lt;number value='10'/&gt;
+      &lt;id name='b'/&gt;
+   &lt;/sum&gt;
+&lt;/prod&gt;</pre>
+
+<p>and the URL</p>
+<pre>http://www.w3.org/TR/1999/xhtml.html</pre>
+
+<p>can give</p>
+<pre>&lt;url&gt;
+   &lt;scheme name='http'/&gt;
+   &lt;authority&gt;
+      &lt;host&gt;
+         &lt;sub name='www'/&gt;
+         &lt;sub name='w3'/&gt;
+         &lt;sub name='org'/&gt;
+      &lt;/host&gt;
+   &lt;/authority&gt;
+   &lt;path&gt;
+      &lt;seg sname='TR'/&gt;
+      &lt;seg sname='1999'/&gt;
+      &lt;seg sname='xhtml.html'/&gt;
+   &lt;/path&gt;
+&lt;/url&gt;</pre>
+
+<p>or</p>
+<pre>&lt;url scheme='http'&gt;://
+   &lt;host&gt;www.w3.org&lt;/host&gt;
+   &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
+&lt;/url&gt;</pre>
+
+<p>The JSON value:</p>
+<pre>{"name": "pi", "value": 3.145926}</pre>
+
+<p>can give</p>
+<pre>&lt;json&gt;
+   &lt;object&gt;
+      &lt;pair string='name'&gt;
+         &lt;string&gt;pi&lt;/string&gt;
+      &lt;/pair&gt;
+      &lt;pair string='value'&gt;
+         &lt;number&gt;3.145926&lt;/number&gt;
+      &lt;/pair&gt;
+   &lt;/object&gt;
+&lt;/json&gt;</pre>
+
+<h2 id="L3718">How it works</h2>
+
+<p>A grammar is used to describe the input format. An input is parsed with this
+grammar, and the resulting parse tree is serialised as XML. Special marks in
+the grammar affect details of this serialisation, excluding parts of the tree,
+or serialising parts as attributes instead of elements.</p>
+
+<p>As an example, consider this simplified grammar for URLs:</p>
+<pre>url: scheme, ":", authority, path.
+
+scheme: letter+.
+
+authority: "//", host.
+host: sub+".".
+sub: letter+.
+
+path: ("/", seg)+.
+seg: fletter*.
+-letter: ["a"-"z"]; ["A"-"Z"]; ["0"-"9"].
+-fletter: letter; ".".</pre>
+
+<p>This means that a URL consists of a <em>scheme</em> (whatever that is),
+followed by a colon, followed by an <em>authority</em>, and then a
+<em>path</em>. A scheme, is one or more <em>letters</em> (whatever a letter
+is). An authority starts with two slashes, followed by a <em>host</em>. A host
+is one or more <em>subs</em>, separated by points. A sub is one or more
+<em>letters</em>. A path is a slash followed by a <em>seg</em>, repeated one or
+more times. A seg is zero or more <em>fletters</em>. A letter is a lowercase
+letter, an uppercase letter, or a digit. An fletter is a letter or a point.</p>
+
+<p>So, given the input string
+<code>http://www.w3.org/TR/1999/xhtml.html</code>, this would produce the
+serialisation</p>
+<pre>&lt;url&gt;
+   &lt;scheme&gt;http&lt;/scheme&gt;:
+   &lt;authority&gt;//
+      &lt;host&gt;
+         &lt;sub&gt;www&lt;/sub&gt;.
+         &lt;sub&gt;w3&lt;/sub&gt;.
+         &lt;sub&gt;org&lt;/sub&gt;
+      &lt;/host&gt;
+   &lt;/authority&gt;
+   &lt;path&gt;
+      /&lt;seg&gt;TR&lt;/seg&gt;
+      /&lt;seg&gt;1999&lt;/seg&gt;
+      /&lt;seg&gt;xhtml.html&lt;/seg&gt;
+   &lt;/path&gt;
+&lt;/url&gt;</pre>
+
+<p>If the rule for <code>letter</code> had not had a "-" before it, the
+serialisation for <code>scheme</code>, for instance, would have been:</p>
+<pre>&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
+
+<p>Changing the rule for <code>scheme</code> to</p>
+<pre>scheme: name.
+@name: letter+.</pre>
+
+<p>would change the serialisation for <code>scheme</code> to:</p>
+<pre>&lt;scheme name="http"/&gt;:</pre>
+
+<p>Changing the rule for <code>scheme</code> instead to:</p>
+<pre>@scheme: letter+.</pre>
+
+<p>would change the serialisation for <code>url</code> to:</p>
+<pre>&lt;url scheme="http"&gt;</pre>
+
+<p>Changing the definitions of <code>sub</code> and <code>seg</code> from</p>
+<pre>sub: letter+.
+seg: fletter*.</pre>
+
+<p>to</p>
+<pre>-sub: letter+.
+-seg: fletter*.</pre>
+
+<p>would prevent the <code>sub</code> and <code>seg</code> elements appearing
+in the serialised result, giving:</p>
+<pre>&lt;url scheme='http'&gt;://
+   &lt;host&gt;www.w3.org&lt;/host&gt;
+   &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
+&lt;/url&gt;</pre>
+
+<h2 id="L3469">The Grammar</h2>
+
+<p>Here we describe the format of the grammar used to describe documents. Note
+that it is in its own format, and therefore describes itself.</p>
+
+<p>A grammar is a sequence of one or more rules. </p>
+<pre>ixml: S, rule+.</pre>
+
+<p><code>S</code> stands for an optional sequence of spacing and comments. A
+comment is enclosed in braces, and may included nested comments, to enable
+commenting out parts of a grammar:</p>
+<pre>          -S: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf; cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comment)*, -"}".
+       -cchar: ~["{}"].</pre>
+
+<h3 id="L5696">Rules</h3>
+
+<p>A rule consists of an optional mark, a name, and a number of alternatives.
+The grammar here uses colons to define rules, an equals sign is also
+allowed.</p>
+<pre>rule: (mark, S)?, name, S, ["=:"], S, -alts, ".", S.</pre>
+
+<p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
+indicates whether the item so marked will be serialised as an attribute
+(<code>@</code>), an element with its children (<code>^</code>), which is the
+default, or only its children (<code>-</code>).</p>
+<pre>@mark: ["@^-"].</pre>
+
+<p>Roughly speaking, a name starts with a letter or underscore, and continues
+with a letter, digit, underscore, a small number of punctuation characters, and
+the Unicode combiner characters; Unicode classes are used to define the sets of
+characters used, for instance, for letters and digits. This is close to, but
+not identical with the XML definition of a name; it is the grammar author's
+responsibility to ensure that all serialised names match the requirements for
+an XML name.</p>
+<pre>        @name: namestart, namefollower*.
+   -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
+
+<p>Alternatives are separated by a semicolon or a vertical bar. Semicolons have
+been used everywhere here:</p>
+<pre>alts: alt+([";|"], S).</pre>
+
+<p>An alternative is zero or more terms, separated by commas:</p>
+<pre>alt: term*(",", S).</pre>
+
+<p>A term is a singleton factor, an optional factor, or a repeated factor,
+repeated zero or more times, or one or more times.</p>
+<pre>-term: factor;
+       option;
+       repeat0;
+       repeat1.</pre>
+
+<p>A factor is a terminal, a nonterminal, or a bracketed series of
+alternatives:</p>
+<pre>-factor: terminal;
+         nonterminal;
+         "(", S, alts, ")", S.</pre>
+
+<p>A factor repeated zero or more times is followed by an asterisk, optionally
+followed by a separator, e.g. <code>abc*</code> and <code>abc*","</code>. For
+instance <code>"a"*"#"</code> would match the empty string, <code>a
+</code><code>a#a a#a#a</code> etc.</p>
+<pre>repeat0: factor, "*", S, sep?.</pre>
+
+<p>Similarly, a factor repeated one or more times is followed by a plus,
+optionally followed by a separator, e.g. <code>abc+</code> and
+<code>abc+","</code>. For instance <code>"a"+"#"</code> would match <code>a
+</code><code>a#a a#a#a</code> etc., but not the empty string.</p>
+<pre>repeat1: factor, "+", S, sep?.</pre>
+
+<p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
+For instance <code>"a"?</code> would match <code>a </code>or the empty
+string.</p>
+<pre>option: factor, "?", S.</pre>
+
+<p>A separator may be any factor. E.g. <code>abc*def</code> or <code>abc*(",";
+".")</code>. For instance <code>"a"+("#"; "!")</code> would match <code>a#a a!a
+a#a!a a!a#a a#a#a</code> etc.</p>
+<pre>sep: factor.</pre>
+
+<h3 id="L5705">Nonterminals</h3>
+
+<p>A nonterminal is an optionally marked name:</p>
+<pre>nonterminal: (mark, S)?, name, S.</pre>
+
+<p>This name refers to the rule that defines this name, which must exist, and
+there must only be one such rule.</p>
+
+<h3 id="L3571">Terminals</h3>
+
+<p>A terminal is a literal or a set of characters. It matches one or more
+characters in the input. A terminal may not be marked as an attribute. Since a
+terminal has no children, if it is marked with "-", it will serialise to the
+empty string.</p>
+<pre>-terminal: literal; 
+           charset.</pre>
+
+<p>A literal is either a quoted string, or a hexadecimally encoded
+character:</p>
+<pre>  literal: quoted;
+           encoded.</pre>
+
+<p>A quoted string is an optionally marked string of one or more characters,
+enclosed with single or double quotes. The enclosing quote is represented in a
+string by doubling it. A quoted string must be exactly matched in the input.
+Examples: <code>"yes" 'yes'. </code></p>
+
+<p>These two strings are identical: <code>'Isn''t it?' "Isn't it?"</code></p>
+<pre> -quoted: (tmark, S)?, -string.
+  @tmark: ["^-"].
+  string: -'"', dstring, -'"', S;
+          -"'", sstring, -"'", S.
+@dstring: dchar+.
+@sstring: schar+.
+   dchar: ~['"'];
+          '"', -'"'. {all characters, quotes must be doubled}
+   schar: ~["'"];
+          "'", -"'". {all characters, quotes must be doubled}</pre>
+
+<p>An encoded character is an optionally marked hexadecimal number. It
+represents a single character and must be matched exactly in the input. It
+starts with a hash symbol, followed by any number of hexadecimal digits, for
+example <code>#a0</code>. The digits are interpreted as a number in
+hexadecimal, and the character at that Unicode code point is used.</p>
+<pre>-encoded: (tmark, S)?, -"#", @hex, S.
+     hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
+
+<h3 id="L3595">Character sets</h3>
+
+<p>A character set is an inclusion or an exclusion.</p>
+
+<p>An inclusion is enclosed in square brackets, and also matches a single
+character in the input. It represents a set of characters, defined by any
+combination of literal characters, a range of characters, hex encoded
+characters, or Unicode classes. Examples <code>["a"-"z"] ["xyz"] [Lc] ["0"-"9";
+"!@#"; Lc]</code>. </p>
+
+<p>Note that <code>["abc"] ["a"; "b"; "c"] ["a"-"c"]
+</code><code>[#61-#63]</code> all represent the same set of characters.</p>
+
+<p>An exclusion matches one character <em>not</em> in the set. E.g.
+<code>~["{}"]</code> matches any character that is not an opening or closing
+brace.</p>
+<pre> -charset: inclusion; 
+           exclusion.
+inclusion: (tmark, S)?,         set.
+exclusion: (tmark, S)?, "~", S, set.
+     -set: "[", S,  member+([";|"], S), "]", S.
+  -member: literal;
+           range;
+           class.</pre>
+
+<p>A range matches any character in the range from the start character to the
+end, inclusive, using the Unicode ordering:</p>
+<pre>range: from, "-", S, to.
+@from: character.
+  @to: character.</pre>
+
+<p>A character is a string of length one, or a hex encoded character:</p>
+<pre>-character: -'"', dchar, -'"', S;
+            -"'", schar, -"'", S;
+            "#", hex, S.</pre>
+
+<p>A class is two letters, representing any character from the <a
+href="http://www.fileformat.info/info/unicode/category/index.htm">Unicode
+character category</a> of that name. E.g. <code>[Ll]</code> matches any
+lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
+character; it is an error if there is no such class.</p>
+<pre>  class: @code.
+   code: letter, letter, S.
+-letter: ["a"-"z"; "A"-"Z"].</pre>
+
+<h3 id="L3649">Complete</h3>
+<pre>         ixml: S, rule+.
+
+           -S: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf; cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comment)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".", S.
+        @mark: ["@^-"].
+         alts: alt+([";|"], S).
+          alt: term*(",", S).
+        -term: factor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: terminal;
+               nonterminal;
+               "(", S, alts, ")", S.
+      repeat0: factor, "*", S, sep?.
+      repeat1: factor, "+", S, sep?.
+       option: factor, "?", S.
+          sep: factor.
+  nonterminal: (mark, S)?, name, S.
+
+    -terminal: literal; 
+               charset.
+      literal: quoted;
+               encoded.
+      -quoted: (tmark, S)?, -string.
+
+        @name: namestart, namefollower*.
+   -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', S;
+               -"'", sstring, -"'", S.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. {all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all characters, quotes must be doubled}
+     -encoded: (tmark, S)?, -"#", @hex, S.
+          hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, S)?,         set.
+    exclusion: (tmark, S)?, "~", S, set.
+         -set: "[", S,  member+([";|"], S), "]", S.
+      -member: literal;
+               range;
+               class.
+        range: from, "-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"', S;
+               -"'", schar, -"'", S;
+               "#", hex, S.
+        class: @code.
+         code: letter, letter, S.
+      -letter: ["a"-"z"; "A"-"Z"].</pre>
+
+<h2 id="L3653">Parsing</h2>
+
+<p>The root symbol of the grammar is the name of the first rule in the grammar.
+If it is marked as hidden, all of its productions must produce exactly one
+non-hidden nonterminal and no non-hidden terminals before or after that
+nonterminal (in order to match the XML requirement of a single-rooted
+document).</p>
+
+<p>Grammars must be processed by an algorithm that accepts and parses any
+context-free grammar, and produces at least one parse of any input that
+conforms to the grammar starting at the root symbol. If more than one parse
+results, one is chosen; it is not defined how this choice is made, but the
+resulting parse must be marked as ambiguous by including the attribute
+<code>ixml:state="ambiguous"</code> on the document element of the
+serialisation. The ixml namespace URI is "{tbd}".</p>
+
+<h2 id="L3662">Serialisation</h2>
+
+<p>If the parse fails, some XML document must be produced with
+<code>ixml:state="failed"</code> on the document element. The document should
+provide helpful information about where and why it failed; it may be a partial
+parse tree that includes parts of the parse that succeeded.</p>
+
+<p>If the parse succeeds, the resulting parse-tree is serialised as XML by
+serialising the root node. If the root node is marked as an attribute, that
+marking is ignored.</p>
+
+<p>A parse node is either a nonterminal or a terminal.</p>
+
+<p>Any parse node may be marked as an element, as an attribute, or as hidden
+(children only). The mark comes from the use of the node in a rule if present,
+otherwise, for a nonterminal, from the definition of the rule for that
+nonterminal. If a node is not marked, it is treated as if marked as an
+element.</p>
+<ul>
+  <li>A <strong>nonterminal</strong> <strong>element</strong> is serialised by
+    outputting the name of the node as an XML tag, serialising all exposed
+    attribute descendents, and then serialising all non-attribute children in
+    order. An attribute is exposed if it is an attribute child, or an exposed
+    attribute of a hidden element child (note this is recursive).</li>
+  <li>A <strong>nonterminal</strong> <strong>hidden</strong> node is serialised
+    by serialising all non-attribute children in order.</li>
+  <li>A <strong>nonterminal</strong> <strong>attribute</strong> is serialised
+    by outputting the name of the node as an attribute, and serialising all
+    non-hidden terminal descendents of the node (regardless of marking of
+    intermediate nonterminals), in order, as the value of the attribute.</li>
+  <li>A <strong>non-hidden terminal</strong> is serialised by outputting its
+    string.</li>
+  <li>A <strong>hidden terminal</strong> is not serialised.</li>
+</ul>
+
+<p>An example grammar that illustrates these rules is</p>
+<pre>expr: open, -arith, @close.
+@open: "(".
+close: ")".
+arith: left, op, right.
+left: @name.
+right: -name.
+@name: "a"; "b".
+-op: sign.
+@sign: "+"</pre>
+
+<p>Applied to the string <code>(a+b)</code>, it yields the serialisation</p>
+<pre>&lt;expr open="(" sign="+" close=")"&gt;
+   &lt;left name="a"/&gt;
+   &lt;right&gt;b&lt;/right&gt;
+&lt;/expr&gt;</pre>
+
+<h2 id="L5773">Hints for Implementors</h2>
+
+<p>Many parsing algorithms only mention terminals, and nonterminals, and don't
+explain how to deal with the repetition constructs used in ixml. However, these
+can be handled simply by converting them to equivalent simple constructs. In
+the examples below, <code>f</code> and <code>sep</code> are
+<code>factors</code> from the grammar above. The other nonterminals are
+generated nonterminals.</p>
+
+<p>Optional factor:</p>
+<pre>f? ⇒ f-option
+-f-option: f; .</pre>
+
+<p>Zero or more repetitions:</p>
+<pre>f* ⇒ f-star
+-f-star: f, f-star; .</pre>
+
+<p>One or more repetitions:</p>
+<pre>f+ ⇒ f-plus
+-f-plus: f, f-plus-option.
+-f-plus-option: f-plus; .</pre>
+
+<p>One or more repetitions with separator:</p>
+<pre>f+sep ⇒ f-plus-sep
+-f-plus-sep: f, sep-part-option. 
+-sep-part-option: sep, f-plus-sep; .</pre>
+
+<p>Zero or more repetitions with separator:</p>
+<pre>f*sep ⇒ f-star-sep
+-f-star-sep: f-plus-sep; .
+-f-plus-sep: f, sep-part-option.
+-sep-part-option: sep, f-plus-sep; .</pre>
+
+<h2 id="L6790">IXML in IXML</h2>
+
+<p>Since the ixml grammar is expressed in its own notation, the above grammar
+can be processed into an XML document by parsing it using itself, and then
+serialising. Note that all semantically significant terminals are recorded in
+attributes. The serialisation begins as below, but the <a
+href="ixml.xml">entire serialisation</a> is available:</p>
+<pre>&lt;ixml&gt;
+   &lt;rule name='ixml'&gt;:
+      &lt;alt&gt;
+         &lt;nonterminal name='S'/&gt;,
+         &lt;repeat1&gt;
+            &lt;nonterminal name='rule'/&gt;+&lt;/repeat1&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='S'&gt;:
+      &lt;alt&gt;
+         &lt;repeat0&gt;(
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name='whitespace'/&gt;
+               &lt;/alt&gt;;
+               &lt;alt&gt;
+                  &lt;nonterminal name='comment'/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)*&lt;/repeat0&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='whitespace'&gt;:
+      &lt;alt&gt;
+         &lt;inclusion tmark='-'&gt;[
+            &lt;class&gt;Zs&lt;/class&gt;;
+            &lt;literal hex='9'&gt;
+               &lt;comment&gt;tab&lt;/comment&gt;
+            &lt;/literal&gt;;
+            &lt;literal hex='a'&gt;
+               &lt;comment&gt;cr&lt;/comment&gt;
+            &lt;/literal&gt;;
+            &lt;literal hex='d'&gt;
+               &lt;comment&gt;lf&lt;/comment&gt;
+            &lt;/literal&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name='comment'&gt;:
+      &lt;alt&gt;
+         &lt;literal tmark='-' dstring='{'/&gt;,
+         &lt;repeat0&gt;(
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name='cchar'/&gt;
+               &lt;/alt&gt;;
+               &lt;alt&gt;
+                  &lt;nonterminal name='comment'/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)*&lt;/repeat0&gt;,
+         &lt;literal tmark='-' dstring='}'/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='cchar'&gt;:
+      &lt;alt&gt;
+         &lt;exclusion&gt;~[
+            &lt;literal dstring='{}'/&gt;]&lt;/exclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name='rule'&gt;:
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;nonterminal name='mark'/&gt;?&lt;/option&gt;,
+         &lt;nonterminal name='name'/&gt;,
+         &lt;nonterminal name='S'/&gt;,
+         &lt;inclusion&gt;[
+            &lt;literal dstring='=:'/&gt;]&lt;/inclusion&gt;,
+         &lt;nonterminal name='S'/&gt;,
+         &lt;nonterminal mark='-' name='alts'/&gt;,
+         &lt;literal dstring='.'/&gt;,
+         &lt;nonterminal name='S'/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;</pre>
+
+<h2 id="L1005">Conformance</h2>
+
+<p>{TBD}</p>
+
+<h2 id="L1029">References</h2>
+
+<p>{TBD}</p>
+
+<h2 id="L654">Acknowledgments</h2>
+
+<p>Thanks are due to Michael Sperberg-McQueen and Hans-Dieter Hiep for their
+close reading of the specification, and consequent many helpful comments.</p>
+</body>
+</html>
