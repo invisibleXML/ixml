@@ -68,16 +68,16 @@ parsable format as if it were XML, without the need for markup. </p>
 <p>There are currently five papers:</p>
 <ul>
   <li><a
-    href="../Talks/2013/08-07-invisible-xml/invisible-xml-3.html">Invisible
+    href="http://www.cwi.nl/~steven/Talks/2013/08-07-invisible-xml/invisible-xml-3.html">Invisible
     XML</a> 
     <p>Introduces the concepts, and develops a notation to support them.</p>
   </li>
-  <li><a href="../Talks/2016/02-12-prague/data.html">Data just wants to be
+  <li><a href="http://www.cwi.nl/~steven/Talks/2016/02-12-prague/data.html">Data just wants to be
     (format) neutral</a> 
     <p>Discusses issues with automatic serialisation, and the relationship
     between Invisible XML grammars and data schemas.</p>
   </li>
-  <li><a href="../Talks/2016/06-05-london/xml-london.html">Parse Earley, Parse
+  <li><a href="http://www.cwi.nl/~steven/Talks/2016/06-05-london/xml-london.html">Parse Earley, Parse
     Often: How to parse anything to XML</a> 
     <p>Discusses issues around grammar design, and in particular parsing
     algorithms used to recognise any document, and converting the resultant
@@ -100,5 +100,5 @@ parsable format as if it were XML, without the need for markup. </p>
 
 <p>Software to support ixml will be made available at a later date.</p>
 
-<p>The draft <a href="ixml-specification.html">Specification for Invisible
+<p>The draft <a href="http://www.cwi.nl/~steven/ixml-specification.html">Specification for Invisible
 XML</a> is available.</p>
