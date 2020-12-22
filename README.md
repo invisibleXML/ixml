@@ -100,5 +100,5 @@ parsable format as if it were XML, without the need for markup. </p>
 
 <p>Software to support ixml will be made available at a later date.</p>
 
-<p>The draft <a href="http://www.cwi.nl/~steven/ixml/ixml-specification.html">Specification for Invisible
+<p>The draft <a href="ixml-specification.html">Specification for Invisible
 XML</a> is available.</p>
