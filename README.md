@@ -2,9 +2,6 @@
 
 <h1>Invisible XML</h1>
 
-<p><em><a href="http://www.cwi.nl/~steven/">Steven Pemberton</a>, <a
-href="http://www.cwi.nl/">CWI</a></em></p>
-
 <p>Data is an abstraction: there is no essential difference between the JSON</p>
 <pre>{"temperature": {"scale": "C"; "value": 21}}</pre>
 
@@ -98,7 +95,7 @@ parsable format as if it were XML, without the need for markup. </p>
   </li>
 </ul>
 
-<p>Software to support ixml will be made available at a later date.</p>
+<p>Software to support ixml will be made available at a later date, at https://github.com/invisibleXML/ixml</p>
 
 <p>The draft <a href="ixml-specification.html">Specification for Invisible
 XML</a> is available.</p>
