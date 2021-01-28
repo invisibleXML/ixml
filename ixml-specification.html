@@ -34,37 +34,37 @@
 
 <p>Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version:  <!--$date=-->2020-07-23<!--$--> </p>
+<p>Version:  <!--$date=-->2021-01-28<!--$--> </p>
 
-<h2 id="L3397">Status</h2>
+<h2 id="status">Status</h2>
 
 <p>This is the current state of the ixml base grammar; it is close to final.</p>
 
 <div class="toc">
 <ul>
-  <li><a href="#L3397">Status</a></li>
-  <li><a href="#L3403">Introduction</a></li>
-  <li><a href="#L3718">How it works</a></li>
-  <li><a href="#L3469">The Grammar</a> 
+  <li><a href="#status">Status</a></li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#works">How it works</a></li>
+  <li><a href="#grammar">The Grammar</a> 
     <ul>
-      <li><a href="#L5696">Rules</a></li>
-      <li><a href="#L5705">Nonterminals</a></li>
-      <li><a href="#L3571">Terminals</a></li>
-      <li><a href="#L3595">Character sets</a></li>
-      <li><a href="#L3649">Complete</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#nonterminals">Nonterminals</a></li>
+      <li><a href="#terminals">Terminals</a></li>
+      <li><a href="#characters">Character sets</a></li>
+      <li><a href="#complete">Complete</a></li>
     </ul>
   </li>
-  <li><a href="#L3653">Parsing</a></li>
-  <li><a href="#L3662">Serialisation</a></li>
-  <li><a href="#L5773">Hints for Implementors</a></li>
-  <li><a href="#L6790">IXML in IXML</a></li>
-  <li><a href="#L1005">Conformance</a></li>
-  <li><a href="#L1029">References</a></li>
-  <li><a href="#L654">Acknowledgments</a></li>
+  <li><a href="#parsing">Parsing</a></li>
+  <li><a href="#serialisation">Serialisation</a></li>
+  <li><a href="#hints">Hints for Implementors</a></li>
+  <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#conformance">Conformance</a></li>
+  <li><a href="#references">References</a></li>
+  <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
 </div>
 
-<h2 id="L3403">Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 
 <p>Data is an abstraction: there is no essential difference between the JSON</p>
 <pre>{"temperature": {"scale": "C"; "value": 21}}</pre>
@@ -181,7 +181,7 @@ example, it can turn CSS code like</p>
    &lt;/object&gt;
 &lt;/json&gt;</pre>
 
-<h2 id="L3718">How it works</h2>
+<h2 id="works">How it works</h2>
 
 <p>A grammar is used to describe the input format. An input is parsed with this
 grammar, and the resulting parse tree is serialised as XML. Special marks in
@@ -262,7 +262,7 @@ in the serialised result, giving:</p>
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
 &lt;/url&gt;</pre>
 
-<h2 id="L3469">The Grammar</h2>
+<h2 id="grammar">The Grammar</h2>
 
 <p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p>
@@ -281,7 +281,7 @@ commenting out parts of a grammar:</p>
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].</pre>
 
-<h3 id="L5696">Rules</h3>
+<h3 id="rules">Rules</h3>
 
 <p>A rule consists of an optional mark, a name, and a number of alternatives.
 The grammar here uses colons to define rules, an equals sign is also
@@ -347,7 +347,7 @@ string.</p>
 a#a!a a!a#a a#a#a</code> etc.</p>
 <pre>sep: factor.</pre>
 
-<h3 id="L5705">Nonterminals</h3>
+<h3 id="nonterminals">Nonterminals</h3>
 
 <p>A nonterminal is an optionally marked name:</p>
 <pre>nonterminal: (mark, S)?, name, S.</pre>
@@ -355,7 +355,7 @@ a#a!a a!a#a a#a#a</code> etc.</p>
 <p>This name refers to the rule that defines this name, which must exist, and
 there must only be one such rule.</p>
 
-<h3 id="L3571">Terminals</h3>
+<h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches one or more
 characters in the input. A terminal may not be marked as an attribute. Since a
@@ -394,7 +394,7 @@ hexadecimal, and the character at that Unicode code point is used.</p>
 <pre>-encoded: (tmark, S)?, -"#", @hex, S.
      hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
-<h3 id="L3595">Character sets</h3>
+<h3 id="characters">Character sets</h3>
 
 <p>A character set is an inclusion or an exclusion.</p>
 
@@ -439,7 +439,7 @@ character; it is an error if there is no such class.</p>
    code: letter, letter, S.
 -letter: ["a"-"z"; "A"-"Z"].</pre>
 
-<h3 id="L3649">Complete</h3>
+<h3 id="complete">Complete</h3>
 <pre>         ixml: S, rule+.
 
            -S: (whitespace; comment)*.
@@ -507,7 +507,7 @@ character; it is an error if there is no such class.</p>
          code: letter, letter, S.
       -letter: ["a"-"z"; "A"-"Z"].</pre>
 
-<h2 id="L3653">Parsing</h2>
+<h2 id="parsing">Parsing</h2>
 
 <p>The root symbol of the grammar is the name of the first rule in the grammar.
 If it is marked as hidden, all of its productions must produce exactly one
@@ -523,7 +523,7 @@ resulting parse must be marked as ambiguous by including the attribute
 <code>ixml:state="ambiguous"</code> on the document element of the
 serialisation. The ixml namespace URI is "{tbd}".</p>
 
-<h2 id="L3662">Serialisation</h2>
+<h2 id="serialisation">Serialisation</h2>
 
 <p>If the parse fails, some XML document must be produced with
 <code>ixml:state="failed"</code> on the document element. The document should
@@ -567,7 +567,7 @@ left: @name.
 right: -name.
 @name: "a"; "b".
 -op: sign.
-@sign: "+"</pre>
+@sign: "+".</pre>
 
 <p>Applied to the string <code>(a+b)</code>, it yields the serialisation</p>
 <pre>&lt;expr open="(" sign="+" close=")"&gt;
@@ -575,7 +575,7 @@ right: -name.
    &lt;right&gt;b&lt;/right&gt;
 &lt;/expr&gt;</pre>
 
-<h2 id="L5773">Hints for Implementors</h2>
+<h2 id="hints">Hints for Implementors</h2>
 
 <p>Many parsing algorithms only mention terminals, and nonterminals, and don't
 explain how to deal with the repetition constructs used in ixml. However, these
@@ -608,7 +608,7 @@ generated nonterminals.</p>
 -f-plus-sep: f, sep-part-option.
 -sep-part-option: sep, f-plus-sep; .</pre>
 
-<h2 id="L6790">IXML in IXML</h2>
+<h2 id="ixml">IXML in IXML</h2>
 
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
@@ -681,15 +681,15 @@ href="ixml.xml">entire serialisation</a> is available:</p>
          &lt;nonterminal name='S'/&gt;
       &lt;/alt&gt;.&lt;/rule&gt;</pre>
 
-<h2 id="L1005">Conformance</h2>
+<h2 id="conformance">Conformance</h2>
 
 <p>{TBD}</p>
 
-<h2 id="L1029">References</h2>
+<h2 id="references">References</h2>
 
 <p>{TBD}</p>
 
-<h2 id="L654">Acknowledgments</h2>
+<h2 id="acknowledgments">Acknowledgments</h2>
 
 <p>Thanks are due to Michael Sperberg-McQueen and Hans-Dieter Hiep for their
 close reading of the specification, and consequent many helpful comments.</p>
