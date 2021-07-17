@@ -98,4 +98,4 @@ parsable format as if it were XML, without the need for markup. </p>
 <p>Software to support ixml will be made available at a later date, at https://github.com/invisibleXML/ixml</p>
 
 <p>The draft <a href="ixml-specification.html">Specification for Invisible
-XML</a> is available.</p>
+XML</a> (<a href="https://htmlpreview.github.io/?https://github.com/invisibleXML/ixml/blob/master/ixml-specification.html">HTML preview</a>) is available.</p>
