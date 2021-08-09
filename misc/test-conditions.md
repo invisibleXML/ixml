@@ -19,15 +19,22 @@ Adding descriptions of negative test cases is relatively straightforward, but I 
 
 Because I worked manually, not automatically, I may well have glided over some things that should not be glided over, but for what it's worth, these are the conditions that are *not* exhibited in the grammar of 9 June 2021 as I went through it just now.
 
+To do:
+
+- Automate generation of lists of this kind (from a grammar, generate a list of conditions to be tested in positive test cases).
+
+- Automate generation of tool to examine a set of ixml test cases (specifically, the parse trees in the expected results) and produce a coverage report for the test case.
+
+
 From *ixml*:
 
-1. An ixml grammar with a single rule.
+1. An ixml grammar with a single rule.  (XPath: `ixml[count(rule) = 1]`)
 
-2. An ixml grammar with multiple rules.
+2. An ixml grammar with multiple rules. (XPath:  `ixml[count(rule) gt 1)]`)
 
 From *S*:
 
-3. *S* consisting of empty string.
+3. *S* consisting of empty string. (XPath:  `//S[not(node())]`)
 
 4. *S* consisting of single whitespace character (or single comment).
 
