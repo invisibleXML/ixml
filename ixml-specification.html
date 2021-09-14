@@ -17,24 +17,19 @@
     h1, h2 {font-family: sans-serif; clear: both}
     pre {margin-left: 2em; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
     code {color: #A00}
-    table {border-collapse: collapse;}
-    th {color: white; background-color: #88f} 
     div {border: thin red solid}
-
-    tr:nth-child(even) {background-color: #ddd}
+    span {background: yellow}
+  
     img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
-    iframe  {height: 50ex; width: 108ex; margin-left: 2ex; border: none}
-    iframe.short  {height: 10ex;}
-    .source {text-align: right}
   </style>
 </head>
 
 <body>
 <h1>Invisible XML Specification (Draft)</h1>
 
-<p>Steven Pemberton, CWI, Amsterdam</p>
+<p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version:  <!--$date=-->2021-01-28<!--$--> </p>
+<p>Version: <!--$date=-->2021-09-14<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -42,7 +37,6 @@
 
 <div class="toc">
 <ul>
-  <li><a href="#status">Status</a></li>
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#works">How it works</a></li>
   <li><a href="#grammar">The Grammar</a> 
@@ -58,7 +52,12 @@
   <li><a href="#serialisation">Serialisation</a></li>
   <li><a href="#hints">Hints for Implementors</a></li>
   <li><a href="#ixml">IXML in IXML</a></li>
-  <li><a href="#conformance">Conformance</a></li>
+  <li><a href="#conformance">Conformance</a> 
+    <ul>
+      <li><a href="#L7027">Conformance of grammars</a></li>
+      <li><a href="#L7076">Conformance of processors</a></li>
+    </ul>
+  </li>
   <li><a href="#references">References</a></li>
   <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
@@ -80,7 +79,7 @@
 
 <p>since the underlying abstractions being represented are the same. </p>
 
-<p>We choose which representations of our data to use, JSON, CSV, XML, or
+<p>We choose which representations of our data to use, CSV, JSON, XML, or
 whatever, depending on habit, convenience, and the context we want to use that
 data in. On the other hand, having an interoperable generic toolchain such as
 that provided by XML to process data is of immense value. How do we resolve the
@@ -183,10 +182,10 @@ example, it can turn CSS code like</p>
 
 <h2 id="works">How it works</h2>
 
-<p>A grammar is used to describe the input format. An input is parsed with this
-grammar, and the resulting parse tree is serialised as XML. Special marks in
-the grammar affect details of this serialisation, excluding parts of the tree,
-or serialising parts as attributes instead of elements.</p>
+<p>A grammar is used to describe the input format. An input is parsed using
+this grammar, and the resulting parse tree is serialised as XML. Special marks
+in the grammar affect details of this serialisation, excluding parts of the
+tree, or serialising parts as attributes instead of elements.</p>
 
 <p>As an example, consider this simplified grammar for URLs:</p>
 <pre>url: scheme, ":", authority, path.
@@ -209,7 +208,7 @@ is). An authority starts with two slashes, followed by a <em>host</em>. A host
 is one or more <em>subs</em>, separated by points. A sub is one or more
 <em>letters</em>. A path is a slash followed by a <em>seg</em>, repeated one or
 more times. A seg is zero or more <em>fletters</em>. A letter is a lowercase
-letter, an uppercase letter, or a digit. An fletter is a letter or a point.</p>
+letter, an uppercase letter, or a digit. A fletter is a letter or a point.</p>
 
 <p>So, given the input string
 <code>http://www.w3.org/TR/1999/xhtml.html</code>, this would produce the
@@ -267,8 +266,9 @@ in the serialised result, giving:</p>
 <p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p>
 
-<p>A grammar is a sequence of one or more rules. </p>
-<pre>ixml: S, rule+.</pre>
+<p>A grammar is a sequence of one or more rules, surrounded and separated by
+spacing and comments:</p>
+<pre>ixml: S, rule+S, S.</pre>
 
 <p><code>S</code> stands for an optional sequence of spacing and comments. A
 comment is enclosed in braces, and may included nested comments, to enable
@@ -283,10 +283,10 @@ commenting out parts of a grammar:</p>
 
 <h3 id="rules">Rules</h3>
 
-<p>A rule consists of an optional mark, a name, and a number of alternatives.
-The grammar here uses colons to define rules, an equals sign is also
+<p>A rule consists of an optional mark, a name, and one or more alternatives.
+The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
-<pre>rule: (mark, S)?, name, S, ["=:"], S, -alts, ".", S.</pre>
+<pre>rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".</pre>
 
 <p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
 indicates whether the item so marked will be serialised as an attribute
@@ -294,19 +294,19 @@ indicates whether the item so marked will be serialised as an attribute
 default, or only its children (<code>-</code>).</p>
 <pre>@mark: ["@^-"].</pre>
 
-<p>Roughly speaking, a name starts with a letter or underscore, and continues
-with a letter, digit, underscore, a small number of punctuation characters, and
-the Unicode combiner characters; Unicode classes are used to define the sets of
-characters used, for instance, for letters and digits. This is close to, but
-not identical with the XML definition of a name; it is the grammar author's
-responsibility to ensure that all serialised names match the requirements for
-an XML name.</p>
+<p>A name starts with a letter or underscore, and continues with a letter,
+digit, underscore, a small number of punctuation characters, and the Unicode
+combiner characters; Unicode classes are used to define the sets of characters
+used, for instance, for letters and digits. This is close to, but not identical
+with the XML definition of a name; it is the grammar author's responsibility to
+ensure that all serialised names match the requirements for an XML name [<a
+href="#xml">XML</a>].</p>
 <pre>        @name: namestart, namefollower*.
    -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
 
-<p>Alternatives are separated by a semicolon or a vertical bar. Semicolons have
-been used everywhere here:</p>
+<p>Alternatives are separated by a semicolon or a vertical bar. The grammar
+here uses semicolons.</p>
 <pre>alts: alt+([";|"], S).</pre>
 
 <p>An alternative is zero or more terms, separated by commas:</p>
@@ -338,7 +338,7 @@ optionally followed by a separator, e.g. <code>abc+</code> and
 <pre>repeat1: factor, "+", S, sep?.</pre>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
-For instance <code>"a"?</code> would match <code>a </code>or the empty
+For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p>
 <pre>option: factor, "?", S.</pre>
 
@@ -358,7 +358,7 @@ there must only be one such rule.</p>
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches one or more
-characters in the input. A terminal may not be marked as an attribute. Since a
+characters in the input. A terminal must not be marked as an attribute. Since a
 terminal has no children, if it is marked with "-", it will serialise to the
 empty string.</p>
 <pre>-terminal: literal; 
@@ -371,8 +371,8 @@ character:</p>
 
 <p>A quoted string is an optionally marked string of one or more characters,
 enclosed with single or double quotes. The enclosing quote is represented in a
-string by doubling it. A quoted string must be exactly matched in the input.
-Examples: <code>"yes" 'yes'. </code></p>
+string by doubling it. A quoted string matches only the exact same string in
+the input. Examples: <code>"yes" 'yes'. </code></p>
 
 <p>These two strings are identical: <code>'Isn''t it?' "Isn't it?"</code></p>
 <pre> -quoted: (tmark, S)?, -string.
@@ -382,39 +382,45 @@ Examples: <code>"yes" 'yes'. </code></p>
 @dstring: dchar+.
 @sstring: schar+.
    dchar: ~['"'];
-          '"', -'"'. {all characters, quotes must be doubled}
+          '"', -'"'. {all characters, quotes are doubled}
    schar: ~["'"];
-          "'", -"'". {all characters, quotes must be doubled}</pre>
+          "'", -"'". {all characters, quotes are doubled}</pre>
 
 <p>An encoded character is an optionally marked hexadecimal number. It
-represents a single character and must be matched exactly in the input. It
+represents a single character and matches that character in the input. It
 starts with a hash symbol, followed by any number of hexadecimal digits, for
 example <code>#a0</code>. The digits are interpreted as a number in
-hexadecimal, and the character at that Unicode code point is used.</p>
+hexadecimal, and the character at that Unicode code-point is used [<a
+href="#unicode">Unicode</a>]. The number must be within the Unicode code-point
+range.</p>
 <pre>-encoded: (tmark, S)?, -"#", @hex, S.
      hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
 <h3 id="characters">Character sets</h3>
 
-<p>A character set is an inclusion or an exclusion.</p>
+<p>A character set is an inclusion or an exclusion: an inclusion matches one
+character in the input that is in the set, an exclusion matches one character
+<em>not</em> in the set.</p>
 
-<p>An inclusion is enclosed in square brackets, and also matches a single
-character in the input. It represents a set of characters, defined by any
-combination of literal characters, a range of characters, hex encoded
-characters, or Unicode classes. Examples <code>["a"-"z"] ["xyz"] [Lc] ["0"-"9";
-"!@#"; Lc]</code>. </p>
+<p>An inclusion is enclosed in square brackets, and represents the set of
+characters defined by any combination of literal characters, a range of
+characters, hex encoded characters, or Unicode classes. Examples
+<code>["a"-"z"] ["xyz"] [Lc] ["0"-"9"; "!@#"; Lc]</code>. Note that
+<code>["abc"] ["a"; "b"; "c"] ["a"-"c"] </code><code>[#61-#63]</code> all
+represent the same set of characters.</p>
 
-<p>Note that <code>["abc"] ["a"; "b"; "c"] ["a"-"c"]
-</code><code>[#61-#63]</code> all represent the same set of characters.</p>
+<p>An exclusion is an inclusion preceded by a tilde <code>~</code>. For
+example, <code>~["{}"]</code> matches any character that is not an opening or
+closing brace.</p>
 
-<p>An exclusion matches one character <em>not</em> in the set. E.g.
-<code>~["{}"]</code> matches any character that is not an opening or closing
-brace.</p>
+<p>Note that the empty inclusion <code>[]</code> would fail to match any
+character in the input; on the other hand <code>~[]</code> would match any one
+character, whatever it is.</p>
 <pre> -charset: inclusion; 
            exclusion.
 inclusion: (tmark, S)?,         set.
 exclusion: (tmark, S)?, "~", S, set.
-     -set: "[", S,  member+([";|"], S), "]", S.
+     -set: "[", S,  member*([";|"], S), "]", S.
   -member: literal;
            range;
            class.</pre>
@@ -430,17 +436,17 @@ end, inclusive, using the Unicode ordering:</p>
             -"'", schar, -"'", S;
             "#", hex, S.</pre>
 
-<p>A class is two letters, representing any character from the <a
-href="http://www.fileformat.info/info/unicode/category/index.htm">Unicode
-character category</a> of that name. E.g. <code>[Ll]</code> matches any
-lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
-character; it is an error if there is no such class.</p>
-<pre>  class: @code.
-   code: letter, letter, S.
+<p>A class is two letters, representing any character from the Unicode
+character category [<a href="#categories">Categories</a>] of that name. E.g.
+<code>[Ll]</code> matches any lower-case letter, <code>[Ll; Lu]</code> matches
+any upper- or lower-case character; it is an error if there is no such
+class.</p>
+<pre>  class: @code, S.
+   code: letter, letter.
 -letter: ["a"-"z"; "A"-"Z"].</pre>
 
 <h3 id="complete">Complete</h3>
-<pre>         ixml: S, rule+.
+<pre>         ixml: S, rule+S, S.
 
            -S: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
@@ -450,7 +456,7 @@ character; it is an error if there is no such class.</p>
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".", S.
+         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".
         @mark: ["@^-"].
          alts: alt+([";|"], S).
           alt: term*(",", S).
@@ -493,7 +499,7 @@ character; it is an error if there is no such class.</p>
                exclusion.
     inclusion: (tmark, S)?,         set.
     exclusion: (tmark, S)?, "~", S, set.
-         -set: "[", S,  member+([";|"], S), "]", S.
+         -set: "[", S,  member*([";|"], S), "]", S.
       -member: literal;
                range;
                class.
@@ -503,8 +509,8 @@ character; it is an error if there is no such class.</p>
    -character: -'"', dchar, -'"', S;
                -"'", schar, -"'", S;
                "#", hex, S.
-        class: @code.
-         code: letter, letter, S.
+        class: @code, S.
+         code: letter, letter.
       -letter: ["a"-"z"; "A"-"Z"].</pre>
 
 <h2 id="parsing">Parsing</h2>
@@ -515,13 +521,13 @@ non-hidden nonterminal and no non-hidden terminals before or after that
 nonterminal (in order to match the XML requirement of a single-rooted
 document).</p>
 
-<p>Grammars must be processed by an algorithm that accepts and parses any
-context-free grammar, and produces at least one parse of any input that
-conforms to the grammar starting at the root symbol. If more than one parse
-results, one is chosen; it is not defined how this choice is made, but the
-resulting parse must be marked as ambiguous by including the attribute
-<code>ixml:state="ambiguous"</code> on the document element of the
-serialisation. The ixml namespace URI is "{tbd}".</p>
+<p>Processors must accept and parse any conforming grammar, and produce at
+least one parse of any input that conforms to the grammar starting at the root
+symbol. If more than one parse results, one is chosen; it is not defined how
+this choice is made, but the resulting parse must be marked as ambiguous by
+including the attribute <code>ixml:state="ambiguous"</code> on the document
+element of the serialisation. The ixml namespace URI is
+"http://invisiblexml.org/NS".</p>
 
 <h2 id="serialisation">Serialisation</h2>
 
@@ -539,8 +545,9 @@ marking is ignored.</p>
 <p>Any parse node may be marked as an element, as an attribute, or as hidden
 (children only). The mark comes from the use of the node in a rule if present,
 otherwise, for a nonterminal, from the definition of the rule for that
-nonterminal. If a node is not marked, it is treated as if marked as an
-element.</p>
+nonterminal. If a node is not marked, it is treated as if marked as an element.
+It is an error if the name of a node to be output does not match the
+requirements of an XML name.</p>
 <ul>
   <li>A <strong>nonterminal</strong> <strong>element</strong> is serialised by
     outputting the name of the node as an XML tag, serialising all exposed
@@ -594,8 +601,8 @@ generated nonterminals.</p>
 
 <p>One or more repetitions:</p>
 <pre>f+ ⇒ f-plus
--f-plus: f, f-plus-option.
--f-plus-option: f-plus; .</pre>
+-f-plus: f, f-star.
+-f-star: f, f-star; .</pre>
 
 <p>One or more repetitions with separator:</p>
 <pre>f+sep ⇒ f-plus-sep
@@ -683,15 +690,162 @@ href="ixml.xml">entire serialisation</a> is available:</p>
 
 <h2 id="conformance">Conformance</h2>
 
-<p>{TBD}</p>
+<p>In this specification, the verb "must" expresses unconditional requirements
+for conformance to the specification; the verb "should" expresses requirements
+that are encouraged but which are not conditions of conformance; the verb "may"
+expresses optional features which are neither required not prohibited.</p>
+
+<p>Conformance to this specification can meaningfully be claimed for grammars
+and for processors.</p>
+
+<p>Note: although input described by a grammar is sometimes described as
+"obeying" or "conforming to" the grammar, conformance to this specification
+cannot be claimed of input streams or of input + grammar pairs.</p>
+
+<h3 id="L7027">Conformance of grammars</h3>
+
+<p>An ixml grammar in ixml form conforms to this specification if</p>
+<ul>
+  <li>it is described by the grammar given in this specification, and</li>
+  <li>it satisfies all the other requirements specified for ixml grammars.</li>
+</ul>
+
+<p>An ixml grammar in XML form conforms to this specification if</p>
+<ul>
+  <li>it can be derived from an ixml grammar in ixml form by parsing as
+    described in this specification, and</li>
+  <li>it satisfies all the other requirements specified for ixml grammars.</li>
+</ul>
+
+<p>Note: The normative formulations of conformance requirements are those given
+elsewhere in this specification. But for convenience the requirements that go
+beyond what is expressed in the grammar itself can be summarized as follows.
+Reasonable effort has been used to make this list complete, but omission of any
+conformance requirement from this list does not affect its status as a
+conformance requirement.</p>
+<ul>
+  <li>All rule names that are serialised must match the requirements for an XML
+    name.</li>
+  <li>All nonterminal names which are marked to be serialised must match the
+    requirements of an XML name. <span>{Is this not the same thing?}</span></li>
+  <li>For every nonterminal name occurring on the right-hand side of a rule,
+    exactly one rule defining that name must exist in the grammar.</li>
+  <li>The grammar must not contain more than one rule defining any given name.
+    <span>{needed?}</span></li>
+  <li>Terminal symbols must not be marked as attributes.</li>
+  <li>Any character class used must be one that is listed in the Unicode
+    specification.</li>
+  <li>The number represented in a hex encoding of a character must be within
+    the Unicode character range, and must not denote a Noncharacter or
+    Surrogate code point.</li>
+  <li>If the first rule in a grammar is marked as hidden, all of its
+    productions must produce exactly one non-hidden nonterminal and no
+    non-hidden terminals before or after that nonterminal.</li>
+</ul>
+
+<h3 id="L7076">Conformance of processors</h3>
+
+<p>A processor conforms to this specification if it accepts grammars in ixml
+<span>{or XML?}</span> form and uses those grammars to parse input and produce
+XML documents representing serialized trees as specified elsewhere in this
+specification. A conforming processor must not accept non-conforming
+grammars.</p>
+
+<p>In addition to requirements mentioned elsewhere in this specification, the
+following also apply to conforming processors:</p>
+<ul>
+  <li>For any conforming grammar and any input, processors must: 
+    <ul>
+      <li>parse the input using the grammar specified, and produce an XML
+        document representing a parse tree for the input, or</li>
+      <li>establish that the input is not described by the grammar, and produce
+        an XML document reporting that fact, or</li>
+      <li>fail for whatever reason (e.g. because available resource limits were
+        exceeded). <span>{so a processor that always fails is
+        conformant?}</span></li>
+    </ul>
+    <p>Note: the first and second items of the list above, together with other
+    requirements, require that grammars be processed by an algorithm that
+    accepts and parses any context-free grammar. Known parsing algorithms of
+    this class include [<a href="#earley">Earley</a>], [<a
+    href="#unger">Unger</a>], [<a href="#cyk">CYK</a>], [<a
+    href="#glr">GLR</a>], and [<a href="#gll">GLL</a>]; see also [<a
+    href="#grune">Grune</a>].</p>
+  </li>
+  <li>If more than one parse tree describes the input, the processor must
+    serialize one of them. It is not defined how this choice is made, but the
+    resulting parse should be marked as ambiguous by including on the document
+    element of the serialisation the attribute
+    <code>ixml:state="ambiguous"</code>, unless the user has activated an
+    option to suppress this attribute. Processors may produce more than one
+    parse tree, but the default mode of operation must serialize exactly
+  one.</li>
+  <li>If the parse fails, the processor must produce a 'failure document', some
+    XML document with <code>ixml:state="failed"</code> on the document element,
+    with helpful information about where and why it failed; it may be a partial
+    parse tree that includes parts of the parse that succeeded.</li>
+  <li>If the root node in the grammar is marked as an attribute, processors
+    must ignore that marking when serialising the rule as the root.</li>
+  <li>The form in which XML documents are produced is not constrained by this
+    specification; processors should be capable of producing serialized XML as
+    a character stream, but other forms (e.g. DOM instances or XDM instances)
+    may also be used.</li>
+  <li>In the normal case, when the input has a determinate length (either known
+    in advance or signaled by some end-of-stream signal), the processor must by
+    default parse the input in its entirety against the grammar and return
+    either a parse tree or a failure document. Processors may provide user
+    options for other behaviors (such as parsing the largest, or smallest,
+    prefix of the input that is described by the grammar). Processors may also
+    support invocation with input streams of indeterminate length.</li>
+</ul>
 
 <h2 id="references">References</h2>
 
-<p>{TBD}</p>
+<p id="unicode">[Unicode] The Unicode Consortium (ed.), The Unicode Standard
+— Version 13.0. Unicode Consortium, 2020, ISBN 978-1-936213-26-9,
+http://www.unicode.org/versions/Unicode13.0.0/</p>
+<!-- apparently unused
+<p  id="properties">[Properties] ibid. Chapter 4, Unicode Character Properties
+https://www.unicode.org/versions/Unicode13.0.0/ch04.pdf</p>
+-->
+
+<p id="categories">[Categories] General Category Values
+https://unicode.org/reports/tr44/#General_Category_Values (See also
+http://www.fileformat.info/info/unicode/category/index.htm)</p>
+
+<p id="xml">[XML] Tim Bray et al. (eds.), Extensible Markup Language (XML) 1.0
+(Fifth Edition), W3C, 2008, https://www.w3.org/TR/xml/</p>
+
+<h2>Informational References</h2>
+
+<p id="earley">[Earley] Earley, Jay (1970), "An efficient context-free parsing
+algorithm", Communications of the ACM, 13 (2): 94–102,
+doi:10.1145/362007.362035</p>
+
+<p id="unger">[Unger] Unger, S. H. A global parser for context-free phrase
+structure grammars. Commun. ACM, 11(4):240–247, April 1968</p>
+
+<p id="cyk">[CYK] Sakai, Itiroo. Syntax in universal translation. In 1961
+International Conference on Machine Translation of Languages and Applied
+Language Analysis, pages 593–608</p>
+
+<p id="glr">[GLR] Masaru Tomita. Generalized LR Parsing. Springer Science &amp;
+Business Media. ISBN 978-1-4615-4034-2.</p>
+
+<p id="gll">[GLL] GLL Parsing Elizabeth Scott and Adrian Johnstone Electronic
+Notes in Theoretical Computer Science, Volume 253, Issue 7, 17 September 2010,
+Pages 177-189</p>
+
+<p id="grune">[Grune] Grune, D. and Jacobs, C. (2008). Parsing techniques : a
+practical guide (2nd ed.). New York: Springer. p. 579. ISBN 978-0-387-20248-8.
+https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</p>
 
 <h2 id="acknowledgments">Acknowledgments</h2>
 
-<p>Thanks are due to Michael Sperberg-McQueen and Hans-Dieter Hiep for their
-close reading of the specification, and consequent many helpful comments.</p>
+<p>This specification was produced by the W3C ixml community group, that at the
+time of publishing consisted of the members: <span>{list of names}</span></p>
+
+<p>Thanks are due to Hans-Dieter Hiep for a close reading of the specification,
+and consequent many helpful comments.</p>
 </body>
 </html>
