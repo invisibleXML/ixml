@@ -629,7 +629,12 @@ href="ixml.xml">entire serialisation</a> is available:</p>
       &lt;alt&gt;
          &lt;nonterminal name='S'/&gt;,
          &lt;repeat1&gt;
-            &lt;nonterminal name='rule'/&gt;+&lt;/repeat1&gt;
+            &lt;nonterminal name='rule'/&gt;+
+            &lt;sep&gt;
+               &lt;nonterminal name='S'/&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;,
+         &lt;nonterminal name='S'/&gt;
       &lt;/alt&gt;.&lt;/rule&gt;
    &lt;rule mark='-' name='S'&gt;:
       &lt;alt&gt;
@@ -646,16 +651,28 @@ href="ixml.xml">entire serialisation</a> is available:</p>
    &lt;rule mark='-' name='whitespace'&gt;:
       &lt;alt&gt;
          &lt;inclusion tmark='-'&gt;[
-            &lt;class&gt;Zs&lt;/class&gt;;
-            &lt;literal hex='9'&gt;
-               &lt;comment&gt;tab&lt;/comment&gt;
-            &lt;/literal&gt;;
-            &lt;literal hex='a'&gt;
-               &lt;comment&gt;cr&lt;/comment&gt;
-            &lt;/literal&gt;;
-            &lt;literal hex='d'&gt;
-               &lt;comment&gt;lf&lt;/comment&gt;
-            &lt;/literal&gt;]&lt;/inclusion&gt;
+            &lt;class code='Zs'/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;;
+      &lt;alt&gt;
+         &lt;nonterminal name='tab'/&gt;
+      &lt;/alt&gt;;
+      &lt;alt&gt;
+         &lt;nonterminal name='lf'/&gt;
+      &lt;/alt&gt;;
+      &lt;alt&gt;
+         &lt;nonterminal name='cr'/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='tab'&gt;:
+      &lt;alt&gt;
+         &lt;literal tmark='-' hex='9'/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='lf'&gt;:
+      &lt;alt&gt;
+         &lt;literal tmark='-' hex='a'/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark='-' name='cr'&gt;:
+      &lt;alt&gt;
+         &lt;literal tmark='-' hex='d'/&gt;
       &lt;/alt&gt;.&lt;/rule&gt;
    &lt;rule name='comment'&gt;:
       &lt;alt&gt;
@@ -678,16 +695,20 @@ href="ixml.xml">entire serialisation</a> is available:</p>
       &lt;/alt&gt;.&lt;/rule&gt;
    &lt;rule name='rule'&gt;:
       &lt;alt&gt;
-         &lt;option&gt;
-            &lt;nonterminal name='mark'/&gt;?&lt;/option&gt;,
+         &lt;option&gt;(
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name='mark'/&gt;,
+                  &lt;nonterminal name='S'/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,
          &lt;nonterminal name='name'/&gt;,
          &lt;nonterminal name='S'/&gt;,
          &lt;inclusion&gt;[
             &lt;literal dstring='=:'/&gt;]&lt;/inclusion&gt;,
          &lt;nonterminal name='S'/&gt;,
          &lt;nonterminal mark='-' name='alts'/&gt;,
-         &lt;literal dstring='.'/&gt;,
-         &lt;nonterminal name='S'/&gt;
+         &lt;literal dstring='.'/&gt;
       &lt;/alt&gt;.&lt;/rule&gt;</pre>
 
 <h2 id="conformance">Conformance</h2>
