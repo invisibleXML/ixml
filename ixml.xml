@@ -3,7 +3,12 @@
       <alt>
          <nonterminal name='S'/>,
          <repeat1>
-            <nonterminal name='rule'/>+</repeat1>
+            <nonterminal name='rule'/>+
+            <sep>
+               <nonterminal name='S'/>
+            </sep>
+         </repeat1>,
+         <nonterminal name='S'/>
       </alt>.</rule>
    <rule mark='-' name='S'>:
       <alt>
@@ -77,8 +82,7 @@
             <literal dstring='=:'/>]</inclusion>,
          <nonterminal name='S'/>,
          <nonterminal mark='-' name='alts'/>,
-         <literal dstring='.'/>,
-         <nonterminal name='S'/>
+         <literal dstring='.'/>
       </alt>.</rule>
    <rule mark='@' name='mark'>:
       <alt>
@@ -264,9 +268,8 @@
       <alt>
          <literal sstring='"'/>,
          <literal tmark='-' sstring='"'/>
-      </alt>.
-      <comment>all characters, quotes must be doubled</comment>
-   </rule>
+      </alt>.</rule>
+   <comment>all characters, quotes must be doubled</comment>
    <rule name='schar'>:
       <alt>
          <exclusion>~[
@@ -275,9 +278,8 @@
       <alt>
          <literal dstring='&apos;'/>,
          <literal tmark='-' dstring='&apos;'/>
-      </alt>.
-      <comment>all characters, quotes must be doubled</comment>
-   </rule>
+      </alt>.</rule>
+   <comment>all characters, quotes must be doubled</comment>
    <rule mark='-' name='encoded'>:
       <alt>
          <option>(
@@ -393,18 +395,23 @@
       </alt>.</rule>
    <rule name='class'>:
       <alt>
-         <nonterminal mark='@' name='code'/>
-      </alt>.</rule>
-   <rule name='code'>:
-      <alt>
-         <nonterminal name='letter'/>,
-         <nonterminal name='letter'/>,
+         <nonterminal name='code'/>,
          <nonterminal name='S'/>
+      </alt>.</rule>
+   <rule mark='@' name='code'>:
+      <alt>
+         <nonterminal name='capital'/>,
+         <option>
+            <nonterminal name='letter'/>?</option>
+      </alt>.</rule>
+   <rule mark='-' name='capital'>:
+      <alt>
+         <inclusion>[
+            <range from='A' to='Z'>-</range>]</inclusion>
       </alt>.</rule>
    <rule mark='-' name='letter'>:
       <alt>
          <inclusion>[
-            <range from='a' to='z'>-</range>;
-            <range from='A' to='Z'>-</range>]</inclusion>
+            <range from='a' to='z'>-</range>]</inclusion>
       </alt>.</rule>
 </ixml>
