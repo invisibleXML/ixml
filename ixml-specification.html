@@ -29,7 +29,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2021-09-14<!--$--></p>
+<p>Version: <!--$date=-->2021-10-12<!--$date=--><!--$--><!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -441,9 +441,10 @@ character category [<a href="#categories">Categories</a>] of that name. E.g.
 <code>[Ll]</code> matches any lower-case letter, <code>[Ll; Lu]</code> matches
 any upper- or lower-case character; it is an error if there is no such
 class.</p>
-<pre>  class: @code, S.
-   code: letter, letter.
--letter: ["a"-"z"; "A"-"Z"].</pre>
+<pre>  class: code, S.
+   @code: capital, letter?.
+-capital: ["A"-"Z"].
+-letter: ["a"-"z"].</pre>
 
 <h3 id="complete">Complete</h3>
 <pre>         ixml: S, rule+S, S.
@@ -509,9 +510,10 @@ class.</p>
    -character: -'"', dchar, -'"', S;
                -"'", schar, -"'", S;
                "#", hex, S.
-        class: @code, S.
-         code: letter, letter.
-      -letter: ["a"-"z"; "A"-"Z"].</pre>
+        class: code, S.
+        @code: capital, letter?.
+     -capital: ["A"-"Z"].
+      -letter: ["a"-"z"].</pre>
 
 <h2 id="parsing">Parsing</h2>
 
@@ -802,25 +804,27 @@ following also apply to conforming processors:</p>
 <h2 id="references">References</h2>
 
 <p id="unicode">[Unicode] The Unicode Consortium (ed.), The Unicode Standard
-— Version 13.0. Unicode Consortium, 2020, ISBN 978-1-936213-26-9,
-http://www.unicode.org/versions/Unicode13.0.0/</p>
+— Version 13.0. Unicode Consortium, 2020, ISBN 978-1-936213-26-9, <a
+href="http://www.unicode.org/versions/Unicode13.0.0/">http://www.unicode.org/versions/Unicode13.0.0/</a></p>
 <!-- apparently unused
 <p  id="properties">[Properties] ibid. Chapter 4, Unicode Character Properties
 https://www.unicode.org/versions/Unicode13.0.0/ch04.pdf</p>
 -->
 
-<p id="categories">[Categories] General Category Values
-https://unicode.org/reports/tr44/#General_Category_Values (See also
-http://www.fileformat.info/info/unicode/category/index.htm)</p>
+<p id="categories">[Categories] General Category Values <a
+href="https://unicode.org/reports/tr44/#General_Category_Values">https://unicode.org/reports/tr44/#General_Category_Values</a>
+(See also <a
+href="http://www.fileformat.info/info/unicode/category/index.htm">http://www.fileformat.info/info/unicode/category/index.htm</a>)</p>
 
 <p id="xml">[XML] Tim Bray et al. (eds.), Extensible Markup Language (XML) 1.0
-(Fifth Edition), W3C, 2008, https://www.w3.org/TR/xml/</p>
+(Fifth Edition), W3C, 2008, <a
+href="https://www.w3.org/TR/xml/">https://www.w3.org/TR/xml/</a></p>
 
 <h2>Informational References</h2>
 
 <p id="earley">[Earley] Earley, Jay (1970), "An efficient context-free parsing
-algorithm", Communications of the ACM, 13 (2): 94–102,
-doi:10.1145/362007.362035</p>
+algorithm", Communications of the ACM, 13 (2): 94–102, <a
+href="doi:10.1145/362007.362035">doi:10.1145/362007.362035</a></p>
 
 <p id="unger">[Unger] Unger, S. H. A global parser for context-free phrase
 structure grammars. Commun. ACM, 11(4):240–247, April 1968</p>
@@ -838,7 +842,8 @@ Pages 177-189</p>
 
 <p id="grune">[Grune] Grune, D. and Jacobs, C. (2008). Parsing techniques : a
 practical guide (2nd ed.). New York: Springer. p. 579. ISBN 978-0-387-20248-8.
-https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</p>
+<a
+href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p>
 
 <h2 id="acknowledgments">Acknowledgments</h2>
 
