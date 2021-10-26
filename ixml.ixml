@@ -8,8 +8,10 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".
+         rule: (mOrP, S)?, name, S, ["=:"], S, -alts, ".".
+        -mOrP: mark; pragma, mark?;
         @mark: ["@^-"].
+       pragma: "#", name, S, string.
          alts: alt+([";|"], S).
           alt: term*(",", S).
         -term: factor;
@@ -23,18 +25,19 @@
       repeat1: factor, "+", S, sep?.
        option: factor, "?", S.
           sep: factor.
-  nonterminal: (mark, S)?, name, S.
+  nonterminal: (mOrP, S)?, name, S.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmark, S)?, -string.
+      -quoted: (tmOrP, S)?, -string.
 
         @name: namestart, namefollower*.
    -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
+       -tmOrP: tmark; pragma, tmark?
        @tmark: ["^-"].
        string: -'"', dstring, -'"', S;
                -"'", sstring, -"'", S.
@@ -44,13 +47,13 @@
                '"', -'"'. {all characters, quotes must be doubled}
         schar: ~["'"];
                "'", -"'". {all characters, quotes must be doubled}
-     -encoded: (tmark, S)?, -"#", @hex, S.
+     -encoded: (tmOrP, S)?, -"#", @hex, S.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: (tmark, S)?,         set.
-    exclusion: (tmark, S)?, "~", S, set.
+    inclusion: (tmOrP, S)?,         set.
+    exclusion: (tmOrP, S)?, "~", S, set.
          -set: "[", S,  member*([";|"], S), "]", S.
       -member: literal;
                range;

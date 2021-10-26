@@ -445,6 +445,11 @@ class.</p>
    @code: capital, letter?.
 -capital: ["A"-"Z"].
 -letter: ["a"-"z"].</pre>
+  
+<h3 id="pragma">Pragmas</h3>
+<p>Pragmas are ways to mark-up the grammar that optionally allow conforming parsers to extend their behaviours.  They are written in such a way that ignoring a pragma results in the desired fall-back behaviour.</p>
+<p>Pragmas are allowed wherever a terminal or non-terminal mark are allowed.  They start with a <code>#</code> symbol, and consist of a qualified name and a quoted <code>string</code>:</p>
+<pre>-pragma: "#", name, string.</pre>
 
 <h3 id="complete">Complete</h3>
 <pre>         ixml: S, rule+S, S.
