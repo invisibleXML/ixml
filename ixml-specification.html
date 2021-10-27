@@ -449,8 +449,11 @@ class.</p>
 <h3 id="pragma">Pragmas</h3>
 <p>Pragmas are ways to mark-up the grammar that optionally allow conforming parsers to extend their behaviours.  They are written in such a way that ignoring a pragma results in the desired fall-back behaviour.</p>
 <p>Pragmas are allowed wherever a terminal or non-terminal mark are allowed.  They start with a <code>#</code> symbol, and consist of a qualified name and a quoted <code>string</code>:</p>
-<pre>@pragma: -"#", #name "" name, string.</pre><p>Pragmas starting with reserved XML names or namespaces, the null namespace, or the Invisible XML namespace are considered to be reserved and should not be used except as directed by this specification.</p><p>There are a number of potential uses for pragmas, some of which are required to define pragmas for the invisible XML grammar. 
-</p><h4>Namespace declarations</h4><p>Namespaces can be declared using the <code>xmlns</code> and <code>xmlns:xxx</code> name patterns, where <code>xxx</code> represents an XML name prefix.  The value of a namespace pragma represents the namespace URI.</p>
+<pre>@pragma: -"#", #name "" name, string.</pre>
+  <p>Pragmas starting with reserved XML names or namespaces, the null namespace, or the Invisible XML namespace are considered to be reserved and should not be used except as directed by this specification.</p>
+  <p>There are a number of potential uses for pragmas, some of which are required to define pragmas for the invisible XML grammar.</p>
+  <h4>Namespace declarations</h4>
+  <p>Namespaces can be declared using the <code>xmlns</code> and <code>xmlns:xxx</code> name patterns, where <code>xxx</code> represents an XML name prefix.  The value of a namespace pragma represents the namespace URI.</p>
   <pre>#xmlns "http://invisiblexml.org/ns"
 #xmlns:xsl "http://www.w3.org/1999/XSL/Transform"</pre>
   <p>This provides a way to declare namespaces and prefixes for use with qualified names in invisible XML.  Declarations on the first rule are taken to apply to the whole grammar.</p>
