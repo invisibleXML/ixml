@@ -29,7 +29,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2021-10-12<!--$date=--><!--$--><!--$--></p>
+<p>Version: <!--$date=-->2021-11-12<!--$date=--><!--$--><!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -80,9 +80,9 @@
 <p>since the underlying abstractions being represented are the same. </p>
 
 <p>We choose which representations of our data to use, CSV, JSON, XML, or
-whatever, depending on habit, convenience, and the context we want to use that
-data in. On the other hand, having an interoperable generic toolchain such as
-that provided by XML to process data is of immense value. How do we resolve the
+whatever, depending on habit, convenience, and the context in which it occurs.
+On the other hand, having an interoperable generic toolchain such as that
+provided by XML to process data is of immense value. How do we resolve the
 conflicting requirements of convenience, habit, and context, and still enable a
 generic toolchain? </p>
 
@@ -261,6 +261,1150 @@ in the serialised result, giving:</p>
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
 &lt;/url&gt;</pre>
 
+<p>Changing the rule </p>
+<pre>url: scheme, ":", authority, path.</pre>
+
+<p>to </p>
+<pre>url: scheme, -":", authority, path.</pre>
+
+<p>and</p>
+<pre>authority: "//", host.authority: "//", host.s;
+               -"'", schar, -"'", s;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;s;
+               -"'", schar, -"'", S;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;"#", hex, S.
+        class: code, S.
+       S;
+               -"'", schar, -"'", S;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;":", authority, path.
+"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;
+
+scheme: letter+.
+
+authority: "//", host.S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", S, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", S, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, S)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;authority: "//", host.</pre>
+
+<p>to </p>
+<pre>authority: -"//", host.authority: "//", host.s;
+               -"'", schar, -"'", s;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;s;
+               -"'", schar, -"'", S;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;"#", hex, S.
+        class: code, S.
+       S;
+               -"'", schar, -"'", S;
+               -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;":", authority, path.
+"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", s.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;
+
+scheme: letter+.
+
+authority: "//", host.S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", s, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", S, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, s)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;S;
+               -"'", schar, -"'", S;
+               -"-", S, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"',  -"]", S.
+      -member: literal;
+               range;
+               class.
+        range: from,), -"~", S, set.
+         -set: -"[", S,  member*(-[";|"], S)?,          set.
+    exclusion: (tmark, S)?, - "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, sacters, quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", @hex, s.
+          hex: ["0"-"9";{all characters, quotes must be doubled}
+        schar: ~["'"];
+               "'", -"'". {all char s.
+     @dstring: dchar+.
+     @sstring: schar+.
+        dchar: ~['"'];
+               '"', -'"'. 
+
+       @tmark: ["^-"].
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'",mefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn]. quoted;
+               encoded.
+      -quoted: (tmark, s)?, -string.
+
+        @name: namestart, na nonterminal: (mark, s)?, name, s.
+
+    -terminal: literal; 
+               charset.
+      literal:"+", s, sep?.
+       option: factor, -"?", s.
+          sep: factor.
+  sep?.
+      repeat1: factor, -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s,al;
+               nonterminal;
+               -actor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: termin[";|"], s).
+          alt: term*(-",", s).
+        -term: f     @mark: ["@^-"].
+         alts: alt+(-["=:"], s, -alts, -".".
+   nt)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, - cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comme         ixml: s, rule+s, s.
+
+           -s: (whitespace; comment)*.
+  -whitespace: -[Zs]; tab; lf;authority: "//", host.</pre>
+
+<p>would remove the spurious characters from the serialisation:</p>
+<pre>&lt;url scheme='http'&gt;
+   &lt;host&gt;www.w3.org&lt;/host&gt;
+   &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
+&lt;/url&gt;</pre>
+
 <h2 id="grammar">The Grammar</h2>
 
 <p>Here we describe the format of the grammar used to describe documents. Note
@@ -268,25 +1412,25 @@ that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is a sequence of one or more rules, surrounded and separated by
 spacing and comments:</p>
-<pre>ixml: S, rule+S, S.</pre>
+<pre>ixml: s, rule+s, s.</pre>
 
-<p><code>S</code> stands for an optional sequence of spacing and comments. A
+<p>An <code>s</code> stands for an optional sequence of spacing and comments. A
 comment is enclosed in braces, and may included nested comments, to enable
 commenting out parts of a grammar:</p>
-<pre>          -S: (whitespace; comment)*.
-  -whitespace: -[Zs]; tab; lf; cr.
-         -tab: -#9.
-          -lf: -#a.
-          -cr: -#d.
-      comment: -"{", (cchar; comment)*, -"}".
-       -cchar: ~["{}"].</pre>
+<pre>         -s: (whitespace; comment)*.
+-whitespace: -[Zs]; tab; lf; cr.
+       -tab: -#9.
+        -lf: -#a.
+        -cr: -#d.
+    comment: -"{", (cchar; comment)*, -"}".
+     -cchar: ~["{}"].</pre>
 
 <h3 id="rules">Rules</h3>
 
 <p>A rule consists of an optional mark, a name, and one or more alternatives.
 The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
-<pre>rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".</pre>
+<pre>rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
 <p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
 indicates whether the item so marked will be serialised as an attribute
@@ -302,15 +1446,15 @@ with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialised names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
 <pre>        @name: namestart, namefollower*.
-   -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
+   -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p>
-<pre>alts: alt+([";|"], S).</pre>
+<pre>alts: alt+(-[";|"], s).</pre>
 
 <p>An alternative is zero or more terms, separated by commas:</p>
-<pre>alt: term*(",", S).</pre>
+<pre>alt: term*(-",", s).</pre>
 
 <p>A term is a singleton factor, an optional factor, or a repeated factor,
 repeated zero or more times, or one or more times.</p>
@@ -323,24 +1467,24 @@ repeated zero or more times, or one or more times.</p>
 alternatives:</p>
 <pre>-factor: terminal;
          nonterminal;
-         "(", S, alts, ")", S.</pre>
+         -"(", s, alts, -")", s.</pre>
 
 <p>A factor repeated zero or more times is followed by an asterisk, optionally
 followed by a separator, e.g. <code>abc*</code> and <code>abc*","</code>. For
 instance <code>"a"*"#"</code> would match the empty string, <code>a
 </code><code>a#a a#a#a</code> etc.</p>
-<pre>repeat0: factor, "*", S, sep?.</pre>
+<pre>repeat0: factor, -"*", s, sep?.</pre>
 
 <p>Similarly, a factor repeated one or more times is followed by a plus,
 optionally followed by a separator, e.g. <code>abc+</code> and
 <code>abc+","</code>. For instance <code>"a"+"#"</code> would match <code>a
 </code><code>a#a a#a#a</code> etc., but not the empty string.</p>
-<pre>repeat1: factor, "+", S, sep?.</pre>
+<pre>repeat1: factor, -"+", s, sep?.</pre>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
 For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p>
-<pre>option: factor, "?", S.</pre>
+<pre>option: factor, -"?", s.</pre>
 
 <p>A separator may be any factor. E.g. <code>abc*def</code> or <code>abc*(",";
 ".")</code>. For instance <code>"a"+("#"; "!")</code> would match <code>a#a a!a
@@ -350,7 +1494,7 @@ a#a!a a!a#a a#a#a</code> etc.</p>
 <h3 id="nonterminals">Nonterminals</h3>
 
 <p>A nonterminal is an optionally marked name:</p>
-<pre>nonterminal: (mark, S)?, name, S.</pre>
+<pre>nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which must exist, and
 there must only be one such rule.</p>
@@ -375,10 +1519,10 @@ string by doubling it. A quoted string matches only the exact same string in
 the input. Examples: <code>"yes" 'yes'. </code></p>
 
 <p>These two strings are identical: <code>'Isn''t it?' "Isn't it?"</code></p>
-<pre> -quoted: (tmark, S)?, -string.
+<pre> -quoted: (tmark, s)?, -string.
   @tmark: ["^-"].
-  string: -'"', dstring, -'"', S;
-          -"'", sstring, -"'", S.
+  string: -'"', dstring, -'"', s;
+          -"'", sstring, -"'", s.
 @dstring: dchar+.
 @sstring: schar+.
    dchar: ~['"'];
@@ -393,7 +1537,7 @@ example <code>#a0</code>. The digits are interpreted as a number in
 hexadecimal, and the character at that Unicode code-point is used [<a
 href="#unicode">Unicode</a>]. The number must be within the Unicode code-point
 range.</p>
-<pre>-encoded: (tmark, S)?, -"#", @hex, S.
+<pre>-encoded: (tmark, s)?, -"#", @hex, s.
      hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
 <h3 id="characters">Character sets</h3>
@@ -418,38 +1562,38 @@ character in the input; on the other hand <code>~[]</code> would match any one
 character, whatever it is.</p>
 <pre> -charset: inclusion; 
            exclusion.
-inclusion: (tmark, S)?,         set.
-exclusion: (tmark, S)?, "~", S, set.
-     -set: "[", S,  member*([";|"], S), "]", S.
+inclusion: (tmark, s)?,          set.
+exclusion: (tmark, s)?, -"~", s, set.
+     -set: -"[", s,  member*(-[";|"], s), -"]", s.
   -member: literal;
            range;
            class.</pre>
 
 <p>A range matches any character in the range from the start character to the
 end, inclusive, using the Unicode ordering:</p>
-<pre>range: from, "-", S, to.
+<pre>range: from, -"-", s, to.
 @from: character.
   @to: character.</pre>
 
 <p>A character is a string of length one, or a hex encoded character:</p>
-<pre>-character: -'"', dchar, -'"', S;
-            -"'", schar, -"'", S;
-            "#", hex, S.</pre>
+<pre>-character: -'"', dchar, -'"', s;
+            -"'", schar, -"'", s;
+            -"#", hex, s.</pre>
 
 <p>A class is two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name. E.g.
 <code>[Ll]</code> matches any lower-case letter, <code>[Ll; Lu]</code> matches
 any upper- or lower-case character; it is an error if there is no such
 class.</p>
-<pre>  class: code, S.
+<pre>  class: code, s.
    @code: capital, letter?.
 -capital: ["A"-"Z"].
 -letter: ["a"-"z"].</pre>
 
 <h3 id="complete">Complete</h3>
-<pre>         ixml: S, rule+S, S.
+<pre>         ixml: s, rule+s, s.
 
-           -S: (whitespace; comment)*.
+           -s: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
           -lf: -#a.
@@ -457,60 +1601,60 @@ class.</p>
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".
+         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
         @mark: ["@^-"].
-         alts: alt+([";|"], S).
-          alt: term*(",", S).
+         alts: alt+(-[";|"], s).
+          alt: term*(-",", s).
         -term: factor;
                option;
                repeat0;
                repeat1.
       -factor: terminal;
                nonterminal;
-               "(", S, alts, ")", S.
-      repeat0: factor, "*", S, sep?.
-      repeat1: factor, "+", S, sep?.
-       option: factor, "?", S.
+               -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s, sep?.
+      repeat1: factor, -"+", s, sep?.
+       option: factor, -"?", s.
           sep: factor.
-  nonterminal: (mark, S)?, name, S.
+  nonterminal: (mark, s)?, name, s.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmark, S)?, -string.
+      -quoted: (tmark, s)?, -string.
 
         @name: namestart, namefollower*.
-   -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
+   -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
        @tmark: ["^-"].
-       string: -'"', dstring, -'"', S;
-               -"'", sstring, -"'", S.
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'", s.
      @dstring: dchar+.
      @sstring: schar+.
         dchar: ~['"'];
                '"', -'"'. {all characters, quotes must be doubled}
         schar: ~["'"];
                "'", -"'". {all characters, quotes must be doubled}
-     -encoded: (tmark, S)?, -"#", @hex, S.
+     -encoded: (tmark, s)?, -"#", @hex, s.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: (tmark, S)?,         set.
-    exclusion: (tmark, S)?, "~", S, set.
-         -set: "[", S,  member*([";|"], S), "]", S.
+    inclusion: (tmark, s)?,          set.
+    exclusion: (tmark, s)?, -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s), -"]", s.
       -member: literal;
                range;
                class.
-        range: from, "-", S, to.
+        range: from, -"-", s, to.
         @from: character.
           @to: character.
-   -character: -'"', dchar, -'"', S;
-               -"'", schar, -"'", S;
-               "#", hex, S.
-        class: code, S.
+   -character: -'"', dchar, -'"', s;
+               -"'", schar, -"'", s;
+               -"#", hex, s.
+        class: code, s.
         @code: capital, letter?.
      -capital: ["A"-"Z"].
       -letter: ["a"-"z"].</pre>
@@ -553,14 +1697,14 @@ requirements of an XML name.</p>
 <ul>
   <li>A <strong>nonterminal</strong> <strong>element</strong> is serialised by
     outputting the name of the node as an XML tag, serialising all exposed
-    attribute descendents, and then serialising all non-attribute children in
+    attribute descendants, and then serialising all non-attribute children in
     order. An attribute is exposed if it is an attribute child, or an exposed
     attribute of a hidden element child (note this is recursive).</li>
   <li>A <strong>nonterminal</strong> <strong>hidden</strong> node is serialised
     by serialising all non-attribute children in order.</li>
   <li>A <strong>nonterminal</strong> <strong>attribute</strong> is serialised
     by outputting the name of the node as an attribute, and serialising all
-    non-hidden terminal descendents of the node (regardless of marking of
+    non-hidden terminal descendants of the node (regardless of marking of
     intermediate nonterminals), in order, as the value of the attribute.</li>
   <li>A <strong>non-hidden terminal</strong> is serialised by outputting its
     string.</li>
@@ -622,101 +1766,117 @@ generated nonterminals.</p>
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
 serialising. Note that all semantically significant terminals are recorded in
-attributes. The serialisation begins as below, but the <a
-href="ixml.xml">entire serialisation</a> is available:</p>
+attributes, and non-significant characters are not serialised. The
+serialisation begins as below, but the <a href="ixml.xml">entire
+serialisation</a> is available:</p>
 <pre>&lt;ixml&gt;
-   &lt;rule name='ixml'&gt;:
+   &lt;rule name='ixml'&gt;
       &lt;alt&gt;
-         &lt;nonterminal name='S'/&gt;,
+         &lt;nonterminal name='s'/&gt;
          &lt;repeat1&gt;
-            &lt;nonterminal name='rule'/&gt;+
+            &lt;nonterminal name='rule'/&gt;
             &lt;sep&gt;
-               &lt;nonterminal name='S'/&gt;
+               &lt;nonterminal name='s'/&gt;
             &lt;/sep&gt;
-         &lt;/repeat1&gt;,
-         &lt;nonterminal name='S'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='S'&gt;:
+         &lt;/repeat1&gt;
+         &lt;nonterminal name='s'/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='s'&gt;
       &lt;alt&gt;
-         &lt;repeat0&gt;(
+         &lt;repeat0&gt;
             &lt;alts&gt;
                &lt;alt&gt;
                   &lt;nonterminal name='whitespace'/&gt;
-               &lt;/alt&gt;;
+               &lt;/alt&gt;
                &lt;alt&gt;
                   &lt;nonterminal name='comment'/&gt;
                &lt;/alt&gt;
-            &lt;/alts&gt;)*&lt;/repeat0&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='whitespace'&gt;:
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='whitespace'&gt;
       &lt;alt&gt;
-         &lt;inclusion tmark='-'&gt;[
-            &lt;class code='Zs'/&gt;]&lt;/inclusion&gt;
-      &lt;/alt&gt;;
+         &lt;inclusion tmark='-'&gt;
+            &lt;class code='Zs'/&gt;
+         &lt;/inclusion&gt;
+      &lt;/alt&gt;
       &lt;alt&gt;
          &lt;nonterminal name='tab'/&gt;
-      &lt;/alt&gt;;
+      &lt;/alt&gt;
       &lt;alt&gt;
          &lt;nonterminal name='lf'/&gt;
-      &lt;/alt&gt;;
+      &lt;/alt&gt;
       &lt;alt&gt;
          &lt;nonterminal name='cr'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='tab'&gt;:
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='tab'&gt;
       &lt;alt&gt;
          &lt;literal tmark='-' hex='9'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='lf'&gt;:
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='lf'&gt;
       &lt;alt&gt;
          &lt;literal tmark='-' hex='a'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='cr'&gt;:
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='cr'&gt;
       &lt;alt&gt;
          &lt;literal tmark='-' hex='d'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule name='comment'&gt;:
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name='comment'&gt;
       &lt;alt&gt;
-         &lt;literal tmark='-' dstring='{'/&gt;,
-         &lt;repeat0&gt;(
+         &lt;literal tmark='-' dstring='{'/&gt;
+         &lt;repeat0&gt;
             &lt;alts&gt;
                &lt;alt&gt;
                   &lt;nonterminal name='cchar'/&gt;
-               &lt;/alt&gt;;
+               &lt;/alt&gt;
                &lt;alt&gt;
                   &lt;nonterminal name='comment'/&gt;
                &lt;/alt&gt;
-            &lt;/alts&gt;)*&lt;/repeat0&gt;,
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
          &lt;literal tmark='-' dstring='}'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule mark='-' name='cchar'&gt;:
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='cchar'&gt;
       &lt;alt&gt;
-         &lt;exclusion&gt;~[
-            &lt;literal dstring='{}'/&gt;]&lt;/exclusion&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;
-   &lt;rule name='rule'&gt;:
+         &lt;exclusion&gt;
+            &lt;literal dstring='{}'/&gt;
+         &lt;/exclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name='rule'&gt;
       &lt;alt&gt;
-         &lt;option&gt;(
+         &lt;option&gt;
             &lt;alts&gt;
                &lt;alt&gt;
-                  &lt;nonterminal name='mark'/&gt;,
-                  &lt;nonterminal name='S'/&gt;
+                  &lt;nonterminal name='mark'/&gt;
+                  &lt;nonterminal name='s'/&gt;
                &lt;/alt&gt;
-            &lt;/alts&gt;)?&lt;/option&gt;,
-         &lt;nonterminal name='name'/&gt;,
-         &lt;nonterminal name='S'/&gt;,
-         &lt;inclusion&gt;[
-            &lt;literal dstring='=:'/&gt;]&lt;/inclusion&gt;,
-         &lt;nonterminal name='S'/&gt;,
-         &lt;nonterminal mark='-' name='alts'/&gt;,
-         &lt;literal dstring='.'/&gt;
-      &lt;/alt&gt;.&lt;/rule&gt;</pre>
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name='name'/&gt;
+         &lt;nonterminal name='s'/&gt;
+         &lt;inclusion tmark='-'&gt;
+            &lt;literal dstring='=:'/&gt;
+         &lt;/inclusion&gt;
+         &lt;nonterminal name='s'/&gt;
+         &lt;nonterminal mark='-' name='alts'/&gt;
+         &lt;literal tmark='-' dstring='.'/&gt;
+      &lt;/alt&gt;
+   &lt;/rule</pre>
 
 <h2 id="conformance">Conformance</h2>
 
 <p>In this specification, the verb "must" expresses unconditional requirements
 for conformance to the specification; the verb "should" expresses requirements
 that are encouraged but which are not conditions of conformance; the verb "may"
-expresses optional features which are neither required not prohibited.</p>
+expresses optional features which are neither required nor prohibited.</p>
 
 <p>Conformance to this specification can meaningfully be claimed for grammars
 and for processors.</p>
@@ -871,7 +2031,7 @@ href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf">https://di
 <p>This specification was produced by the W3C ixml community group, that at the
 time of publishing consisted of the members: <span>{list of names}</span></p>
 
-<p>Thanks are due to Hans-Dieter Hiep for a close reading of the specification,
-and consequent many helpful comments.</p>
+<p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
+specification, and consequent many helpful comments.</p>
 </body>
 </html>
