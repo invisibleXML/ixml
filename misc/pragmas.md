@@ -332,7 +332,7 @@ the *y* namespace, and some in no namespace at all, might be
 	x:a: 'Speed'.
 	y:b: 'kills'.
 	c:  'It really does.'.
-
+````
 The XML representation of the grammar might be:
 
 ````
