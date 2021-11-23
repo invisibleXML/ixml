@@ -14,8 +14,10 @@ that is not part of the ixml specification but can be used by some
 implementations to provide useful behavior, without getting in the way
 of other implementations for which the information is irrelevant. The
 additional information contained in pragmas may be used to control
-options in a processor (like optimization levels in a C compiler) or
-to extend the specification.
+options in a processor or to extend the specification (in roughly the
+same way as pragmas and structured comments in C or Pascal
+programs may be used to control optimization levels in some
+compilers).
 
 The proposal described here is inspired in part by the `xsl:fallback`
 and `use-when` mechanisms of XSLT and the *extension expression*
@@ -48,13 +50,18 @@ nonterminal.
 * Rule rewriting
 
   Using pragmas to specify that a rule as given is shorthand for a set
-of other rules.  (As in John Lumley's grammar rewriting for XPath.)
+of other rules.  (Example: John Lumley's grammar rewriting for XPath.)
 
-* Tokenization annotation.
+* Tokenization annotation. 
 
-  Using pragmas to annotate nonterminals in an ixml grammar to
-indicate that they (a) define a regular language and (b) can be safely
-recognized by a greedy regular-expression match.
+  Using pragmas to annotate nonterminals in an ixml grammar to 
+indicate that they (a) define a regular language and (b) can be safely 
+recognized by a greedy regular-expression match. 
+
+* Alternative formulations. 
+
+  Using pragmas to provide alternative formulations of rules in an
+ixml grammar to allow different annotation or better optimization.
 
 * Text injection.
 
@@ -404,11 +411,40 @@ nonterminal.
 Using pragmas to specify that a rule as given is shorthand for a set
 of other rules.  (As in John Lumley's grammar rewriting for XPath.)
 
-### Tokenization annotation.
+### Tokenization annotation and alternative formulations.
 
-Using pragmas to annotate nonterminals in an ixml grammar to
-indicate that they (a) define a regular language and (b) can be safely
+We can use pragmas to annotate nonterminals in an ixml grammar to
+indicate that they define a regular language and can be safely
 recognized by a greedy regular-expression match.
+
+For example, consider the grammar for a simple programming language.
+A processor might read programs a little faster if it could read
+identifiers in a single operation; this will be true if when an
+identifier is encountered, the identifier will always consist of the
+longest available sequence of characters legal in an identifier.  In
+the toy Program.ixml grammar, the rule for identifiers is:
+
+````
+    identifier:  letter+, S.
+````
+
+We can annotate *identifier* to signal that it's safe to consume an
+identifier using a single regular-expression match by using a pragma
+in a 'lexical scanning' (ls) namespace:
+
+````
+    [ls:token] identifier:  letter+, S.
+````
+
+The rules for comments in ixml itself offer another wrinkle.  
+
+````
+      comment: -"{", (cchar; comment)*, -"}".
+      -cchar: ~["{}"].
+````
+
+Within a comment, any sequence of characters matching *cchar* can be
+recognized in a single operation; there is no need to look for
 
 ### Text injection.
 
