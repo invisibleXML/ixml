@@ -3,7 +3,7 @@
            -s: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
-          -lf: -#b.
+          -lf: -#a.
           -cr: -#d.
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
@@ -60,7 +60,7 @@
           @to: character.
    -character: -'"', dchar, -'"', s;
                -"'", schar, -"'", s;
-               -"#", hex, s.
+               "#", hex, s.
         class: code, s.
         @code: capital, letter?.
      -capital: ["A"-"Z"].

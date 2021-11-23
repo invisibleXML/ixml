@@ -455,7 +455,7 @@
          <nonterminal name='s'/>
       </alt>
       <alt>
-         <literal tmark='-' dstring='#'/>
+         <literal dstring='#'/>
          <nonterminal name='hex'/>
          <nonterminal name='s'/>
       </alt>
