@@ -163,59 +163,10 @@ an ixml grammar?
 
 ## Proposal(s)
 
-Two concrete proposals have been made; they have been given arbitrary
-names for discussion.
-
-### The hash-QName proposal
-
-In this proposal, pragmas take the form of a hash mark, a QName, and a
-string. Because ixml has two string delimiters, pragmas can nest, but
-only two deep.
-
-They can occur immediately before a terminal or nonterminal symbol,
-before the mark if any.
-
-In the XML form, they are realized as extension attributes whose name
-is the QName given in the pragma and whose value is the value of the
-string.
-
-For example:
-
-````
-    #my:color 'blue' a = b, #my:flavor 'vanilla' c?.
-````
-
-The corresponding XML form is:
-
-````
-    <rule name="a" my:color="blue">
-        <alt>
-            <nonterminal name="b"/>
-            <option>
-                <nonterminal name="c" my:flavor="vanilla"/>
-            </option>
-		</alt>
-    </rule>
-````
-	
-Annotations pertaining to a particular occurrence of a symbol appear 
-immediately before that occurrence, as here the `my:flavor` pragma. 
-
-Annotations pertaining to a rule as a whole, or which provide a 
-nonterminal with default value for some property appear immediately 
-before the nonterminal on the left-hand side of a rule, as here the 
-`my:color` pragma. 
-
-Annotations pertaining to the grammar as a whole appear immediately
-before the first rule, and thus appear as attributes on the first
-`rule` element of the grammar.
-
-There are no syntactic distinctions among these cases: if the rule
-shown is the first rule in the grammar, `my:color` might be supplying
-a default property value for `a`, or annotating the rule, or
-annotating the grammar as a whole. The difference must be carried by
-the semantics of the pragma: those defining the `my:color` pragma
-should be clear about what it means and what its scope is.
+The current proposal is given the arbitrary name of 'brackets QName' for
+discussion; an earlier proposal (the 'hash-QName' proposal) has been
+withdrawn, though traces of it may remain in other documents in this
+branch.
 
 ### The brackets-QName proposal 
 
@@ -224,38 +175,41 @@ optional mark, a QName, the pragma's data, and a right square bracket.
 Nested pairs of square brackets are allowed, so pragmas can nest
 arbitrarily deep.
 
-Pragmas can occur immediately before a terminal or nonterminal symbol,
-before the mark if any, or in the whitespace immediately before the
-full stop of a rule.
+In the ixml form of a grammar, pragmas can occur immediately
+
+* before a terminal or nonterminal symbol, before the mark if any, or
+
+* in the whitespace immediately before the full stop of a rule.
 
 In the XML form, the serialization of the pragma depends on its
-position and the mark following the opening bracket.
+position and in some cases on the mark following the opening bracket.
 
 * Pragmas occurring before the full stop of a rule are serialized as
 extension elements following the final `alt` of the right-hand side of
-the rule.
+the rule, regardless of the mark.
 
-* Pragmas occurring before a symbol are serialized as attributes if 
-marked `@` (ignoring marks on any nested pragmas). 
+* Pragmas occurring before a symbol are
 
-* Pragmas occurring before a symbol are serialized as processing
-instructions if marked `-`.
+    * serialized as attributes if marked `@` (ignoring marks on any
+    nested pragmas).
 
-  The processing instructions appear as the first children of the XML
-representation of the symbol; the name and data of the processing
-instruction in the XML form are the name and pragma data of the pragma
-in the ixml form.
+    * serialized as processing instructions if marked `-`.
 
-* Pragmas occurring before a symbol are serialized as extension
-elements if unmarked or marked `^`.
+      The processing instructions appear as the first children of the
+      XML representation of the symbol; the name and data of the
+      processing instruction in the XML form are the name and pragma
+      data of the pragma in the ixml form.
 
-  The extension elements appear as the first children of the XML
-representation of the symbol. In the canonical XML representation, the
-pragma data is serialized as a 'pragma-data' element within the
-extension element, which will contain the pragma-data as a character
-sequence. Depending on the semantics of the pragma itself, the
-extension element may also contain additional elements. (See the
-examples in the final section of this paper.)
+    * serialized as extension elements if unmarked or marked `^`.
+
+      The extension elements appear as the first children of the XML
+      representation of the symbol. In the canonical XML
+      representation, the pragma data is serialized as a 'pragma-data'
+      element within the extension element, which will contain the
+      pragma-data as a character sequence. Depending on the semantics
+      of the pragma itself, the extension element may also contain
+      additional elements. (See the examples in the final section of
+      this paper.)
 
 For example:
 
@@ -279,30 +233,37 @@ The corresponding XML form is:
         </my:spin>
     </rule>
 ````
-	
-Annotations pertaining to a particular occurrence of a symbol appear 
-immediately before that occurrence, as here the `my:flavor` pragma. 
 
-Annotations which provide a nonterminal with default value for some
-property appear immediately before the nonterminal on the left-hand
-side of a rule, as here the `my:color` pragma.
+Annotations appearing immediately before an occurrence of a symbol in
+the right-hand side of a rule pertain to the occurrence of that
+symbol.  In the example, this is the case for the `my:flavor` pragma
+on *c*.
 
-Annotations pertaining to a rule as a whole may occur either before
-the left-hand side of the rule, which may be preferred for
-light-weight annotations, or before the full stop at the end of the
-rule, which is preferable for long complicated annotations.
+Annotations appearing before the full stop at the end of the rule 
+pertain to the rule as a whole.   In the example, this is the case for
+the `my:spin` pragma.
 
-Annotations pertaining to the grammar as a whole appear immediately
-before the first rule, and thus appear as attributes on the first
-`rule` element of the grammar.
+Annotations appearing immediately before the nonterminal on the
+left-hand side of a rule do one of three things:
 
-Pragmas occurring before a full stop apply to the rule as a whole.
-Pragmas occurring before a symbol in the right-hand side of a rule
-apply to that occurrence of that symbol. Pragmas occurring before the
-left-hand side of a rule may apply to that symbol in general, or to
-the rule as a whole, or (if occurring before the first rule) to the
-grammar as a whole; such distinctions are conveyed semantically, not
-syntactically.
+* They may provide the nonterminal on the left-hand side with a
+default value for some property.
+
+* They may pertain to the rule as a whole.
+
+* They may pertain to the grammar as a whole.
+
+These cases are not distinguished by their syntax; the distinction
+follows from the meaning of the pragma.
+
+In the example, this is the case for the `my:color` pragma.
+
+It follows that there are two ways to provide annotations pertaining
+to a rule as a whole: they may occur either before the left-hand side
+of the rule, which may be preferred for light-weight annotations, or
+before the full stop at the end of the rule, which is preferable for
+long complicated annotations.
+
 
 ## Worked examples
 
