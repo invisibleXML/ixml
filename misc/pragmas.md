@@ -1,6 +1,10 @@
 # Pragmas for ixml
 
-2021-11-16
+2021-11-16, rev. 2021-11-23
+
+*Tentative decisions and to-do items*
+
+* *Drop hash-quotes proposal.*
 
 
 This document describes a proposal for adding *pragmas* to the
@@ -10,14 +14,18 @@ It was prepared (or rather, is being prepared) by Tom Hillman and
 Michael Sperberg-McQueen. It is currently not finished.
 
 The general idea of pragmas is to provide a channel for information
-that is not part of the ixml specification but can be used by some
-implementations to provide useful behavior, without getting in the way
-of other implementations for which the information is irrelevant. The
-additional information contained in pragmas may be used to control
-options in a processor or to extend the specification (in roughly the
-same way as pragmas and structured comments in C or Pascal
-programs may be used to control optimization levels in some
-compilers).
+that is not a required part of the ixml specification but can be used
+by some implementations to provide useful behavior, without
+interfering with the operation of other implementations for which the
+information is irrelevant.  Pragmas can also be used to provide
+optional features in the ixml specification.  The additional
+information contained in pragmas may be used to control options in a
+processor or to extend the specification (in roughly the same way as
+pragmas and structured comments in C or Pascal programs may be used to
+control optimization levels in some compilers).
+
+On this view, pragmas are a form of annotation, and we use the terms
+*pragma* and *annotation* accordingly.
 
 The proposal described here is inspired in part by the `xsl:fallback`
 and `use-when` mechanisms of XSLT and the *extension expression*
@@ -52,25 +60,25 @@ nonterminal.
   Using pragmas to specify that a rule as given is shorthand for a set
 of other rules.  (Example: John Lumley's grammar rewriting for XPath.)
 
-* Tokenization annotation. 
+* Tokenization annotation
 
   Using pragmas to annotate nonterminals in an ixml grammar to 
 indicate that they (a) define a regular language and (b) can be safely 
 recognized by a greedy regular-expression match. 
 
-* Alternative formulations. 
+* Alternative formulations
 
   Using pragmas to provide alternative formulations of rules in an
 ixml grammar to allow different annotation or better optimization.
 
-* Text injection.
+* Text injection
 
   Using pragmas to indicate that a particular string should be
 injected into the XML representation of the input as (part of) a text
 node, or as an attribute or element. (This can help make the output of
 an ixml parse conform to a pre-existing schema.)
 
-* Attribute grammar specification.
+* Attribute grammar specification
 
   Using pragmas to annotate a grammar with information about
 grammatical attributes to be associated with nodes of the parse tree,
@@ -88,7 +96,7 @@ cases for pragmas not because we think they are best handled by
 pragmas (although for some of these cases, that may be true) but
 because they are (a) plausible ideas for things one might want to do
 which are (b) not supported by ixml in its current form, and thus (c)
-natural examples of the kinds of things an extension mechanism oughtly
+natural examples of the kinds of things an extension mechanism ought
 ideally to support.
 
 Some of these use cases seem most naturally handled by annotations
@@ -104,7 +112,7 @@ arbitrary expressions in a grammar.
 Our tentative list of requirements and desiderata is as follows.
 
 By *requirement* we mean a property or functionality which must be
-achieved for a pragmas proposal to be worth adopting.  
+achieved for a pragmas proposal to be worth adopting. 
 By *desideratum* we mean a property or functionality that should be
 included if possible, but which need not lead to the rejection of the
 proposal if it proves impossible to achieve.
@@ -140,8 +148,10 @@ expressed by the semantics of the particular pragma.
 
 ## Design questions
 
-Several design questions can be distinguished, not necessarily
-completely orthogonal.
+Several design questions can be distinguished; they are not completely
+orthogonal.
+
+* What information should be encodable with pragmas?
 
 * What syntax should pragmas have in invisible XML? 
 
@@ -228,8 +238,13 @@ the rule.
 * Pragmas occurring before a symbol are serialized as attributes if 
 marked `@` (ignoring marks on any nested pragmas). 
 
-* Pragmas occurring before a symbol are not serialized at all if
-marked `-`.
+* Pragmas occurring before a symbol are serialized as processing
+instructions if marked `-`.
+
+  The processing instructions appear as the first children of the XML
+representation of the symbol; the name and data of the processing
+instruction in the XML form are the name and pragma data of the pragma
+in the ixml form.
 
 * Pragmas occurring before a symbol are serialized as extension
 elements if unmarked or marked `^`.
