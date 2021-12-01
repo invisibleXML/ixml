@@ -1,6 +1,6 @@
 # Pragmas for ixml
 
-2021-11-16, rev. most recently 2021-11-30
+2021-11-16, rev. most recently 2021-12-01
 
 
 This document describes a proposal for adding *pragmas* to the
@@ -62,7 +62,7 @@ nonterminal.
 * Rule rewriting
 
   Using pragmas to specify that a rule as given is shorthand for a set
-of other rules.  (Example: John Lumley's grammar rewriting for XPath.)
+of other rules, which can be obtained by rewriting the rule as given.
 
 * Tokenization annotation
 
@@ -152,8 +152,8 @@ orthogonal.
 
 * What syntax should pragmas have in invisible XML? 
 
-* What representation should pragmas have in the XML serialization of
-an ixml grammar?
+* What representation should pragmas have in the XML form of a
+grammar?
 
 * Where can pragmas appear?
 
@@ -191,9 +191,10 @@ several locations:
 * immediately before the full stop of a rule; these pragmas apply to
   the rule.
 
-Two locations are allowed for pragmas applying to rule in order to
-allow them to appear either first or last; this is essentially a
-rhetorical choice, as it can make a large difference to readability.
+Two locations are allowed for pragmas applying to rules, in order to
+allow them to appear either first or last.  This is essentially a
+rhetorical choice, but an important one as it can make a large
+difference to readability.
 
 #### Marks on pragmas
 
@@ -206,37 +207,55 @@ various XML constructs in the XML form of the grammar:
 
 * An ixml pragma marked `?` corresponds to a processing instruction.
 
+To ensure that the ixml grammar has an XML representation, any two
+pragmas marked `@` and attached to the same construct must have
+different expanded names.
+
+Since ixml pragmas marked `@` all correspond to attributes, the
+precise location at which the pragmas appear in the ixml form of a
+grammar cannot (*or:* must not; *or:* by definition does not) convey
+information relevant to the meaning or processing of the pragma.  A
+pragma marked `@`, for example, has the same meaning whether it
+appears before the first rule in the grammar or after the last rule,
+or at some point between rules in the grammar.  Similarly the
+positions of pragmas marked `@` relative to other pragmas attached to
+the same construct carry no meaningful information.
+
+
 #### The XML form
 
 These XML constructs may occur in locations corresponding to those in
 which pragmas may appear in the ixml grammar:
 
 * as a child or attribute of the `ixml` element before, between, or
-  after `rule` elements.
+  after `rule` elements.  These correspond to ixml pragmas occurring
+  before, between, or after rule elements.
 
-* as a child or attribute of a `rule` element.  An ixml pragma marked 
-  `^` or `?` occurring on the left-hand side of a rule corresponds to an
-  extension element or processing instruction occurring before the
-  first `alt` child of the `rule` element; if it occurs immediately
-  before the full stop of the rule, it corresponds to an element or
-  processing instruction occurring after the last `alt` of the `rule`.
+* as as attribute of a `rule` element, or as an extension element or
+  processing instruction occurring as a child of `rule`, either before
+  all `alt` children of the rule or after them.  A pragma occurring
+  before the `alt` children corresponds to an ixml pragma marked `^`
+  or `?` occurring on the left-hand side of a rule; a pragma occurring
+  after the last `alt` child corresponds to an ixml pragma marked `^`
+  of `?` appearing in the whitespace before the full stop of the rule.
 
 * as a child or attribute of a `nonterminal`, `literal`, `inclusion`,
-  or `exclusion` element.
+  or `exclusion` element.  These correspond to ixml pragmas occurring
+  immediately before the terminal or nonterminal symbol in question,
+  before or after the mark.
 
-To ensure that the ixml grammar has an XML representation, any two
-pragmas marked `@` and attached to the same construct must have
-different expanded names.
 
-When a grammar in XML form is serialized into ixml form, extension
-attributes appearing on the `rule` element may be serialized either on
+When a grammar in XML form is written out into ixml form, extension
+attributes appearing on the `ixml` element may be serialized either
+before the first rule, after the last one, or between any two rules.
+Attributes appearing on the `rule` element may be serialized either on
 the left-hand side of the rule or before the full stop.  Pragmas
 attached to a symbol in the right-hand side of a rule may be
-serialized either before or after the mark; the two positions are
-equivalent.
+serialized either before or after the mark.  In all of these cases,
+the possible positions are all equivalent.
 
-For attributes, the attribute name is the QName of the ixml pragma 
-and the attribute value is the pragma data. 
+For attributes, the attribute name is the QName of the ixml pragma and
+the attribute value is the pragma data.
 
 For processing instructions, the PI name is the QName of the 
 ixml pragma and the PI value is the pragma data. 
@@ -326,7 +345,7 @@ on the left-hand side of a rule correspond in the XML to attributes or
 children of `rule` elements. In the example, this is the case for the
 `my:color` pragma.
 
-Annotations appearing immediately before an occurrence of a symbol in  
+Annotations appearing immediately before an occurrence of a symbol in
 the right-hand side of an ixml rule pertain to the occurrence of that
 symbol and correspond to attributes or children of the corresponding
 element in the XML grammar.  In the example, this is the case for the
@@ -379,7 +398,7 @@ binds the prefix *ns* to that namespace.
 That is, a pragma-aware processor must be on the alert for pragmas
 with the following properties:
 
-* In the pragma's QName, the prefix and local name are the same 
+* In the pragma's QName, the prefix and local name are the same
   NCName (non-colonized name). 
 
 * The pragma's data is the magic namespace name
@@ -390,9 +409,9 @@ When that pragma is found, it is interpreted as binding prefix *ns*
 pragma with a QName using that prefix and a URI as pragma data is to
 be interpreted as a namespace declaration in the obvious way.
 
-The corresponding constructs in the XML grammar are (a) a namespace
-declaration binding the prefix *ns* to the given namespace and (b) an
-attribute with the qualified name *ns:ns* with the value
+In the XML form for grammars, the corresponding constructs are (a) a
+namespace declaration binding the prefix *ns* to the given namespace
+and (b) an attribute with the qualified name *ns:ns* with the value
 "`http://example.com/ixml-namespaces`".
 
 *(Alternatively, we could follow the example of XML namespaces and
@@ -456,6 +475,11 @@ appropriate namespace bindings on the `x:sentence` element and the
 prefixed names in the grammar will serialize in instances as prefixed
 names in the XML, with appropriate namespace bindings.
 
+The fallback behavior of a parser that does not support these pragmas  
+will be as under the current spec, which someone wearing a  
+language-lawyer hat tells us is probably to emit output that is
+well-formed XML but not *namespace-well-formed* XML.
+
 This example does not define a capability for changing namespace
 bindings within a document.  It's an example.
 
@@ -467,7 +491,7 @@ serializing a nonterminal should be given a name different from the
 nonterminal itself. (As in Steven Pemberton's proposal for element
 renaming.)
 
-In the following grammar, the two forms of month have different 
+In the grammar below, the two forms of month have different 
 syntaxes, so they are required to have different nonterminal names, 
 and so they are required to be serialized using different XML element 
 names.
@@ -499,10 +523,15 @@ example with a literal URI-qualified name.  In that case, the *iso*
 rule would read as follows.
 
 ````
-	iso: year, "-", 
-        [Q{https://lists.w3.org/Archives/Public/public-ixml/2021Oct/0014.html}:rename month] nmonth, 
-        "-", day.
+iso:
+  year, "-", 
+  [Q{https://lists.w3.org/Archives/Public/public-ixml/2021Oct/0014.html}:rename month] nmonth, 
+  "-", day.
 ````
+
+The fallback behavior of a parser that does not support these pragmas
+will be to produce output using both the element name `month` and the
+element name `nmonth`.
 
 ### Name indirection 
 
@@ -568,10 +597,10 @@ briefly *r:nur*, the grammar takes the following form.  Note that in
 order to ensure that the first pragma is correctly interpreted as
 belonging to the first rule and not to the grammar as a whole, we must
 specify an explicit mark for the first rule.  We specify one for the
-second rule as well just for visual parallelism.  (In practice, we
+second rule as well just for visual parallelism.  In practice, we
 also need a rule that means "don't rewrite the entire rule, but
 replace references to rules rewritten using *r:nur*; we call this
-second pragma *r:ref*.)
+second pragma *r:ref*.
 
 ````
 ^ [r:nur] expr: term; expr, addop, term.
@@ -666,6 +695,9 @@ rules appearing as children of the extension elements.
     </ixml>
 ````
 
+The fallback behavior of a processor that doesn't support these 
+pragmas will be to serialize `expr` and `term` elements even when they 
+have only one child. 
 
 
 ### Tokenization annotation and alternative formulations.
@@ -702,8 +734,15 @@ The rules for comments in ixml itself offer another wrinkle.
 
 Within a comment, any sequence of characters matching *cchar* can be
 recognized in a single operation; there is no need to look for
-alternate parses that consume only some of the characters.  So we
-annotate the grammar and supply an alternative formulation of
+alternate parses that consume only some of the characters.  But there
+is no nonterminal here that matches all and only non-empty sequences
+of *cchar*.  In order to use the *ls:token* annotation here, we must
+first rewrite the grammar at this point.  So we introduce an
+annotation named *ls:rewrite* to be attached to a single grammar rule
+with the meaning that the pragma data provide an alternate form of the
+rule.
+
+We can now annotate the grammar and supply an alternative formulation of
 *comment* that replaces it with two new rules:
 
 ````
@@ -720,16 +759,25 @@ formulation after, not before, the existing rule:
 
 ````
       comment: -"{", (cchar; comment)*, -"}"
-          [ls:rewrite 
-                  comment: -"{", (cchars; comment)*, -"}". 
-                  [ls:token] cchars:  cchar+. 
-		  ].
+      [ls:rewrite 
+          comment: -"{", (cchars; comment)*, -"}". 
+          [ls:token] cchars:  cchar+. 
+	  ].
       -cchar: ~["{}"].
 ````
 
 Either way, the rewrite contains an alternative formulation of the
 grammar which recognizes the same sentences and provides the same XML
 representation but may be processed faster by some processors.
+
+The fallback behavior of a processor that doesn't support these
+pragmas will be to parse as usual using the grammar as specified.
+
+Note however that there is no guarantee or requirement that the
+alternate rules in an *ls:rewrite* pragma be equivalent to the
+fallback rules: pragmas may change the behavior of a processor, and
+they may change the meaning of an expression (or here the meaning of a
+grammar or part of it).
 
 
 ### Text injection.
@@ -785,7 +833,7 @@ would not involve any interesting new principles.
 A conventional system for reading attribute grammars and making
 parsers which parse input and calculate the values of grammatical
 attributes might represent this grammar thus, naming the grammatical
-attribute *v* (this example follows, roughly the syntax of Alblas 191,
+attribute *v* (this example follows, roughly the syntax of Alblas 1991,
 and like Alblas assumes whitespace is someone else's problem).
 
 ````
@@ -847,8 +895,8 @@ particular instance of a nonterminal, and *ag:rule* is assumed to
 contain a set of assignment statements specifying the values of
 particular attributes, in a subset of XPath syntax. (A more serious
 proposal would need some way to distinguish *e0.v* meaning "the *v*
-attribute of *e0* from the same string as a name which happens to
-contain a string. This is not that serious proposal.)
+attribute of *e0*" from *e0.v* occurring as a name which happens to
+contain a dot. This is not that serious proposal.)
 
 
 *Example:  synthesized value attribute and inherited environment
@@ -861,10 +909,10 @@ contain a string. This is not that serious proposal.)
 ## Open issues
 
 * Ideally we would prefer to allow annotations on rules to precede the
-mark on the left-hand side; an earlier version of the bracket-QName
-proposal did allow them there, rather than after the mark.  The
-current version was changed in order to allow pragmas at the beginning
-of a grammar to be attached to the grammar as a whole.
+  mark on the left-hand side; an earlier version of the bracket-QName
+  proposal did allow them there, rather than after the mark.  The
+  current version was changed in order to allow pragmas at the
+  beginning of a grammar to be attached to the grammar as a whole.
 
 * One result is that while for pragmas on symbols in a right-hand side
   it doesn't matter whether they come before or after the mark, on the
@@ -875,14 +923,44 @@ of a grammar to be attached to the grammar as a whole.
   proposal takes the second course.
 
 * The fact that extension elements can contain things that are
-implicit but not explicit in the ixml form means that a schema for
-the visible-XML form of a grammar, as described here, requires
-manual intervention and not just a mechanical derivation from the
-ixml grammar for ixml.  That will make some people nervous, as
-it makes us.  But at the moment, it says here that this is the right
-compromise.
+  implicit but not explicit in the ixml form means that a schema for
+  the visible-XML form of a grammar, as described here, requires
+  manual intervention and not just a mechanical derivation from the
+  ixml grammar for ixml.  That will make some people nervous, as it
+  makes us.  But at the moment, it says here that this is the right
+  compromise.
+
+* Should ixml pragmas marked `@` be restricted in where they can  
+  appear (e.g. before the first rule, not later; on the LHS of a rule,
+  not before the stop)?  Rationale for current decision: it's simpler
+  not to restrict them, and restricting them does not allow us to get
+  rid of the rule that their precise location carries no meaning,
+  since we would still have to specify that their position relative to
+  other pragmas is not signficant.
+
+* Should the ixml pragmas for namespace declarations cause standard
+  XML namespace declarations for all prefixes declared?  That would
+  allow an XSLT or XQuery processor to understand the namespace
+  bindings relevant for QNames appearing as nonterminal names.
+  Rationale for current decision:  it's an example, not a proposal for
+  the spec, and it's complicated enough already.
+
+* Allow pragmas between `alt` elements / immediately before the
+  separator between top-level alternatives in a right-hand side?
+
+  Con: things are complicated enough as it is.  Pro: it would allow
+  pragmas to support the attribute-grammar use case.  It would make
+  occurrence before, after, or between `alt` elements within a `rule`
+  parallel to occurrence before, after, or between `rule` elements
+  within the `ixml` element.
+
 
 ## Decisions to be made by the group
+
+The group may wish to weigh in on any of the open issues listed above,
+assuming the authors have not made a decision and removed all trace of
+the open issue before sending this document to the group.  Some open
+questions will need to be made by the group, not by the authors.
 
 * What name should be used for the magic namespace-binding namespace?
   In the examples, we use "`http://example.com/ixml-namespaces`".
@@ -891,3 +969,11 @@ compromise.
   prefix analogous to `xmlns`?
 
 * *I could have sworn there were more things to put here.*
+
+## References
+
+Alblas 1991.  Henk Alblas, "Introduction to attribute grammars," in
+*Attribute grammars, applications and systems:* *International summer
+school SAGA, Prague, Czechoslovakia, June 4-13, 1991, Proceedings*,
+ed. H. Alblas and B. Melichar (Berlin et al:  Springer, 1991) = LNCS
+545, pp. 1-15. 
