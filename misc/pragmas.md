@@ -874,6 +874,14 @@ of a grammar to be attached to the grammar as a whole.
   to allow them either before or after the mark.  At the moment, the
   proposal takes the second course.
 
+* The fact that extension elements can contain things that are
+implicit but not explicit in the ixml form means that a schema for
+the visible-XML form of a grammar, as described here, requires
+manual intervention and not just a mechanical derivation from the
+ixml grammar for ixml.  That will make some people nervous, as
+it makes us.  But at the moment, it says here that this is the right
+compromise.
+
 ## Decisions to be made by the group
 
 * What name should be used for the magic namespace-binding namespace?
@@ -882,3 +890,4 @@ of a grammar to be attached to the grammar as a whole.
 * Alternatively, should the spec provide a magic namespace-binding
   prefix analogous to `xmlns`?
 
+* *I could have sworn there were more things to put here.*
