@@ -815,14 +815,14 @@ value of the *expr*.
 * The value of a *term* consisting solely of a *factor* is the value 
 of the *factor*. 
 
-* The value of a *term* consisting solely of a *term* followed by an 
+* The value of a *term* consisting of a *term* followed by an 
 asterisk and a *factor* is the product of the values of the *term* and 
 the *factor*. 
 
 * The value of an *expr* consisting solely of a *term* is the value 
 of the *term*. 
 
-* The value of an *expr* consisting solely of an *expr* followed by a
+* The value of an *expr* consisting of an *expr* followed by a
 plus sign and a *term* is the sum of the values of the *expr* and
 the *term*.
 
@@ -832,9 +832,10 @@ would not involve any interesting new principles.
 
 A conventional system for reading attribute grammars and making
 parsers which parse input and calculate the values of grammatical
-attributes might represent this grammar thus, naming the grammatical
-attribute *v* (this example follows, roughly the syntax of Alblas 1991,
-and like Alblas assumes whitespace is someone else's problem).
+attributes might represent this grammar as follows.  We name the
+grammatical attribute *v*. (This example follows roughly the syntax of
+Alblas 1991, and like Alblas assumes whitespace is someone else's
+problem.)
 
 ````
     expr_0 →  expr_1 '+' term.
@@ -869,15 +870,15 @@ and like Alblas assumes whitespace is someone else's problem).
 
 Note that some nonterminals are subscripted so that references to
 their grammatical attributes can be unambiguous. To express this
-grammar in ixml, we need either to allow multiple rules for the same
-nonterminal, or to allow pragmas before connectors like comma or
-semicolon, or we need to allow string-to-typed-value functions in the
-style of XPath. I'll assume the latter two, along with a string()
-function that returns the string value of a nonterminal. With these
-assumptions, and the assumption that by means not specified the
-prefix *ag* has been bound to an appropriate grammar for
+grammar in ixml, we need either (1) to allow multiple rules for the
+same nonterminal, or (2) to allow pragmas before connectors like comma
+or semicolon, or (3) we need to allow string-to-typed-value functions
+in the style of XPath. I'll assume the latter two, along with a
+string() function that returns the string value of a nonterminal. With
+these assumptions, and the assumption that by means not specified the
+prefix *ag* has been bound to an appropriate namespace for
 attribute-grammar functionality, the attribute grammar could be
-written thus using the brackets-QName syntax
+written thus using the brackets-QName syntax:
 
 ````
     [@ag:id e0] expr:  [@ag:id e1] expr, s, '+', s, term
@@ -887,7 +888,7 @@ written thus using the brackets-QName syntax
 	factor:  digit [@ag:rule factor.v := number(string(digit))]; 
             '(', s, expr, s, ')' [@ag:rule factor.v := expr.v ].
     digit: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'.
-    s:  [#20; #A; #D; #9]_.
+    s:  [#20; #A; #D; #9].
 ````
 
 Here *ag:id* is assumed to associate a unique identifier with a
