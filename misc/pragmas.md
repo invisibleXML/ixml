@@ -1,6 +1,6 @@
 # Pragmas for ixml
 
-2021-11-16, rev. most recently 2021-12-01
+2021-11-16, rev. most recently 2021-12-04
 
 
 This document describes a proposal for adding *pragmas* to the
@@ -165,9 +165,11 @@ discussion; an earlier proposal (the 'hash-QName' proposal) has been
 withdrawn, though traces of it may remain in other documents in this
 branch.
 
+### The brackets-QName proposal 
+
 In working out the details of the brackets-QName proposal it has
-become clear that as described below it requires that ixml be extended
-in various ways with mechanisms for:
+become clear that as initially conceived it requires that ixml be
+extended in various ways with mechanisms for:
 
 * Binding prefixes to namespaces so that QNames can be interpreted as
 usual in XML and related specifications. (See the *Namespace
@@ -182,29 +184,22 @@ element or as an attribute based on what is found in the data.
 (This may require nothing more elaborate than what is
 described in the *Renaming* use case below.)
 
-As suggested in the worked examples for the use cases, some of these
-can themselves be introduced using pragmas, but it is clear that
-extending ixml in these ways for the sake of pragmas may feel like a
-heavy lift to some members of the community group.  So we have also
-prepared a scaled-back proposal, described below as the
-*pragma-element* proposal, since one of its most visible properties is
-that in the XML form of a grammar, all pragmas are represented as
-`pragma` elements, and not in the various ways possible in the
-brackets-QName proposal.
+Some of these extensions can themselves be introduced using pragmas,
+as illustrated in the *Worked examples* section below, but it is clear
+that adding so much new functionality to ixml for the sake of pragmas
+may feel like a heavy lift to some members of the community group. So
+the discussion below describes two variants of the bracket-QName
+proposal: a 'fixed-form' variant and a 'variable-form' variant, so
+named for the relative fixity or variation in the XML representation
+of pragmas in the two forms of the proposal. For brevity they are
+often referred to as F and V respectively. Since they have a great
+deal in common, they are described in parallel rather than separately.
 
-The brackets-QName proposal is described first because it was
-developed first and the authors currently think of the pragma-element
-proposal in terms of its differences from the brackets-QName proposal.
-Other things being equal, the authors realize it would be better
-to describe the simpler proposal first.  But time is short and other
-things are not equal.
+In both forms of this proposal, pragmas in ixml take the form of a
+left square bracket, an optional mark, a QName or a 'URI-qualified
+name', the pragma's data, and a right square bracket. Nested pairs of
+square brackets are allowed, so pragmas can nest arbitrarily deep.
 
-### The brackets-QName proposal 
-
-In this proposal, pragmas take the form of a left square bracket, an
-optional mark, a QName, the pragma's data, and a right square bracket.
-Nested pairs of square brackets are allowed, so pragmas can nest
-arbitrarily deep.
 
 #### The ixml form
 
@@ -235,41 +230,49 @@ rules the nonterminal *S* is replaced by *SP* (space-or-pragma), to
 allow pragmas to appear as described above:
 
 ````
-ixml: SP, rule+SP, SP.
-rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
-nonterminal: (mark, SP)?, name, S.
--quoted: (tmark, SP)?, -string.
--encoded: (tmark, SP)?, -"#", @hex, S.
-inclusion: (tmark, SP)?,         set.
-exclusion: (tmark, SP)?, "~", S, set.
+    ixml: SP, rule+SP, SP.
+    rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+    nonterminal: (mark, SP)?, name, S.
+    -quoted: (tmark, SP)?, -string.
+    -encoded: (tmark, SP)?, -"#", @hex, S.
+    inclusion: (tmark, SP)?,         set.
+    exclusion: (tmark, SP)?, "~", S, set.
 ````
 
 The new nonterminal *SP* and the nonterminals needed for pragmas
 themselves are defined as follows.
+
 ````
--SP: (S; pragma)*.
-pragma: "[", @pmark?, @name, (S, pragma-data)?, "]".
-@pmark: ["@^?"].
-pragma-data: (pragma-chars; pragma)*.
--pragma-chars: ~["[]"]*.
+    -SP: (S; pragma)*.
+    pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]". 
+    @pname: -QName; -UQName. 
+    -QName: -name, ':', -name. 
+    -UQName: 'Q{', -ns-name, '}', -name. 
+    -ns-name: ~["{}"; '"'; "'"]* { oversimplification }. 
+    @pmark: ["@^?"].
+    pragma-data: (pragma-chars; pragma)*.
+    -pragma-chars: ~["[]"]*.
 ````
 
-To make these ixml fragments easier to read, they use only
-the marks currently supported by ixml.  To read pragmas
-in ixml form and produce the XML representation described
-below will require either magic (i.e. the specification simply
-says that pragmas are a special case and have their own rules
-for translation into XML) or pragmas like those described below
-in the worked examples.
+Note that these ixml fragments use only the marks and serialization
+rules currently supported by ixml. If the variable-form proposal is
+adopted, it will probably make sense to add new marks or new
+serialization rules, or both.
 
-*The grammar fragments just given assume that pragmas
-always use QNames; they should be extended to support
-EQNames as well.*
+A simple example illustrates the core syntactic ideas:
+````
+    [my:pitch C#]
+    ^ [my:color blue] a = b, [@my:flavor vanilla] c? [my:spin ...].
+````
 
-#### Marks on pragmas
+This fragment assumes that the prefix *my* is bound to some namespace,
+by means not shown here (*and to be determined*).
 
-Depending on the mark used in the ixml pragma, it may correspond to
-various XML constructs in the XML form of the grammar:
+
+#### Marks on pragmas in V
+
+In the variable-form proposal, the *pmark* signals which of various
+XML constructs represents the pragma in the XML form of the grammar:
 
 * An ixml pragma marked `^` corresponds to an extension element. 
 
@@ -291,38 +294,80 @@ or at some point between rules in the grammar.  Similarly the
 positions of pragmas marked `@` relative to other pragmas attached to
 the same construct carry no meaningful information.
 
+#### Marks on pragmas in F
 
-#### The XML form
+In the fixed-form proposal, the *pmark* is included but has no special
+meaning for a standard processor, since all pragmas have the same
+representation in XML grammars.
 
-These XML constructs may occur in locations corresponding to those in
-which pragmas may appear in the ixml grammar:
 
-* as a child or attribute of the `ixml` element before, between, or
+#### The XML form of pragmas in F ####
+
+In F, all pragmas in the XML form of a grammar take the form
+implicitly described by the grammar fragments shown earlier: a
+`pragma` element with attributes named *pname* and *pmark* and a child
+element named `pragma-data`.
+
+It is not signaled in the ixml grammar (because ixml has no way to say
+it), but other child elements may follow the `pragma-data` element.
+Their content is required to be reconstructible from the pragma data
+and the fallback expression, but they may express the information in a
+more convenient form. (For example, the pragma data may be a
+structured expression which a conforming application will parse; the
+parsed form of the pragma data may be enclosed in the pragma.) In this
+way we ensure that the ixml and XML forms of a grammar contain the
+same information, although the XML form of the grammar may be easier
+to process by machine.
+
+For example, the ixml pragma `[my:pitch C#]` corresponds to the following
+XML pragma
+
+````
+<pragma pname="my:pitch">
+    <pragma-data>C#</pragma-data>
+    ...
+</pragma>
+````
+
+The ellipsis shows where additional elements not constrained by this
+proposal may appear.  The only constraint is that it must be possible
+in principle to construct them from the ixml form of the grammar.
+
+It follows from the grammar fragments above that in an XML grammar,
+pragmas may occur in locations, which annotate different parts of the
+grammar.:
+
+* as a child of the `ixml` element before, between, or
   after `rule` elements.  These correspond to ixml pragmas occurring
   before, between, or after rule elements.
 
-* as as attribute of a `rule` element, or as an extension element or
-  processing instruction occurring as a child of `rule`, either before
-  all `alt` children of the rule or after them.  A pragma occurring
-  before the `alt` children corresponds to an ixml pragma marked `^`
-  or `?` occurring on the left-hand side of a rule; a pragma occurring
-  after the last `alt` child corresponds to an ixml pragma marked `^`
-  of `?` appearing in the whitespace before the full stop of the rule.
+* as a child of the `rule` element, either before all `alt` children
+  of the rule or after them. A pragma occurring before the `alt`
+  children corresponds to an ixml pragma occurring on the left-hand
+  side of a rule; a pragma occurring after the last `alt` child
+  corresponds to an ixml pragma appearing in the whitespace before the
+  full stop of the rule.
 
-* as a child or attribute of a `nonterminal`, `literal`, `inclusion`,
-  or `exclusion` element.  These correspond to ixml pragmas occurring
+* as a child of a `nonterminal`, `literal`, `inclusion`, or
+`exclusion` element. These correspond to ixml pragmas occurring
   immediately before the terminal or nonterminal symbol in question,
   before or after the mark.
 
+
+#### The XML form of pragmas in V
+
+In the variable-form proposal, XML pragmas may occur in the same
+locations as elements or processing instructions, and may also occur
+as attributes on the parent element.
 
 When a grammar in XML form is written out into ixml form, extension
 attributes appearing on the `ixml` element may be serialized either
 before the first rule, after the last one, or between any two rules.
 Attributes appearing on the `rule` element may be serialized either on
-the left-hand side of the rule or before the full stop.  Pragmas
+the left-hand side of the rule or before the full stop. Pragmas
 attached to a symbol in the right-hand side of a rule may be
-serialized either before or after the mark.  In all of these cases,
-the possible positions are all equivalent.
+serialized either before or after the mark. In all of these cases, the
+possible positions are all equivalent.
 
 For attributes, the attribute name is the QName of the ixml pragma and
 the attribute value is the pragma data.
@@ -332,17 +377,8 @@ ixml pragma and the PI value is the pragma data.
 
 For extension elements, the element name is the QName of the ixml
 pragma and the pragma data appears as character data within a child
-named `pragma-data`.  Other child elements may follow the
-`pragma-data` element; their content is required to be reconstructible
-from the pragma data and the fallback expression, but they may express
-the information in a more convenient form.  (For example, the pragma
-data may be a structured expression which a conforming application
-will parse; the parsed form of the pragma data may be enclosed in the
-pragma.)  In this way we ensure that the ixml and XML forms of a
-grammar contain the same information, although the XML form of the
-grammar may be easier to process by machine.
-
-*See also the scaled-down proposal below.*
+named `pragma-data`. As in proposal F, the element may contain other
+XML elements with a structured representation of relevant information.
 
 
 #### Annotating symbols, rules, or grammars
@@ -380,6 +416,8 @@ as a whole, as follows:
   
 * Pragmas applicable to the grammar as a whole appear the first rule.
 
+F and V are the same in this regard.
+
 #### An example
 
 For example:
@@ -389,7 +427,7 @@ For example:
     ^ [my:color blue] a = b, [@my:flavor vanilla] c? [my:spin ...].
 ````
 
-The corresponding XML form is:
+The corresponding XML form in proposal V is:
 
 ````
     <my:pitch>
@@ -406,6 +444,32 @@ The corresponding XML form is:
         <my:spin>
             <pragma-data>...</pragma-data>
         </my:spin>
+    </rule>
+````
+
+In F, the corresponding XML form is:
+
+````
+    <pragma pname="my:pitch">
+        <pragma-data>C#</pragma-data>
+    </pragma>
+    <rule name="a">
+        <pragma pname="my:color">
+            <pragma-data>blue</pragma-data>
+        </pragma>
+        <alt>
+            <nonterminal name="b"/>
+            <option>
+                <nonterminal name="c">
+                    <pragma pname="my:flavor">
+                        <pragma-data>vanilla</pragma-data>
+                    </pragma>
+                </nonterminal>
+            </option>
+        </alt>
+        <pragma pname="my:spin">
+            <pragma-data>...</pragma-data>
+        </pragma>
     </rule>
 ````
 
@@ -428,36 +492,6 @@ Annotations appearing before the full stop at the end of the rule
 pertain to the rule as a whole and correspond to extension elements
 appear as the last children of a `rule` element.  In the example, this
 is the case for the `my:spin` pragma.
-
-
-### Scaled-down proposal
-
-The scaled-down proposal differs from the brackets-QName
-proposal primarily in its XML representations.
-
-* The ixml form is as described above, except that marks are
-  not allowed on pragmas.  *(Or just ignored for the moment?)*
-
-* In the XML form of a grammar, all pragmas take the form of a
-`pragma` element along the following lines, with the ellipses replaced
-by appropriate attribute values, character sequences (inside
-the `pragma-data` element), or element sequences (following
-the `pragma-data` element).
-
-````
-<pragma pmark="..." name="...">
-    <pragma-data>...</pragma-data>
-    ...
-</pragma>
-````
-
-This approach would be less pleasant to use than the current proposal,
-but it would possibly be simpler to explain and to specify.
-
-The schema governing XML representations of grammars will
-need to allow arbitrary sequences of elements following
-the `pragma-data` child of `pragma`.  This is probably best
-handled by fiat.
 
 
 ## Worked examples
@@ -537,7 +571,7 @@ the *y* namespace, and some in no namespace at all, might be
 	y:b: 'kills'.
 	c:  'It really does.'.
 ````
-The XML representation of the grammar might be:
+The XML representation of the grammar might be (in form V):
 
 ````
     <ixml
@@ -571,6 +605,22 @@ The XML representation of the grammar might be:
         </alt> 
       </rule>
     </ixml>
+````
+
+In form F, the beginning of the grammar is different:
+
+````
+    <ixml>
+        <pragma name="nsd:nsd">
+            <pragma-data>http://example.com/ixml-namespaces</pragma-data>
+        </pragma>
+        <pragma name="nsd:x">
+            <pragma-data>http://example.com/NS/existential</pragma-data>
+        </pragma>
+        <pragma name="nsd:y">
+            <pragma-data>http://example.com/NS/yoyo</pragma-data>
+        </pragma>
+        ...
 ````
 
 An ixml parser supporting these namespace pragmas will emit
@@ -647,32 +697,32 @@ a simple subset of XML.  It's a subset of XML for simplicity, and it's
 a superset of the subset because a grammar written at this level
 cannot enforce the well-formedness constraints of XML.
 ````
-{ A grammar for a small subset of XML, for use as an illustration. }
-
-element:  start-tag, content, end-tag; sole-tag.
-
--start-tag:  "<", @gi, (ws, attribute)*, ws?, ">".
--end-tag:  "</", @gi2, (ws, attribute)*, ws?, ">".
--sole-tag:  "<", @gi, (ws, attribute)*, ws?, "/>".
-
-attribute:  @name, ws?, "=", ws?, @value.
-@value: dqstring; sqstring.
--dqstring: dq, ~['"']*, dq.
--sqstring: sq, ~["'"]*, sq.
--dq: -['"'].
--sq: -["'"].
-
--content:  (PCDATA; processing-instruction; comment; element)*.
-
-PCDATA:  (~["<>&"]; "&amp;"; "&lt;"; "&gt;")*.
-processing-instruction:  "<?", @name, ws, @pi-data, "?>".
-comment:  "<--", commentdata, "-->".
-
-gi: name.
-gi2: name.
-{ name is left as an exercise for the reader. }
-
-ws:  (#20; #A; #C; #9)+.
+    { A grammar for a small subset of XML, for use as an illustration. }
+    
+    element:  start-tag, content, end-tag; sole-tag.
+    
+    -start-tag:  "<", @gi, (ws, attribute)*, ws?, ">".
+    -end-tag:  "</", @gi2, (ws, attribute)*, ws?, ">".
+    -sole-tag:  "<", @gi, (ws, attribute)*, ws?, "/>".
+    
+    attribute:  @name, ws?, "=", ws?, @value.
+    @value: dqstring; sqstring.
+    -dqstring: dq, ~['"']*, dq.
+    -sqstring: sq, ~["'"]*, sq.
+    -dq: -['"'].
+    -sq: -["'"].
+    
+    -content:  (PCDATA; processing-instruction; comment; element)*.
+    
+    PCDATA:  (~["<>&"]; "&amp;"; "&lt;"; "&gt;")*.
+    processing-instruction:  "<?", @name, ws, @pi-data, "?>".
+    comment:  "<--", commentdata, "-->".
+    
+    gi: name.
+    gi2: name.
+    { name is left as an exercise for the reader. }
+    
+    ws:  (#20; #A; #C; #9)+.
 ````
 
 Among the input sequences which should be accepted
@@ -895,6 +945,10 @@ rules appearing as children of the extension elements.
     </ixml>
 ````
 
+The attentive reader will note that the XML form shown is that for the
+V proposal; the form it would take in the F proposal should be easily
+constructed.
+
 The fallback behavior of a processor that doesn't support these 
 pragmas will be to serialize `expr` and `term` elements even when they 
 have only one child. 
@@ -1108,6 +1162,12 @@ contain a dot. This is not that serious proposal.)
 
 
 ## Open issues
+
+* In the fixed-form variant, drop *pmark* entirely?  The current text
+  leaves it in, on the theory that if it is retained, then it is possible
+  in principle to adopt the fixed-form variant in the ixml spec and
+  then use pragmas to specify the behavior of the variable-form
+  variant.  
 
 * The standard rules for translating an ixml grammar to XML form
   by parsing it against *ixml.ixml* do not produce the results
