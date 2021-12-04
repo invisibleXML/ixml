@@ -165,6 +165,40 @@ discussion; an earlier proposal (the 'hash-QName' proposal) has been
 withdrawn, though traces of it may remain in other documents in this
 branch.
 
+In working out the details of the brackets-QName proposal it has
+become clear that as described below it requires that ixml be extended
+in various ways with mechanisms for:
+
+* Binding prefixes to namespaces so that QNames can be interpreted as
+usual in XML and related specifications. (See the *Namespace
+declarations* use case below.)
+
+* Serializing a nonterminal as an element or attribute whose name 
+is taken not from the grammar (as in ixml as currently specified) 
+but from the input data.  (See the *Name indirection* use case below.) 
+
+* Deciding whether to serialize a given nonterminal as an
+element or as an attribute based on what is found in the data.
+(This may require nothing more elaborate than what is
+described in the *Renaming* use case below.)
+
+As suggested in the worked examples for the use cases, some of these
+can themselves be introduced using pragmas, but it is clear that
+extending ixml in these ways for the sake of pragmas may feel like a
+heavy lift to some members of the community group.  So we have also
+prepared a scaled-back proposal, described below as the
+*pragma-element* proposal, since one of its most visible properties is
+that in the XML form of a grammar, all pragmas are represented as
+`pragma` elements, and not in the various ways possible in the
+brackets-QName proposal.
+
+The brackets-QName proposal is described first because it was
+developed first and the authors currently think of the pragma-element
+proposal in terms of its differences from the brackets-QName proposal.
+Other things being equal, the authors realize it would be better
+to describe the simpler proposal first.  But time is short and other
+things are not equal.
+
 ### The brackets-QName proposal 
 
 In this proposal, pragmas take the form of a left square bracket, an
@@ -195,6 +229,42 @@ Two locations are allowed for pragmas applying to rules, in order to
 allow them to appear either first or last.  This is essentially a
 rhetorical choice, but an important one as it can make a large
 difference to readability.
+
+The relevant changes to the ixml grammar are these.  First, in several
+rules the nonterminal *S* is replaced by *SP* (space-or-pragma), to
+allow pragmas to appear as described above:
+
+````
+ixml: SP, rule+SP, SP.
+rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+nonterminal: (mark, SP)?, name, S.
+-quoted: (tmark, SP)?, -string.
+-encoded: (tmark, SP)?, -"#", @hex, S.
+inclusion: (tmark, SP)?,         set.
+exclusion: (tmark, SP)?, "~", S, set.
+````
+
+The new nonterminal *SP* and the nonterminals needed for pragmas
+themselves are defined as follows.
+````
+-SP: (S; pragma)*.
+pragma: "[", @pmark?, @name, (S, pragma-data)?, "]".
+@pmark: ["@^?"].
+pragma-data: (pragma-chars; pragma)*.
+-pragma-chars: ~["[]"]*.
+````
+
+To make these ixml fragments easier to read, they use only
+the marks currently supported by ixml.  To read pragmas
+in ixml form and produce the XML representation described
+below will require either magic (i.e. the specification simply
+says that pragmas are a special case and have their own rules
+for translation into XML) or pragmas like those described below
+in the worked examples.
+
+*The grammar fragments just given assume that pragmas
+always use QNames; they should be extended to support
+EQNames as well.*
 
 #### Marks on pragmas
 
@@ -271,6 +341,9 @@ will parse; the parsed form of the pragma data may be enclosed in the
 pragma.)  In this way we ensure that the ixml and XML forms of a
 grammar contain the same information, although the XML form of the
 grammar may be easier to process by machine.
+
+*See also the scaled-down proposal below.*
+
 
 #### Annotating symbols, rules, or grammars
 
@@ -355,6 +428,36 @@ Annotations appearing before the full stop at the end of the rule
 pertain to the rule as a whole and correspond to extension elements
 appear as the last children of a `rule` element.  In the example, this
 is the case for the `my:spin` pragma.
+
+
+### Scaled-down proposal
+
+The scaled-down proposal differs from the brackets-QName
+proposal primarily in its XML representations.
+
+* The ixml form is as described above, except that marks are
+  not allowed on pragmas.  *(Or just ignored for the moment?)*
+
+* In the XML form of a grammar, all pragmas take the form of a
+`pragma` element along the following lines, with the ellipses replaced
+by appropriate attribute values, character sequences (inside
+the `pragma-data` element), or element sequences (following
+the `pragma-data` element).
+
+````
+<pragma pmark="..." name="...">
+    <pragma-data>...</pragma-data>
+    ...
+</pragma>
+````
+
+This approach would be less pleasant to use than the current proposal,
+but it would possibly be simpler to explain and to specify.
+
+The schema governing XML representations of grammars will
+need to allow arbitrary sequences of elements following
+the `pragma-data` child of `pragma`.  This is probably best
+handled by fiat.
 
 
 ## Worked examples
@@ -538,6 +641,103 @@ element name `nmonth`.
 Using pragmas to specify that an element or attribute name should be
 taken not from the grammar but from the string value of a given
 nonterminal.
+
+Consider the following grammar which recognizes a superset of
+a simple subset of XML.  It's a subset of XML for simplicity, and it's
+a superset of the subset because a grammar written at this level
+cannot enforce the well-formedness constraints of XML.
+````
+{ A grammar for a small subset of XML, for use as an illustration. }
+
+element:  start-tag, content, end-tag; sole-tag.
+
+-start-tag:  "<", @gi, (ws, attribute)*, ws?, ">".
+-end-tag:  "</", @gi2, (ws, attribute)*, ws?, ">".
+-sole-tag:  "<", @gi, (ws, attribute)*, ws?, "/>".
+
+attribute:  @name, ws?, "=", ws?, @value.
+@value: dqstring; sqstring.
+-dqstring: dq, ~['"']*, dq.
+-sqstring: sq, ~["'"]*, sq.
+-dq: -['"'].
+-sq: -["'"].
+
+-content:  (PCDATA; processing-instruction; comment; element)*.
+
+PCDATA:  (~["<>&"]; "&amp;"; "&lt;"; "&gt;")*.
+processing-instruction:  "<?", @name, ws, @pi-data, "?>".
+comment:  "<--", commentdata, "-->".
+
+gi: name.
+gi2: name.
+{ name is left as an exercise for the reader. }
+
+ws:  (#20; #A; #C; #9)+.
+````
+
+Among the input sequences which should be accepted
+by this grammar is the following XML representation of a
+haiku.
+
+````
+<haiku author="Basho" date="1686">
+    <line>When the old pond</line>
+    <line>gets a new frog</line>
+    <line>it's a new pond.</line>
+</haiku>
+````
+
+We might like an ixml processor to read this and produce
+the same XML that any XML parser would produce. (This
+desire makes sense only when the ixml processor's results
+are supplied to a user in a DOM or XDM or SAX or other
+XML API or model.)  What the grammar above will produce
+is isomorphic to this result, but not the same (*WARNING:
+output produced manually, may be inaccurate*):
+
+````
+<element @gi='haiku' @gi2='haiku'>
+    <attribute name="author" value="Basho"/>
+    <attribute name="date" value="1686"/>
+    <element @gi='line @gi2='line'>
+	    <PCDATA>When the old pond</PCDATA>
+	</element>	
+    <element @gi='line @gi2='line'>
+	    <PCDATA>gets a new frog</PCDATA>
+	</element>	
+    <element @gi='line @gi2='line'>
+	    <PCDATA>It's a new pond.</PCDATA>
+	</element>	
+</element>
+````
+
+We can specify that we want normal XML from the grammar using
+the pragmas:
+
+* `xp:name` *expression* - specifies that the name under which a
+nonterminal is to be serialized is given by the value of the supplied
+XPath expression, interpreted with the standard ixml result element as
+the context node and with the result coerced to type *xs:string*.
+
+* `xp:serialize` *keyword* - specifies that the nonterminal is to be
+serialized as specified by the keyword (which is assumed to be
+`attribute`, `element`, or the name of some other XPath node test).
+
+* `xp:drop` - specifies that the nonterminal so annotated is to be
+suppressed entirely, along with the entire parse tree dominated by the
+nonterminal.'
+
+With these pragmas, we can annotate the *element* and *attribute*
+rules appropriately:
+````
+^ [xp:name @gi] element:  start-tag, content, end-tag; sole-tag.
+...
+-end-tag:  "</", [xp:drop] @gi2, (ws, attribute)*, ws?, ">".
+...
+^ [xp:serialize attribute]
+  [xp:name @name]
+  attribute:  @name, ws?, "=", ws?, @value.
+````
 
 ### Rule rewriting
 
@@ -909,11 +1109,24 @@ contain a dot. This is not that serious proposal.)
 
 ## Open issues
 
+* The standard rules for translating an ixml grammar to XML form
+  by parsing it against *ixml.ixml* do not produce the results
+  described here.  Either we just impose them by fiat, or we need
+  a fully worked out proposal for generating XML names from
+  the input data.
+
+  This is a major stumbling block.
+
 * Ideally we would prefer to allow annotations on rules to precede the
   mark on the left-hand side; an earlier version of the bracket-QName
   proposal did allow them there, rather than after the mark.  The
   current version was changed in order to allow pragmas at the
   beginning of a grammar to be attached to the grammar as a whole.
+
+  If pragmas occurring outside rules are syntactically distinct (e.g.
+  if they are always to be followed by a full stop), then pragmas can
+  occur both before the mark on a left-hand side and between rules.
+  Worth doing?
 
 * One result is that while for pragmas on symbols in a right-hand side
   it doesn't matter whether they come before or after the mark, on the
@@ -954,10 +1167,6 @@ contain a dot. This is not that serious proposal.)
   occurrence before, after, or between `alt` elements within a `rule`
   parallel to occurrence before, after, or between `rule` elements
   within the `ixml` element.
-
-* Require pragmas occurring outside rules to be followed by a
-  full stop, so that pragmas can occur both before the mark on
-  a left-hand side and between rules?
 
 ## Decisions to be made by the group
 
