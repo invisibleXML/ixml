@@ -748,7 +748,7 @@ We can now annotate the grammar and supply an alternative formulation of
 ````
       ^ [ls:rewrite
               comment: -"{", (cchars; comment)*, -"}". 
-              [ls:token] cchars:  cchar+. 
+              [ls:token] -cchars:  cchar+. 
 		  ]
       comment: -"{", (cchar; comment)*, -"}".
       -cchar: ~["{}"].
@@ -761,7 +761,7 @@ formulation after, not before, the existing rule:
       comment: -"{", (cchar; comment)*, -"}"
       [ls:rewrite 
           comment: -"{", (cchars; comment)*, -"}". 
-          [ls:token] cchars:  cchar+. 
+          - [ls:token] cchars:  cchar+. 
 	  ].
       -cchar: ~["{}"].
 ````
@@ -806,7 +806,7 @@ expression as a synthesized (bottom-up) grammatical attribute
 following the rules:
 
 * The value of a *factor* consisting of a single digit is the value of
-the integer usually so written: '0' has the value of zero, '1` has the
+the integer usually so written: '0' has the value of zero, '1' has the
 value of one, etc.
 
 * The value of a *factor* consisting of a parenthesized *expr* is the
@@ -883,7 +883,7 @@ written thus using the brackets-QName syntax:
 ````
     [@ag:id e0] expr:  [@ag:id e1] expr, s, '+', s, term
             [ag:rule e0.v := e1.v + term.v ].
-    {@ag:id t0] term:  [@ag:id t1] term, s, '_', s, factor
+    [@ag:id t0] term:  [@ag:id t1] term, s, '_', s, factor
             [ag:rule t0.v := t1.v * factor.v].
 	factor:  digit [@ag:rule factor.v := number(string(digit))]; 
             '(', s, expr, s, ')' [@ag:rule factor.v := expr.v ].
@@ -955,6 +955,9 @@ contain a dot. This is not that serious proposal.)
   parallel to occurrence before, after, or between `rule` elements
   within the `ixml` element.
 
+* Require pragmas occurring outside rules to be followed by a
+  full stop, so that pragmas can occur both before the mark on
+  a left-hand side and between rules?
 
 ## Decisions to be made by the group
 
