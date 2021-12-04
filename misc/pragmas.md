@@ -1160,6 +1160,15 @@ contain a dot. This is not that serious proposal.)
 
 [Left as an exercise for the reader.]
 
+### Pragmas for proposal V
+
+In the ideal case, it should be possible to use pragmas defined
+as in proposal F to describe the behavior of processors under
+proposal V.
+
+*Example to be worked out with list of the required pragmas
+and annotated version of the ixml grammar fragments given
+earlier.*
 
 ## Open issues
 
