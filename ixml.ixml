@@ -1,5 +1,7 @@
-         ixml: S, rule+S, S.
+         ixml: SP, rule+SP, SP.
 
+          -SP: (S; pragma)*.
+	  
            -S: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
@@ -8,10 +10,17 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-         rule: (mOrP, S)?, name, S, ["=:"], S, -alts, ".".
-        -mOrP: mark; pragma, mark?;
+       pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]".
+       @pname: -QName; -EQName.
+       -QName: -name, ':', -name.
+      -EQName: 'Q{', -ns-name, '}', -name.
+     -ns-name: ~["{}"; '"'; "'"]* { oversimplification }.
+       @pmark: ["@^?"].
+  pragma-data: (pragma-chars; pragma)*.
+-pragma-chars: ~["[]"]*.
+
+         rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
         @mark: ["@^-"].
-       pragma: "#", name, S, string.
          alts: alt+([";|"], S).
           alt: term*(",", S).
         -term: factor;
@@ -25,19 +34,18 @@
       repeat1: factor, "+", S, sep?.
        option: factor, "?", S.
           sep: factor.
-  nonterminal: (mOrP, S)?, name, S.
+  nonterminal: (mark, SP)?, name, S.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmOrP, S)?, -string.
+      -quoted: (tmark, SP)?, -string.
 
         @name: namestart, namefollower*.
    -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
-       -tmOrP: tmark; pragma, tmark?
        @tmark: ["^-"].
        string: -'"', dstring, -'"', S;
                -"'", sstring, -"'", S.
@@ -47,13 +55,13 @@
                '"', -'"'. {all characters, quotes must be doubled}
         schar: ~["'"];
                "'", -"'". {all characters, quotes must be doubled}
-     -encoded: (tmOrP, S)?, -"#", @hex, S.
+     -encoded: (tmark, SP)?, -"#", @hex, S.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: (tmOrP, S)?,         set.
-    exclusion: (tmOrP, S)?, "~", S, set.
+    inclusion: (tmark, SP)?,         set.
+    exclusion: (tmark, SP)?, "~", S, set.
          -set: "[", S,  member*([";|"], S), "]", S.
       -member: literal;
                range;
