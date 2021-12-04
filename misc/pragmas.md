@@ -1223,7 +1223,7 @@ as follows:
     ^ [pr:as string(pmark)]
       [pr:name string(pname)]
       pragma: "[", [pr:drop] @pmark?, [pr:drop] @pname, (S, pragma-data)?, "]". 
-```
+````
 
 Alternatively, we could define a single pragma with a sequence of
 comma-separated property/value pairs, using parenthesized
@@ -1234,7 +1234,7 @@ comma-separated values to specify multiple values:
         as: string(pmark),
         drop:  (pmark, pname)]
       pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]". 
-```
+````
 
 Note: The `pr:v` (for 'pragmas proposal V') pragma seems less general
 than the earlier set, but it feels slightly lighter-weight.
