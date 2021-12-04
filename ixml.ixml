@@ -11,9 +11,9 @@
        -cchar: ~["{}"].
 
        pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]".
-       @pname: -QName; -EQName.
+       @pname: -QName; -UQName.
        -QName: -name, ':', -name.
-      -EQName: 'Q{', -ns-name, '}', -name.
+      -UQName: 'Q{', -ns-name, '}', -name.
      -ns-name: ~["{}"; '"'; "'"]* { oversimplification }.
        @pmark: ["@^?"].
   pragma-data: (pragma-chars; pragma)*.
