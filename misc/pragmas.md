@@ -1170,6 +1170,86 @@ proposal V.
 and annotated version of the ixml grammar fragments given
 earlier.*
 
+The differences between proposals F and V all lie in the
+XML representation of pragmas:
+
+* In F, the element and attribute names of the pragma element
+  are fixed; in V the element name is assigned dynamically.
+
+* In F, all pragmas are elements; in V, some are attributes and some
+  are processing instructions.
+
+* In F, the *pname* and *pmark* appear as attributes on the
+  pragma; in V they affect the name and form of the XML pragma 
+  but do not appear as content, attributes, or children.
+
+The section above on name indirection illustrates ways to solve the
+first and third of these.  We can adapt the pragmas shown there and
+add a third for the remaining item, so that we have three pragmas,
+which we define in terms of their operation on an XML representation
+of the raw parse tree (i.e. the one an ixml processor would produce if
+it ignored all marks); a processor might implement the pragma
+differently, as long as the result were the same.
+
+The first two of these pragmas are defined to apply to a rule and they
+describe the relation of the serialized XML for instances of that rule
+to the raw parse tree for that instance.
+
+* `pr:as` *pmark*?: If the *pmark* argument is `^` or absent, the
+  nonterminal is serialized as an element; if it's `@`, the
+  nonterminal is serialized as an attribute; if it's `?`, the
+  nonterminal is serialized as a processing instruction.
+
+* `pr:name` *pname*: The *pname* is specified by an expression (we
+  will assume a small subset of XPath).  If the value is a lexical
+  QName, that QName is the name of the corresponding XML node; if the
+  value is a URIQualifiedName (of the form
+  Q{namespace-name}local-name), then a prefix is chosen, a lexical
+  QName is formed from that prefix and the specified local name, and
+  any namespace declarations necessary to bind the chosen prefix to
+  the specified URI are created and added to an appropriate element.
+
+The third pragma applies to nonterminals in a right-hand side.
+
+* `pr:drop`: The parse tree rooted in the nonterminal annotated with
+  `pr:drop` does not appear in the serialization.  Since that subtree
+  may be used (e.g. to supply an element name), it is important as a
+  practical matter that this pragma be interpreted after the others.
+
+With these three pragmas, the ixml rule for *pragma* can be annotated
+as follows:
+
+````
+    ^ [pr:as string(pmark)]
+      [pr:name string(pname)]
+      pragma: "[", [pr:drop] @pmark?, [pr:drop] @pname, (S, pragma-data)?, "]". 
+```
+
+Alternatively, we could define a single pragma with a sequence of
+comma-separated property/value pairs, using parenthesized
+comma-separated values to specify multiple values:
+
+````
+    ^ [pr:v name: string(pname), 
+        as: string(pmark),
+        drop:  (pmark, pname)]
+      pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]". 
+```
+
+Note: The `pr:v` (for 'pragmas proposal V') pragma seems less general
+than the earlier set, but it feels slightly lighter-weight.
+
+Note: The `pr:as` pragma is very ad hoc; a more general approach would
+say that its argument should be one of 'element', 'attribute',
+'processing-instruction', 'comment', 'text'.  But then we would need
+some way of saying "if the string value of *pmark* is '^', then
+'element', otherwise ...", and that seems likely to lead to a long
+slide down a slippery slope to a Turing-complete programming
+language.  One of the nice things about defining your own pragmas is
+that you can give them ad hoc semantics if you need to, without
+spoiling things for other people.
+
+
 ## Open issues
 
 * In the fixed-form variant, drop *pmark* entirely?  The current text
