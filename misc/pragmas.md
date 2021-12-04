@@ -80,7 +80,7 @@ ixml grammar to allow different annotation or better optimization.
   Using pragmas to indicate that a particular string should be
 injected into the XML representation of the input as (part of) a text
 node, or as an attribute or element. (This can help make the output of
-an ixml parse conform to a pre-existing schema.)
+an ixml parser conform to a pre-existing schema.)
 
 * Attribute grammar specification
 
@@ -88,9 +88,9 @@ an ixml parse conform to a pre-existing schema.)
 grammatical attributes to be associated with nodes of the parse tree,
 whether they are inherited from an ancestor or an elder sibling or
 synthesized from the children of a node, and what values should be
-assigned to them. (Note that grammatical attributes are not to be
-confused with XML attributes, although in particular cases it may be
-helpful to render a grammatical attribute as an XML attribute.)
+assigned to them. Grammatical attributes are not to be confused with
+XML attributes, although in particular cases it may be helpful to
+render a grammatical attribute as an XML attribute.
 
 *Are there other use cases that need to be mentioned here?*
 
@@ -222,36 +222,36 @@ several locations:
 
 Two locations are allowed for pragmas applying to rules, in order to
 allow them to appear either first or last.  This is essentially a
-rhetorical choice, but an important one as it can make a large
-difference to readability.
+rhetorical choice, but an important one as it can make a difference to
+readability.
 
 The relevant changes to the ixml grammar are these.  First, in several
 rules the nonterminal *S* is replaced by *SP* (space-or-pragma), to
 allow pragmas to appear as described above:
 
 ````
-    ixml: SP, rule+SP, SP.
-    rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
-    nonterminal: (mark, SP)?, name, S.
-    -quoted: (tmark, SP)?, -string.
-    -encoded: (tmark, SP)?, -"#", @hex, S.
-    inclusion: (tmark, SP)?,         set.
-    exclusion: (tmark, SP)?, "~", S, set.
+ixml: SP, rule+SP, SP.
+rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+nonterminal: (mark, SP)?, name, S.
+-quoted: (tmark, SP)?, -string.
+-encoded: (tmark, SP)?, -"#", @hex, S.
+inclusion: (tmark, SP)?,         set.
+exclusion: (tmark, SP)?, "~", S, set.
 ````
 
 The new nonterminal *SP* and the nonterminals needed for pragmas
 themselves are defined as follows.
 
 ````
-    -SP: (S; pragma)*.
-    pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]". 
-    @pname: -QName; -UQName. 
-    -QName: -name, ':', -name. 
-    -UQName: 'Q{', -ns-name, '}', -name. 
-    -ns-name: ~["{}"; '"'; "'"]* { oversimplification }. 
-    @pmark: ["@^?"].
-    pragma-data: (pragma-chars; pragma)*.
-    -pragma-chars: ~["[]"]*.
+-SP: (S; pragma)*.
+pragma: -"[", @pmark?, @pname, (S, pragma-data)?, -"]". 
+@pname: -QName; -UQName. 
+-QName: -name, ':', -name. 
+-UQName: 'Q{', -ns-name, '}', -name. 
+-ns-name: ~["{}"; '"'; "'"]* { oversimplification }. 
+@pmark: ["@^?"].
+pragma-data: (pragma-chars; pragma)*.
+-pragma-chars: ~["[]"]*.
 ````
 
 Note that these ixml fragments use only the marks and serialization
@@ -334,8 +334,8 @@ proposal may appear.  The only constraint is that it must be possible
 in principle to construct them from the ixml form of the grammar.
 
 It follows from the grammar fragments above that in an XML grammar,
-pragmas may occur in locations, which annotate different parts of the
-grammar.:
+pragmas may occur in different locations which annotate different
+parts of the grammar.:
 
 * as a child of the `ixml` element before, between, or
   after `rule` elements.  These correspond to ixml pragmas occurring
@@ -357,8 +357,8 @@ grammar.:
 #### The XML form of pragmas in V
 
 In the variable-form proposal, XML pragmas may occur in the same
-locations as elements or processing instructions, and may also occur
-as attributes on the parent element.
+locations when they take the form of elements or processing
+instructions.  They also occur as attributes on the parent element.
 
 When a grammar in XML form is written out into ixml form, extension
 attributes appearing on the `ixml` element may be serialized either
@@ -381,11 +381,52 @@ named `pragma-data`. As in proposal F, the element may contain other
 XML elements with a structured representation of relevant information.
 
 
+#### Pragmas and other extension mechanisms
+
+Some XML formats make the provision that any namespace-qualified
+attributes and elements may occur in documents, provided their
+namespace is not reserved for other purposes.  For example, both XSLT
+and XSD provide that namespace-qualified attributes in other namespace
+may appear on elements in the core namespace, and both allow what we
+might call foreign elements in other locations, although not at all
+locations in a document.
+
+In general, the purpose of such provisions is similar to that of
+pragmas, so it makes sense to ask how such foreign elements and
+attributes relate to the XML pragmas described here.  In particular,
+when can they be rendered as pragmas in the ixml form?
+
+Under proposal F, pragmas in XML are always `pragma` elements; foreign 
+attributes and elements are not formally pragmas and the ixml spec 
+would under proposal F define no correspondence between them and any 
+ixml notation. 
+
+Under proposal V, the situation is more complex:
+
+* Non-ixml namespaced attributes on the `ixml`, `rule`, `nonterminal`,
+  `literal`, `inclusion`, and `exclusion` elements can be recognized
+  as pragmas.
+
+* Non-ixml namespaced elements can be recognized as pragmas if they
+  appear in one of the specified locations.
+
+* Processing instructions can be recognized as pragmas if they occur
+  in one of the specified locations.
+
+Any pragma recognized can be written out in ixml notation.  In the
+case of attributes and processing instructions, the pragma data will
+be taken from the value of the node.  In the case of elements, the
+pragma data will be the string value of the `pragma-data` element
+appearing as a child of the element, if there is one.
+
+Non-ixml constructs not recognized as pragmas cannot be translated
+interoperably to ixml form.
+
 #### Annotating symbols, rules, or grammars
 
-Viewed the other way around, as described in the Desiderata, pragmas
-can apply to symbols, rules, to a subset of rules, or to the grammar
-as a whole, as follows:
+As described in the Desiderata, pragmas can apply to symbols, rules,
+to a subset of rules, or to the grammar as a whole. There are several
+cases.
 
 * Pragmas applicable to one occurrence of one symbol appear in ixml 
   before that symbol, either before or after the mark if any; in XML
@@ -414,7 +455,8 @@ as a whole, as follows:
   that information; we specify this only out of an abundance of
   caution.)
   
-* Pragmas applicable to the grammar as a whole appear the first rule.
+* Pragmas applicable to the grammar as a whole appear before the first
+  rule.
 
 F and V are the same in this regard.
 
@@ -511,6 +553,13 @@ namespace, some into another, and some into none, and that namespace
 bindings should remain constant throughout the grammar (so: no
 changing the default namespace in the middle of the document).
 
+*Note that there is a bootstrapping issue here: the proposal made in
+this document requires that pragmas be identified by qualified names,
+which requires some level of namespace support in ixml itself.  So
+there is a certain unavoidable artificiality in the approach taken in
+the following discussion, of trying to support pragmas for namespace
+declarations without asssuming namespace support in the base ixml.*
+
 We define the namespace 'http://example.com/ixml-namespaces" (*final
 decision on namespace name pending*) as providing for namespace
 bindings, and we adopt the convention that a prefix `ppp` is bound to
@@ -541,10 +590,18 @@ with the following properties:
 * The pragma's data is the magic namespace name
   "`http://example.com/ixml-namespaces`".
 
-When that pragma is found, it is interpreted as binding prefix *ns*
-(whatever it might be) to the indicated namespace.  Any subsequent
-pragma with a QName using that prefix and a URI as pragma data is to
-be interpreted as a namespace declaration in the obvious way.
+Alternatively, the prefix *ns* might be bound to the namespace
+indicate using a pragma of the form
+
+````
+    [@Q{http://example.com/ixml-namespaces}:ns http://example.com/ixml-namespaces]
+````
+
+When either form of the pragma is found, it is interpreted as binding
+prefix *ns* (whatever prefix that might be) to the indicated
+namespace.  Any subsequent pragma with a QName using that prefix and a
+URI as pragma data is to be interpreted as a namespace declaration in
+the obvious way.
 
 In the XML form for grammars, the corresponding constructs are (a) a
 namespace declaration binding the prefix *ns* to the given namespace
@@ -630,13 +687,14 @@ names in the XML, with appropriate namespace bindings.
 
 The fallback behavior of a parser that does not support these pragmas  
 will be as under the current spec, which someone wearing a  
-language-lawyer hat tells us is probably to emit output that is
+language-lawyer hat tells us is probably to emit output that lacks
+necessary namespace declarations and is technically speaking
 well-formed XML but not *namespace-well-formed* XML.
 
 This example does not define a capability for changing namespace
 bindings within a document.  It's an example.
 
-		  
+
 ### Renaming 
 
 Using pragmas to specify that an element or attribute name
@@ -657,15 +715,16 @@ support the pragma will call them all `month`.
 
 ````
     [@nsd:nsd http://example.com/ixml-namespaces]
-    [@nsd:sp https://lists.w3.org/Archives/Public/public-ixml/2021Oct/0014.html]
+    [@nsd:sp 
+    https://lists.w3.org/Archives/Public/public-ixml/2021Oct/0014.html]
 
-	date: day, " ", month, " ", year.
-	day: d, d?.
-	month: "January"; "February"; etc.
-	year: d, d, d, d.
+    date: day, " ", month, " ", year.
+    day: d, d?.
+    month: "January"; "February"; etc.
+    year: d, d, d, d.
 
-	iso: year, "-", [sp:rename month] nmonth, "-", day.
-	nmonth: d, d.
+    iso: year, "-", [sp:rename month] nmonth, "-", day.
+    nmonth: d, d.
 ````
 
 The namespace bindings in the example assume namespace pragmas as
@@ -697,7 +756,7 @@ a simple subset of XML.  It's a subset of XML for simplicity, and it's
 a superset of the subset because a grammar written at this level
 cannot enforce the well-formedness constraints of XML.
 ````
-    { A grammar for a small subset of XML, for use as an illustration. }
+    { A grammar for a small subset of XML, as an illustration. }
     
     element:  start-tag, content, end-tag; sole-tag.
     
@@ -749,20 +808,20 @@ output produced manually, may be inaccurate*):
 <element @gi='haiku' @gi2='haiku'>
     <attribute name="author" value="Basho"/>
     <attribute name="date" value="1686"/>
-    <element @gi='line @gi2='line'>
+    <element @gi='line' @gi2='line'>
 	    <PCDATA>When the old pond</PCDATA>
 	</element>	
-    <element @gi='line @gi2='line'>
+    <element @gi='line' @gi2='line'>
 	    <PCDATA>gets a new frog</PCDATA>
 	</element>	
-    <element @gi='line @gi2='line'>
+    <element @gi='line' @gi2='line'>
 	    <PCDATA>It's a new pond.</PCDATA>
 	</element>	
 </element>
 ````
 
-We can specify that we want normal XML from the grammar using
-the pragmas:
+We can use the following pragmas to obtain normal XML from
+parsing with the grammar:
 
 * `xp:name` *expression* - specifies that the name under which a
 nonterminal is to be serialized is given by the value of the supplied
@@ -1051,7 +1110,8 @@ involving addition and multiplication over single-digit integers.
 ````
     expr:  expr, s, '+', s, term.
     term:  term, s, '*', s, factor.
-    factor:  '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; '(', s, expr, s, ')'.
+    factor:  '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; 
+            -'(', s, expr, s, -')'.
     s:  [#20; #A; #D; #9]*.
 ````
 
