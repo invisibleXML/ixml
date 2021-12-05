@@ -1318,32 +1318,35 @@ spoiling things for other people.
   then use pragmas to specify the behavior of the variable-form
   variant.  
 
-* The standard rules for translating an ixml grammar to XML form
-  by parsing it against *ixml.ixml* do not produce the results
-  described here.  Either we just impose them by fiat, or we need
-  a fully worked out proposal for generating XML names from
-  the input data.
-
-  This is a major stumbling block.
-
 * Ideally we would prefer to allow annotations on rules to precede the
   mark on the left-hand side; an earlier version of the bracket-QName
   proposal did allow them there, rather than after the mark.  The
   current version was changed in order to allow pragmas at the
   beginning of a grammar to be attached to the grammar as a whole.
 
-  If pragmas occurring outside rules are syntactically distinct (e.g.
-  if they are always to be followed by a full stop), then pragmas can
-  occur both before the mark on a left-hand side and between rules.
-  Worth doing?
+  If pragmas occurring outside rules are syntactically distinct, then 
+  pragmas can occur both before the mark on a left-hand side and 
+  between rules.  It does complicate the grammar a bit.  Worth doing?
+  
+  Easiest approach may be to require a full stop after pragmas occurring
+  outside of rules.  
+  
+  * Change ixml rule to `ixml: SPS, rule+SPS, SPS.`
+  * Define SPS as `-SPS: (S; (pragma, S, '.'))*.`
+  
+  Or alternatively just change the rule for ixml and define two forms
+  of pragma:
+  
+  * `ixml:  S, (rule; Pragma)+S, S.`
+  * `Pragma:  pragma, S, '.'.`
 
-* One result is that while for pragmas on symbols in a right-hand side
-  it doesn't matter whether they come before or after the mark, on the
-  left-hand side it does matter.  It might be less confusing to
-  require that pragmas follow the mark on the right-hand side, to make
-  it parallel to the left-hand side.  Or it might be less irritating
-  to allow them either before or after the mark.  At the moment, the
-  proposal takes the second course.
+* One result of the current design is that while for pragmas on symbols 
+  in a *right-hand side* it doesn't matter whether they come before or 
+  after the mark, on the *left-hand side* it does matter.  It might be 
+  less confusing to require that pragmas follow the mark on the 
+  right-hand side, to make it parallel to the left-hand side.  Or it 
+  might be less irritating to allow them either before or after the mark.  
+  At the moment, the proposal takes the second course.
 
 * The fact that extension elements can contain things that are
   implicit but not explicit in the ixml form means that a schema for
@@ -1353,7 +1356,7 @@ spoiling things for other people.
   makes us.  But at the moment, it says here that this is the right
   compromise.
 
-* Should ixml pragmas marked `@` be restricted in where they can  
+* Should ixml pragmas marked `@` be restricted in where they can 
   appear (e.g. before the first rule, not later; on the LHS of a rule,
   not before the stop)?  Rationale for current decision: it's simpler
   not to restrict them, and restricting them does not allow us to get
