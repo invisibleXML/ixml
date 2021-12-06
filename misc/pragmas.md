@@ -256,16 +256,15 @@ square brackets are allowed, so pragmas can nest arbitrarily deep.
 In the ixml form of a grammar, pragmas can occur within whitespace in
 several locations:
 
-* before the first rule of the grammar, after the last rule of the
-  grammar, or between rules; these pragmas apply to the grammar
-  as a whole or to the rules following the pragma.
+* before the first rule of the grammar; these pragmas apply to the
+  grammar as a whole.
 
 * before a terminal or nonterminal symbol on the right-hand side of a
   rule, before or after the mark if any; these pragmas apply to that
   occurrence of the symbol.
 
-* between the mark on the left-hand side of a rule and the 
-  nonterminal; these pragmas apply to the rule. 
+* on the left-hand side of a rule before the rule name, before or
+  after the mark if any; these pragmas apply to the rule.
 
 * immediately before the full stop of a rule; these pragmas apply to
   the rule.
@@ -276,21 +275,31 @@ rhetorical choice, but an important one as it can make a difference to
 readability.
 
 The relevant changes to the ixml grammar are these.  First, in several
-rules the nonterminal *S* is replaced by *SP* (space-or-pragma), to
-allow pragmas to appear as described above:
+rules the options `(mark, S)?` and `(tmark, S)?` are replaced by new
+nonterminals which provide for both marks and pragmas.  In some
+locations the nonterminal *S* is replaced by *SP* (space-or-pragma),
+to allow pragmas to appear as described above.
+
 
 ````
-ixml: SP, rule+SP, SP.
-rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
-nonterminal: (mark, SP)?, name, S.
--quoted: (tmark, SP)?, -string.
--encoded: (tmark, SP)?, -"#", @hex, S.
-inclusion: (tmark, SP)?,         set.
-exclusion: (tmark, SP)?, "~", S, set.
+         rule: annotation, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+  nonterminal: annotation, name, S.
+      -quoted: tannotation, -string.
+     -encoded: tannotation, -"#", @hex, S.
+    inclusion: tannotation,         set.
+    exclusion: tannotation, "~", S, set.
+
+          -SP: (S; pragma)*
+  -annotation: (pragma, SP)?, (mark, SP)?.
+ -tannotation: (pragma, SP)?, (tmark, SP)?..
 ````
 
-The new nonterminal *SP* and the nonterminals needed for pragmas
-themselves are defined as follows.
+To allow pragmas pertaining to the grammar as a whole to precede the
+first rule of the grammar, the production rule for *ixml* is changed.
+To ensure that pragmas in the prolog can be distinguished
+syntactically from pragmas attached to the left-hand side of the first
+rule, pragmas in the prolog are required to be followed by full stops.
+
 
 ````
 -SP: (S; pragma)*.
@@ -1403,6 +1412,14 @@ work as follows:
   The ixml processor is responsible for including appropriate
   namespace declarations in the XML output.
 
+* In the XML form of an ixml grammar, all namespaces bound in in the
+  ixml grammar should be bound in the XML form of the grammar.
+
+  This should normally take the form of namespace declarations on the
+  `ixml` element.  The pragmas should also be represented in the usual
+  way, if that differs from being realized as a namespace-binding
+  attribute.
+
 The proposals differ in their rules for how a pragma is recognized as
 a namespace-binding pragma.
 
@@ -1474,18 +1491,6 @@ use of a reserved prefix in their QName.
   ixml grammar for ixml.  That will make some people nervous, as it
   makes us.
 
-* Should the ixml pragmas for namespace declarations cause standard
-  XML namespace declarations for all prefixes declared?  That would
-  allow an XSLT or XQuery processor to understand the namespace
-  bindings relevant for QNames appearing as nonterminal names.
-  Rationale for current decision:  it's an example, not a proposal for
-  the spec, and it's complicated enough already.
-
-  *In the V proposal, this is required, since attributes and elements
-  may be using qualified names with bound prefixes.  In the F
-  proposal, it's not required but it may be advantageous.  It will
-  probably be simpler to specify that it always happens.*
-
 * Allow pragmas between `alt` elements / immediately before the
   separator between top-level alternatives in a right-hand side?
 
@@ -1497,31 +1502,62 @@ use of a reserved prefix in their QName.
 
   *No.  Make the attribute-grammar example work some other way.*
 
+* How should the prolog be defined?  Several formulations have
+  occurred to me, some equivalent and some not. Which is clearest and
+  nicest?
 
+  * Inline the full stop:  
+
+        `-prolog: S, pragma*(S, (-'.', S)), S.`
+
+  * Require only one full stop, at the end of the prolog: 
+
+        `-prolog: S, pragma*S, S, -'.', S.`
+
+  * Use a different name for pragmas with full stops, to simplify the
+    rule for *prolog:*
+
+        ````
+          -prolog: S, Pragma*S, S.
+          -Pragma: pragma, S, '.'.
+        ````
+
+  * Use the nonterminal *ppragma* rather than *Pragma:*
+
+        ````
+          -prolog: S, ppragma*S, S.
+         -ppragma: pragma, S, '.'.
+        ````
 
 ## Decisions to be made by the group
 
-The group may wish to weigh in on any of the open issues listed above,
-assuming the authors have not made a decision and removed all trace of
-the open issue before sending this document to the group.  Some open
-questions will need to be made by the group, not by the authors.
+* If the proposal is adopted, which form of the pragmas proposal 
+  should be chosen?  V or F?  Or some other variant?
 
-* What name should be used for the magic namespace-binding namespace? 
-  In the examples, we use "`http://example.com/ixml-namespaces`". 
+* If the proposal is adopted, which form of the namespace binding 
+  proposal should be chosen?  U or S?  Or some other variant?
+
+* If proposal S is adopted, what name should be used for the magic 
+  namespace-binding prefix in proposal S?  The proposal above uses 
+  *ixmlns*; it might feel more convenient if we use `xmlns`.  If we do 
+  so, are we violating the rule that says names beginning with 'xml' 
+  are reserved for W3C Recommendations? 
+
+* What name should be used for the magic namespace-binding namespace?
+  In the examples, we use "`http://example.com/ixml-namespaces`".
 
   Should we use "`http://www.w3.org/2000/xmlns/`", to which the prefix 
   `xmlns` is bound by convention? 
 
-* What name should be used for the magic namespace-binding prefix in
-  proposal S?  If we use `xmlns`, are we transgressing the rule that
-  says names beginning with 'xml' are reserved for W3C
-  Recommendations?
-
-
-* Alternatively, should the spec provide a magic namespace-binding
-  prefix analogous to `xmlns`?
+* The group may also wish to weigh in on any of the open issues listed
+  above, if any are left when this document goes to the group.
 
 * *I could have sworn there were more things to put here.*
+
+* Once the group has resolved the questions just listed, the remaining
+  question is: should the proposal as thus refined by adopted for
+  ixml 1.0 or not?
+  
 
 ## References
 
