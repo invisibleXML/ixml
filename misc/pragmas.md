@@ -1316,7 +1316,9 @@ spoiling things for other people.
   leaves it in, on the theory that if it is retained, then it is possible
   in principle to adopt the fixed-form variant in the ixml spec and
   then use pragmas to specify the behavior of the variable-form
-  variant.  
+  variant.
+
+  *Keep it.*
 
 * Ideally we would prefer to allow annotations on rules to precede the
   mark on the left-hand side; an earlier version of the bracket-QName
@@ -1340,6 +1342,8 @@ spoiling things for other people.
   * `ixml:  S, (rule; Pragma)+S, S.`
   * `Pragma:  pragma, S, '.'.`
 
+  *Agreed:  use full stops, with second grammar form.*
+
 * One result of the current design is that while for pragmas on symbols 
   in a *right-hand side* it doesn't matter whether they come before or 
   after the mark, on the *left-hand side* it does matter.  It might be 
@@ -1348,13 +1352,14 @@ spoiling things for other people.
   might be less irritating to allow them either before or after the mark.  
   At the moment, the proposal takes the second course.
 
+  *Agreement on previous item covers this.*
+
 * The fact that extension elements can contain things that are
   implicit but not explicit in the ixml form means that a schema for
   the visible-XML form of a grammar, as described here, requires
   manual intervention and not just a mechanical derivation from the
   ixml grammar for ixml.  That will make some people nervous, as it
-  makes us.  But at the moment, it says here that this is the right
-  compromise.
+  makes us.
 
 * Should ixml pragmas marked `@` be restricted in where they can 
   appear (e.g. before the first rule, not later; on the LHS of a rule,
@@ -1364,12 +1369,19 @@ spoiling things for other people.
   since we would still have to specify that their position relative to
   other pragmas is not signficant.
 
+  *Restrict all grammar-level pragmas to occur before the first rule.*
+
 * Should the ixml pragmas for namespace declarations cause standard
   XML namespace declarations for all prefixes declared?  That would
   allow an XSLT or XQuery processor to understand the namespace
   bindings relevant for QNames appearing as nonterminal names.
   Rationale for current decision:  it's an example, not a proposal for
   the spec, and it's complicated enough already.
+
+  *In the V proposal, this is required, since attributes and elements
+  may be using qualified names with bound prefixes.  In the F
+  proposal, it's not required but it may be advantageous.  It will
+  probably be simpler to specify that it always happens.*
 
 * Allow pragmas between `alt` elements / immediately before the
   separator between top-level alternatives in a right-hand side?
@@ -1379,6 +1391,19 @@ spoiling things for other people.
   occurrence before, after, or between `alt` elements within a `rule`
   parallel to occurrence before, after, or between `rule` elements
   within the `ixml` element.
+
+  *No.  Make the attribute-grammar example work some other way.*
+
+* Is `pragma-data` really necessary?
+
+  *Make it an attribute, and make pragmas cease to nest.*
+
+* What do we ask for w.r.t. namespaces?
+
+  *We need a way to declare namespaces that apply to the
+  entire grammar.  We can use a defined pragma.*
+  
+
 
 ## Decisions to be made by the group
 
