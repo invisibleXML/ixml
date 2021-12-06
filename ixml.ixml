@@ -1,5 +1,8 @@
-         ixml: SP, rule+SP, SP.
+         ixml: prolog, rule+S, S.
 
+      -prolog: (S; Pragma)*.
+      -Pragma: pragma, S, -'.'.
+       
           -SP: (S; pragma)*.
 	  
            -S: (whitespace; comment)*.
@@ -19,7 +22,8 @@
  @pragma-data: (pragma-chars; '[', pragma-chars, ']')*.
 -pragma-chars: ~["[]"]*.
 
-         rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+         rule: annotation, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+  -annotation: (pragma, SP)?, (mark, SP)?.
         @mark: ["@^-"].
          alts: alt+([";|"], S).
           alt: term*(",", S).
@@ -34,14 +38,15 @@
       repeat1: factor, "+", S, sep?.
        option: factor, "?", S.
           sep: factor.
-  nonterminal: (mark, SP)?, name, S.
+  nonterminal: annotation, name, S.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmark, SP)?, -string.
-
+      -quoted: tannotation, -string.
+ -tannotation: (pragma, SP)?, (tmark, SP)?.
+  
         @name: namestart, namefollower*.
    -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
@@ -55,13 +60,13 @@
                '"', -'"'. {all characters, quotes must be doubled}
         schar: ~["'"];
                "'", -"'". {all characters, quotes must be doubled}
-     -encoded: (tmark, SP)?, -"#", @hex, S.
+     -encoded: tannotation, -"#", @hex, S.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: (tmark, SP)?,         set.
-    exclusion: (tmark, SP)?, "~", S, set.
+    inclusion: tannotation,         set.
+    exclusion: tannotation, "~", S, set.
          -set: "[", S,  member*([";|"], S), "]", S.
       -member: literal;
                range;
