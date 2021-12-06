@@ -1437,14 +1437,6 @@ use of a reserved prefix in their QName.
 
 ## Open issues
 
-* In the fixed-form variant, drop *pmark* entirely?  The current text
-  leaves it in, on the theory that if it is retained, then it is possible
-  in principle to adopt the fixed-form variant in the ixml spec and
-  then use pragmas to specify the behavior of the variable-form
-  variant.
-
-  *Keep it.*
-
 * Ideally we would prefer to allow annotations on rules to precede the
   mark on the left-hand side; an earlier version of the bracket-QName
   proposal did allow them there, rather than after the mark.  The
