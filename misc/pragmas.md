@@ -1511,10 +1511,6 @@ use of a reserved prefix in their QName.
 
   *No.  Make the attribute-grammar example work some other way.*
 
-* Is `pragma-data` really necessary?
-
-  *Make it an attribute, and make pragmas cease to nest.*
-
 * What do we ask for w.r.t. namespaces?
 
   *We need a way to declare namespaces that apply to the
