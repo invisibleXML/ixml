@@ -10,13 +10,13 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-       pragma: "[", @pmark?, @pname, (S, pragma-data)?, "]".
+       pragma: "[", @pmark?, @pname, (S, @pragma-data)?, "]".
        @pname: -QName; -UQName.
        -QName: -name, ':', -name.
       -UQName: 'Q{', -ns-name, '}', -name.
      -ns-name: ~["{}"; '"'; "'"]* { oversimplification }.
        @pmark: ["@^?"].
-  pragma-data: (pragma-chars; pragma)*.
+ @pragma-data: (pragma-chars; '[', pragma-chars, ']')*.
 -pragma-chars: ~["[]"]*.
 
          rule: (mark, SP)?, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
