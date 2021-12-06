@@ -1,8 +1,9 @@
          ixml: SP, rule+SP, SP.
 
-          -SP: (s; pragma)*.
-	  
-           -s: (whitespace; comment)*.
+      -prolog: S, Pragma*S, S.
+      -Pragma: pragma, S, '.'.
+       
+           -S: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
           -lf: -#a.
@@ -21,8 +22,10 @@
 
          rule: (mark, SP)?, name, s, ["=:"], s, -alts, (pragma, SP)?, ".".
         @mark: ["@^-"].
-         alts: alt+([";|"], s).
-          alt: term*(",", s).
+          -SP: (S; pragma)*.
+
+         alts: alt+([";|"], S).
+          alt: term*(",", S).
         -term: factor;
                option;
                repeat0;
