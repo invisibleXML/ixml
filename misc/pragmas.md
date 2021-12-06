@@ -28,6 +28,19 @@ and `use-when` mechanisms of XSLT and the *extension expression*
 and *annotation* mechanisms of XQuery. SGML and XML processing
 instructions have also contributed to our thinking.
 
+In working out the proposal for pragmas, we have come to believe that
+in order for pragmas to work as designed, some form of namespace
+binding must be available in ixml.  This could be done by inventing
+new syntax for namespace bindings, but what we propose here is to use
+the syntax of pragmas to declare namespace bindings: the net effect is
+that the spec (a) defines a syntax for pragmas and (b) defines one
+particular set of pragmas that all ixml processors must support.
+
+This document thus includes both a proposal for pragmas and a proposal
+for namespace binding, each of which assumes the other.  Each proposal
+has two variants (F and V for the pragmas proposal, U and S for the
+namespaces proposal).
+
 
 ## Use cases
 
@@ -132,16 +145,23 @@ expression*.
 Desiderata:
 
 * Ideally, the result of evaluating the fallback expression should be
-a useful and meaningful result, but this is more a matter for the
-individual writing a grammar than for this proposal.  The desideratum
-for a pragmas proposal is to make it easy (or at least not
-unnecessarily hard) to write useful fallbacks.
+  a useful and meaningful result, but this is more a matter for the
+  individual writing a grammar than for this proposal.  The
+  desideratum for a pragmas proposal is to make it easy (or at least
+  not unnecessarily hard) to write useful fallbacks.
 
 * It should ideally be possible to specify pragmas as annotations
-applying to a symbol, a rule, or a grammar as a whole, and it should
-be possible to know which is which. It is not required that the
-distinction be a syntactic one, however, since it can also be
-expressed by the semantics of the particular pragma.
+  applying to a symbol, a rule, or a grammar as a whole, and it should
+  be possible to know which is which. It is not required that the
+  distinction be a syntactic one, however, since it can also be
+  expressed by the semantics of the particular pragma.
+
+* It should ideally be possible for processors to generate the XML
+  representation of an ixml grammar containing pragmas, even if they
+  do not understand the pragmas contained.  And conversely it should
+  ideally be possible for processors to write out the ixml form of an
+  XML grammar containing pragmas, even if the processor does not
+  understand the pragmas appearing in the grammar.
 
 ## Design questions
 
@@ -158,12 +178,12 @@ grammar?
 * Where can pragmas appear?
 
 
-## Proposal(s)
+## Pragma Proposal(s)
 
-The current proposal is given the arbitrary name of 'brackets QName' for
-discussion; an earlier proposal (the 'hash-QName' proposal) has been
-withdrawn, though traces of it may remain in other documents in this
-branch.
+The current proposal for pragmas is given the arbitrary name of
+'brackets QName' for discussion; an earlier proposal (the 'hash-QName'
+proposal) has been withdrawn, though traces of it may remain in other
+documents in this branch.
 
 ### The brackets-QName proposal 
 
@@ -179,10 +199,10 @@ declarations* use case below.)
 is taken not from the grammar (as in ixml as currently specified) 
 but from the input data.  (See the *Name indirection* use case below.) 
 
-* Deciding whether to serialize a given nonterminal as an
-element or as an attribute based on what is found in the data.
-(This may require nothing more elaborate than what is
-described in the *Renaming* use case below.)
+* Deciding whether to serialize a given nonterminal as an element or
+as an attribute based on what is found in the data.  (This may require
+nothing more elaborate than what is described in the *Renaming* use
+case below.)
 
 Some of these extensions can themselves be introduced using pragmas,
 as illustrated in the *Worked examples* section below, but it is clear
@@ -1310,6 +1330,111 @@ that you can give them ad hoc semantics if you need to, without
 spoiling things for other people.
 
 
+## Namespace binding proposals
+
+As described in the worked example for *Namespace declarations* above,
+there are at least two ways for ixml to use pragmas provide the
+namespace declaration functionality necessary to allow QNames to be
+used in pragmas.  We call them U (for 'user-specified namespace
+binding prefix') and S (for 'specification-defined namespace binding
+prefix').
+
+The two proposals differ in how pragmas are recognized as
+namespace-binding pragmas but are otherwise similar.
+
+### Namespace binding, common rules
+
+In both proposal, the ixml spec requires that conforming processors
+understand the syntax for pragmas (this is implicit in the rule that
+they follow the syntax for ixml grammars) and that conforming
+processors understand and implement namespace-binding pragmas which
+work as follows:
+
+* A namespace-binding pragma whose QName has the local name *n* binds
+  *n* as a namespace prefix to the namespace whose name by the pragma
+  data.
+
+  As is the case for for XML namespaces generally, the pragma data
+  should be a legal URI, but ixml processors are not obligated to
+  check the URI for syntactic correctness (although they are may do
+  so), and normally should not attempt to dereference it.
+
+* All namespace-binding pragmas pertain to the grammar as a whole and
+  must be given before the first rule of the grammar.
+
+* A nonterminal taking the lexical form of a QName must if serialized
+  be serialized as an XML element name with the same local name and
+  with a prefix bound to the same namespace.  Normally the prefix
+  should be as given in the grammar.  *(If all namespaces are declared
+  before the first rule, there should be no reason it should be
+  impossible to use the same prefix.  Perhaps we can make this a
+  'must'.)*
+
+  The ixml processor is responsible for including appropriate
+  namespace declarations in the XML output.
+
+The proposals differ in their rules for how a pragma is recognized as
+a namespace-binding pragma.
+
+
+### Namespace binding in proposal U 
+
+In this proposal, namespace-binding pragmas are those whose QName is
+in a particular well-known namespace; a bootstrapping rule is used to
+recognize the binding of a user-specified prefix to that namespace.
+
+* A pragma whose QName has the same name as its prefix and its local
+  name and whose value is the namespace-binding namespace
+  '`http://example.com/ixml-namespaces`" binds the given prefix to
+  that namespace.  This pragma must be marked `@`.  For example:
+
+    ````
+    [@nsd:nsd http://example.com/ixml-namespaces]
+    ````
+
+* The equivalent pragma using a URI-qualified name similarly binds the
+  given prefix to that namespace.
+
+  For example:
+
+    ````
+    [@Q{http://example.com/ixml-namespaces}:nsd 
+        http://example.com/ixml-namespaces]
+    ````
+
+In the examples just given, the prefix *nsd* is only an example: the
+user can specify any desired prefix to use for namespace bindings.
+
+* Any pragma whose QName has the namespace 
+  "`http://example.com/ixml-namespaces`" is recognized as a 
+  namespace-binding pragma. 
+
+* Any pragma with an unprefixed name whose local name is bound as a
+  prefix to the namespace "`http://example.com/ixml-namespaces`" is
+  recognized as a namespace-binding pragma defining a default
+  namespace.
+
+
+### Namespace binding in proposal S
+
+In this proposal, namespace-binding pragmas are recognized by their
+use of a reserved prefix in their QName.
+
+* The prefix *ixmlns* is understood by all conforming ixml software as
+  bound to the namespace-binding namespace
+  '`http://example.com/ixml-namespaces`".
+
+  *Open question: use the name 'ixmlns' or some other name?  Perhaps
+  'xmlns'?*
+
+* Any pragma whose QName has the prefix *ixmlns* is recognized as a
+  namespace-binding pragma.
+
+* Any pragma with the unprefixed *ixmlns* is recognized as a
+  namespace-binding pragma defining a default namespace.
+
+
+
 ## Open issues
 
 * In the fixed-form variant, drop *pmark* entirely?  The current text
@@ -1412,8 +1537,17 @@ assuming the authors have not made a decision and removed all trace of
 the open issue before sending this document to the group.  Some open
 questions will need to be made by the group, not by the authors.
 
-* What name should be used for the magic namespace-binding namespace?
-  In the examples, we use "`http://example.com/ixml-namespaces`".
+* What name should be used for the magic namespace-binding namespace? 
+  In the examples, we use "`http://example.com/ixml-namespaces`". 
+
+  Should we use "`http://www.w3.org/2000/xmlns/`", to which the prefix 
+  `xmlns` is bound by convention? 
+
+* What name should be used for the magic namespace-binding prefix in
+  proposal S?  If we use `xmlns`, are we transgressing the rule that
+  says names beginning with 'xml' are reserved for W3C
+  Recommendations?
+
 
 * Alternatively, should the spec provide a magic namespace-binding
   prefix analogous to `xmlns`?
