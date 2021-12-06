@@ -41,6 +41,36 @@ for namespace binding, each of which assumes the other.  Each proposal
 has two variants (F and V for the pragmas proposal, U and S for the
 namespaces proposal).
 
+Contents:
+* [Use cases](#use-cases) 
+* [Requirements and desiderata](#requirements-and-desiderata) 
+* [Design questions](#design-questions) 
+* [Pragma proposal(s)](#pragma-proposals)
+    * [The brackets-QName proposal](#the-brackets-qname-proposal) 
+        * [The ixml form](#the-ixml-form) 
+        * [Marks on pragmas in V](#marks-on-pragmas-in-v) 
+        * [Marks on pragmas in F](#marks-on-pragmas-in-f) 
+        * [The XML form of pragmas in F](#the-xml-form-of-pragmas-in-f) 
+        * [The XML form of pragmas in V](#the-xml-form-of-pragmas-in-v) 
+        * [Pragmas and other extension mechanism](#pragmas-and-other-extension-mechanisms) 
+        * [Annotating symbols, rules, or grammars](#annotating-symbols-rules-or-grammars) 
+        * [An example](#an-example)
+* [Worked examples](#worked-examples)
+    * [Namespace declarations](#namespace-declarations) 
+    * [Renaming](#renaming) 
+    * [Name indirection](#name-indirection) 
+    * [Rule rewriting](#rule-rewriting)
+	* [Tokenization annotation and alternative formulations.](#tokenization-annotation-and-alternative-formulations)
+	* [Text injection](#text-injection)
+	* [Attribute grammar specification](#attribute-grammar-specification)
+	* [Pragmas for proposal V](#Pragmas-for-proposal-V)
+* [Namespace binding proposals](#Namespace-binding-proposals)
+	* [Namespace binding, common rules](#namespace-binding-common-rules)
+    * [Namespace binding in proposal U](#namespace-binding-in-proposal-u) 
+    * [Namespace binding in proposal S](#namespace-binding-in-proposal-s) 
+* [Open issues](#open-issues) 
+* [Decisions to be made by the group](#decisions-to-be-made-by-the-group) 
+* [References](#references) 
 
 ## Use cases
 
@@ -1033,7 +1063,7 @@ pragmas will be to serialize `expr` and `term` elements even when they
 have only one child. 
 
 
-### Tokenization annotation and alternative formulations.
+### Tokenization annotation and alternative formulations
 
 We can use pragmas to annotate nonterminals in an ixml grammar to
 indicate that they define a regular language and can be safely
@@ -1113,14 +1143,14 @@ they may change the meaning of an expression (or here the meaning of a
 grammar or part of it).
 
 
-### Text injection.
+### Text injection
 
 Using pragmas to indicate that a particular string should be
 injected into the XML representation of the input as (part of) a text
 node, or as an attribute or element. (This can help make the output of
 an ixml parse conform to a pre-existing schema.)
 
-### Attribute grammar specification.
+### Attribute grammar specification
 
 *Example:  synthesized value attribute for arithmetic expressions.*
 
@@ -1511,11 +1541,6 @@ use of a reserved prefix in their QName.
 
   *No.  Make the attribute-grammar example work some other way.*
 
-* What do we ask for w.r.t. namespaces?
-
-  *We need a way to declare namespaces that apply to the
-  entire grammar.  We can use a defined pragma.*
-  
 
 
 ## Decisions to be made by the group
