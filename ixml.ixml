@@ -20,23 +20,23 @@
  @pragma-data: (pragma-chars; '[', pragma-chars, ']')*.
 -pragma-chars: ~["[]"]*.
 
-         rule: annotation, name, S, ["=:"], S, -alts, (pragma, SP)?, ".".
+         rule: annotation, name, S, -["=:"], S, -alts, (pragma, SP)?, ".".
   -annotation: (pragma, SP)?, (mark, SP)?.
         @mark: ["@^-"].
           -SP: (S; pragma)*.
 
-         alts: alt+([";|"], S).
-          alt: term*(",", S).
+         alts: alt+(-[";|"], S).
+          alt: term*(-",", S).
         -term: factor;
                option;
                repeat0;
                repeat1.
       -factor: terminal;
                nonterminal;
-               "(", S, alts, ")", S.
-      repeat0: factor, "*", S, sep?.
-      repeat1: factor, "+", S, sep?.
-       option: factor, "?", S.
+               -"(", S, alts, -")", S.
+      repeat0: factor, -"*", S, sep?.
+      repeat1: factor, -"+", S, sep?.
+       option: factor, -"?", S.
           sep: factor.
   nonterminal: annotation, name, S.
 
@@ -48,7 +48,7 @@
  -tannotation: (pragma, SP)?, (tmark, SP)?.
   
         @name: namestart, namefollower*.
-   -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
+   -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
        @tmark: ["^-"].
@@ -66,12 +66,12 @@
      -charset: inclusion; 
                exclusion.
     inclusion: tannotation,         set.
-    exclusion: tannotation, "~", S, set.
-         -set: "[", S,  member*([";|"], S), "]", S.
+    exclusion: tannotation, -"~", S, set.
+         -set: -"[", S,  member*(-[";|"], S), -"]", S.
       -member: literal;
                range;
                class.
-        range: from, "-", S, to.
+        range: from, -"-", S, to.
         @from: character.
           @to: character.
    -character: -'"', dchar, -'"', S;

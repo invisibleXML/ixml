@@ -17,7 +17,7 @@ With respect to positive test cases, I take the grammatical equivalent of that c
 
 Adding descriptions of negative test cases is relatively straightforward, but I did this exercise manually, not automatically, and I did not attempt to make a list of negative cases to be covered.  It produced a list of 87 conditions that should be exercised by positive test cases.
 
-Because I worked manually, not automatically, I may well have glided over some things that should not be glided over, but for what it's worth, these are the conditions that are *not* exhibited in the grammar of 9 June 2021 as I went through it just now.
+Because I worked manually, not automatically, I may well have glided over some things that should not be glided over, but for what it's worth, these are the conditions I noted.  Those marked !! are those that are *not* exhibited in the grammar of 9 June 2021 as I went through it just now.
 
 To do:
 
@@ -28,7 +28,7 @@ To do:
 
 From *ixml*:
 
-1. An ixml grammar with a single rule.  (XPath: `ixml[count(rule) = 1]`)
+1. !! An ixml grammar with a single rule.  (XPath: `ixml[count(rule) = 1]`)
 
 2. An ixml grammar with multiple rules. (XPath:  `ixml[count(rule) gt 1)]`)
 
@@ -44,19 +44,19 @@ From *whitespace*:
 
 6. *whitespace* including a character in Unicode class Zs (space separators).
 
-7. *whitespace* containing a tab.
+7. !! *whitespace* containing a tab.
 
-8. _whitespace_ containing a linefeed character.  
+8. !! _whitespace_ containing a linefeed character.  
 
-9. _whitespace_ containing a carriage return character.  
+9. !! _whitespace_ containing a carriage return character.  
 
 From *comment*:
 
-10. empty comment (i.e. "`{}`").
+10. !! empty comment (i.e. "`{}`").
 
 11. comment containing one or more _cchar_ characters.
 
-12. nested comment.
+12. !! nested comment.
 
 From *rule*:
 
@@ -64,7 +64,7 @@ From *rule*:
 
 14. A rule with no explicit mark on the left-hand side.
 
-15. A rule using "`=`" to separate left- and right-hand sides.
+15. !! A rule using "`=`" to separate left- and right-hand sides.
 
 16. A rule using "`:`" to separate left- and right-hand sides.
 
@@ -72,7 +72,7 @@ From *mark*:
 
 17. A mark of "`@`" on a left- or right-hand nonterminal.
 
-18. A mark of "`^`" on a left- or right-hand nonterminal.
+18. !! A mark of "`^`" on a left- or right-hand nonterminal.
 
 19. A mark of '`-`' on a left- or right-hand nonterminal.
 
@@ -80,7 +80,7 @@ From *alts*:
 
 20. A set of alternatives containing a single alternative.
 
-21. Multiple alternatives separated by vertical bar (`|`).
+21. !! Multiple alternatives separated by vertical bar (`|`).
 
 22. Multiple alternatives separated by semicolon (`;`).
 
@@ -88,7 +88,7 @@ From _alt_:
 
 23. An alternative consisting of a single term.
 
-24. An alternative consisting of zero terms.
+24. !! An alternative consisting of zero terms.
 
 25. An alternative consisting of more than one term.
 
@@ -156,39 +156,39 @@ From *name*:
 
 From *namestart*:
 
-48. Name containing the namestart character underscore (`_`).
+48. !! Name containing the namestart character underscore (`_`).
 
 49. Name containing a namestart character from the Unicode class Ll (lowercase letters).
 
 50. Name containing a namestart character from the Unicode class Lu (uppercase letters).
 
-51. Name containing a namestart character from class Lm (modifier letters). 
+51. !! Name containing a namestart character from class Lm (modifier letters). 
 
-52. Name containing a namestart character from class Lt (titlecase letters). 
+52. !! Name containing a namestart character from class Lt (titlecase letters). 
 
-53. Name containing a namestart character from class Lo (other letters). 
+53. !! Name containing a namestart character from class Lo (other letters). 
 
 From *namefollower*:
 
 54. Name containing a namestart character (after the initial position).
 
-55. Name containing the namefollower character -. 
+55. !! Name containing the namefollower character -. 
 
-56. Name containing the namefollower character '.' (full stop). 
+56. !! Name containing the namefollower character '.' (full stop). 
 
-57. Name containing the namefollower character middle dot. 
+57. !! Name containing the namefollower character middle dot. 
 
-58. Name containing the namefollower character undertie. 
+58. !! Name containing the namefollower character undertie. 
 
-59. Name containing the namefollower character overtie. 
+59. !! Name containing the namefollower character overtie. 
 
 60. Name containing a character in Unicode class Nd (decimal digits).
 
-61. Name containing a namefollower character from class Mn (nonspacing marks).
+61. !! Name containing a namefollower character from class Mn (nonspacing marks).
 
 From _tmark_:
 
-62. A _tmark_ realized as '`^`'.
+62. !! A _tmark_ realized as '`^`'.
 
 63. A _tmark_ realized as '`-`'.
 
@@ -208,24 +208,24 @@ From *dstring*:
 
 From *dchar*: 
 
-68. A double-quoted string containing a doubled double-quote character. 
+68. !! A double-quoted string containing a doubled double-quote character. 
 
 From *schar*: 
 
-69. A single-quoted string containing a doubled single-quote character. 
+69. !! A single-quoted string containing a doubled single-quote character. 
 
 
 From *encoded*:
 
 70.  An occurrence of _encoded_ (a character specified in hex) with an explicit _tmark_. 
 
-71.  An occurrence of _encoded_ (a character specified in hex) with no _tmark_. 
+71.  !! An occurrence of _encoded_ (a character specified in hex) with no _tmark_. 
 
 From *hex*:
 
 72. A _hex_ character in the range 0-9.
 
-73. A _hex_ character in the range 'A' - 'F' (as distinct form 'a' - 'f').
+73. !! A _hex_ character in the range 'A' - 'F' (as distinct form 'a' - 'f').
 
 74. A _hex_ character in the range 'a' - 'f' (as distinct form 'A' - 'F').
 
@@ -243,19 +243,19 @@ From *inclusion*:
 
 From *exclusion*:
 
-79. A character set exclusion with an explicit _tmark_. 
+79. !! A character set exclusion with an explicit _tmark_. 
 
 80. A character set exclusion with no explicit _tmark_. 
 
 From *set*:
 
-81. A character set exclusion or inclusion with no members.
+81. !! A character set exclusion or inclusion with no members.
 
 82. A character set exclusion or inclusion with one member.
 
 83. A character set exclusion or inclusion with multiple members, separated by semicolon (`;`).
 
-84.  A character set with multiple members, separated by vertical bar (`|`).
+84. !! A character set with multiple members, separated by vertical bar (`|`).
 
 From *member*:
 
