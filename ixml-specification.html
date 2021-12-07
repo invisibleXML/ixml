@@ -445,27 +445,7 @@ class.</p>
    @code: capital, letter?.
 -capital: ["A"-"Z"].
 -letter: ["a"-"z"].</pre>
-  
-<h3 id="pragma">Pragmas</h3>
-<p>Pragmas are ways to mark-up the grammar that optionally allow conforming parsers to extend their behaviours.  They are written in such a way that ignoring a pragma results in the desired fall-back behaviour.</p>
-<p>Pragmas are allowed wherever a terminal or non-terminal mark are allowed.  They start with a <code>#</code> symbol, and consist of a qualified name and a quoted <code>string</code>:</p>
-<pre>@pragma: -"#", #name "" name, string.</pre>
-  <p>Pragmas starting with reserved XML names or namespaces, the null namespace, or the Invisible XML namespace are considered to be reserved and should not be used except as directed by this specification.</p>
-  <p>There are a number of potential uses for pragmas, some of which are required to define pragmas for the invisible XML grammar.</p>
-  <h4>Namespace declarations</h4>
-  <p>Namespaces can be declared using the <code>xmlns</code> and <code>xmlns:xxx</code> name patterns, where <code>xxx</code> represents an XML name prefix.  The value of a namespace pragma represents the namespace URI.</p>
-  <pre>#xmlns "http://invisiblexml.org/ns"
-#xmlns:xsl "http://www.w3.org/1999/XSL/Transform"</pre>
-  <p>This provides a way to declare namespaces and prefixes for use with qualified names in invisible XML.  Declarations on the first rule are taken to apply to the whole grammar.</p>
-  <h4>Name templates</h4>
-  <p>It is sometimes desirable to set an element name dynamically; for instance where the name of an element or attribute should be taken from the value rather than the name of a terminal or non-terminal.</p>
-  <p>Where the <code>name</code> pragma is defined within a rule, the terminal or non-terminal which it annotates is used as the name for that rule, where such a rule results in a node with a qualified name:</p>
-  <pre>rule: pragma.
-@pragma: -"#", #name "" name, string.
-name: "new-name"
-string: "value"</pre>
-  <p>would result in </p>
-  <pre>&lt;rule new-name="value"/></pre>
+
 <h3 id="complete">Complete</h3>
 <pre>         ixml: S, rule+S, S.
 
@@ -477,10 +457,8 @@ string: "value"</pre>
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-         rule: (mOrP, S)?, name, S, ["=:"], S, -alts, ".".
-        -mOrP: mark; pragma, mark?;
+         rule: (mark, S)?, name, S, ["=:"], S, -alts, ".".
         @mark: ["@^-"].
-       pragma: "#", name, S, string.
          alts: alt+([";|"], S).
           alt: term*(",", S).
         -term: factor;
@@ -494,19 +472,18 @@ string: "value"</pre>
       repeat1: factor, "+", S, sep?.
        option: factor, "?", S.
           sep: factor.
-  nonterminal: (mOrP, S)?, name, S.
+  nonterminal: (mark, S)?, name, S.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmOrP, S)?, -string.
+      -quoted: (tmark, S)?, -string.
 
         @name: namestart, namefollower*.
    -namestart: ["_"; Ll; Lu; Lm; Lt; Lo].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
-       -tmOrP: tmark; pragma, tmark?
        @tmark: ["^-"].
        string: -'"', dstring, -'"', S;
                -"'", sstring, -"'", S.
@@ -516,13 +493,13 @@ string: "value"</pre>
                '"', -'"'. {all characters, quotes must be doubled}
         schar: ~["'"];
                "'", -"'". {all characters, quotes must be doubled}
-     -encoded: (tmOrP, S)?, -"#", @hex, S.
+     -encoded: (tmark, S)?, -"#", @hex, S.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: (tmOrP, S)?,         set.
-    exclusion: (tmOrP, S)?, "~", S, set.
+    inclusion: (tmark, S)?,         set.
+    exclusion: (tmark, S)?, "~", S, set.
          -set: "[", S,  member*([";|"], S), "]", S.
       -member: literal;
                range;
@@ -733,21 +710,6 @@ href="ixml.xml">entire serialisation</a> is available:</p>
          &lt;nonterminal mark='-' name='alts'/&gt;,
          &lt;literal dstring='.'/&gt;
       &lt;/alt&gt;.&lt;/rule&gt;</pre>
-  <h3>Pragmas in XML representations</h3>
-  
-  <p>Pragmas in XML representations of grammars should be captured as namespaced attributes or pseudo-attributes.</p>
-  
-  <pre>#xmlns:xsl "http://www.w3.org/1999/XSL/Transform"
-#xmlns:eg  "http://example.org/ns"
-xsl:message: #eg:name "value" string</pre>
-  
-  <p>Becomes:</p>
-  <pre>&lt;rule name=&quot;xsl:message&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:eg="http://example.org/ns"&gt;
-  &lt;alt&gt;
-    &lt;nonterminal eg:name="value" name=&quot;string&quot;/&gt;
-  &lt;/alt&gt;
-&lt;/rule&gt;</pre>
-  <p>Pragmas are an optional feature, and may be ignored.</p>
 
 <h2 id="conformance">Conformance</h2>
 
