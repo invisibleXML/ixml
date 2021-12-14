@@ -40,10 +40,10 @@
                -"'", sstring, -"'", s.
      @dstring: dchar+.
      @sstring: schar+.
-        dchar: ~['"'];
-               '"', -'"'. {all characters, quotes must be doubled}
-        schar: ~["'"];
-               "'", -"'". {all characters, quotes must be doubled}
+        dchar: ~['"'; #a; #d];
+               '"', -'"'. {all characters except line breaks; quotes must be doubled}
+        schar: ~["'"; #a; #d];
+               "'", -"'". {all characters except line breaks; quotes must be doubled}
      -encoded: (tmark, s)?, -"#", @hex, s.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 

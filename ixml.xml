@@ -309,6 +309,8 @@
       <alt>
          <exclusion>
             <literal sstring='"'/>
+            <literal hex='a'/>
+            <literal hex='d'/>
          </exclusion>
       </alt>
       <alt>
@@ -316,11 +318,13 @@
          <literal tmark='-' sstring='"'/>
       </alt>
    </rule>
-   <comment>all characters, quotes must be doubled</comment>
+   <comment>all characters except line breaks; quotes must be doubled</comment>
    <rule name='schar'>
       <alt>
          <exclusion>
             <literal dstring='&apos;'/>
+            <literal hex='a'/>
+            <literal hex='d'/>
          </exclusion>
       </alt>
       <alt>
@@ -328,7 +332,7 @@
          <literal tmark='-' dstring='&apos;'/>
       </alt>
    </rule>
-   <comment>all characters, quotes must be doubled</comment>
+   <comment>all characters except line breaks; quotes must be doubled</comment>
    <rule mark='-' name='encoded'>
       <alt>
          <option>
