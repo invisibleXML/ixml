@@ -6,8 +6,8 @@
 This document describes a proposal for adding *pragmas* to the
 Invisible-XML specification.
 
-It was prepared (or rather, is being prepared) by Tom Hillman and
-Michael Sperberg-McQueen. It is currently not finished.
+It was prepared by Tom Hillman and
+Michael Sperberg-McQueen. It is currently as complete as we expect to make it.
 
 The general idea of pragmas is to provide a channel for information
 that is not a required part of the ixml specification but can be used
