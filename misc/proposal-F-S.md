@@ -43,12 +43,11 @@ pragma: -"[", @pmark?, @pname, (s, pragma-data)?, -"]".
 pragma-data: (-pragma-chars; -bracket-pair)*. 
 -pragma-chars: ~["[]"]*.
 -bracket-pair: '[', -pragma-data, ']'.
-````
 
-This syntactic proposal assumes that by means specified elsewhere,
-prefixes are bound to namespace names and that QNames can be
-interpreted in the normal way. The nonterminals *QName* and *UQName*
-are defined below in the proposal for namespace declarations.
+-QName: -name, ':', -name.
+-UQName: 'Q{', -ns-name, '}', -name.
+-ns-name: ~["{}"; '"'; "'"]* 
+````
 
 For example:
 
@@ -59,7 +58,7 @@ For example:
 or
 
 ````
-[?{http://example.org/NS/mine}blue]
+[?Q{http://example.org/NS/mine}blue]
 ````
 
 or
@@ -300,6 +299,4 @@ The following rules apply:
   `ixml` element.  The pragmas should also be represented in the usual
   way, if that differs from being realized as a namespace-binding
   attribute.
-
-
 

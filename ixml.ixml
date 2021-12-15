@@ -1,9 +1,9 @@
-         ixml: prolog, rule+S, S.
+         ixml: prolog, rule+s, s.
 
-      -prolog: S, Pragma*S, S.
-      -Pragma: pragma, S, '.'.
-       
-           -S: (whitespace; comment)*.
+       prolog: s, ppragma+s, s.
+     -ppragma: pragma, s, -".".
+
+           -s: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
           -lf: -#a.
@@ -11,73 +11,74 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-       pragma: "[", @pmark?, @pname, (S, @pragma-data)?, "]".
-       @pname: -QName; -UQName.
-       -QName: -name, ':', -name.
-      -UQName: 'Q{', -ns-name, '}', -name.
-     -ns-name: ~["{}"; '"'; "'"]* { oversimplification }.
-       @pmark: ["@^?"].
- @pragma-data: (pragma-chars; '[', pragma-chars, ']')*.
--pragma-chars: ~["[]"]*.
-
-         rule: annotation, name, S, -["=:"], S, -alts, (pragma, SP)?, ".".
-  -annotation: (pragma, SP)?, (mark, SP)?.
+         rule: annotation, name, s, -["=:"], s, -alts, -".".
+  -annotation: (pragma, sp?), (mark, sp)?.
+          -sp: (s; pragma)*.
         @mark: ["@^-"].
-          -SP: (S; pragma)*.
-
-         alts: alt+(-[";|"], S).
-          alt: term*(-",", S).
+         alts: alt+(-[";|"], s).
+          alt: term*(-",", s).
         -term: factor;
                option;
                repeat0;
                repeat1.
       -factor: terminal;
                nonterminal;
-               -"(", S, alts, -")", S.
-      repeat0: factor, -"*", S, sep?.
-      repeat1: factor, -"+", S, sep?.
-       option: factor, -"?", S.
+               -"(", s, alts, -")", s.
+      repeat0: factor, -"*", s, sep?.
+      repeat1: factor, -"+", s, sep?.
+       option: factor, -"?", s.
           sep: factor.
-  nonterminal: annotation, name, S.
+  nonterminal: annotation, name, s.
 
     -terminal: literal; 
                charset.
       literal: quoted;
                encoded.
       -quoted: tannotation, -string.
- -tannotation: (pragma, SP)?, (tmark, SP)?.
-  
+
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
        @tmark: ["^-"].
-       string: -'"', dstring, -'"', S;
-               -"'", sstring, -"'", S.
+       string: -'"', dstring, -'"', s;
+               -"'", sstring, -"'", s.
      @dstring: dchar+.
      @sstring: schar+.
-        dchar: ~['"'];
-               '"', -'"'. {all characters, quotes must be doubled}
-        schar: ~["'"];
-               "'", -"'". {all characters, quotes must be doubled}
-     -encoded: tannotation, -"#", @hex, S.
+        dchar: ~['"'; #a; #d];
+               '"', -'"'. {all characters except line breaks; quotes must be doubled}
+        schar: ~["'"; #a; #d];
+               "'", -"'". {all characters except line breaks; quotes must be doubled}
+     -encoded: tannotation, -"#", @hex, s.
           hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
      -charset: inclusion; 
                exclusion.
-    inclusion: tannotation,         set.
-    exclusion: tannotation, -"~", S, set.
-         -set: -"[", S,  member*(-[";|"], S), -"]", S.
+    inclusion: tannotation,          set.
+    exclusion: tannotation, -"~", s, set.
+         -set: -"[", s,  member*(-[";|"], s), -"]", s.
       -member: literal;
                range;
                class.
-        range: from, -"-", S, to.
+        range: from, -"-", s, to.
         @from: character.
           @to: character.
-   -character: -'"', dchar, -'"', S;
-               -"'", schar, -"'", S;
-               "#", hex, S.
-        class: code, S.
+   -character: -'"', dchar, -'"', s;
+               -"'", schar, -"'", s;
+               "#", hex, s.
+        class: code, s.
         @code: capital, letter?.
      -capital: ["A"-"Z"].
       -letter: ["a"-"z"].
+
+       pragma: -"[", @pmark?, @pname, (s, pragma-data)?, -"]". 
+       @pname: -QName; -UQName. 
+       @pmark: ["@^?"].
+  pragma-data: (-pragma-chars; -bracket-pair)*. 
+-pragma-chars: ~["[]"]*.
+-bracket-pair: '[', -pragma-data, ']'.
+
+       -QName: -name, ':', -name.
+      -UQName: 'Q{', -ns-name, '}', -name.
+     -ns-name: ~["{}"; '"'; "'"]* 
+
