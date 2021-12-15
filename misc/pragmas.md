@@ -33,7 +33,7 @@ in order for pragmas to work as designed, some form of namespace
 binding must be available in ixml.  This could be done by inventing
 new syntax for namespace bindings, but what we propose here is to use
 the syntax of pragmas to declare namespace bindings: the net effect is
-that the spec (a) defines a syntax for pragmas and (b) defines one
+that the spec would (a) define a syntax for pragmas and (b) define one
 particular set of pragmas that all ixml processors must support.
 
 This document thus includes both a proposal for pragmas and a proposal
