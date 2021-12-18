@@ -62,40 +62,45 @@ example, it can turn CSS code like</p>
 <p>This is an ongoing project to provide software that lets you treat any
 parsable format as if it were XML, without the need for markup. </p>
 
-<p>There are currently five papers:</p>
+<h2>Resources</h2>
+    <ul>
+      <li>The (draft) <a href="ixml-specification.html">Specification for
+          Invisible XML</a> formally describes the language.</li>
+      <li>The <a href="http://www.cwi.nl/~steven/ixml/tutorial/">hands-on tutorial</a> shows you how to use
+        it.</li>
+    </ul>
+
+<p>There are five papers on the development:</p>
 <ul>
   <li><a
     href="http://www.cwi.nl/~steven/Talks/2013/08-07-invisible-xml/invisible-xml-3.html">Invisible
-    XML</a> 
-    <p>Introduces the concepts, and develops a notation to support them.</p>
+    XML</a>: Introduces the concepts, and develops a notation to support them.
   </li>
   <li><a href="http://www.cwi.nl/~steven/Talks/2016/02-12-prague/data.html">Data just wants to be
-    (format) neutral</a> 
-    <p>Discusses issues with automatic serialisation, and the relationship
-    between Invisible XML grammars and data schemas.</p>
+    (format) neutral</a>:
+    Discusses issues with automatic serialisation, and the relationship
+    between Invisible XML grammars and data schemas.
   </li>
   <li><a href="http://www.cwi.nl/~steven/Talks/2016/06-05-london/xml-london.html">Parse Earley, Parse
-    Often: How to parse anything to XML</a> 
-    <p>Discusses issues around grammar design, and in particular parsing
+    Often: How to parse anything to XML</a>:
+    Discusses issues around grammar design, and in particular parsing
     algorithms used to recognise any document, and converting the resultant
-    parse-tree into XML, and gives a new perspective on a classic algorithm.</p>
+    parse-tree into XML, and gives a new perspective on a classic algorithm.
   </li>
   <li><a
     href="http://archive.xmlprague.cz/2017/files/xmlprague-2017-proceedings.pdf#page=155">On
-    the Descriptions of Data: The Usability of Notations</a> 
-    <p>Discusses changes to the design following experience with using it,
+    the Descriptions of Data: The Usability of Notations</a>:
+    Discusses changes to the design following experience with using it,
     giving examples of its use to develop data descriptions, and in passing,
-    suggests other output formats.</p>
+    suggests other output formats.
   </li>
   <li><a
     href="https://archive.xmlprague.cz/2019/files/xmlprague-2019-proceedings.pdf#page=425">On
-    the Specification of Invisible XML</a>
-    <p>Describes decisions made during the production of the specification of
-    ixml.</p>
+    the Specification of Invisible XML</a>:
+    Describes decisions made during the production of the specification of
+    ixml.
   </li>
 </ul>
 
-<p>Software to support ixml will be made available at a later date, at https://github.com/invisibleXML/ixml</p>
-
-<p>The draft <a href="ixml-specification.html">Specification for Invisible
-XML</a> is available.</p>
+<p>Software to support ixml will be made available at a later date, but it
+      is already usable via a link; see the tutorial for details.</p>
