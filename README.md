@@ -63,12 +63,10 @@ example, it can turn CSS code like</p>
 parsable format as if it were XML, without the need for markup. </p>
 
 <h2>Resources</h2>
-    <ul>
-      <li>The (draft) <a href="ixml-specification.html">Specification for
-          Invisible XML</a> formally describes the language.</li>
-      <li>The <a href="http://www.cwi.nl/~steven/ixml/tutorial/">hands-on tutorial</a> shows you how to use
-        it.</li>
-    </ul>
+<ul>
+<li>The (draft) <a href="ixml-specification.html">Specification for Invisible XML</a> formally describes the language.</li>
+<li>The <a href="http://www.cwi.nl/~steven/ixml/tutorial/">hands-on tutorial</a> shows you how to use it.</li>
+</ul>
 
 <p>There are five papers on the development:</p>
 <ul>
