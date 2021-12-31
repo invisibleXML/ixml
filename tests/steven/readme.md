@@ -3,30 +3,39 @@ In each directory, there are three files per test:
 * file.inp: sample input for that grammar
 * file.req: the expected output for that input
 
-MSM has made zip files (well, so far one zip file) containing these tests
-and test catalogs using the test-catalog vocabulary
+MSM has made test catalogs for these tests using the test-catalog vocabulary
 defined in his ixml-tests repository.
 
 * SP-syntaxtests-package.zip
+* tests-SP-MSM
 
-The SP-syntaxtests-package.zip file contains
-three catalogs, which specify the tests in different
-ways:
+For the syntaxtests directory, the result is packaged in a zip file
+containing the tests and catalogs.  (No input files or result files
+are included, because none are needed: none of the tests consume input
+other than the grammar files, and none produces output.)
 
-* In `catalog-as-instance-tests-ixml.xml`, the catalog 
-specifies the tests as instance tests, using `../../../ixml.ixml`
-as the grammar against which they are to be parsed. 
+The SP-syntaxtests-package.zip file contains three catalogs, which
+specify the tests in different ways:
 
-* In `catalog-as-instance-tests-xml.xml`, the catalog 
-specifies the tests as instance tests, using `../../../ixml.xml`
-as the grammar against which they are to be parsed.
-Processors which don't support the XML form of ixml
-grammars won't want to bother running these.
+* In `catalog-as-instance-tests-ixml.xml`, the catalog specifies the
+tests as instance tests, using `../../../ixml.ixml` as the grammar
+against which they are to be parsed.
 
-* In `catalog-as-grammar-tests.xml`, the processor 
-is to use its inbuilt ixml grammar.  Assuming the
-processor is using the current ixml grammar, the results
-should be the same.
+* In `catalog-as-instance-tests-xml.xml`, the catalog specifies the
+tests as instance tests, using `../../../ixml.xml` as the grammar
+against which they are to be parsed.  Processors which don't support
+the XML form of ixml grammars won't want to bother running these.
 
-The companion piece `SP-tests-package.zip` should
-be along real soon now.
+* In `catalog-as-grammar-tests.xml`, the processor is to use its
+inbuilt ixml grammar.  Assuming the processor is using the current
+ixml grammar, the results should be the same.
+
+In the directory tests-SP-MSM, a test catalog is packaged with
+corrected input and result files.  As noted case by case in the
+catalog, a number of changes were made, often stripping ungrammatical
+whitespace from the input files and in some case stripping
+nonsignficant whitespace from the expected result, to avoid causing
+problems for XML comparators using deep-equal(), or for other
+comparators looking at output with different pretty-printing
+practices.
+
