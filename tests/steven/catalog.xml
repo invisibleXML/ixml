@@ -1,0 +1,16 @@
+<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
+	      release-date="2021-12-16"
+	      name="Amsterdam Test Suite 1">
+
+  <description>
+    <p>Top-level catalog for tests provided by
+    Steven Pemberton in December 2021.</p>
+    <p>There are two sub-groups, one general
+    and one focused on syntax issues.</p>
+  </description>
+  
+  <test-set-ref href="syntaxtests/syntaxtests-catalog.xml"/>
+
+  <test-set-ref href="tests/tests-catalog.xml"/>
+
+</test-catalog>
