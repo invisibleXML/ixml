@@ -8,9 +8,26 @@
     <p>There are two sub-groups, one general
     and one focused on syntax issues.</p>
   </description>
-  
-  <test-set-ref href="syntaxtests/syntaxtests-catalog.xml"/>
 
-  <test-set-ref href="tests/tests-catalog.xml"/>
+  <!--* The syntaxtests catalogs assume that you have
+      * unzipped SP-syntaxtests-package.zip in this
+      * directory; you may also have unzipped
+      * syntaxtests.zip. No harm is done by unzipping
+      * both.
+      *-->
+  <!--* The three syntaxtests catalogs use the
+      * same test cases but test them in slightly
+      * different ways.  You may want all three,
+      * or only one or two, depending on the processor
+      * you are testing.
+      *-->
+  <test-set-ref href="syntaxtests/catalog-as-grammar-tests.xml"/>
+  <test-set-ref href="syntaxtests/catalog-as-instance-tests-ixml.xml"/>
+  <test-set-ref href="syntaxtests/catalog-as-instance-tests-xml.xml"/>
+
+  <!--* The tests-SP-MSM tests do not require any unzipping.
+      * They are, as Erica Jong might say, zipless tests.
+      *-->
+  <test-set-ref href="tests-SP-MSM/tests-catalog.xml"/>
 
 </test-catalog>
