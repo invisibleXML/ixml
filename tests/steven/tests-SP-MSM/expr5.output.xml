@@ -1,6 +1,6 @@
 
-<expression>
-   <bracketed>
-      <number>3</number>
-   </bracketed>
-</expression>
+<expression
+   ><bracketed
+      ><number>3</number
+   ></bracketed
+></expression>

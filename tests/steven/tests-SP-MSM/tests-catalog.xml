@@ -417,6 +417,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-23"
 		  change="Change result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove whitespace from expected result"/>
 	<test-string-ref href="expr1.inp"/>
 	<description>
 	  <p>We may need a new assertion: if taken literally this
@@ -444,6 +448,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove whitespace from expected result"/>
 	<test-string-ref href="expr2.inp"/>
 	<result>
 	  <assert-xml-ref href="expr2.output.xml"/>
@@ -459,6 +465,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove whitespace from expected result"/>
 	<test-string-ref href="expr3.inp"/>
 	<result>
 	  <assert-xml-ref href="expr3.output.xml"/>
@@ -474,6 +482,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove whitespace from expected result"/>
 	<test-string-ref href="expr4.inp"/>
 	<result>
 	  <assert-xml-ref href="expr4.output.xml"/>
@@ -489,6 +499,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove trailing whitespace from input, again"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove whitespace from expected result"/>
 	<test-string-ref href="expr5.inp"/>
 	<result>
 	  <assert-xml-ref href="expr5.output.xml"/>
@@ -504,6 +518,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove pretty-printing whitespace from expected result"/>
 	<test-string-ref href="expr6.inp"/>
 	<result>
 	  <assert-xml-ref href="expr6.output.xml"/>
@@ -519,6 +535,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove pretty-printing whitespace from expected result"/>
 	<test-string-ref href="hash.inp"/>
 	<result>
 	  <assert-xml-ref href="hash.output.xml"/>
@@ -562,6 +580,8 @@
       <ixml-grammar-ref href="hex3.ixml"/>
       <test-case name="hex3">
 	<created by="SP" on="2021-12-16"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove trailing whitespace from input"/>
 	<test-string-ref href="hex3.inp"/>
 	<result>
 	  <assert-xml-ref href="hex3.output.xml"/>
