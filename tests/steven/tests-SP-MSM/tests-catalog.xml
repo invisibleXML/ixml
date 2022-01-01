@@ -257,12 +257,15 @@
 	  by="MSM"
 	  on="2021-12-30"
 	  change="stripped non-significant whitespace from result"/>
+      <modified by="MSM" on="2022-01-01"
+		change="supply alternate result"/>
       <ixml-grammar-ref href="css.ixml"/>
       <test-case name="css">
 	<created by="SP" on="2021-12-16"/>
 	<test-string-ref href="css.inp"/>
 	<result>
 	  <assert-xml-ref href="css.output.xml"/>
+	  <assert-xml-ref href="css.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>
