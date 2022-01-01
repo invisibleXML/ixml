@@ -5,17 +5,11 @@
 -->
 
 <expr ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"
-   ><expr
-      ><id>a</id
-   ></expr
-   ><operator>÷</operator
-   ><expr
-      ><expr
-         ><id>b</id
-      ></expr
-      ><operator>÷</operator
-      ><expr
-         ><id>c</id
-      ></expr
-   ></expr
+  ><expr
+    ><expr><id>a</id></expr
+    ><operator>÷</operator
+    ><expr><id>b</id></expr
+  ></expr
+  ><operator>÷</operator
+  ><expr><id>c</id></expr
 ></expr>

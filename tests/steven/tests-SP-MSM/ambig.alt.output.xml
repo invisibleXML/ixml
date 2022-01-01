@@ -5,11 +5,11 @@
 -->
 
 <expr ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"
-   ><e
+  ><e
+    ><e
       ><e>i</e
-      >+<e
-         ><e>i</e
-         >+<e>i</e
-      ></e
-   ></e
+      >+<e>i</e
+    ></e
+    >+<e>i</e
+  ></e
 ></expr>

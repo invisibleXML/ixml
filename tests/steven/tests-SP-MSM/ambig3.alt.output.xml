@@ -7,6 +7,6 @@
 -->
 <a ixml:state="ambiguous"
    xmlns:ixml="http://invisiblexml.org/NS"
-   >a<spaces
-   /><b><spaces>   </spaces>b</b
+   >a<spaces> </spaces
+   ><b><spaces>  </spaces>b</b
 ></a>

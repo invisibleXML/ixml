@@ -22,6 +22,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove all but one trailing LF from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="address.inp"/>
 	<result>
 	  <assert-xml-ref href="address.output.xml"/>
@@ -37,9 +40,15 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="added alternate expected result"/>
 	<test-string-ref href="ambig.inp"/>
 	<result>
 	  <assert-xml-ref href="ambig.output.xml"/>
+	  <assert-xml-ref href="ambig.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -81,9 +90,18 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="added the other three parses as 
+			  expected results"/>
 	<test-string-ref href="ambig3.inp"/>
 	<result>
 	  <assert-xml-ref href="ambig3.output.xml"/>
+	  <assert-xml-ref href="ambig3.alt.output.xml"/>
+	  <assert-xml-ref href="ambig3.alt-2.output.xml"/>
+	  <assert-xml-ref href="ambig3.alt-3.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -96,9 +114,15 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="trim ungrammatical trailing LF from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="add alternate expected result"/>
 	<test-string-ref href="ambig4.inp"/>
 	<result>
 	  <assert-xml-ref href="ambig4.output.xml"/>
+	  <assert-xml-ref href="ambig4.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -111,9 +135,15 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="added second parse as expected result"/>
 	<test-string-ref href="ambig5.inp"/>
 	<result>
 	  <assert-xml-ref href="ambig5.output.xml"/>
+	  <assert-xml-ref href="ambig5.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -124,9 +154,16 @@
       <ixml-grammar-ref href="ambig6.ixml"/>
       <test-case name="ambig6">
 	<created by="SP" on="2021-12-16"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="added second parse as expected result"/>
 	<test-string-ref href="ambig6.inp"/>
 	<result>
 	  <assert-xml-ref href="ambig6.output.xml"/>
+	  <assert-xml-ref href="ambig6.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -139,16 +176,17 @@
 	<created by="SP" on="2021-12-21"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="Supplied expected outputs"/>
+	<modified by="MSM" on="2022-01-02"
+		  change="Correct second expected output"/>
 	<description>
 	  <p>The grammar is <code>a: b, ()?, c. b: "b". c: "c".</code>
 	  and the input is <code>bc</code>.</p>
-	  <p>As with ambig2, this is or is not ambiguous
-	  depending on exactly how we define ambiguity.
-	  The parse may interpret the middle term as present or as absent,
-	  so there are two derivations, or may be
-	  depending on how we define 'derivation'.
-	  There is only one parse tree for the
-	  EBNF grammar.</p>
+	  <p>As with ambig2, this is or is not ambiguous depending on
+	  exactly how we define ambiguity.  The parse may interpret
+	  the middle term as present or as absent, so there are two
+	  derivations, or may be depending on how we define
+	  'derivation'.  There is only one parse tree for the EBNF
+	  grammar.</p>
 	  <p>So MSM has specified two alternative results
 	  which differ only in including or excluding
 	  the ambiguity flag.</p>
@@ -171,6 +209,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from expected result"/>
 	<test-string-ref href="arith.inp"/>
 	<result>
 	  <assert-xml-ref href="arith.output.xml"/>
@@ -199,6 +239,10 @@
       <ixml-grammar-ref href="bnf.ixml"/>
       <test-case name="bnf">
 	<created by="SP" on="2021-12-16"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="bnf.inp"/>
 	<result>
 	  <assert-xml-ref href="bnf.output.xml"/>
@@ -229,6 +273,10 @@
       <ixml-grammar-ref href="date.ixml"/>
       <test-case name="date">
 	<created by="SP" on="2021-12-16"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="date.inp"/>
 	<result>
 	  <assert-xml-ref href="date.output.xml"/>
@@ -242,6 +290,10 @@
       <ixml-grammar-ref href="diary.ixml"/>
       <test-case name="diary">
 	<created by="SP" on="2021-12-16"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="diary.inp"/>
 	<result>
 	  <assert-xml-ref href="diary.output.xml"/>
@@ -255,6 +307,10 @@
       <ixml-grammar-ref href="diary2.ixml"/>
       <test-case name="diary2">
 	<created by="SP" on="2021-12-16"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="diary2.inp"/>
 	<result>
 	  <assert-xml-ref href="diary2.output.xml"/>
@@ -315,6 +371,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="expr.inp"/>
 	<result>
 	  <assert-xml-ref href="expr.output.xml"/>
@@ -330,9 +390,18 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="supplied alternate result"/>
 	<test-string-ref href="expr0.inp"/>
 	<result>
 	  <assert-xml-ref href="expr0.output.xml"/>
+	  <assert-xml-ref href="expr0.alt.output.xml"/>
 	</result>
       </test-case>
     </test-set>

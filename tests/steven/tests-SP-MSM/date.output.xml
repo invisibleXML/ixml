@@ -4,14 +4,13 @@
      2: date[1.1:]:  bla[:1.33] number[:1.36] S[:1.37] month[:1.40] S[:1.41] year[:1.45] bla[:1.55] 
 -->
 
-<date ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS">The conference starts 
-   <day>
-      <Thursday>Thursday</Thursday>
-   </day>, 
-   <number>
-      <cardinal>9th</cardinal>
-   </number> 
-   <month>
-      <February>Feb</February>
-   </month> 
-   <year>2017</year> at 10:00.</date>
+<date ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"
+   >The conference starts <day
+      ><Thursday>Thursday</Thursday
+   ></day>, <number
+      ><cardinal>9th</cardinal
+   ></number
+   > <month
+      ><February>Feb</February
+   ></month
+   > <year>2017</year> at 10:00.</date>
