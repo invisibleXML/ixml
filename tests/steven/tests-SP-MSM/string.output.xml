@@ -1,6 +1,6 @@
 
-<S able='aaa.' charlie='ccc.'>
-   <baker>
-      <string>bbb.</string>
-   </baker>
-</S>
+<S able='aaa.' charlie='ccc.'
+   ><baker
+      ><string>bbb.</string
+   ></baker
+></S>

@@ -1,5 +1,5 @@
 
-<test>
-   <foo/>
-   <bar>.</bar>
-</test>
+<test
+   ><foo
+   /><bar>.</bar
+></test>

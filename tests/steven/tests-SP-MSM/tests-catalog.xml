@@ -176,7 +176,7 @@
 	<created by="SP" on="2021-12-21"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="Supplied expected outputs"/>
-	<modified by="MSM" on="2022-01-02"
+	<modified by="MSM" on="2022-01-01"
 		  change="Correct second expected output"/>
 	<description>
 	  <p>The grammar is <code>a: b, ()?, c. b: "b". c: "c".</code>
@@ -618,9 +618,28 @@
 	    by="MSM"
 	    on="2021-12-30"
 	    change="stripped non-significant whitespace from result"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="replace expected result"/>
+	<description>
+	  <p>Note that the input and the grammar are the same.</p>
+	  <p>The expected result supplied in tests.zip cannot be
+	  right: it excludes the delimiter characters like ":" and
+	  ",", although they are not marked hidden in the grammar, and
+	  it marks whitespace as "s", not as "S".  It appears to be
+	  parsing the input with a different grammar more like the
+	  current ixml grammar.  It has been replaced by output
+	  thought correct.  However, the old file has been left in
+	  place, in case of disputes over correctness.</p>
+	  <p>The comment text "allcharacters,quotesmustbedoubled"
+	  looks like a possible error, but the comments in the input
+	  are also missing inter-word spaces.</p>
+	</description>
 	<test-string-ref href="ixml-one-line.inp"/>
 	<result>
-	  <assert-xml-ref href="ixml-one-line.output.xml"/>
+	  <!-- <assert-xml-ref href="ixml-one-line.output.xml"/> -->
+	  <assert-xml-ref href="ixml-one-line.corr.output.xml"/>
 	</result>
       </test-case>
     </test-set>
@@ -670,6 +689,17 @@
 	    on="2021-12-30"
 	    change="stripped non-significant whitespace from result"/>
 	<!--* not sure it all got stripped ... *-->
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped erroneous blanks from
+		    dchar rule in expected result"/>
+	<description>
+	  <p>The exclude element in the rule for dchar included 18
+	  extraneous blanks; after the exclude, the terminal element
+	  concluded with an extraneous blank line containing 12
+	  blanks.  These have now been removed.</p>
+	</description>
 	<test-string-ref href="ixml1.inp"/>
 	<result>
 	  <assert-xml-ref href="ixml1.output.xml"/>
@@ -688,9 +718,32 @@
 	    on="2021-12-30"
 	    change="stripped non-significant whitespace from result"/>
 	<!--* not sure it all got stripped ... *-->
+	<modified by="MSM" on="2022-01-01"
+		  change="changed result to not-a-grammar"/>
+	<description>
+	  <p>The test grammar includes the rule
+	  <code>-letgit: ["a"{first}-"z"; "A"-"Z"; "0"-"9"].</code></p>
+	  <p>The ixml grammar of December 2021, like its
+	  predecessors, translates the first range into
+	  <code><![CDATA[<range from="afirst" to="z"/>]]></code>,
+	  which does not provide a single-character start
+	  for the range.  The semantics of such a range are
+	  not defined by the spec.  (One naive translation
+	  into conventional regular expressions produces a
+	  range including the letters 'a', 'f', 'i',
+	  and 'r' through 'z', which makes the name 'ixml'
+	  fail on the 'm'.)</p>
+	  <p>Until the ixml grammar is corrected to turn this into
+	  <code><![CDATA[<range from="a"
+	  to="z">comment>first</comment></range>]]></code> or
+	  something else that keeps the comment out of the
+	  'from' attribute, this should be treated as a test
+	  case with an error in the test case grammar.</p>
+	</description>
 	<test-string-ref href="ixml2.inp"/>
 	<result>
-	  <assert-xml-ref href="ixml2.output.xml"/>
+	  <assert-not-a-grammar/>
+	  <!-- <assert-xml-ref href="ixml2.output.xml"/> -->
 	</result>
       </test-case>
     </test-set>
@@ -719,6 +772,9 @@
       <ixml-grammar-ref href="json.ixml"/>
       <test-case name="json">
 	<created by="SP" on="2021-12-16"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="removed non-significant whitespace
+			  from expected result"/>
 	<test-string-ref href="json.inp"/>
 	<result>
 	  <assert-xml-ref href="json.output.xml"/>
@@ -734,6 +790,13 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="replace trailing LF in input with space"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="removed non-significant whitespace
+			  from expected result"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="trimmed trailing blank to agree with
+			  expected result, it is not actually
+			  required by the grammar"/>
 	<test-string-ref href="json1.inp"/>
 	<result>
 	  <assert-xml-ref href="json1.output.xml"/>
@@ -783,6 +846,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="nested-comment.inp"/>
 	<result>
 	  <assert-xml-ref href="nested-comment.output.xml"/>
@@ -840,6 +906,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="poly.inp"/>
 	<result>
 	  <assert-xml-ref href="poly.output.xml"/>
@@ -855,6 +924,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="program.inp"/>
 	<result>
 	  <assert-xml-ref href="program.output.xml"/>
@@ -866,6 +938,10 @@
     <test-set name="range">
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="range.ixml"/>
+      <description>
+	<p>Possible problem:  range [#0 - #9]
+	includes non-XML characters.  Legal?</p>
+      </description>
       <test-case name="range">
 	<created by="SP" on="2021-12-16"/>
 	<test-string-ref href="range.inp"/>
@@ -883,6 +959,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="string.inp"/>
 	<result>
 	  <assert-xml-ref href="string.output.xml"/>
@@ -898,6 +977,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="trim ungrammatical trailing LF from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
+
 	<test-string-ref href="tab.inp"/>
 	<result>
 	  <assert-xml-ref href="tab.output.xml"/>
@@ -913,6 +996,9 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2022-01-01"
+		  change="remove nonsignificant whitespace from
+			  expected result"/>
 	<test-string-ref href="test.inp"/>
 	<result>
 	  <assert-xml-ref href="test.output.xml"/>
@@ -928,6 +1014,8 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2021-01-01"
+		  change="corrected expected output, it was missing a character"/>
 	<test-string-ref href="unicode-range.inp"/>
 	<result>
 	  <assert-xml-ref href="unicode-range.output.xml"/>
@@ -1029,6 +1117,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="xml.inp"/>
 	<result>
 	  <assert-xml-ref href="xml.output.xml"/>
@@ -1044,6 +1136,10 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified
+	    by="MSM"
+	    on="2022-01-01"
+	    change="stripped non-significant whitespace from result"/>
 	<test-string-ref href="xml1.inp"/>
 	<result>
 	  <assert-xml-ref href="xml1.output.xml"/>
@@ -1059,9 +1155,18 @@
 	<created by="SP" on="2021-12-16"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="remove trailing whitespace from input"/>
+	<modified by="MSM" on="2021-01-01"
+		  change="mark as not-a-sentence"/>
+	<description>
+	  <p>The input is <code>a[.!='']</code> but the grammar does
+	  not provide for predicates.  So although the input is a
+	  perfectly fine XPath expression, it is not a sentence in the
+	  language defined by the grammar specified for the test.</p>
+	</description>
 	<test-string-ref href="xpath.inp"/>
 	<result>
-	  <assert-xml-ref href="xpath.output.xml"/>
+	  <assert-not-a-sentence/>
+	  <!-- <assert-xml-ref href="xpath.output.xml"/> -->
 	</result>
       </test-case>
     </test-set>

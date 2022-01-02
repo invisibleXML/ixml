@@ -355,9 +355,8 @@
       >: <def
          ><alt
             ><terminal
-               ><exclude>~['                  <schar>"</schar>']</exclude>
-            
-</terminal
+               ><exclude>~['<schar>"</schar>']</exclude
+            ></terminal
          ></alt
          >; <alt
             ><terminal
