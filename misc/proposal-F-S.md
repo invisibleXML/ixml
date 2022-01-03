@@ -2,7 +2,7 @@
 
 Tom Hillman, Michael Sperberg-McQueen
 
-15 December 2021
+15 December 2021, rev. 3 January 2022
 
 This document describes a proposal for adding namespace declarations
 and pragmas to ixml.
@@ -10,8 +10,12 @@ and pragmas to ixml.
 For background, use cases, some discussion of design choices, and
 examples of how pragmas as defined here could be used in the use
 cases, see the document (pragmas.md)[pragmas.md] in this directory. In
-that document, the proposals made here are referred to as namespaces
+that document, the proposal made here is referred to as namespaces
 proposal S and pragmas proposal F.
+
+We believe that the examples given in (pragmas.md)[pragmas.md]
+demonstrate that the proposal outlined here satisfies the known use
+cases for pragmas.
 
 ## Pragmas
 
