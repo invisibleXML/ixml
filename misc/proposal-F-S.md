@@ -5,28 +5,39 @@ Tom Hillman, Michael Sperberg-McQueen
 15 December 2021
 
 This document describes a proposal for adding namespace declarations
-and pragmas to ixml. For background, use cases, some discussion of
-design choices, and examples of how pragmas as defined here could be
-used in the use cases, see the document (pragmas.md)[pragmas.md] in
-this directory. (In that document, the proposals made here are
-referred to as namespaces proposal S and pragmas proposal F.)
+and pragmas to ixml.
+
+For background, use cases, some discussion of design choices, and
+examples of how pragmas as defined here could be used in the use
+cases, see the document (pragmas.md)[pragmas.md] in this directory. In
+that document, the proposals made here are referred to as namespaces
+proposal S and pragmas proposal F.
 
 ## Pragmas
 
 Pragmas are a syntactic device to allow grammar writers to communicate
 with processors without interfering with the operation of other
-processors. To avoid interference with other processors, pragmas must
-be syntactically identifiable as such, and it must be possible for
-processors to distinguish pragmas directed at them from other
-pragmas. This proposal uses namespaces, QNames, and URI-qualified
-names to allow grammar writers and implementations to avoid
-collisions.
+processors. To avoid interference with other processors, two
+requirements arise:
+
+* Pragmas must be syntactically identifiable as such.
+
+* Also, it must be possible for processors to distinguish pragmas
+directed at them from other pragmas.  This proposal uses namespaces,
+QNames, and URI-qualified names to allow grammar writers and
+implementations to avoid collisions.  
 
 Pragmas may affect the behavior of a processor in any way, either in
 ways that leave the meaning of a grammar unchanged or in ways that
 change the meaning of the grammar in which the pragmas appear.
-Processors should be capable, at user option, of ignoring all pragmas
-and processing a grammar using the standard rules of ixml.
+
+Since specific pragmas will be understood by some processors and not
+others, it is necessary in this proposal to discuss both how an
+example might be processed by a processor which understands and
+implements the pragma and how it will be processed by a processor
+oblivious to it.  (See below for the terms *understand* and
+*oblivious*.)
+
 
 ### Syntax in ixml
 
@@ -37,11 +48,11 @@ square-bracket-balanced characters. The relevant part of the ixml
 grammar is:
 
 ````
-pragma: -"[", @pmark?, @pname, (s, pragma-data)?, -"]". 
+pragma: -"[", @pmark?, @pname, (whitespace, pragma-data)?, -"]". 
 @pname: -QName; -UQName. 
 @pmark: ["@^?"].
-pragma-data: (-pragma-chars; -bracket-pair)*. 
--pragma-chars: ~["[]"]*.
+pragma-data: (-pragma-chars; -bracket-pair)*.
+-pragma-chars: ~["[]"]+.
 -bracket-pair: '[', -pragma-data, ']'.
 
 -QName: -name, ':', -name.
@@ -49,25 +60,19 @@ pragma-data: (-pragma-chars; -bracket-pair)*.
 -ns-name: ~["{}"; '"'; "'"]* 
 ````
 
-For example:
+For example, the following are all syntactically well formed pragmas:
 
-````
-[?my:blue]
-````
+* `[?my:blue]`
+* `[?Q{http://example.org/NS/mine}blue]`
+* `[@my:color blue]`
 
-or
-
-````
-[?Q{http://example.org/NS/mine}blue]
-````
-
-or
-
-````
-[@my:color blue]
-````
-
-or
+It is a consequence of the syntax that pragmas can nest, though the
+nesting is only apparent to a processor which understands the
+*ls:rewrite* pragma and knows to parse its pragma data as a sequence
+of rules in ixml notation.  A processor which does not understand the
+*ls:rewrite* pragma will merely know that the pragma data here
+contains 100 characters, which happen to include one nested pair of
+brackets.
 
 ````
 [ls:rewrite
@@ -120,7 +125,7 @@ rule: annotation, name, s, -["=:"], s, -alts, (pragma, sp)?, -".".
 
 To allow pragmas before the first rule and to distinguish them from
 pragmas occurring on the left-hand side of the first rule, we modify
-the definition of *ixml*:
+the definition of *ixml* to introduce a *prolog*.
 
 ````
 ixml: prolog, rule+s, s. 
@@ -148,6 +153,14 @@ For example:
 or
 
 ````
+<pragma pname="Q{http://example.org/NS/mine}:blue" pmark="?">
+    <pragma-data/>
+</pragma>
+````
+
+or
+
+````
 <pragma pname="my:color" pmark="@">
     <pragma-data>blue</pragma-data>
 </pragma>
@@ -161,7 +174,6 @@ or
               [ls:token] -cchars:  cchar+. 
 </pragma-data>
 </pragma>
-
 ````
 
 Pragma-oblivious processors and processors which do not implement the
@@ -174,12 +186,61 @@ derived XML form which makes the information in the pragma easier to
 process. It is to be expected that any software to serialize XML
 grammars in ixml form will discard the additional XML elements.
 
+For example, note that a processor which understands the *ls:rewrite*
+pragma might prefer to produce a different XML representation for it,
+e.g. one in which the embedded grammar rules have their normal XML
+representation.  As noted above: pragmas may affect the behavior of a
+processor in any way.  For such a processor, the XML representation
+might be:
+
+````
+<pragma pname="ls:rewrite">
+    <pragma-data>comment: -"{", (cchars; comment)*, -"}". 
+              [ls:token] -cchars:  cchar+. 
+</pragma-data>
+    <rule name="comment">
+        <alt>
+            <literal dstring="{" tmark="-"/>
+            <repeat0><alts>
+                <alt><nonterminal name="cchars"/></alt>
+                <alt><nonterminal name="comment"/></alt>
+            </alts></repeat0>
+            <literal dstring="}" tmark="-"/>
+        </alt>
+    </rule>
+    <rule name="cchars" mark="-">
+        <pragma pname="ls:token"><pragma-data/></pragma>
+        <alt>
+            <repeat1><alts>
+                <alt><nonterminal name="cchar"/></alt>
+            </alts></repeat0>
+        </alt>
+    </rule>
+</pragma>
+````
+
+Note that because the additional XML elements within the pragma are
+just redundant XML representations of the pragma data, a
+pragma-oblivious application to rewrite XML grammars in ixml form will
+lose no information when transcribing this XML pragma as
+
+````
+[ls:rewrite
+              comment: -"{", (cchars; comment)*, -"}". 
+              [ls:token] -cchars:  cchar+. 
+]
+````
+
 It should be noted that the *pmark* allowed by the syntax has no
 effect on the XML representation produced by the core rules of ixml.
 Pragma-oblivious processors will always produce XML representation of
 pragmas of the form described here. Pragma-aware processors may
 implement pragmas which modify the standard XML representation
-('pragmas for pragma'). See (pragmas.md)[pragmas.md] for an example.
+('pragmas for pragmas'). See (pragmas.md)[pragmas.md] for an
+example. The point of the *pmark* is in fact to allow such a pragma
+for pragmas to specify that pragmas marked "`?`" or "`@`" be
+represented in XML as processing instructions or attributes.  (Again:
+pragmas may affect the behavior of programs.)
 
 
 ### Static semantics
@@ -199,9 +260,14 @@ child elements of the part of the grammar they apply to (an element
 named `ixml`, `rule`, `nonterminal`, `literal`, `inclusion`, or
 `exclusion`).
 
-These associations are specified here for clarity and to enable
-clearer discussion of pragmas, but they have no effect on the
-operational semantics of ixml processors.
+These associations between pragmas and parts of grammars are specified
+here for clarity and to enable clearer discussion of pragmas, but they
+have no effect on the operational semantics of ixml processors.  A
+pragma-oblivious processor will not be affected by the pragmas,
+regardless of what they apply to, and a processor that understands a
+given pragma will know from its definition what changes in behavior it
+requests.  The associations given above are thus of most direct use to
+those specifying the meaning of specific pragmas.
 
 
 ### Operational semantics 
@@ -235,12 +301,30 @@ producing an XML form of the grammar) produce the correct XML form of
 each pragma, just as they produce the corresponding XML form for any
 construct in the grammar.
 
-Pragma-aware processors must similarly to accept pragmas when they
+Pragma-aware processors MUST similarly to accept pragmas when they
 occur in the ixml form of a grammar, and (if they are producing an XML
 form of the grammar) produce the correct XML form of each pragma, just
 as they produce the corresponding XML form for any construct in the
 grammar. As already noted, however, pragmas may modify this behavior
 like any other.
+
+### Conformance requirements for pragmas
+
+Processors MUST be capable, at user option, of ignoring all pragmas 
+and processing a grammar using the standard rules of ixml. 
+
+Processors MUST accept pragmas in the ixml or XML form of a grammar, 
+whether they understand or implement the specific pragmas or not. 
+
+If a pragma which the processor does not understand or implement is
+present in a grammar used to parse input, the processor MUST process
+the grammar in the same way as if the pragma were not present.
+
+When ixml grammars are processed as input using the grammar for ixml,
+processors MUST produce the correct XML form of each pragma, just as
+they produce the corresponding XML form for any construct in the
+grammar, *except* as the processor's behavior is affected by the
+presence of pragmas, in the grammar for ixml used to parse the input.
 
 
 ## Namespace declarations
@@ -259,9 +343,9 @@ For example the following namespace declarations bind the prefix
 ````
 
 As is the case for for XML namespaces generally, the pragma data
-should be a legal URI, but ixml processors are not obligated to check
+SHOULD be a legal URI, but ixml processors are not obligated to check
 the URI for syntactic correctness (although they are may do so), and
-normally should not attempt to dereference it.
+normally SHOULD NOT attempt to dereference it.
 
 The effect of a namespace declaration is to bind the local part of the 
 QName to the given namespace and allow it to be used as a prefix in 
@@ -277,26 +361,45 @@ The following rules apply:
   default namespace.
 
 * All namespace declarations pertain to the grammar as a whole and
-  must be given before the first rule of the grammar.  
+  MUST be given before the first rule of the grammar. 
 
 * No two namespace declarations may bind the same prefix.
 
-* A nonterminal taking the lexical form of a QName must if serialized
+* A nonterminal taking the lexical form of a QName MUST if serialized
   be serialized as an XML element name with the same local name and
   with a prefix bound to the same namespace.  Normally the prefix
-  should be as given in the grammar.  *(If all namespaces are declared
+  SHOULD be as given in the grammar.  *(If all namespaces are declared
   before the first rule, there should be no reason it should be
   impossible to use the same prefix.  Perhaps we can make this a
-  'must'.)*
+  'MUST'.)*
 
   The ixml processor is responsible for including appropriate
   namespace declarations in the XML output.
 
 * In the XML form of an ixml grammar, all namespaces bound in in the
-  ixml grammar should be bound in the XML form of the grammar.
+  ixml grammar SHOULD be bound in the XML form of the grammar.
 
   This should normally take the form of namespace declarations on the
-  `ixml` element.  The pragmas should also be represented in the usual
-  way, if that differs from being realized as a namespace-binding
-  attribute.
+  `ixml` element. 
 
+## Possible variations
+
+* Instead of saying processors MUST be able to ignore all pragmas, we 
+  might say they SHOULD be able to ignore all pragmas. 
+
+* Instead of making pragma-data required but possibly empty, requiring
+  an empty *pragma-data* element in cases like `[ls:token]`, we might
+  make it optional but non-empty, so that `[ls:token]` could have the
+  shorter XML representation `<pragma pname="ls:token"/>`.
+
+* Instead of forbidding two namespace declarations for the same
+  prefix, we could say they MUST agree, or that the first one wins (as
+  for entity declarations) or that the last one wins (as for multiple
+  `let` clauses for the same variable in a FLWOR expression in
+  XQuery).
+
+* Instead of requiring that in the XML form of an ixml grammar, all
+  namespaces bound in in the ixml grammar SHOULD be bound in the XML
+  form of the grammar, we could say that those actually used MUST be
+  bound, or that they all MUST be bound.
+  
