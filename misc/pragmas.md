@@ -2,6 +2,14 @@
 
 2021-11-16, rev. most recently 2021-12-04
 
+**Note, 2022-01-02:**  A more compact proposal for
+pragmas is [elsewhere in this directory](proposal-S-F.md);
+it presents only variants S and F of this proposal and omits
+much of the design discussion and all of the samples showing
+how pragmas can be used to solve specific use cases.  This
+document remains relevant because it covers those topics,
+but for current details of the proposed syntax for pragmas
+and namespace declarations, see the other document.
 
 This document describes a proposal for adding *pragmas* to the
 Invisible-XML specification.
