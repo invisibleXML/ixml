@@ -70,13 +70,8 @@ For example, the following are all syntactically well formed pragmas:
 * `[?Q{http://example.org/NS/mine}blue]`
 * `[@my:color blue]`
 
-It is a consequence of the syntax that pragmas can nest, though the
-nesting is only apparent to a processor which understands the
-*ls:rewrite* pragma and knows to parse its pragma data as a sequence
-of rules in ixml notation.  A processor which does not understand the
-*ls:rewrite* pragma will merely know that the pragma data here
-contains 100 characters, which happen to include one nested pair of
-brackets.
+It is a consequence of the syntax that pragmas can contain nested
+pairs of square brackets.
 
 ````
 [ls:rewrite
@@ -84,6 +79,14 @@ brackets.
               [ls:token] -cchars:  cchar+. 
 ]
 ````
+
+Here, in fact, the pragma contains a nested pragma, though the nesting
+is only apparent to a processor which understands the *ls:rewrite*
+pragma and knows to parse its pragma data as a sequence of rules in
+ixml notation.  A processor which does *not* understand the
+*ls:rewrite* pragma will merely know that the pragma data here
+contains 100 characters, which happen to include one nested pair of
+brackets.  That suffices.
 
 Pragmas may appear:
 
@@ -310,8 +313,9 @@ like any other.
 
 ### Conformance requirements for pragmas
 
-Processors MUST be capable, at user option, of ignoring all pragmas 
-and processing a grammar using the standard rules of ixml. 
+Processors MUST be capable, at user option, of ignoring all pragmas
+other than namespace declarations and processing a grammar using the
+standard rules of ixml.
 
 Processors MUST accept pragmas in the ixml or XML form of a grammar, 
 whether they understand or implement the specific pragmas or not. 
@@ -398,3 +402,24 @@ The following rules apply:
   form of the grammar, we could say that those actually used MUST be
   bound, or that they all MUST be bound.
   
+* Instead of using the prefix *ixmlns*, namespace declarations could
+  use *xmlns* (although strictly speaking that name is reserved, and
+  it's not clear we have the standing to use it here).
+  
+* Instead of using pragma syntax, namespace declarations could use 
+  some other syntax.  E.g.
+        ````
+        prolog:  s, (ppragma; namespace)+s, s. 
+        namespace: -'declare', s, -'namespace', s, 
+          @prefix, s, -'=', s, @ns-name, s, '.'.
+          @prefix: name.
+        @ns-name: string.
+        ````
+
+    In this case, the examples shown above would take the form
+        ````
+        declare namespace xsd = "http://www.w3.org/2001/XMLSchema".
+        declare namespace rng = "http://relaxng.org/ns/structure/1.0".
+        ````
+
+
