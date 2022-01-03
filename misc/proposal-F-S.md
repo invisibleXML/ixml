@@ -9,11 +9,11 @@ and pragmas to ixml.
 
 For background, use cases, some discussion of design choices, and
 examples of how pragmas as defined here could be used in the use
-cases, see the document (pragmas.md)[pragmas.md] in this directory. In
+cases, see the document [pragmas.md](pragmas.md) in this directory. In
 that document, the proposal made here is referred to as namespaces
 proposal S and pragmas proposal F.
 
-We believe that the examples given in (pragmas.md)[pragmas.md]
+We believe that the examples given in [pragmas.md](pragmas.md)
 demonstrate that the proposal outlined here satisfies the known use
 cases for pragmas.
 
