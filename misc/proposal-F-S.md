@@ -141,25 +141,21 @@ prolog:  s, ppragma+s, s.
 ### Syntax in XML
 
 Following the normal rules of ixml, pragmas are serialized as elements
-named `pragma`, with attributes named `pmark` and `pname` and a child
-element named `pragma-data`. In addition, in XML grammars `pragma`
-elements may contain any number of XML elements following the
-`pragma-data` element.
+named `pragma`, with attributes named `pmark` and `pname` and an
+optional child element named `pragma-data`. In addition, in XML
+grammars `pragma` elements may contain any number of XML elements
+following the `pragma-data` element.
 
 For example:
 
 ````
-<pragma pname="my:blue" pmark="?">
-    <pragma-data/>
-</pragma>
+<pragma pname="my:blue" pmark="?"/>
 ````
 
 or
 
 ````
-<pragma pname="Q{http://example.org/NS/mine}:blue" pmark="?">
-    <pragma-data/>
-</pragma>
+<pragma pname="Q{http://example.org/NS/mine}:blue" pmark="?"/>
 ````
 
 or
@@ -182,10 +178,10 @@ or
 
 Pragma-oblivious processors and processors which do not implement the
 pragma in question will as a matter of course produce `pragma`
-elements with just the one child element. But processors which
-implement a given pragma are free to inject additional XML elements
-into the XML form of the pragma. It is to be assumed that the XML
-elements contain no additional information, only a mechanically
+elements with just the one child element (or none). But processors
+which implement a given pragma are free to inject additional XML
+elements into the XML form of the pragma. It is to be assumed that the
+XML elements contain no additional information, only a mechanically
 derived XML form which makes the information in the pragma easier to
 process. It is to be expected that any software to serialize XML
 grammars in ixml form will discard the additional XML elements.
@@ -213,7 +209,7 @@ might be:
         </alt>
     </rule>
     <rule name="cchars" mark="-">
-        <pragma pname="ls:token"><pragma-data/></pragma>
+        <pragma pname="ls:token"/>
         <alt>
             <repeat1><alts>
                 <alt><nonterminal name="cchar"/></alt>
@@ -390,11 +386,6 @@ The following rules apply:
 
 * Instead of saying processors MUST be able to ignore all pragmas, we 
   might say they SHOULD be able to ignore all pragmas. 
-
-* Instead of making pragma-data required but possibly empty, requiring
-  an empty *pragma-data* element in cases like `[ls:token]`, we might
-  make it optional but non-empty, so that `[ls:token]` could have the
-  shorter XML representation `<pragma pname="ls:token"/>`.
 
 * Instead of forbidding two namespace declarations for the same
   prefix, we could say they MUST agree, or that the first one wins (as
