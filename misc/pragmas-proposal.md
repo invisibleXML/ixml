@@ -2,7 +2,7 @@
 
 Tom Hillman, Michael Sperberg-McQueen
 
-15 December 2021, rev. 3 January 2022
+15 December 2021, rev. 4 January 2022
 
 This document describes a proposal for adding namespace declarations
 and pragmas to ixml.
