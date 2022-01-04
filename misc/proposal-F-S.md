@@ -409,19 +409,13 @@ The following rules apply:
 * Instead of using pragma syntax, namespace declarations could use 
   some other syntax.  E.g.
 
-        ````
         prolog:  s, (ppragma; namespace)+s, s. 
         namespace: -'declare', s, -'namespace', s, 
           @prefix, s, -'=', s, @ns-name, s, '.'.
           @prefix: name.
         @ns-name: string.
-        ````
 
     In this case, the examples shown above would take the form
 
-        ````
         declare namespace xsd = "http://www.w3.org/2001/XMLSchema".
         declare namespace rng = "http://relaxng.org/ns/structure/1.0".
-        ````
-
-
