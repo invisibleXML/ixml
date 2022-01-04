@@ -20,7 +20,7 @@ cases for pragmas.
 ## Pragmas
 
 Pragmas are a syntactic device to allow grammar writers to communicate
-with processors without interfering with the operation of other
+with processors in non-standard ways without interfering with the operation of other
 processors. To avoid interference with other processors, two
 requirements arise:
 
@@ -120,7 +120,7 @@ and terminals:
 -encoded: tannotation, -"#", @hex, s.
 inclusion: tannotation,          set.
 exclusion: tannotation, -"~", s, set.
--tannotation:  (pragma, sp)?, (mark, sp)?. 
+-tannotation:  (pragma, sp)?, (tmark, sp)?. 
 ````
 
 To allow pragmas on the left-hand side of a rule and before its
@@ -239,7 +239,7 @@ effect on the XML representation produced by the core rules of ixml.
 Pragma-oblivious processors will always produce XML representation of
 pragmas of the form described here. Pragma-aware processors may
 implement pragmas which modify the standard XML representation
-('pragmas for pragmas'). See (pragmas.md)[pragmas.md] for an
+('pragmas for pragmas'). See [pragmas.md](pragmas.md) for an
 example. The point of the *pmark* is in fact to allow such a pragma
 for pragmas to specify that pragmas marked "`?`" or "`@`" be
 represented in XML as processing instructions or attributes.  (Again:
@@ -300,11 +300,11 @@ whether to modify its normal operation or not.
 
 The obligation of pragma-oblivious processors is to accept pragmas
 when they occur in the ixml form of a grammar, and (if they are
-producing an XML form of the grammar) produce the correct XML form of
+producing an XML form of the grammar) to produce the correct XML form of
 each pragma, just as they produce the corresponding XML form for any
 construct in the grammar.
 
-Pragma-aware processors MUST similarly to accept pragmas when they
+Pragma-aware processors MUST similarly accept pragmas when they
 occur in the ixml form of a grammar, and (if they are producing an XML
 form of the grammar) produce the correct XML form of each pragma, just
 as they produce the corresponding XML form for any construct in the
@@ -328,7 +328,7 @@ When ixml grammars are processed as input using the grammar for ixml,
 processors MUST produce the correct XML form of each pragma, just as
 they produce the corresponding XML form for any construct in the
 grammar, *except* as the processor's behavior is affected by the
-presence of pragmas, in the grammar for ixml used to parse the input.
+presence of pragmas in the grammar for ixml used to parse the input.
 
 
 ## Namespace declarations
@@ -397,17 +397,18 @@ The following rules apply:
   `let` clauses for the same variable in a FLWOR expression in
   XQuery).
 
-* Instead of requiring that in the XML form of an ixml grammar, all
-  namespaces bound in in the ixml grammar SHOULD be bound in the XML
+* Instead of requiring that in the XML form of an ixml grammar all
+  namespaces bound in the ixml grammar SHOULD be bound in the XML
   form of the grammar, we could say that those actually used MUST be
   bound, or that they all MUST be bound.
   
 * Instead of using the prefix *ixmlns*, namespace declarations could
-  use *xmlns* (although strictly speaking that name is reserved, and
-  it's not clear we have the standing to use it here).
+  use *xmlns*.  Strictly speaking, however, that name is reserved and
+  it's not clear we have the standing to use it here.
   
 * Instead of using pragma syntax, namespace declarations could use 
   some other syntax.  E.g.
+
         ````
         prolog:  s, (ppragma; namespace)+s, s. 
         namespace: -'declare', s, -'namespace', s, 
@@ -417,6 +418,7 @@ The following rules apply:
         ````
 
     In this case, the examples shown above would take the form
+
         ````
         declare namespace xsd = "http://www.w3.org/2001/XMLSchema".
         declare namespace rng = "http://relaxng.org/ns/structure/1.0".
