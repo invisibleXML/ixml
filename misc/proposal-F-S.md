@@ -7,11 +7,10 @@ Tom Hillman, Michael Sperberg-McQueen
 This document describes a proposal for adding namespace declarations
 and pragmas to ixml.
 
-For background, use cases, some discussion of design choices, and
-examples of how pragmas as defined here could be used in the use
-cases, see the document [pragmas.md](pragmas.md) in this directory. In
-that document, the proposal made here is referred to as namespaces
-proposal S and pragmas proposal F.
+For background, use cases, and some discussion of design choices, see
+the document [pragmas.md](pragmas.md) in this directory. In that
+document, the proposal made here is referred to as namespaces proposal
+S and pragmas proposal F.
 
 We believe that the examples given in [pragmas.md](pragmas.md)
 demonstrate that the proposal outlined here satisfies the known use
@@ -240,13 +239,10 @@ Pragma-oblivious processors will always produce XML representation of
 pragmas of the form described here. Pragma-aware processors may
 implement pragmas which modify the standard XML representation
 ('pragmas for pragmas'). See [pragmas.md](pragmas.md) for an
-example. The point of the *pmark* is in fact to allow such a pragma
-for pragmas to specify that pragmas marked "`?`" or "`@`" be
-represented in XML as processing instructions or attributes.  (Again:
-pragmas may affect the behavior of programs.)
+example.
 
 
-### Static semantics
+### Pragma scope
 
 In this proposal, pragmas always apply explicitly to some part of a
 grammar:
@@ -278,10 +274,11 @@ those specifying the meaning of specific pragmas.
 In describing the operational semantics of pragmas, we distinguish
 different classes of ixml processor:
 
-* *pragma-oblivious* processors recognize pragmas syntactically but 
-otherwise ignore them all. Informally, they do not 'understand' any 
-pragmas, and their only obligation is not to trip over pragmas when 
-they encounter them. 
+* *pragma-oblivious* processors recognize pragmas syntactically but
+otherwise ignore them all, except for namespace
+declarations. Informally, they do not 'understand' any pragmas, and
+their only obligation is not to trip over pragmas when they encounter
+them.
 
 * *pragma-aware* processors recognize pragmas syntactically and modify
 their behavior in accordance with some pragmas. Informally, they
@@ -290,7 +287,7 @@ they must determine whether it is one they 'understand' and implement,
 or not.
 
 With regard to a given pragma, processors either *implement* that
-pragma or they do not. A processor *implements* a pragma iff it
+pragma or they do not. A processor *implements* a pragma if and only if it
 adjusts its behavior as specified by that pragma. In the ideal case
 there will be some written specification of the pragma which describes
 the operational effect of the pragma clearly. This proposal assumes
@@ -317,8 +314,13 @@ Processors MUST be capable, at user option, of ignoring all pragmas
 other than namespace declarations and processing a grammar using the
 standard rules of ixml.
 
-Processors MUST accept pragmas in the ixml or XML form of a grammar, 
-whether they understand or implement the specific pragmas or not. 
+Processors which accept ixml grammars MUST accept pragmas in the ixml
+form of a grammar, whether they understand or implement the specific
+pragmas or not.
+
+Processors which accept XML grammars MUST accept pragmas in the XML
+form of a grammar, whether they understand or implement the specific
+pragmas or not.
 
 If a pragma which the processor does not understand or implement is
 present in a grammar used to parse input, the processor MUST process
@@ -383,10 +385,17 @@ The following rules apply:
 * In the XML form of an ixml grammar, all namespaces bound in in the
   ixml grammar SHOULD be bound in the XML form of the grammar.
 
-  This should normally take the form of namespace declarations on the
-  `ixml` element. 
+    This should normally take the form of namespace declarations on the
+    `ixml` element. 
 
-## Possible variations
+
+## Appendix: Possible variations
+
+Some obvious variations on this proposal can be listed.
+
+* Instead of saying that pragma-oblivious processors must ignore all
+  pragmas, we could say that they that they must ignore all pragmas
+  except namespace declarations.
 
 * Instead of saying processors MUST be able to ignore all pragmas, we 
   might say they SHOULD be able to ignore all pragmas. 
