@@ -29,17 +29,15 @@
                charset.
       literal: quoted;
                encoded.
-      -quoted: (tmark, s)?, -string.
+      -quoted: (tmark, s)?, string.
 
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
        @tmark: ["^-"].
-       string: -'"', dstring, -'"', s;
-               -"'", sstring, -"'", s.
-     @dstring: dchar+.
-     @sstring: schar+.
+      @string: -'"', dchar+, -'"', s;
+               -"'", schar+, -"'", s.
         dchar: ~['"'; #a; #d];
                '"', -'"'. {all characters except line breaks; quotes must be doubled}
         schar: ~["'"; #a; #d];
