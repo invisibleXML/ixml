@@ -443,7 +443,7 @@ exclusion: (tmark, s)?, -"~", s, set.
 
 <p>A range matches any character in the range from the start character to the
 end, inclusive, using the Unicode ordering:</p>
-<pre>range: from, -"-", s, to, s.
+<pre>range: from, s, -"-", s, to, s.
 @from: character.
   @to: character.</pre>
 
@@ -518,7 +518,7 @@ class.</p>
       -member: literal;
                range;
                class.
-        range: from, -"-", s, to, s.
+        range: from, s, -"-", s, to, s.
         @from: character.
           @to: character.
    -character: -'"', dchar, -'"';

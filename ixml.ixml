@@ -53,7 +53,7 @@
       -member: literal;
                range;
                class.
-        range: from, -"-", s, to, s.
+        range: from, s, -"-", s, to, s.
         @from: character.
           @to: character.
    -character: -'"', dchar, -'"';

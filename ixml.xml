@@ -421,6 +421,7 @@
    <rule name='range'>
       <alt>
          <nonterminal name='from'/>
+         <nonterminal name='s'/>
          <literal tmark='-' string='-'/>
          <nonterminal name='s'/>
          <nonterminal name='to'/>
