@@ -424,6 +424,7 @@
          <literal tmark='-' string='-'/>
          <nonterminal name='s'/>
          <nonterminal name='to'/>
+         <nonterminal name='s'/>
       </alt>
    </rule>
    <rule mark='@' name='from'>
@@ -441,18 +442,15 @@
          <literal tmark='-' string='"'/>
          <nonterminal name='dchar'/>
          <literal tmark='-' string='"'/>
-         <nonterminal name='s'/>
       </alt>
       <alt>
          <literal tmark='-' string='&apos;'/>
          <nonterminal name='schar'/>
          <literal tmark='-' string='&apos;'/>
-         <nonterminal name='s'/>
       </alt>
       <alt>
          <literal string='#'/>
          <nonterminal name='hex'/>
-         <nonterminal name='s'/>
       </alt>
    </rule>
    <rule name='class'>

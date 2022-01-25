@@ -27,7 +27,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-01-24<!--$--></p>
+<p>Version: <!--$date=-->2022-01-25<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -443,14 +443,14 @@ exclusion: (tmark, s)?, -"~", s, set.
 
 <p>A range matches any character in the range from the start character to the
 end, inclusive, using the Unicode ordering:</p>
-<pre>range: from, -"-", s, to.
+<pre>range: from, -"-", s, to, s.
 @from: character.
   @to: character.</pre>
 
 <p>A character is a string of length one, or a hex encoded character:</p>
-<pre>-character: -'"', dchar, -'"', s;
-            -"'", schar, -"'", s;
-            "#", hex, s.</pre>
+<pre>-character: -'"', dchar, -'"';
+            -"'", schar, -"'";
+            "#", hex.</pre>
 
 <p>A class is two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name. E.g.
@@ -518,12 +518,12 @@ class.</p>
       -member: literal;
                range;
                class.
-        range: from, -"-", s, to.
+        range: from, -"-", s, to, s.
         @from: character.
           @to: character.
-   -character: -'"', dchar, -'"', s;
-               -"'", schar, -"'", s;
-               "#", hex, s.
+   -character: -'"', dchar, -'"';
+               -"'", schar, -"'";
+               "#", hex.
         class: code, s.
         @code: capital, letter?.
      -capital: ["A"-"Z"].
@@ -695,7 +695,7 @@ serialisation</a> is available:</p>
    &lt;/rule&gt;
    &lt;rule name='comment'&gt;
       &lt;alt&gt;
-         &lt;literal tmark='-' dstring='{'/&gt;
+         &lt;literal tmark='-' string='{'/&gt;
          &lt;repeat0&gt;
             &lt;alts&gt;
                &lt;alt&gt;
@@ -706,13 +706,13 @@ serialisation</a> is available:</p>
                &lt;/alt&gt;
             &lt;/alts&gt;
          &lt;/repeat0&gt;
-         &lt;literal tmark='-' dstring='}'/&gt;
+         &lt;literal tmark='-' string='}'/&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;
    &lt;rule mark='-' name='cchar'&gt;
       &lt;alt&gt;
          &lt;exclusion&gt;
-            &lt;literal dstring='{}'/&gt;
+            &lt;literal string='{}'/&gt;
          &lt;/exclusion&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;
@@ -729,13 +729,13 @@ serialisation</a> is available:</p>
          &lt;nonterminal name='name'/&gt;
          &lt;nonterminal name='s'/&gt;
          &lt;inclusion tmark='-'&gt;
-            &lt;literal dstring='=:'/&gt;
+            &lt;literal string='=:'/&gt;
          &lt;/inclusion&gt;
          &lt;nonterminal name='s'/&gt;
          &lt;nonterminal mark='-' name='alts'/&gt;
-         &lt;literal tmark='-' dstring='.'/&gt;
+         &lt;literal tmark='-' string='.'/&gt;
       &lt;/alt&gt;
-   &lt;/rule</pre>
+   &lt;/rule&gt;</pre>
 
 <h2 id="conformance">Conformance</h2>
 

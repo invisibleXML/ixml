@@ -53,12 +53,12 @@
       -member: literal;
                range;
                class.
-        range: from, -"-", s, to.
+        range: from, -"-", s, to, s.
         @from: character.
           @to: character.
-   -character: -'"', dchar, -'"', s;
-               -"'", schar, -"'", s;
-               "#", hex, s.
+   -character: -'"', dchar, -'"';
+               -"'", schar, -"'";
+               "#", hex.
         class: code, s.
         @code: capital, letter?.
      -capital: ["A"-"Z"].
