@@ -68,12 +68,12 @@ Contents:
     * [Renaming](#renaming) 
     * [Name indirection](#name-indirection) 
     * [Rule rewriting](#rule-rewriting)
-	* [Tokenization annotation and alternative formulations.](#tokenization-annotation-and-alternative-formulations)
-	* [Text injection](#text-injection)
-	* [Attribute grammar specification](#attribute-grammar-specification)
-	* [Pragmas for proposal V](#Pragmas-for-proposal-V)
+    * [Tokenization annotation and alternative formulations.](#tokenization-annotation-and-alternative-formulations)
+    * [Text injection](#text-injection)
+    * [Attribute grammar specification](#attribute-grammar-specification)
+    * [Pragmas for proposal V](#Pragmas-for-proposal-V)
 * [Namespace binding proposals](#Namespace-binding-proposals)
-	* [Namespace binding, common rules](#namespace-binding-common-rules)
+    * [Namespace binding, common rules](#namespace-binding-common-rules)
     * [Namespace binding in proposal U](#namespace-binding-in-proposal-u) 
     * [Namespace binding in proposal S](#namespace-binding-in-proposal-s) 
 * [Open issues](#open-issues) 
@@ -691,9 +691,9 @@ the *y* namespace, and some in no namespace at all, might be
     [@nsd:x http://example.org/NS/existential]
     [@nsd:y http://example.com/NS/yoyo]
     x:sentence: x:a, ' ', y:b?, '.  ', c.
-	x:a: 'Speed'.
-	y:b: 'kills'.
-	c:  'It really does.'.
+        x:a: 'Speed'.
+        y:b: 'kills'.
+        c:  'It really does.'.
 ````
 The XML representation of the grammar might be (in form V):
 
@@ -876,14 +876,14 @@ output produced manually, may be inaccurate*):
     <attribute name="author" value="Basho"/>
     <attribute name="date" value="1686"/>
     <element @gi='line' @gi2='line'>
-	    <PCDATA>When the old pond</PCDATA>
-	</element>	
+        <PCDATA>When the old pond</PCDATA>
+    </element>
     <element @gi='line' @gi2='line'>
-	    <PCDATA>gets a new frog</PCDATA>
-	</element>	
+        <PCDATA>gets a new frog</PCDATA>
+    </element>
     <element @gi='line' @gi2='line'>
-	    <PCDATA>It's a new pond.</PCDATA>
-	</element>	
+        <PCDATA>It's a new pond.</PCDATA>
+    </element>
 </element>
 ````
 
@@ -1127,9 +1127,9 @@ We can now annotate the grammar and supply an alternative formulation of
 
 ````
       ^ [ls:rewrite
-              comment: -"{", (cchars; comment)*, -"}". 
-              [ls:token] -cchars:  cchar+. 
-		  ]
+            comment: -"{", (cchars; comment)*, -"}". 
+            [ls:token] -cchars:  cchar+. 
+        ]
       comment: -"{", (cchar; comment)*, -"}".
       -cchar: ~["{}"].
 ````
@@ -1142,7 +1142,7 @@ formulation after, not before, the existing rule:
       [ls:rewrite 
           comment: -"{", (cchars; comment)*, -"}". 
           - [ls:token] cchars:  cchar+. 
-	  ].
+      ].
       -cchar: ~["{}"].
 ````
 
@@ -1227,9 +1227,9 @@ problem.)
 
     factor →  '0'.
             [ factor.v = 0 ]
-	factor → '1'.
-	        [ factor.v = 1 ]
-	factor → '2'.
+    factor → '1'.
+            [ factor.v = 1 ]
+    factor → '2'.
             [ factor.v = 2 ]
     factor → '3'.
             [ factor.v = 3 ]
@@ -1266,7 +1266,7 @@ written thus using the brackets-QName syntax:
             [ag:rule e0.v := e1.v + term.v ].
     [@ag:id t0] term:  [@ag:id t1] term, s, '_', s, factor
             [ag:rule t0.v := t1.v * factor.v].
-	factor:  digit [@ag:rule factor.v := number(string(digit))]; 
+    factor:  digit [@ag:rule factor.v := number(string(digit))]; 
             '(', s, expr, s, ')' [@ag:rule factor.v := expr.v ].
     digit: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'.
     s:  [#20; #A; #D; #9].
