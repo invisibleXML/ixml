@@ -67,10 +67,6 @@
       <result><assert-not-a-sentence/></result>
     </test-case>
     
-    <test-case name="elem1">
-      <test-string-ref href="elem1.ixml"/>
-      <result><assert-not-a-sentence/></result>
-    </test-case>
     <test-case name="elem2">
       <test-string-ref href="elem2.ixml"/>
       <result><assert-not-a-sentence/></result>
@@ -111,11 +107,6 @@
       <result><assert-not-a-sentence/></result>
     </test-case>
     
-    <test-case name="illegal-class">
-      <test-string-ref href="illegal-class.ixml"/>
-      <result><assert-not-a-sentence/></result>
-    </test-case>
-    
     <test-case name="name-with-spaces">
       <test-string-ref href="name-with-spaces.ixml"/>
       <result><assert-not-a-sentence/></result>
@@ -127,10 +118,6 @@
     </test-case>
     <test-case name="rule1">
       <test-string-ref href="rule1.ixml"/>
-      <result><assert-not-a-sentence/></result>
-    </test-case>
-    <test-case name="rule2">
-      <test-string-ref href="rule2.ixml"/>
       <result><assert-not-a-sentence/></result>
     </test-case>
     <test-case name="rule3">
@@ -176,15 +163,6 @@
     </test-case>
     <test-case name="unterminated-comment2">
       <test-string-ref href="unterminated-comment2.ixml"/>
-      <result><assert-not-a-sentence/></result>
-    </test-case>
-    
-    <test-case name="unused-rule">
-      <test-string-ref href="unused-rule.ixml"/>
-      <result><assert-not-a-sentence/></result>
-    </test-case>
-    <test-case name="unused-rules">
-      <test-string-ref href="unused-rules.ixml"/>
       <result><assert-not-a-sentence/></result>
     </test-case>
     
