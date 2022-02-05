@@ -204,9 +204,14 @@
 	  by="MSM"
 	  on="2022-01-01"
 	  change="stripped non-significant whitespace from result"/>
+      <modified
+	  by="ndw"
+	  on="2022-02-05"
+	  change="added alternative parse"/>
       <test-string-ref href="date.inp"/>
       <result>
 	<assert-xml-ref href="date.output.xml"/>
+	<assert-xml-ref href="date.alt.output.xml"/>
       </result>
     </test-case>
   </test-set>
