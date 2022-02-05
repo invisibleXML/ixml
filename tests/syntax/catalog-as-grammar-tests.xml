@@ -16,318 +16,318 @@
     the ixml grammar built into the processor.</p>
   </description>
 
-  <test-set name="class-range">
+  <test-set name="class-range.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="class-range.ixml"/>
-    <test-case name="class-range">
+    <grammar-test>
       <result>
 	<assert-not-a-grammar/>
       </result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn1">
+  
+  <test-set name="defn1.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn1.ixml"/>
-    <test-case name="defn1">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn10">
+  
+  <test-set name="defn10.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn10.ixml"/>
-    <test-case name="defn10">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn11">
+  
+  <test-set name="defn11.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn11.ixml"/>
-    <test-case name="defn11">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn2">
+  
+  <test-set name="defn2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn2.ixml"/>
-    <test-case name="defn2">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn3">
+  
+  <test-set name="defn3.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn3.ixml"/>
-    <test-case name="defn3">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn4">
+  
+  <test-set name="defn4.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn4.ixml"/>
-    <test-case name="defn4">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn5">
+  
+  <test-set name="defn5.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn5.ixml"/>
-    <test-case name="defn5">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn6">
+  
+  <test-set name="defn6.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn6.ixml"/>
-    <test-case name="defn6">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn8">
+  
+  <test-set name="defn8.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn8.ixml"/>
-    <test-case name="defn8">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="defn9">
+  
+  <test-set name="defn9.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn9.ixml"/>
-    <test-case name="defn9">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem1">
+  
+  <test-set name="elem1.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem1.ixml"/>
-    <test-case name="elem1">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem2">
+  
+  <test-set name="elem2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem2.ixml"/>
-    <test-case name="elem2">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem3">
+  
+  <test-set name="elem3.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem3.ixml"/>
-    <test-case name="elem3">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem4">
+  
+  <test-set name="elem4.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem4.ixml"/>
-    <test-case name="elem4">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem5">
+  
+  <test-set name="elem5.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem5.ixml"/>
-    <test-case name="elem5">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem6">
+  
+  <test-set name="elem6.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem6.ixml"/>
-    <test-case name="elem6">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="elem7">
+  
+  <test-set name="elem7.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem7.ixml"/>
-    <test-case name="elem7">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="empty-string">
+  
+  <test-set name="empty-string.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="empty-string.ixml"/>
-    <test-case name="empty-string">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="expr10">
+  
+  <test-set name="expr10.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="expr10.ixml"/>
-    <test-case name="expr10">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="hex2">
+  
+  <test-set name="hex2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="hex2.ixml"/>
-    <test-case name="hex2">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="illegal-class">
+  
+  <test-set name="illegal-class.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="illegal-class.ixml"/>
-    <test-case name="illegal-class">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="name-with-spaces">
+  
+  <test-set name="name-with-spaces.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="name-with-spaces.ixml"/>
-    <test-case name="name-with-spaces">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule">
+  
+  <test-set name="rule.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule.ixml"/>
-    <test-case name="rule">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule1">
+  
+  <test-set name="rule1.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule1.ixml"/>
-    <test-case name="rule1">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule10">
+  
+  <test-set name="rule10.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule10.ixml"/>
-    <test-case name="rule10">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule2">
+  
+  <test-set name="rule2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule2.ixml"/>
-    <test-case name="rule2">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule3">
+  
+  <test-set name="rule3.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule3.ixml"/>
-    <test-case name="rule3">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule4">
+  
+  <test-set name="rule4.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule4.ixml"/>
-    <test-case name="rule4">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule5">
+  
+  <test-set name="rule5.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule5.ixml"/>
-    <test-case name="rule5">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule6">
+  
+  <test-set name="rule6.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule6.ixml"/>
-    <test-case name="rule6">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule7">
+  
+  <test-set name="rule7.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule7.ixml"/>
-    <test-case name="rule7">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule8">
+  
+  <test-set name="rule8.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule8.ixml"/>
-    <test-case name="rule8">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="rule9">
+  
+  <test-set name="rule9.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule9.ixml"/>
-    <test-case name="rule9">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="unterminated-comment">
+  
+  <test-set name="unterminated-comment.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment.ixml"/>
-    <test-case name="unterminated-comment">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="unterminated-comment1">
+  
+  <test-set name="unterminated-comment1.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment1.ixml"/>
-    <test-case name="unterminated-comment1">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="unterminated-comment2">
+  
+  <test-set name="unterminated-comment2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment2.ixml"/>
-    <test-case name="unterminated-comment2">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="unused-rule">
+  
+  <test-set name="unused-rule.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unused-rule.ixml"/>
-    <test-case name="unused-rule">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
-  <test-set name="unused-rules">
+  
+  <test-set name="unused-rules.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unused-rules.ixml"/>
-    <test-case name="unused-rules">
+    <grammar-test>
       <result><assert-not-a-grammar/></result>
-    </test-case>
+    </grammar-test>
   </test-set>
-
+  
 </test-catalog>
