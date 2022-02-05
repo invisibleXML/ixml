@@ -725,20 +725,6 @@
     </test-case>
   </test-set>
 
-  <test-set name="range">
-    <created by="ndw" on="2022-02-05"/>
-    <ixml-grammar-ref href="range.ixml"/>
-    <test-case name="range">
-      <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
-      change="Converted it into the catalog format"/>
-      <test-string-ref href="range.inp"/>
-      <result>
-	<assert-xml-ref href="range.output.xml"/>
-      </result>
-    </test-case>
-  </test-set>
-
   <test-set name="ranges">
     <created by="ndw" on="2022-02-05"/>
     <ixml-grammar-ref href="ranges.ixml"/>
