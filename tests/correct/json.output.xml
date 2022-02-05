@@ -87,8 +87,7 @@
          >,<member string='string'
             >:<element
                ><string
-                  >\<escape>u
-                     <hex>f</hex
+                  >\<escape>u<hex>f</hex
                      ><hex>f</hex
                      ><hex>f</hex
                      ><hex>f</hex
