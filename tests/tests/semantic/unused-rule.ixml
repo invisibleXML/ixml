@@ -1,6 +1,0 @@
-a: b, undefined.
-b: c.
-c: .
-unused: e.
-e: f.
-f: .

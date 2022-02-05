@@ -1,3 +1,0 @@
-input: line+lf.
-line: ~[#a]*.
-lf: -#a.
