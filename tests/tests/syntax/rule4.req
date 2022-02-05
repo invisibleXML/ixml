@@ -1,0 +1,11 @@
+a: b, c. 
+b: b, c . 
+c: ".") {Rule ends wrong}
+#
+#
+
+**** Character "." expected
+   3 c: ".") {Rule ends wrong}
+           ^
+**** Parsing failed at line 3: Character "." expected
+Failed

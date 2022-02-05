@@ -1,0 +1,13 @@
+a: b, c, d.
+b: "b".
+c: "" {not allowed}.
+d: "d".
+#
+bd
+#
+
+**** A string must contain at least one character
+   3 c: "" {not allowed}.
+          ^
+**** Parsing failed at line 3: A string must contain at least one character
+Failed

@@ -1,0 +1,12 @@
+a: b, c.
+b: c, d.
+c: @#9. {no @ for terminals}
+d: .
+#
+#
+
+**** Marker '@' only allowed for rule names
+   3 c: @#9. {no @ for terminals}
+         ^
+**** Parsing failed at line 3: Marker '@' only allowed for rule names
+Failed

@@ -1,0 +1,16 @@
+a: b, ()?, c.
+b: "b".
+c: "c".
+#
+bc
+#
+<!-- AMBIGUOUS
+     The input from line.pos 1.2 to 1.2 can be interpreted as '()?' in 2 different ways:
+     1: ()?[1.2:]:  
+     2: ()?[1.2:]:  ()[:1.2] 
+-->
+
+<a ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS">
+   <b>b</b>
+   <c>c</c>
+</a>

@@ -1,0 +1,13 @@
+test: foo, bar.
+foo: -".".
+bar: ".".
+
+#
+..
+
+#
+
+<test>
+   <foo/>
+   <bar>.</bar>
+</test>

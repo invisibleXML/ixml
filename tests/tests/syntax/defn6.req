@@ -1,0 +1,12 @@
+a: b, c.
+b: c, d.
+c: @~["abc"]. {No @ allowed}
+d: .
+#
+#
+
+**** Marker '@' only allowed for rule names
+   3 c: @~["abc"]. {No @ allowed}
+         ^
+**** Parsing failed at line 3: Marker '@' only allowed for rule names
+Failed

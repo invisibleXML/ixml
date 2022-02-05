@@ -1,0 +1,37 @@
+expression: expr.
+-expr: term+plusop.
+@plusop: "+"; "-".
+term: -factor; factor, mulop, factor+mulop.
+@mulop: "*"; "/".
+factor: id; number; bracketed.
+bracketed: -"(", expr, -")".
+id: @name.
+name: letter+.
+number: @value.
+value: digit+.
+-letter: ["a"-"z"].
+-digit: ["0"-"9"].
+#
+1+2+3*4+5
+
+#
+
+<expression plusop='+' plusop='+' plusop='+'>
+   <term>
+      <number value='1'/>
+   </term>
+   <term>
+      <number value='2'/>
+   </term>
+   <term mulop='*'>
+      <factor>
+         <number value='3'/>
+      </factor>
+      <factor>
+         <number value='4'/>
+      </factor>
+   </term>
+   <term>
+      <number value='5'/>
+   </term>
+</expression>

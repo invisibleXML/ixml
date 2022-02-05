@@ -1,0 +1,30 @@
+xml: element.
+element: -"<", name, (" "+, attribute)*, (-">", content, -"</", close, -">"; -"/>").
+@name: ["a"-"z"; "A"-"Z"]+.
+@close: name.
+attribute: name, -"=", value.
+@value: -'"', dchar*, -'"'; -"'", schar*, -"'".
+content: (cchar; element)*.
+-dchar: ~['"'].
+-schar: ~["'"].
+-cchar: ~["<"].
+
+#
+<test att="abc" class="test">
+  Now is the <em>time</em> for stuff.
+</test>
+
+#
+
+<xml>
+   <element name='test' close='test'> 
+      <attribute name='att' value='abc'/> 
+      <attribute name='class' value='test'/>
+      <content>
+  Now is the 
+         <element name='em' close='em'>
+            <content>time</content>
+         </element> for stuff.
+</content>
+   </element>
+</xml>

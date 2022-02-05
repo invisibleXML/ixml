@@ -1,0 +1,10 @@
+data: s?, word. 
+-s: [#20; #9]+.
+word: [L]+.
+#
+		abc
+#
+
+<data>		
+   <word>abc</word>
+</data>

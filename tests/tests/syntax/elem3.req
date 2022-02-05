@@ -1,0 +1,16 @@
+a: b, c.
+b: c, d.
+c: ["a"-""]. {Must be length 1} 
+d: .
+#
+#
+
+**** A string must contain at least one character
+   3 c: ["a"-""]. {Must be length 1} 
+               ^
+
+**** Bound of range must be a single character
+   3 c: ["a"-""]. {Must be length 1} 
+               ^
+**** Parsing failed at line 3: Bound of range must be a single character
+Failed

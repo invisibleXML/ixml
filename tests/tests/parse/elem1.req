@@ -1,0 +1,20 @@
+a: "a", b, c.
+b: "b", c, d.
+c: "c", []. {it should block here, since nothing matches}
+d: "d".
+#
+abcd
+#
+<!--
+  **** Parsing failed at line 1, position 4
+  abcd
+     ^
+  **** Permitted at this position: [].
+  **** I see: "d".
+-->
+<fail ixml:state="failed" xmlns:ixml="http://invisiblexml.org/NS">
+   <line>1</line>
+   <pos>4</pos>
+   <line>abcd</line>
+   <permitted>[]</permitted>
+</fail>

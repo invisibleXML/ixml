@@ -1,0 +1,32 @@
+a b: b c. {No spaces in names}
+b: .
+c: .
+#
+You shouldn't see this, or you forgot to supply an *.inp file
+#
+
+**** One of [:=] expected
+   1 a b: b c. {No spaces in names}
+       ^
+
+**** Character "," expected
+   1 a b: b c. {No spaces in names}
+            ^
+
+**** Character "," expected
+   2 b: .
+      ^
+
+**** Character "," expected
+   3 c: .
+      ^
+
+**** name, "string", # encoded character, [character set], or (group) expected here
+   3 c: .
+        ^
+
+**** Character "." expected
+   3 c: .
+        ^
+**** Parsing failed at line 3: Character "." expected
+Failed

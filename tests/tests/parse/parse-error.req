@@ -1,0 +1,18 @@
+a: "a", punctuation, "b".
+punctuation: [",.;:'?!</&>"].
+#
+a b<&>.
+#
+<!--
+  **** Parsing failed at line 1, position 2
+  a b<&>.
+   ^
+  **** Permitted at this position: [",.;:'?!</&>"].
+  **** I see: " ".
+-->
+<fail ixml:state="failed" xmlns:ixml="http://invisiblexml.org/NS">
+   <line>1</line>
+   <pos>2</pos>
+   <line>a b&lt;&amp;>.</line>
+   <permitted>[",.;:'?!&lt;/&amp;>"]</permitted>
+</fail>

@@ -1,0 +1,12 @@
+a: b, c.
+b: c, d.
+c: ^(a, b, c). {No marker allowed}
+d: .
+#
+#
+
+**** Markers not possible for bracketed rules
+   3 c: ^(a, b, c). {No marker allowed}
+         ^
+**** Parsing failed at line 3: Markers not possible for bracketed rules
+Failed

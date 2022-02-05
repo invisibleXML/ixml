@@ -1,0 +1,30 @@
+<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
+	      release-date="2021-12-16"
+	      name="Amsterdam Test Suite 1">
+
+  <description>
+    <p>Top-level catalog for tests provided by
+    Steven Pemberton in December 2021.</p>
+    <p>There are two sub-groups, one general
+    and one focused on syntax issues.</p>
+  </description>
+
+  <!--* The three syntaxtests catalogs use the
+      * same test cases but test them in slightly
+      * different ways.  You may want all three,
+      * or only one or two, depending on the processor
+      * you are testing.
+      *-->
+  <test-set-ref href="syntax/catalog-as-grammar-tests.xml"/>
+  <test-set-ref href="syntax/catalog-as-instance-tests-ixml.xml"/>
+  <test-set-ref href="syntax/catalog-as-instance-tests-xml.xml"/>
+
+  <!--* Norm reworked the tests-SP-MSM test directory
+      * into a set of separate directories with individual
+      * catalogs
+      *-->
+  <test-set-ref href="ambiguous/test-catalog.xml"/>
+  <test-set-ref href="correct/test-catalog.xml"/>
+  <test-set-ref href="ixml/test-catalog.xml"/>
+  <test-set-ref href="parse/test-catalog.xml"/>
+</test-catalog>

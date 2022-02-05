@@ -1,0 +1,11 @@
+a: class.
+class: [Xx]. {Non-existent class}
+#
+Dummy input
+#
+
+**** "Xx" is not a valid class name
+   2 class: [Xx]. {Non-existent class}
+               ^
+**** Parsing failed at line 2: "Xx" is not a valid class name
+Failed

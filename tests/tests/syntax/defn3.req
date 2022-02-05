@@ -1,0 +1,16 @@
+a: b, c.
+b: c, d.
+c: 'unterminated. {unterminated string}
+d: .
+#
+#
+
+**** Unterminated string
+   3 c: 'unterminated. {unterminated string}
+        ^
+
+**** Character "," expected
+   3 c: 'unterminated. {unterminated string}
+         ^
+**** Parsing failed at line 3: Character "," expected
+Failed

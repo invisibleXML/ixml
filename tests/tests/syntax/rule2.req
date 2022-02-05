@@ -1,0 +1,12 @@
+a: b, c. 
+a: b, c. {double defined}
+b: .
+c: .
+#
+#
+
+**** a has already been defined
+   2 a: b, c. {double defined}
+      ^
+**** Parsing failed at line 2: a has already been defined
+Failed

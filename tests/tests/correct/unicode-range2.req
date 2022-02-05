@@ -1,0 +1,6 @@
+chars: [#60-#70]+.
+#
+abc
+#
+
+<chars>abc</chars>

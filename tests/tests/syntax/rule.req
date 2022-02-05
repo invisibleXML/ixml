@@ -1,0 +1,15 @@
+a: b, c. 
+b . {missing colon}
+c: .
+#
+#
+
+**** One of [:=] expected
+   2 b . {missing colon}
+       ^
+
+**** name, "string", # encoded character, [character set], or (group) expected here
+   3 c: .
+      ^
+**** Parsing failed at line 3: name, "string", # encoded character, [character set], or (group) expected here
+Failed

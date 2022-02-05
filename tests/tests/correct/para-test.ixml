@@ -1,0 +1,4 @@
+document: para+lf.
+para: line+.
+line: ~[#a]+, lf.
+-lf: -#a.

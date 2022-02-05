@@ -1,0 +1,15 @@
+a: class-range.
+class-range: [L-N].
+#
+Syntax error
+#
+
+**** Bound of range must be a single character
+   2 class-range: [L-N].
+                    ^
+
+**** Bound of range must be a single character
+   2 class-range: [L-N].
+                      ^
+**** Parsing failed at line 2: Bound of range must be a single character
+Failed

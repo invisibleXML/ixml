@@ -1,0 +1,15 @@
+a: b, c. 
+b:: b, c. {double colon} 
+c: ".".
+#
+#
+
+**** name, "string", # encoded character, [character set], or (group) expected here
+   2 b:: b, c. {double colon} 
+       ^
+
+**** Character "," expected
+   2 b:: b, c. {double colon} 
+         ^
+**** Parsing failed at line 2: Character "," expected
+Failed

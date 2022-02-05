@@ -1,0 +1,7 @@
+content: -a, -".".
+a: ~["."]*.
+#
+"'<>/&.
+#
+
+<content>"'&lt;>/&amp;</content>
