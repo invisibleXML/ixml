@@ -159,8 +159,6 @@
 		  change="remove trailing whitespace from input"/>
 	<modified by="MSM" on="2022-01-01"
 		  change="remove whitespace from expected result"/>
-	<modified by="ndw" on="2022-02-05"
-		  change="I can't reproduce MSMs assertion. Added a result."/>
 	<test-string-ref href="expr1.inp"/>
 	<description>
 	  <p>We may need a new assertion: if taken literally this
@@ -172,9 +170,9 @@
 	  <p>To be discussed, probably at length.</p>
 	</description>
 	<result>
-          <assert-xml-ref href="expr1.output.xml"/>
-	  <!--
 	  <assert-not-a-grammar/>
+	  <!--
+          <assert-xml-ref href="expr1.output.xml"/>
 	  -->
 	</result>
       </test-case>
