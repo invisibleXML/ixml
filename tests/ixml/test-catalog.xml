@@ -150,33 +150,13 @@
 	    by="MSM"
 	    on="2021-12-30"
 	    change="stripped non-significant whitespace from result"/>
-	<!--* not sure it all got stripped ... *-->
 	<modified by="MSM" on="2022-01-01"
 		  change="changed result to not-a-grammar"/>
-	<description>
-	  <p>The test grammar includes the rule
-	  <code>-letgit: ["a"{first}-"z"; "A"-"Z"; "0"-"9"].</code></p>
-	  <p>The ixml grammar of December 2021, like its
-	  predecessors, translates the first range into
-	  <code><![CDATA[<range from="afirst" to="z"/>]]></code>,
-	  which does not provide a single-character start
-	  for the range.  The semantics of such a range are
-	  not defined by the spec.  (One naive translation
-	  into conventional regular expressions produces a
-	  range including the letters 'a', 'f', 'i',
-	  and 'r' through 'z', which makes the name 'ixml'
-	  fail on the 'm'.)</p>
-	  <p>Until the ixml grammar is corrected to turn this into
-	  <code><![CDATA[<range from="a"
-	  to="z">comment>first</comment></range>]]></code> or
-	  something else that keeps the comment out of the
-	  'from' attribute, this should be treated as a test
-	  case with an error in the test case grammar.</p>
-	</description>
+	<modified by="ndw" on="2022-02-05"
+		  change="grammar updates mean this test now passes"/>
 	<test-string-ref href="ixml2.inp"/>
 	<result>
-	  <assert-not-a-grammar/>
-	  <!-- <assert-xml-ref href="ixml2.output.xml"/> -->
+	  <assert-xml-ref href="ixml2.output.xml"/>
 	</result>
       </test-case>
     </test-set>
