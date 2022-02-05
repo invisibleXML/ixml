@@ -258,10 +258,12 @@
       <created by="ndw" on="2022-02-05"/>
       <modified by="ndw" on="2022-02-05"/>
       change="Converted it into the catalog format"/>
+      <modified by="ndw" on="2022-02-05"/>
+      change="Added alternate output"/>
       <test-string-ref href="lf2.inp"/>
       <result>
 	<assert-xml-ref href="lf2.output.xml"/>
-        <!-- FIXME: alternate is needed -->
+	<assert-xml-ref href="lf2.alt.output.xml"/>
       </result>
     </test-case>
   </test-set>
