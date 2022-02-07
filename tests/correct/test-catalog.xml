@@ -686,7 +686,7 @@
     <ixml-grammar-ref href="element-content.ixml"/>
     <test-case name="element-content">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
       <test-string-ref href="element-content.inp"/>
       <result>
@@ -700,7 +700,7 @@
     <ixml-grammar-ref href="empty-group.ixml"/>
     <test-case name="empty-group">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
       <test-string-ref href="empty-group.inp"/>
       <result>
@@ -714,7 +714,7 @@
     <ixml-grammar-ref href="range-comments.ixml"/>
     <test-case name="range-comments">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
       <test-string-ref href="range-comments.inp"/>
       <result>
@@ -728,7 +728,7 @@
     <ixml-grammar-ref href="ranges.ixml"/>
     <test-case name="ranges">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
       <test-string-ref href="ranges.inp"/>
       <result>
@@ -742,7 +742,7 @@
     <ixml-grammar-ref href="ranges1.ixml"/>
     <test-case name="ranges1">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
       <test-string-ref href="ranges1.inp"/>
       <result>

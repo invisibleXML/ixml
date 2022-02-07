@@ -256,9 +256,9 @@
     <ixml-grammar-ref href="lf2.ixml"/>
     <test-case name="lf2">
       <created by="ndw" on="2022-02-05"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Converted it into the catalog format"/>
-      <modified by="ndw" on="2022-02-05"/>
+      <modified by="ndw" on="2022-02-05"
       change="Added alternate output"/>
       <test-string-ref href="lf2.inp"/>
       <result>
