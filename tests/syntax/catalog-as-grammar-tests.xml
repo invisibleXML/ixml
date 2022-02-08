@@ -106,12 +106,18 @@
     </grammar-test>
   </test-set>
   
-  <test-set name="elem1.ixml">
+  <test-set name="elem1">
     <created by="SP" on="2021-12-16"/>
+    <modified by="ndw" on="2022-02-08"
+              change="Convert to a passing test."/>
     <ixml-grammar-ref href="elem1.ixml"/>
-    <grammar-test>
-      <result><assert-not-a-grammar/></result>
-    </grammar-test>
+    <test-case name="elem1">
+      <created by="ndw" on="2022-02-08"/>
+      <test-string-ref href="elem1.inp"/>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
   </test-set>
   
   <test-set name="elem2.ixml">
