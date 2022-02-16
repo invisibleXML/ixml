@@ -1,4 +1,4 @@
-* Samples directory
+# Samples directory
 
 This directory contains a collection of ixml grammars for various
 languages or notations for which some more or less authoritative
