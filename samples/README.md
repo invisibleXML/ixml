@@ -17,14 +17,14 @@ that are not feasible in a pure context-free grammar.  So do not
 assume without checking that the language accepted by the ixml grammar
 here matches exactly the language defined by the relevant source.
 
-Grammars in this directory include:
+Samples in this directory include:
 
-* ISBN.ixml: a grammar for International Standard Book Numbers and
+* ISBN: a grammar for International Standard Book Numbers and
   International Standard Serial numbers that checks to make sure the
   check digit is correct.  (Currently only ISBN-13; ISBN-10 and ISSN
   coming soon.)
 
-* ABNF.ixml: an ixml version of the grammar notation used in IETF
+* ABNF: an ixml version of the grammar notation used in IETF
   Requests for Comment, as defined in RFC.  (Coming real soon now.)
 
 
