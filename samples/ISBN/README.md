@@ -25,7 +25,7 @@ the sum must be evenly divisible by ten, or else the ISBN is not
 valid.
 
 For example, the ISBN 9781441919014 can be validated as follows:
-
+````
     9 * 1
   + 7 * 3
   + 8 * 1
@@ -42,7 +42,7 @@ For example, the ISBN 9781441919014 can be validated as follows:
   _______
 
   = 120
-
+````
 Since 120 is evenly divisible by 10, the number is valid.
 
 Alternatively, given the first 12 digits of the ISBN, the check digit
@@ -63,7 +63,7 @@ The basic principle is perhaps most easily seen with a simpler
 example: here is a finite state automaton which recognizes base-10
 numerals which are evenly divisible by three:
 
-![FSA recognizing numerals divisible by three](fsa-3.png)
+![FSA recognizing numerals divisible by three](fsa-3.dot.png)
 
 The FSA recognizes the numeral "12", for example, by starting in state
 0, going to state 1 on the first digit by following the arc labeled
