@@ -1,0 +1,99 @@
+<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
+	      release-date="2022-02-19"
+	      name="Error tests">
+
+  <description>
+    <p>Tests intended to demonstrate errors that processors are required
+    to raise.</p>
+  </description>
+
+  <!-- This needs a new kind of assertion for "can't be serialized" I think.
+  <test-set name="syntax-xml">
+    <created by="ndw" on="2022-02-19"/>
+    <ixml-grammar>ª: 'a' .</ixml-grammar>
+    <test-case name="invalid-name">
+      <test-string>a</test-string>
+      <result><assert-not-xml/></result>
+    </test-case>
+  </test-set>
+  -->
+
+  <test-set name="hex-much-too-big">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>The number is so large it’s like to exceed the processor’s
+      ability to represent it.</p>
+    </description>
+    <ixml-grammar>s: #decafbadbadbadbad .</ixml-grammar>
+    <test-case name="hex-much-too-big">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="hex-too-big">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>Exceeds the range of Unicode.</p>
+    </description>
+    <ixml-grammar>s: #ffffffff0 .</ixml-grammar>
+    <test-case name="hex-too-big">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="hex-not-a-character">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>Not a Unicode character.</p>
+    </description>
+    <ixml-grammar>s: #fffe .</ixml-grammar>
+    <test-case name="hex-not-a-character">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="hex-also-not-a-character">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>Also not a Unicode character.</p>
+    </description>
+    <ixml-grammar>s: #1fffe .</ixml-grammar>
+    <test-case name="hex-also-not-a-character">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="hex-surrogate">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>A Unicode surrogate.</p>
+    </description>
+    <ixml-grammar>s: #d801 .</ixml-grammar>
+    <test-case name="hex-surrogate">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="bad-class">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>An invalid Unicode character class.</p>
+    </description>
+    <ixml-grammar>s: [Xq] .</ixml-grammar>
+    <test-case name="bad-class">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+  <test-set name="invalid-range">
+    <created by="ndw" on="2022-02-19"/>
+    <description>
+      <p>An invalid range.</p>
+    </description>
+    <ixml-grammar>s: ['Z'-'A'] .</ixml-grammar>
+    <test-case name="invalid-range">
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+  </test-set>    
+
+</test-catalog>
