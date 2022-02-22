@@ -27,7 +27,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-01-25<!--$--></p>
+<p>Version: <!--$date=-->2022-02-22<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -35,7 +35,8 @@
 
 <div class="toc">
 <ul>
-  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="/Documents/Forms/#status"></a><a
+    href="#introduction">Introduction</a></li>
   <li><a href="#works">How it works</a></li>
   <li><a href="#grammar">The Grammar</a> 
     <ul>
@@ -52,12 +53,13 @@
   <li><a href="#ixml">IXML in IXML</a></li>
   <li><a href="#conformance">Conformance</a> 
     <ul>
-      <li><a href="#L7027">Conformance of grammars</a></li>
-      <li><a href="#L7076">Conformance of processors</a></li>
+      <li><a href="#grammarconformance">Conformance of grammars</a></li>
+      <li><a href="#processorconformance">Conformance of processors</a></li>
     </ul>
   </li>
   <li><a href="#references">References</a></li>
-  <li><a href="#acknowledgments">Acknowledgments</a></li>
+  <li><a href="#L3425">Informational References</a></li>
+  <li><a href="#acknowledgments">Acknowledgements</a></li>
 </ul>
 </div>
 
@@ -532,18 +534,18 @@ class.</p>
 <h2 id="parsing">Parsing</h2>
 
 <p>The root symbol of the grammar is the name of the first rule in the grammar.
-If it is marked as hidden, all of its productions must produce exactly one
-non-hidden nonterminal and no non-hidden terminals before or after that
-nonterminal (in order to match the XML requirement of a single-rooted
-document).</p>
+It may not be marked as an attribute. If it is marked as hidden, all of its
+productions must produce exactly one non-hidden non-attribute nonterminal and
+no non-hidden terminals before or after that nonterminal (in order to match the
+XML requirement of a single-rooted document).</p>
 
 <p>Processors must accept and parse any conforming grammar, and produce at
-least one parse of any input that matches the grammar starting at the root
+least one parse of supplied input that matches the grammar starting at the root
 symbol. If more than one parse results, one is chosen; it is not defined how
 this choice is made, but the resulting parse should be marked as ambiguous by
 including the attribute <code>ixml:state="ambiguous"</code> on the document
 element of the serialisation. The ixml namespace URI is
-"http://invisiblexml.org/NS".</p>
+"<code>http://invisiblexml.org/NS</code>".</p>
 
 <h2 id="serialisation">Serialisation</h2>
 
@@ -749,7 +751,7 @@ prohibited.</em></p>
 and for processors; it cannot be claimed for input streams or input + grammar
 pairs.</p>
 
-<h3 id="L7027">Conformance of grammars</h3>
+<h3 id="grammarconformance">Conformance of grammars</h3>
 
 <p>An ixml grammar in ixml form conforms to this specification if</p>
 <ul>
@@ -782,50 +784,53 @@ conformance requirement.)</p>
   <li>The number represented in a hex encoding of a character must be within
     the Unicode character range, and must not denote a Noncharacter or
     Surrogate code point.</li>
-  <li>If the first rule in a grammar is marked as hidden, all of its
-    productions must produce exactly one non-hidden nonterminal and no
-    non-hidden terminals before or after that nonterminal.</li>
+  <li>The first rule in a grammar may not be marked as an attribute. If it is
+    marked as hidden, all of its productions must produce exactly one
+    non-hidden non-attribute nonterminal and no non-hidden terminals before or
+    after that nonterminal.</li>
 </ul>
 
-<h3 id="L7076">Conformance of processors</h3>
+<h3 id="processorconformance">Conformance of processors</h3>
 
 <p>A conforming processor must accept grammars in ixml form, and should accept
 grammars in XML form. A conforming processor must not accept non-conforming
-grammars. For any conforming grammar and any input, processors must: </p>
+grammars. For any conforming grammar and any input: </p>
 <ul>
-  <li>Parse the input using the grammar specified, and produce an XML document
-    representing a parse tree for the input, or establish that the input is not
-    described by the grammar, and produce an XML document reporting that
-    fact.  Note: together with other requirements, this requires that grammars
-    be processed by an algorithm that accepts and parses any context-free
-    grammar; known parsing algorithms of this class include [<a
-    href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
-    href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a
-    href="#gll">GLL</a>]; see also [<a href="#grune">Grune</a>].</li>
+  <li>Processors must parse by default the entire input using the grammar,
+    determining in the process whether or not the input is described by the
+    grammar. Processors may provide user options for other behaviors, such as
+    parsing the largest, or smallest, prefix of the input that is described by
+    the grammar, or supporting invocation with input streams of indeterminate
+    length.</li>
+  <li>If the input is unambiguously described by the grammar, the resulting
+    parse tree must be serialized to an XML document.</li>
   <li>If more than one parse tree describes the input, the processor must
     serialize one of them. It is not defined how this choice is made, but the
-    resulting parse should be marked as ambiguous by including on the document
-    element of the serialisation the attribute
-    <code>ixml:state="ambiguous"</code>, unless the user has activated an
-    option to suppress this attribute. Processors may produce more than one
-    parse tree, but the default mode of operation must serialize exactly
-  one.</li>
-  <li>If the parse fails, the processor must produce a 'failure document', some
-    XML document with <code>ixml:state="failed"</code> on the document element,
-    with helpful information about where and why it failed; it may be a partial
-    parse tree that includes parts of the parse that succeeded.</li>
-  <li>If the root node in the grammar is marked as an attribute, processors
-    must ignore that marking when serialising the rule as the root.</li>
+    resulting parse must by default be marked as ambiguous by including on the
+    document element of the serialisation the attribute
+    <code>ixml:state="ambiguous"</code>. Processors may provide a user option
+    to suppress that attribute; they may also provide a user option to produce
+    more than one parse tree.</li>
+  <li>If the input is not described by the grammar, the processor must produce
+    some XML document with <code>ixml:state="failed"</code> on the document
+    element, with helpful information about where and why it failed; it may be
+    a partial parse tree that includes parts of the parse that succeeded.</li>
+  <li>If a prefix of the input is described by the grammar, processors may
+    choose either to produce a failure document as described above, or to
+    serialize the resulting parse tree with the attribute
+    <code>ixml:state="prefix"</code>, or if the parse is ambiguous
+    <code>ixml:state="ambiguous prefix"</code>.</li>
   <li>The form in which XML documents are produced is not constrained by this
     specification; processors should be capable of producing serialized XML as
     a character stream, but other forms (e.g. DOM instances or XDM instances)
     may also be used.</li>
-  <li>The processor must by default parse the input in its entirety against the
-    grammar and return either a parse tree or a failure document. Processors
-    may provide user options for other behaviors, such as parsing the largest,
-    or smallest, prefix of the input that is described by the grammar, or
-    supporting invocation with input streams of indeterminate length.</li>
 </ul>
+
+<p>Note: the requirements require that grammars be processed by an algorithm
+that accepts and parses any context-free grammar; known algorithms of this
+class include [<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
+href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
+see also [<a href="#grune">Grune</a>].</p>
 
 <h2 id="references">References</h2>
 
@@ -847,34 +852,34 @@ href="http://www.fileformat.info/info/unicode/category/index.htm">http://www.fil
 Language (XML) 1.0 (Fifth Edition)</em>, W3C, 2008, <a
 href="https://www.w3.org/TR/xml/">https://www.w3.org/TR/xml/</a></p>
 
-<h2>Informational References</h2>
-
-<p id="earley">[Earley] Earley, J. <em>An efficient context-free parsing
-algorithm</em>. Communications of the ACM, 13(2):94–102, February 1970, <a
-href="doi:/home/steven/Common/web/localhost/ixml/10.1145/362007.362035">doi:10.1145/362007.362035</a></p>
-
-<p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
-structure grammars</em>. Communications of the ACM, 11(4):240–247, April
-1968, <a href="doi:10.1145/362991.363001">doi:10.1145/362991.363001</a></p>
+<h2 id="L3425">Informational References</h2>
 
 <p id="cyk">[CYK] Sakai, Itiroo. <em>Syntax in universal translation</em>. In
 1961 International Conference on Machine Translation of Languages and Applied
 Language Analysis, pages 593–608. <a
 href="https://aclanthology.org/www.mt-archive.info/50/NPL-1961-Sakai.pdf">https://aclanthology.org/www.mt-archive.info/50/NPL-1961-Sakai.pdf</a></p>
 
-<p id="glr">[GLR] Masaru Tomita. <em>Generalized LR Parsing</em>. Springer
-Science &amp; Business Media. ISBN 978-1-4615-4034-2. <a
-href="doi:10.1007/978-1-4615-4034-2">doi:10.1007/978-1-4615-4034-2</a></p>
+<p id="earley">[Earley] Earley, J. <em>An efficient context-free parsing
+algorithm</em>. Communications of the ACM, 13(2):94–102, February 1970, <a
+href="doi:/home/steven/Common/web/localhost/ixml/10.1145/362007.362035">doi:10.1145/362007.362035</a></p>
 
 <p id="gll">[GLL] Elizabeth Scott and Adrian Johnstone, <em>GLL Parsing</em>.
 Electronic Notes in Theoretical Computer Science, Volume 253, Issue 7, 17
 September 2010, pages 177-189. <a
 href="doi:10.1016/j.entcs.2010.08.041">doi:10.1016/j.entcs.2010.08.041</a></p>
 
+<p id="glr">[GLR] Masaru Tomita. <em>Generalized LR Parsing</em>. Springer
+Science &amp; Business Media. ISBN 978-1-4615-4034-2. <a
+href="doi:10.1007/978-1-4615-4034-2">doi:10.1007/978-1-4615-4034-2</a></p>
+
 <p id="grune">[Grune] Grune, D. and Jacobs, C. <em>Parsing techniques : a
 practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
 978-0-387-20248-8. <a
 href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p>
+
+<p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
+structure grammars</em>. Communications of the ACM, 11(4):240–247, April
+1968, <a href="doi:10.1145/362991.363001">doi:10.1145/362991.363001</a></p>
 
 <h2 id="acknowledgments">Acknowledgements</h2>
 
