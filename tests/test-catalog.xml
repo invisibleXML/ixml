@@ -27,4 +27,5 @@
   <test-set-ref href="correct/test-catalog.xml"/>
   <test-set-ref href="ixml/test-catalog.xml"/>
   <test-set-ref href="parse/test-catalog.xml"/>
+  <test-set-ref href="error/test-catalog.xml"/>
 </test-catalog>
