@@ -319,18 +319,50 @@
       <result><assert-not-a-grammar/></result>
     </grammar-test>
   </test-set>
-  
-  <test-set name="unused-rule.ixml">
+
+  <test-set name="unused-rule">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unused-rule.ixml"/>
+    <test-case name="unused-rule">
+      <created by="ndw" on="2022-03-01"/>
+      <modified by="ndw" on="2022-03-01"
+	        change="remove undefined rule from test"/>
+      <test-string></test-string>
+      <result>
+        <assert-xml><a xmlns=""><b><c/></b></a></assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="unused-rules">
+    <created by="SP" on="2021-12-16"/>
+    <ixml-grammar-ref href="unused-rules.ixml"/>
+    <test-case name="unused-rules">
+      <created by="ndw" on="2022-03-01"/>
+      <modified by="ndw" on="2022-03-01"
+	        change="remove undefined rules from test"/>
+      <test-string></test-string>
+      <result>
+        <assert-xml><a xmlns=""><b><c/></b></a></assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+  
+  <test-set name="undefined-rule.ixml">
+    <created by="SP" on="2021-12-16"/>
+    <modified by="ndw" on="2022-03-01"
+	      change="remove unused rule from test"/>
+    <ixml-grammar-ref href="undefined-rule.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar/></result>
     </grammar-test>
   </test-set>
   
-  <test-set name="unused-rules.ixml">
+  <test-set name="undefined-rules.ixml">
     <created by="SP" on="2021-12-16"/>
-    <ixml-grammar-ref href="unused-rules.ixml"/>
+    <modified by="ndw" on="2022-03-01"
+	      change="remove unused rules from test"/>
+    <ixml-grammar-ref href="undefined-rules.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar/></result>
     </grammar-test>
