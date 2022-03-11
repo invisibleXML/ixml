@@ -64,6 +64,23 @@
     </test-set>
 
 
+    <test-set name="attribute-multipart">
+      <description>
+        <p>Test that an attribute value constructed from multiple children
+        is correctly interpreted.</p>
+      </description>
+      <created by="ndw" on="2022-03-11"/>
+      <ixml-grammar-ref href="attr-multipart.ixml"/>
+      <test-case name="attribute-multipart">
+        <created by="ndw" on="2022-03-11"/>
+	<test-string>February, 2022</test-string>
+	<result>
+	  <assert-xml><date month="February" xmlns=""><year>2022</year></date></assert-xml>
+	</result>
+      </test-case>
+    </test-set>
+
+
     <test-set name="diary">
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="diary.ixml"/>
