@@ -17,7 +17,7 @@
       pre {margin-left: 2em; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
       code {color: #A00}
       div {border: thin red solid}
-      span {background: yellow} 
+      span.fixme {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
     </style>
 </head>
@@ -57,6 +57,7 @@
       <li><a href="#processorconformance">Conformance of processors</a></li>
     </ul>
   </li>
+  <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
   <li><a href="#acknowledgments">Acknowledgements</a></li>
@@ -371,7 +372,12 @@ a#a!a a!a#a a#a#a</code> etc.</p>
 <pre>nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which must exist, and
-there must only be one such rule.</p>
+there must only be one such rule.
+<span id="s002" class="static error">It is an error (<code>S002</code>) to use a
+nonterminal name that is not defined by a rule in the grammar.</span>
+<span id="s003" class="static error">It is an error (<code>S003</code>) if the grammar
+contains more than one rule for any given nonterminal.</span>
+</p>
 
 <h3 id="terminals">Terminals</h3>
 
@@ -457,8 +463,10 @@ end, inclusive, using the Unicode ordering:</p>
 <p>A class is two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name. E.g.
 <code>[Ll]</code> matches any lower-case letter, <code>[Ll; Lu]</code> matches
-any upper- or lower-case character; it is an error if there is no such
-class.</p>
+any upper- or lower-case character.
+<span id="s001" class="static error">It is an error (<code>S001</code>) to use a
+Unicode character category that is not defined in the Unicode
+specification.</span></p>
 <pre>   class: code, s.
    @code: capital, letter?.
 -capital: ["A"-"Z"].
@@ -555,8 +563,10 @@ provide helpful information about where and why it failed; it may be a partial
 parse tree that includes parts of the parse that succeeded.</p>
 
 <p>If the parse succeeds, the resulting parse-tree is serialised as XML by
-serialising the root node. If the root node is marked as an attribute, that
-marking is ignored.</p>
+serialising the root node.
+<span id="d001" class="dynamic error">It is an error (<code>D001</code>) if the
+root node is marked as an attribute.</span>
+</p>
 
 <p>A parse node is either a nonterminal or a terminal.</p>
 
@@ -832,6 +842,32 @@ class include [<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
 href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
 see also [<a href="#grune">Grune</a>].</p>
 
+<h2 id="errors">Errors</h2>
+
+<p>This section summarizes errors identified in this specification.</p>
+
+<dl>
+<dt><a href="#s001">S001</a></dt>
+<dd><span class="static error">It is an error (<code>S001</code>) to use a
+Unicode character category that is not defined in the Unicode
+specification.</span>
+</dd>
+<dt><a href="#s002">S002</a></dt>
+<dd><span class="static error">It is an error (<code>S002</code>) to use a
+nonterminal name that is not defined by a rule in the grammar.</span>
+</dd>
+<dt><a href="#s003">S003</a></dt>
+<dd><span class="static error">It is an error (<code>S003</code>) if the grammar
+contains more than one rule for any given nonterminal.</span>
+</dd>
+
+<dl>
+<dt><a href="#d001">D001</a></dt>
+<dd><span class="dynamic error">It is an error (<code>D001</code>) if the
+root node is marked as an attribute.</span>
+</dd>
+</dl>
+
 <h2 id="references">References</h2>
 
 <p id="unicode">[Unicode] The Unicode Consortium (ed.), <em>The Unicode
@@ -884,7 +920,7 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 <h2 id="acknowledgments">Acknowledgements</h2>
 
 <p>This specification was produced by the W3C ixml community group, that at the
-time of publishing consisted of the members: <span>{list of names}</span></p>
+time of publishing consisted of the members: <span class="fixme">{list of names}</span></p>
 
 <p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
 specification, and consequent many helpful comments.</p>
