@@ -326,7 +326,7 @@
     <test-case name="unused-rule">
       <created by="ndw" on="2022-03-01"/>
       <modified by="ndw" on="2022-03-01"
-	        change="remove undefined rule from test"/>
+	        change="remove undefined symbol from test"/>
       <test-string></test-string>
       <result>
         <assert-xml><a xmlns=""><b><c/></b></a></assert-xml>
@@ -340,7 +340,7 @@
     <test-case name="unused-rules">
       <created by="ndw" on="2022-03-01"/>
       <modified by="ndw" on="2022-03-01"
-	        change="remove undefined rules from test"/>
+	        change="remove undefined symbol from test"/>
       <test-string></test-string>
       <result>
         <assert-xml><a xmlns=""><b><c/></b></a></assert-xml>
@@ -348,21 +348,21 @@
     </test-case>
   </test-set>
   
-  <test-set name="undefined-rule.ixml">
+  <test-set name="undefined-symbol">
     <created by="SP" on="2021-12-16"/>
     <modified by="ndw" on="2022-03-01"
 	      change="remove unused rule from test"/>
-    <ixml-grammar-ref href="undefined-rule.ixml"/>
+    <ixml-grammar-ref href="undefined-symbol.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar/></result>
     </grammar-test>
   </test-set>
   
-  <test-set name="undefined-rules.ixml">
+  <test-set name="undefined-symbols">
     <created by="SP" on="2021-12-16"/>
     <modified by="ndw" on="2022-03-01"
 	      change="remove unused rules from test"/>
-    <ixml-grammar-ref href="undefined-rules.ixml"/>
+    <ixml-grammar-ref href="undefined-symbol.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar/></result>
     </grammar-test>
