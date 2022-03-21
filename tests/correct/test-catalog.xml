@@ -176,6 +176,8 @@
 		  change="remove trailing whitespace from input"/>
 	<modified by="MSM" on="2022-01-01"
 		  change="remove whitespace from expected result"/>
+	<modified by="ndw" on="2022-03-21"
+		  change="changed to the correct error, not-a-sentence"/>
 	<test-string-ref href="expr1.inp"/>
 	<description>
 	  <p>We may need a new assertion: if taken literally this
@@ -187,10 +189,7 @@
 	  <p>To be discussed, probably at length.</p>
 	</description>
 	<result>
-	  <assert-not-a-grammar/>
-	  <!--
-          <assert-xml-ref href="expr1.output.xml"/>
-	  -->
+	  <assert-not-a-sentence/>
 	</result>
       </test-case>
     </test-set>
