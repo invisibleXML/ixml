@@ -565,7 +565,7 @@ parse tree that includes parts of the parse that succeeded.</p>
 <p>If the parse succeeds, the resulting parse-tree is serialised as XML by
 serialising the root node.
 <span id="d001" class="dynamic error">It is an error (<code>D001</code>) if the
-root node is marked as an attribute.</span>
+outermost node serialized to XML is marked as an attribute.</span>
 </p>
 
 <p>A parse node is either a nonterminal or a terminal.</p>
@@ -860,6 +860,7 @@ nonterminal name that is not defined by a rule in the grammar.</span>
 <dd><span class="static error">It is an error (<code>S003</code>) if the grammar
 contains more than one rule for any given nonterminal.</span>
 </dd>
+</dl>
 
 <dl>
 <dt><a href="#d001">D001</a></dt>
