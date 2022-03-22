@@ -1492,68 +1492,12 @@ use of a reserved prefix in their QName.
 
 ## Open issues
 
-* Ideally we would prefer to allow annotations on rules to precede the
-  mark on the left-hand side; an earlier version of the bracket-QName
-  proposal did allow them there, rather than after the mark.  The
-  current version was changed in order to allow pragmas at the
-  beginning of a grammar to be attached to the grammar as a whole.
-
-  If pragmas occurring outside rules are syntactically distinct, then 
-  pragmas can occur both before the mark on a left-hand side and 
-  between rules.  It does complicate the grammar a bit.  Worth doing?
-  
-  Easiest approach may be to require a full stop after pragmas occurring
-  outside of rules.  
-  
-  * Change ixml rule to `ixml: SPS, rule+SPS, SPS.`
-  * Define SPS as `-SPS: (S; (pragma, S, '.'))*.`
-  
-  Or alternatively just change the rule for ixml and define two forms
-  of pragma:
-  
-  * `ixml:  S, (rule; Pragma)+S, S.`
-  * `Pragma:  pragma, S, '.'.`
-
-  *Agreed:  use full stops, with second grammar form.*
-
-* One result of the current design is that while for pragmas on symbols 
-  in a *right-hand side* it doesn't matter whether they come before or 
-  after the mark, on the *left-hand side* it does matter.  It might be 
-  less confusing to require that pragmas follow the mark on the 
-  right-hand side, to make it parallel to the left-hand side.  Or it 
-  might be less irritating to allow them either before or after the mark.  
-  At the moment, the proposal takes the second course.
-
-  *Agreement on previous item covers this.*
-
 * The fact that extension elements can contain things that are
   implicit but not explicit in the ixml form means that a schema for
   the visible-XML form of a grammar, as described here, requires
   manual intervention and not just a mechanical derivation from the
   ixml grammar for ixml.  That will make some people nervous, as it
   makes us.
-
-* Should ixml pragmas marked `@` be restricted in where they can 
-  appear (e.g. before the first rule, not later; on the LHS of a rule,
-  not before the stop)?  Rationale for current decision: it's simpler
-  not to restrict them, and restricting them does not allow us to get
-  rid of the rule that their precise location carries no meaning,
-  since we would still have to specify that their position relative to
-  other pragmas is not signficant.
-
-  *Restrict all grammar-level pragmas to occur before the first rule.*
-
-* Should the ixml pragmas for namespace declarations cause standard
-  XML namespace declarations for all prefixes declared?  That would
-  allow an XSLT or XQuery processor to understand the namespace
-  bindings relevant for QNames appearing as nonterminal names.
-  Rationale for current decision:  it's an example, not a proposal for
-  the spec, and it's complicated enough already.
-
-  *In the V proposal, this is required, since attributes and elements
-  may be using qualified names with bound prefixes.  In the F
-  proposal, it's not required but it may be advantageous.  It will
-  probably be simpler to specify that it always happens.*
 
 * Allow pragmas between `alt` elements / immediately before the
   separator between top-level alternatives in a right-hand side?
