@@ -310,7 +310,9 @@ allowed.</p>
 <p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
 indicates whether the item so marked will be serialised as an attribute
 (<code>@</code>), an element with its children (<code>^</code>), which is the
-default, or only its children (<code>-</code>).</p>
+default, or only its children (<code>-</code>).
+<span id="s006" class="static error">It is an error (<code>S006</code>) if an
+invalid character appears in the mark.</span></p>
 <pre>@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
@@ -420,6 +422,12 @@ range.</p>
 <pre>-encoded: (tmark, s)?, -"#", @hex, s.
      hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
+<p><span id="s004" class="static error">It is an (<code>S004</code>) if the hex
+encoding uses any characters not allowed in hexidecimal.</span>
+<span id="s005" class="static error">It is an (<code>S005</code>) if the
+hexidecimal value is not within the Unicode code-point range.</span>
+</p>
+
 <h3 id="characters">Character sets</h3>
 
 <p>A character set is an inclusion or an exclusion: an inclusion matches one
@@ -459,6 +467,12 @@ end, inclusive, using the Unicode ordering:</p>
 <pre>-character: -'"', dchar, -'"';
             -"'", schar, -"'";
             "#", hex.</pre>
+
+<p><span id="s007" class="static error">It is an error (<code>S007</code>) if the
+starting or ending character of a range consists of more than one character.</span>
+<span id="s008" class="static error">It is an error (<code>S008</code>) if the
+first character in a range has a code point value greater than or equal to the
+second character in the range.</span></p>
 
 <p>A class is two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name. E.g.
@@ -563,9 +577,14 @@ provide helpful information about where and why it failed; it may be a partial
 parse tree that includes parts of the parse that succeeded.</p>
 
 <p>If the parse succeeds, the resulting parse-tree is serialised as XML by
-serialising the root node.
+serialising the root node. The serialized XML must be well-formed.
 <span id="d001" class="dynamic error">It is an error (<code>D001</code>) if the
 outermost node serialized to XML is marked as an attribute.</span>
+<span id="d002" class="dynamic error">It is an error (<code>D002</code>) if the
+name of any element or attribute is not a valid XML name.</span>
+<span id="d003" class="dynamic error">It is an error (<code>D003</code>) if two
+different nonterminals with the same name are serialized as attributes on the
+same element.</span>
 </p>
 
 <p>A parse node is either a nonterminal or a terminal.</p>
@@ -846,27 +865,70 @@ see also [<a href="#grune">Grune</a>].</p>
 
 <p>This section summarizes errors identified in this specification.</p>
 
-<dl>
-<dt><a href="#s001">S001</a></dt>
-<dd><span class="static error">It is an error (<code>S001</code>) to use a
-Unicode character category that is not defined in the Unicode
-specification.</span>
-</dd>
-<dt><a href="#s002">S002</a></dt>
-<dd><span class="static error">It is an error (<code>S002</code>) to use a
-nonterminal name that is not defined by a rule in the grammar.</span>
-</dd>
-<dt><a href="#s003">S003</a></dt>
-<dd><span class="static error">It is an error (<code>S003</code>) if the grammar
-contains more than one rule for any given nonterminal.</span>
-</dd>
-</dl>
+<!-- N.B. Update this list with tools/error-summary.xsl whenever 
+     error codes are added or changed. -->
 
-<dl>
-<dt><a href="#d001">D001</a></dt>
-<dd><span class="dynamic error">It is an error (<code>D001</code>) if the
-root node is marked as an attribute.</span>
-</dd>
+<dl xmlns="http://www.w3.org/1999/xhtml">
+   <dt>
+      <a href="#s001">S001</a>
+   </dt>
+   <dd>It is an error (<code>S001</code>) to use a
+Unicode character category that is not defined in the Unicode
+specification.</dd>
+   <dt>
+      <a href="#s002">S002</a>
+   </dt>
+   <dd>It is an error (<code>S002</code>) to use a
+nonterminal name that is not defined by a rule in the grammar.</dd>
+   <dt>
+      <a href="#s003">S003</a>
+   </dt>
+   <dd>It is an error (<code>S003</code>) if the grammar
+contains more than one rule for any given nonterminal.</dd>
+   <dt>
+      <a href="#s004">S004</a>
+   </dt>
+   <dd>It is an (<code>S004</code>) if the hex
+encoding uses any characters not allowed in hexidecimal.</dd>
+   <dt>
+      <a href="#s005">S005</a>
+   </dt>
+   <dd>It is an (<code>S005</code>) if the
+hexidecimal value is not within the Unicode code-point range.</dd>
+   <dt>
+      <a href="#s006">S006</a>
+   </dt>
+   <dd>It is an error (<code>S006</code>) if an
+invalid character appears in the mark.</dd>
+   <dt>
+      <a href="#s007">S007</a>
+   </dt>
+   <dd>It is an error (<code>S007</code>) if the
+starting or ending character of a range consists of more than one character.</dd>
+   <dt>
+      <a href="#s008">S008</a>
+   </dt>
+   <dd>It is an error (<code>S008</code>) if the
+first character in a range has a code point value greater than or equal to the
+second character in the range.</dd>
+</dl>
+<dl xmlns="http://www.w3.org/1999/xhtml">
+   <dt>
+      <a href="#d001">D001</a>
+   </dt>
+   <dd>It is an error (<code>D001</code>) if the
+outermost node serialized to XML is marked as an attribute.</dd>
+   <dt>
+      <a href="#d002">D002</a>
+   </dt>
+   <dd>It is an error (<code>D002</code>) if the
+name of any element or attribute is not a valid XML name.</dd>
+   <dt>
+      <a href="#d003">D003</a>
+   </dt>
+   <dd>It is an error (<code>D003</code>) if two
+different nonterminals with the same name are serialized as attributes on the
+same element.</dd>
 </dl>
 
 <h2 id="references">References</h2>
