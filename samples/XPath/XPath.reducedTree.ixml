@@ -1,6 +1,4 @@
 
-         
-         {rules: 141 Optionals: Expr OrExpr AndExpr ComparisonExpr StringConcatExpr RangeExpr AdditiveExpr MultiplicativeExpr UnionExpr IntersectExceptExpr InstanceofExpr TreatExpr CastExpr ArrowExpr UnaryExpr SimpleMapExpr PathExpr RelativePathExpr AxisStep ForwardStep PostfixExpr}
 XPath:  s?, OPT-Expr, s?. 
                
 ParamList:  Param, ( ',', Param )*. 

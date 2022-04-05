@@ -28,8 +28,8 @@ Samples in this directory include:
   Requests for Comment, as defined in RFC.  (Coming real soon now.)
 
 * XPath: two ixml versions of the grammar for XPath3.1 expressions:
-    **XPath.ixml** produces a full parse tree, **XPath.reducedTree.ixml** produces
-    a minimised parse tree where any element which has only a single child is removed 
+    **XPath.ixml** produces a full parse tree, **XPath.reducedTree.ixml**  (derived from a decorated version of the full grammar) produces
+    a minimised parse tree where any element in the resulting parse tree which would have only a single child is removed 
       - this for example ensures that a simple integer is returned as a single element, rather a tree some 30+ levels deep.
 
 

@@ -1,6 +1,4 @@
 
-         
-         {rules: 141}
 XPath: s?, Expr, s?. 
                
 ParamList: Param, ( ',', Param )*. 
