@@ -1,0 +1,381 @@
+
+         
+         {rules: 141 Optionals: Expr OrExpr AndExpr ComparisonExpr StringConcatExpr RangeExpr AdditiveExpr MultiplicativeExpr UnionExpr IntersectExceptExpr InstanceofExpr TreatExpr CastExpr ArrowExpr UnaryExpr SimpleMapExpr PathExpr RelativePathExpr AxisStep ForwardStep PostfixExpr}
+XPath:  s?, OPT-Expr, s?. 
+               
+ParamList:  Param, ( ',', Param )*. 
+               
+Param:  -'$', EQName, TypeDeclaration?. 
+               
+FunctionBody:  EnclosedExpr. 
+               
+EnclosedExpr:  -'{', s?, OPT-Expr?, s?, -'}'. 
+               
+-OPT-Expr:INV-Expr;Expr.
+ -INV-Expr:  ExprSingle  .
+ Expr:  ExprSingle, ( s?,',',s?, ExprSingle )+. 
+               
+-ExprSingle:  ForExpr;
+   LetExpr;
+   QuantifiedExpr;
+   IfExpr;
+   OPT-OrExpr. 
+               
+ForExpr:  -SimpleForClause, s, -'return', s, ExprSingle. 
+               
+SimpleForClause:  -'for', s, SimpleForBinding, ( -',', s?, SimpleForBinding )*. 
+               
+SimpleForBinding:  s?, -'$', VarName, s, -'in', s, ExprSingle. 
+               
+LetExpr:  -SimpleLetClause, s, -'return', s, ExprSingle. 
+               
+SimpleLetClause:  -'let', s, SimpleLetBinding, ( -',', s?, SimpleLetBinding )*. 
+               
+SimpleLetBinding:  -'$', -VarName, s?, -':=', s?, ExprSingle. 
+               
+QuantifiedExpr:  @QuantOp,s, -'$', -VarName,s, -'in', s, ExprSingle, 
+      ( ',', -'$', VarName,s,-'in',s, ExprSingle )*, s, -'satisfies', s, ExprSingle. 
+               
+@QuantOp:    ( 'some' ; 'every' ). 
+               
+IfExpr:  -'if', -'(', OPT-Expr, -')', s, -'then', s, ExprSingle,s, -'else',s, ExprSingle. 
+               
+-OPT-OrExpr:INV-OrExpr;OrExpr.
+ -INV-OrExpr:  OPT-AndExpr .
+ OrExpr:  OPT-AndExpr, s, -'or', s, OPT-OrExpr. 
+               
+-OPT-AndExpr:INV-AndExpr;AndExpr.
+ -INV-AndExpr:  OPT-ComparisonExpr .
+ AndExpr:  OPT-ComparisonExpr, s, -'and', s, OPT-AndExpr. 
+               
+-OPT-ComparisonExpr:INV-ComparisonExpr;ComparisonExpr.
+ -INV-ComparisonExpr:  OPT-StringConcatExpr .
+ ComparisonExpr:  OPT-StringConcatExpr, (s, ( @ValueComp ; @GeneralComp ;@ NodeComp ), s, OPT-StringConcatExpr ). 
+               
+-OPT-StringConcatExpr:INV-StringConcatExpr;StringConcatExpr.
+ -INV-StringConcatExpr:  OPT-RangeExpr .
+ StringConcatExpr:  OPT-RangeExpr, s?, '||', s?, OPT-StringConcatExpr. 
+               
+-OPT-RangeExpr:INV-RangeExpr;RangeExpr.
+ -INV-RangeExpr:  OPT-AdditiveExpr .
+ RangeExpr:  OPT-AdditiveExpr,  s, -'to', s, OPT-AdditiveExpr. 
+               
+-OPT-AdditiveExpr:INV-AdditiveExpr;AdditiveExpr.
+ -INV-AdditiveExpr:  OPT-MultiplicativeExpr .
+ AdditiveExpr: 
+   OPT-MultiplicativeExpr,  s?, AddOp, s?, OPT-AdditiveExpr. 
+               
+@AddOp:  ( '+' ; '-' ). 
+               
+-OPT-MultiplicativeExpr:INV-MultiplicativeExpr;MultiplicativeExpr.
+ -INV-MultiplicativeExpr:  OPT-UnionExpr .
+ MultiplicativeExpr: 
+   OPT-UnionExpr,  MultOp, OPT-MultiplicativeExpr. 
+               
+@MultOp:   (s?,'*',s?) ; (s, ('div' ; 'idiv' ; 'mod'),s). 
+               
+-OPT-UnionExpr:INV-UnionExpr;UnionExpr.
+ -INV-UnionExpr:  OPT-IntersectExceptExpr .
+ UnionExpr:  OPT-IntersectExceptExpr, s, ( 'union' ; '|' ), s,  OPT-UnionExpr. 
+               
+-OPT-IntersectExceptExpr:INV-IntersectExceptExpr;IntersectExceptExpr.
+ -INV-IntersectExceptExpr:  OPT-InstanceofExpr .
+ IntersectExceptExpr:  OPT-InstanceofExpr,  s, IntersectOp, s, OPT-IntersectExceptExpr. 
+               
+@IntersectOp:  'intersect' ;'except'. 
+               
+-OPT-InstanceofExpr:INV-InstanceofExpr;InstanceofExpr.
+ -INV-InstanceofExpr:  OPT-TreatExpr .
+ InstanceofExpr:  OPT-TreatExpr,  (s, -'instance', s, -'of', s, @SequenceType). 
+               
+-OPT-TreatExpr:INV-TreatExpr;TreatExpr.
+ -INV-TreatExpr:  OPT-CastExpr .
+ TreatExpr:  OPT-CastExpr,  (s, -'treat', s, -'as', s, @SequenceType). 
+               
+-OPT-CastExpr:INV-CastExpr;CastExpr.
+ -INV-CastExpr:  OPT-ArrowExpr .
+ CastExpr:  OPT-ArrowExpr, ( s, -'cast', s,-'as', s, @SingleType ). 
+               
+-OPT-ArrowExpr:INV-ArrowExpr;ArrowExpr.
+ -INV-ArrowExpr:  OPT-UnaryExpr .
+ ArrowExpr:  OPT-UnaryExpr, ( '=>', ArrowFunctionSpecifier, ArgumentList ). 
+               
+-OPT-UnaryExpr:INV-UnaryExpr;UnaryExpr.
+ -INV-UnaryExpr:  ValueExpr .
+ UnaryExpr:  ( '-' ; '+' ), OPT-UnaryExpr. 
+               
+-ValueExpr:  OPT-SimpleMapExpr. 
+               
+GeneralComp:  '='; '!='; '<'; '<='; '>'; '>='. 
+               
+ValueComp:  'eq'; 'ne'; 'lt'; 'le'; 'gt'; 'ge'. 
+               
+NodeComp:  'is'; '<<'; '>>'. 
+               
+-OPT-SimpleMapExpr:INV-SimpleMapExpr;SimpleMapExpr.
+ -INV-SimpleMapExpr:  OPT-PathExpr .
+ SimpleMapExpr:  OPT-PathExpr, ( '!', OPT-SimpleMapExpr ). 
+               
+-OPT-PathExpr:INV-PathExpr;PathExpr.
+ -INV-PathExpr:  OPT-RelativePathExpr .
+ PathExpr:  step, OPT-RelativePathExpr. 
+               
+-OPT-RelativePathExpr:INV-RelativePathExpr;RelativePathExpr.
+ -INV-RelativePathExpr:  StepExpr .
+ RelativePathExpr:  StepExpr, ( step, OPT-RelativePathExpr ). 
+               
+@step:  '/'; '//'. 
+               
+-StepExpr:  OPT-PostfixExpr; OPT-AxisStep. 
+               
+-OPT-AxisStep:INV-AxisStep;AxisStep.
+ -INV-AxisStep:  DirectedStep .
+ AxisStep:  DirectedStep, PredicateList. 
+               
+-DirectedStep:  ReverseStep;OPT-ForwardStep. 
+               
+-OPT-ForwardStep:INV-ForwardStep;ForwardStep.
+ -INV-ForwardStep:  AbbrevForwardStep .
+ ForwardStep: 
+   @ForwardAxis, NodeTest. 
+               
+ForwardAxis:  'child::';
+  'descendant::';
+  'attribute::';
+  'self::';
+  'descendant-or-self::';
+  'following-sibling::';
+  'following::';
+  'namespace::'. 
+               
+-AbbrevForwardStep:  ChildStep; AttributeStep. 
+               
+ChildStep:  -QName. 
+               
+AttributeStep:  -'@', -QName. 
+               
+ReverseStep:  @ReverseAxis, NodeTest;
+   @AbbrevReverseStep. 
+               
+ReverseAxis:  'parent::';
+   'ancestor::';
+   'preceding-sibling::';
+   'preceding::';
+   'ancestor-or-self::'. 
+               
+AbbrevReverseStep:  '..'. 
+               
+-NodeTest:   KindTest; NameTest. 
+               
+-NameTest:  EQName; Wildcard. 
+               
+-OPT-PostfixExpr:INV-PostfixExpr;PostfixExpr.
+ -INV-PostfixExpr:  PrimaryExpr .
+ PostfixExpr:  PrimaryExpr, ( Predicate ; ArgumentList ; Lookup )+ . 
+               
+ArgumentList:  -'(',s?, ( -Argument,(s?,  -',', s?, -Argument )* )?, s?, -')'. 
+               
+PredicateList:  -Predicate+. 
+               
+Predicate:  -'[', OPT-Expr, -']'. 
+               
+Lookup:  -'?', KeySpecifier. 
+               
+KeySpecifier:  NCName; IntegerLiteral; ParenthesizedExpr; '*'. 
+               
+-ArrowFunctionSpecifier:  EQName; VarRef; ParenthesizedExpr. 
+               
+-PrimaryExpr:  Literal;
+   VarRef;
+   ParenthesizedExpr;
+   ContextItemExpr;
+   FunctionCall;
+   FunctionItemExpr;
+   MapConstructor;
+   ArrayConstructor;
+   UnaryLookup. 
+               
+-Literal:   NumericLiteral; StringLiteral. 
+               
+-NumericLiteral:   IntegerLiteral; DecimalLiteral; DoubleLiteral. 
+               
+VarRef:  -'$', -VarName. 
+               
+VarName:  EQName. 
+               
+-ParenthesizedExpr:  -'(', OPT-Expr?, -')'. 
+               
+ContextItemExpr:  -'.'. 
+               
+FunctionCall:  -FunctionEQName, ArgumentList. 
+               
+-Argument:  ExprSingle; ArgumentPlaceholder. 
+               
+ArgumentPlaceholder:  -'?'. 
+               
+-FunctionItemExpr:  NamedFunctionRef; InlineFunctionExpr. 
+               
+NamedFunctionRef:  -FunctionEQName, -'#', IntegerLiteral. 
+               
+InlineFunctionExpr:  -'function', -'(', ParamList?, -')', ( s, -'as', s, SequenceType )?, s?, FunctionBody. 
+               
+MapConstructor:  -'map', -'{', ( MapConstructorEntry, ( s?, -',', s?, MapConstructorEntry )* )?, -'}'. 
+               
+MapConstructorEntry:  MapKeyExpr, s?,-':',s?, MapValueExpr. 
+               
+-MapKeyExpr:  ExprSingle. 
+               
+-MapValueExpr:  ExprSingle. 
+               
+ArrayConstructor:  SquareArrayConstructor; CurlyArrayConstructor. 
+               
+-SquareArrayConstructor:  -'[', ( ExprSingle, ( s?, -',', s?, ExprSingle )* )?, -']'. 
+               
+-CurlyArrayConstructor:  -'array', -'{', OPT-Expr?, -'}'. 
+               
+UnaryLookup:  -'?', KeySpecifier. 
+               
+SingleType:  SimpleTypeName, '?'?. 
+               
+TypeDeclaration:  -'as', SequenceType. 
+               
+SequenceType:  'empty-sequence()';
+   ItemType, OccurrenceIndicator?. 
+               
+@OccurrenceIndicator:  '?'; '*'; '+'. 
+               
+ItemType:  KindTest;
+   'item()';
+   FunctionTest;
+   MapTest;
+   ArrayTest;
+   AtomicOrUnionType;
+   ParenthesizedItemType. 
+               
+AtomicOrUnionType:  EQName. 
+               
+-KindTest:  DocumentTest;
+   ElementTest;
+   AttributeTest;
+   SchemaElementTest;
+   SchemaAttributeTest;
+   PITest;
+   CommentTest;
+   TextTest;
+   NamespaceNodeTest;
+   AnyKindTest. 
+               
+AnyKindTest:  'node()'. 
+               
+DocumentTest:  -'document-node(' , ( ElementTest ; SchemaElementTest )?, -')'. 
+               
+TextTest:  -'text()'. 
+               
+CommentTest:  -'comment()'. 
+               
+NamespaceNodeTest:  -'namespace-node()'. 
+               
+PITest:   -'processing-instruction(' , ( NCName ; StringLiteral )?, -')'. 
+               
+AttributeTest:  -'attribute(' ,( AttribNameOrWildcard, ( ',', TypeName )? )?, -')'. 
+               
+AttribNameOrWildcard:  AttributeName; '*'. 
+               
+SchemaAttributeTest:  -'schema-attribute(', AttributeDeclaration, -')'. 
+               
+AttributeDeclaration:  AttributeName. 
+               
+ElementTest:  -'element(' , ( ElementNameOrWildcard, ( ',', TypeName, '?'? )? )?, -')'. 
+               
+ElementNameOrWildcard:  ElementName;'*'. 
+               
+SchemaElementTest:  -'schema-element(', ElementDeclaration, -')'. 
+               
+ElementDeclaration:  ElementName. 
+               
+AttributeName:  EQName. 
+               
+ElementName:  EQName. 
+               
+SimpleTypeName:  EQName. 
+               
+TypeName:  EQName. 
+               
+FunctionTest:  AnyFunctionTest; TypedFunctionTest. 
+               
+AnyFunctionTest:  -'function(*)'. 
+               
+TypedFunctionTest:  -'function(', ( SequenceType, ( -',', SequenceType )* )?, -')', s, -'as', s, SequenceType. 
+               
+MapTest:  AnyMapTest; TypedMapTest. 
+               
+AnyMapTest:  -'map(*)'. 
+               
+TypedMapTest:  -'map(', s?, AtomicOrUnionType,s?,  -',', s?,  SequenceType, s?, -')'. 
+               
+ArrayTest:  AnyArrayTest; TypedArrayTest. 
+               
+AnyArrayTest:  -'array(*)'. 
+               
+TypedArrayTest:  -'array(', s, SequenceType, s, -')'. 
+               
+ParenthesizedItemType:  -'(',s, ItemType,s, -')'. 
+               
+FunctionEQName:  FunctionName; URIQualifiedName. 
+               
+-EQName:  QName; URIQualifiedName. 
+               
+-QName:  FunctionName. 
+               
+-FunctionName:  QNameToken. 
+               
+StringLiteral:   -'"', ( EscapeQuot; ~['"'] )*, -'"';
+   -"'", ( EscapeApos ; ~["'"] )*, -"'". 
+               
+IntegerLiteral:   -Digits. 
+               
+DecimalLiteral:   '.', -Digits;
+   -Digits, '.', ['0'-'9']*. 
+               
+DoubleLiteral:   ( '.', -Digits ; -Digits, ( '.', ['0'-'9']* )? ), ['e'; 'E'], -Digits. 
+               
+-URIQualifiedName:  BracedURILiteral, NCName. 
+               
+BracedURILiteral:  'Q', '{', ~['{';'}']*, '}'. 
+               
+EscapeQuot:   '""'. 
+               
+EscapeApos:   "''". 
+               
+-QNameToken:  PrefixedName;  UnprefixedName. 
+               
+PrefixedName:  @Prefix, -':', @LocalPart. 
+               
+UnprefixedName:  @LocalPart. 
+               
+Prefix:  NCName. 
+               
+LocalPart:  NCName. 
+               
+NCName:  @Name. 
+               
+-NameStartChar:  ['A'-'Z'];
+   '_';
+   ['a'-'z']. 
+               
+-NameChar:  NameStartChar;
+   '-';
+   '.';
+   ['0'-'9']. 
+               
+Name:  NameStartChar, NameChar*. 
+               
+-s:   -[' ';#a;#d]+. 
+               
+Wildcard:  '*';
+   NCName, ':', '*';
+   '*', ':', NCName;
+   BracedURILiteral, '*'. 
+               
+Digits:   ['0'-'9']+. 
+               
