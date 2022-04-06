@@ -20,7 +20,13 @@
       span.todo {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
       span.conform {font-weight: bold}
+  </style>
+  <!--
+    <style type="text/css" rel="alternate stylesheet" title="Fragments">
+       p, h3 {display: none}
+       pre.frag {display: block}
     </style>
+    -->
 </head>
 
 <body>
@@ -28,7 +34,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-03-17<!--$--></p>
+<p>Version: <!--$date=-->2022-03-29<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -285,13 +291,15 @@ in the serialised result, giving:</p>
 that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is a sequence of one or more rules, surrounded and separated by
-spacing and comments:</p>
-<pre>ixml: s, rule+s, s.</pre>
+spacing and comments. Spacing and comments are entirely optional, except that
+rules must be separated by at least one of either.</p>
+<pre class="frag">ixml: s, rule+S, s.</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments. A
 comment is enclosed in braces, and can included nested comments, to enable
 commenting out parts of a grammar:</p>
-<pre>         -s: (whitespace; comment)*.
+<pre class="frag">         -s: (whitespace; comment)*.
+         -S: (whitespace; comment)+.
 -whitespace: -[Zs]; tab; lf; cr.
        -tab: -#9.
         -lf: -#a.
@@ -304,13 +312,13 @@ commenting out parts of a grammar:</p>
 <p>A rule consists of an optional mark, a name, and one or more alternatives.
 The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
-<pre>rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
+<pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
 <p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
 indicates whether the item so marked will be serialised as an attribute
 (<code>@</code>), an element with its children (<code>^</code>), which is the
 default, or only its children (<code>-</code>).</p>
-<pre>@mark: ["@^-"].</pre>
+<pre class="frag">@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
 digit, underscore, a small number of punctuation characters, and the Unicode
@@ -319,27 +327,24 @@ used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialised names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
-<pre>        @name: namestart, namefollower*.
+<pre class="frag">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
--namefollower: namestart; ["-·‿⁀"; Nd; Mn].</pre>
-
-<p>Alternatives are separated by a semicolon or a vertical bar. The grammar
-here uses semicolons.</p>
-<pre>alts: alt+(-[";|"], s).</pre>
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].Alternatives are separated by a semicolon or a vertical bar. The grammar here uses semicolons.</pre>
+<pre class="frag">alts: alt+(-[";|"], s).</pre>
 
 <p>An alternative is zero or more terms, separated by commas:</p>
-<pre>alt: term*(-",", s).</pre>
+<pre class="frag">alt: term*(-",", s).</pre>
 
 <p>A term is a singleton factor, an optional factor, or a repeated factor,
 repeated zero or more times, or one or more times.</p>
-<pre>-term: factor;
+<pre class="frag">-term: factor;
        option;
        repeat0;
        repeat1.</pre>
 
 <p>A factor is a terminal, a nonterminal, or a bracketed series of
 alternatives:</p>
-<pre>-factor: terminal;
+<pre class="frag">-factor: terminal;
          nonterminal;
          -"(", s, alts, -")", s.</pre>
 
@@ -347,28 +352,28 @@ alternatives:</p>
 followed by a separator, e.g. <code>abc*</code> and <code>abc*","</code>. For
 instance <code>"a"*"#"</code> would match the empty string, <code>a
 </code><code>a#a a#a#a</code> etc.</p>
-<pre>repeat0: factor, -"*", s, sep?.</pre>
+<pre class="frag">repeat0: factor, -"*", s, sep?.</pre>
 
 <p>Similarly, a factor repeated one or more times is followed by a plus,
 optionally followed by a separator, e.g. <code>abc+</code> and
 <code>abc+","</code>. For instance <code>"a"+"#"</code> would match <code>a
 </code><code>a#a a#a#a</code> etc., but not the empty string.</p>
-<pre>repeat1: factor, -"+", s, sep?.</pre>
+<pre class="frag">repeat1: factor, -"+", s, sep?.</pre>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
 For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p>
-<pre>option: factor, -"?", s.</pre>
+<pre class="frag">option: factor, -"?", s.</pre>
 
 <p>A separator can be any factor. E.g. <code>abc*def</code> or <code>abc*(",";
 ".")</code>. For instance <code>"a"+("#"; "!")</code> would match <code>a#a a!a
 a#a!a a!a#a a#a#a</code> etc.</p>
-<pre>sep: factor.</pre>
+<pre class="frag">sep: factor.</pre>
 
 <h3 id="nonterminals">Nonterminals</h3>
 
 <p>A nonterminal is an optionally marked name:</p>
-<pre>nonterminal: (mark, s)?, name, s.</pre>
+<pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which <span
 class="conform">must</span> exist, and there <span class="conform">must</span>
@@ -380,12 +385,12 @@ only be one such rule.</p>
 characters in the input. A terminal cannot be marked as an attribute. Since a
 terminal has no children, if it is marked with "-", it will serialise to the
 empty string.</p>
-<pre>-terminal: literal; 
+<pre class="frag">-terminal: literal; 
            charset.</pre>
 
 <p>A literal is either a quoted string, or a hexadecimally encoded
 character:</p>
-<pre>  literal: quoted;
+<pre class="frag">  literal: quoted;
            encoded.</pre>
 
 <p>A quoted string is an optionally marked string of one or more characters,
@@ -396,7 +401,7 @@ same string in the input. Examples: <code>"yes" 'yes'. </code></p>
 enclosing quote is represented in a string by doubling it; these two strings
 are identical: <code>'Isn''t it?' "Isn't it?"</code>, as are these: <code>"He
 said ""Don't!""" 'He said "Don''t!"'</code>.</p>
-<pre> -quoted: (tmark, s)?, string, s.
+<pre class="frag"> -quoted: (tmark, s)?, string, s.
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
@@ -413,7 +418,7 @@ hexadecimal, and the character at that Unicode code-point is used [<a
 href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
 within the Unicode code-point range, and <span class="conform">must</span> not
 denote a Noncharacter or Surrogate code point.</p>
-<pre>-encoded: (tmark, s)?, -"#", hex, s.
+<pre class="frag">-encoded: (tmark, s)?, -"#", hex, s.
     @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
 <h3 id="characters">Character sets</h3>
@@ -436,7 +441,7 @@ closing brace.</p>
 <p>Note that the empty inclusion <code>[]</code> would fail to match any
 character in the input; on the other hand <code>~[]</code> would match any one
 character, whatever it is.</p>
-<pre> -charset: inclusion; 
+<pre class="frag"> -charset: inclusion; 
            exclusion.
 inclusion: (tmark, s)?,          set.
 exclusion: (tmark, s)?, -"~", s, set.
@@ -450,12 +455,12 @@ exclusion: (tmark, s)?, -"~", s, set.
 end, inclusive, using the Unicode ordering. The <code>from</code> character
 <span class="conform">must</span> not be later in the ordering than the
 <code>to</code> character.</p>
-<pre>range: from, s, -"-", s, to, s.
+<pre class="frag">range: from, s, -"-", s, to, s.
 @from: character.
   @to: character.</pre>
 
 <p>A character is a string of length one, or a hex encoded character:</p>
-<pre>-character: -'"', dchar, -'"';
+<pre class="frag">-character: -'"', dchar, -'"';
             -"'", schar, -"'";
             "#", hex.</pre>
 
@@ -464,15 +469,16 @@ character category [<a href="#categories">Categories</a>] of that name, which
 <span class="conform">must</span> exist. E.g. <code>[Ll]</code> matches any
 lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
 character.</p>
-<pre>   class: code, s.
+<pre class="frag">   class: code, s.
    @code: capital, letter?.
 -capital: ["A"-"Z"].
  -letter: ["a"-"z"].</pre>
 
 <h3 id="complete">Complete</h3>
-<pre>         ixml: s, rule+s, s.
+<pre>         ixml: s, rule+S, s.
 
            -s: (whitespace; comment)*.
+           -S: (whitespace; comment)+.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
           -lf: -#a.
@@ -499,7 +505,7 @@ character.</p>
 
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
--namefollower: namestart; ["-·‿⁀"; Nd; Mn].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
     -terminal: literal; 
                charset.
@@ -545,11 +551,10 @@ grammar.</p>
 <p>Processors <span class="conform">must</span> accept and parse any conforming
 grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
-chosen; it is not defined how this choice is made, but the resulting parse
-<span class="conform">should</span> be marked as ambiguous by including the
-attribute <code>ixml:state="ambiguous"</code> on the document element of the
-serialisation. The ixml namespace URI is
-"<code>http://invisiblexml.org/NS</code>".</p>
+chosen; it is not defined how this choice is made, but the resulting
+serialization <span class="conform">should</span> including the attribute
+<code>ixml:state="ambiguous"</code> on the document element. The ixml namespace
+URI is "<code>http://invisiblexml.org/NS</code>".</p>
 
 <p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state="failed"</code> on the document element. The
@@ -676,10 +681,13 @@ conformance requirement.)</p>
 <h3 id="processorconformance">Conformance of processors</h3>
 
 <p>A conforming processor <span class="conform">must</span> accept grammars in
-ixml form, and <span class="conform">should</span> accept grammars in XML form.
-A conforming processor <span class="conform">must</span> not accept
-non-conforming grammars. For any conforming grammar and any input, under normal
-operation: </p>
+ixml form, and <span class="conform">should</span> accept grammars in XML form;
+it <span class="conform">must</span> not accept non-conforming grammars. Both
+grammars and input <span class="conform">must</span> be accepted in UTF-8
+encoding, and <span class="conform">may</span> be accepted in other
+encodings.</p>
+
+<p>For any conforming grammar and any input, under normal operation: </p>
 <ul>
   <li>Processors <span class="conform">must</span> parse by default the entire
     input using the grammar, determining in the process whether or not the
@@ -693,11 +701,10 @@ operation: </p>
     document.</li>
   <li>If more than one parse tree describes the input, the processor <span
     class="conform">must</span> serialize one of them. It is not defined how
-    this choice is made, but the resulting parse <span
-    class="conform">must</span> by default be marked as ambiguous by including
-    on the document element of the serialization the attribute
-    <code>ixml:state="ambiguous"</code>. Processors <span
-    class="conform">may</span> provide a user option to suppress that
+    this choice is made, but the resulting serialization <span
+    class="conform">must</span> by default include the attribute
+    <code>ixml:state="ambiguous"</code> on the document element. Processors
+    <span class="conform">may</span> provide a user option to suppress that
     attribute; they <span class="conform">may</span> also provide a user option
     to produce more than one parse tree.</li>
   <li>If the input is not described by the grammar, the processor <span
@@ -722,7 +729,8 @@ operation: </p>
 that accepts and parses any context-free grammar; known algorithms of this
 class include [<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
 href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
-see also [<a href="#grune">Grune</a>].</p>
+see also [<a href="#grune">Grune</a>]. Different algorithms may differ slightly
+in how ambiguity is defined.</p>
 
 <h2 id="hints">Hints for Implementers</h2>
 
@@ -768,10 +776,24 @@ serialisation</a> is available:</p>
          &lt;repeat1&gt;
             &lt;nonterminal name='rule'/&gt;
             &lt;sep&gt;
-               &lt;nonterminal name='s'/&gt;
+               &lt;nonterminal name='S'/&gt;
             &lt;/sep&gt;
          &lt;/repeat1&gt;
          &lt;nonterminal name='s'/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark='-' name='S'&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name='whitespace'/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name='comment'/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat1&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;
    &lt;rule mark='-' name='s'&gt;
@@ -915,7 +937,8 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 <h2 id="acknowledgments">Acknowledgements</h2>
 
 <p>This specification was produced by the W3C ixml community group, that at the
-time of publishing consisted of the members: <span class="todo">{list of names}</span></p>
+time of publishing consisted of the members: <span class="todo">{list of
+names}</span></p>
 
 <p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
 specification, and consequent many helpful comments.</p>

@@ -1,6 +1,7 @@
-{version 2022-03-17}
-         ixml: s, rule+s, s.
+{version 2022-03-29}
+         ixml: s, rule+S, s.
 
+           -S: (whitespace; comment)+.
            -s: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
          -tab: -#9.
@@ -28,7 +29,7 @@
 
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
--namefollower: namestart; ["-·‿⁀"; Nd; Mn].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 
     -terminal: literal; 
                charset.

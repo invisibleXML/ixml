@@ -1,16 +1,30 @@
 
 <ixml>
-   <comment>version 2022-03-17</comment>
+   <comment>version 2022-03-29</comment>
    <rule name='ixml'>
       <alt>
          <nonterminal name='s'/>
          <repeat1>
             <nonterminal name='rule'/>
             <sep>
-               <nonterminal name='s'/>
+               <nonterminal name='S'/>
             </sep>
          </repeat1>
          <nonterminal name='s'/>
+      </alt>
+   </rule>
+   <rule mark='-' name='S'>
+      <alt>
+         <repeat1>
+            <alts>
+               <alt>
+                  <nonterminal name='whitespace'/>
+               </alt>
+               <alt>
+                  <nonterminal name='comment'/>
+               </alt>
+            </alts>
+         </repeat1>
       </alt>
    </rule>
    <rule mark='-' name='s'>
@@ -237,7 +251,7 @@
       </alt>
       <alt>
          <inclusion>
-            <member string='-·‿⁀'/>
+            <member string='-.·‿⁀'/>
             <member code='Nd'/>
             <member code='Mn'/>
          </inclusion>
