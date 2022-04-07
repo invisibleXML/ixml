@@ -329,7 +329,8 @@ ensure that all serialised names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
 <pre class="frag">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
--namefollower: namestart; ["-.·‿⁀"; Nd; Mn].Alternatives are separated by a semicolon or a vertical bar. The grammar here uses semicolons.</pre>
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
+<p>Alternatives are separated by a semicolon or a vertical bar. The grammar here uses semicolons.</p>
 <pre class="frag">alts: alt+(-[";|"], s).</pre>
 
 <p>An alternative is zero or more terms, separated by commas:</p>
