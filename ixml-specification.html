@@ -20,6 +20,7 @@
       span.todo {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
       span.conform {font-weight: bold}
+      a.error, a.error:visited {color: #33339f; text-decoration: none;}
   </style>
   <!--
     <style type="text/css" rel="alternate stylesheet" title="Fragments">
@@ -63,6 +64,7 @@
   </li>
   <li><a href="#hints">Hints for Implementers</a></li>
   <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
   <li><a href="#acknowledgments">Acknowledgements</a></li>
@@ -292,7 +294,8 @@ that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is a sequence of one or more rules, surrounded and separated by
 spacing and comments. Spacing and comments are entirely optional, except that
-rules must be separated by at least one of either.</p>
+<a href="#s010" id="ps010" class="error">
+rules <span class="conform">must</span> be separated by at least one of either<sup>S010</sup></a>.</p>
 <pre class="frag">ixml: s, rule+S, s.</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments. A
@@ -317,7 +320,9 @@ allowed.</p>
 <p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
 indicates whether the item so marked will be serialised as an attribute
 (<code>@</code>), an element with its children (<code>^</code>), which is the
-default, or only its children (<code>-</code>).</p>
+default, or only its children (<code>-</code>).
+The mark <a href="#s006" id="ps006" class="error"><span class="conform">must</span>
+be a valid mark character<sup>S006</sup></a>.</p>
 <pre class="frag">@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
@@ -375,9 +380,11 @@ a#a!a a!a#a a#a#a</code> etc.</p>
 <p>A nonterminal is an optionally marked name:</p>
 <pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
 
-<p>This name refers to the rule that defines this name, which <span
-class="conform">must</span> exist, and there <span class="conform">must</span>
-only be one such rule.</p>
+<p>This name refers to the rule that defines this name, which
+<a href="#s002" id="ps002" class="error"><span class="conform">must</span> exist<sup>S002</sup></a>,
+and there
+<a href="#s003" id="ps003" class="error"><span class="conform">must</span>
+only be one such rule<sup>S003</sup></a>.</p>
 
 <h3 id="terminals">Terminals</h3>
 
@@ -397,7 +404,9 @@ character:</p>
 enclosed with single or double quotes. A quoted string matches only the exact
 same string in the input. Examples: <code>"yes" 'yes'. </code></p>
 
-<p>A string <span class="conform">must</span> not extend over a line-break. The
+<p>A string
+<a href="#s011" id="ps011" class="error"><span class="conform">must</span> not extend
+over a line-break<sup>S011</sup>. The
 enclosing quote is represented in a string by doubling it; these two strings
 are identical: <code>'Isn''t it?' "Isn't it?"</code>, as are these: <code>"He
 said ""Don't!""" 'He said "Don''t!"'</code>.</p>
@@ -415,9 +424,13 @@ represents a single character and matches that character in the input. It
 starts with a hash symbol, followed by any number of hexadecimal digits, for
 example <code>#a0</code>. The digits are interpreted as a number in
 hexadecimal, and the character at that Unicode code-point is used [<a
-href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
-within the Unicode code-point range, and <span class="conform">must</span> not
-denote a Noncharacter or Surrogate code point.</p>
+href="#unicode">Unicode</a>].
+The number <a href="#s004" id="ps004" class="error"><span class="conform">must</span> consist
+exclusively of hexidecimal digits<sup>S004</sup></a>,
+<a href="#s005" id="ps005" class="error"><span class="conform">must</span> be
+within the Unicode code-point range<sup>S005</sup></a>, and
+<a href="#s009" id="ps009" class="error"><span class="conform">must not</span>
+denote a Noncharacter or Surrogate code point<sup>S009</sup></a>.</p>
 <pre class="frag">-encoded: (tmark, s)?, -"#", hex, s.
     @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
@@ -452,21 +465,27 @@ exclusion: (tmark, s)?, -"~", s, set.
            class.</pre>
 
 <p>A range matches any character in the range from the start character to the
-end, inclusive, using the Unicode ordering. The <code>from</code> character
-<span class="conform">must</span> not be later in the ordering than the
-<code>to</code> character.</p>
+end, inclusive, using the Unicode ordering.
+<a href="#s008" id="ps008" class="error">The <code>from</code> character
+<span class="conform">must not</span>
+be later in the ordering than the
+<code>to</code> character.<sup>S008</sup></a></p>
 <pre class="frag">range: from, s, -"-", s, to, s.
 @from: character.
   @to: character.</pre>
 
-<p>A character is a string of length one, or a hex encoded character:</p>
+<p>A character <a href="#s007" id="ps007" class="error"><span class="conform">must</span> be a
+string of length one<sup>S007</sup></a>,
+or a hex encoded character:</p>
+
 <pre class="frag">-character: -'"', dchar, -'"';
             -"'", schar, -"'";
             "#", hex.</pre>
 
 <p>A class is one or two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name, which
-<span class="conform">must</span> exist. E.g. <code>[Ll]</code> matches any
+<a href="#s001" id="ps001" class="error"><span class="conform">must</span> exist<sup>S001</sup></a>.
+For example, <code>[Ll]</code> matches any
 lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
 character.</p>
 <pre class="frag">   class: code, s.
@@ -597,13 +616,19 @@ element.</p>
 serialization of a parse tree produced from the grammar is well-formed XML.</p>
 
 <p>Note: This requirement means for instance that names of serialized elements
-and attributes must match the XML requirements; an element must not contain
-more than one attribute of a given name; invalid characters must not be
-serialized; a nonterminal being serialized as root element must not be marked
-as an attribute; in order to match the XML requirement of a single-rooted
-document, if the root rule is marked as hidden, all of its productions must
+and attributes
+<a href="#d002" id="pd002" class="error"><span class="conform">must</span>
+match the XML requirements<sup>D002</sup></a>; an element
+<a href="#d003" id="pd003" class="error"><span class="conform">must not</span> contain
+more than one attribute of a given name<sup>D003</sup></a>;
+invalid characters <a href="#d004" id="pd004" class="error"><span class="conform">must not</span> be
+serialized<sup>D004</sup></a>; a nonterminal being serialized as root element
+<a href="#d001" id="pd001" class="error"><span class="conform">must not</span> be marked
+as an attribute<sup>D001</sup></a>; in order to match the XML requirement of a single-rooted
+document, if the root rule is marked as hidden, all of its productions
+<a href="#d005" id="pd005" class="error"><span class="conform">must</span>
 produce exactly one non-hidden non-attribute nonterminal and no non-hidden
-terminals before or after that nonterminal.</p>
+terminals before or after that nonterminal<sup>D005</sup></a>.</p>
 
 <p>A (necessarily contrived) example grammar that illustrates the serialization
 rules is:</p>
@@ -884,6 +909,68 @@ serialisation</a> is available:</p>
          &lt;literal tmark='-' string='.'/&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;</pre>
+
+<h2 id="errors">Errors</h2>
+
+<p>This section summarizes errors identified in this specification.</p>
+
+<dl>
+   <dt id="s001"><a href="#ps001">S001</a></dt>
+   <dd>It is an error to use a
+Unicode character category that is not defined in the Unicode
+specification.</dd>
+   <dt id="s002"><a href="#ps002">S002</a></dt>
+   <dd>It is an error to use a
+nonterminal name that is not defined by a rule in the grammar.</dd>
+   <dt id="s003"><a href="#ps003">S003</a></dt>
+   <dd>It is an error if the grammar
+contains more than one rule for any given nonterminal.</dd>
+   <dt id="s004"><a href="#ps004">S004</a></dt>
+   <dd>It is an if the hex
+encoding uses any characters not allowed in hexidecimal.</dd>
+   <dt id="s005"><a href="#ps005">S005</a></dt>
+   <dd>It is an if the
+hexidecimal value is not within the Unicode code-point range.</dd>
+   <dt id="s006"><a href="#ps006">S006</a></dt>
+   <dd>It is an error if an invalid character appears in the mark.</dd>
+   <dt id="s007"><a href="#ps007">S007</a></dt>
+   <dd>It is an error if the
+starting or ending character of a range consists of more than one character.</dd>
+   <dt id="s008"><a href="#ps008">S008</a></dt>
+   <dd>It is an error if the
+first character in a range has a code point value greater than or equal to the
+second character in the range.</dd>
+   <dt id="s009"><a href="#ps009">S009</a></dt>
+   <dd>It is an error a encoded character denotes a Unicode noncharacter or
+surrogate code point.</dd>
+   <dt id="s010"><a href="#ps010">S010</a></dt>
+   <dd>It is an error if two rules are not separated by at least one whitespace character
+or comment.</dd>
+   <dt id="s011"><a href="#ps011">S011</a></dt>
+   <dd>It is an error if a string includes a line break.</dd>
+</dl>
+
+<dl xmlns="http://www.w3.org/1999/xhtml">
+   <dt id="d001"><a href="#pd001">D001</a></dt>
+   <dd>It is an error if the
+outermost node serialized to XML is marked as an attribute.</dd>
+   <dt id="d002"><a href="#pd002">D002</a></dt>
+   <dd>It is an error if the
+name of any element or attribute is not a valid XML name.</dd>
+   <dt id="d003"><a href="#pd003">D003</a></dt>
+   <dd>It is an error if two
+different nonterminals with the same name are serialized as attributes on the
+same element.</dd>
+   <dt id="d004"><a href="#pd004">D004</a></dt>
+   <dd>It is an error to attempt to serialize an XML characters that are not valid in XML.</dd>
+   <dt id="d005"><a href="#pd005">D005</a></dt>
+   <dd>It is an error if an XML serialization would have more than one top-level document
+element.</dd>
+</dl>
+
+<p>Note: if error codes are reported in a context where it makes sense for them
+to appear in a namespace, they <span class="conform">should</span> be in
+the Invisible XML namespace.</p>
 
 <h2 id="references">References</h2>
 
