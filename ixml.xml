@@ -1,15 +1,30 @@
 
 <ixml>
+   <comment>version 2022-03-29</comment>
    <rule name='ixml'>
       <alt>
          <nonterminal name='s'/>
          <repeat1>
             <nonterminal name='rule'/>
             <sep>
-               <nonterminal name='s'/>
+               <nonterminal name='S'/>
             </sep>
          </repeat1>
          <nonterminal name='s'/>
+      </alt>
+   </rule>
+   <rule mark='-' name='S'>
+      <alt>
+         <repeat1>
+            <alts>
+               <alt>
+                  <nonterminal name='whitespace'/>
+               </alt>
+               <alt>
+                  <nonterminal name='comment'/>
+               </alt>
+            </alts>
+         </repeat1>
       </alt>
    </rule>
    <rule mark='-' name='s'>
@@ -29,7 +44,7 @@
    <rule mark='-' name='whitespace'>
       <alt>
          <inclusion tmark='-'>
-            <class code='Zs'/>
+            <member code='Zs'/>
          </inclusion>
       </alt>
       <alt>
@@ -76,7 +91,7 @@
    <rule mark='-' name='cchar'>
       <alt>
          <exclusion>
-            <literal string='{}'/>
+            <member string='{}'/>
          </exclusion>
       </alt>
    </rule>
@@ -93,7 +108,7 @@
          <nonterminal name='name'/>
          <nonterminal name='s'/>
          <inclusion tmark='-'>
-            <literal string='=:'/>
+            <member string='=:'/>
          </inclusion>
          <nonterminal name='s'/>
          <nonterminal mark='-' name='alts'/>
@@ -103,7 +118,7 @@
    <rule mark='@' name='mark'>
       <alt>
          <inclusion>
-            <literal string='@^-'/>
+            <member string='@^-'/>
          </inclusion>
       </alt>
    </rule>
@@ -115,7 +130,7 @@
                <alts>
                   <alt>
                      <inclusion tmark='-'>
-                        <literal string=';|'/>
+                        <member string=';|'/>
                      </inclusion>
                      <nonterminal name='s'/>
                   </alt>
@@ -214,6 +229,34 @@
          <nonterminal name='s'/>
       </alt>
    </rule>
+   <rule mark='@' name='name'>
+      <alt>
+         <nonterminal name='namestart'/>
+         <repeat0>
+            <nonterminal name='namefollower'/>
+         </repeat0>
+      </alt>
+   </rule>
+   <rule mark='-' name='namestart'>
+      <alt>
+         <inclusion>
+            <member string='_'/>
+            <member code='L'/>
+         </inclusion>
+      </alt>
+   </rule>
+   <rule mark='-' name='namefollower'>
+      <alt>
+         <nonterminal name='namestart'/>
+      </alt>
+      <alt>
+         <inclusion>
+            <member string='-.·‿⁀'/>
+            <member code='Nd'/>
+            <member code='Mn'/>
+         </inclusion>
+      </alt>
+   </rule>
    <rule mark='-' name='terminal'>
       <alt>
          <nonterminal name='literal'/>
@@ -241,40 +284,13 @@
             </alts>
          </option>
          <nonterminal name='string'/>
-      </alt>
-   </rule>
-   <rule mark='@' name='name'>
-      <alt>
-         <nonterminal name='namestart'/>
-         <repeat0>
-            <nonterminal name='namefollower'/>
-         </repeat0>
-      </alt>
-   </rule>
-   <rule mark='-' name='namestart'>
-      <alt>
-         <inclusion>
-            <literal string='_'/>
-            <class code='L'/>
-         </inclusion>
-      </alt>
-   </rule>
-   <rule mark='-' name='namefollower'>
-      <alt>
-         <nonterminal name='namestart'/>
-      </alt>
-      <alt>
-         <inclusion>
-            <literal string='-.·‿⁀'/>
-            <class code='Nd'/>
-            <class code='Mn'/>
-         </inclusion>
+         <nonterminal name='s'/>
       </alt>
    </rule>
    <rule mark='@' name='tmark'>
       <alt>
          <inclusion>
-            <literal string='^-'/>
+            <member string='^-'/>
          </inclusion>
       </alt>
    </rule>
@@ -285,7 +301,6 @@
             <nonterminal name='dchar'/>
          </repeat1>
          <literal tmark='-' string='"'/>
-         <nonterminal name='s'/>
       </alt>
       <alt>
          <literal tmark='-' string='&apos;'/>
@@ -293,15 +308,14 @@
             <nonterminal name='schar'/>
          </repeat1>
          <literal tmark='-' string='&apos;'/>
-         <nonterminal name='s'/>
       </alt>
    </rule>
    <rule name='dchar'>
       <alt>
          <exclusion>
-            <literal string='"'/>
-            <literal hex='a'/>
-            <literal hex='d'/>
+            <member string='"'/>
+            <member hex='a'/>
+            <member hex='d'/>
          </exclusion>
       </alt>
       <alt>
@@ -313,9 +327,9 @@
    <rule name='schar'>
       <alt>
          <exclusion>
-            <literal string='&apos;'/>
-            <literal hex='a'/>
-            <literal hex='d'/>
+            <member string='&apos;'/>
+            <member hex='a'/>
+            <member hex='d'/>
          </exclusion>
       </alt>
       <alt>
@@ -335,17 +349,17 @@
             </alts>
          </option>
          <literal tmark='-' string='#'/>
-         <nonterminal mark='@' name='hex'/>
+         <nonterminal name='hex'/>
          <nonterminal name='s'/>
       </alt>
    </rule>
-   <rule name='hex'>
+   <rule mark='@' name='hex'>
       <alt>
          <repeat1>
             <inclusion>
-               <range from='0' to='9'/>
-               <range from='a' to='f'/>
-               <range from='A' to='F'/>
+               <member from='0' to='9'/>
+               <member from='a' to='f'/>
+               <member from='A' to='F'/>
             </inclusion>
          </repeat1>
       </alt>
@@ -396,7 +410,7 @@
                <alts>
                   <alt>
                      <inclusion tmark='-'>
-                        <literal string=';|'/>
+                        <member string=';|'/>
                      </inclusion>
                      <nonterminal name='s'/>
                   </alt>
@@ -407,9 +421,13 @@
          <nonterminal name='s'/>
       </alt>
    </rule>
-   <rule mark='-' name='member'>
+   <rule name='member'>
       <alt>
-         <nonterminal name='literal'/>
+         <nonterminal name='string'/>
+      </alt>
+      <alt>
+         <literal tmark='-' string='#'/>
+         <nonterminal name='hex'/>
       </alt>
       <alt>
          <nonterminal name='range'/>
@@ -418,7 +436,7 @@
          <nonterminal name='class'/>
       </alt>
    </rule>
-   <rule name='range'>
+   <rule mark='-' name='range'>
       <alt>
          <nonterminal name='from'/>
          <nonterminal name='s'/>
@@ -454,7 +472,7 @@
          <nonterminal name='hex'/>
       </alt>
    </rule>
-   <rule name='class'>
+   <rule mark='-' name='class'>
       <alt>
          <nonterminal name='code'/>
          <nonterminal name='s'/>
@@ -471,14 +489,14 @@
    <rule mark='-' name='capital'>
       <alt>
          <inclusion>
-            <range from='A' to='Z'/>
+            <member from='A' to='Z'/>
          </inclusion>
       </alt>
    </rule>
    <rule mark='-' name='letter'>
       <alt>
          <inclusion>
-            <range from='a' to='z'/>
+            <member from='a' to='z'/>
          </inclusion>
       </alt>
    </rule>

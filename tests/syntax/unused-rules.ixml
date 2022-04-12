@@ -1,6 +1,6 @@
-a: b, undefined1.
+a: b.
 b: c.
-c: undefined2.
+c:.
 unused1: e.
 e: f.
 unused2: .
