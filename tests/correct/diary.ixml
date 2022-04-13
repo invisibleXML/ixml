@@ -7,7 +7,7 @@ month: "January"; "February"; "March"; "April"; "May"; "June";
        "July"; "August"; "September"; "October"; "November"; "December".
 year: digit, digit, digit, digit.
 
-para: word+s, s?, blank.
+para: word++s, s?, blank.
 -blank: -#a, -#a.
 -word: (letter; punctuation)+.
 -letter: [L].

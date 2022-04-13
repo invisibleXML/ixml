@@ -1,4 +1,4 @@
- ixml  :  S  ,  rule  +  S  ,  S  . 
+ ixml  :  S  ,  rule  ++  S  ,  S  . 
  - S :  ( whitespace ; comment )  *  . 
  - whitespace :  -  [ Zs ]  ; tab ;  lf ;  cr . 
  - tab :  - #9 . 
@@ -8,8 +8,8 @@
  - cchar : ~ [ "{}" ]  . 
  rule :  ( mark , S ) ? , name , S ,  [ "=:" ]  , S ,  - alts , "." . 
  @ mark :  [ "@^-" ]  . 
- alts : alt +  (  [ ";|" ]  , S )  . 
- alt : term *  ( "," , S )  . 
+ alts : alt ++  (  [ ";|" ]  , S )  . 
+ alt : term **  ( "," , S )  . 
  - term : factor ; 
           option ; 
           repeat0 ; 
@@ -45,7 +45,7 @@
              exclusion . 
  inclusion :  ( tmark , S ) ? , set . 
  exclusion :  ( tmark , S ) ? , "~" , S , set . 
- - set : "[" , S , member *  (  [ ";|" ]  , S )  , "]" , S . 
+ - set : "[" , S , member **  (  [ ";|" ]  , S )  , "]" , S . 
  - member : literal ; 
             range ; 
             class . 
