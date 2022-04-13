@@ -3,7 +3,7 @@
 <h1>Invisible XML</h1>
 
 <p>Data is an abstraction: there is no essential difference between the JSON</p>
-<pre>{"temperature": {"scale": "C"; "value": 21}}</pre>
+<pre>{"temperature": {"scale": "C", "value": 21}}</pre>
 
 <p>and an equivalent XML</p>
 <pre>&lt;temperature scale="C" value="21"/&gt;</pre>
