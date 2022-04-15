@@ -651,8 +651,9 @@ not present in the input. For instance, the grammar</p>
 <pre>  data: value++",", @source.
 source: ^"ixml".
  value: pos; neg.
-   pos: ^"+", digit+.
-   neg: ^"-", -"(", digit+, -")".</pre>
+  -pos: ^"+", digit+.
+  -neg: ^"-", -"(", digit+, -")".
+-digit: ["0"-"9"].</pre>
 
 <p>With input:</p>
 <pre>100,200,(300),400</pre>
