@@ -25,6 +25,9 @@ Samples in this directory include:
   coming soon.)
 
 * ABNF: an ixml version of the grammar notation used in IETF
-  Requests for Comment, as defined in RFC.  (Coming real soon now.)
+  Requests for Comment, as defined in RFC 5234.
+
+* bcp47: The grammar from [BCP47](https://tools.ietf.org/rfc/bcp/bcp47.txt),
+  _Tags for Identifying Languages_.
 
 

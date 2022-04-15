@@ -18,6 +18,7 @@
   <test-set-ref href="syntax/catalog-as-grammar-tests.xml"/>
   <test-set-ref href="syntax/catalog-as-instance-tests-ixml.xml"/>
   <test-set-ref href="syntax/catalog-as-instance-tests-xml.xml"/>
+  <test-set-ref href="syntax/catalog-of-correct-tests.xml"/>
 
   <!--* Norm reworked the tests-SP-MSM test directory
       * into a set of separate directories with individual
