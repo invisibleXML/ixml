@@ -1,8 +1,8 @@
 json: S, object.
 object: "{", S, members, "}", S.
--members: pair*(",", S).
+-members: pair**(",", S).
 pair: @string, S, ":", S, value.
-array: "[", S, value*(",", S), "]", S.
+array: "[", S, value**(",", S), "]", S.
 -value: string, S; number, S; object; array; "true", S; "false", S; "null", S.
 string: -"""", char*, -"""".
 -char: ~['"'; "\" {;[#0-#1F];}]; '\', ('"'; "\"; "/"; "b"; "f"; "n"; "r"; "t"; "u", hexdigits).
