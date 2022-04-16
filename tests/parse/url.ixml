@@ -2,7 +2,7 @@ url: scheme, ":", authority, path.
 scheme: name.
 @name: letter+.
 authority: "//", host.
-host: sub+".".
+host: sub++".".
 sub: name.
 path: ("/", seg)+.
 seg: sname.

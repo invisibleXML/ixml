@@ -8,10 +8,10 @@ element: value.
         "false", S;
         "null", S.
 object: "{", S, members, "}", S.
--members: member*(",", S).
+-members: member**(",", S).
 member: @string, S, ":", S, element.
 array: "[", S, elements, "]", S.
-elements: element*(",", S).
+elements: element**(",", S).
 string: -'"', character*, -'"'.
 -character: ~['"\'; #0-#19];
            "\", escape.
