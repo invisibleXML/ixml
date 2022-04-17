@@ -14,12 +14,14 @@
   <style type="text/css">
       body {margin-left: auto; margin-right:auto; max-width: 50em;}
       h1, h2 {font-family: sans-serif; clear: both}
-      pre {margin-left: 2em; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
+      pre {margin-left: 2rem; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
       code {color: #A00}
       div {border: thin red solid}
       span.todo {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
       span.conform {font-weight: bold}
+      a.errlink, a.errlink:visited {color: #33339f; text-decoration: none;}
+      .error { margin-left: 2rem; padding: 0.5em 0 0.5em 1em; background-color: #ffdddd }
   </style>
   <!--
       <style type="text/css" rel="alternate stylesheet" title="Fragments">
@@ -63,6 +65,7 @@
   </li>
   <li><a href="#hints">Hints for Implementers</a></li>
   <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
   <li><a href="#acknowledgments">Acknowledgements</a></li>
@@ -292,8 +295,14 @@ that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is a sequence of one or more rules, surrounded and separated by
 spacing and comments. Spacing and comments are entirely optional, except that
-rules must be separated by at least one of either.</p>
+rules <span class="conform">must</span> be separated by at least one of either
+(<a class="errlink" href="#s010" id="ps010">error S010</a>).</p>
+
 <pre class="frag">ixml: s, rule++RS, s.</pre>
+
+<p class="error">Error S010:
+it is an error if two rules are not separated by at least one whitespace character
+or comment.</p>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments. A
 comment is enclosed in braces, and can included nested comments, to enable
@@ -314,12 +323,17 @@ The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
 <pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
-<p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
+<p>A mark <span class="conform">must</span> be one of <code>@</code>,
+<code>^</code> or <code>-</code>, (<a class="errlink" href="#s006" id="ps006">error
+S006</a>) and
 indicates whether the item so marked will be serialised as an attribute
 (<code>@</code>), inserted as an element with its children (<code>^</code>),
 which is the default, or deleted, so that only its children are serialized
 (<code>-</code>).</p>
 <pre class="frag">@mark: ["@^-"].</pre>
+
+<p class="error">Error S006: it is an error if the mark character is invalid.
+</p>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
 digit, underscore, a small number of punctuation characters, and the Unicode
@@ -380,8 +394,16 @@ match <code>a#a a!a a#a!a a!a#a a#a#a</code> etc.</p>
 <pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which <span
-class="conform">must</span> exist, and there <span class="conform">must</span>
-only be one such rule.</p>
+class="conform">must</span> exist
+(<a class="errlink" href="#s002" id="ps002">error S002</a>),
+and there <span class="conform">must</span>
+only be one such rule
+(<a class="errlink" href="#s003" id="p">error S003</a>).</p>
+
+<p class="error">Error S002: it is an error to use a nonterminal name
+that is not defined by a rule in the grammar.</p>
+<p class="error">Error S003: it is an error if the grammar
+contains more than one rule for any given nonterminal.</p>
 
 <h3 id="terminals">Terminals</h3>
 
@@ -405,7 +427,8 @@ matches only the exact same string in the input. Examples: <code>"yes"
 'yes'</code>. An inserted quoted string matches zero characters in the input
 (and succeeds).</p>
 
-<p>A string cannot extend over a line-break. The enclosing quote is represented
+<p>A string cannot extend over a line-break
+(<a class="errlink" href="#s011" id="ps011">error S011</a>). The enclosing quote is represented
 in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
 "Isn't it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
 "Don''t!"'</code>.</p>
@@ -418,13 +441,33 @@ in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
    schar: ~["'"; #a; #d];
           "'", -"'". {all characters except line breaks; quotes must be doubled}</pre>
 
+<p class="error">Error S011: it is an error if a line break occurs within a string.
+</p>
+
 <p>An encoded character is an optionally marked hexadecimal number. It starts
 with a hash symbol, followed by any number of hexadecimal digits, for example
 <code>#a0</code>. The digits are interpreted as a number in hexadecimal, and
 the character at that Unicode code-point is used [<a
-href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
-within the Unicode code-point range, and <span class="conform">must</span> not
-denote a Noncharacter or Surrogate code point.</p>
+href="#unicode">Unicode</a>].
+The number <span class="conform">must</span> consist exclusively of hexidecimal
+digits
+(<a class="errlink" href="#s004" id="ps004">error S004</a>),
+<span class="conform">must</span> be
+within the Unicode code-point range
+(<a class="errlink" href="#s005" id="p">error S005</a>),
+and <span class="conform">must not</span>
+denote a Noncharacter or Surrogate code point
+(<a class="errlink" href="#s009" id="ps009">error S009</a>).</p>
+
+<p class="error">Error S004: it is an if the hex
+encoding uses any characters not allowed in hexidecimal.
+</p>
+<p class="error">Error S005: it is an if the
+hexidecimal value is not within the Unicode code-point range.
+</p>
+<p class="error">Error S009: it is an error a encoded character denotes a Unicode noncharacter or
+surrogate code point.
+</p>
 
 <p>An unmarked or deleted encoded character matches that one character in the
 input. If marked as inserted, it matches no characters (but succeeds).</p>
