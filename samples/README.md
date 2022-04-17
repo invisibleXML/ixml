@@ -25,7 +25,10 @@ Samples in this directory include:
   coming soon.)
 
 * ABNF: an ixml version of the grammar notation used in IETF
-  Requests for Comment, as defined in RFC.  (Coming real soon now.)
+  Requests for Comment, as defined in RFC 5234.
+
+* bcp47: The grammar from [BCP47](https://tools.ietf.org/rfc/bcp/bcp47.txt),
+  _Tags for Identifying Languages_.
 
 * XPath: two ixml versions of the grammar for XPath3.1 expressions:
     **XPath.ixml** produces a full parse tree, **XPath.reducedTree.ixml**  (derived from a decorated version of the full grammar) produces

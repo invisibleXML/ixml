@@ -1,12 +1,12 @@
 expression: expr.
 -expr: term; sum; diff.
-sum: term, "+", term+"+".
-diff: term, "-", term+"-".
+sum: term, "+", term++"+".
+diff: term, "-", term++"-".
 -term: power; prod; div.
-prod: power, "×", power+"×".
-div: power, "÷", power+"÷".
+prod: power, "×", power++"×".
+div: power, "÷", power++"÷".
 -power: fact; exp.
-exp: fact, "^", fact+"^".
+exp: fact, "^", fact++"^".
 -fact: id; number; bracketed.
 bracketed: "(", exp, ")".
 id: letter+.

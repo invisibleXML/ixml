@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rng:grammar xmlns:follow="http://blackmesatech.com/2016/nss/ixml-gluschkov-automata-followset"
+             xmlns:gl="http://blackmesatech.com/2019/iXML/Gluschkov"
+             xmlns:gt="http://blackmesatech.com/2020/grammartools"
+             xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:rtn="http://blackmesatech.com/2020/iXML/recursive-transition-networks"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+   <!--* Relax NG schema for ixml grammars.
+       * Based on grammar of 25 January 2022.
+       *
+       * Captures structural rules but does not capture all constraints
+       * on character data or attribute values.
+       *
+       * Namespace-qualified attributes are allowed everywhere.
+       *-->
+   <rng:start>
+      <rng:ref name="ixml"/>
+   </rng:start>
+   <rng:define name="ixml">
+      <rng:ref name="e.ixml"/>
+   </rng:define>
+   <rng:define name="e.ixml">
+      <rng:element name="ixml">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="s"/>
+            <rng:group>
+               <rng:ref name="rule"/>
+               <rng:zeroOrMore>
+                  <rng:ref name="s"/>
+                  <rng:ref name="rule"/>
+               </rng:zeroOrMore>
+            </rng:group>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="s">
+      <rng:ref name="h.s"/>
+   </rng:define>
+   <rng:define name="h.s">
+      <rng:group>
+         <rng:zeroOrMore>
+            <rng:choice>
+               <rng:group>
+                  <rng:ref name="whitespace"/>
+               </rng:group>
+               <rng:group>
+                  <rng:ref name="comment"/>
+               </rng:group>
+            </rng:choice>
+         </rng:zeroOrMore>
+      </rng:group>
+   </rng:define>
+   <rng:define name="whitespace">
+      <rng:ref name="h.whitespace"/>
+   </rng:define>
+   
+   <rng:define name="h.whitespace">
+      <rng:choice>
+         <rng:empty/>
+         <rng:group>
+            <rng:ref name="tab"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="lf"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="cr"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="tab">
+      <rng:ref name="h.tab"/>
+   </rng:define>
+   <rng:define name="h.tab"><!-- alt with no realized children -->
+      <rng:empty/>
+   </rng:define>
+   <rng:define name="lf">
+      <rng:ref name="h.lf"/>
+   </rng:define>
+   <rng:define name="h.lf"><!-- alt with no realized children -->
+      <rng:empty/>
+   </rng:define>
+   <rng:define name="cr">
+      <rng:ref name="h.cr"/>
+   </rng:define>
+   <rng:define name="h.cr"><!-- alt with no realized children -->
+      <rng:empty/>
+   </rng:define>
+   <rng:define name="comment">
+      <rng:ref name="e.comment"/>
+   </rng:define>
+   <rng:define name="e.comment">
+      <rng:element name="comment">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:zeroOrMore>
+               <rng:choice>
+                  <rng:group>
+                     <rng:ref name="cchar"/>
+                  </rng:group>
+                  <rng:group>
+                     <rng:ref name="comment"/>
+                  </rng:group>
+               </rng:choice>
+            </rng:zeroOrMore>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="cchar">
+      <rng:ref name="h.cchar"/>
+   </rng:define>
+   <rng:define name="h.cchar">
+      <rng:group><!-- can a data element be used? -->
+         <rng:text/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="rule">
+      <rng:ref name="e.rule"/>
+   </rng:define>
+   <rng:define name="e.rule">
+      <rng:element name="rule">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:optional>
+               <rng:group>
+                  <rng:ref name="mark"/>
+                  <rng:ref name="s"/>
+               </rng:group>
+            </rng:optional>
+            <rng:ref name="name"/>
+            <rng:ref name="s"/>
+            <rng:ref name="s"/>
+            <rng:ref name="h.alts"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="mark">
+      <rng:ref name="a.mark"/>
+   </rng:define>
+   <rng:define name="a.mark">
+      <rng:attribute name="mark">
+         <rng:group><!-- can a data element be used? -->
+            <rng:text/>
+         </rng:group>
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="alts">
+      <rng:ref name="e.alts"/>
+   </rng:define>
+   <rng:define name="e.alts">
+      <rng:element name="alts">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:group>
+               <rng:ref name="alt"/>
+               <rng:zeroOrMore>
+                  <rng:group>
+                     <rng:ref name="s"/>
+                  </rng:group>
+                  <rng:ref name="alt"/>
+               </rng:zeroOrMore>
+            </rng:group>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="h.alts">
+      <rng:group>
+         <rng:group>
+            <rng:ref name="alt"/>
+            <rng:zeroOrMore>
+               <rng:group>
+                  <rng:ref name="s"/>
+               </rng:group>
+               <rng:ref name="alt"/>
+            </rng:zeroOrMore>
+         </rng:group>
+      </rng:group>
+   </rng:define>
+   <rng:define name="alt">
+      <rng:ref name="e.alt"/>
+   </rng:define>
+   <rng:define name="e.alt">
+      <rng:element name="alt">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:optional>
+               <rng:ref name="term"/>
+               <rng:zeroOrMore>
+                  <rng:group>
+                     <rng:ref name="s"/>
+                  </rng:group>
+                  <rng:ref name="term"/>
+               </rng:zeroOrMore>
+            </rng:optional>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="term">
+      <rng:ref name="h.term"/>
+   </rng:define>
+   <rng:define name="h.term">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="factor"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="option"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="repeat0"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="repeat1"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="factor">
+      <rng:ref name="h.factor"/>
+   </rng:define>
+   <rng:define name="h.factor">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="terminal"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="nonterminal"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="s"/>
+            <rng:ref name="alts"/>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="repeat0">
+      <rng:ref name="e.repeat0"/>
+   </rng:define>
+   <rng:define name="e.repeat0">
+      <rng:element name="repeat0">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="factor"/>
+            <rng:ref name="s"/>
+            <rng:optional>
+               <rng:ref name="sep"/>
+            </rng:optional>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="repeat1">
+      <rng:ref name="e.repeat1"/>
+   </rng:define>
+   <rng:define name="e.repeat1">
+      <rng:element name="repeat1">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="factor"/>
+            <rng:ref name="s"/>
+            <rng:optional>
+               <rng:ref name="sep"/>
+            </rng:optional>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="option">
+      <rng:ref name="e.option"/>
+   </rng:define>
+   <rng:define name="e.option">
+      <rng:element name="option">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="factor"/>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="sep">
+      <rng:ref name="e.sep"/>
+   </rng:define>
+   <rng:define name="e.sep">
+      <rng:element name="sep">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="factor"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="nonterminal">
+      <rng:ref name="e.nonterminal"/>
+   </rng:define>
+   <rng:define name="e.nonterminal">
+      <rng:element name="nonterminal">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:optional>
+               <rng:group>
+                  <rng:ref name="mark"/>
+                  <rng:ref name="s"/>
+               </rng:group>
+            </rng:optional>
+            <rng:ref name="name"/>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="terminal">
+      <rng:ref name="h.terminal"/>
+   </rng:define>
+   <rng:define name="h.terminal">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="literal"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="charset"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="literal">
+      <rng:ref name="e.literal"/>
+   </rng:define>
+   <rng:define name="e.literal">
+      <rng:element name="literal">
+         <rng:ref name="external-attributes"/>
+         <rng:choice>
+            <rng:group>
+               <rng:ref name="quoted"/>
+            </rng:group>
+            <rng:group>
+               <rng:ref name="encoded"/>
+            </rng:group>
+         </rng:choice>
+      </rng:element>
+   </rng:define>
+   <rng:define name="quoted">
+      <rng:ref name="h.quoted"/>
+   </rng:define>
+   <rng:define name="h.quoted">
+      <rng:group>
+         <rng:optional>
+            <rng:group>
+               <rng:ref name="tmark"/>
+               <rng:ref name="s"/>
+            </rng:group>
+         </rng:optional>
+         <rng:ref name="string"/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="name">
+      <rng:ref name="a.name"/>
+   </rng:define>
+   <rng:define name="a.name">
+      <rng:attribute name="name">
+         <rng:group>
+            <rng:ref name="namestart"/>
+            <rng:zeroOrMore>
+               <rng:ref name="namefollower"/>
+            </rng:zeroOrMore>
+         </rng:group>
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="namestart">
+      <rng:ref name="h.namestart"/>
+   </rng:define>
+   <rng:define name="h.namestart">
+      <rng:group><!-- can a data element be used? -->
+         <rng:text/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="namefollower">
+      <rng:ref name="h.namefollower"/>
+   </rng:define>
+   <rng:define name="h.namefollower">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="namestart"/>
+         </rng:group>
+         <rng:group><!-- can a data element be used? -->
+            <rng:text/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="tmark">
+      <rng:ref name="a.tmark"/>
+   </rng:define>
+   <rng:define name="a.tmark">
+      <rng:attribute name="tmark">
+         <rng:group><!-- can a data element be used? -->
+            <rng:text/>
+         </rng:group>
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="string">
+      <rng:ref name="a.string"/>
+   </rng:define>
+   <rng:define name="a.string">
+      <rng:attribute name="string">
+         <rng:text/>
+         <!--<rng:choice>
+            <rng:group>
+               <rng:oneOrMore>
+                  <rng:ref name="dchar"/>
+               </rng:oneOrMore>
+               <rng:ref name="s"/>
+            </rng:group>
+            <rng:group>
+               <rng:oneOrMore>
+                  <rng:ref name="schar"/>
+               </rng:oneOrMore>
+               <rng:ref name="s"/>
+            </rng:group>
+         </rng:choice>-->
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="dchar">
+      <rng:ref name="e.dchar"/>
+   </rng:define>
+   <rng:define name="e.dchar">
+      <rng:element name="dchar">
+         <rng:ref name="external-attributes"/>
+         <rng:choice>
+            <rng:group><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:group>
+            <rng:group><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:group>
+         </rng:choice>
+      </rng:element>
+   </rng:define>
+   <rng:define name="schar">
+      <rng:ref name="e.schar"/>
+   </rng:define>
+   <rng:define name="e.schar">
+      <rng:element name="schar">
+         <rng:ref name="external-attributes"/>
+         <rng:choice>
+            <rng:group><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:group>
+            <rng:group><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:group>
+         </rng:choice>
+      </rng:element>
+   </rng:define>
+   <rng:define name="encoded">
+      <rng:ref name="h.encoded"/>
+   </rng:define>
+   <rng:define name="h.encoded">
+      <rng:group>
+         <rng:optional>
+            <rng:group>
+               <rng:ref name="tmark"/>
+               <rng:ref name="s"/>
+            </rng:group>
+         </rng:optional>
+         <rng:ref name="a.hex"/>
+         <rng:ref name="s"/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="hex">
+      <rng:ref name="e.hex"/>
+   </rng:define>
+   <rng:define name="e.hex">
+      <rng:element name="hex">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:oneOrMore><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:oneOrMore>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="a.hex">
+      <rng:attribute name="hex">
+         <rng:group>
+            <rng:oneOrMore><!-- can a data element be used? -->
+               <rng:text/>
+            </rng:oneOrMore>
+         </rng:group>
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="charset">
+      <rng:ref name="h.charset"/>
+   </rng:define>
+   <rng:define name="h.charset">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="inclusion"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="exclusion"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="inclusion">
+      <rng:ref name="e.inclusion"/>
+   </rng:define>
+   <rng:define name="e.inclusion">
+      <rng:element name="inclusion">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:optional>
+               <rng:group>
+                  <rng:ref name="tmark"/>
+                  <rng:ref name="s"/>
+               </rng:group>
+            </rng:optional>
+            <rng:ref name="set"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="exclusion">
+      <rng:ref name="e.exclusion"/>
+   </rng:define>
+   <rng:define name="e.exclusion">
+      <rng:element name="exclusion">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:optional>
+               <rng:group>
+                  <rng:ref name="tmark"/>
+                  <rng:ref name="s"/>
+               </rng:group>
+            </rng:optional>
+            <rng:ref name="s"/>
+            <rng:ref name="set"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="set">
+      <rng:ref name="h.set"/>
+   </rng:define>
+   <rng:define name="h.set">
+      <rng:group>
+         <rng:ref name="s"/>
+         <rng:optional>
+            <rng:ref name="member"/>
+            <rng:zeroOrMore>
+               <rng:group>
+                  <rng:ref name="s"/>
+               </rng:group>
+               <rng:ref name="member"/>
+            </rng:zeroOrMore>
+         </rng:optional>
+         <rng:ref name="s"/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="member">
+      <rng:ref name="h.member"/>
+   </rng:define>
+   <rng:define name="h.member">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="literal"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="range"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="class"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="range">
+      <rng:ref name="e.range"/>
+   </rng:define>
+   <rng:define name="e.range">
+      <rng:element name="range">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="from"/>
+            <rng:ref name="s"/>
+            <rng:ref name="s"/>
+            <rng:ref name="to"/>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="from">
+      <rng:ref name="a.from"/>
+   </rng:define>
+   <rng:define name="a.from">
+      <rng:attribute name="from">
+         <rng:text/>
+         <!--<rng:group>
+            <rng:ref name="character"/>
+         </rng:group>-->
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="to">
+      <rng:ref name="a.to"/>
+   </rng:define>
+   <rng:define name="a.to">
+      <rng:attribute name="to">
+         <rng:text/>
+         <!--<rng:group>
+            <rng:ref name="character"/>
+         </rng:group>-->
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="character">
+      <rng:ref name="h.character"/>
+   </rng:define>
+   <rng:define name="h.character">
+      <rng:choice>
+         <rng:group>
+            <rng:ref name="dchar"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="schar"/>
+         </rng:group>
+         <rng:group><!-- can a data element be used? -->
+            <rng:text/>
+            <rng:ref name="hex"/>
+         </rng:group>
+      </rng:choice>
+   </rng:define>
+   <rng:define name="class">
+      <rng:ref name="e.class"/>
+   </rng:define>
+   <rng:define name="e.class">
+      <rng:element name="class">
+         <rng:ref name="external-attributes"/>
+         <rng:group>
+            <rng:ref name="code"/>
+            <rng:ref name="s"/>
+         </rng:group>
+      </rng:element>
+   </rng:define>
+   <rng:define name="code">
+      <rng:ref name="a.code"/>
+   </rng:define>
+   <rng:define name="a.code">
+      <rng:attribute name="code">
+         <rng:group>
+            <rng:ref name="capital"/>
+            <rng:optional>
+               <rng:ref name="letter"/>
+            </rng:optional>
+         </rng:group>
+      </rng:attribute>
+   </rng:define>
+   <rng:define name="capital">
+      <rng:ref name="h.capital"/>
+   </rng:define>
+   <rng:define name="h.capital">
+      <rng:group><!-- can a data element be used? -->
+         <rng:text/>
+      </rng:group>
+   </rng:define>
+   <rng:define name="letter">
+      <rng:ref name="h.letter"/>
+   </rng:define>
+   <rng:define name="h.letter">
+      <rng:group><!-- can a data element be used? -->
+         <rng:text/>
+      </rng:group>
+   </rng:define>
+   
+   <rng:define name="external-attributes"><rng:empty></rng:empty></rng:define>
+</rng:grammar>

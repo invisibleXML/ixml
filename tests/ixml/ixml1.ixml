@@ -1,7 +1,7 @@
 ixml: S, rule+.
 rule: mark?, name, S, ":", S, def, ".", S.
-def: alt+(";", S).
-alt: term*(",", S).
+def: alt++(";", S).
+alt: term**(",", S).
 -term: factor; repeat0; repeat1; option.
 repeat0: factor, "*", S, sep?.
 sep: factor.
@@ -11,7 +11,7 @@ option: factor, "?", S.
 nonterminal: mark?, name, S.
 terminal: mark?, (quoted; hex; charset; exclude).
 
-charset: "[", S,  element+(";", S), "]", S.
+charset: "[", S,  element++(";", S), "]", S.
 exclude: "~", S, -charset.
 
 -element: range; character, S; class, S.

@@ -1,8 +1,8 @@
 {A test for what happens with comments in nonterminal attributes}
 ixml: S, rule+.
 rule: mark?, name, ["=:"], S, -alts, ".", S.
-alts: alt+([";|"], S).
-alt: term*(",", S).
+alts: alt++([";|"], S).
+alt: term**(",", S).
 -term: factor;
        repeat0;
        repeat1;
@@ -22,8 +22,8 @@ nonterminal: mark?, name.
 
 quoted: tmark?, -string.
 encoded: tmark?, @hex, S.
-inclusion: tmark?, "[", S,  element+([";|"], S), "]", S.
-exclusion: tmark?, "~", S, "[", S,  element+([";|"], S), "]", S.
+inclusion: tmark?, "[", S,  element++([";|"], S), "]", S.
+exclusion: tmark?, "~", S, "[", S,  element++([";|"], S), "]", S.
 
 @tmark: ["^-"], S.
 -element: range;

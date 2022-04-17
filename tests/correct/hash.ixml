@@ -1,4 +1,4 @@
-hashes: hash*S, ".".
+hashes: hash**S, ".".
 hash: "#", d6.
 @d6: d, (d, (d, (d, (d, d?)?)?)?)?.
 -d: ["0"-"9"].
