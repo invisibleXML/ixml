@@ -55,13 +55,14 @@ becomes
    <minute>55</minute>
    <second>24</second>
    <utc-offset>
-      <offset-hour>00</offset-hour>
+      <offset-hour direction="+">00</offset-hour>
       <offset-minute>00</offset-minute>
    </utc-offset>
 </local-datetime>
 ```
 
-If a datetime includes a specific offset from UTC, the sign is only included on the hour if its negative.
+If a datetime includes a specific offset from UTC, the sign is represented in a `direction` attribute
+on the `offset-hour`.
 
 ## Durations
 
