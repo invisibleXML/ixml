@@ -13,7 +13,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>00</offset-hour>
+         <offset-hour direction="+">00</offset-hour>
          <offset-minute>00</offset-minute>
       </utc-offset>
    </local-datetime>
@@ -44,7 +44,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>01</offset-hour>
+         <offset-hour direction="+">01</offset-hour>
          <offset-minute>00</offset-minute>
       </utc-offset>
    </local-datetime>
@@ -57,7 +57,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>02</offset-hour>
+         <offset-hour direction="+">02</offset-hour>
          <offset-minute>00</offset-minute>
       </utc-offset>
    </local-datetime>
@@ -70,7 +70,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>-03</offset-hour>
+         <offset-hour direction="-">03</offset-hour>
          <offset-minute>00</offset-minute>
       </utc-offset>
    </local-datetime>
@@ -83,7 +83,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>-04</offset-hour>
+         <offset-hour direction="-">04</offset-hour>
          <offset-minute>00</offset-minute>
       </utc-offset>
    </local-datetime>
@@ -96,7 +96,7 @@
       <minute>55</minute>
       <second>24</second>
       <utc-offset>
-         <offset-hour>-05</offset-hour>
+         <offset-hour direction="-">05</offset-hour>
       </utc-offset>
    </local-datetime>
 

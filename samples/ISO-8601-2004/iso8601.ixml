@@ -147,8 +147,9 @@ expanded-year = sign, digit+, digit, digit, digit .
 expanded-century = sign, digit+, digit, digit .
 -sign = -'+' ; '-' .
 
-offset-hour = sign, digit, digit .
+offset-hour = @direction, digit, digit .
 offset-minute = digit, digit .
+direction = '+'; '-' .
 
 year    = digit, digit, digit, digit .
 century = digit, digit .
