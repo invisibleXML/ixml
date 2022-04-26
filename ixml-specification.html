@@ -63,6 +63,7 @@
   </li>
   <li><a href="#hints">Hints for Implementers</a></li>
   <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
   <li><a href="#acknowledgments">Acknowledgements</a></li>
@@ -292,7 +293,8 @@ that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is a sequence of one or more rules, surrounded and separated by
 spacing and comments. Spacing and comments are entirely optional, except that
-rules must be separated by at least one of either.</p>
+rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either
+(<a class="error" href="#err-s01">error S01</a>).</p>
 <pre class="frag">ixml: s, rule++RS, s.</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments. A
@@ -379,16 +381,23 @@ match <code>a#a a!a a#a!a a!a#a a#a#a</code> etc.</p>
 <p>A nonterminal is an optionally marked name:</p>
 <pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
 
-<p>This name refers to the rule that defines this name, which <span
-class="conform">must</span> exist, and there <span class="conform">must</span>
-only be one such rule.</p>
+<p>This name refers to the rule that defines this name, which
+<span id="ref-s02" class="conform">must</span> exist
+(<a class="error" href="#err-s02">error S02</a>),
+and there <span id="ref-s03" class="conform">must</span>
+only be one such rule
+(<a class="error" href="#err-s03">error S03</a>).</p>
 
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
-input. A terminal <span class="conform">must not</span> be marked as an
-attribute (@), and a charset <span class="conform">must not</span> be marked as
-inserted (^). A terminal marked as deleted (-), serialises to the empty string.
+input. A terminal <span id="ref-s04" class="conform">must not</span> be marked as an
+attribute (@)
+(<a class="error" href="#err-s04">error S04</a>),
+and a charset <span id="ref-s05" class="conform">must not</span> be marked as
+inserted (^)
+(<a class="error" href="#err-s05">error S05</a>).
+A terminal marked as deleted (-), serialises to the empty string.
 A terminal marked as inserted (^) matches no characters on the input, but
 appears in the serialization.</p>
 <pre class="frag">-terminal: literal; 
@@ -405,7 +414,8 @@ matches only the exact same string in the input. Examples: <code>"yes"
 'yes'</code>. An inserted quoted string matches zero characters in the input
 (and succeeds).</p>
 
-<p>A string cannot extend over a line-break. The enclosing quote is represented
+<p id="ref-s11">A string cannot extend over a line-break
+(<a class="error" href="#err-s11">error S11</a>). The enclosing quote is represented
 in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
 "Isn't it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
 "Don''t!"'</code>.</p>
@@ -418,13 +428,19 @@ in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
    schar: ~["'"; #a; #d];
           "'", -"'". {all characters except line breaks; quotes must be doubled}</pre>
 
-<p>An encoded character is an optionally marked hexadecimal number. It starts
+<p id="ref-s06">An encoded character is an optionally marked hexadecimal number. It starts
 with a hash symbol, followed by any number of hexadecimal digits, for example
-<code>#a0</code>. The digits are interpreted as a number in hexadecimal, and
+<code>#a0</code>. The digits are interpreted as a number in hexadecimal
+(<a class="error" href="#err-s06">error S06</a>)
+, and
 the character at that Unicode code-point is used [<a
-href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
-within the Unicode code-point range, and <span class="conform">must not</span>
-denote a Noncharacter or Surrogate code point.</p>
+href="#unicode">Unicode</a>].
+The number <span id="ref-s07" class="conform">must</span> be
+within the Unicode code-point range
+(<a class="error" href="#err-s07">error S07</a>), and
+<span id="ref-s08" class="conform">must not</span>
+denote a Noncharacter or Surrogate code point
+(<a class="error" href="#err-s08">error S08</a>).</p>
 
 <p>An unmarked or deleted encoded character matches that one character in the
 input. If marked as inserted, it matches no characters (but succeeds).</p>
@@ -463,8 +479,9 @@ exclusion: (tmark, s)?, -"~", s, set.
 
 <p>A range matches any character in the range from the start character to the
 end, inclusive, using the Unicode ordering. The <code>from</code> character
-<span class="conform">must not</span> be later in the ordering than the
-<code>to</code> character.</p>
+<span id="ref-s09" class="conform">must not</span> be later in the ordering than the
+<code>to</code> character
+(<a class="error" href="#err-s09">error S09</a>).</p>
 <pre class="frag">-range: from, s, -"-", s, to.
 @from: character.
   @to: character.</pre>
@@ -476,7 +493,8 @@ end, inclusive, using the Unicode ordering. The <code>from</code> character
 
 <p>A class is one or two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name, which
-<span class="conform">must</span> exist. E.g. <code>[Ll]</code> matches any
+<span id="ref-s10" class="conform">must</span> exist
+(<a class="error" href="#err-s10">error S10</a>). E.g. <code>[Ll]</code> matches any
 lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
 character.</p>
 <pre class="frag">   -class: code.
@@ -610,17 +628,32 @@ nonterminal.</p>
   <li><strong>Deleted</strong>: the node is not serialised.</li>
 </ul>
 
-<p>Grammars <span class="conform">must</span> be written so that any
-serialization of a parse tree produced from the grammar is well-formed XML.</p>
+<p>Grammars <span id="ref-d01" class="conform">must</span> be written so that any
+serialization of a parse tree produced from the grammar is well-formed XML
+(<a class="error" href="#err-d01">error D01</a>).</p>
 
 <p>Note: This requirement means for instance that names of serialized elements
-and attributes must match the XML requirements; an element must not contain
-more than one attribute of a given name; invalid characters must not be
-serialized; a nonterminal being serialized as root element must not be marked
-as an attribute; in order to match the XML requirement of a single-rooted
-document, if the root rule is marked as hidden, all of its productions must
+and attributes must match the XML requirements; an element
+<span id="ref-d02" class="conform">must not</span> contain
+more than one attribute of a given name
+(<a class="error" href="#err-d02">error D02</a>);
+the names of all elements and attributes
+<span id="ref-d03" class="conform">must</span> conform to the requirements
+for XML names;
+invalid characters
+<span id="ref-d04" class="conform">must not</span> be
+serialized
+(<a class="error" href="#err-d04">error D04</a>);
+a nonterminal being serialized as root element
+<span id="ref-d05" class="conform">must not</span> be marked
+as an attribute
+(<a class="error" href="#err-d05">error D05</a>);
+in order to match the XML requirement of a single-rooted
+document, if the root rule is marked as hidden, all of its productions
+<span id="ref-d06" class="conform">must</span>
 produce exactly one non-hidden non-attribute nonterminal and no non-hidden
-terminals before or after that nonterminal.</p>
+terminals before or after that nonterminal
+(<a class="error" href="#err-d06">error D06</a>).</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
 rules is:</p>
@@ -919,6 +952,63 @@ serialisation</a> is available:</p>
          &lt;literal tmark='-' string='.'/&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;</pre>
+
+<h2 id="errors">Errors</h2>
+
+<p>This section summarizes errors identified in this specification. Static errors
+are errors that can be identified by inspecting the grammar.</p>
+
+<dl id="static-errors">
+  <dt id="err-s01"><a href="#ref-s01">S01</a></dt>
+  <dd>It is an error if two rules are not separated by at least one whitespace
+  character or comment.</dd>
+  <dt id="err-s02"><a href="#ref-s02">S02</a></dt>
+  <dd>It is an error to use a nonterminal name that is not defined by a rule in the grammar.</dd>
+  <dt id="err-s03"><a href="#ref-s03">S03</a></dt>
+  <dd>It is an error if the grammar contains more than one rule for a given nonterminal name.</dd>
+  <dt id="err-s04"><a href="#ref-s04">S04</a></dt>
+  <dd>It is an error to mark a terminal as an attribute.</dd>
+  <dt id="err-s05"><a href="#ref-s05">S05</a></dt>
+  <dd>It is an error to mark a character set as an insertion.</dd>
+  <dt id="err-s06"><a href="#ref-s06">S06</a></dt>
+  <dd>It is an error if a hex encoding uses any characters not allowed in hexidecimal.</dd>
+  <dt id="err-s07"><a href="#ref-s07">S07</a></dt>
+  <dd>It is an error if the hexidecimal value is not within the Unicode code-point range.</dd>
+  <dt id="err-s08"><a href="#ref-s08">S08</a></dt>
+  <dd>It is an error if an encoded character denotes a Unicode noncharacter or surrogate code point.</dd>
+  <dt id="err-s09"><a href="#ref-s09">S09</a></dt>
+  <dd>It is an error if the first character in a range has a code point value
+  greater than the second character in the range.</dd>
+  <dt id="err-s10"><a href="#ref-s10">S10</a></dt>
+  <dd>It is an error to use a Unicode character category that is not defined in the
+  Unicode specification.</dd>
+  <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
+  <dd>It is an error if a string contains a line break.</dd>
+</dl>
+
+<p>Dynamic errors arise when a particular input is processed with a grammar.</p>
+
+<dl id="dynamic-errors">
+  <dt id="err-d01"><a href="#ref-d01">D01</a></dt>
+  <dd>It is an error if the parse tree produced by a grammar cannot be represented as
+  well-formed XML.</dd>
+  <dt id="err-d02"><a href="#ref-d02">D02</a></dt>
+  <dd>It is an error if two or more attributes with the same name would be serialized on
+  the same element.</dd>
+  <dt id="err-d03"><a href="#ref-d03">D03</a></dt>
+  <dd>It is an error if the name of any element or attribute is not a valid XML name.</dd>
+  <dt id="err-d04"><a href="#ref-d04">D04</a></dt>
+  <dd>It is an error to attempt to serialize as XML any characters that are not permitted
+  in XML.</dd>
+  <dt id="err-d05"><a href="#ref-d05">D05</a></dt>
+  <dd>It is an error to attempt to serialize an attribute as the root node of an XML document.</dd>
+  <dt id="err-d06"><a href="#ref-d06">D06</a></dt>
+  <dd>It is an error if the parse tree does not contain exactly one top-level element.</dd>
+</dl>
+
+<p>Note: if error codes are reported in a context where it makes sense for them
+to appear in a namespace, they <span class="conform">should</span>
+be in the Invisible XML namespace.</p>
 
 <h2 id="references">References</h2>
 
