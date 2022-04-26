@@ -22,11 +22,11 @@
       span.conform {font-weight: bold}
   </style>
   <!--
-      <style type="text/css" rel="alternate stylesheet" title="Fragments">
-         p, h3 {display: none}
-         pre.frag {display: block}
-      </style>
-      -->
+        <style type="text/css" rel="alternate stylesheet" title="Fragments">
+           p, h3 {display: none}
+           pre.frag {display: block}
+        </style>
+        -->
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version:  <!--$date=-->2022-04-15<!--$--> </p>
+<p>Version: <!--$date=-->2022-04-26<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -235,7 +235,7 @@ serialisation</p>
    &lt;/path&gt;
 &lt;/url&gt;</pre>
 
-<p>If the rule for <code>letter</code> had not had a "-" before it, the
+<p>If the rule for <code>letter</code> had not had a "-" before it, the
 serialisation for <code>scheme</code>, for instance, would have been:</p>
 <pre>&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
 
@@ -386,8 +386,8 @@ only be one such rule.</p>
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
-input. A terminal <span class="conform">must</span> not be marked as an
-attribute (@), and a charset <span class="conform">must</span> not be marked as
+input. A terminal <span class="conform">must not</span> be marked as an
+attribute (@), and a charset <span class="conform">must not</span> be marked as
 inserted (^). A terminal marked as deleted (-), serialises to the empty string.
 A terminal marked as inserted (^) matches no characters on the input, but
 appears in the serialization.</p>
@@ -423,7 +423,7 @@ with a hash symbol, followed by any number of hexadecimal digits, for example
 <code>#a0</code>. The digits are interpreted as a number in hexadecimal, and
 the character at that Unicode code-point is used [<a
 href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
-within the Unicode code-point range, and <span class="conform">must</span> not
+within the Unicode code-point range, and <span class="conform">must not</span>
 denote a Noncharacter or Surrogate code point.</p>
 
 <p>An unmarked or deleted encoded character matches that one character in the
@@ -463,7 +463,7 @@ exclusion: (tmark, s)?, -"~", s, set.
 
 <p>A range matches any character in the range from the start character to the
 end, inclusive, using the Unicode ordering. The <code>from</code> character
-<span class="conform">must</span> not be later in the ordering than the
+<span class="conform">must not</span> be later in the ordering than the
 <code>to</code> character.</p>
 <pre class="frag">-range: from, s, -"-", s, to.
 @from: character.
@@ -564,7 +564,11 @@ grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
 serialization <span class="conform">should</span> including the attribute
 <code>ixml:state="ambiguous"</code> on the document element. The ixml namespace
-URI is "<code>http://invisiblexml.org/NS</code>".</p>
+URI is "<code>http://invisiblexml.org/NS</code>". Known algorithms that accept
+and parse any context-free grammar include [<a href="#earley">Earley</a>], [<a
+href="#unger">Unger</a>], [<a href="#cyk">CYK</a>], [<a href="#glr">GLR</a>],
+and [<a href="#gll">GLL</a>]; see also [<a href="#grune">Grune</a>]; different
+algorithms may differ slightly in how ambiguity is defined.</p>
 
 <p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state="failed"</code> on the document element. The
@@ -698,18 +702,18 @@ conformance requirement.)</p>
 <ul>
   <li>Every nonterminal used in the right-hand side of any rule <span
     class="conform">must</span> be defined by a single rule.</li>
-  <li>A terminal <span class="conform">must</span> not be marked as an
-    attribute (@), and a charset <span class="conform">must</span> not be
+  <li>A terminal <span class="conform">must not</span> be marked as an
+    attribute (@), and a charset <span class="conform">must not</span> be
     marked as inserted (^). </li>
   <li>Any character class used <span class="conform">must</span> be one that is
     listed in the Unicode specification.</li>
   <li>The number represented in a hex encoding of a character <span
     class="conform">must</span> be within the Unicode character range, and
-    <span class="conform">must</span> not denote a Noncharacter or Surrogate
+    <span class="conform">must not</span> denote a Noncharacter or Surrogate
     code point.</li>
-  <li>The <code>from</code> character of a range <span
-    class="conform">must</span> not be later in the Unicode ordering than the
-    <code>to</code> character.</li>
+  <li>The <code>from</code> character of a range <span class="conform">must
+    not</span> be later in the Unicode ordering than the <code>to</code>
+    character.</li>
   <li>Any serialization of a parse tree produced from the grammar <span
     class="conform">must</span> be well-formed XML.</li>
 </ul>
@@ -718,7 +722,7 @@ conformance requirement.)</p>
 
 <p>A conforming processor <span class="conform">must</span> accept grammars in
 ixml form, and <span class="conform">should</span> accept grammars in XML form;
-it <span class="conform">must</span> not accept non-conforming grammars. Both
+it <span class="conform">must not</span> accept non-conforming grammars. Both
 grammars and input <span class="conform">must</span> be accepted in UTF-8
 encoding, and <span class="conform">may</span> be accepted in other
 encodings.</p>
@@ -760,13 +764,6 @@ encodings.</p>
     instances or XDM instances) <span class="conform">may</span> also be
   used.</li>
 </ul>
-
-<p>Note: the requirements require that grammars be processed by an algorithm
-that accepts and parses any context-free grammar; known algorithms of this
-class include [<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
-href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
-see also [<a href="#grune">Grune</a>]. Different algorithms may differ slightly
-in how ambiguity is defined.</p>
 
 <h2 id="hints">Hints for Implementers</h2>
 
