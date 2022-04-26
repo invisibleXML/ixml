@@ -1,6 +1,6 @@
 css: S, rule+.
 rule: selector, block.
-block: -"{", S, property*(-";", S), -"}", S.
+block: -"{", S, property**(-";", S), -"}", S.
 property:  @name, S, -":", S, value; empty.
 selector: name, S.
 name: letter+.

@@ -1,4 +1,4 @@
-         ixml: s, rule+s, s.
+         ixml: s, rule++s, s.
 
            -s: (whitespace; comment)*.
   -whitespace: -[Zs]; tab; lf; cr.
@@ -10,8 +10,8 @@
 
          rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
         @mark: ["@^-"].
-         alts: alt+(-[";|"], s).
-          alt: term*(-",", s).
+         alts: alt++(-[";|"], s).
+          alt: term**(-",", s).
         -term: factor;
                option;
                repeat0;
@@ -51,7 +51,7 @@
                exclusion.
     inclusion: (tmark, s)?,          set.
     exclusion: (tmark, s)?, -"~", s, set.
-         -set: -"[", s,  member*(-[";|"], s), -"]", s.
+         -set: -"[", s,  member**(-[";|"], s), -"]", s.
       -member: literal;
                range;
                class.
