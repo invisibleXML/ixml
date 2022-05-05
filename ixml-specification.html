@@ -466,6 +466,12 @@ and there <span id="ref-s03" class="conform">must</span>
 only be one such rule
 (<a class="error" href="#err-s03">error S03</a>).</p>
 
+<p class="add">The XML Recommendation reserves names that begin “xml”. Nonterminal names
+<span class="conform">should not</span> begin with the letters “xml” in any combination of upper-
+or lower-case. A nonterminal marked as an attribute <span id="ref-s16" class="conform">must not</span>
+be named “<code>xmlns</code>” or have the prefix “<code>xmlns</code>”
+(<a class="error" href="#err-s16">error S16</a>).</p>
+
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
@@ -696,7 +702,8 @@ nonterminal.</p>
   <li><strong>Attribute</strong>: the node is serialized as an XML attribute
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of marking of
-    intermediate nonterminals), if any, in order.</li>
+    intermediate nonterminals), if any, in order.
+</li>
 </ul>
 
 <p>A terminal can be unmarked, or marked as inserted (^), or as deleted (-).</p>
@@ -1071,6 +1078,10 @@ are errors that can be identified by inspecting the grammar.</p>
   for all of the namespaces declared in the grammar on the <code>ixml</code> document element.</dd>
   <dt class="add" id="err-s15"><a href="#ref-s15">S15</a></dt>
   <dd class="add">It is an error if a prefix used in a nonterminal name does not have a namespace declaration.</dd>
+  <dt class="add" id="err-s16"><a href="#ref-s16">S16</a></dt>
+  <dd class="add">It is an error to attempt to construct an attribute named “<code>xmlns</code>”
+  or which has the prefix “<code>xmlns</code>”. These are reserved by XML for namespace declarations
+  and cannot be serialised as attributes.</dd>
 </dl>
 
 <p>Dynamic errors arise when a particular input is processed with a grammar.</p>
