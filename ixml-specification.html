@@ -20,6 +20,8 @@
       span.todo {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
       span.conform {font-weight: bold}
+      add, .add { background-color: #aaffaa; }
+      del, .del { background-color: #ffaaaa; text-decoration: line-through; }
   </style>
   <!--
         <style type="text/css" rel="alternate stylesheet" title="Fragments">
@@ -312,12 +314,18 @@ commenting out parts of a grammar:</p>
     comment: -"{", (cchar; comment)*, -"}".
      -cchar: ~["{}"].</pre>
 
-<h3 id="prolog">Version declaration</h3>
+<h3 id="prolog">Version <add>and namespace </add>declaration<add>s</add></h3>
 
-<p>A grammar may begin with a version declaration.</p>
+<p>A grammar may begin with a version declaration<add> and/or namespace declarations.
+Both are optional.</add></p>
 
-<pre class="frag">        prolog = version, s.
+<pre class="frag del">        prolog = version, s.
        version = -"ixml", RS, -"version", RS, -string, s, -'.' .</pre>
+
+<pre class="frag add">       prolog = ((version, s, namespace**RS) | namespace++RS) .
+      version = -"ixml", RS, -"version", RS, -string, s, -'.' .</pre>
+
+<h4 class="add" id="version">Version declaration</h4>
 
 <p>A version declaration consists of the words <code>ixml</code>
 and <code>version</code> followed by a string and terminated with
@@ -342,6 +350,30 @@ using the semantics of the version of Invisible XML under which it
 found a valid interpretation, otherwise it must reject the grammar.
 </p>
 
+<h4 id="xmlns" class="add">Namespace declarations</h4>
+
+<p class="add">Namespace declarations associate XML namespaces with nonterminals.
+There <span id="ref-s12" class="conform">must not</span> be more than one default namespace declaration
+(<a class="error" href="#err-s12">error S12</a>).
+Any number of prefixes may be declared, but there
+<span id="ref-s13" class="conform">must not</span> be more than one declaration for any given prefix
+(<a class="error" href="#err-s13">error S13</a>). The default namespace applies only to nonterminals
+marked (explicitly or implicitly) with “<code>^</code>”.
+</p>
+
+<pre class="frag add">    namespace = defaultns | prefixns.
+   -defaultns = -"default", RS, -"namespace", s, -"=", s, @uri, s, -'.' .
+   -prefixns  = -"namespace", RS, @prefix, s, -"=", s, @uri, s, -'.' .
+          uri = -string .</pre>
+
+<p class="add">In the XML serialization of an ixml grammar, all namespace declarations present
+<span id="ref-s14" class="conform">must</span> appear as XML namespace declarations on the
+<code>&lt;ixml&gt;</code> document element
+(<a class="error" href="#err-s14">error S14</a>).
+Implementations <span class="conform">should not</span> put
+namespace declarations on any other elements or declare any namespaces not declared in
+the grammar.</p>
+
 <h3 id="rules">Rules</h3>
 
 <p>A rule consists of an optional mark, a name, and one or more alternatives.
@@ -363,9 +395,22 @@ used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialised names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
-<pre class="frag">        @name: namestart, namefollower*.
+
+<pre class="frag del">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
+
+<p class="add">If a name contains a prefix, the grammar
+<span id="ref-s15" class="conform">must</span> contain a corresponding
+<a href="#xmlns">namespace declaration</a>
+(<a class="error" href="#err-s15">error S15</a>).</p>
+
+<pre class="frag add">        @name = (prefix, ':')?, ncname.
+      -ncname = namestart, namefollower*.
+      -prefix = -ncname .
+   -namestart = ["_" | L].
+-namefollower = namestart | ["-.·‿⁀" | Nd | Mn].</pre>
+
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p>
@@ -1017,6 +1062,15 @@ are errors that can be identified by inspecting the grammar.</p>
   Unicode specification.</dd>
   <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
   <dd>It is an error if a string contains a line break.</dd>
+  <dt class="add" id="err-s12"><a href="#ref-s12">S12</a></dt>
+  <dd class="add">It is an error if more than one default namespace declaration is present.</dd>
+  <dt class="add" id="err-s13"><a href="#ref-s13">S13</a></dt>
+  <dd class="add">It is an error if more than one namespace declaration is present for any given prefix.</dd>
+  <dt class="add" id="err-s14"><a href="#ref-s14">S14</a></dt>
+  <dd class="add">It is an error if the XML serialization of a grammar does not place XML namespace declarations
+  for all of the namespaces declared in the grammar on the <code>ixml</code> document element.</dd>
+  <dt class="add" id="err-s15"><a href="#ref-s15">S15</a></dt>
+  <dd class="add">It is an error if a prefix used in a nonterminal name does not have a namespace declaration.</dd>
 </dl>
 
 <p>Dynamic errors arise when a particular input is processed with a grammar.</p>
