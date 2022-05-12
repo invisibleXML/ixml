@@ -7,7 +7,7 @@ chars: punctuation, nonpunct?; upper, nonupper?; lower, nonlower?; digit, nondig
 upper: [#41-#5A]+.
 lower: [#61-#7A]+.
 digit: [#30-#39]+.
-punctuation: ~[#a; #30-#39; #41-#5A; #61-#7A]+.
+punctuation: ~[#a; #d; #30-#39; #41-#5A; #61-#7A]+.
 {-lf: -#a.}
 {
 0123456789abcdef

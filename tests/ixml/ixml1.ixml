@@ -39,7 +39,7 @@ hex: "#", number.
 number: hexit+.
 -hexit: digit; ["a"-"f"; "A"-"F"].
 
--S: (" "; -#a; comment)*.
+-S: (" "; -#a; -#d; comment)*.
 comment: "{", cchar*, "}".
 -cchar: ~["}"].
 {the end}
