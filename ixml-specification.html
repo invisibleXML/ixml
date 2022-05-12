@@ -22,11 +22,11 @@
       span.conform {font-weight: bold}
   </style>
   <!--
-        <style type="text/css" rel="alternate stylesheet" title="Fragments">
-           p, h3 {display: none}
-           pre.frag {display: block}
-        </style>
-        -->
+          <style type="text/css" rel="alternate stylesheet" title="Fragments">
+             p, h3 {display: none}
+             pre.frag {display: block}
+          </style>
+          -->
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-04-26<!--$--></p>
+<p>Version: <!--$date=-->2022-05-10<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -314,11 +314,11 @@ The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
 <pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
-<p>A mark is one of <code>@</code>, <code>^</code> or <code>-</code>, and
-indicates whether the item so marked will be serialised as an attribute
-(<code>@</code>), inserted as an element with its children (<code>^</code>),
-which is the default, or deleted, so that only its children are serialized
-(<code>-</code>).</p>
+<p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
+indicates whether the item so marked will be serialised as a structured element
+with its children (<code>^</code>) which is the default, as unstructured data
+in an attribute (<code>@</code>), or deleted, so that only its children are
+serialized (<code>-</code>).</p>
 <pre class="frag">@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
@@ -386,11 +386,11 @@ only be one such rule.</p>
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
-input. A terminal <span class="conform">must not</span> be marked as an
-attribute (@), and a charset <span class="conform">must not</span> be marked as
-inserted (^). A terminal marked as deleted (-), serialises to the empty string.
-A terminal marked as inserted (^) matches no characters on the input, but
-appears in the serialization.</p>
+input. A terminal <span class="conform">must not</span> be marked as
+unstructured (@), and a charset <span class="conform">must not</span> be marked
+as structured (^). A terminal marked as deleted (-), serialises to the empty
+string. A terminal marked as inserted (+) matches no characters on the input,
+but appears in the serialization.</p>
 <pre class="frag">-terminal: literal; 
            charset.</pre>
 
@@ -410,7 +410,7 @@ in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
 "Isn't it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
 "Don''t!"'</code>.</p>
 <pre class="frag"> -quoted: (tmark, s)?, string, s.
-  @tmark: ["^-"].
+  @tmark: ["^-+"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
    dchar: ~['"'; #a; #d];
@@ -523,7 +523,7 @@ character.</p>
                encoded.
       -quoted: (tmark, s)?, string, s.
 
-       @tmark: ["^-"].
+       @tmark: ["^-+"].
       @string: -'"', dchar+, -'"';
                -"'", schar+, -"'".
        -dchar: ~['"'; #a; #d];
@@ -584,29 +584,31 @@ serialising the root node of the parse tree.</p>
 <p>A parse node is either a nonterminal, which has a name and children, or a
 terminal, which has a string.</p>
 
-<p>A nonterminal can be unmarked, or marked as inserted (^), as an attribute
+<p>A nonterminal can be unmarked, or marked as structured (^), as unstructured
 (@), or as deleted (-). The mark comes from the use of the nonterminal in a
 rule if present, otherwise, from the definition of the rule for that
 nonterminal.</p>
 <ul>
-  <li><strong>Unmarked or inserted</strong>: the node is serialized as an XML
+  <li><strong>Unmarked or structured</strong>: the node is serialized as an XML
     element whose name is the name of the node, whose attributes are the
-    serializations of all exposed attribute descendants, if any, and whose
-    content is the serialization of all its non-attribute children in order, if
-    any. An attribute node is exposed if it is an attribute child, or an
-    exposed attribute of a deleted child (note this is recursive).</li>
+    serializations of all exposed unstructured descendants, if any, and whose
+    content is the serialization of all its non-unstructured children in order,
+    if any. An unstructured node is exposed if it is an unstructured child, or
+    an exposed unstructured node of a deleted child (note this is
+  recursive).</li>
   <li><strong>Deleted</strong>: all its non-attribute children, if any, are
     serialized in order.</li>
-  <li><strong>Attribute</strong>: the node is serialized as an XML attribute
+  <li><strong>Unstructured</strong>: the node is serialized as an XML attribute
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of marking of
     intermediate nonterminals), if any, in order.</li>
 </ul>
 
-<p>A terminal can be unmarked, or marked as inserted (^), or as deleted (-).</p>
+<p>A terminal can be unmarked, or marked as inserted (+), structured (^), or as
+deleted (-).</p>
 <ul>
-  <li><strong>Unmarked or inserted</strong>: the node is serialised as its
-    string.</li>
+  <li><strong>Unmarked, structured, or inserted</strong>: the node is
+    serialised as its string.</li>
   <li><strong>Deleted</strong>: the node is not serialised.</li>
 </ul>
 
@@ -617,9 +619,9 @@ serialization of a parse tree produced from the grammar is well-formed XML.</p>
 and attributes must match the XML requirements; an element must not contain
 more than one attribute of a given name; invalid characters must not be
 serialized; a nonterminal being serialized as root element must not be marked
-as an attribute; in order to match the XML requirement of a single-rooted
+as unstructured; in order to match the XML requirement of a single-rooted
 document, if the root rule is marked as hidden, all of its productions must
-produce exactly one non-hidden non-attribute nonterminal and no non-hidden
+produce exactly one non-hidden structured nonterminal and no non-hidden
 terminals before or after that nonterminal.</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
@@ -652,11 +654,11 @@ some attributes can appear earlier in the serialization than in the input.</p>
 
 <p>Insertions allow characters to be inserted into the serialization that were
 not present in the input. For instance, the grammar</p>
-<pre>  data: value++",", @source.
-source: ^"ixml".
+<pre>  data: value++-",", @source.
+source: +"ixml".
  value: pos; neg.
-  -pos: ^"+", digit+.
-  -neg: ^"-", -"(", digit+, -")".
+  -pos: +"+", digit+.
+  -neg: +"-", -"(", digit+, -")".
 -digit: ["0"-"9"].</pre>
 
 <p>With input:</p>
@@ -702,9 +704,9 @@ conformance requirement.)</p>
 <ul>
   <li>Every nonterminal used in the right-hand side of any rule <span
     class="conform">must</span> be defined by a single rule.</li>
-  <li>A terminal <span class="conform">must not</span> be marked as an
-    attribute (@), and a charset <span class="conform">must not</span> be
-    marked as inserted (^). </li>
+  <li>A terminal <span class="conform">must not</span> be marked as
+    unstructured (@), and a charset <span class="conform">must not</span> be
+    marked as inserted (+). </li>
   <li>Any character class used <span class="conform">must</span> be one that is
     listed in the Unicode specification.</li>
   <li>The number represented in a hex encoding of a character <span
