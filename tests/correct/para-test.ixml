@@ -1,5 +1,5 @@
+doc: section+.
 section: para, lf.
 para: line+.
-line: ~[#a]+, lf.
-lf: -#a.
-
+line: ~[#a | #d]+, lf.
+-lf: -#a | -#d, -#a.
