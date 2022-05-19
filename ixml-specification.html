@@ -34,7 +34,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-05-17<!--$--></p>
+<p>Version: <!--$date=-->2022-05-19<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -291,11 +291,13 @@ in the serialised result, giving:</p>
 <p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p>
 
-<p>A grammar is a sequence of one or more rules, surrounded and separated by
-spacing and comments. Spacing and comments are entirely optional, except that
-rules <span id="ref-s01" class="conform">must</span> be separated by at least
-one of either (<a class="error" href="#err-s01">error S01</a>).</p>
-<pre class="frag">ixml: s, rule++RS, s.</pre>
+<p>A grammar is an optional prolog containing a version declaration
+followed by a sequence of one or more rules, surrounded and separated
+by spacing and comments. Spacing and comments are entirely optional,
+except that rules <span id="ref-s01" class="conform">must</span> be
+separated by at least one of either (<a class="error"
+href="#err-s01">error S01</a>).</p>
+<pre class="frag">ixml: s, prolog?, rule++RS, s.</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments. A
 comment is enclosed in braces, and can included nested comments, to enable
@@ -308,6 +310,36 @@ commenting out parts of a grammar:</p>
         -cr: -#d.
     comment: -"{", (cchar; comment)*, -"}".
      -cchar: ~["{}"].</pre>
+
+<h3 id="prolog">Version declaration</h3>
+
+<p>A grammar may begin with a version declaration.</p>
+
+<pre class="frag">        prolog = version, s.
+       version = -"ixml", RS, -"version", RS, -string, s, -'.' .</pre>
+
+<p>A version declaration consists of the words <code>ixml</code>
+and <code>version</code> followed by a string and terminated with
+a full stop. For example</p>
+
+<pre>ixml version "1.0" .</pre>
+
+<p>If a version declaration is present in an Invisible XML grammar, it is
+a statement by the author that the grammar conforms to the syntax and
+semantics of the version of ixml indicated in the declaration.</p>
+
+<p>An implemenation will either recognize the version string or it
+will not. If it recognizes the version string, it should process the
+grammar using the syntax and semantics of the declared version. If a
+version declaration is not present, an implementation should behave as
+if the grammar was labeled “1.0”.</p>
+
+<p>If it does not recognize the version string, it may issue a
+warning, but it must attempt to process the grammar. If it finds a
+syntactically valid interpretation of the grammar, it should proceed
+using the semantics of the version of Invisible XML under which it
+found a valid interpretation, otherwise it must reject the grammar.
+</p>
 
 <h3 id="rules">Rules</h3>
 
