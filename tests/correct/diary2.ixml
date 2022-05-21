@@ -1,6 +1,6 @@
 diary: entry+.
 entry: date, para.
-date: day, s, month, s,  year, -#a.
+date: day, s, month, s,  year, nl.
 day: digit, digit?.
 -digit:["0"-"9"].
 month: "January"; "February"; "March"; "April"; "May"; "June";
@@ -8,8 +8,9 @@ month: "January"; "February"; "March"; "April"; "May"; "June";
 year: digit, digit, digit, digit.
 
 para: char*, blank.
--blank: -#a, -#a.
+-blank: nl, nl.
 -char: letter; punctuation; s.
 -letter: [L].
 -punctuation: [".;:,'?!"].
 -s: " ".
+-nl: -#a | -#d, -#a .

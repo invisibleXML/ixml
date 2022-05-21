@@ -1,4 +1,4 @@
-{version 2022-04-15}
+{version 2022-05-17}
          ixml: s, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
@@ -37,7 +37,7 @@
                encoded.
       -quoted: (tmark, s)?, string, s.
 
-       @tmark: ["^-"].
+       @tmark: ["^-+"].
       @string: -'"', dchar+, -'"';
                -"'", schar+, -"'".
        -dchar: ~['"'; #a; #d];

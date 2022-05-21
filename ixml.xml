@@ -1,5 +1,6 @@
+
 <ixml>
-   <comment>version 2022-04-15</comment>
+   <comment>version 2022-05-17</comment>
    <rule name='ixml'>
       <alt>
          <nonterminal name='s'/>
@@ -303,7 +304,7 @@
    <rule mark='@' name='tmark'>
       <alt>
          <inclusion>
-            <member string='^-'/>
+            <member string='^-+'/>
          </inclusion>
       </alt>
    </rule>
