@@ -25,7 +25,15 @@
       ability to represent it.</p>
     </description>
     <ixml-grammar>s: #decafbadbadbadbad .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
+    <!-- Since there is no grammar here, it's not really necessary
+	 to have a text case.  But hey, ... -->
     <test-case name="hex-much-too-big">
+      <test-string/>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -36,7 +44,13 @@
       <p>Exceeds the range of Unicode.</p>
     </description>
     <ixml-grammar>s: #ffffffff0 .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="hex-too-big">
+      <test-string>42</test-string>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -47,7 +61,13 @@
       <p>Not a Unicode character.</p>
     </description>
     <ixml-grammar>s: #fffe .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="hex-not-a-character">
+      <test-string>65534</test-string>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -58,7 +78,13 @@
       <p>Also not a Unicode character.</p>
     </description>
     <ixml-grammar>s: #1fffe .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="hex-also-not-a-character">
+      <test-string/>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -69,7 +95,13 @@
       <p>A Unicode surrogate.</p>
     </description>
     <ixml-grammar>s: #d801 .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="hex-surrogate">
+      <test-string/>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -80,7 +112,13 @@
       <p>An invalid Unicode character class.</p>
     </description>
     <ixml-grammar>s: [Xq] .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="bad-class">
+      <test-string>x</test-string>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
@@ -91,7 +129,21 @@
       <p>An invalid range.</p>
     </description>
     <ixml-grammar>s: ['Z'-'A'] .</ixml-grammar>
+    <grammar-test>
+      <result>
+	<assert-not-a-grammar/>
+      </result>
+    </grammar-test>
     <test-case name="invalid-range">
+      <test-string>A</test-string>
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+    <test-case name="invalid-range">
+      <test-string>Z</test-string>
+      <result><assert-not-a-grammar/></result>
+    </test-case>
+    <test-case name="invalid-range">
+      <test-string>L</test-string>
       <result><assert-not-a-grammar/></result>
     </test-case>
   </test-set>    
