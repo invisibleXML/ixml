@@ -1,7 +1,7 @@
 expression: expr.
--expr: term+plusop.
+-expr: term++plusop.
 @plusop: "+"; "-".
-term: -factor; factor, mulop, factor+mulop.
+term: -factor; factor, mulop, factor++mulop.
 @mulop: "*"; "/".
 factor: id; number; bracketed.
 bracketed: -"(", expr, -")".
