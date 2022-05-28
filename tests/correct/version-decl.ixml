@@ -1,4 +1,4 @@
-ixml version "1.0"
+ixml version "1.0".
 
 S = 'abc', done
   ; [#00BF], 'x', [], 'x?
