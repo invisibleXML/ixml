@@ -1,9 +1,12 @@
 
 <ixml>
-   <comment>version 2022-05-17</comment>
+   <comment>version 2022-05-28</comment>
    <rule name='ixml'>
       <alt>
          <nonterminal name='s'/>
+         <option>
+            <nonterminal name='prolog'/>
+         </option>
          <repeat1>
             <nonterminal name='rule'/>
             <sep>
@@ -97,6 +100,23 @@
          </exclusion>
       </alt>
    </rule>
+   <rule name='prolog'>
+      <alt>
+         <nonterminal name='version'/>
+         <nonterminal name='s'/>
+      </alt>
+   </rule>
+   <rule name='version'>
+      <alt>
+         <literal tmark='-' string='ixml'/>
+         <nonterminal name='RS'/>
+         <literal tmark='-' string='version'/>
+         <nonterminal name='RS'/>
+         <nonterminal name='string'/>
+         <nonterminal name='s'/>
+         <literal tmark='-' string='.'/>
+      </alt>
+   </rule>
    <rule name='rule'>
       <alt>
          <option>
@@ -176,6 +196,9 @@
       </alt>
       <alt>
          <nonterminal name='nonterminal'/>
+      </alt>
+      <alt>
+         <nonterminal name='insertion'/>
       </alt>
       <alt>
          <literal tmark='-' string='('/>
@@ -304,7 +327,7 @@
    <rule mark='@' name='tmark'>
       <alt>
          <inclusion>
-            <member string='^-+'/>
+            <member string='^-'/>
          </inclusion>
       </alt>
    </rule>
@@ -324,7 +347,7 @@
          <literal tmark='-' string='&apos;'/>
       </alt>
    </rule>
-   <rule mark='-' name='dchar'>
+   <rule name='dchar'>
       <alt>
          <exclusion>
             <member string='"'/>
@@ -338,7 +361,7 @@
       </alt>
    </rule>
    <comment>all characters except line breaks; quotes must be doubled</comment>
-   <rule mark='-' name='schar'>
+   <rule name='schar'>
       <alt>
          <exclusion>
             <member string='&apos;'/>
@@ -515,6 +538,21 @@
          <inclusion>
             <member from='a' to='z'/>
          </inclusion>
+      </alt>
+   </rule>
+   <rule name='insertion'>
+      <alt>
+         <literal tmark='-' string='+'/>
+         <nonterminal name='s'/>
+         <alts>
+            <alt>
+               <nonterminal name='string'/>
+            </alt>
+            <alt>
+               <literal tmark='-' string='#'/>
+               <nonterminal name='hex'/>
+            </alt>
+         </alts>
       </alt>
    </rule>
 </ixml>

@@ -1,5 +1,5 @@
-{version 2022-05-17}
-         ixml: s, rule++RS, s.
+{version 2022-05-28}
+         ixml: s, prolog?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
           -RS: (whitespace; comment)+. {Required spacing}
@@ -9,6 +9,9 @@
           -cr: -#d.
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
+
+       prolog: version, s.
+      version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
          rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
         @mark: ["@^-"].
@@ -20,6 +23,7 @@
                repeat1.
       -factor: terminal;
                nonterminal;
+               insertion;
                -"(", s, alts, -")", s.
       repeat0: factor, (-"*", s; -"**", s, sep).
       repeat1: factor, (-"+", s; -"++", s, sep).
@@ -37,12 +41,12 @@
                encoded.
       -quoted: (tmark, s)?, string, s.
 
-       @tmark: ["^-+"].
+       @tmark: ["^-"].
       @string: -'"', dchar+, -'"';
                -"'", schar+, -"'".
-       -dchar: ~['"'; #a; #d];
+        dchar: ~['"'; #a; #d];
                '"', -'"'. {all characters except line breaks; quotes must be doubled}
-       -schar: ~["'"; #a; #d];
+        schar: ~["'"; #a; #d];
                "'", -"'". {all characters except line breaks; quotes must be doubled}
      -encoded: (tmark, s)?, -"#", hex, s.
          @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
@@ -66,3 +70,4 @@
         @code: capital, letter?.
      -capital: ["A"-"Z"].
       -letter: ["a"-"z"].
+    insertion: -"+", s, (string; -"#", hex).
