@@ -16,6 +16,7 @@ e.ixml =
     extension-attributes,
     (extension-elements
      & (s,
+        prolog?,
         (rule, (RS, rule)*),
         s))
   }
@@ -52,6 +53,18 @@ cchar = h.cchar
 h.cchar =
   # can a data element be used?
   text
+prolog = e.prolog
+e.prolog =
+  element prolog {
+    extension-attributes,
+    (extension-elements & (version, s))
+  }
+version = e.version
+e.version =
+  element version {
+    extension-attributes,
+    (extension-elements & (RS, RS, \string, s))
+  }
 rule = e.rule
 e.rule =
   element rule {
@@ -62,7 +75,8 @@ e.rule =
 mark = a.mark
 a.mark =
   attribute mark {
-    xsd:string { pattern = "[@\^\-]" }
+    # No annotations found, falling back to 'text'.
+    text
   }
 alts = e.alts
 e.alts =
@@ -82,7 +96,7 @@ e.alt =
 term = h.term
 h.term = factor | option | repeat0 | repeat1
 factor = h.factor
-h.factor = terminal | nonterminal | (s, alts, s)
+h.factor = terminal | nonterminal | insertion | (s, alts, s)
 repeat0 = e.repeat0
 e.repeat0 =
   element repeat0 {
@@ -118,9 +132,8 @@ e.nonterminal =
 name = a.name
 a.name =
   attribute name {
-    xsd:string {
-      pattern = "([_\p{L}])((([_\p{L}]))|([\-.·‿⁀\p{Nd}\p{Mn}]))*"
-    }
+    # No annotations found, falling back to 'text'.
+    text
   }
 namestart = h.namestart
 h.namestart =
@@ -144,33 +157,42 @@ h.quoted = (tmark, s)?, \string, s
 tmark = a.tmark
 a.tmark =
   attribute tmark {
-    xsd:string { pattern = "[\^\-+]" }
+    # No annotations found, falling back to 'text'.
+    text
   }
 \string = a.string
 a.string =
   attribute string {
-    xsd:string {
-      pattern = """((([^"\x{d}])|("))+)|((([^'\x{d}])|('))+)"""
-    }
+    # No annotations found, falling back to 'text'.
+    text
   }
-dchar = h.dchar
-h.dchar =
-  # can a data element be used?
-  text
-  | # can a data element be used?
-    text
-schar = h.schar
-h.schar =
-  # can a data element be used?
-  text
-  | # can a data element be used?
-    text
+dchar = e.dchar
+e.dchar =
+  element dchar {
+    extension-attributes,
+    (extension-elements
+     & (# can a data element be used?
+        text
+        | # can a data element be used?
+          text))
+  }
+schar = e.schar
+e.schar =
+  element schar {
+    extension-attributes,
+    (extension-elements
+     & (# can a data element be used?
+        text
+        | # can a data element be used?
+          text))
+  }
 encoded = h.encoded
 h.encoded = (tmark, s)?, hex, s
 hex = a.hex
 a.hex =
   attribute hex {
-    xsd:string { pattern = "[0-9a-fA-F]+" }
+    # No annotations found, falling back to 'text'.
+    text
   }
 charset = h.charset
 h.charset = inclusion | exclusion
@@ -205,18 +227,14 @@ h.range = from, s, s, to
 from = a.from
 a.from =
   attribute from {
-    xsd:string {
-      pattern =
-        """(((([^"\x{d}])|(")))|((([^'\x{d}])|(')))|(#([0-9a-fA-F]+)))"""
-    }
+    # No annotations found, falling back to 'text'.
+    text
   }
 to = a.to
 a.to =
   attribute to {
-    xsd:string {
-      pattern =
-        """(((([^"\x{d}])|(")))|((([^'\x{d}])|(')))|(#([0-9a-fA-F]+)))"""
-    }
+    # No annotations found, falling back to 'text'.
+    text
   }
 character = h.character
 h.character =
@@ -230,7 +248,8 @@ h.class = code
 code = a.code
 a.code =
   attribute code {
-    xsd:string { pattern = "([A-Z])([a-z])?" }
+    # No annotations found, falling back to 'text'.
+    text
   }
 capital = h.capital
 h.capital =
@@ -240,6 +259,13 @@ letter = h.letter
 h.letter =
   # can a data element be used?
   text
+insertion = e.insertion
+e.insertion =
+  element insertion {
+    extension-attributes,
+    (extension-elements
+     & (s, (\string | hex)))
+  }
 extension-attributes = nsq-att*
 nsq-att = attribute * - local:* { text }
 extension-elements = nsq-element*
