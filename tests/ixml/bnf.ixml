@@ -20,7 +20,7 @@ range: -"[", S,  from, S, -"-", S, to, S, -"]", S.
 @from: character.
 @to: character.
 -character: -"""", char, -""""; -"""", """", -"""", -"""".
--S: -[" "; #a], S; comment, S; .
+-S: -[" "; #a; #d], S; comment, S; .
 comment: "{", schars, "}".
 -schars: schar, schars; .
 -schar: [" "-"|"]; "~". {Everything except: }

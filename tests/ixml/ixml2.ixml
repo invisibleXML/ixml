@@ -53,7 +53,7 @@ schar: ~["'"];
        "''". {all characters, squotes must be doubled}
 hex: "#", ["0"-"9"; "a"-"f"; "A"-"F"]+, S.
 
--S: (" "; -#a; #9; comment)*.
+-S: (" "; -#a; #d; #9; comment)*.
 comment: "{", cchar*, "}".
 -cchar: ~["}"].
 

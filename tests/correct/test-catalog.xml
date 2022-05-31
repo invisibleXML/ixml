@@ -439,25 +439,21 @@
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="para-test.ixml"/>
       <test-case name="para-test">
-	<created by="SP" on="2021-12-16"/>
-	<modified by="MSM" on="2021-12-30"
-		  change="changed result"/>
-	<test-string-ref href="para-test.inp"/>
-	<result>
-	  <assert-not-a-sentence/>
-	  <!--
-	      <assert-xml-ref href="para-test.output.xml"/>
-	  -->
-	</result>
-	<description>
-	  <p>The grammar as written allows only one section; the input
-	  has several.  The error was probably in the formulation of
-	  the grammar, but the simplest change to bring it into a
-	  consistent state is to change the result.</p>
-	  <p>For the record, the originally asserted result is now in
-	  file 'para-test.disputed-output.xml'.</p>
-	</description>
-
+        <created by="SP" on="2021-12-16"/>
+        <modified by="MSM" on="2021-12-30"
+          change="changed result"/>
+        <modified by="NDW" on="2022-05-12"
+          change="changed result"/>
+        <test-string-ref href="para-test.inp"/>
+        <result>
+          <assert-xml-ref href="para-test.output.xml"/>
+        </result>
+        <description>
+          <p>The grammar as written allows only one section; the input
+            has several. The error was probably in the formulation of
+            the grammar. The grammar has been updated to one possible
+            correct forumulation.</p>
+        </description>        
       </test-case>
     </test-set>
 

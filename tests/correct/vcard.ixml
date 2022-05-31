@@ -2,10 +2,10 @@ card: -"BEGIN:", name, eoln, property+, -"END:", endname, eoln.
 property: name, parameters, -":", attribute++-";", -eoln.
 parameters: (-";", parameter)*.
 parameter: name, -"=", pvalue.
-@pvalue: ~[";:"; #a]+.
+@pvalue: ~[";:"; #a; #d]+.
 attribute: value.
 @value: achar*.
--achar: ~["#;"; #a].
+-achar: ~["#;"; #a; #d].
 @name: ["a"-"z"; "A"-"Z"]+.
 @endname: name.
--eoln: -#a.
+-eoln: -#a | -#d, -#a. 

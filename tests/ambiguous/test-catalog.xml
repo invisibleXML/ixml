@@ -221,9 +221,14 @@
     <ixml-grammar-ref href="empty-parens.ixml"/>
     <test-case name="empty-parens">
       <created by="SP" on="2021-12-16"/>
+      <modified
+        by="jwL"
+        on="2022-05-15"
+        change="added alternative parse, given ()? can be ambiguous"/>
       <test-string-ref href="empty-parens.inp"/>
       <result>
 	<assert-xml-ref href="empty-parens.output.xml"/>
+        <assert-xml-ref href="empty-parens.alt.output.xml"/>
       </result>
     </test-case>
   </test-set>
