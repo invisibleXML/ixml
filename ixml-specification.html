@@ -11,6 +11,12 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification</title>
+  <!-- 
+      <style type="text/css" rel="alternate stylesheet" title="Fragments">
+           p, h3 {display: none}
+           pre.frag {display: block}
+      </style>
+      -->
   <style type="text/css">
       body {margin-left: auto; margin-right:auto; max-width: 50em;}
       h1, h2 {font-family: sans-serif; clear: both}
@@ -20,13 +26,7 @@
       span.todo {background: yellow} 
       img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
       span.conform {font-weight: bold}
-  </style>
-  <!--
-          <style type="text/css" rel="alternate stylesheet" title="Fragments">
-             p, h3 {display: none}
-             pre.frag {display: block}
-          </style>
-          -->
+ </style>
 </head>
 
 <body>
@@ -34,35 +34,38 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-05-10<!--$--></p>
+<p>Version: <!--$date=-->2022-05-28<!--$--></p>
 
 <h2 id="status">Status</h2>
 
-<p>This is the current state of the ixml base grammar; it is close to final.</p>
+<p>This document describes the final version of ixml version 1.0..</p>
 
 <div class="toc">
 <ul>
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#works">How it works</a></li>
-  <li><a href="#grammar">The Grammar</a> 
+  <li><a href="#grammar">The Grammar</a>
     <ul>
+      <li><a href="#L3041">Prolog</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#nonterminals">Nonterminals</a></li>
       <li><a href="#terminals">Terminals</a></li>
       <li><a href="#characters">Character sets</a></li>
-      <li><a href="#complete">Complete</a></li>
+      <li><a href="#L649">Insertions</a></li>
     </ul>
   </li>
   <li><a href="#parsing">Parsing</a></li>
-  <li><a href="#serialisation">Serialisation</a></li>
-  <li><a href="#conformance">Conformance</a> 
+  <li><a href="#serialisation">Serialization</a></li>
+  <li><a href="#conformance">Conformance</a>
     <ul>
       <li><a href="#grammarconformance">Conformance of grammars</a></li>
       <li><a href="#processorconformance">Conformance of processors</a></li>
     </ul>
   </li>
   <li><a href="#hints">Hints for Implementers</a></li>
+  <li><a href="#complete">Complete Grammar</a></li>
   <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
   <li><a href="#acknowledgments">Acknowledgements</a></li>
@@ -189,9 +192,9 @@ example, it can turn CSS code like</p>
 <h2 id="works">How it works</h2>
 
 <p>A grammar is used to describe the input format. An input is parsed using
-this grammar, and the resulting parse tree is serialised as XML. Special marks
-in the grammar affect details of this serialisation, excluding parts of the
-tree, or serialising parts as attributes instead of elements.</p>
+this grammar, and the resulting parse tree is serialized as XML. Special marks
+in the grammar affect details of this serialization, excluding parts of the
+tree, or serializing parts as attributes instead of elements.</p>
 
 <p>As an example, consider this simplified grammar for URLs:</p>
 <pre>url: scheme, ":", authority, path.
@@ -218,7 +221,7 @@ letter, an uppercase letter, or a digit. A fletter is a letter or a point.</p>
 
 <p>So, given the input string
 <code>http://www.w3.org/TR/1999/xhtml.html</code>, this would produce the
-serialisation</p>
+serialization</p>
 <pre>&lt;url&gt;
    &lt;scheme&gt;http&lt;/scheme&gt;:
    &lt;authority&gt;//
@@ -236,20 +239,20 @@ serialisation</p>
 &lt;/url&gt;</pre>
 
 <p>If the rule for <code>letter</code> had not had a "-" before it, the
-serialisation for <code>scheme</code>, for instance, would have been:</p>
+serialization for <code>scheme</code>, for instance, would have been:</p>
 <pre>&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
 
 <p>Changing the rule for <code>scheme</code> to</p>
 <pre>scheme: name.
 @name: letter+.</pre>
 
-<p>would change the serialisation for <code>scheme</code> to:</p>
+<p>would change the serialization for <code>scheme</code> to:</p>
 <pre>&lt;scheme name="http"/&gt;:</pre>
 
 <p>Changing the rule for <code>scheme</code> instead to:</p>
 <pre>@scheme: letter+.</pre>
 
-<p>would change the serialisation for <code>url</code> to:</p>
+<p>would change the serialization for <code>url</code> to:</p>
 <pre>&lt;url scheme="http"&gt;</pre>
 
 <p>Changing the definitions of <code>sub</code> and <code>seg</code> from</p>
@@ -261,7 +264,7 @@ seg: fletter*.</pre>
 -seg: fletter*.</pre>
 
 <p>would prevent the <code>sub</code> and <code>seg</code> elements appearing
-in the serialised result, giving:</p>
+in the serialized result, giving:</p>
 <pre>&lt;url scheme='http'&gt;://
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
@@ -279,7 +282,7 @@ in the serialised result, giving:</p>
 <p>to </p>
 <pre>authority: -"//", host.</pre>
 
-<p>would remove the spurious characters from the serialisation:</p>
+<p>would remove the spurious characters from the serialization:</p>
 <pre>&lt;url scheme='http'&gt;
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
@@ -290,14 +293,17 @@ in the serialised result, giving:</p>
 <p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p>
 
-<p>A grammar is a sequence of one or more rules, surrounded and separated by
-spacing and comments. Spacing and comments are entirely optional, except that
-rules must be separated by at least one of either.</p>
-<pre class="frag">ixml: s, rule++RS, s.</pre>
+<p>A grammar is an optional prolog, followed by a sequence of one or more
+rules, surrounded and separated by spacing and comments. Spacing and comments
+are entirely optional, except that rules <span id="ref-s01"
+class="conform">must</span> be separated by at least one of either (<a
+class="error" href="#err-s01">error S01</a>).</p>
+<pre class="frag">ixml: s, prolog?, rule++RS, s.</pre>
 
-<p>An <code>s</code> stands for an optional sequence of spacing and comments. A
-comment is enclosed in braces, and can included nested comments, to enable
-commenting out parts of a grammar:</p>
+<p>An <code>s</code> stands for an optional sequence of spacing and comments;
+<code>RS</code> for at least one space or comment. A comment is enclosed in
+braces, and can included nested comments, to enable commenting out parts of a
+grammar:</p>
 <pre class="frag">         -s: (whitespace; comment)*. {Optional spacing}
         -RS: (whitespace; comment)+. {Required spacing}
 -whitespace: -[Zs]; tab; lf; cr.
@@ -307,6 +313,25 @@ commenting out parts of a grammar:</p>
     comment: -"{", (cchar; comment)*, -"}".
      -cchar: ~["{}"].</pre>
 
+<h3 id="L3041">Prolog</h3>
+
+<p>The optional prolog declares the version of ixml being used. If absent,
+version 1.0 is assumed. A grammar <span class="conform">must</span> conform to
+the syntax and semantics of the version declared or assumed.</p>
+<pre class="frag">        prolog: version, s.
+       version: -"ixml", RS, -"version", RS, string, s, -'.' .</pre>
+
+<p>If an implementation recognizes the version string, it <span
+class="conform">must</span> process the grammar using the syntax and semantics
+of that version.</p>
+
+<p>If it does not recognize the version string, it <span
+class="conform">must</span> nevertheless attempt to process the grammar. If it
+finds a syntactically valid interpretation of the grammar, it <span
+class="conform">must</span> proceed using the semantics of the version under
+which it found a valid interpretation, otherwise it <span
+class="conform">must</span> reject the grammar.</p>
+
 <h3 id="rules">Rules</h3>
 
 <p>A rule consists of an optional mark, a name, and one or more alternatives.
@@ -315,7 +340,7 @@ allowed.</p>
 <pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
-indicates whether the item so marked will be serialised as a structured element
+indicates whether the item so marked will be serialized as a structured element
 with its children (<code>^</code>) which is the default, as unstructured data
 in an attribute (<code>@</code>), or deleted, so that only its children are
 serialized (<code>-</code>).</p>
@@ -326,7 +351,7 @@ digit, underscore, a small number of punctuation characters, and the Unicode
 combiner characters; Unicode classes are used to define the sets of characters
 used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
-ensure that all serialised names match the requirements for an XML name [<a
+ensure that all serialized names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
 <pre class="frag">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
@@ -346,10 +371,11 @@ repeated zero or more times, or one or more times.</p>
        repeat0;
        repeat1.</pre>
 
-<p>A factor is a terminal, a nonterminal, or a bracketed series of
-alternatives:</p>
+<p>A factor is a terminal, a nonterminal, an insertion, or a bracketed series
+of alternatives:</p>
 <pre class="frag">-factor: terminal;
          nonterminal;
+         insertion;
          -"(", s, alts, -")", s.</pre>
 
 <p>A factor repeated zero or more times is followed by an asterisk, or followed
@@ -380,17 +406,15 @@ match <code>a#a a!a a#a!a a!a#a a#a#a</code> etc.</p>
 <pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which <span
-class="conform">must</span> exist, and there <span class="conform">must</span>
-only be one such rule.</p>
+id="ref-s02" class="conform">must</span> exist (<a class="error"
+href="#err-s02">error S02</a>), and there <span id="ref-s03"
+class="conform">must</span> only be one such rule (<a class="error"
+href="#err-s03">error S03</a>).</p>
 
 <h3 id="terminals">Terminals</h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
-input. A terminal <span class="conform">must not</span> be marked as
-unstructured (@), and a charset <span class="conform">must not</span> be marked
-as structured (^). A terminal marked as deleted (-), serialises to the empty
-string. A terminal marked as inserted (+) matches no characters on the input,
-but appears in the serialization.</p>
+input. A terminal marked as deleted (-) serializes to the empty string.</p>
 <pre class="frag">-terminal: literal; 
            charset.</pre>
 
@@ -400,17 +424,16 @@ character:</p>
            encoded.</pre>
 
 <p>A quoted string is an optionally marked string of one or more characters,
-enclosed with single or double quotes. An unmarked or deleted quoted string
-matches only the exact same string in the input. Examples: <code>"yes"
-'yes'</code>. An inserted quoted string matches zero characters in the input
-(and succeeds).</p>
+enclosed with single or double quotes. A string matches only the exact same
+string in the input. Examples: <code>"yes" 'yes'</code>.</p>
 
-<p>A string cannot extend over a line-break. The enclosing quote is represented
-in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
-"Isn't it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
+<p id="ref-s11">A string cannot extend over a line-break (<a class="error"
+href="#err-s11">error S11</a>). The enclosing quote is represented in a string
+by doubling it; these two strings are identical: <code>'Isn''t it?' "Isn't
+it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
 "Don''t!"'</code>.</p>
 <pre class="frag"> -quoted: (tmark, s)?, string, s.
-  @tmark: ["^-+"].
+  @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
    dchar: ~['"'; #a; #d];
@@ -418,16 +441,17 @@ in a string by doubling it; these two strings are identical: <code>'Isn''t it?'
    schar: ~["'"; #a; #d];
           "'", -"'". {all characters except line breaks; quotes must be doubled}</pre>
 
-<p>An encoded character is an optionally marked hexadecimal number. It starts
-with a hash symbol, followed by any number of hexadecimal digits, for example
-<code>#a0</code>. The digits are interpreted as a number in hexadecimal, and
-the character at that Unicode code-point is used [<a
-href="#unicode">Unicode</a>]. The number <span class="conform">must</span> be
-within the Unicode code-point range, and <span class="conform">must not</span>
-denote a Noncharacter or Surrogate code point.</p>
+<p id="ref-s06">An encoded character is an optionally marked hexadecimal
+number. It starts with a hash symbol, followed by any number of hexadecimal
+digits, for example <code>#a0</code>. The digits are interpreted as a number in
+hexadecimal (<a class="error" href="#err-s06">error S06</a>) , and the
+character at that Unicode code-point is used [<a href="#unicode">Unicode</a>].
+The number <span id="ref-s07" class="conform">must</span> be within the Unicode
+code-point range (<a class="error" href="#err-s07">error S07</a>), and <span
+id="ref-s08" class="conform">must not</span> denote a Noncharacter or Surrogate
+code point (<a class="error" href="#err-s08">error S08</a>).</p>
 
-<p>An unmarked or deleted encoded character matches that one character in the
-input. If marked as inserted, it matches no characters (but succeeds).</p>
+<p>An encoded character matches that one character in the input.</p>
 <pre class="frag">-encoded: (tmark, s)?, -"#", hex, s.
     @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
@@ -461,13 +485,14 @@ exclusion: (tmark, s)?, -"~", s, set.
            range;
            class.</pre>
 
-<p>A range matches any character in the range from the start character to the
-end, inclusive, using the Unicode ordering. The <code>from</code> character
-<span class="conform">must not</span> be later in the ordering than the
-<code>to</code> character.</p>
+<p>A range represents all characters in the range from the <code>from</code>
+character to the <code>to</code> character, inclusive, using the Unicode
+ordering. The <code>from</code> character <span id="ref-s09"
+class="conform">must not</span> be later in the ordering than the
+<code>to</code> character (<a class="error" href="#err-s09">error S09</a>).</p>
 <pre class="frag">-range: from, s, -"-", s, to.
-@from: character.
-  @to: character.</pre>
+ @from: character.
+   @to: character.</pre>
 
 <p>A character is a string of length one, or a hex encoded character:</p>
 <pre class="frag">-character: -'"', dchar, -'"';
@@ -476,82 +501,20 @@ end, inclusive, using the Unicode ordering. The <code>from</code> character
 
 <p>A class is one or two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name, which
-<span class="conform">must</span> exist. E.g. <code>[Ll]</code> matches any
-lower-case letter, <code>[Ll; Lu]</code> matches any upper- or lower-case
-character.</p>
+<span id="ref-s10" class="conform">must</span> exist (<a class="error"
+href="#err-s10">error S10</a>). E.g. <code>[Ll]</code> matches any lower-case
+letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
 <pre class="frag">   -class: code.
-   @code: capital, letter?.
--capital: ["A"-"Z"].
- -letter: ["a"-"z"].</pre>
+    @code: capital, letter?.
+ -capital: ["A"-"Z"].
+  -letter: ["a"-"z"].</pre>
 
-<h3 id="complete">Complete</h3>
-<pre>         ixml: s, rule++RS, s.
+<h3 id="L649">Insertions</h3>
 
-           -s: (whitespace; comment)*. {Optional spacing}
-          -RS: (whitespace; comment)+. {Required spacing}
-  -whitespace: -[Zs]; tab; lf; cr.
-         -tab: -#9.
-          -lf: -#a.
-          -cr: -#d.
-      comment: -"{", (cchar; comment)*, -"}".
-       -cchar: ~["{}"].
-
-         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
-        @mark: ["@^-"].
-         alts: alt++(-[";|"], s).
-          alt: term**(-",", s).
-        -term: factor;
-               option;
-               repeat0;
-               repeat1.
-      -factor: terminal;
-               nonterminal;
-               -"(", s, alts, -")", s.
-      repeat0: factor, (-"*", s; -"**", s, sep).
-      repeat1: factor, (-"+", s; -"++", s, sep).
-       option: factor, -"?", s.
-          sep: factor.
-  nonterminal: (mark, s)?, name, s.
-
-        @name: namestart, namefollower*.
-   -namestart: ["_"; L].
--namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
-
-    -terminal: literal; 
-               charset.
-      literal: quoted;
-               encoded.
-      -quoted: (tmark, s)?, string, s.
-
-       @tmark: ["^-+"].
-      @string: -'"', dchar+, -'"';
-               -"'", schar+, -"'".
-       -dchar: ~['"'; #a; #d];
-               '"', -'"'. {all characters except line breaks; quotes must be doubled}
-       -schar: ~["'"; #a; #d];
-               "'", -"'". {all characters except line breaks; quotes must be doubled}
-     -encoded: (tmark, s)?, -"#", hex, s.
-         @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
-
-     -charset: inclusion; 
-               exclusion.
-    inclusion: (tmark, s)?,          set.
-    exclusion: (tmark, s)?, -"~", s, set.
-         -set: -"[", s,  (member, s)**(-[";|"], s), -"]", s.
-       member: string;
-               -"#", hex;
-               range;
-               class.
-       -range: from, s, -"-", s, to.
-        @from: character.
-          @to: character.
-   -character: -'"', dchar, -'"';
-               -"'", schar, -"'";
-               "#", hex.
-       -class: code.
-        @code: capital, letter?.
-     -capital: ["A"-"Z"].
-      -letter: ["a"-"z"].</pre>
+<p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
+insertion matches zero characters in the input, and only appears in the
+serialization.</p>
+<pre>insertion: -"+", s, (string; -"#", hex).</pre>
 
 <h2 id="parsing">Parsing</h2>
 
@@ -563,66 +526,78 @@ grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
 serialization <span class="conform">should</span> including the attribute
-<code>ixml:state="ambiguous"</code> on the document element. The ixml namespace
-URI is "<code>http://invisiblexml.org/NS</code>". Known algorithms that accept
-and parse any context-free grammar include [<a href="#earley">Earley</a>], [<a
-href="#unger">Unger</a>], [<a href="#cyk">CYK</a>], [<a href="#glr">GLR</a>],
-and [<a href="#gll">GLL</a>]; see also [<a href="#grune">Grune</a>]; different
-algorithms may differ slightly in how ambiguity is defined.</p>
+<code>serializ</code> on the document element with a value that includes the
+word <code>ambiguous</code>. Different processors <span
+class="conform">may</span> vary in whether input is detected as ambiguous or
+not. The ixml namespace URI is "<code>http://invisiblexml.org/NS</code>". Known
+algorithms that accept and parse any context-free grammar include [<a
+href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
+href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
+see also [<a href="#grune">Grune</a>].</p>
 
 <p>If the parse fails, some XML document <span class="conform">must</span> be
-produced with <code>ixml:state="failed"</code> on the document element. The
-document <span class="conform">should</span> provide helpful information about
-where and why it failed; it <span class="conform">may</span> be a partial parse
-tree that includes parts of the parse that succeeded.</p>
+produced with <code>serializ</code> on the document element with a value that
+includes the word <code>failed</code>. The document <span
+class="conform">should</span> provide helpful information about where and why
+it failed; it <span class="conform">may</span> be a partial parse tree that
+includes parts of the parse that succeeded.</p>
 
-<h2 id="serialisation">Serialisation</h2>
+<h2 id="serialisation">Serialization</h2>
 
-<p>If the parse succeeds, the resulting parse-tree is serialised as XML by
-serialising the root node of the parse tree.</p>
+<p>If the parse succeeds, the resulting parse-tree is serialized as XML by
+serializing the root node of the parse tree.</p>
 
-<p>A parse node is either a nonterminal, which has a name and children, or a
-terminal, which has a string.</p>
+<p>A parse node is a nonterminal, which has a name and children, a terminal,
+which has a string, or an insertion, which has a string.</p>
 
-<p>A nonterminal can be unmarked, or marked as structured (^), as unstructured
+<p>A nonterminal can be unmarked, or marked as included (^), as an attribute
 (@), or as deleted (-). The mark comes from the use of the nonterminal in a
 rule if present, otherwise, from the definition of the rule for that
 nonterminal.</p>
 <ul>
-  <li><strong>Unmarked or structured</strong>: the node is serialized as an XML
+  <li><strong>Unmarked or included</strong>: the node is serialized as an XML
     element whose name is the name of the node, whose attributes are the
-    serializations of all exposed unstructured descendants, if any, and whose
-    content is the serialization of all its non-unstructured children in order,
-    if any. An unstructured node is exposed if it is an unstructured child, or
-    an exposed unstructured node of a deleted child (note this is
-  recursive).</li>
+    serializations of all exposed attribute descendants, if any, and whose
+    content is the serialization of all its non-attribute children in order, if
+    any. An attribute node is exposed if it is an attribute child, or an
+    exposed attribute node of a deleted child (note this is recursive).</li>
   <li><strong>Deleted</strong>: all its non-attribute children, if any, are
     serialized in order.</li>
-  <li><strong>Unstructured</strong>: the node is serialized as an XML attribute
+  <li><strong>Attribute</strong>: the node is serialized as an XML attribute
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of marking of
     intermediate nonterminals), if any, in order.</li>
 </ul>
 
-<p>A terminal can be unmarked, or marked as inserted (+), structured (^), or as
-deleted (-).</p>
+<p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p>
 <ul>
-  <li><strong>Unmarked, structured, or inserted</strong>: the node is
-    serialised as its string.</li>
-  <li><strong>Deleted</strong>: the node is not serialised.</li>
+  <li><strong>Unmarked or included</strong>: the node is serialized as its
+    string.</li>
+  <li><strong>Deleted</strong>: the node is not serialized.</li>
 </ul>
 
-<p>Grammars <span class="conform">must</span> be written so that any
-serialization of a parse tree produced from the grammar is well-formed XML.</p>
+<p>An insertion is serialized as its string.</p>
+
+<p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
+any serialization of a parse tree produced from the grammar is well-formed XML
+(<a class="error" href="#err-d01">error D01</a>).</p>
 
 <p>Note: This requirement means for instance that names of serialized elements
-and attributes must match the XML requirements; an element must not contain
-more than one attribute of a given name; invalid characters must not be
-serialized; a nonterminal being serialized as root element must not be marked
-as unstructured; in order to match the XML requirement of a single-rooted
-document, if the root rule is marked as hidden, all of its productions must
-produce exactly one non-hidden structured nonterminal and no non-hidden
-terminals before or after that nonterminal.</p>
+and attributes <span class="conform">must</span> match the XML requirements,
+and attributes <span class="conform">must not</span> start with the string
+"xmlns"; an element <span id="ref-d02" class="conform">must not</span> contain
+more than one attribute of a given name (<a class="error" href="#err-d02">error
+D02</a>); the names of all elements and attributes <span id="ref-d03"
+class="conform">must</span> conform to the requirements for XML names; invalid
+characters <span id="ref-d04" class="conform">must not</span> be serialized (<a
+class="error" href="#err-d04">error D04</a>); a nonterminal being serialized as
+root element <span id="ref-d05" class="conform">must not</span> be marked as an
+attribute (<a class="error" href="#err-d05">error D05</a>); in order to match
+the XML requirement of a single-rooted document, if the root rule is marked as
+hidden, all of its productions <span id="ref-d06" class="conform">must</span>
+produce exactly one non-hidden non-attribute nonterminal and no non-hidden
+terminals before or after that nonterminal (<a class="error"
+href="#err-d06">error D06</a>).</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
 rules is:</p>
@@ -638,7 +613,7 @@ rules is:</p>
      -op: sign.
    @sign: "+"; "-".</pre>
 
-<p>Applied to the string <code>(a+1);</code> it yields the serialisation</p>
+<p>Applied to the string <code>(a+1);</code> it yields the serialization</p>
 <pre>&lt;expr open='(' sign='+' close=')'&gt;
    &lt;left name='a'/&gt;
    &lt;right&gt;1&lt;/right&gt;
@@ -704,9 +679,6 @@ conformance requirement.)</p>
 <ul>
   <li>Every nonterminal used in the right-hand side of any rule <span
     class="conform">must</span> be defined by a single rule.</li>
-  <li>A terminal <span class="conform">must not</span> be marked as
-    unstructured (@), and a charset <span class="conform">must not</span> be
-    marked as inserted (+). </li>
   <li>Any character class used <span class="conform">must</span> be one that is
     listed in the Unicode specification.</li>
   <li>The number represented in a hex encoding of a character <span
@@ -744,22 +716,26 @@ encodings.</p>
   <li>If more than one parse tree describes the input, the processor <span
     class="conform">must</span> serialize one of them. It is not defined how
     this choice is made, but the resulting serialization <span
-    class="conform">must</span> by default include the attribute
-    <code>ixml:state="ambiguous"</code> on the document element. Processors
-    <span class="conform">may</span> provide a user option to suppress that
+    class="conform">should</span> by default include the attribute
+    <code>ixml:state</code> on the document element with a value that includes
+    the word <code>ambiguous</code>. Processors <span
+    class="conform">may</span> provide a user option to suppress that
     attribute; they <span class="conform">may</span> also provide a user option
     to produce more than one parse tree.</li>
   <li>If the input is not described by the grammar, the processor <span
-    class="conform">must</span> produce some XML document with
-    <code>ixml:state="failed"</code> on the document element, with helpful
-    information about where and why it failed; it <span
-    class="conform">may</span> be a partial parse tree that includes parts of
-    the parse that succeeded.</li>
+    class="conform">must</span> produce some XML document with the attribute
+    <code>ixml:state</code> on the document element with a value that includes
+    the word <code>failed</code>, with helpful information about where and why
+    it failed; it <span class="conform">may</span> be a partial parse tree that
+    includes parts of the parse that succeeded.</li>
   <li>If a prefix of the input is described by the grammar, processors <span
     class="conform">may</span> choose either to produce a failure document as
     described above, or to serialize the resulting parse tree with the
-    attribute <code>ixml:state="prefix"</code>, or if the parse is ambiguous
-    <code>ixml:state="ambiguous prefix"</code>.</li>
+    attribute <code>ixml:state</code> containing the word <code>prefix</code>,
+    or if the parse is ambiguous, the words <code>ambiguous prefix</code>.</li>
+  <li>If the input was processed as a different version of ixml than that
+    required by the prolog, the <code>ixml:state</code> attribute must include
+    the word <code>version-mismatch</code>. </li>
   <li>The form in which XML documents are produced is not constrained by this
     specification; processors <span class="conform">should</span> be capable of
     producing serialized XML as a character stream, but other forms (e.g. DOM
@@ -796,18 +772,95 @@ generated nonterminals.</p>
 <pre>f**sep ⇒ f-star-sep
 -f-star-sep: (f++sep)?.</pre>
 
+<h2 id="complete">Complete Grammar</h2>
+<pre>         ixml: s, prolog?, rule++RS, s.
+
+           -s: (whitespace; comment)*. {Optional spacing}
+          -RS: (whitespace; comment)+. {Required spacing}
+  -whitespace: -[Zs]; tab; lf; cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comment)*, -"}".
+       -cchar: ~["{}"].
+
+       prolog: version, s.
+      version: -"ixml", RS, -"version", RS, string, s, -'.' .
+
+         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
+        @mark: ["@^-"].
+         alts: alt++(-[";|"], s).
+          alt: term**(-",", s).
+        -term: factor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: terminal;
+               nonterminal;
+               insertion;
+               -"(", s, alts, -")", s.
+      repeat0: factor, (-"*", s; -"**", s, sep).
+      repeat1: factor, (-"+", s; -"++", s, sep).
+       option: factor, -"?", s.
+          sep: factor.
+  nonterminal: (mark, s)?, name, s.
+
+        @name: namestart, namefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
+
+    -terminal: literal; 
+               charset.
+      literal: quoted;
+               encoded.
+      -quoted: (tmark, s)?, string, s.
+
+       @tmark: ["^-"].
+      @string: -'"', dchar+, -'"';
+               -"'", schar+, -"'".
+        dchar: ~['"'; #a; #d];
+               '"', -'"'. {all characters except line breaks; quotes must be doubled}
+        schar: ~["'"; #a; #d];
+               "'", -"'". {all characters except line breaks; quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", hex, s.
+         @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, s)?,          set.
+    exclusion: (tmark, s)?, -"~", s, set.
+         -set: -"[", s,  (member, s)**(-[";|"], s), -"]", s.
+       member: string;
+               -"#", hex;
+               range;
+               class.
+       -range: from, s, -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"';
+               -"'", schar, -"'";
+               "#", hex.
+       -class: code.
+        @code: capital, letter?.
+     -capital: ["A"-"Z"].
+      -letter: ["a"-"z"].
+    insertion: -"+", s, (string; -"#", hex).</pre>
+
 <h2 id="ixml">IXML in IXML</h2>
 
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
-serialising. Note that all semantically significant terminals are recorded in
-attributes, and non-significant characters are not serialised. The
-serialisation begins as below, but the <a href="ixml.xml">entire
-serialisation</a> is available:</p>
+serializing. Note that all semantically significant terminals are recorded in
+attributes, and non-significant characters are not serialized. The
+serialization begins as below, but the <a href="ixml.xml">entire
+serialization</a> is available:</p>
 <pre>&lt;ixml&gt;
    &lt;rule name='ixml'&gt;
       &lt;alt&gt;
          &lt;nonterminal name='s'/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name='prolog'/&gt;
+         &lt;/option&gt;
          &lt;repeat1&gt;
             &lt;nonterminal name='rule'/&gt;
             &lt;sep&gt;
@@ -901,6 +954,23 @@ serialisation</a> is available:</p>
          &lt;/exclusion&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;
+   &lt;rule name='prolog'&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name='version'/&gt;
+         &lt;nonterminal name='s'/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name='version'&gt;
+      &lt;alt&gt;
+         &lt;literal tmark='-' string='ixml'/&gt;
+         &lt;nonterminal name='RS'/&gt;
+         &lt;literal tmark='-' string='version'/&gt;
+         &lt;nonterminal name='RS'/&gt;
+         &lt;nonterminal name='string'/&gt;
+         &lt;nonterminal name='s'/&gt;
+         &lt;literal tmark='-' string='.'/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
    &lt;rule name='rule'&gt;
       &lt;alt&gt;
          &lt;option&gt;
@@ -921,6 +991,69 @@ serialisation</a> is available:</p>
          &lt;literal tmark='-' string='.'/&gt;
       &lt;/alt&gt;
    &lt;/rule&gt;</pre>
+
+<h2 id="errors">Errors</h2>
+
+<p>This section summarizes errors identified in this specification. Static
+errors are errors that can be identified by inspecting the grammar.</p>
+<dl id="static-errors">
+  <dt id="err-s01"><a href="#ref-s01">S01</a></dt>
+    <dd>It is an error if two rules are not separated by at least one
+      whitespace character or comment.</dd>
+  <dt id="err-s02"><a href="#ref-s02">S02</a></dt>
+    <dd>It is an error to use a nonterminal name that is not defined by a rule
+      in the grammar.</dd>
+  <dt id="err-s03"><a href="#ref-s03">S03</a></dt>
+    <dd>It is an error if the grammar contains more than one rule for a given
+      nonterminal name.</dd>
+  <dt id="err-s04"><a href="#ref-s04">S04</a></dt>
+    <dd>It is an error to mark a terminal as an attribute.</dd>
+  <dt id="err-s05"><a href="#ref-s05">S05</a></dt>
+    <dd>It is an error to mark a character set as an insertion.</dd>
+  <dt id="err-s06"><a href="#ref-s06">S06</a></dt>
+    <dd>It is an error if a hex encoding uses any characters not allowed in
+      hexidecimal.</dd>
+  <dt id="err-s07"><a href="#ref-s07">S07</a></dt>
+    <dd>It is an error if the hexidecimal value is not within the Unicode
+      code-point range.</dd>
+  <dt id="err-s08"><a href="#ref-s08">S08</a></dt>
+    <dd>It is an error if an encoded character denotes a Unicode noncharacter
+      or surrogate code point.</dd>
+  <dt id="err-s09"><a href="#ref-s09">S09</a></dt>
+    <dd>It is an error if the first character in a range has a code point value
+      greater than the second character in the range.</dd>
+  <dt id="err-s10"><a href="#ref-s10">S10</a></dt>
+    <dd>It is an error to use a Unicode character category that is not defined
+      in the Unicode specification.</dd>
+  <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
+    <dd>It is an error if a string contains a line break.</dd>
+</dl>
+
+<p>Dynamic errors arise when a particular input is processed with a grammar.</p>
+<dl id="dynamic-errors">
+  <dt id="err-d01"><a href="#ref-d01">D01</a></dt>
+    <dd>It is an error if the parse tree produced by a grammar cannot be
+      represented as well-formed XML.</dd>
+  <dt id="err-d02"><a href="#ref-d02">D02</a></dt>
+    <dd>It is an error if two or more attributes with the same name would be
+      serialized on the same element.</dd>
+  <dt id="err-d03"><a href="#ref-d03">D03</a></dt>
+    <dd>It is an error if the name of any element or attribute is not a valid
+      XML name.</dd>
+  <dt id="err-d04"><a href="#ref-d04">D04</a></dt>
+    <dd>It is an error to attempt to serialize as XML any characters that are
+      not permitted in XML.</dd>
+  <dt id="err-d05"><a href="#ref-d05">D05</a></dt>
+    <dd>It is an error to attempt to serialize an attribute as the root node of
+      an XML document.</dd>
+  <dt id="err-d06"><a href="#ref-d06">D06</a></dt>
+    <dd>It is an error if the parse tree does not contain exactly one top-level
+      element.</dd>
+</dl>
+
+<p>Note: if error codes are reported in a context where it makes sense for them
+to appear in a namespace, they <span class="conform">should</span> be in the
+Invisible XML namespace.</p>
 
 <h2 id="references">References</h2>
 
@@ -973,9 +1106,9 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 
 <h2 id="acknowledgments">Acknowledgements</h2>
 
-<p>This specification was produced by the W3C ixml community group, that at the
-time of publishing consisted of the members: <span class="todo">{list of
-names}</span></p>
+<p>This specification was produced by members of the W3C ixml community group:
+Tomos Hillman, John Lumley, Steven Pemberton, Michael Sperberg-McQueen, Bethan
+Tovey-Walsh, Norman Tovey-Walsh.</p>
 
 <p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
 specification, and consequent many helpful comments.</p>

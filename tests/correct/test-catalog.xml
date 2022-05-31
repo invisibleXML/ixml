@@ -1,10 +1,11 @@
 <test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-              release-date="2021-12-21"
+              release-date="2022-05-24"
 	      name="Amsterdam Test Suite 1, correct tests">
 
   <description>
-    <p>Tests provided by Steven Pemberton in December 2021,
-    with corrections of 21 December. Reorganized by Norm Tovey-Walsh, February 2022.</p>
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
 
   </description>
 
@@ -169,28 +170,32 @@
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="expr1.ixml"/>
       <test-case name="expr1">
-	<created by="SP" on="2021-12-16"/>
-	<modified by="MSM" on="2021-12-23"
-		  change="Change result"/>
-	<modified by="MSM" on="2022-01-01"
-		  change="remove trailing whitespace from input"/>
-	<modified by="MSM" on="2022-01-01"
-		  change="remove whitespace from expected result"/>
-	<test-string-ref href="expr1.inp"/>
-	<description>
-	  <p>We may need a new assertion: if taken literally this
-	  grammar produces non-XML output (multiple occurrences of an
-	  attribute on the same element).
-	  </p>
-	  <p>For now I'll class it as a run-time error in the
-	  grammar.  But is it an error in the grammar?</p>
-	  <p>To be discussed, probably at length.</p>
-	</description>
-	<result>
-	  <assert-not-a-grammar/>
-	  <!--
-          <assert-xml-ref href="expr1.output.xml"/>
-	  -->
+        <created by="SP" on="2021-12-16"/>
+        <modified by="MSM" on="2021-12-23"
+                  change="Change result"/>
+        <modified by="MSM" on="2022-01-01"
+                  change="remove trailing whitespace from input"/>
+        <modified by="MSM" on="2022-01-01"
+                  change="remove whitespace from expected result"/>
+        <modified by="MSM" on="2022-05-21"
+                  change="change to assert-dynamic-error"/>
+        <test-string-ref href="expr1.inp"/>
+        <description>
+          <p>Illustrates the way to handle dynamic errors in a test:
+          use assert-dynamic-error.</p>
+          <p>It's not formally a grammar error, since this grammar
+          will work fine for some inputs and processors are not
+          required to reject the grammar.  So assert-not-a-grammar
+          is not the right thing.</p>
+          <p>It's not formally a failure to parse the input, since
+          this input string is perfectly grammatical against this
+          input grammar.  So assert-not-a-sentence is not the right
+          thing.</p>
+          <p>The error arises in serialization and only at run time.
+          So assert-dynamic-error.</p>
+        </description>
+        <result>
+          <assert-dynamic-error/>
 	</result>
       </test-case>
     </test-set>
@@ -439,21 +444,22 @@
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="para-test.ixml"/>
       <test-case name="para-test">
-        <created by="SP" on="2021-12-16"/>
-        <modified by="MSM" on="2021-12-30"
-          change="changed result"/>
-        <modified by="NDW" on="2022-05-12"
-          change="changed result"/>
-        <test-string-ref href="para-test.inp"/>
-        <result>
-          <assert-xml-ref href="para-test.output.xml"/>
-        </result>
-        <description>
-          <p>The grammar as written allows only one section; the input
-            has several. The error was probably in the formulation of
-            the grammar. The grammar has been updated to one possible
-            correct forumulation.</p>
-        </description>        
+	<created by="SP" on="2021-12-16"/>
+	<modified by="MSM" on="2021-12-30"
+		  change="changed result"/>
+	<modified by="NDW" on="2022-05-12"
+		  change="changed result"/>
+	<test-string-ref href="para-test.inp"/>
+	<result>
+	  <assert-xml-ref href="para-test.output.xml"/>
+	</result>
+	<description>
+	  <p>The grammar as written allows only one section; the input
+	  has several. The error was probably in the formulation of
+	  the grammar. The grammar has been updated to one possible
+          correct forumulation.</p>
+	</description>
+
       </test-case>
     </test-set>
 

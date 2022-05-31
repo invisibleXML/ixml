@@ -8,4 +8,4 @@ attribute: value.
 -achar: ~["#;"; #a; #d].
 @name: ["a"-"z"; "A"-"Z"]+.
 @endname: name.
--eoln: -#a | -#d, -#a. 
+-eoln: -#a | -#d, -#a.

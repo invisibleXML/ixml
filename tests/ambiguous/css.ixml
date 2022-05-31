@@ -9,4 +9,4 @@ digit: ["0"-"9"].
 value: (@name; @number), S.
 number: digit+.
 -empty: .
--S: -[" "; #a]*.
+-S: -[" "; #a; #d]*.
