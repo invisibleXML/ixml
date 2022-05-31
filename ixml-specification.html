@@ -12,11 +12,11 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification</title>
   <!-- 
-      <style type="text/css" rel="alternate stylesheet" title="Fragments">
-           p, h3 {display: none}
-           pre.frag {display: block}
-      </style>
-      -->
+                <style type="text/css" rel="alternate stylesheet" title="Fragments">
+                     p, h3 {display: none}
+                     pre.frag {display: block}
+                </style>
+                -->
   <style type="text/css">
       body {margin-left: auto; margin-right:auto; max-width: 50em;}
       h1, h2 {font-family: sans-serif; clear: both}
@@ -34,17 +34,17 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-05-28<!--$--></p>
+<p>Version: <!--$date=-->2022-05-31<!--$--></p>
 
 <h2 id="status">Status</h2>
 
-<p>This document describes the final version of ixml version 1.0..</p>
+<p>This document describes the final version of ixml version 1.0.</p>
 
 <div class="toc">
 <ul>
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#works">How it works</a></li>
-  <li><a href="#grammar">The Grammar</a>
+  <li><a href="#grammar">The Grammar</a> 
     <ul>
       <li><a href="#L3041">Prolog</a></li>
       <li><a href="#rules">Rules</a></li>
@@ -56,7 +56,7 @@
   </li>
   <li><a href="#parsing">Parsing</a></li>
   <li><a href="#serialisation">Serialization</a></li>
-  <li><a href="#conformance">Conformance</a>
+  <li><a href="#conformance">Conformance</a> 
     <ul>
       <li><a href="#grammarconformance">Conformance of grammars</a></li>
       <li><a href="#processorconformance">Conformance of processors</a></li>
@@ -75,7 +75,7 @@
 <h2 id="introduction">Introduction</h2>
 
 <p>Data is an abstraction: there is no essential difference between the JSON</p>
-<pre>{"temperature": {"scale": "C"; "value": 21}}</pre>
+<pre>{"temperature": {"scale": "C", "value": 21}}</pre>
 
 <p>and an equivalent XML</p>
 <pre>&lt;temperature scale="C" value="21"/&gt;</pre>
@@ -193,8 +193,8 @@ example, it can turn CSS code like</p>
 
 <p>A grammar is used to describe the input format. An input is parsed using
 this grammar, and the resulting parse tree is serialized as XML. Special marks
-in the grammar affect details of this serialization, excluding parts of the
-tree, or serializing parts as attributes instead of elements.</p>
+in the grammar affect details of this serialization, for example excluding
+parts of the tree, or serializing parts as attributes instead of elements.</p>
 
 <p>As an example, consider this simplified grammar for URLs:</p>
 <pre>url: scheme, ":", authority, path.
@@ -316,8 +316,9 @@ grammar:</p>
 <h3 id="L3041">Prolog</h3>
 
 <p>The optional prolog declares the version of ixml being used. If absent,
-version 1.0 is assumed. A grammar <span class="conform">must</span> conform to
-the syntax and semantics of the version declared or assumed.</p>
+version 1.0 is assumed. A grammar <span id="ref-s12"
+class="conform">must</span> conform to the syntax and semantics of the version
+declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
 <pre class="frag">        prolog: version, s.
        version: -"ixml", RS, -"version", RS, string, s, -'.' .</pre>
 
@@ -340,10 +341,10 @@ allowed.</p>
 <pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
-indicates whether the item so marked will be serialized as a structured element
-with its children (<code>^</code>) which is the default, as unstructured data
-in an attribute (<code>@</code>), or deleted, so that only its children are
-serialized (<code>-</code>).</p>
+indicates whether the item so marked will be serialized as an element with its
+children (<code>^</code>) which is the default, as an attribute
+(<code>@</code>), or deleted, so that only its children are serialized
+(<code>-</code>).</p>
 <pre class="frag">@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
@@ -381,13 +382,13 @@ of alternatives:</p>
 <p>A factor repeated zero or more times is followed by an asterisk, or followed
 by a double asterisk and a separator, e.g. <code>abc*</code> and
 <code>abc**","</code>. For instance <code>"a"**"#"</code> would match the empty
-string, <code>a </code><code>a#a a#a#a</code> etc.</p>
+string, <code>a</code>, <code>a#a</code>, <code>a#a#a</code> etc.</p>
 <pre class="frag">repeat0: factor, (-"*", s; -"**", s, sep).</pre>
 
 <p>Similarly, a factor repeated one or more times is followed by a plus, or a
 double plus and a separator, e.g. <code>abc+</code> and <code>abc++","</code>.
-For instance <code>"a"++"#"</code> would match <code>a </code><code>a#a
-a#a#a</code> etc., but not the empty string.</p>
+For instance <code>"a"++"#"</code> would match <code>a</code>,
+<code>a#a</code>, <code>a#a#a</code> etc., but not the empty string.</p>
 <pre class="frag">repeat1: factor, (-"+", s; -"++", s, sep).</pre>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
@@ -395,9 +396,10 @@ For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p>
 <pre class="frag">option: factor, -"?", s.</pre>
 
-<p>A separator can be any factor. E.g. <code>abc**def</code> or
+<p>A separator can be any factor, for example <code>abc**def</code> or
 <code>abc**(","; ".")</code>. For instance <code>"a"++("#"; "!")</code> would
-match <code>a#a a!a a#a!a a!a#a a#a#a</code> etc.</p>
+match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
+<code>a!a#a</code>, <code>a#a#a</code> etc.</p>
 <pre class="frag">sep: factor.</pre>
 
 <h3 id="nonterminals">Nonterminals</h3>
@@ -429,9 +431,9 @@ string in the input. Examples: <code>"yes" 'yes'</code>.</p>
 
 <p id="ref-s11">A string cannot extend over a line-break (<a class="error"
 href="#err-s11">error S11</a>). The enclosing quote is represented in a string
-by doubling it; these two strings are identical: <code>'Isn''t it?' "Isn't
-it?"</code>, as are these: <code>"He said ""Don't!""" 'He said
-"Don''t!"'</code>.</p>
+by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
+<code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
+<code>'He said "Don''t!"'</code>.</p>
 <pre class="frag"> -quoted: (tmark, s)?, string, s.
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
@@ -464,16 +466,17 @@ character in the input that is in the set, an exclusion matches one character
 <p>An inclusion is enclosed in square brackets, and represents the set of
 characters defined by any combination of literal characters, a range of
 characters, hex encoded characters, or Unicode classes. Examples
-<code>["a"-"z"] ["xyz"] [Lc] ["0"-"9"; "!@#"; Lc]</code>. Note that
-<code>["abc"] ["a"; "b"; "c"] ["a"-"c"] </code><code>[#61-#63]</code> all
+<code>["a"-"z"]</code>, <code>["xyz"]</code>, <code>[Lc]</code>, and
+<code>["0"-"9"; "!@#"; Lc]</code>. Note that <code>["abc"]</code>, <code>["a";
+"b"; "c"]</code>, <code>["a"-"c"]</code>, and <code>[#61-#63]</code> all
 represent the same set of characters.</p>
 
 <p>An exclusion is an inclusion preceded by a tilde <code>~</code>. For
 example, <code>~["{}"]</code> matches any character that is not an opening or
 closing brace.</p>
 
-<p>Note that the empty inclusion <code>[]</code> would fail to match any
-character in the input; on the other hand <code>~[]</code> would match any one
+<p>Note that the empty inclusion <code>[]</code> will fail to match any
+character in the input; on the other hand <code>~[]</code> will match any one
 character, whatever it is.</p>
 <pre class="frag"> -charset: inclusion; 
            exclusion.
@@ -526,7 +529,7 @@ grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
 serialization <span class="conform">should</span> including the attribute
-<code>serializ</code> on the document element with a value that includes the
+<code>ixml:state</code> on the document element with a value that includes the
 word <code>ambiguous</code>. Different processors <span
 class="conform">may</span> vary in whether input is detected as ambiguous or
 not. The ixml namespace URI is "<code>http://invisiblexml.org/NS</code>". Known
@@ -536,7 +539,7 @@ href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
 see also [<a href="#grune">Grune</a>].</p>
 
 <p>If the parse fails, some XML document <span class="conform">must</span> be
-produced with <code>serializ</code> on the document element with a value that
+produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span
 class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
@@ -565,8 +568,8 @@ nonterminal.</p>
     serialized in order.</li>
   <li><strong>Attribute</strong>: the node is serialized as an XML attribute
     whose name is the name of the node, and whose value is the serialization of
-    all non-deleted terminal descendants of the node (regardless of marking of
-    intermediate nonterminals), if any, in order.</li>
+    all non-deleted terminal descendants of the node (regardless of the marking
+    of intermediate nonterminals), if any, in order.</li>
 </ul>
 
 <p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p>
@@ -583,11 +586,12 @@ any serialization of a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01">error D01</a>).</p>
 
 <p>Note: This requirement means for instance that names of serialized elements
-and attributes <span class="conform">must</span> match the XML requirements,
-and attributes <span class="conform">must not</span> start with the string
-"xmlns"; an element <span id="ref-d02" class="conform">must not</span> contain
-more than one attribute of a given name (<a class="error" href="#err-d02">error
-D02</a>); the names of all elements and attributes <span id="ref-d03"
+and attributes <span class="conform">must</span> match the XML requirements; an
+element <span id="ref-d02" class="conform">must not</span> contain more than
+one attribute of a given name (<a class="error" href="#err-d02">error D02</a>);
+an element <span id="ref-d07" class="conform">must not</span> contain an
+attribute named “xmlns” (<a class="error" href="#err-d07">error D07</a>);
+the names of all elements and attributes <span id="ref-d03"
 class="conform">must</span> conform to the requirements for XML names; invalid
 characters <span id="ref-d04" class="conform">must not</span> be serialized (<a
 class="error" href="#err-d04">error D04</a>); a nonterminal being serialized as
@@ -1006,8 +1010,6 @@ errors are errors that can be identified by inspecting the grammar.</p>
   <dt id="err-s03"><a href="#ref-s03">S03</a></dt>
     <dd>It is an error if the grammar contains more than one rule for a given
       nonterminal name.</dd>
-  <dt id="err-s04"><a href="#ref-s04">S04</a></dt>
-    <dd>It is an error to mark a terminal as an attribute.</dd>
   <dt id="err-s05"><a href="#ref-s05">S05</a></dt>
     <dd>It is an error to mark a character set as an insertion.</dd>
   <dt id="err-s06"><a href="#ref-s06">S06</a></dt>
@@ -1027,6 +1029,9 @@ errors are errors that can be identified by inspecting the grammar.</p>
       in the Unicode specification.</dd>
   <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
     <dd>It is an error if a string contains a line break.</dd>
+  <dt id="err-s12"><a href="#ref-s12">S12</a></dt>
+    <dd>It is an error if the grammar does not conform to the implied or
+      declared version.</dd>
 </dl>
 
 <p>Dynamic errors arise when a particular input is processed with a grammar.</p>
@@ -1049,6 +1054,8 @@ errors are errors that can be identified by inspecting the grammar.</p>
   <dt id="err-d06"><a href="#ref-d06">D06</a></dt>
     <dd>It is an error if the parse tree does not contain exactly one top-level
       element.</dd>
+  <dt id="err-d07"><a href="#ref-d07">D07</a></dt>
+     <dd>It is an error if an attribute named “xmlns” appears on an element.</dd>
 </dl>
 
 <p>Note: if error codes are reported in a context where it makes sense for them
