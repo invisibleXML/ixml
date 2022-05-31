@@ -12,11 +12,11 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification</title>
   <!-- 
-                <style type="text/css" rel="alternate stylesheet" title="Fragments">
-                     p, h3 {display: none}
-                     pre.frag {display: block}
-                </style>
-                -->
+                  <style type="text/css" rel="alternate stylesheet" title="Fragments">
+                       p, h3 {display: none}
+                       pre.frag {display: block}
+                  </style>
+                  -->
   <style type="text/css">
       body {margin-left: auto; margin-right:auto; max-width: 50em;}
       h1, h2 {font-family: sans-serif; clear: both}
@@ -528,7 +528,7 @@ grammar.</p>
 grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
-serialization <span class="conform">should</span> including the attribute
+serialization <span class="conform">should</span> include the attribute
 <code>ixml:state</code> on the document element with a value that includes the
 word <code>ambiguous</code>. Different processors <span
 class="conform">may</span> vary in whether input is detected as ambiguous or
@@ -669,10 +669,10 @@ pairs.</p>
 described by the grammar given in this specification, and it satisfies all the
 other requirements specified for ixml grammars.</p>
 
-<p>An ixml grammar in XML form conforms to this specification if it can be
-derived from an ixml grammar in ixml form by parsing as described in this
-specification, and it satisfies all the other requirements specified for ixml
-grammars.</p>
+<p>An ixml grammar in XML form conforms to this specification if, after removal
+of namespace qualified elements and attributes, it can be derived from an ixml
+grammar in ixml form by parsing as described in this specification, and it
+satisfies all the other requirements specified for ixml grammars.</p>
 
 <p>Note: The normative formulations of conformance requirements are those given
 elsewhere in this specification. For convenience the requirements that go
@@ -1055,7 +1055,8 @@ errors are errors that can be identified by inspecting the grammar.</p>
     <dd>It is an error if the parse tree does not contain exactly one top-level
       element.</dd>
   <dt id="err-d07"><a href="#ref-d07">D07</a></dt>
-     <dd>It is an error if an attribute named “xmlns” appears on an element.</dd>
+    <dd>It is an error if an attribute named “xmlns” appears on an
+    element.</dd>
 </dl>
 
 <p>Note: if error codes are reported in a context where it makes sense for them
