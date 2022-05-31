@@ -4,6 +4,8 @@
     RNC grammar for test catalog.
     
     Revisions:
+    2022-05-31 : CMSMcQ : Make 'error' attribute obligatory,
+                          add 'wrong-error' as result.
     2022-04-12 : CMSMcQ : Move base version of this to ixml repo
     2022-04-11 : CMSMcQ : Add dynamic-error as expected result
     2022-02-14 : CMSMcQ : Move metadata from attributes to elements
@@ -428,7 +430,13 @@
   <define name="result-type">
     <choice>
       <value>pass</value>
+      <!-- results are as expected -->
       <value>fail</value>
+      <!-- results not as expected -->
+      <value>wrong-error</value>
+      <!-- right overall result, wrong error code -->
+      <value>wrong-state</value>
+      <!-- right overall result, wrong ixml:state value(s) -->
       <value>not-run</value>
       <value>other</value>
     </choice>
@@ -514,7 +522,7 @@
     catalog expects assert-dynamic-error.
     
     Errors in the grammar and dynamic errors may be associated
-    with error codes.  For the moment, these are optional.
+    with error codes.  These are now required.
   -->
   <define name="Assertion">
     <choice>
@@ -530,9 +538,7 @@
     </choice>
   </define>
   <define name="Error-Code">
-    <optional>
-      <attribute name="error-code"/>
-    </optional>
+    <attribute name="error-code"/>
   </define>
   <define name="assert-xml-ref">
     <element name="assert-xml-ref">
