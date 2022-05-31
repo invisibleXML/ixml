@@ -700,6 +700,7 @@
 	</result>
       </test-case>
     </test-set>
+    
   </test-set>
 
   <test-set name="element-content">
@@ -775,10 +776,15 @@
   <test-set name="version-decl">
     <created by="MSM" on="2022-05-27"/>
     <ixml-grammar-ref href="version-decl.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="version-decl.ixml.xml"/>
+      </result>
+    </grammar-test>
     <test-case name="empty">
       <test-string/>
       <result><assert-not-a-sentence/></result>
-    </test-case>
+    </test-case>    
     <test-case name="abc">
       <test-string>abc😺</test-string>
       <result><assert-xml>
@@ -832,13 +838,13 @@
     </test-case>
 
     <test-case name="v0">
-      <test-string>¿vv?</test-string>
+      <test-string>vv</test-string>
       <result><assert-not-a-sentence/></result>
     </test-case>
     <test-case name="v1">
       <test-string>v.v</test-string>
       <result><assert-xml>
-	<S xmlns=""></S>
+	<S xmlns="">v.v</S>
       </assert-xml></result>
     </test-case>
     <test-case name="v2">
@@ -874,7 +880,7 @@
       </assert-xml></result>
     </test-case>
     <test-case name="t2">
-      <test-string>t.t</test-string>
+      <test-string>t..t</test-string>
       <result><assert-not-a-sentence/></result>
     </test-case>    
     <test-case name="s0">
@@ -898,9 +904,14 @@
     
   </test-set>
 
-  <test-set name="version-two">
+  <test-set name="version-decl-two">
     <created by="MSM" on="2022-05-27"/>
     <ixml-grammar-ref href="version-decl.2.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="version-decl-two.ixml.xml"/>
+      </result>
+    </grammar-test>
     <test-case name="empty">
       <test-string/>
       <result><assert-xml><S xmlns=""/></assert-xml></result>
@@ -930,11 +941,11 @@
 &#x9;      | 'Keep ''calm'''.&#xD;
 &#x9;b&#xD;={}[';,']?.&#xD;
 &#x9;&#x9;d = 'be ''happy''.'&#xD;
-        |{}; 'and carry on.'.{}c=#00000000020.&#xD;
+        |{}; 'and carry on.'.{}c=#000000000000020.&#xD;
     </ixml-grammar>
     <grammar-test>
       <result><assert-xml>
-	<ixml
+	<ixml xmlns=""
 	  ><rule name="S"
 	    ><comment
 	    /><alt
@@ -950,18 +961,17 @@
 	  ></rule
 	  ><rule name="b"
 	    ><comment
-	    /><alt><inclusion><member string=";,"/></inclusion></alt
+	    /><alt><option><inclusion><member string=";,"/></inclusion></option></alt
 	  ></rule
 	  ><rule name="d"
+	    ><alt><literal string="be 'happy'."/></alt
 	    ><comment
-	    /><alt><literal string="be 'happy'."/></alt
-	    ><alt
-	    /><comment
+	    /><alt
 	    /><alt><literal string="and carry on."/></alt
 	  ></rule
-	  ><rule name="c"
-	    ><comment
-	    /><alt><literal hex="000000000000000000000000020"/></alt
+	  ><comment
+	  /><rule name="c"
+	    ><alt><literal hex="000000000000020"/></alt
 	  ></rule
 	></ixml>
       </assert-xml></result>     
@@ -993,10 +1003,10 @@
 
   <test-set name="whitespace-and-delimiters-external">
     <created by="MSM" on="2022-05-30"/>
-    <ixml-grammar-ref href="ws-and-del.ixml"/>
+    <ixml-grammar-ref href="ws-and-delim.ixml"/>
     <grammar-test>
       <result><assert-xml>
-	<ixml
+	<ixml xmlns=""
 	  ><rule name="S"
 	    ><comment
 	    /><alt
@@ -1012,18 +1022,17 @@
 	  ></rule
 	  ><rule name="b"
 	    ><comment
-	    /><alt><inclusion><member string=";,"/></inclusion></alt
+	    /><alt><option><inclusion><member string=";,"/></inclusion></option></alt
 	  ></rule
 	  ><rule name="d"
+	    ><alt><literal string="be 'happy'."/></alt
 	    ><comment
-	    /><alt><literal string="be 'happy'."/></alt
-	    ><alt
-	    /><comment
+	    /><alt
 	    /><alt><literal string="and carry on."/></alt
 	  ></rule
-	  ><rule name="c"
-	    ><comment
-	    /><alt><literal hex="000000000000000000000000020"/></alt
+	  ><comment
+	  /><rule name="c"
+	    ><alt><literal hex="00000000020"/></alt
 	  ></rule
 	></ixml>
       </assert-xml></result>     
