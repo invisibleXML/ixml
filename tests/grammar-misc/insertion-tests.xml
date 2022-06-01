@@ -1,18 +1,12 @@
-<test-catalog xmlns:ixml="http://invisiblexml.org/NS"
-	      xmlns="https://github.com/cmsmcq/ixml-tests"
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      xmlns:ixml="http://invisiblexml.org/NS"
 	      xmlns:jwL="https://lists.w3.org/Archives/Public/public-ixml/2022May/0099.html"
-	      release-date="2022-03-14"
-	      name="Insertion tests"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Insertion tests"
 	      >
 
   <description>
     <p>This test set collects some grammars that use textual insertion.</p>
-  </description>
-  
-  <description>
-
-    <p>Note: </p>
-
   </description>
 
 

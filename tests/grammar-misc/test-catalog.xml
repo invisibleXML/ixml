@@ -1,12 +1,13 @@
-<tc:test-catalog xmlns:tc="https://github.com/cmsmcq/ixml-tests"
+<tc:test-catalog xmlns:tc="https://github.com/invisibleXML/ixml/test-catalog"
 		 xmlns:ap="http://blackmesatech.com/2019/iXML/Aparecium"
                  xmlns:ixml="http://invisiblexml.org/NS"
-		 release-date="2022-03-14"
-		 name="Improper grammars">
+		 release-date="2022-06-01"
+		 name="iXML Community Group Test Suite - Improper grammars">
+  
   <tc:description>
     <tc:p>This test set collects some grammars which have
     various forms of useless rules.  Some but not all of these
-    are non-conforming under the current (2022-02-22) rules of
+    are non-conforming under the current (2022-06-01) rules of
     ixml.</tc:p>
   </tc:description>
   
@@ -85,7 +86,7 @@
 	<tc:p>The ixml spec defines this as a non-conforming grammar.</tc:p>
       </tc:description>	
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S03"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:multiple-definitions="warning"/>
@@ -114,7 +115,7 @@
     <tc:test-case name="md-1">
       <tc:test-string/>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S03"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:multiple-definitions="warning"/>
@@ -126,7 +127,7 @@
     <tc:test-case name="md-2">
       <tc:test-string>a</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S03"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:multiple-definitions="warning"/>
@@ -140,7 +141,7 @@
     <tc:test-case name="md-3">
       <tc:test-string>b</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S03"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:multiple-definitions="warning"/>
@@ -180,7 +181,7 @@
 	<tc:p>The ixml spec defines this as a non-conforming grammar.</tc:p>
       </tc:description>	
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -238,7 +239,7 @@
     <tc:test-case name="undef-1">
       <tc:test-string/>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -250,7 +251,7 @@
     <tc:test-case name="undef-2">
       <tc:test-string>a</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -264,7 +265,7 @@
     <tc:test-case name="undef-3">
       <tc:test-string>b</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -288,7 +289,7 @@
     <tc:test-case name="undef-4">
       <tc:test-string>(a)</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -302,7 +303,7 @@
     <tc:test-case name="undef-5">
       <tc:test-string>((a))</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -316,7 +317,7 @@
     <tc:test-case name="undef-6">
       <tc:test-string>(b))</tc:test-string>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="S02"/>
       </tc:result>
       <tc:app-info>
 	<tc:options ap:undefined-symbols="warning"/>
@@ -488,7 +489,7 @@
       <tc:p>A grammar with an unproductive nonterminal.  The rule for
       A is useless because it cannot produce any sequence of terminal
       symbols: once A is in the sentential form, no rewriting step can
-      get eliminate it.</tc:p>
+      eliminate it.</tc:p>
       <tc:p>This grammar can be cleaned up to the equivalent grammar
       S = B. B = 'b'.</tc:p>
     </tc:description>

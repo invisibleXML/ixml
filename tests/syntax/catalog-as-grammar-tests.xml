@@ -1,6 +1,6 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-	      release-date="2021-12-16"
-	      name="Amsterdam Test Suite 1 - Syntax tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Syntax tests">
 
   <description>
     <p>Syntax tests provided by Steven Pemberton in December 2021.</p>
@@ -21,7 +21,7 @@
     <ixml-grammar-ref href="class-range.ixml"/>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="none"/>
       </result>
     </grammar-test>
   </test-set>
@@ -30,7 +30,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn1.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -38,7 +38,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn10.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -46,7 +46,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn11.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -54,7 +54,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn2.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -62,7 +62,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn3.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -70,7 +70,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn4.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -78,7 +78,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn5.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -86,7 +86,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn6.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -94,7 +94,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn8.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -102,7 +102,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="defn9.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -124,7 +124,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem2.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -132,7 +132,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem3.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -140,7 +140,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem4.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -148,7 +148,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem5.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -156,7 +156,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem6.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -164,7 +164,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="elem7.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -172,7 +172,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="empty-string.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -180,7 +180,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="expr10.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -188,7 +188,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="hex2.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -196,7 +196,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="illegal-class.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S10"/></result>
     </grammar-test>
   </test-set>
   
@@ -204,7 +204,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="name-with-spaces.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -212,7 +212,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -220,7 +220,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule1.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -228,7 +228,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule10.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -236,7 +236,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule2.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S03"/></result>
     </grammar-test>
   </test-set>
   
@@ -244,7 +244,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule3.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -252,7 +252,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule4.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -260,7 +260,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule5.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -268,7 +268,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule6.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -276,7 +276,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule7.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -284,7 +284,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule8.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -292,7 +292,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule9.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -300,7 +300,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -308,7 +308,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment1.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
   
@@ -316,7 +316,7 @@
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="unterminated-comment2.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="none"/></result>
     </grammar-test>
   </test-set>
 
@@ -354,7 +354,7 @@
 	      change="remove unused rule from test"/>
     <ixml-grammar-ref href="undefined-symbol.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S02"/></result>
     </grammar-test>
   </test-set>
   
@@ -364,7 +364,7 @@
 	      change="remove unused rules from test"/>
     <ixml-grammar-ref href="undefined-symbol.ixml"/>
     <grammar-test>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S02"/></result>
     </grammar-test>
   </test-set>
   

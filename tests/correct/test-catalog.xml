@@ -1,6 +1,6 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-              release-date="2022-05-30"
-	      name="Amsterdam Test Suite 1, correct tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+              release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Tests producing parse trees">
 
   <description>
     <p>Tests provided by Steven Pemberton in December 2021, with
@@ -197,7 +197,7 @@
           So assert-dynamic-error.</p>
         </description>
         <result>
-          <assert-dynamic-error/>
+          <assert-dynamic-error error-code="D01 D02"/>
 	</result>
       </test-case>
     </test-set>
