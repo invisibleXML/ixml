@@ -1,10 +1,11 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-              release-date="2021-12-21"
-	      name="Amsterdam Test Suite 1, ambiguous tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+              release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Ambiguous inputs">
 
   <description>
-    <p>Tests provided by Steven Pemberton in December 2021,
-    with corrections of 21 December. Reorganized by Norm Tovey-Walsh, February 2022.</p>
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
   </description>
 
   <test-set name="ambig">

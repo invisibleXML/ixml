@@ -1,22 +1,35 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-	      release-date="2022-02-19"
-	      name="Error tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Error tests">
 
   <description>
     <p>Tests intended to demonstrate errors that processors are required
     to raise.</p>
   </description>
 
-  <!-- This needs a new kind of assertion for "can't be serialized" I think.
-  <test-set name="syntax-xml">
+  <test-set name="syntax-xml-name">
     <created by="ndw" on="2022-02-19"/>
+    <modified by="MSM" on="2022-06-01"
+	      change="Uncomment this test, expect dynamic error"/>
+    
+    <description>
+      <p>This falls into the class "can't be serialized" I
+      think.</p>
+      <p>So:  assert-dynamic-error.</p>
+    </description>
+    <description>      
+      <p>No grammar-test for this one, because different
+      results are possible:  a processor is allowed but not
+      required to detect the problem statically.</p>
+    </description>
+
     <ixml-grammar>ª: 'a' .</ixml-grammar>
+
     <test-case name="invalid-name">
       <test-string>a</test-string>
-      <result><assert-not-xml/></result>
+      <result><assert-dynamic-error error-code="D01 D03"/></result>
     </test-case>
   </test-set>
-  -->
 
   <test-set name="hex-much-too-big">
     <created by="ndw" on="2022-02-19"/>
@@ -27,14 +40,14 @@
     <ixml-grammar>s: #decafbadbadbadbad .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S07"/>
       </result>
     </grammar-test>
     <!-- Since there is no grammar here, it's not really necessary
 	 to have a text case.  But hey, ... -->
     <test-case name="hex-much-too-big">
       <test-string/>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S07"/></result>
     </test-case>
   </test-set>    
 
@@ -46,12 +59,12 @@
     <ixml-grammar>s: #ffffffff0 .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S07"/>
       </result>
     </grammar-test>
     <test-case name="hex-too-big">
       <test-string>42</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S07"/></result>
     </test-case>
   </test-set>    
 
@@ -63,12 +76,12 @@
     <ixml-grammar>s: #fffe .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S08"/>
       </result>
     </grammar-test>
     <test-case name="hex-not-a-character">
       <test-string>65534</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S08"/></result>
     </test-case>
   </test-set>    
 
@@ -80,12 +93,12 @@
     <ixml-grammar>s: #1fffe .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S08"/>
       </result>
     </grammar-test>
     <test-case name="hex-also-not-a-character">
       <test-string/>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S08"/></result>
     </test-case>
   </test-set>    
 
@@ -97,12 +110,12 @@
     <ixml-grammar>s: #d801 .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S08"/>
       </result>
     </grammar-test>
     <test-case name="hex-surrogate">
       <test-string/>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S08"/></result>
     </test-case>
   </test-set>    
 
@@ -114,12 +127,12 @@
     <ixml-grammar>s: [Xq] .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S10"/>
       </result>
     </grammar-test>
     <test-case name="bad-class">
       <test-string>x</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S10"/></result>
     </test-case>
   </test-set>    
 
@@ -131,20 +144,20 @@
     <ixml-grammar>s: ['Z'-'A'] .</ixml-grammar>
     <grammar-test>
       <result>
-	<assert-not-a-grammar/>
+	<assert-not-a-grammar error-code="S09"/>
       </result>
     </grammar-test>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-A">
       <test-string>A</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-Z">
       <test-string>Z</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-L">
       <test-string>L</test-string>
-      <result><assert-not-a-grammar/></result>
+      <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
   </test-set>    
 

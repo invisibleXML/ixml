@@ -1,6 +1,6 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-	      release-date="2022-03-26"
-	      name="Syntax tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Syntax tests">
 
   <description>
     <p>Syntax tests for grammar features. These tests all make assertions

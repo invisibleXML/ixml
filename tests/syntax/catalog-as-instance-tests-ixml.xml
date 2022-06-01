@@ -1,10 +1,10 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-	      release-date="2021-12-16"
-	      name="Amsterdam Test Suite 1 - Syntax tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite - Syntax tests">
 
   <description>
     <p>Syntax tests provided by Steven Pemberton in December 2021.</p>
-    <p>All tests are negative (the file.ixml files do not conform
+    <p>Most tests are negative (the file.ixml files do not conform
     to the grammar for ixml).</p>
     <p>Since these are all parsed against the grammar for ixml
     grammars, the expected result could be given as
