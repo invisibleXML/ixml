@@ -16,7 +16,7 @@
     tests as instance tests.</p>
   </description>
 
-  <test-set name="syntax-xml">
+  <test-set name="syntax-xml-instance">
     <created by="SP" on="2021-12-16"/>
 
     <vxml-grammar-ref href="../reference/ixml.xml"/>

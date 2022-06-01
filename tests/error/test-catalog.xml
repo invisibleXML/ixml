@@ -7,7 +7,7 @@
     to raise.</p>
   </description>
 
-  <test-set name="syntax-xml">
+  <test-set name="syntax-xml-name">
     <created by="ndw" on="2022-02-19"/>
     <modified by="MSM" on="2022-06-01"
 	      change="Uncomment this test, expect dynamic error"/>
@@ -147,15 +147,15 @@
 	<assert-not-a-grammar error-code="S09"/>
       </result>
     </grammar-test>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-A">
       <test-string>A</test-string>
       <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-Z">
       <test-string>Z</test-string>
       <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
-    <test-case name="invalid-range">
+    <test-case name="invalid-range-L">
       <test-string>L</test-string>
       <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
