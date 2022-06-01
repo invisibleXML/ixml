@@ -1,5 +1,5 @@
 <test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-              release-date="2022-05-24"
+              release-date="2022-05-30"
 	      name="Amsterdam Test Suite 1, correct tests">
 
   <description>
@@ -15,6 +15,8 @@
 	      change="Corrected input, grammar, or output for 5 tests"/>
     <modified on="2021-12-30" by="MSM"
 	      change="Updated catalog, corrected many tests."/>
+    <modified on="2022-05-30" by="MSM"
+	      change="Add whitespace-and-delimiters test sets."/>
 
     <test-set name="address">
       <created by="SP" on="2021-12-16"/>
@@ -698,6 +700,7 @@
 	</result>
       </test-case>
     </test-set>
+    
   </test-set>
 
   <test-set name="element-content">
@@ -754,7 +757,7 @@
 	<assert-xml-ref href="ranges.output.xml"/>
       </result>
     </test-case>
-  </test-set>
+  </test-set>  
 
   <test-set name="ranges1">
     <created by="ndw" on="2022-02-05"/>
@@ -768,6 +771,295 @@
 	<assert-xml-ref href="ranges1.output.xml"/>
       </result>
     </test-case>
+  </test-set>  
+
+  <test-set name="version-decl">
+    <created by="MSM" on="2022-05-27"/>
+    <ixml-grammar-ref href="version-decl.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="version-decl.ixml.xml"/>
+      </result>
+    </grammar-test>
+    <test-case name="empty">
+      <test-string/>
+      <result><assert-not-a-sentence/></result>
+    </test-case>    
+    <test-case name="abc">
+      <test-string>abc😺</test-string>
+      <result><assert-xml>
+	<S xmlns="">abc<done>😺</done></S>
+      </assert-xml></result>
+    </test-case>
+    
+    <test-case name="x0">
+      <test-string>¿xx?</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="x1">
+      <test-string>¿x.x?</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="y0">
+      <test-string>¿yy?</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="y1">
+      <test-string>¿y.y?</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="y2">
+      <test-string>¿y..y?</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>    
+    <test-case name="z0">
+      <test-string>¡zz!</test-string>
+      <result><assert-xml>
+	<S xmlns="">¡zz!</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="z1">
+      <test-string>¡z.z!</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>    
+    <test-case name="w0">
+      <test-string>¡ww!</test-string>
+      <result><assert-xml>
+	<S xmlns="">¡ww!</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="w1">
+      <test-string>¡w.w!</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="w2">
+      <test-string>¡w..w!</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+
+    <test-case name="v0">
+      <test-string>vv</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="v1">
+      <test-string>v.v</test-string>
+      <result><assert-xml>
+	<S xmlns="">v.v</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="v2">
+      <test-string>v..v</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="u0">
+      <test-string>uu</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="u1">
+      <test-string>u.u</test-string>
+      <result><assert-xml>
+	<S xmlns="">u.u</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="u2">
+      <test-string>u..u</test-string>
+      <result><assert-xml>
+	<S xmlns="">u..u</S>
+      </assert-xml></result>
+    </test-case>    
+    <test-case name="t0">
+      <test-string>tt</test-string>
+      <result><assert-xml>
+	<S xmlns="">tt</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="t1">
+      <test-string>t.t</test-string>
+      <result><assert-xml>
+	<S xmlns="">t.t</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="t2">
+      <test-string>t..t</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>    
+    <test-case name="s0">
+      <test-string>ss</test-string>
+      <result><assert-xml>
+	<S xmlns="">ss</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="s1">
+      <test-string>s.s</test-string>
+      <result><assert-xml>
+	<S xmlns="">s.s</S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="s2">
+      <test-string>s..s</test-string>
+      <result><assert-xml>
+	<S xmlns="">s..s</S>
+      </assert-xml></result>
+    </test-case>
+    
+  </test-set>
+
+  <test-set name="version-decl-two">
+    <created by="MSM" on="2022-05-27"/>
+    <ixml-grammar-ref href="version-decl.2.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="version-decl-two.ixml.xml"/>
+      </result>
+    </grammar-test>
+    <test-case name="empty">
+      <test-string/>
+      <result><assert-xml><S xmlns=""/></assert-xml></result>
+    </test-case>
+    <test-case name="abc">
+      <test-string>abc😺</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>    
+    <test-case name="done">
+      <test-string>done</test-string>
+      <result><assert-xml>
+	<S xmlns="">done</S>
+      </assert-xml></result>
+    </test-case>    
+    <test-case name="overdone">
+      <test-string>donetoomuch</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    
+  </test-set>
+
+  <test-set name="whitespace-and-delimiters-inline">
+    <created by="MSM" on="2022-05-30"/>
+    <ixml-grammar>
+&#x9;S&#xD;={}a, b, c, d.&#xD;
+&#x9;a&#xA;=&#x20;'Don''t worry'&#xD;
+&#x9;      | 'Keep ''calm'''.&#xD;
+&#x9;b&#xD;={}[';,']?.&#xD;
+&#x9;&#x9;d = 'be ''happy''.'&#xD;
+        |{}; 'and carry on.'.{}c=#000000000000020.&#xD;
+    </ixml-grammar>
+    <grammar-test>
+      <result><assert-xml>
+	<ixml xmlns=""
+	  ><rule name="S"
+	    ><comment
+	    /><alt
+	      ><nonterminal name="a"
+	      /><nonterminal name="b"
+	      /><nonterminal name="c"
+	      /><nonterminal name="d"
+	    /></alt
+	  ></rule
+	  ><rule name="a"
+	    ><alt><literal string="Don't worry"/></alt
+	    ><alt><literal string="Keep 'calm'"/></alt
+	  ></rule
+	  ><rule name="b"
+	    ><comment
+	    /><alt><option><inclusion><member string=";,"/></inclusion></option></alt
+	  ></rule
+	  ><rule name="d"
+	    ><alt><literal string="be 'happy'."/></alt
+	    ><comment
+	    /><alt
+	    /><alt><literal string="and carry on."/></alt
+	  ></rule
+	  ><comment
+	  /><rule name="c"
+	    ><alt><literal hex="000000000000020"/></alt
+	  ></rule
+	></ixml>
+      </assert-xml></result>     
+    </grammar-test>
+    <test-case name="empty">
+      <test-string/>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="wd1">
+      <test-string>Don't worry, be 'happy'.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Don't worry</a><b>,</b><c> </c><d>be 'happy'.</d></S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="wd2">
+      <test-string>Don't worry and carry on.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Don't worry</a><b></b><c> </c><d>and carry on.</d></S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="wd3">
+      <test-string>Keep 'calm'; be 'happy'.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Keep 'calm'</a><b>;</b><c> </c><d>be 'happy'.</d></S>
+      </assert-xml></result>
+    </test-case> 
+    
+  </test-set>
+
+  <test-set name="whitespace-and-delimiters-external">
+    <created by="MSM" on="2022-05-30"/>
+    <ixml-grammar-ref href="ws-and-delim.ixml"/>
+    <grammar-test>
+      <result><assert-xml>
+	<ixml xmlns=""
+	  ><rule name="S"
+	    ><comment
+	    /><alt
+	      ><nonterminal name="a"
+	      /><nonterminal name="b"
+	      /><nonterminal name="c"
+	      /><nonterminal name="d"
+	    /></alt
+	  ></rule
+	  ><rule name="a"
+	    ><alt><literal string="Don't worry"/></alt
+	    ><alt><literal string="Keep 'calm'"/></alt
+	  ></rule
+	  ><rule name="b"
+	    ><comment
+	    /><alt><option><inclusion><member string=";,"/></inclusion></option></alt
+	  ></rule
+	  ><rule name="d"
+	    ><alt><literal string="be 'happy'."/></alt
+	    ><comment
+	    /><alt
+	    /><alt><literal string="and carry on."/></alt
+	  ></rule
+	  ><comment
+	  /><rule name="c"
+	    ><alt><literal hex="00000000020"/></alt
+	  ></rule
+	></ixml>
+      </assert-xml></result>     
+    </grammar-test>
+    <test-case name="empty">
+      <test-string/>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="wd1">
+      <test-string>Don't worry, be 'happy'.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Don't worry</a><b>,</b><c> </c><d>be 'happy'.</d></S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="wd2">
+      <test-string>Don't worry and carry on.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Don't worry</a><b></b><c> </c><d>and carry on.</d></S>
+      </assert-xml></result>
+    </test-case>
+    <test-case name="wd3">
+      <test-string>Keep 'calm'; be 'happy'.</test-string>
+      <result><assert-xml>
+	<S xmlns=""><a>Keep 'calm'</a><b>;</b><c> </c><d>be 'happy'.</d></S>
+      </assert-xml></result>
+    </test-case> 
+    
   </test-set>
 
 

@@ -30,6 +30,6 @@
   <test-set-ref href="parse/test-catalog.xml"/>
   <test-set-ref href="error/test-catalog.xml"/>
   <test-set-ref href="hygiene/test-catalog.xml"/>
-  
-  <test-set-ref href="jwl/test-catalog.xml"/>
+  <test-set-ref href="hygiene/prolog-tests.xml"/>
+  <test-set-ref href="hygiene/insertion-tests.xml"/>
 </test-catalog>

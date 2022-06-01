@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="../../../gingersnap/src/ixml-html.xsl"?>
 <rng:grammar xmlns:d2x="http://www.blackmesatech.com/2014/lib/d2x"
              xmlns:follow="http://blackmesatech.com/2016/nss/ixml-gluschkov-automata-followset"
              xmlns:gl="http://blackmesatech.com/2019/iXML/Gluschkov"
@@ -8,16 +7,6 @@
              xmlns:rtn="http://blackmesatech.com/2020/iXML/recursive-transition-networks"
              xmlns:xs="http://www.w3.org/2001/XMLSchema"
              datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-
-   <!--* Relax NG schema for ixml grammars.
-       * Based on grammar of 17 May 2022.
-       *
-       * Captures structural rules but does not capture all constraints
-       * on character data or attribute values.
-       *
-       * Namespace-qualified attributes are allowed everywhere.
-       *-->
-
    <rng:start>
       <rng:ref name="ixml"/>
    </rng:start>
@@ -31,6 +20,9 @@
             <rng:ref name="extension-elements"/>
             <rng:group>
                <rng:ref name="s"/>
+               <rng:optional>
+                  <rng:ref name="prolog"/>
+               </rng:optional>
                <rng:group>
                   <rng:ref name="rule"/>
                   <rng:zeroOrMore>
@@ -143,6 +135,38 @@
          <rng:text/>
       </rng:group>
    </rng:define>
+   <rng:define name="prolog">
+      <rng:ref name="e.prolog"/>
+   </rng:define>
+   <rng:define name="e.prolog">
+      <rng:element name="prolog">
+         <rng:ref name="extension-attributes"/>
+         <rng:interleave>
+            <rng:ref name="extension-elements"/>
+            <rng:group>
+               <rng:ref name="version"/>
+               <rng:ref name="s"/>
+            </rng:group>
+         </rng:interleave>
+      </rng:element>
+   </rng:define>
+   <rng:define name="version">
+      <rng:ref name="e.version"/>
+   </rng:define>
+   <rng:define name="e.version">
+      <rng:element name="version">
+         <rng:ref name="extension-attributes"/>
+         <rng:interleave>
+            <rng:ref name="extension-elements"/>
+            <rng:group>
+               <rng:ref name="RS"/>
+               <rng:ref name="RS"/>
+               <rng:ref name="string"/>
+               <rng:ref name="s"/>
+            </rng:group>
+         </rng:interleave>
+      </rng:element>
+   </rng:define>
    <rng:define name="rule">
       <rng:ref name="e.rule"/>
    </rng:define>
@@ -170,10 +194,8 @@
       <rng:ref name="a.mark"/>
    </rng:define>
    <rng:define name="a.mark">
-      <rng:attribute name="mark">
-         <rng:data type="string">
-            <rng:param name="pattern">[@\^\-]</rng:param>
-         </rng:data>
+      <rng:attribute name="mark"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="alts">
@@ -262,6 +284,9 @@
          </rng:group>
          <rng:group>
             <rng:ref name="nonterminal"/>
+         </rng:group>
+         <rng:group>
+            <rng:ref name="insertion"/>
          </rng:group>
          <rng:group>
             <rng:ref name="s"/>
@@ -370,10 +395,8 @@
       <rng:ref name="a.name"/>
    </rng:define>
    <rng:define name="a.name">
-      <rng:attribute name="name">
-         <rng:data type="string">
-            <rng:param name="pattern">([_\p{L}])((([_\p{L}]))|([\-.·‿⁀\p{Nd}\p{Mn}]))*</rng:param>
-         </rng:data>
+      <rng:attribute name="name"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="namestart">
@@ -448,47 +471,55 @@
       <rng:ref name="a.tmark"/>
    </rng:define>
    <rng:define name="a.tmark">
-      <rng:attribute name="tmark">
-         <rng:data type="string">
-            <rng:param name="pattern">[\^\-+]</rng:param>
-         </rng:data>
+      <rng:attribute name="tmark"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="string">
       <rng:ref name="a.string"/>
    </rng:define>
    <rng:define name="a.string">
-      <rng:attribute name="string">
-         <rng:data type="string">
-            <rng:param name="pattern">((([^"&#xD;])|("))+)|((([^'&#xD;])|('))+)</rng:param>
-         </rng:data>
+      <rng:attribute name="string"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="dchar">
-      <rng:ref name="h.dchar"/>
+      <rng:ref name="e.dchar"/>
    </rng:define>
-   <rng:define name="h.dchar">
-      <rng:choice>
-         <rng:group><!-- can a data element be used? -->
-            <rng:text/>
-         </rng:group>
-         <rng:group><!-- can a data element be used? -->
-            <rng:text/>
-         </rng:group>
-      </rng:choice>
+   <rng:define name="e.dchar">
+      <rng:element name="dchar">
+         <rng:ref name="extension-attributes"/>
+         <rng:interleave>
+            <rng:ref name="extension-elements"/>
+            <rng:choice>
+               <rng:group><!-- can a data element be used? -->
+                  <rng:text/>
+               </rng:group>
+               <rng:group><!-- can a data element be used? -->
+                  <rng:text/>
+               </rng:group>
+            </rng:choice>
+         </rng:interleave>
+      </rng:element>
    </rng:define>
    <rng:define name="schar">
-      <rng:ref name="h.schar"/>
+      <rng:ref name="e.schar"/>
    </rng:define>
-   <rng:define name="h.schar">
-      <rng:choice>
-         <rng:group><!-- can a data element be used? -->
-            <rng:text/>
-         </rng:group>
-         <rng:group><!-- can a data element be used? -->
-            <rng:text/>
-         </rng:group>
-      </rng:choice>
+   <rng:define name="e.schar">
+      <rng:element name="schar">
+         <rng:ref name="extension-attributes"/>
+         <rng:interleave>
+            <rng:ref name="extension-elements"/>
+            <rng:choice>
+               <rng:group><!-- can a data element be used? -->
+                  <rng:text/>
+               </rng:group>
+               <rng:group><!-- can a data element be used? -->
+                  <rng:text/>
+               </rng:group>
+            </rng:choice>
+         </rng:interleave>
+      </rng:element>
    </rng:define>
    <rng:define name="encoded">
       <rng:ref name="h.encoded"/>
@@ -509,10 +540,8 @@
       <rng:ref name="a.hex"/>
    </rng:define>
    <rng:define name="a.hex">
-      <rng:attribute name="hex">
-         <rng:data type="string">
-            <rng:param name="pattern">[0-9a-fA-F]+</rng:param>
-         </rng:data>
+      <rng:attribute name="hex"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="charset">
@@ -633,20 +662,16 @@
       <rng:ref name="a.from"/>
    </rng:define>
    <rng:define name="a.from">
-      <rng:attribute name="from">
-         <rng:data type="string">
-            <rng:param name="pattern">(((([^"&#xD;])|(")))|((([^'&#xD;])|(')))|(#([0-9a-fA-F]+)))</rng:param>
-         </rng:data>
+      <rng:attribute name="from"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="to">
       <rng:ref name="a.to"/>
    </rng:define>
    <rng:define name="a.to">
-      <rng:attribute name="to">
-         <rng:data type="string">
-            <rng:param name="pattern">(((([^"&#xD;])|(")))|((([^'&#xD;])|(')))|(#([0-9a-fA-F]+)))</rng:param>
-         </rng:data>
+      <rng:attribute name="to"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="character">
@@ -678,10 +703,8 @@
       <rng:ref name="a.code"/>
    </rng:define>
    <rng:define name="a.code">
-      <rng:attribute name="code">
-         <rng:data type="string">
-            <rng:param name="pattern">([A-Z])([a-z])?</rng:param>
-         </rng:data>
+      <rng:attribute name="code"><!-- No annotations found, falling back to 'text'. -->
+         <rng:text/>
       </rng:attribute>
    </rng:define>
    <rng:define name="capital">
@@ -699,6 +722,28 @@
       <rng:group><!-- can a data element be used? -->
          <rng:text/>
       </rng:group>
+   </rng:define>
+   <rng:define name="insertion">
+      <rng:ref name="e.insertion"/>
+   </rng:define>
+   <rng:define name="e.insertion">
+      <rng:element name="insertion">
+         <rng:ref name="extension-attributes"/>
+         <rng:interleave>
+            <rng:ref name="extension-elements"/>
+            <rng:group>
+               <rng:ref name="s"/>
+               <rng:choice>
+                  <rng:group>
+                     <rng:ref name="string"/>
+                  </rng:group>
+                  <rng:group>
+                     <rng:ref name="hex"/>
+                  </rng:group>
+               </rng:choice>
+            </rng:group>
+         </rng:interleave>
+      </rng:element>
    </rng:define>
    <rng:define name="extension-attributes">
       <rng:zeroOrMore>
