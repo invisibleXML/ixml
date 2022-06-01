@@ -904,8 +904,11 @@
     
   </test-set>
 
-  <test-set name="version-decl-two">
+  <test-set name="version-decl-two"
+	    xmlns:ixml="http://invisiblexml.org/NS">
     <created by="MSM" on="2022-05-27"/>
+    <modified on="2022-06-01" by="NDW"
+	      change="Added ixml:state to indicate a version mismatch."/>
     <ixml-grammar-ref href="version-decl.2.ixml"/>
     <grammar-test>
       <result>
@@ -914,7 +917,7 @@
     </grammar-test>
     <test-case name="empty">
       <test-string/>
-      <result><assert-xml><S xmlns=""/></assert-xml></result>
+      <result><assert-xml><S xmlns="" ixml:state="version-mismatch"/></assert-xml></result>
     </test-case>
     <test-case name="abc">
       <test-string>abc😺</test-string>
@@ -923,7 +926,7 @@
     <test-case name="done">
       <test-string>done</test-string>
       <result><assert-xml>
-	<S xmlns="">done</S>
+	<S xmlns="" ixml:state="version-mismatch">done</S>
       </assert-xml></result>
     </test-case>    
     <test-case name="overdone">
