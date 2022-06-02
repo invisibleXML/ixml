@@ -2,7 +2,7 @@
 		 xmlns:ap="http://blackmesatech.com/2019/iXML/Aparecium"
                  xmlns:ixml="http://invisiblexml.org/NS"
 		 release-date="2022-06-01"
-		 name="iXML Community Group Test Suite - Improper grammars">
+		 name="Improper grammars">
   
   <tc:description>
     <tc:p>This test set collects some grammars which have
