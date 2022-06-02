@@ -202,7 +202,6 @@
       </test-case>
     </test-set>
 
-
     <test-set name="expr2">
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="expr2.ixml"/>
@@ -1062,9 +1061,22 @@
 	<S xmlns=""><a>Keep 'calm'</a><b>;</b><c> </c><d>be 'happy'.</d></S>
       </assert-xml></result>
     </test-case> 
-    
   </test-set>
 
+  <test-set name="invalid-char">
+    <created by="SP" on="2021-12-16"/>
+    <ixml-grammar-ref href="invalid-char.ixml"/>
+    <test-case name="invalid-char">
+      <created by="NDW" on="2022-06-02"/>
+      <test-string>a</test-string>
+      <description>
+        <p>Attempts to serialize an invalid XML character.</p>
+      </description>
+      <result>
+        <assert-dynamic-error error-code="D02"/>
+      </result>
+    </test-case>
+  </test-set>
 
 </test-catalog>
 
