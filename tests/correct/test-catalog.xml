@@ -1073,7 +1073,7 @@
         <p>Attempts to serialize an invalid XML character.</p>
       </description>
       <result>
-        <assert-dynamic-error error-code="D02"/>
+        <assert-dynamic-error error-code="D04"/>
       </result>
     </test-case>
   </test-set>
