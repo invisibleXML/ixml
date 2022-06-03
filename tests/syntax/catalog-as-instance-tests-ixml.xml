@@ -164,5 +164,25 @@
       <test-string-ref href="unterminated-comment2.ixml"/>
       <result><assert-not-a-sentence/></result>
     </test-case>
+
+    <test-case name="nothexdigits">
+      <created by="NDW" on="2022-06-02"/>
+      <modified by="MSM" on="2022-06-03"
+		change="copied to instance tests"/>
+      <test-string>S = #CAFFEINE.</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+
+    <test-case name="multiline-strings-LF">
+      <created by="CMSMcQ" on="2022-06-03"/>
+      <test-string-ref href="multiline-string.ixml"/>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="multiline-strings-CRLF">
+      <created by="CMSMcQ" on="2022-06-03"/>
+      <test-string-ref href="multiline-string.crlf.ixml"/>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    
   </test-set>
 </test-catalog>

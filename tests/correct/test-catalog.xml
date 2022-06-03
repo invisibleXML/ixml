@@ -1063,20 +1063,5 @@
     </test-case> 
   </test-set>
 
-  <test-set name="invalid-char">
-    <created by="NDW" on="2022-06-02"/>
-    <ixml-grammar-ref href="invalid-char.ixml"/>
-    <test-case name="invalid-char">
-      <created by="NDW" on="2022-06-02"/>
-      <test-string>a</test-string>
-      <description>
-        <p>Attempts to serialize an invalid XML character.</p>
-      </description>
-      <result>
-        <assert-dynamic-error error-code="D02"/>
-      </result>
-    </test-case>
-  </test-set>
-
 </test-catalog>
 
