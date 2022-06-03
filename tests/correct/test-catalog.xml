@@ -1064,7 +1064,7 @@
   </test-set>
 
   <test-set name="invalid-char">
-    <created by="SP" on="2021-12-16"/>
+    <created by="NDW" on="2022-06-02"/>
     <ixml-grammar-ref href="invalid-char.ixml"/>
     <test-case name="invalid-char">
       <created by="NDW" on="2022-06-02"/>
