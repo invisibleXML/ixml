@@ -1,6 +1,6 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-              release-date="2022-05-30"
-	      name="Amsterdam Test Suite 1, correct tests">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+              release-date="2022-06-01"
+	      name="Tests producing parse trees">
 
   <description>
     <p>Tests provided by Steven Pemberton in December 2021, with
@@ -197,11 +197,10 @@
           So assert-dynamic-error.</p>
         </description>
         <result>
-          <assert-dynamic-error/>
+          <assert-dynamic-error error-code="D01 D02"/>
 	</result>
       </test-case>
     </test-set>
-
 
     <test-set name="expr2">
       <created by="SP" on="2021-12-16"/>
@@ -904,8 +903,11 @@
     
   </test-set>
 
-  <test-set name="version-decl-two">
+  <test-set name="version-decl-two"
+	    xmlns:ixml="http://invisiblexml.org/NS">
     <created by="MSM" on="2022-05-27"/>
+    <modified on="2022-06-01" by="NDW"
+	      change="Added ixml:state to indicate a version mismatch."/>
     <ixml-grammar-ref href="version-decl.2.ixml"/>
     <grammar-test>
       <result>
@@ -914,7 +916,7 @@
     </grammar-test>
     <test-case name="empty">
       <test-string/>
-      <result><assert-xml><S xmlns=""/></assert-xml></result>
+      <result><assert-xml><S xmlns="" ixml:state="version-mismatch"/></assert-xml></result>
     </test-case>
     <test-case name="abc">
       <test-string>abc😺</test-string>
@@ -923,7 +925,7 @@
     <test-case name="done">
       <test-string>done</test-string>
       <result><assert-xml>
-	<S xmlns="">done</S>
+	<S xmlns="" ixml:state="version-mismatch">done</S>
       </assert-xml></result>
     </test-case>    
     <test-case name="overdone">
@@ -1059,9 +1061,22 @@
 	<S xmlns=""><a>Keep 'calm'</a><b>;</b><c> </c><d>be 'happy'.</d></S>
       </assert-xml></result>
     </test-case> 
-    
   </test-set>
 
+  <test-set name="invalid-char">
+    <created by="NDW" on="2022-06-02"/>
+    <ixml-grammar-ref href="invalid-char.ixml"/>
+    <test-case name="invalid-char">
+      <created by="NDW" on="2022-06-02"/>
+      <test-string>a</test-string>
+      <description>
+        <p>Attempts to serialize an invalid XML character.</p>
+      </description>
+      <result>
+        <assert-dynamic-error error-code="D02"/>
+      </result>
+    </test-case>
+  </test-set>
 
 </test-catalog>
 

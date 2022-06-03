@@ -1,12 +1,13 @@
-<test-catalog xmlns="https://github.com/cmsmcq/ixml-tests"
-	      release-date="2021-12-16"
-	      name="Amsterdam Test Suite 1">
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+	      release-date="2022-06-01"
+	      name="iXML Community Group Test Suite">
 
   <description>
-    <p>Top-level catalog for tests provided by
-    Steven Pemberton in December 2021.</p>
-    <p>There are two sub-groups, one general
-    and one focused on syntax issues.</p>
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
   </description>
 
   <!--* The three syntaxtests catalogs use the
@@ -20,16 +21,12 @@
   <test-set-ref href="syntax/catalog-as-instance-tests-xml.xml"/>
   <test-set-ref href="syntax/catalog-of-correct-tests.xml"/>
 
-  <!--* Norm reworked the tests-SP-MSM test directory
-      * into a set of separate directories with individual
-      * catalogs
-      *-->
   <test-set-ref href="ambiguous/test-catalog.xml"/>
   <test-set-ref href="correct/test-catalog.xml"/>
   <test-set-ref href="ixml/test-catalog.xml"/>
   <test-set-ref href="parse/test-catalog.xml"/>
   <test-set-ref href="error/test-catalog.xml"/>
-  <test-set-ref href="hygiene/test-catalog.xml"/>
-  <test-set-ref href="hygiene/prolog-tests.xml"/>
-  <test-set-ref href="hygiene/insertion-tests.xml"/>
+  <test-set-ref href="grammar-misc/test-catalog.xml"/>
+  <test-set-ref href="grammar-misc/prolog-tests.xml"/>
+  <test-set-ref href="grammar-misc/insertion-tests.xml"/>
 </test-catalog>

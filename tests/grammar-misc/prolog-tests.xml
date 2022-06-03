@@ -1,4 +1,4 @@
-<tc:test-catalog xmlns:tc="https://github.com/cmsmcq/ixml-tests"
+<tc:test-catalog xmlns:tc="https://github.com/invisibleXML/ixml/test-catalog"
 		 xmlns:ixml="http://invisiblexml.org/NS"
 		 release-date="2022-05-17"
 		 name="Prolog tests"
@@ -48,7 +48,7 @@
 	<tc:assert-not-a-sentence ixml:state="version-mismatch"/>
       </tc:result>
     </tc:test-case>
-    <tc:test-case name="B">
+    <tc:test-case name="B1">
       <tc:test-string>B</tc:test-string>
       <tc:result><tc:assert-xml>
 	<P ixml:state="version-mismatch">B</P>
@@ -60,7 +60,7 @@
 	<P ixml:state="version-mismatch">D</P>
       </tc:assert-xml></tc:result>
     </tc:test-case>
-    <tc:test-case name="b">
+    <tc:test-case name="b2">
       <tc:test-string>b</tc:test-string>
       <tc:result>
 	<tc:assert-not-a-sentence ixml:state="version-mismatch"/>
@@ -106,7 +106,7 @@
       <tc:test-string/>
       <tc:result><tc:assert-not-a-sentence/></tc:result>
     </tc:test-case>
-    <tc:test-case name="B">
+    <tc:test-case name="B1">
       <tc:test-string>B</tc:test-string>
       <tc:result><tc:assert-xml>
 	<P>B</P>
@@ -118,7 +118,7 @@
 	<P>D</P>
       </tc:assert-xml></tc:result>
     </tc:test-case>
-    <tc:test-case name="b">
+    <tc:test-case name="b2">
       <tc:test-string>b</tc:test-string>
       <tc:result><tc:assert-not-a-sentence/></tc:result>
     </tc:test-case>
@@ -136,23 +136,23 @@
     <tc:ixml-grammar> ixml version P:["B"-"D"]. </tc:ixml-grammar>
     <tc:grammar-test>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="none"/>
       </tc:result>
     </tc:grammar-test>
 
     <tc:test-case name="epsilon">
       <tc:test-string/>
       <tc:result>
-	<tc:assert-not-a-grammar/>
+	<tc:assert-not-a-grammar error-code="none"/>
       </tc:result>
     </tc:test-case>
-    <tc:test-case name="B">
+    <tc:test-case name="B1">
       <tc:test-string>B</tc:test-string>
-      <tc:result><tc:assert-not-a-grammar/></tc:result>
+      <tc:result><tc:assert-not-a-grammar error-code="none"/></tc:result>
     </tc:test-case>
     <tc:test-case name="BCD">
       <tc:test-string>BCD</tc:test-string>
-      <tc:result><tc:assert-not-a-grammar/></tc:result>
+      <tc:result><tc:assert-not-a-grammar error-code="none"/></tc:result>
     </tc:test-case>
   </tc:test-set>
 
@@ -185,7 +185,7 @@
       <tc:test-string/>
       <tc:result><tc:assert-not-a-sentence/></tc:result>
     </tc:test-case>
-    <tc:test-case name="B">
+    <tc:test-case name="B1">
       <tc:test-string>B</tc:test-string>
       <tc:result><tc:assert-xml>
 	<ixml>B</ixml>
@@ -197,7 +197,7 @@
 	<ixml>D</ixml>
       </tc:assert-xml></tc:result>
     </tc:test-case>
-    <tc:test-case name="b">
+    <tc:test-case name="b2">
       <tc:test-string>b</tc:test-string>
       <tc:result><tc:assert-not-a-sentence/></tc:result>
     </tc:test-case>
