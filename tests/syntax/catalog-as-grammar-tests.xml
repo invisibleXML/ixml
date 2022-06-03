@@ -1,5 +1,5 @@
 <test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
-	      release-date="2022-06-01"
+	      release-date="2022-06-02"
 	      name="Grammar Syntax tests">
 
   <description>
@@ -224,14 +224,6 @@
     </grammar-test>
   </test-set>
   
-  <test-set name="rule10.ixml">
-    <created by="SP" on="2021-12-16"/>
-    <ixml-grammar-ref href="rule10.ixml"/>
-    <grammar-test>
-      <result><assert-not-a-grammar error-code="none"/></result>
-    </grammar-test>
-  </test-set>
-  
   <test-set name="rule2.ixml">
     <created by="SP" on="2021-12-16"/>
     <ixml-grammar-ref href="rule2.ixml"/>
@@ -293,6 +285,22 @@
     <ixml-grammar-ref href="rule9.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar error-code="none"/></result>
+    </grammar-test>
+  </test-set>
+
+  <test-set name="rule10.ixml">
+    <created by="SP" on="2021-12-16"/>
+    <ixml-grammar-ref href="rule10.ixml"/>
+    <grammar-test>
+      <result><assert-not-a-grammar error-code="none"/></result>
+    </grammar-test>
+  </test-set>
+  
+  <test-set name="rule11.ixml">
+    <created by="NDW" on="2021-06-02"/>
+    <ixml-grammar-ref href="rule11.ixml"/>
+    <grammar-test>
+      <result><assert-not-a-grammar error-code="S01 S12"/></result>
     </grammar-test>
   </test-set>
   
@@ -365,6 +373,14 @@
     <ixml-grammar-ref href="undefined-symbol.ixml"/>
     <grammar-test>
       <result><assert-not-a-grammar error-code="S02"/></result>
+    </grammar-test>
+  </test-set>
+
+  <test-set name="nothexdigits">
+    <created by="NDW" on="2022-06-02"/>
+    <vxml-grammar-ref href="nothexdigits.xml"/>
+    <grammar-test>
+      <result><assert-not-a-grammar error-code="S06"/></result>
     </grammar-test>
   </test-set>
   
