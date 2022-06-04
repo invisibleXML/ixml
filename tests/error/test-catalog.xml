@@ -274,9 +274,9 @@
 
   <test-set name="name-starting-xml">
     <created by="MSM" on="2022-06-03"/>
-    <description><p>This grammar marks all its nonterminal symbols as
-    hidden; since there is no outermost element, the parse tree cannot
-    be serialized as well-formed XML.</p></description>
+    <description><p>This grammar includes an attempt to create
+    an attribute named 'xmlns', but that name is reserved.
+    </p></description>
     <ixml-grammar>
       S: xmlns, able, baker.
       @xmlns: +'http://example.com/this-does-not-work'.
