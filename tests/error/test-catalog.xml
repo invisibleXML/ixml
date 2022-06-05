@@ -159,6 +159,139 @@
       <test-string>L</test-string>
       <result><assert-not-a-grammar error-code="S09"/></result>
     </test-case>
+  </test-set>
+
+  <test-set name="invalid-char">
+    <created by="NDW" on="2022-06-02"/>
+    <ixml-grammar-ref href="invalid-char.ixml"/>
+    <test-case name="invalid-char">
+      <created by="NDW" on="2022-06-02"/>
+      <test-string>a</test-string>
+      <description>
+        <p>Attempts to serialize an invalid XML character.</p>
+      </description>
+      <result>
+        <assert-dynamic-error error-code="D04 D01"/>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="attribute-root">
+    <created by="MSM" on="2022-06-03"/>
+    <description><p>This grammar marks its root (and only) node as an
+    attribute; its single sentence thus cannot be serialized as
+    well-formed XML.</p></description>
+    <ixml-grammar>
+      @S: 'This sentence cannot be serialized.'. 
+    </ixml-grammar>
+    <!--* no grammar test, since some processors may detect
+	* the error statically. *-->
+    <!--
+    <grammar-test>
+      <result><assert-xml>
+	<ixml xmlns=""
+	  ><rule name="S" mark="@"
+	    ><literal string="This sentence cannot be serialized."
+	    /></rule
+	  ></ixml>
+      </assert-xml></result>     
+    </grammar-test>
+    -->
+    <test-case name="sentence">
+      <description><p>This input is grammatical.  It just
+      cannot be serialized.</p></description>
+      <test-string>This sentence cannot be serialized.</test-string>
+      <result><assert-dynamic-error error-code="D05 D01"/></result>
+    </test-case> 
+  </test-set>
+
+  <test-set name="attribute-roots-plural">
+    <created by="MSM" on="2022-06-03"/>
+    <description><p>This grammar marks its start symbol as hidden;
+    when that symbol has multiple children marked as attributes, the
+    sentence cannot be serialized as well-formed
+    XML.</p></description>
+    <ixml-grammar>
+      -S: a, b, c, d.
+      @a: 'able'.
+      @b: 'baker'.
+      @c: 'charlie'.
+      d: 'dog'.
+    </ixml-grammar>
+    <!--* no grammar test, since some processors may detect
+	* the error statically. *-->
+    <test-case name="wb-not-wf">
+      <description><p>This input is grammatical but cannot be
+      serialized.</p></description>
+      <test-string>ablebakercharliedog</test-string>
+      <result><assert-dynamic-error error-code="D05 D01"/></result>
+    </test-case> 
+  </test-set>
+
+  <test-set name="well-balanced-xml">
+    <created by="MSM" on="2022-06-03"/>
+    <description><p>This grammar marks its start symbol as hidden;
+    when that symbol has multiple children, the sentence cannot be
+    serialized as well-formed XML.</p></description>
+    <ixml-grammar>
+      -S: a, b, c, d.
+      a: 'able'.
+      b: 'baker'.
+      c: 'charlie'.
+      d: 'dog'.
+    </ixml-grammar>
+    <!--* no grammar test, since some processors may detect
+	* the error statically. *-->
+    <test-case name="wb-not-wf">
+      <description><p>This input is grammatical but cannot be
+      serialized.</p></description>
+      <test-string>ablebakercharliedog</test-string>
+      <result><assert-dynamic-error error-code="D06 D01"/></result>
+    </test-case> 
+  </test-set>
+
+  <test-set name="rootless">
+    <created by="MSM" on="2022-06-03"/>
+    <description><p>This grammar marks all its nonterminal symbols as
+    hidden; since there is no outermost element, the parse tree cannot
+    be serialized as well-formed XML.</p></description>
+    <ixml-grammar>
+      -S: a, b, c, d.
+      -a: 'able'.
+      -b: 'baker'.
+      -c: 'charlie'.
+      -d: 'dog'.
+    </ixml-grammar>
+    <!--* no grammar test, since some processors may detect
+	* the error statically. *-->
+    <test-case name="textnode-at-root">
+      <description><p>This input is grammatical but cannot be
+      serialized.</p></description>
+      <test-string>ablebakercharliedog</test-string>
+      <result><assert-dynamic-error error-code="D06 D01"/></result>
+    </test-case> 
+  </test-set>
+
+  <test-set name="name-starting-xml">
+    <created by="MSM" on="2022-06-03"/>
+    <description><p>This grammar includes an attempt to create
+    an attribute named 'xmlns', but that name is reserved.
+    </p></description>
+    <ixml-grammar>
+      S: xmlns, able, baker.
+      @xmlns: +'http://example.com/this-does-not-work'.
+      able: 'a'*.
+      baker: 'B'?.
+    </ixml-grammar>
+    <!--* no grammar test, since some processors may detect
+	* the error statically. *-->
+    <test-case name="wb-not-wf">
+      <description><p>This input is grammatical but cannot be
+      serialized.  'xmlns' is not allowed as the name of an
+      attribute.</p></description>
+      <test-string>aB</test-string>
+      <result><assert-dynamic-error error-code="D07 D01"/></result>
+    </test-case> 
   </test-set>    
 
 </test-catalog>
