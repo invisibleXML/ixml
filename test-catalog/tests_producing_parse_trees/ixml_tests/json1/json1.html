@@ -1,0 +1,45 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../../"><img class="logotype" src="../../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees">Tests producing parse trees</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests">ixml tests</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests/json1">json1</a>&nbsp;/&nbsp;json1</div><main><img class="logosm" src="../../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Tests producing parse trees</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+
+  </div></details><h3 class="title">ixml tests</h3><details><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><details><summary>Updated 21&nbsp;Dec&nbsp;2021 by SP</summary><p>Corrected input, grammar, or output for 5 tests</p></details><details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>Updated catalog, corrected many tests.</p></details><details><summary>Updated 30&nbsp;May&nbsp;2022 by MSM</summary><p>Add whitespace-and-delimiters test sets.</p></details></details><h3 class="title">json1</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>json: S, object.
+object: "{", S, members, "}", S.
+-members: pair**(",", S).
+pair: @string, S, ":", S, value.
+array: "[", S, value**(",", S), "]", S.
+-value: string, S; number, S; object; array; "true", S; "false", S; "null", S.
+string: -"""", char*, -"""".
+-char: ~['"'; "\" {;[#0-#1F];}]; '\', ('"'; "\"; "/"; "b"; "f"; "n"; "r"; "t"; "u", hexdigits).
+number: "-"?, int, frac?, exp?.
+-int: "0"; digit19, digit*.
+-frac: ".", digit+.
+-exp: ("e"; "E"), sign?, digit+.
+-sign: "+"; "-".
+-S: " "*.
+-digit: ["0"-"9"].
+-digit19: ["1"-"9"].
+-hexdigits: hexdigit, hexdigit, hexdigit, hexdigit.
+-hexdigit: digit; ["a"-"f"]; ["A"-"F"].
+
+</code></pre></div><h1>Test case: json1</h1><details><p>Repository URI: <code>…/tests/correct/test-catalog.xml</code></p></details>
+	<p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+	<details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>replace trailing LF in input with space</p></details>
+	<details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>removed non-significant whitespace      from expected result</p></details>
+	<details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>trimmed trailing blank to agree with      expected result, it is not actually      required by the grammar</p></details>
+	<div class="test-string"><h4>Input string (33 characters)</h4><pre><code>{"name": "pi", "value": 3.145926}</code></pre></div>
+	<div class="result"><h4>Expected result</h4>
+	  <div class="xml-result"><pre><code>&lt;json&gt;
+   &lt;object&gt;{&lt;pair string="name"&gt;: &lt;string&gt;pi&lt;/string&gt;
+      &lt;/pair&gt;, &lt;pair string="value"&gt;: &lt;number&gt;3.145926&lt;/number&gt;
+      &lt;/pair&gt;}&lt;/object&gt;
+&lt;/json&gt;
+</code></pre></div>
+	</div>
+      </main></body></html>

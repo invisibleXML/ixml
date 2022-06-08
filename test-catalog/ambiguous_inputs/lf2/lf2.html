@@ -1,0 +1,51 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs">Ambiguous inputs</a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs/lf2">lf2</a>&nbsp;/&nbsp;lf2</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Ambiguous inputs</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+  </div></details><h3 class="title">lf2</h3><p>Created 05&nbsp;Feb&nbsp;2022 by ndw</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>input: line++lf, lf?.
+line: ~[#a | #d]*.
+lf: -#a | -#d, -#a .
+</code></pre></div><h1>Test case: lf2</h1><details><p>Repository URI: <code>…/tests/ambiguous/test-catalog.xml</code></p></details>
+      <p>Created 05&nbsp;Feb&nbsp;2022 by ndw</p>
+      <details><summary>Updated 05&nbsp;Feb&nbsp;2022 by ndw</summary><p>Converted it into the catalog format</p></details>
+      <details><summary>Updated 05&nbsp;Feb&nbsp;2022 by ndw</summary><p>Added alternate output</p></details>
+      <div class="test-string"><h4>Input string (49 characters)</h4><pre><code>Now is the time
+For all good people
+To have fun.
+</code></pre></div>
+      <div class="result"><h4>Expected results (one of)</h4>
+	<div class="xml-result"><pre><code>&lt;!-- AMBIGUOUS
+     The input from line.pos 1.1 to 4.1 can be interpreted as 'input' in 2 different ways:
+     1: input[1.1:]:  line+lf[:3.13] lf?[:4.1] 
+     2: input[1.1:]:  line+lf[:4.1] lf?[:4.1] 
+--&gt;&lt;input xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous"&gt;
+   &lt;line&gt;Now is the time&lt;/line&gt;
+   &lt;lf/&gt;
+   &lt;line&gt;For all good people&lt;/line&gt;
+   &lt;lf/&gt;
+   &lt;line&gt;To have fun.&lt;/line&gt;
+   &lt;lf/&gt;
+&lt;/input&gt;
+</code></pre></div>
+	<div class="xml-result"><pre><code>&lt;!-- AMBIGUOUS
+     The input from line.pos 1.1 to 4.1 can be interpreted as 'input' in 2 different ways:
+     1: input[1.1:]:  line+lf[:3.13] lf?[:4.1] 
+     2: input[1.1:]:  line+lf[:4.1] lf?[:4.1] 
+--&gt;&lt;input xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous"&gt;
+   &lt;line&gt;Now is the time&lt;/line&gt;
+   &lt;lf/&gt;
+   &lt;line&gt;For all good people&lt;/line&gt;
+   &lt;lf/&gt;
+   &lt;line&gt;To have fun.&lt;/line&gt;
+   &lt;lf/&gt;
+   &lt;line/&gt;
+&lt;/input&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

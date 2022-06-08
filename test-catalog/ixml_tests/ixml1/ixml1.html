@@ -1,0 +1,460 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../ixml_tests">ixml tests</a>&nbsp;/&nbsp;<a href="../../ixml_tests/ixml1">ixml1</a>&nbsp;/&nbsp;ixml1</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">ixml tests</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021,
+    with corrections of 21 December. Reorganized by Norm Tovey-Walsh, February 2022.</p>
+    </div></details><h3 class="title">ixml1</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>ixml: S, rule+.
+rule: mark?, name, S, ":", S, def, ".", S.
+def: alt++(";", S).
+alt: term**(",", S).
+-term: factor; repeat0; repeat1; option.
+repeat0: factor, "*", S, sep?.
+sep: factor.
+repeat1: factor, "+", S, sep?.
+option: factor, "?", S.
+-factor: nonterminal; terminal; "(", S, def, ")", S.
+nonterminal: mark?, name, S.
+terminal: mark?, (quoted; hex; charset; exclude).
+
+charset: "[", S,  element++(";", S), "]", S.
+exclude: "~", S, -charset.
+
+-element: range; character, S; class, S.
+range: from, S, "-", S, to, S.
+@from: character.
+@to: character.
+class: letter, letter. {One of the Unicode character classes}
+
+@name: letgit, xletter*.
+-letgit: letter; digit.
+-letter: ["a"-"z"; "A"-"Z"].
+-digit: ["0"-"9"].
+-xletter: letgit; "-".
+
+@mark: "@", S; "^", S; "-", S.
+
+quoted: -'"', dstring, -'"', S; -"'", sstring, -"'", S.
+@dstring: dchar+.
+@sstring: schar+.
+dchar: ~['"']; '""'. {all characters, dquotes must be doubled}
+schar: ~["'"]; "''". {all characters, squotes must be doubled}
+-character: '"', dchar, '"'; "'", schar, "'"; hex.
+
+hex: "#", number.
+number: hexit+.
+-hexit: digit; ["a"-"f"; "A"-"F"].
+
+-S: (" "; -#a; -#d; comment)*.
+comment: "{", cchar*, "}".
+-cchar: ~["}"].
+{the end}
+</code></pre></div><h1>Test case: ixml1</h1><details><p>Repository URI: <code>…/tests/ixml/test-catalog.xml</code></p></details>
+	<p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+	<details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>stripped non-significant whitespace from result</p></details>
+	
+	<details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>stripped erroneous blanks from       dchar rule in expected result</p></details>
+	<div class="description">
+	  <p>The exclude element in the rule for dchar included 18
+	  extraneous blanks; after the exclude, the terminal element
+	  concluded with an extraneous blank line containing 12
+	  blanks.  These have now been removed.</p>
+	</div>
+	<div class="test-string"><h4>Input string (1179 characters)</h4><pre><code>ixml: S, rule+.
+rule: mark?, name, S, ":", S, def, ".", S.
+def: alt+(";", S).
+alt: term*(",", S).
+-term: factor; repeat0; repeat1; option.
+repeat0: factor, "*", S, sep?.
+sep: factor.
+repeat1: factor, "+", S, sep?.
+option: factor, "?", S.
+-factor: nonterminal; terminal; "(", S, def, ")", S.
+nonterminal: mark?, name, S.
+terminal: mark?, (quoted; hex; charset; exclude).
+
+charset: "[", S,  element+(";", S), "]", S.
+exclude: "~", S, -charset.
+
+-element: range; character, S; class, S.
+range: from, S, "-", S, to, S.
+@from: character.
+@to: character.
+class: letter, letter. {One of the Unicode character classes}
+
+@name: letgit, xletter*.
+-letgit: letter; digit.
+-letter: ["a"-"z"; "A"-"Z"].
+-digit: ["0"-"9"].
+-xletter: letgit; "-".
+
+@mark: "@", S; "^", S; "-", S.
+
+quoted: -'"', dstring, -'"', S; -"'", sstring, -"'", S.
+@dstring: dchar+.
+@sstring: schar+.
+dchar: ~['"']; '""'. {all characters, dquotes must be doubled}
+schar: ~["'"]; "''". {all characters, squotes must be doubled}
+-character: '"', dchar, '"'; "'", schar, "'"; hex.
+
+hex: "#", number.
+number: hexit+.
+-hexit: digit; ["a"-"f"; "A"-"F"].
+
+-S: (" "; comment)*.
+comment: "{", cchar*, "}".
+-cchar: ~["}"].
+{the end}
+</code></pre></div>
+	<div class="result"><h4>Expected result</h4>
+	  <div class="xml-result"><pre><code>&lt;ixml&gt;
+   &lt;rule name="ixml"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="S"/&gt;, &lt;repeat1&gt;
+               &lt;nonterminal name="rule"/&gt;+&lt;/repeat1&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="rule"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;option&gt;
+               &lt;nonterminal name="mark"/&gt;?&lt;/option&gt;, &lt;nonterminal name="name"/&gt;, &lt;nonterminal name="S"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring=":"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;nonterminal name="def"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="."/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="def"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat1&gt;
+               &lt;nonterminal name="alt"/&gt;+&lt;sep&gt;(&lt;def&gt;
+                     &lt;alt&gt;
+                        &lt;terminal&gt;
+                           &lt;quoted dstring=";"/&gt;
+                        &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+                     &lt;/alt&gt;
+                  &lt;/def&gt;)&lt;/sep&gt;
+            &lt;/repeat1&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="alt"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat0&gt;
+               &lt;nonterminal name="term"/&gt;*&lt;sep&gt;(&lt;def&gt;
+                     &lt;alt&gt;
+                        &lt;terminal&gt;
+                           &lt;quoted dstring=","/&gt;
+                        &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+                     &lt;/alt&gt;
+                  &lt;/def&gt;)&lt;/sep&gt;
+            &lt;/repeat0&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="term"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="factor"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="repeat0"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="repeat1"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="option"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="repeat0"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="factor"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="*"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;option&gt;
+               &lt;nonterminal name="sep"/&gt;?&lt;/option&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="sep"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="factor"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="repeat1"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="factor"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="+"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;option&gt;
+               &lt;nonterminal name="sep"/&gt;?&lt;/option&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="option"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="factor"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="?"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="factor"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="nonterminal"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="terminal"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="("/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;nonterminal name="def"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring=")"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="nonterminal"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;option&gt;
+               &lt;nonterminal name="mark"/&gt;?&lt;/option&gt;, &lt;nonterminal name="name"/&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="terminal"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;option&gt;
+               &lt;nonterminal name="mark"/&gt;?&lt;/option&gt;, (&lt;def&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="quoted"/&gt;
+               &lt;/alt&gt;; &lt;alt&gt;
+                  &lt;nonterminal name="hex"/&gt;
+               &lt;/alt&gt;; &lt;alt&gt;
+                  &lt;nonterminal name="charset"/&gt;
+               &lt;/alt&gt;; &lt;alt&gt;
+                  &lt;nonterminal name="exclude"/&gt;
+               &lt;/alt&gt;
+            &lt;/def&gt;)&lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="charset"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="["/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;,  &lt;repeat1&gt;
+               &lt;nonterminal name="element"/&gt;+&lt;sep&gt;(&lt;def&gt;
+                     &lt;alt&gt;
+                        &lt;terminal&gt;
+                           &lt;quoted dstring=";"/&gt;
+                        &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+                     &lt;/alt&gt;
+                  &lt;/def&gt;)&lt;/sep&gt;
+            &lt;/repeat1&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="]"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="exclude"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="~"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;nonterminal mark="-" name="charset"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="element"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="range"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="character"/&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="class"/&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="range"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="from"/&gt;, &lt;nonterminal name="S"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="-"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;, &lt;nonterminal name="to"/&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="from"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="character"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="to"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="character"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="class"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="letter"/&gt;, &lt;nonterminal name="letter"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;. &lt;comment&gt;{One of the Unicode character classes}&lt;/comment&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="@" name="name"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="letgit"/&gt;, &lt;repeat0&gt;
+               &lt;nonterminal name="xletter"/&gt;*&lt;/repeat0&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="letgit"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="letter"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="digit"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="letter"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;charset&gt;[&lt;range from="&amp;#34;a&amp;#34;" to="&amp;#34;z&amp;#34;"&gt;-&lt;/range&gt;; &lt;range from="&amp;#34;A&amp;#34;" to="&amp;#34;Z&amp;#34;"&gt;-&lt;/range&gt;]&lt;/charset&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="digit"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;charset&gt;[&lt;range from="&amp;#34;0&amp;#34;" to="&amp;#34;9&amp;#34;"&gt;-&lt;/range&gt;]&lt;/charset&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="xletter"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="letgit"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="-"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="mark"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="@"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="^"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="-"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="quoted"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal mark="-"&gt;
+               &lt;quoted sstring="&amp;#34;"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="dstring"/&gt;, &lt;terminal mark="-"&gt;
+               &lt;quoted sstring="&amp;#34;"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal mark="-"&gt;
+               &lt;quoted dstring="'"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="sstring"/&gt;, &lt;terminal mark="-"&gt;
+               &lt;quoted dstring="'"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="S"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="dstring"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat1&gt;
+               &lt;nonterminal name="dchar"/&gt;+&lt;/repeat1&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="sstring"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat1&gt;
+               &lt;nonterminal name="schar"/&gt;+&lt;/repeat1&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="dchar"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;exclude&gt;~['&lt;schar&gt;"&lt;/schar&gt;']&lt;/exclude&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted sstring="&amp;#34;&amp;#34;"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;. &lt;comment&gt;{all characters, dquotes must be doubled}&lt;/comment&gt;
+   &lt;/rule&gt;
+   &lt;rule name="schar"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;exclude&gt;~["&lt;dchar&gt;'&lt;/dchar&gt;"]&lt;/exclude&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="''"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;. &lt;comment&gt;{all characters, squotes must be doubled}&lt;/comment&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="character"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted sstring="&amp;#34;"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="dchar"/&gt;, &lt;terminal&gt;
+               &lt;quoted sstring="&amp;#34;"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="'"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="schar"/&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="'"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;nonterminal name="hex"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="hex"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="#"/&gt;
+            &lt;/terminal&gt;, &lt;nonterminal name="number"/&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="number"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat1&gt;
+               &lt;nonterminal name="hexit"/&gt;+&lt;/repeat1&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="hexit"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;nonterminal name="digit"/&gt;
+         &lt;/alt&gt;; &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;charset&gt;[&lt;range from="&amp;#34;a&amp;#34;" to="&amp;#34;f&amp;#34;"&gt;-&lt;/range&gt;; &lt;range from="&amp;#34;A&amp;#34;" to="&amp;#34;F&amp;#34;"&gt;-&lt;/range&gt;]&lt;/charset&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="S"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;repeat0&gt;(&lt;def&gt;
+                  &lt;alt&gt;
+                     &lt;terminal&gt;
+                        &lt;quoted dstring=" "/&gt;
+                     &lt;/terminal&gt;
+                  &lt;/alt&gt;; &lt;alt&gt;
+                     &lt;nonterminal name="comment"/&gt;
+                  &lt;/alt&gt;
+               &lt;/def&gt;)*&lt;/repeat0&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule name="comment"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;quoted dstring="{"/&gt;
+            &lt;/terminal&gt;, &lt;repeat0&gt;
+               &lt;nonterminal name="cchar"/&gt;*&lt;/repeat0&gt;, &lt;terminal&gt;
+               &lt;quoted dstring="}"/&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="cchar"&gt;: &lt;def&gt;
+         &lt;alt&gt;
+            &lt;terminal&gt;
+               &lt;exclude&gt;~["&lt;dchar&gt;}&lt;/dchar&gt;"]&lt;/exclude&gt;
+            &lt;/terminal&gt;
+         &lt;/alt&gt;
+      &lt;/def&gt;.&lt;comment&gt;{the end}&lt;/comment&gt;
+   &lt;/rule&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+	</div>
+      </main></body></html>

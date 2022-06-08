@@ -1,0 +1,94 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../instance_syntax_tests_ixml">Instance Syntax tests (ixml)</a>&nbsp;/&nbsp;<a href="../../instance_syntax_tests_ixml/syntax-ixml">syntax-ixml</a>&nbsp;/&nbsp;defn3</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Instance Syntax tests (ixml)</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Syntax tests provided by Steven Pemberton in December 2021.</p>
+    <p>Most tests are negative (the file.ixml files do not conform
+    to the grammar for ixml).</p>
+    <p>Since these are all parsed against the grammar for ixml
+    grammars, the expected result could be given as
+    'assert-not-a-grammar' as well as 'assert-not-a-sentence'. The
+    inputs are not sentences in the language defined by the grammar
+    for grammars, which means they are not ixml grammars.</p>
+    <p>Three catalogs are provided, using different formulations. This
+    one uses the ixml form of the ixml grammar and describes all the
+    tests as instance tests.</p>
+  </div></details><h3 class="title">syntax-ixml</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{version 2022-05-17}
+         ixml: s, rule++RS, s.
+
+           -s: (whitespace; comment)*. {Optional spacing}
+          -RS: (whitespace; comment)+. {Required spacing}
+  -whitespace: -[Zs]; tab; lf; cr.
+         -tab: -#9.
+          -lf: -#a.
+          -cr: -#d.
+      comment: -"{", (cchar; comment)*, -"}".
+       -cchar: ~["{}"].
+
+         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
+        @mark: ["@^-"].
+         alts: alt++(-[";|"], s).
+          alt: term**(-",", s).
+        -term: factor;
+               option;
+               repeat0;
+               repeat1.
+      -factor: terminal;
+               nonterminal;
+               -"(", s, alts, -")", s.
+      repeat0: factor, (-"*", s; -"**", s, sep).
+      repeat1: factor, (-"+", s; -"++", s, sep).
+       option: factor, -"?", s.
+          sep: factor.
+  nonterminal: (mark, s)?, name, s.
+
+        @name: namestart, namefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
+
+    -terminal: literal; 
+               charset.
+      literal: quoted;
+               encoded.
+      -quoted: (tmark, s)?, string, s.
+
+       @tmark: ["^-+"].
+      @string: -'"', dchar+, -'"';
+               -"'", schar+, -"'".
+       -dchar: ~['"'; #a; #d];
+               '"', -'"'. {all characters except line breaks; quotes must be doubled}
+       -schar: ~["'"; #a; #d];
+               "'", -"'". {all characters except line breaks; quotes must be doubled}
+     -encoded: (tmark, s)?, -"#", hex, s.
+         @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
+
+     -charset: inclusion; 
+               exclusion.
+    inclusion: (tmark, s)?,          set.
+    exclusion: (tmark, s)?, -"~", s, set.
+         -set: -"[", s,  (member, s)**(-[";|"], s), -"]", s.
+       member: string;
+               -"#", hex;
+               range;
+               class.
+       -range: from, s, -"-", s, to.
+        @from: character.
+          @to: character.
+   -character: -'"', dchar, -'"';
+               -"'", schar, -"'";
+               "#", hex.
+       -class: code.
+        @code: capital, letter?.
+     -capital: ["A"-"Z"].
+      -letter: ["a"-"z"].
+</code></pre></div><h1>Test case: defn3</h1><details><p>Repository URI: <code>…/tests/syntax/catalog-as-instance-tests-ixml.xml</code></p></details>
+      <div class="test-string"><h4>Input string (63 characters)</h4><pre><code>a: b, c.
+b: c, d.
+c: 'unterminated. {unterminated string}
+d: .
+</code></pre></div>
+      <div class="result unsuccessful"><h4>Expected result</h4><p class="not-a-sentence">The input does not match the grammar.</p></div>
+    </main></body></html>

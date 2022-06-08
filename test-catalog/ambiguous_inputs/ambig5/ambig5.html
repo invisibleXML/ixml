@@ -1,0 +1,46 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs">Ambiguous inputs</a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs/ambig5">ambig5</a>&nbsp;/&nbsp;ambig5</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Ambiguous inputs</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+  </div></details><h3 class="title">ambig5</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>data: number+.
+number: digit+.
+digit: ["0"-"9"].
+</code></pre></div><h1>Test case: ambig5</h1><details><p>Repository URI: <code>…/tests/ambiguous/test-catalog.xml</code></p></details>
+      <p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+      <details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>remove trailing whitespace from input</p></details>
+      <details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>remove nonsignificant whitespace from    expected result</p></details>
+      <details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>added second parse as expected result</p></details>
+      <div class="test-string"><h4>Input string (2 characters)</h4><pre><code>12</code></pre></div>
+      <div class="result"><h4>Expected results (one of)</h4>
+	<div class="xml-result"><pre><code>&lt;!-- AMBIGUOUS
+     The input from line.pos 1.1 to 1.3 can be interpreted as 'number+' in 2 different ways:
+     1: number+[1.1:]:  number[:1.2] number+[:1.3] 
+     2: number+[1.1:]:  number[:1.3] 
+--&gt;&lt;data xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous"&gt;
+   &lt;number&gt;
+      &lt;digit&gt;1&lt;/digit&gt;
+   &lt;/number&gt;
+   &lt;number&gt;
+      &lt;digit&gt;2&lt;/digit&gt;
+   &lt;/number&gt;
+&lt;/data&gt;
+</code></pre></div>
+	<div class="xml-result"><pre><code>&lt;!-- AMBIGUOUS
+     The input from line.pos 1.1 to 1.3 can be interpreted as 'number+' in 2 different ways:
+     1: number+[1.1:]:  number[:1.2] number+[:1.3] 
+     2: number+[1.1:]:  number[:1.3] 
+--&gt;&lt;data xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous"&gt;
+   &lt;number&gt;
+      &lt;digit&gt;1&lt;/digit&gt;
+      &lt;digit&gt;2&lt;/digit&gt;
+   &lt;/number&gt;
+&lt;/data&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

@@ -1,0 +1,152 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Invisible XML</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body id="home">
+<img class="logo" src="img/logo_gradient.png" />
+<div class="introduction">
+<h1>Invisible XML</h1>
+
+<p>Invisible XML is a language for describing the implicit structure
+of data, and a set of technologies for making that structure explicit
+as XML markup. It allows you to write a declarative description of the
+format of some text and then leverage that format to represent the
+text as structured information.</p>
+</div>
+
+<div class="specification">
+<h2>Specification</h2>
+
+<p><a href="ixml-specification.html">Invisible XML</a> (ixml) 1.0 was
+published on 10 June, 2022. The grammar of Invisible XML is defined
+with Invisible XML. The ixml grammar for ixml is available in
+<a href="ixml.ixml">ixml format</a> or in <a href="ixml.xml">xml format</a>.
+</p>
+
+</div>
+<div class="tutorials">
+<h2>Tutorials</h2>
+
+<ul>
+<li>Steven Pemberton’s
+<a href="http://www.cwi.nl/~steven/ixml/tutorial/">hands-on tutorial</a>
+is a great way to begin learning how to write your own grammars.</li>
+<li>Norm Tovey-Walsh has written introductory material
+<a href="https://www.xml.com/articles/2022/03/01/invisible-xml/">about ixml</a>
+and
+<a href="https://www.xml.com/articles/2022/03/28/writing-invisible-xml-grammars/">about
+writing grammars</a> on <a href="https://www.xml.com/">xml.com</a>.</li>
+</ul>
+
+</div>
+<div class="implementations">
+<h2>Implementations</h2>
+
+<ul>
+<li>Steven Pemberton’s implementation is available online as
+<a href="https://www.cwi.nl/~steven/ixml/tutorial/run.html">a web
+service</a>.</li>
+<li><a href="https://coffeepot.nineml.org/">CoffeePot</a> is Norm
+Tovey-Walsh’s Java implementation.</li>
+<li>jωiXML is John Lumley’s JavaScript implementation.</li>
+<li><a href="https://github.com/cmsmcq/Aparecium">Aparecium</a> is
+Michael Sperberg-McQueen’s proof-of-concept implementation in
+XQuery.</li>
+<li><a href="https://github.com/eXpertML/JayParser">JayParser</a>
+is Tomos Hillman’s XSLT implementation
+(in progress).</li>
+</ul>
+
+</div>
+<div class="test-suite">
+<h2>Test suite</h2>
+
+<p>The <a href="https://github.com/invisiblexml/ixml/">ixml GitHub repository</a>
+includes a comprehensive test suite. It is also available as a
+<a href="test-catalog/">browsable catalog</a>.</p>
+
+</div>
+<div class="schemas">
+<h2>Schemas</h2>
+
+<p>The XML versions of Invisible XML grammars conform to the RELAX NG
+<a href="https://github.com/invisibleXML/ixml/tree/master/schemas">schemas</a>
+provided.</p>
+</div>
+
+<div class="samples">
+<h2>Example grammars</h2>
+
+<p>A selection of sample grammars are available including:</p>
+
+<ul>
+<li><a href="https://github.com/invisibleXML/ixml/tree/master/samples/ABNF">ABNF</a>,
+the grammar notation used in IETF Requests for Comments, as defined in
+<a href="https://www.rfc-editor.org/rfc/rfc5234.txt">RFC 5234</a>.</li>
+<li><a href="https://github.com/invisibleXML/ixml/tree/master/samples/ISBN">ISBN</a>,
+International Standard Book Numbers.</li>
+<li><a href="https://github.com/invisibleXML/ixml/tree/master/samples/ISO-8601-2004">ISO
+8601</a>, the standard ISO date, time, datetime, duration, interval, and recurrence
+formats, as defined in ISO 8601:2004.
+</li>
+<li><a href="https://github.com/invisibleXML/ixml/tree/master/samples/bcp47">BCP 47</a>,
+tags for identifying languages, as defined in
+<a href="https://tools.ietf.org/rfc/bcp/bcp47.txt">BCP 47</a>.</li>
+</ul>
+</div>
+
+<div class="other">
+<h2>Other Tools</h2>
+
+<ul>
+<li><a href="https://github.com/cmsmcq/Gingersnap">Gingersnap</a>
+is a library of XSLT modules for processing (the XML form) of Invisible XML grammars.</li>
+</ul>
+</div>
+<div class="bibliography">
+<div>
+<h2>Bibliography</h2>
+
+<p>There are a few additional papers and presentations on the development of
+Invisible XML</p>
+
+<ul>
+<li>Hillman, Tomos. XSLT Earley: First Steps to a Declarative
+Parser Generator. Presented in two halves at
+<a href="https://archive.xmlprague.cz/2020/files/xmlprague-2020-proceedings.pdf#page=243">XML Prague, 2020</a> and
+<a href="https://declarative.amsterdam/program-2020">Declarative Amsterdam, 2020</a>.</li>
+<li>Pemberton, Steven. <a href="http://www.cwi.nl/~steven/Talks/2013/08-07-invisible-xml/invisible-xml-3.html">Invisible XML</a>:
+introduces the concepts, and develops a notation to support them.</li>
+<li>Pemberton, Steven. <a href="http://www.cwi.nl/~steven/Talks/2016/02-12-prague/data.html">Data
+just wants to be (format) neutral</a>:
+discusses issues with automatic serialisation, and the relationship
+between Invisible XML grammars and data schemas.</li>
+<li>Pemberton, Steven. <a href="http://www.cwi.nl/~steven/Talks/2016/06-05-london/xml-london.html">Parse
+Earley, Parse Often: How to parse anything to XML</a>:
+discusses issues around grammar design, and in particular parsing
+algorithms used to recognise any document, and converting the
+resultant parse-tree into XML, and gives a new perspective on a
+classic algorithm.</li>
+<li>Pemberton, Steven. <a href="http://archive.xmlprague.cz/2017/files/xmlprague-2017-proceedings.pdf#page=155">On
+the Descriptions of Data</a>:
+discusses the Usability of Notations: Discusses changes to the design
+following experience with using it, giving examples of its use to
+develop data descriptions, and in passing, suggests other output
+formats.</li>
+<li>Pemberton, Steven. <a href="https://archive.xmlprague.cz/2019/files/xmlprague-2019-proceedings.pdf#page=425">On
+the Specification of Invisible XML</a>:
+describes decisions made during the production of the specification
+of ixml.</li>
+<li>Sperberg-McQueen, C. M. “<a href="https://balisage.net/Proceedings/vol23/html/Sperberg-McQueen01/BalisageVol23-Sperberg-McQueen01.html">Aparecium:
+An XQuery / XSLT library for invisible XML.</a>” Presented at
+Balisage: The Markup Conference 2019, Washington, DC, July 30 - August
+2, 2019. In Proceedings of Balisage: The Markup Conference 2019.
+Balisage Series on Markup Technologies, vol. 23 (2019).
+https://doi.org/10.4242/BalisageVol23.Sperberg-McQueen01.</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

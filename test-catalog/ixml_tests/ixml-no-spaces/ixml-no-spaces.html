@@ -1,0 +1,375 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../ixml_tests">ixml tests</a>&nbsp;/&nbsp;<a href="../../ixml_tests/ixml-no-spaces">ixml-no-spaces</a>&nbsp;/&nbsp;ixml-no-spaces</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">ixml tests</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021,
+    with corrections of 21 December. Reorganized by Norm Tovey-Walsh, February 2022.</p>
+    </div></details><h3 class="title">ixml-no-spaces</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>ixml:S,rule++S,S.
+-S:(whitespace;comment)*.
+-whitespace:-[Zs];tab;lf;cr.
+-tab:-#9.
+-lf:-#a.
+-cr:-#d.
+comment:-"{",(cchar;comment)*,-"}".
+-cchar:~["{}"].
+rule:(mark,S)?,name,S,["=:"],S,-alts,".".
+@mark:["@^-"].
+alts:alt++([";|"],S).
+alt:term**(",",S).
+-term:factor;
+option;
+repeat0;
+repeat1.
+-factor:terminal;
+nonterminal;
+"(",S,alts,")",S.
+repeat0:factor,"*",S,sep?.
+repeat1:factor,"+",S,sep?.
+option:factor,"?",S.
+sep:factor.
+nonterminal:(mark,S)?,name,S.
+-terminal:literal;
+charset.
+literal:quoted;
+encoded.
+-quoted:(tmark,S)?,-string.
+@name:namestart,namefollower*.
+-namestart:["_";Ll;Lu;Lm;Lt;Lo].
+-namefollower:namestart;["-.·‿⁀";Nd;Mn].
+@tmark:["^-"].
+string:-'"',dstring,-'"',S;
+-"'",sstring,-"'",S.
+@dstring:dchar+.
+@sstring:schar+.
+dchar:~['"'];
+'"',-'"'.{allcharacters,quotesmustbedoubled}
+schar:~["'"];
+"'",-"'".{allcharacters,quotesmustbedoubled}
+-encoded:(tmark,S)?,-"#",@hex,S.
+hex:["0"-"9";"a"-"f";"A"-"F"]+.
+-charset:inclusion;
+exclusion.
+inclusion:(tmark,S)?,set.
+exclusion:(tmark,S)?,"~",S,set.
+-set:"[",S,member**([";|"],S),"]",S.
+-member:literal;
+range;
+class.
+range:from,"-",S,to.
+@from:character.
+@to:character.
+-character:-'"',dchar,-'"',S;
+-"'",schar,-"'",S;
+"#",hex,S.
+class:@code,S.
+code:letter,letter.
+-letter:["a"-"z";"A"-"Z"].
+</code></pre></div><h1>Test case: ixml-no-spaces</h1><details><p>Repository URI: <code>…/tests/ixml/test-catalog.xml</code></p></details>
+	<p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+	<details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>stripped non-significant whitespace from result</p></details>
+	<div class="test-string"><h4>Input string (1256 characters)</h4><pre><code>ixml:S,rule+S,S.
+-S:(whitespace;comment)*.
+-whitespace:-[Zs];tab;{lf;}cr.
+-tab:-#9.
+{-lf:-#a.}
+-cr:-#d.
+comment:-"{",(cchar;comment)*,-"}".
+-cchar:~["{}"].
+rule:(mark,S)?,name,S,["=:"],S,-alts,".".
+@mark:["@^-"].
+alts:alt+([";|"],S).
+alt:term*(",",S).
+-term:factor;
+option;
+repeat0;
+repeat1.
+-factor:terminal;
+nonterminal;
+"(",S,alts,")",S.
+repeat0:factor,"*",S,sep?.
+repeat1:factor,"+",S,sep?.
+option:factor,"?",S.
+sep:factor.
+nonterminal:(mark,S)?,name,S.
+-terminal:literal;
+charset.
+literal:quoted;
+encoded.
+-quoted:(tmark,S)?,-string.
+@name:namestart,namefollower*.
+-namestart:["_";Ll;Lu;Lm;Lt;Lo].
+-namefollower:namestart;["-.·‿⁀";Nd;Mn].
+@tmark:["^-"].
+string:-'"',dstring,-'"',S;
+-"'",sstring,-"'",S.
+@dstring:dchar+.
+@sstring:schar+.
+dchar:~['"'];
+'"',-'"'.{allcharacters,quotesmustbedoubled}
+schar:~["'"];
+"'",-"'".{allcharacters,quotesmustbedoubled}
+-encoded:(tmark,S)?,-"#",@hex,S.
+hex:["0"-"9";"a"-"f";"A"-"F"]+.
+-charset:inclusion;
+exclusion.
+inclusion:(tmark,S)?,set.
+exclusion:(tmark,S)?,"~",S,set.
+-set:"[",S,member*([";|"],S),"]",S.
+-member:literal;
+range;
+class.
+range:from,"-",S,to.
+@from:character.
+@to:character.
+-character:-'"',dchar,-'"',S;
+-"'",schar,-"'",S;
+"#",hex,S.
+class:@code,S.
+code:letter,letter.
+-letter:["a"-"z";"A"-"Z"].
+</code></pre></div>
+	<div class="result"><h4>Expected result</h4>
+	  <div class="xml-result"><pre><code>&lt;ixml&gt;
+   &lt;rule name="ixml"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="S"/&gt;,&lt;repeat1&gt;
+            &lt;nonterminal name="rule"/&gt;+&lt;sep&gt;
+               &lt;nonterminal name="S"/&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="S"&gt;:&lt;alt&gt;
+         &lt;repeat0&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="whitespace"/&gt;
+               &lt;/alt&gt;;&lt;alt&gt;
+                  &lt;nonterminal name="comment"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)*&lt;/repeat0&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="whitespace"&gt;:&lt;alt&gt;
+         &lt;inclusion tmark="-"&gt;[&lt;class code="Zs"/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="tab"/&gt;
+      &lt;/alt&gt;;&lt;comment&gt;lf;&lt;/comment&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="cr"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="tab"&gt;:&lt;alt&gt;
+         &lt;literal tmark="-" hex="9"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;comment&gt;-lf:-#a.&lt;/comment&gt;
+   &lt;rule mark="-" name="cr"&gt;:&lt;alt&gt;
+         &lt;literal tmark="-" hex="d"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="comment"&gt;:&lt;alt&gt;
+         &lt;literal tmark="-" dstring="{"/&gt;,&lt;repeat0&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="cchar"/&gt;
+               &lt;/alt&gt;;&lt;alt&gt;
+                  &lt;nonterminal name="comment"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)*&lt;/repeat0&gt;,&lt;literal tmark="-" dstring="}"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="cchar"&gt;:&lt;alt&gt;
+         &lt;exclusion&gt;~[&lt;literal dstring="{}"/&gt;]&lt;/exclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="rule"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="mark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;nonterminal name="name"/&gt;,&lt;nonterminal name="S"/&gt;,&lt;inclusion&gt;[&lt;literal dstring="=:"/&gt;]&lt;/inclusion&gt;,&lt;nonterminal name="S"/&gt;,&lt;nonterminal mark="-" name="alts"/&gt;,&lt;literal dstring="."/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="mark"&gt;:&lt;alt&gt;
+         &lt;inclusion&gt;[&lt;literal dstring="@^-"/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="alts"&gt;:&lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="alt"/&gt;+&lt;sep&gt;(&lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;inclusion&gt;[&lt;literal dstring=";|"/&gt;]&lt;/inclusion&gt;,&lt;nonterminal name="S"/&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;)&lt;/sep&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="alt"&gt;:&lt;alt&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="term"/&gt;*&lt;sep&gt;(&lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal dstring=","/&gt;,&lt;nonterminal name="S"/&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;)&lt;/sep&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="term"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="option"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="repeat0"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="repeat1"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="factor"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="terminal"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="nonterminal"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal dstring="("/&gt;,&lt;nonterminal name="S"/&gt;,&lt;nonterminal name="alts"/&gt;,&lt;literal dstring=")"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="repeat0"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;,&lt;literal dstring="*"/&gt;,&lt;nonterminal name="S"/&gt;,&lt;option&gt;
+            &lt;nonterminal name="sep"/&gt;?&lt;/option&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="repeat1"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;,&lt;literal dstring="+"/&gt;,&lt;nonterminal name="S"/&gt;,&lt;option&gt;
+            &lt;nonterminal name="sep"/&gt;?&lt;/option&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="option"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;,&lt;literal dstring="?"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="sep"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="nonterminal"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="mark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;nonterminal name="name"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="terminal"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="literal"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="charset"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="literal"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="quoted"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="encoded"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="quoted"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="tmark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;nonterminal mark="-" name="string"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="name"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="namestart"/&gt;,&lt;repeat0&gt;
+            &lt;nonterminal name="namefollower"/&gt;*&lt;/repeat0&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="namestart"&gt;:&lt;alt&gt;
+         &lt;inclusion&gt;[&lt;literal dstring="_"/&gt;;&lt;class code="Ll"/&gt;;&lt;class code="Lu"/&gt;;&lt;class code="Lm"/&gt;;&lt;class code="Lt"/&gt;;&lt;class code="Lo"/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="namefollower"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="namestart"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;inclusion&gt;[&lt;literal dstring="-.·‿⁀"/&gt;;&lt;class code="Nd"/&gt;;&lt;class code="Mn"/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="tmark"&gt;:&lt;alt&gt;
+         &lt;inclusion&gt;[&lt;literal dstring="^-"/&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="string"&gt;:&lt;alt&gt;
+         &lt;literal tmark="-" sstring="&amp;#34;"/&gt;,&lt;nonterminal name="dstring"/&gt;,&lt;literal tmark="-" sstring="&amp;#34;"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal tmark="-" dstring="'"/&gt;,&lt;nonterminal name="sstring"/&gt;,&lt;literal tmark="-" dstring="'"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="dstring"&gt;:&lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="dchar"/&gt;+&lt;/repeat1&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="sstring"&gt;:&lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="schar"/&gt;+&lt;/repeat1&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="dchar"&gt;:&lt;alt&gt;
+         &lt;exclusion&gt;~[&lt;literal sstring="&amp;#34;"/&gt;]&lt;/exclusion&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal sstring="&amp;#34;"/&gt;,&lt;literal tmark="-" sstring="&amp;#34;"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;comment&gt;allcharacters,quotesmustbedoubled&lt;/comment&gt;
+   &lt;rule name="schar"&gt;:&lt;alt&gt;
+         &lt;exclusion&gt;~[&lt;literal dstring="'"/&gt;]&lt;/exclusion&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal dstring="'"/&gt;,&lt;literal tmark="-" dstring="'"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;comment&gt;allcharacters,quotesmustbedoubled&lt;/comment&gt;
+   &lt;rule mark="-" name="encoded"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="tmark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;literal tmark="-" dstring="#"/&gt;,&lt;nonterminal mark="@" name="hex"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="hex"&gt;:&lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;inclusion&gt;[&lt;range from="0" to="9"&gt;-&lt;/range&gt;;&lt;range from="a" to="f"&gt;-&lt;/range&gt;;&lt;range from="A" to="F"&gt;-&lt;/range&gt;]&lt;/inclusion&gt;+&lt;/repeat1&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="charset"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="inclusion"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="exclusion"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="inclusion"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="tmark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;nonterminal name="set"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="exclusion"&gt;:&lt;alt&gt;
+         &lt;option&gt;(&lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="tmark"/&gt;,&lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;)?&lt;/option&gt;,&lt;literal dstring="~"/&gt;,&lt;nonterminal name="S"/&gt;,&lt;nonterminal name="set"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="set"&gt;:&lt;alt&gt;
+         &lt;literal dstring="["/&gt;,&lt;nonterminal name="S"/&gt;,&lt;repeat0&gt;
+            &lt;nonterminal name="member"/&gt;*&lt;sep&gt;(&lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;inclusion&gt;[&lt;literal dstring=";|"/&gt;]&lt;/inclusion&gt;,&lt;nonterminal name="S"/&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;)&lt;/sep&gt;
+         &lt;/repeat0&gt;,&lt;literal dstring="]"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="member"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="literal"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="range"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;nonterminal name="class"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="range"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="from"/&gt;,&lt;literal dstring="-"/&gt;,&lt;nonterminal name="S"/&gt;,&lt;nonterminal name="to"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="from"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="character"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="@" name="to"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="character"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="character"&gt;:&lt;alt&gt;
+         &lt;literal tmark="-" sstring="&amp;#34;"/&gt;,&lt;nonterminal name="dchar"/&gt;,&lt;literal tmark="-" sstring="&amp;#34;"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal tmark="-" dstring="'"/&gt;,&lt;nonterminal name="schar"/&gt;,&lt;literal tmark="-" dstring="'"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;;&lt;alt&gt;
+         &lt;literal dstring="#"/&gt;,&lt;nonterminal name="hex"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="class"&gt;:&lt;alt&gt;
+         &lt;nonterminal mark="@" name="code"/&gt;,&lt;nonterminal name="S"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule name="code"&gt;:&lt;alt&gt;
+         &lt;nonterminal name="letter"/&gt;,&lt;nonterminal name="letter"/&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+   &lt;rule mark="-" name="letter"&gt;:&lt;alt&gt;
+         &lt;inclusion&gt;[&lt;range from="a" to="z"&gt;-&lt;/range&gt;;&lt;range from="A" to="Z"&gt;-&lt;/range&gt;]&lt;/inclusion&gt;
+      &lt;/alt&gt;.&lt;/rule&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+	</div>
+      </main></body></html>

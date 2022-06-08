@@ -1,0 +1,74 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../improper_grammars">Improper grammars</a>&nbsp;/&nbsp;non-productive-2</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Improper grammars</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>This test set collects some grammars which have
+    various forms of useless rules.  Some but not all of these
+    are non-conforming under the current (2022-06-01) rules of
+    ixml.</p>
+  </div><div class="description">
+    
+    <p>Note: This test catalog includes alternate results for
+    processors operating in non-standard modes. These are included
+    after the result element, wrapped in an app-info element.  The
+    app-info element also contains tc:options elements describing the
+    conditions under which the result holds. Conditions are assumed to
+    be describable by sets of name/value (usually option/setting)
+    pairs, expressed on the options element as attribute-value
+    specifications. If all the option/setting pairs on any options
+    element in the app-info element apply, then any of the results
+    specified in the app-info element is acceptable.  (So: for both
+    the options elements and the results in the app-info there is an
+    implicit disjunction: if any of the options elements applies, then
+    any of the results is OK.  For the various name/value pairs on an
+    options element, there is an implicit conjunction: the options
+    element applies if ALL of the name/value pairs apply.)</p>
+    
+    <p>In the current state of this catalog, the only options
+    specified are in the ap:* namespace; these have the local names
+     
+      'multiple-definitions', 
+      'undefined-symbols',
+      'unreachable-symbols', and 
+      'unproductive-symbols', 
+
+    with meanings which I hope are obvious.  In all cases, the
+    possible values are "error", "warning", and "silence".  In
+    non-error cases, the grammar may be rewritten internally to
+    eliminate the problem, but unless the user requests that the
+    compiled grammar be returned, there is really no way to know
+    whether this happens or not.</p>
+    
+    <p>For strict ixml conformance, the prescribed values are
+    
+      ap:multiple-definitions = "error", 
+      ap:undefined-symbols = "error",
+      ap:unreachable-symbols = "warning" or "silence", and 
+      ap:unproductive-symbols = "warning" or "silence".
+      
+    </p>    
+    
+    <p>Note that the handling of options is experimental and
+    subject to change without warning.  Anyone using this test set who
+    has opinions or suggestions on the right way to handle such
+    options is invited to contact the author.</p>
+    
+  </div><div class="description">
+    <p>Note also that a test-case result of assert-not-a-grammar is
+    used here in test cases for what the spec will, I believe,
+    eventually describe as dynamic errors in the grammar, or just as
+    dynamic errors. (Greetings from the past, o future user!  If in
+    your world another result is prescribed, like for instance
+    assert-dynamic-error, then you are going to need to update this
+    catalog.  The same applies if you want to specify particular error
+    codes to be raised for particular test cases.)</p>
+  </div></details><h3 class="title">non-productive-2</h3><p>Created 12&nbsp;Mar&nbsp;2022 by cmsmcq</p><div class="description">
+      <p>A grammar with two unproductive nonterminals.  Neither A
+      nor C can produce a sequence of terminal symbols, so once they
+      appear in a sentential form the derivation process will never
+      terminate.  The grammar can be rewritten in an equivalent form
+      without their rules, as "S = B. B = 'b'."</p>
+    </div><div class="toc"><h4>Table of contents</h4><ul><li><a href="../../improper_grammars/non-productive-2/grammar-test.html">Grammar test</a></li><li><a href="../../improper_grammars/non-productive-2/np-4.html">np-4</a></li><li><a href="../../improper_grammars/non-productive-2/np-5.html">np-5</a></li><li><a href="../../improper_grammars/non-productive-2/np-6.html">np-6</a></li></ul></div></main></body></html>

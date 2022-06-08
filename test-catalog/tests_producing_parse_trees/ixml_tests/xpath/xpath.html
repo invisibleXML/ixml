@@ -1,0 +1,287 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../../"><img class="logotype" src="../../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees">Tests producing parse trees</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests">ixml tests</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests/xpath">xpath</a>&nbsp;/&nbsp;xpath</div><main><img class="logosm" src="../../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Tests producing parse trees</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+
+  </div></details><h3 class="title">ixml tests</h3><details><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><details><summary>Updated 21&nbsp;Dec&nbsp;2021 by SP</summary><p>Corrected input, grammar, or output for 5 tests</p></details><details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>Updated catalog, corrected many tests.</p></details><details><summary>Updated 30&nbsp;May&nbsp;2022 by MSM</summary><p>Add whitespace-and-delimiters test sets.</p></details></details><h3 class="title">xpath</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>XPath: Expr.
+
+ParamList: Param, ( ',', Param )*.
+Param: '$', EQName, TypeDeclaration?.
+FunctionBody: EnclosedExpr.
+EnclosedExpr: '{', Expr?, '}'.
+
+Expr: ExprSingle, ( s?,',',s?, ExprSingle )*.
+
+-ExprSingle: OrExpr; OrExprSingle.
+
+
+-OrExprSingle: AndExpr.
+OrExpr: AndExpr, (s?, 'or', s?,  AndExpr )+.
+AndExpr: ComparisonExpr, (s?, 'and', s?, ComparisonExpr )*.
+ComparisonExpr: StringConcatExpr, (s, ( @ValueComp ; @GeneralComp ;@ NodeComp ), s, StringConcatExpr )?.
+StringConcatExpr: RangeExpr, (s?, '||', s?, RangeExpr )*.
+RangeExpr: AdditiveExpr, ( s, 'to', s, AdditiveExpr )?.
+AdditiveExpr: MultiplicativeExpr;
+   MultiplicativeExpr,  s?, @AddOp, s?, AdditiveExpr.
+@AddOp: ( '+' ; '-' ).
+MultiplicativeExpr: UnionExpr;
+   UnionExpr,  s?, @MultOp, s?, MultiplicativeExpr.
+@MultOp:  '*' ; 'div' ; 'idiv' ; 'mod'.
+UnionExpr: IntersectExceptExpr, ( ( 'union' ; '|' ), IntersectExceptExpr )*.
+IntersectExceptExpr: InstanceofExpr, ( s, ( 'intersect' ;'except' ), s, InstanceofExpr )*.
+InstanceofExpr: TreatExpr, ( s, 'instance', s, 'of', s, @SequenceType )?.
+TreatExpr: CastExpr, ( s, -'treat', s, -'as', s, @SequenceType )?.
+CastExpr: ArrowExpr, ( s, -'cast', s,-'as', s, @SingleType )?.
+ArrowExpr: UnaryExpr, ( '=&gt;', ArrowFunctionSpecifier, ArgumentList )*.
+
+
+UnaryExpr: ( '-' ; '+' )*, ValueExpr.
+-ValueExpr: SimpleMapExpr.
+GeneralComp: '='; '!='; '&lt;'; '&lt;='; '&gt;'; '&gt;='.
+ValueComp: 'eq'; 'ne'; 'lt'; 'le'; 'gt'; 'ge'.
+NodeComp: 'is'; '&lt;&lt;'; '&gt;&gt;'.
+SimpleMapExpr: PathExpr, ( '!', PathExpr )*.
+PathExpr: '/', ( RelativePathExpr );
+   '//', RelativePathExpr;
+   RelativePathExpr.
+RelativePathExpr: StepExpr, ( ( '/'; '//' ), StepExpr )*.
+
+-StepExpr: PostfixExpr; AxisStep.
+-AxisStep: ( ReverseStep;ForwardStep ).
+ForwardStep: @ForwardAxis, NodeTest;
+   AbbrevForwardStep.
+ForwardAxis: 'child::';
+   'descendant::';
+   'attribute::';
+   'self::';
+   'descendant-or-self::';
+   'following-sibling::';
+   'following::';
+   'namespace::'.
+AbbrevForwardStep: '@'?, QName.
+ReverseStep: @ReverseAxis, NodeTest;
+   @AbbrevReverseStep.
+ReverseAxis: 'parent::';
+   'ancestor::';
+   'preceding-sibling::';
+   'preceding::';
+   'ancestor-or-self::'.
+AbbrevReverseStep: '..'.
+
+
+-NodeTest:  KindTest; NameTest.
+-NameTest: EQName; Wildcard.
+
+PostfixExpr: PrimaryExpr.
+ArgumentList: -'(',s?, ( -Argument,(s?,  -',', s?, -Argument )* )?, s?, -')'.
+
+KeySpecifier: NCName;| IntegerLiteral; ParenthesizedExpr; '*'.
+-ArrowFunctionSpecifier: EQName; VarRef; ParenthesizedExpr.
+
+-PrimaryExpr: Literal;
+   VarRef;
+   ParenthesizedExpr;
+   ContextItemExpr;
+   FunctionCall;
+   FunctionItemExpr;
+   MapConstructor;
+   ArrayConstructor;
+   UnaryLookup.
+-Literal: NumericLiteral; StringLiteral.
+-NumericLiteral: IntegerLiteral; DecimalLiteral;| DoubleLiteral.
+VarRef: -'$', @VarName.
+VarName: EQName.
+ParenthesizedExpr: -'(', Expr?, -')'.
+ContextItemExpr: -'.'.
+FunctionCall: @FunctionEQName, -ArgumentList.
+-Argument: ExprSingle; ArgumentPlaceholder.
+ArgumentPlaceholder: -'?'.
+FunctionItemExpr: NamedFunctionRef; InlineFunctionExpr.
+NamedFunctionRef: FunctionEQName, '#', IntegerLiteral.
+InlineFunctionExpr: -'function', -'(', ParamList?, ')', ( s, 'as', s, SequenceType )?, FunctionBody.
+MapConstructor: -'map', -'{', ( MapConstructorEntry, ( ',', MapConstructorEntry )* )?, -'}'.
+MapConstructorEntry: MapKeyExpr, -':', MapValueExpr.
+MapKeyExpr: ExprSingle.
+MapValueExpr: ExprSingle.
+ArrayConstructor: SquareArrayConstructor; CurlyArrayConstructor.
+SquareArrayConstructor: -'[', ( ExprSingle, ( -',', ExprSingle )* )?, -']'.
+CurlyArrayConstructor: -'array', '{', Expr?, -'}'.
+UnaryLookup: -'?', KeySpecifier.
+
+SingleType: SimpleTypeName, '?'?.
+TypeDeclaration: 'as', SequenceType.
+SequenceType: 'empty-sequence()';
+   ItemType, OccurrenceIndicator?.
+@OccurrenceIndicator: '?'; '*'; '+'.
+ItemType: KindTest;
+ 'item()';
+ FunctionTest;
+ MapTest;
+ ArrayTest;
+ AtomicOrUnionType;
+ ParenthesizedItemType.
+AtomicOrUnionType: EQName.
+
+
+-KindTest: DocumentTest;
+   ElementTest;
+   AttributeTest;
+   SchemaElementTest;
+   SchemaAttributeTest;
+   PITest;
+   CommentTest;
+   TextTest;
+   NamespaceNodeTest;
+   AnyKindTest.
+AnyKindTest: 'node()'.
+DocumentTest: -'document-node(' , ( ElementTest ; SchemaElementTest )?, -')'.
+TextTest: -'text()'.
+CommentTest: -'comment()'.
+NamespaceNodeTest: -'namespace-node()'.
+PITest:  -'processing-instruction(' , ( NCName ; StringLiteral )?, -')'.
+AttributeTest: -'attribute(' ,( AttribNameOrWildcard, ( ',', TypeName )? )?, -')'.
+AttribNameOrWildcard: AttributeName; '*'.
+SchemaAttributeTest: -'schema-attribute(', AttributeDeclaration, -')'.
+AttributeDeclaration: AttributeName.
+ElementTest: -'element(' , ( ElementNameOrWildcard, ( ',', TypeName, '?'? )? )?, -')'.
+ElementNameOrWildcard: ElementName;'*'.
+SchemaElementTest: -'schema-element(', ElementDeclaration, -')'.
+ElementDeclaration: ElementName.
+
+AttributeName: EQName.
+ElementName: EQName.
+SimpleTypeName: EQName.
+TypeName: EQName.
+
+FunctionTest: AnyFunctionTest; TypedFunctionTest.
+AnyFunctionTest: -'function(*)'.
+TypedFunctionTest: -'function(', ( SequenceType, ( -',', SequenceType )* )?, -')', s, 'as', s, SequenceType.
+MapTest: AnyMapTest; TypedMapTest.
+AnyMapTest: -'map(*)'.
+TypedMapTest: -'map(', s, AtomicOrUnionType,s,  -',', s,  SequenceType, s, -')'.
+ArrayTest: AnyArrayTest; TypedArrayTest.
+AnyArrayTest: -'array(*)'.
+TypedArrayTest: -'array(', s, SequenceType, s, -')'.
+ParenthesizedItemType: -'(',s, ItemType,s, -')'.
+
+FunctionEQName: FunctionName; URIQualifiedName.
+EQName: QName; URIQualifiedName.
+
+QName: FunctionName;
+    'array';
+    'attribute';
+    'comment';
+    'document-node';
+    'element';
+    'empty-sequence';
+    'function';
+    'if';
+    'item';
+    'map';
+    'namespace-node';
+    'node';
+    'processing-instruction';
+    'schema-attribute';
+    'schema-element';
+    'switch';
+    'text';
+    'typeswitch'.
+ 
+ -FunctionName: QNameToken;
+    'ancestor';
+    'ancestor-or-self';
+    'and';
+    'cast';
+    'castable';
+    'child';
+    'descendant';
+    'descendant-or-self';
+    'div';
+    'else';
+    'eq';
+    'every';
+    'except';
+    'following';
+    'following-sibling';
+    'for';
+    'ge';
+    'gt';
+    'idiv';
+    'instance';
+    'intersect';
+    'is';
+    'le';
+    'let';
+    'lt';
+    'mod';
+    'namespace';
+    'ne';
+    'or';
+    'parent';
+    'preceding';
+    'preceding-sibling';
+    'return';
+    'satisfies';
+    'self';
+    'some';
+    'to';
+    'treat';
+    'union'.
+
+StringLiteral: -'"', ( EscapeQuot; ~['"'] )*, -'"';
+   -"'", ( EscapeApos ; ~["'"] )*, -"'".
+IntegerLiteral: -Digits.
+DecimalLiteral: '.', -Digits;
+   -Digits, '.', ['0'-'9']*.
+DoubleLiteral: ( '.', -Digits ; -Digits, ( '.', ['0'-'9']* )? ), ['e'; 'E'], -Digits.
+
+-URIQualifiedName: BracedURILiteral, NCName.
+BracedURILiteral: 'Q', '{', ~['{';'}']*, '}'.
+EscapeQuot: '""'.
+EscapeApos: "''".
+
+QNameToken: PrefixedName;  UnprefixedName.
+PrefixedName: @Prefix, -':', @LocalPart.
+UnprefixedName: LocalPart.
+Prefix: NCName.
+LocalPart: NCName.
+NCName: @Name.
+
+-NameStartChar: ['A'-'Z'];
+   '_';
+   ['a'-'z'].
+-NameChar: NameStartChar;
+   '-';
+   '.';
+   ['0'-'9'].  
+Name: NameStartChar, NameChar*.
+-s: -' '+.
+Wildcard: '*';
+   NCName, ':', '*';
+   '*', ':', NCName;
+   BracedURILiteral, '*'.
+Digits: ['0'-'9']+.
+
+
+</code></pre></div><h1>Test case: xpath</h1><details><p>Repository URI: <code>…/tests/correct/test-catalog.xml</code></p></details>
+	<p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+	<details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>remove trailing whitespace from input</p></details>
+	<details><summary>Updated 01&nbsp;Jan&nbsp;2021 by MSM</summary><p>mark as not-a-sentence</p></details>
+	<div class="description">
+	  <p>The input is <code>a[.!='']</code> but the grammar does
+	  not provide for predicates.  So although the input is a
+	  perfectly fine XPath expression, it is not a sentence in the
+	  language defined by the grammar specified for the test.</p>
+	</div>
+	<div class="test-string"><h4>Input string (8 characters)</h4><pre><code>a[.!='']</code></pre></div>
+	<div class="result unsuccessful"><h4>Expected result</h4>
+	  <p class="not-a-sentence">The input does not match the grammar.</p>
+	  
+	</div>
+      </main></body></html>

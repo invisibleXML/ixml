@@ -1,0 +1,49 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../../catalog.css"></head><body><div class="breadcrumbs"><a href="../../../"><img class="logotype" src="../../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees">Tests producing parse trees</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests">ixml tests</a>&nbsp;/&nbsp;<a href="../../../tests_producing_parse_trees/ixml_tests/expr1">expr1</a>&nbsp;/&nbsp;expr1</div><main><img class="logosm" src="../../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>01&nbsp;Jun&nbsp;2022 (03&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Tests producing parse trees</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+
+  </div></details><h3 class="title">ixml tests</h3><details><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><details><summary>Updated 21&nbsp;Dec&nbsp;2021 by SP</summary><p>Corrected input, grammar, or output for 5 tests</p></details><details><summary>Updated 30&nbsp;Dec&nbsp;2021 by MSM</summary><p>Updated catalog, corrected many tests.</p></details><details><summary>Updated 30&nbsp;May&nbsp;2022 by MSM</summary><p>Add whitespace-and-delimiters test sets.</p></details></details><h3 class="title">expr1</h3><p>Created 16&nbsp;Dec&nbsp;2021 by SP</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>expression: expr.
+-expr: term++plusop.
+@plusop: "+"; "-".
+term: -factor; factor, mulop, factor++mulop.
+@mulop: "*"; "/".
+factor: id; number; bracketed.
+bracketed: -"(", expr, -")".
+id: @name.
+name: letter+.
+number: @value.
+value: digit+.
+-letter: ["a"-"z"].
+-digit: ["0"-"9"].
+</code></pre></div><h1>Test case: expr1</h1><details><p>Repository URI: <code>…/tests/correct/test-catalog.xml</code></p></details>
+        <p>Created 16&nbsp;Dec&nbsp;2021 by SP</p>
+        <details><summary>Updated 23&nbsp;Dec&nbsp;2021 by MSM</summary><p>Change result</p></details>
+        <details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>remove trailing whitespace from input</p></details>
+        <details><summary>Updated 01&nbsp;Jan&nbsp;2022 by MSM</summary><p>remove whitespace from expected result</p></details>
+        <details><summary>Updated 21&nbsp;May&nbsp;2022 by MSM</summary><p>change to assert-dynamic-error</p></details>
+        <div class="test-string"><h4>Input string (9 characters)</h4><pre><code>1+2+3*4+5</code></pre></div>
+        <div class="description">
+          <p>Illustrates the way to handle dynamic errors in a test:
+          use assert-dynamic-error.</p>
+          <p>It's not formally a grammar error, since this grammar
+          will work fine for some inputs and processors are not
+          required to reject the grammar.  So assert-not-a-grammar
+          is not the right thing.</p>
+          <p>It's not formally a failure to parse the input, since
+          this input string is perfectly grammatical against this
+          input grammar.  So assert-not-a-sentence is not the right
+          thing.</p>
+          <p>The error arises in serialization and only at run time.
+          So assert-dynamic-error.</p>
+        </div>
+        <div class="result unsuccessful"><h4>Expected result</h4>
+          <p class="dynamic-error">Raises a dynamic error: one of <a href="https://invisiblexml.org/ixml-specification.html#ref-d01">D01</a>, <a href="https://invisiblexml.org/ixml-specification.html#ref-d02">D02</a>.</p>
+	</div>
+      </main></body></html>
