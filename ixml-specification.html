@@ -12,11 +12,11 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification</title>
   <!-- 
-                  <style type="text/css" rel="alternate stylesheet" title="Fragments">
-                       p, h3 {display: none}
-                       pre.frag {display: block}
-                  </style>
-                  -->
+                      <style type="text/css" rel="alternate stylesheet" title="Fragments">
+                           p, h3 {display: none}
+                           pre.frag {display: block}
+                      </style>
+                      -->
   <style type="text/css">
       body {margin-left: auto; margin-right:auto; max-width: 50em;}
       h1, h2 {font-family: sans-serif; clear: both}
@@ -34,7 +34,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-06-02<!--$--></p>
+<p>Version: <!--$date=-->2022-06-07<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -238,6 +238,9 @@ serialization</p>
    &lt;/path&gt;
 &lt;/url&gt;</pre>
 
+<p>(Here and in other examples, whitespace has been added to the XML for
+legibility.)</p>
+
 <p>If the rule for <code>letter</code> had not had a "-" before it, the
 serialization for <code>scheme</code>, for instance, would have been:</p>
 <pre>&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
@@ -331,7 +334,11 @@ class="conform">must</span> nevertheless attempt to process the grammar. If it
 finds a syntactically valid interpretation of the grammar, it <span
 class="conform">must</span> proceed using the semantics of the version under
 which it found a valid interpretation, otherwise it <span
-class="conform">must</span> reject the grammar.</p>
+class="conform">must</span> reject the grammar. In either case, the document
+element of the serialization <span class="conform">must</span> include an
+attribute named <code>ixml:state</code>, with the word
+'<code>version-mismatch</code>' in its value. The ixml namespace URI is
+"<code>http://invisiblexml.org/NS</code>".</p>
 
 <h3 id="rules">Rules</h3>
 
@@ -532,9 +539,8 @@ serialization <span class="conform">should</span> include the attribute
 <code>ixml:state</code> on the document element with a value that includes the
 word <code>ambiguous</code>. Different processors <span
 class="conform">may</span> vary in whether input is detected as ambiguous or
-not. The ixml namespace URI is "<code>http://invisiblexml.org/NS</code>". Known
-algorithms that accept and parse any context-free grammar include [<a
-href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
+not. Known algorithms that accept and parse any context-free grammar include
+[<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
 href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
 see also [<a href="#grune">Grune</a>].</p>
 
@@ -586,23 +592,23 @@ any serialization of a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01">error D01</a>).</p>
 
 <p>Note: This requirement means for instance that names of serialized elements
-and attributes <span id="ref-d03" class="conform">must</span> match the XML 
-requirements (<a class="error" href="#err-d03">error D03</a>); an
-element <span id="ref-d02" class="conform">must not</span> contain more than
-one attribute of a given name (<a class="error" href="#err-d02">error D02</a>);
-an element <span id="ref-d07" class="conform">must not</span> contain an
-attribute named “xmlns” (<a class="error" href="#err-d07">error D07</a>);
-the names of all elements and attributes <span id="ref-d03"
-class="conform">must</span> conform to the requirements for XML names; invalid
-characters <span id="ref-d04" class="conform">must not</span> be serialized (<a
-class="error" href="#err-d04">error D04</a>); a nonterminal being serialized as
-root element <span id="ref-d05" class="conform">must not</span> be marked as an
-attribute (<a class="error" href="#err-d05">error D05</a>); in order to match
-the XML requirement of a single-rooted document, if the root rule is marked as
-hidden, all of its productions <span id="ref-d06" class="conform">must</span>
-produce exactly one non-hidden non-attribute nonterminal and no non-hidden
-terminals before or after that nonterminal (<a class="error"
-href="#err-d06">error D06</a>).</p>
+and attributes <span id="ref-d03" class="conform">must</span> match the XML
+requirements (<a class="error" href="#err-d03">error D03</a>); an element <span
+id="ref-d02" class="conform">must not</span> contain more than one attribute of
+a given name (<a class="error" href="#err-d02">error D02</a>); an element <span
+id="ref-d07" class="conform">must not</span> contain an attribute named
+“xmlns” (<a class="error" href="#err-d07">error D07</a>); the names of all
+elements and attributes <span id="ref-d03" class="conform">must</span> conform
+to the requirements for XML names; non-XML characters <span id="ref-d04"
+class="conform">must not</span> be serialized (<a class="error"
+href="#err-d04">error D04</a>); a nonterminal being serialized as root element
+<span id="ref-d05" class="conform">must not</span> be marked as an attribute
+(<a class="error" href="#err-d05">error D05</a>); in order to match the XML
+requirement of a single-rooted document, if the root rule is marked as hidden,
+all of its productions <span id="ref-d06" class="conform">must</span> produce
+exactly one non-hidden non-attribute nonterminal and no non-hidden terminals
+before or after that nonterminal (<a class="error" href="#err-d06">error
+D06</a>).</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
 rules is:</p>
@@ -1011,13 +1017,11 @@ errors are errors that can be identified by inspecting the grammar.</p>
   <dt id="err-s03"><a href="#ref-s03">S03</a></dt>
     <dd>It is an error if the grammar contains more than one rule for a given
       nonterminal name.</dd>
-  <dt id="err-s05"><a href="#ref-s05">S05</a></dt>
-    <dd>It is an error to mark a character set as an insertion.</dd>
   <dt id="err-s06"><a href="#ref-s06">S06</a></dt>
     <dd>It is an error if a hex encoding uses any characters not allowed in
-      hexidecimal.</dd>
+      hexadecimal.</dd>
   <dt id="err-s07"><a href="#ref-s07">S07</a></dt>
-    <dd>It is an error if the hexidecimal value is not within the Unicode
+    <dd>It is an error if the hexadecimal value is not within the Unicode
       code-point range.</dd>
   <dt id="err-s08"><a href="#ref-s08">S08</a></dt>
     <dd>It is an error if an encoded character denotes a Unicode noncharacter
@@ -1116,8 +1120,9 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 <h2 id="acknowledgments">Acknowledgements</h2>
 
 <p>This specification was produced by members of the W3C ixml community group:
-Tomos Hillman, John Lumley, Steven Pemberton, Michael Sperberg-McQueen, Bethan
-Tovey-Walsh, Norman Tovey-Walsh.</p>
+Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
+Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
+have also contributed.</p>
 
 <p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
 specification, and consequent many helpful comments.</p>
