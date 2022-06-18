@@ -196,6 +196,12 @@
         <assert-xml>
           <S xmlns="" ixml:state="ambiguous">a=b=c</S>
         </assert-xml>
+        <assert-xml>
+          <S xmlns="" ixml:state="ambiguous">a:b=c</S>
+        </assert-xml>
+        <assert-xml>
+          <S xmlns="" ixml:state="ambiguous">a=b:c</S>
+        </assert-xml>
       </result>
     </test-case>
   </test-set>
