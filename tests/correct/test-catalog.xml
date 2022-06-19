@@ -1079,6 +1079,13 @@
 	<assert-xml><S xmlns=""><B/><B/>a</S></assert-xml>
       </result>
     </test-case>
+    <test-case name="leading-nullable-fail">
+      <created by="ndw" on="2022-06-19"/>
+      <test-string>aa</test-string>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
   </test-set>
 
   <test-set name="leading-embedded-nullable">
@@ -1096,6 +1103,13 @@
       <test-string>a</test-string>
       <result>
 	<assert-xml><S xmlns=""><B><C/></B><B><C/></B>a</S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="leading-nullable-fail">
+      <created by="ndw" on="2022-06-19"/>
+      <test-string>aa</test-string>
+      <result>
+	<assert-not-a-sentence/>
       </result>
     </test-case>
   </test-set>
