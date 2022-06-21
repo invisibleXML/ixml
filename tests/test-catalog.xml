@@ -29,4 +29,5 @@
   <test-set-ref href="grammar-misc/test-catalog.xml"/>
   <test-set-ref href="grammar-misc/prolog-tests.xml"/>
   <test-set-ref href="grammar-misc/insertion-tests.xml"/>
+  <test-set-ref href="misc/misc-001-020-catalog.xml"/>
 </test-catalog>
