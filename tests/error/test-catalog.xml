@@ -300,7 +300,7 @@
     </test-case>
   </test-set>
 
-  <test-set name="non-XML-char-in-input-output-clear">
+  <test-set name="non-XML-char-in-input-output-errors">
     <created by="MSM" on="2022-06-20"/>
     <description>
       <p>Followup to invalid-char.  Tests for serialization of non-XML
