@@ -31,6 +31,92 @@
     </test-case>
   </test-set>
 
+  <test-set name="non-NCName-hidden">
+    <created by="MSM" on="2022-06-20"/>    
+    <description>
+      <p>This grammar does not raise a dynamic error; it's here
+      to check that processors do allow nonterminals which are not
+      NCNames, if they are hidden.</p>
+    </description>
+
+    <ixml-grammar>S: ª. -ª: 'a' .</ixml-grammar>
+
+    <grammar-test>
+      <result>
+	<assert-xml>
+	  <ixml
+	    ><rule name="S"><alt><nonterminal name="ª"/></alt></rule
+	    ><rule name="ª" mark="-"><alt><literal string="a"/></alt></rule
+	  ></ixml>	  
+	</assert-xml>
+      </result>
+    </grammar-test>
+    
+    <test-case name="hidden-1">
+      <test-string>a</test-string>
+      <result><assert-xml><S>a</S></assert-xml></result>
+    </test-case>
+    <test-case name="hidden-2">
+      <test-string></test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="hidden-3">
+      <test-string>b</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="hidden-4">
+      <test-string>aa</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+  </test-set>
+
+  <test-set name="non-NCName-not-hidden">
+    <created by="MSM" on="2022-06-20"/>    
+    <description>
+      <p>This grammar does not raise a dynamic error; it's here
+      to check that processors do allow nonterminals which are not
+      NCNames, if they are not in fact serialized.</p>
+      <p>Actually, processors are allowed to reject this grammar
+      because a static analysis will show that the non-NCName could be
+      serialized.  So the prescribed result of this grammar test does
+      not exhaust all possibilities.</p>
+    </description>
+
+    <ixml-grammar>S: ª; B. ª: 'a'. B: 'b'.</ixml-grammar>
+
+    <grammar-test>
+      <result>
+	<assert-xml>
+	  <ixml
+	    ><rule name="S"
+	      ><alt><nonterminal name="ª"/></alt
+	      ><alt><nonterminal name="B"/></alt
+	    ></rule
+	    ><rule name="ª"><alt><literal string="a"/></alt></rule
+	    ><rule name="B"><alt><literal string="b"/></alt></rule
+	  ></ixml>
+	</assert-xml>
+      </result>
+    </grammar-test>
+    
+    <test-case name="nonhidden-1">
+      <test-string>a</test-string>
+      <result><assert-dynamic-error error-code="D03 D01"/></result>
+    </test-case>
+    <test-case name="nonhidden-2">
+      <test-string></test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+    <test-case name="nonhidden-3">
+      <test-string>b</test-string>
+      <result><assert-xml><S><B>b</B></S></assert-xml></result>
+    </test-case>
+    <test-case name="nonhidden-4">
+      <test-string>aa</test-string>
+      <result><assert-not-a-sentence/></result>
+    </test-case>
+  </test-set>
+
   <test-set name="hex-much-too-big">
     <created by="ndw" on="2022-02-19"/>
     <description>
@@ -176,6 +262,83 @@
     </test-case>
   </test-set>
 
+  <test-set name="non-XML-char-in-input-output-clear">
+    <created by="MSM" on="2022-06-20"/>
+    <description>
+      <p>Followup to invalid-char.  Tests for serialization of non-XML
+      characters in a different way.</p>
+      <p>This test set is for sanity checking the inputs of the
+      following test set: the grammar accepts a range of non-XML
+      characters but hides all of them, but indicates in the output
+      where they were.</p>
+    </description>
+    <ixml-grammar-ref href="non-XML-chars-all-hidden.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="non-XML-chars-all-hidden.xml"/>
+      </result>
+    </grammar-test>
+    <test-case name="SOH-RS-EOT">
+      <created by="MSM" on="2022-06-20"/>
+      <test-string-ref href="SOH_and_RS_and_EOT.txt"/>
+      <description>
+        <p>Input contains SOH, RS, and EOT control characters.</p>
+      </description>
+      <result>
+        <assert-xml-ref href="SOH_and_RS_and_EOT.xml"/>
+      </result>
+    </test-case>
+    <test-case name="STX-ETX">
+      <created by="MSM" on="2022-06-20"/>
+      <test-string-ref href="STX_and_ETX.txt"/>
+      <description>
+        <p>Input contains STX and ETX control characters.</p>
+      </description>
+      <result>
+        <assert-xml-ref href="STX_and_ETX.xml"/>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="non-XML-char-in-input-output-clear">
+    <created by="MSM" on="2022-06-20"/>
+    <description>
+      <p>Followup to invalid-char.  Tests for serialization of non-XML
+      characters in a different way.</p>
+      <p>In this test set, the grammar accepts a range of non-XML
+      characters and hides some of them, but not all.  Input in
+      which only 'hidden' control characters are present produces
+      output, input in which non-hidden controls are present
+      should produce a dynamic error.</p>
+    </description>
+    <ixml-grammar-ref href="non-XML-chars-some-visible.ixml"/>
+    <grammar-test>
+      <result>
+	<assert-xml-ref href="non-XML-chars-some-visible.xml"/>
+      </result>
+    </grammar-test>
+    <test-case name="SOH-RS-EOT">
+      <created by="MSM" on="2022-06-20"/>
+      <test-string-ref href="SOH_and_RS_and_EOT.txt"/>
+      <description>
+        <p>Input contains SOH, RS, and EOT control characters.</p>
+      </description>
+      <result>
+        <assert-xml-ref href="SOH_and_RS_and_EOT.xml"/>
+      </result>
+    </test-case>
+    <test-case name="STX-ETX">
+      <created by="MSM" on="2022-06-20"/>
+      <test-string-ref href="STX_and_ETX.txt"/>
+      <description>
+        <p>Input contains STX and ETX control characters.</p>
+      </description>
+      <result>
+        <assert-dynamic-error error-code="D04 D01"/>
+      </result>
+    </test-case>
+  </test-set>
+
   <test-set name="attribute-root">
     <created by="MSM" on="2022-06-03"/>
     <description><p>This grammar marks its root (and only) node as an
@@ -220,7 +383,10 @@
     </ixml-grammar>
     <!--* no grammar test, since some processors may detect
 	* the error statically. *-->
-    <test-case name="wb-not-wf">
+    <test-case name="atts-at-root">
+      <created by="MSM" on="2022-06-03"/>
+      <modified by="MSM" on="2022-06-20"
+		change="rename testcase"/>
       <description><p>This input is grammatical but cannot be
       serialized.</p></description>
       <test-string>ablebakercharliedog</test-string>
@@ -242,7 +408,10 @@
     </ixml-grammar>
     <!--* no grammar test, since some processors may detect
 	* the error statically. *-->
-    <test-case name="wb-not-wf">
+    <test-case name="multiple-root-elements">
+      <created by="MSM" on="2022-06-03"/>
+      <modified by="MSM" on="2022-06-20"
+		change="rename testcase"/>
       <description><p>This input is grammatical but cannot be
       serialized.</p></description>
       <test-string>ablebakercharliedog</test-string>
@@ -285,7 +454,10 @@
     </ixml-grammar>
     <!--* no grammar test, since some processors may detect
 	* the error statically. *-->
-    <test-case name="wb-not-wf">
+    <test-case name="xmlns-forbidden">
+      <created by="MSM" on="2022-06-03"/>
+      <modified by="MSM" on="2022-06-20"
+		change="rename testcase"/>
       <description><p>This input is grammatical but cannot be
       serialized.  'xmlns' is not allowed as the name of an
       attribute.</p></description>
