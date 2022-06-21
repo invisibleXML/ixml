@@ -750,7 +750,7 @@ Number  = [0-9]+
 	<tc:assert-not-a-sentence/>
       </tc:result>
     </tc:test-case>
-    <tc:test-case name="g08c03">
+    <tc:test-case name="g08c05">
       <tc:test-string>aaaa</tc:test-string>
       <tc:result>
 	<tc:assert-xml><A>a<A>a<A>a<A>a<A/></A></A></A></A></tc:assert-xml>
