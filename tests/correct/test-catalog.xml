@@ -1,5 +1,5 @@
 <test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
-              release-date="2022-06-01"
+              release-date="2022-06-17"
 	      name="Tests producing parse trees">
 
   <description>
@@ -1061,6 +1061,57 @@
 	<S xmlns=""><a>Keep 'calm'</a><b>;</b><c> </c><d>be 'happy'.</d></S>
       </assert-xml></result>
     </test-case> 
+  </test-set>
+
+  <test-set name="leading-nullable">
+    <description>
+      <p>Test that repeated nullable nonterminals are handled correctly.</p>
+    </description>
+    <created by="ndw" on="2022-06-17"/>
+    <ixml-grammar>
+      S = B, B, 'a'.
+      B = .
+    </ixml-grammar>
+    <test-case name="leading-nullable">
+      <created by="ndw" on="2022-06-17"/>
+      <test-string>a</test-string>
+      <result>
+	<assert-xml><S xmlns=""><B/><B/>a</S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="leading-nullable-fail">
+      <created by="ndw" on="2022-06-19"/>
+      <test-string>aa</test-string>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="leading-embedded-nullable">
+    <description>
+      <p>Test that repeated nullable nonterminals are handled correctly.</p>
+    </description>
+    <created by="ndw" on="2022-06-17"/>
+    <ixml-grammar>
+      S = B, B, 'a'.
+      B = C .
+      C = .
+    </ixml-grammar>
+    <test-case name="leading-nullable">
+      <created by="ndw" on="2022-06-17"/>
+      <test-string>a</test-string>
+      <result>
+	<assert-xml><S xmlns=""><B><C/></B><B><C/></B>a</S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="leading-nullable-fail">
+      <created by="ndw" on="2022-06-19"/>
+      <test-string>aa</test-string>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
   </test-set>
 
 </test-catalog>
