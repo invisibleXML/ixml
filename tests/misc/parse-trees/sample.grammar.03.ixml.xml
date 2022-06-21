@@ -61,16 +61,16 @@ from https://homepages.cwi.nl/~steven/Talks/2013/08-07-invisible-xml/invisible-x
   ><rule name="name"
     ><alt
       ><inclusion
-        ><range from="a" to="z"
-        /><range from="A" to="Z"
+        ><member from="a" to="z"
+        /><member from="A" to="Z"
       /></inclusion
       ><repeat0
         ><inclusion
-          ><range from="a" to="z"
-          /><range from="A" to="Z"
-          /><range from="0" to="9"
-          /><literal string="-"
-          /><literal string="_"
+          ><member from="a" to="z"
+          /><member from="A" to="Z"
+          /><member from="0" to="9"
+          /><member string="-"
+          /><member string="_"
         /></inclusion
       ></repeat0
     ></alt
@@ -78,7 +78,7 @@ from https://homepages.cwi.nl/~steven/Talks/2013/08-07-invisible-xml/invisible-x
   ><rule name="value"
     ><alt
       ><inclusion
-        ><range from="x" to="z"
+        ><member from="x" to="z"
       /></inclusion
     ></alt
   ></rule
