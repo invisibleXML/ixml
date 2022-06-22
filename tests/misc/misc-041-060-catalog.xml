@@ -1,7 +1,7 @@
 <tc:test-catalog xmlns:tc="https://github.com/invisibleXML/ixml/test-catalog"
 		 xmlns:ixml="http://invisiblexml.org/NS"
 		 xmlns:ap="http://blackmesatech.com/2019/iXML/Aparecium"		 
-		 name="Wisps test set 1"
+		 name="Misc tests 3"
 		 release-date="2022-06-21"
 		 >
   <tc:description>
