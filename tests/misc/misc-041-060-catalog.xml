@@ -1571,7 +1571,7 @@
               ><Sum
                 ><Sum><Digit>1</Digit></Sum
 	        >+<Sum><Digit>9</Digit></Sum></Sum
-              >+<Sum><Digit>7</Digit></Sum></Sum>
+              >+<Sum><Digit>7</Digit></Sum></Sum
 	    >+<Sum><Digit>4</Digit></Sum
 	  ></Sum>
 	</tc:assert-xml>
