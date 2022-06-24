@@ -1,10 +1,10 @@
 { ixml grammar serialized 
-  2022-06-22T16:46:04.923876-06:00
+  2022-06-23T17:27:05.776042-06:00
   by serialize-as-ixml.xsl from 
   file:/home/cmsmcq/2022/github/cmsmcq-ixml/samples/Oberon/misc/tmp.Oberon.1.xml
 }
 
-{* 2022-06-22: whitespace handling added by inject-whitespace.xsl *
+{* 2022-06-23: whitespace handling added by inject-whitespace.xsl *
  * start = module
  * whitespace = s
  * literal = trailing

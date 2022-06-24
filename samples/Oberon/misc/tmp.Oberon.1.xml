@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ixml>
-   <comment>* 2022-06-22: whitespace handling added by inject-whitespace.xsl *
+   <comment>* 2022-06-23: whitespace handling added by inject-whitespace.xsl *
  * start = module
  * whitespace = s
  * literal = trailing

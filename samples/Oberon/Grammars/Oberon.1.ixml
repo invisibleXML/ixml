@@ -18,6 +18,9 @@
   - The definition of string has been changed to specify double not
     single quotes, to match what is actually present in the 
     source code.
+  - The rules for real and ScaleFactor have been adjusted to 
+    remove the automatically added references to 's'.
+
   - Literals used with multiple meanings have been distinguished
     (MUL/STAR, EQUALS/EQL).
   - For literals used as operators or which are otherwise semantically
@@ -25,8 +28,6 @@
     (though the actual literal is still suppressed).  (So in 
     "1+2" the output will have an empty 'PLUS' element.)
   - The rules for digit and hexDigit have been reformulated.
-  - The rules for real and ScaleFactor have been adjusted to 
-    remove the automatically added references to 's'.
 
 }
 
@@ -47,7 +48,7 @@
          ScaleFactor = ["ED"], ["+-"]?, -digit, -digit*.
               number = integer | real.
               string = '"', -character*, '"', s?
-	      	     | -digit, hexDigit*, HEXCHAR, s?.
+	      	     | -digit, hexDigit*, HEXMARK, s?.
     ConstDeclaration = identdef, EQUALS, ConstExpression.
      ConstExpression = expression.
      TypeDeclaration = identdef, EQUALS, StrucType.
@@ -193,8 +194,9 @@ RETURN = -"RETURN", s?.
 TRUE = -"TRUE", s?.
 FALSE = -"FALSE", s?.
 
-{ HEXCHAR is handled specially. }
--HEXCHAR = "X", s?.
+{ HEXMARK is handled specially. Literal X, not 
+  the nonterminal, and no trailing space. }
+-HEXMARK = "X".
 
 {* Delimiters (hidden) *}
 -LPAR = -"(", s?.

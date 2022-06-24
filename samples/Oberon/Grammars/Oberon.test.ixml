@@ -81,7 +81,12 @@
     by a further selector.  This is at least consistent with the
     examples of type guards given in the documentation.
 
-
+  - The rule for factor has been revised to eliminate the references to
+    the keywords NIL, TRUE, and FALSE.  In a system with no upstream
+    lexer, these references make the grammar ambiguous, since each of
+    these keywords also matches the rule for identifiers.  The problem
+    does not arise for other keywords.
+ 
 }
 
               module = s?, MODULE, _ident_, SEMI, 
@@ -133,8 +138,9 @@
        -_expression_ = expression | _SimpleExpression_.
           expression = _SimpleExpression_, relation, _SimpleExpression_.
             relation = EQL | NEQ | LSS | LEQ | GTR | GEQ | IN | IS.
- -_SimpleExpression_ = SimpleExpression | (PLUS | MINUS)?, _term_.
-    SimpleExpression = (PLUS | MINUS)?, _term_, (AddOperator, _term_)+.
+ -_SimpleExpression_ = SimpleExpression | _term_.
+    SimpleExpression = (PLUS | MINUS), _term_
+    		     | (PLUS | MINUS)?, _term_, (AddOperator, _term_)+.
          AddOperator = PLUS | MINUS | OR.
              -_term_ = term | _factor_.
                 term = _factor_, (MulOperator, _factor_)+.
@@ -142,23 +148,26 @@
            -_factor_ = factor
 	             | number
 	             | _string_
-		     | NIL | TRUE | FALSE
+		   { | NIL | TRUE | FALSE } { parse these keywords as identifiers }
 		     | set
+		     | designator
 		     | LPAR, _expression_, RPAR
 		     .
-              factor = designator, (ActualParameters)?
+              factor = designator, ActualParameters
 		     | NEGATION, -_factor_
 		     .
         { designator = qualident, (selector)*. }
           designator = double-ident, selector*
-	  	     | single-ident, ((subscript|UP|typeguard), selector*)?
+	  	     | single-ident, (non-field-selector, selector*)?
 		     .
        -single-ident = _ident_.
         double-ident = _ident_, DOT, _ident_.
            -selector = field-ref
-	    	     | subscript
+	             | -non-field-selector
+		     .
+ -non-field-selector = subscript
 		     | UP
-		     | typeguard, (field-ref | UP) { experimental }
+		     | typeguard, (field-ref | UP)
 		     .
 	   field-ref = DOT, _ident_.
 	   subscript = LBRKT, ExpList, RBRKT.
@@ -270,9 +279,11 @@ UP = -"^", s?.
 RETURN = -"RETURN", s?.
 TRUE = -"TRUE", s?.
 FALSE = -"FALSE", s?.
+NIL = -"NIL", s?.
 
-{ HEXMARK is handled specially. }
--HEXMARK = "X", s?.
+{ HEXMARK is handled specially. Literal X, not 
+  the nonterminal, and no trailing space. }
+-HEXMARK = "X".
 
 {* Delimiters (hidden) *}
 -LPAR = -"(", s?.
@@ -304,7 +315,6 @@ FALSE = -"FALSE", s?.
 -IF = -"IF", s?.
 -IMPORT = -"IMPORT", s?.
 -MODULE = -"MODULE", s?.
--NIL = -"NIL", s?.
 -OF = -"OF", s?.
 -POINTER = -"POINTER", s?.
 -PROCEDURE = -"PROCEDURE", s?.
