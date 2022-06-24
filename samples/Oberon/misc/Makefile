@@ -11,11 +11,11 @@ PO2013=../Project-Oberon-2013-materials
 
 ## Make Oberon.0, Wirth's grammar with no changes.  First in XML, by
 ## just parsing his EBNF as ixml.
-../XML/Oberon.0.ixml.xml : $(PO2013)/OberonSyntax.Text.txt \
+../Grammars/Oberon.0.ixml.xml : $(PO2013)/OberonSyntax.Text.txt \
                            ./ixml-from-EBNF-W.ixml
 	$(IXML) $< ixml-from-EBNF-W.ixml $@
 
-../XML/Oberon.0.ixml.pp.xml : $(PO2013)/OberonSyntax.Text.txt \
+../Grammars/Oberon.0.ixml.pp.xml : $(PO2013)/OberonSyntax.Text.txt \
                               ./ixml-from-EBNF-W.ixml
 	$(IXML) $< ixml-from-EBNF-W.ixml $@ --pretty-print
 
@@ -51,7 +51,7 @@ tmp.Oberon.1.ixml: tmp.Oberon.1.xml
 
 ### Demand manual intervention to make the copies in the
 ### Grammars and XML directories
-../XML/Oberon.1.xml: tmp.Oberon.1.xml
+../Grammars/Oberon.1.xml: tmp.Oberon.1.xml
 	@echo "Manual intervention needed to make Oberon.1.xml: "
 	@echo "(1) edit tmp.Oberon.1.xml, save, convert to ixml"
 	@echo "or"
@@ -65,10 +65,10 @@ tmp.Oberon.1.ixml: tmp.Oberon.1.xml
 ### Make it relatively easy to turn either form into the other,
 ### without clobbering something that may have been the result
 ### of manual intervention.
-../XML/Oberon.1.dup.xml: ../Grammars/Oberon.1.ixml
+../Grammars/Oberon.1.dup.xml: ../Grammars/Oberon.1.ixml
 	$(IXML) $< $(SPECGRAMMAR) $@
-	@echo You should compare XML/Oberon.{1,1.dup}.xml
-../Grammars/Oberon.1.dup.ixml: ../XML/Oberon.1.xml
+	@echo You should compare Grammars/Oberon.{1,1.dup}.xml
+../Grammars/Oberon.1.dup.ixml: ../Grammars/Oberon.1.xml
 	$(XSLT) $< $(GINGERSNAP)/serialize-as-ixml.xsl $@
 	@echo You should compare Grammars/Oberon.{1,1.dup}.ixml
 
@@ -91,24 +91,25 @@ all_1_pretty:  ../XML/ORB.Mod.1.pp.xml \
 	../XML/ORP.Mod.1.pp.xml \
 	../XML/ORS.Mod.1.pp.xml \
 	../XML/ORTool.Mod.1.pp.xml
+
 # ................................................................
-# Making grammar Oberon.2.{ixml,xml}
+# Making grammar Oberon.{ixml,xml}
 # ................................................................
 
-## Oberon.2 is a non-mechanical adaptation and requires
+## Oberon.ixml is a non-mechanical adaptation and requires
 ## manual intervention.  No rules here.
 
 ## But if one form is modified, let's make it easy to get
 ## the other form.
-../XML/Oberon.2.dup.xml: ../Grammars/Oberon.2.ixml
+../Grammars/Oberon.dup.xml: ../Grammars/Oberon.ixml
 	$(IXML) $< $(SPECGRAMMAR) $@
-	@echo You should compare XML/Oberon.{2,2.dup}.xml
-../Grammars/Oberon.2.dup.ixml: ../XML/Oberon.2.xml
+	@echo You should compare Grammars/Oberon.{,dup}.xml
+../Grammars/Oberon.dup.ixml: ../Grammars/Oberon.xml
 	$(XSLT) $< $(GINGERSNAP)/serialize-as-ixml.xsl $@
-	@echo You should compare Grammars/Oberon.{2,2.dup}.ixml
+	@echo You should compare Grammars/Oberon.{,dup}.ixml
 
 # ................................................................
-# Parsing with Oberon.2 grammar
+# Parsing with Oberon.ixml grammar
 # ................................................................
 ../XML/%.Mod.xml: $(PO2013)/%.Mod.txt ../Grammars/Oberon.ixml
 	time $(IXML) $< ../Grammars/Oberon.ixml $@ --gll
