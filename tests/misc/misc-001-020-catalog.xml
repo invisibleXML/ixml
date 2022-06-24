@@ -1312,6 +1312,14 @@ Number  = [0-9]+
              ></A
           ></S>
 	</tc:assert-xml>
+        <tc:assert-xml>
+          <S ixml:state="ambiguous"
+             ><A
+             ><A><A><A>aaaa</A><A>a</A></A
+             ><A>a</A></A><A>a</A></A><A>a</A
+             ></S>
+        </tc:assert-xml>
+	<!-- ... -->
       </tc:result>
     </tc:test-case>
     <tc:test-case name="g12.r06">
