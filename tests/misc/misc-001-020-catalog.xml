@@ -1112,6 +1112,15 @@ Number  = [0-9]+
                ><B><B><C>x</C></B></B
             ></S>
 	  </tc:assert-xml>
+          <tc:assert-xml>
+            <S ixml:state="ambiguous"
+               ><B/><A><A>x</A><C/></A
+               ></S>
+          </tc:assert-xml>
+          <tc:assert-xml>
+            <S ixml:state="ambiguous"
+               ><A/><B>x</B></S>
+          </tc:assert-xml>
 	  <!-- ... etc. ... -->
 	</tc:result>
       </tc:test-case>
@@ -1318,6 +1327,17 @@ Number  = [0-9]+
              ><A><A><A>aaaa</A><A>a</A></A
              ><A>a</A></A><A>a</A></A><A>a</A
              ></S>
+        </tc:assert-xml>
+        <tc:assert-xml>
+          <S ixml:state="ambiguous"
+             ><A>aaa</A><A><A>a</A><A>a</A
+             ><A><A>a</A><A>a</A></A
+             ><A>a</A></A></S>
+        </tc:assert-xml>
+        <tc:assert-xml>
+          <S ixml:state="ambiguous"
+             ><A>aaaaaa</A
+             ><A>aa</A></S>
         </tc:assert-xml>
 	<!-- ... -->
       </tc:result>
