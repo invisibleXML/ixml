@@ -1,5 +1,5 @@
 <test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
-	      release-date="2022-06-01"
+	      release-date="2022-06-28"
 	      name="Error tests">
 
   <description>
@@ -44,7 +44,7 @@
     <grammar-test>
       <result>
 	<assert-xml>
-	  <ixml
+	  <ixml xmlns=""
 	    ><rule name="S"><alt><nonterminal name="ª"/></alt></rule
 	    ><rule name="ª" mark="-"><alt><literal string="a"/></alt></rule
 	  ></ixml>	  
@@ -54,7 +54,7 @@
     
     <test-case name="hidden-1">
       <test-string>a</test-string>
-      <result><assert-xml><S>a</S></assert-xml></result>
+      <result><assert-xml><S xmlns="">a</S></assert-xml></result>
     </test-case>
     <test-case name="hidden-2">
       <test-string></test-string>
@@ -87,7 +87,7 @@
     <grammar-test>
       <result>
 	<assert-xml>
-	  <ixml
+	  <ixml xmlns=""
 	    ><rule name="S"
 	      ><alt><nonterminal name="ª"/></alt
 	      ><alt><nonterminal name="B"/></alt
@@ -109,7 +109,7 @@
     </test-case>
     <test-case name="nonhidden-3">
       <test-string>b</test-string>
-      <result><assert-xml><S><B>b</B></S></assert-xml></result>
+      <result><assert-xml><S xmlns=""><B>b</B></S></assert-xml></result>
     </test-case>
     <test-case name="nonhidden-4">
       <test-string>aa</test-string>
@@ -269,8 +269,13 @@
       characters in a different way.</p>
       <p>This test set is for sanity checking the inputs of the
       following test set: the grammar accepts a range of non-XML
-      characters but hides all of them, but indicates in the output
-      where they were.</p>
+      characters but hides all of them, indicating in the output
+      where they were.  When the outputs of these tests are as
+      expected, we can have some confidence about exactly which
+      invisible characters are where in the test-case inputs.  We
+      can then use the same test-case inputs with a grammar that
+      does not hide all of the non-XML characters but tries instead
+      to serialize them.</p>
     </description>
     <ixml-grammar-ref href="non-XML-chars-all-hidden.ixml"/>
     <grammar-test>
