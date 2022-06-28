@@ -1,7 +1,7 @@
 <tc:test-catalog xmlns:tc="https://github.com/invisibleXML/ixml/test-catalog"
 		 xmlns:ixml="http://invisiblexml.org/NS"
 		 name="Misc tests 2"
-		 release-date="2022-06-13"
+		 release-date="2022-06-28"
 		 >
   <tc:description>
     <tc:p>Grammars 21-40.</tc:p>
@@ -1172,7 +1172,21 @@
 		></C></Z></D></C></B></F></E></D></C></Z></D
 	      ></C></Z></D></C></Z></D></C></Z></D></C></B
 	    ></Y></E></D></C></B></Y></E></D></C></B></A
-	  ></S>
+          ></S>
+	</tc:assert-xml>
+	<tc:assert-xml>
+          <S xmlns:ixml="http://invisiblexml.org/NS"
+              ixml:state="ambiguous"
+             ><A><B><C><D><Z><C><D><E><Y><B
+               ><C><D><Z><C><D><E><F><B><C><D
+                 ><Z><C><D><E><Y><B><C><D><Z><C
+                   ><D><E><F
+                     ><G
+                   /></F></E></D
+                 ></C></Z></D></C></B></Y></E></D></C></Z
+               ></D></C></B></F></E></D></C></Z></D></C
+             ></B></Y></E></D></C></Z></D></C></B></A
+          ></S>	  
 	</tc:assert-xml>
 	
 	<!--* and many many more *-->
