@@ -19,8 +19,7 @@
   <test-set name="syntax-xml-instance">
     <created by="SP" on="2021-12-16"/>
 
-    <vxml-grammar-ref href="/mine/ixml.xml"/>
-    <!--<vxml-grammar-ref href="../reference/ixml.xml"/>-->
+    <vxml-grammar-ref href="../reference/ixml.xml"/>
     
     <test-case name="class-range">
       <test-string-ref href="class-range.ixml"/>
