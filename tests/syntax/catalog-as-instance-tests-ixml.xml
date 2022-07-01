@@ -18,8 +18,7 @@
 
   <test-set name="syntax-ixml">
     <created by="SP" on="2021-12-16"/>
-    <ixml-grammar-ref href="/mine/ixml.ixml"/>
-    <!--<ixml-grammar-ref href="../reference/ixml.ixml"/>-->
+    <ixml-grammar-ref href="../reference/ixml.ixml"/>
     
     <test-case name="class-range">
       <test-string-ref href="class-range.ixml"/>
