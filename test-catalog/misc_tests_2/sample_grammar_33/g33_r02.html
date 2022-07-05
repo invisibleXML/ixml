@@ -1,0 +1,101 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../misc_tests_2">Misc tests 2</a>&nbsp;/&nbsp;<a href="../../misc_tests_2/sample_grammar_33">sample.grammar.33</a>&nbsp;/&nbsp;g33.r02</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Misc tests 2</h2><details><summary>13&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Grammars 21-40.</p>
+    <p>Test grammars compiled manually in 2018 and 2019,
+    re-packaged in 2022.</p>
+    <p>Added test cases where needed and moved to ixml test
+    collection, June 2022.</p>
+  </div></details><h3 class="title">sample.grammar.33</h3><p>Created 08&nbsp;Feb&nbsp;2022 by cmsmcq</p><div class="description">
+      <p>Grammar for the toy programming language Tosca. </p>
+      <p>From Susan Stepney, High integrity compilation: a case study. Hemel 
+      Hempstead: Prentice Hall International, 1993. Web edition.  Tosca is 
+      defined in chapter 4; the concrete syntax is specified using Z, not 
+      using a grammar, and leaves some things undefined, so the grammar
+      given here is a bit of a reconstruction.</p>
+      <p>
+      </p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{ program is defined in section 4.8 }
+program: S, decl**S, S, cmd, S.
+
+{ Names are described in 4.3 but left indeterminate syntactically;
+I've made them like the SGML reference concrete syntax. }
+NAME: letter, namechar*.
+-letter:  ["a"-"z"; "A"-"Z"].
+-digit: ["0"-"9"].
+-namechar:  letter; digit; ["-"; "."; "_"].
+
+{ Types are described in 4.3 }
+TYPE:  "int"; "bool".
+boolean:  "true"; "false".
+number:  digit+.
+
+{ declarations:  section 4.4 }
+decl:  NAME, S, -":", S, TYPE, S, -";".
+
+{ operators, section 4.5 }
+unaryOp: negate; not.  
+
+negate: "-".
+not: "not".
+
+binaryOp: plus; minus; less; greater; equal; or; and.  
+plus: -"+".
+minus: -"-".
+less: -"&lt;".
+greater: -"&gt;".
+equal: -"=".
+or: -"or".
+and: -"and".
+
+{ expressions:  4.6 }
+expr:  constant; variable; unaryExpr; binaryExpr.
+constant:  number; boolean.
+variable:  NAME.
+unaryExpr:  unaryOp, S, expr.
+binaryExpr:  -"(", S, expr, S, binaryOp, S, expr, S, -")".
+
+{ commands:  4.7 }
+cmd: (skip; block; assign; choice; loop; input; output).
+cmdseq: (cmd, S, -";", S)+.
+skip: -"skip".
+block:  -"begin", S, cmdseq, -"end".
+assign: variable, S, -":=", S, expr.
+choice: -"if", S, condition, S, -"then", S, iftrue, -"else", S, iffalse.
+condition: -expr.
+iftrue: cmd.
+iffalse: cmd.
+loop: -"while", S, expr, S, -"do", S, cmd.
+input: -"input", S, NAME.
+output: -"output", S, expr.
+
+{ Stepney does not specify whitespace or comment rules. }
+-S: (ws; comment)*.
+-ws: -[#20; #0A; #09; #0D].
+comment: -"/*", nonstar*, ("*", nonstarnonslash*)*, -"*/".
+nonstar: ~["*"]. 
+nonstarnonslash: ~["*"; "/"]. 
+
+</code></pre></div><h1>Test case: g33.r02</h1><details><p>Repository URI: <code>…/tests/misc/misc-021-040-catalog.xml</code></p></details>
+      <div class="test-string"><h4>Input string (310 characters)</h4><pre><code>
+	n, sq, limit : int ;
+        begin
+	     n := 1 ; sq := 1 ;
+	     input limit ;
+             output sq ;
+             while ( n &lt; limit ) do
+             begin
+                  sq := ( ( sq + 1 ) + ( n + n ) ) ;
+                  n := ( n + 1 ) ;
+                  output sq ;
+             end ;
+	end
+      </code></pre></div>
+      <div class="result unsuccessful"><h4>Expected result</h4>
+	<p class="not-a-sentence">The input does not match the grammar.</p>
+      </div>
+    </main></body></html>

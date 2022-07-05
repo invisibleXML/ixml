@@ -1,0 +1,1206 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../misc_tests_3">Misc tests 3</a>&nbsp;/&nbsp;<a href="../../misc_tests_3/sample_grammar_41ter">sample.grammar.41ter</a>&nbsp;/&nbsp;Grammar test</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Misc tests 3</h2><details><summary>21&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Grammars 41-60.</p>
+    <p>Tests compiled manually in 2018 and 2019, re-packaged and
+    extended (supplying test cases where needed) in 2022.</p>
+  </div><div class="description">
+    <p>Note that some tests have alternate results for processors
+    operating in non-standard modes, in particular modes in which
+    they tolerate multiple definitions and undefined nonterminals
+    or in which they do not tolerate non-productive nonterminals
+    or unreachable nonterminals.</p>
+    <p>For a description of the form in which alternate results
+    are recorded, see tests/misc-grammar/test-catalog.xml.</p>
+  </div></details><h3 class="title">sample.grammar.41ter</h3><p>Created 08&nbsp;Feb&nbsp;2022 by cmsmcq</p><div class="description">
+      <p>
+	Sample grammar derived from one in Niklaus Wirth, Grundlagen
+	und Techniken des Compilerbaus (Bonn: Addison-Wesley, 1996),
+	pp. 36-37.
+      </p>
+      <p>
+	Derived from sample.grammar.41bis by rewriting the expression
+	syntax so that nonterminals are visible in the XML only when
+	needed to group multiple children and invisible if they have
+	only one child.
+      </p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{ Sample grammar from Niklaus Wirth, Grundlagen und Techniken des
+Compilerbaus (Bonn: Addison-Wesley, 1996), pp. 36-37.
+
+Oberon-0.
+
+Rules for ws added for convenience; Wirth assumes the lexer
+eats whitespace. }
+
+{ Revisions:
+  2022-06-15 : CMSMcQ : Use the Lumley construction to trim expressions.
+  2022-06-15 : CMSMcQ : revise S handling again (leading ws pattern).
+                        Make selector and procedures reject epsilon
+                        for clarity in the output
+  2022-06-14 : CMSMcQ : revise S handling (tight tags, where possible).
+                        Hide most literals, use pre-terminal symbols.
+  2018-08-10 : CMSMcQ : correct syntax errors found by DCG parser
+  2018-08-09 : CMSMcQ : made first transcription; needs testing, since
+      the translation from Wirth's EBNF is error-prone.
+}
+
+{ We move the rule for module to the front, since it is the
+start symbol. }
+
+            module = S?, -"MODULE", S, @ident, -";", S?,
+                     declarations,
+                     (-"BEGIN", S?, StatementSequence)?,
+                     -"END", S, @ident_close, -".", S?.
+    
+             ident = letter, (letter; digit)*, S?.
+       ident_close = ident.
+           integer = digit, (digit)*, S?.
+          selector = (member; subscript)+.
+	    member = -".", S?, ident.
+	 subscript = -"[", S?, EXPRESSION, -"]", S?.
+         {selector = (".", S?, ident; "[", S?, expression, "]", S?)*.}
+           -number = integer.
+           -FACTOR = ident
+	           ; number
+		   ; -"(", S?, EXPRESSION, -")", S?
+		   ; factor
+		   .
+            factor = ident, selector
+	           ; "~", S?, FACTOR
+		   .
+             -TERM = FACTOR; term.
+              term = FACTOR, (TIMES; DIV; MOD; AND), FACTOR++(TIMES; DIV; MOD; AND).
+             {term = factor++(TIMES; DIV; MOD; AND).}
+	      
+ -SIMPLEEXPRESSION =  (PLUS; MINUS)?, TERM; SimpleExpression.
+  SimpleExpression =  (PLUS; MINUS)?, TERM, (PLUS; MINUS; OR), TERM++(PLUS; MINUS; OR).
+ {SimpleExpression =  (PLUS; MINUS)?, term++(PLUS; MINUS; OR).}
+
+    { N.B. Simplexpression allows 1, -1, 1 + 1,
+      -1 + 1, but not 1 + -1.
+      I expect that's intentional.
+      I've made it also forbid white space between sign and term.
+    }    
+ 
+       -EXPRESSION = SIMPLEEXPRESSION; expression.
+        expression = SIMPLEEXPRESSION, -COMPARATOR, SIMPLEEXPRESSION.
+       {expression = SimpleExpression, (-COMPARATOR, SimpleExpression)?.}
+       -COMPARATOR = EQL; NEQ; LSS; LEQ; GTR; GEQ.
+        assignment = ident, selector?, -":=", S?, EXPRESSION.
+  ActualParameters = -"(", S?, EXPRESSION**(-",", S?), -")", S?.
+     ProcedureCall = ident, selector?, ActualParameters?.
+       IfStatement = -"IF", S?, condition, 
+                     -"THEN", S?, then-stmts,
+                     (-"ELSIF", S?, condition, 
+		     -"THEN", S?, then-stmts)*,
+                     (-"ELSE", S?, else-stmts)?,
+		     -"END", S?.
+         condition = -EXPRESSION.
+        then-stmts = -StatementSequence.
+        else-stmts = -StatementSequence.
+    WhileStatement = -"WHILE", S?, condition, 
+                     -"DO", S?, do-statements,
+		     -"END", S?.
+     do-statements = -StatementSequence.
+
+         statement = {}
+	 	   ; assignment
+		   ; ProcedureCall
+		   ; IfStatement
+		   ; WhileStatement
+		   .
+ StatementSequence = statement++(-";", S?).
+ 
+ { Wirth's formulation is closer to the following, but that complicates whitespace
+   handling. 
+
+         statement = (assignment; ProcedureCall; IfStatement; WhileStatement)?.
+ StatementSequence = statement++SEMI.
+ }
+
+         IdentList = ident++(-",", S?).
+         ArrayType = -"ARRAY", S?, EXPRESSION, -"OF", S?, type.
+         FieldList = (IdentList, -":", S?, type)?.
+        RecordType = -"RECORD", S?, FieldList++(-";", S?), -"END", S?.
+              type = ident
+	           ; ArrayType
+		   ; RecordType
+		   .
+         FPSection = (-"VAR", S)?, IdentList, -":", S?, type.
+  FormalParameters = -"(", S?, FPSection**(-";", S?), -")", S?.
+  ProcedureHeading = -"PROCEDURE", S, ident, FormalParameters?.
+     ProcedureBody = declarations, 
+                     (-"BEGIN", S?, StatementSequence)?,
+		     -"END", S, @ident.
+ProcedureDeclaration
+                   = ProcedureHeading, -";", S?, ProcedureBody.
+      declarations = constants?, types?, variables?, procedures?.
+         constants = -"CONST", S, (ident, -"=", S?, EXPRESSION, -";", S?)*.
+             types = -"TYPE", S, (IdentList, -"=", S?, type, -";", S?)*.
+         variables = -"VAR", S, (IdentList, -":", S?, type, -";", S?)*.
+        procedures = (ProcedureDeclaration, -";", S?)+.
+
+{ S and comment added here to make the grammar usable without
+  a scanner. N.B. Comments nest. }
+                -S = (ws; comment)+.
+               -ws = -[" "; #09; #0A; #0D].
+
+           comment = -"(*", comment-body, -"*)".
+      comment-body = comment-chars, ((comment++comment-chars), comment-chars?)?.
+    -comment-chars = (cc1; cc2; cc3)+, star*, lpar* | star+, lpar* | lpar+.
+              -cc1 = not-star-or-lpar.
+              -cc2 = lpar+, not-star-or-lpar.
+	      -cc3 = star+, lpar+, not-star-or-lpar
+                   | star+, not-star-or-lrpar.
+ -not-star-or-lpar = ~["*("].
+-not-star-or-lrpar = ~["(*)"].
+             -lpar = "(".
+	     -star = "*".
+
+            -digit = ['0'-'9'].
+           -letter = ['a'-'z'; 'A'-'Z'].
+
+             TIMES = -"*", S?.
+	       DIV = -"DIV", S?.
+	       MOD = -"MOD", S?.
+	       AND = -"AND", S?.
+	      PLUS = -"+", S?.
+	     MINUS = -"-", S?.
+	        OR = -"OR", S?.
+               EQL = -"=", S?.
+	       NEQ = -"#", S?.
+	       LSS = -"&lt;", S?.
+	       LEQ = -"&lt;=", S?.
+	       GTR = -"&gt;", S?.
+	       GEQ = -"&gt;=", S?.
+
+{ Separators }
+
+</code></pre></div><h1>Test case: Grammar test</h1><details><p>Repository URI: <code>…/tests/misc/misc-041-060-catalog.xml</code></p></details>
+      <div class="result"><h4>Expected result</h4>
+	<div class="xml-result"><pre><code>&lt;ixml&gt;
+   &lt;comment&gt; Sample grammar from Niklaus Wirth, Grundlagen und Techniken des
+Compilerbaus (Bonn: Addison-Wesley, 1996), pp. 36-37.
+
+Oberon-0.
+
+Rules for ws added for convenience; Wirth assumes the lexer
+eats whitespace. &lt;/comment&gt;
+   &lt;comment&gt; Revisions:
+  2022-06-15 : CMSMcQ : Use the Lumley construction to trim expressions.
+  2022-06-15 : CMSMcQ : revise S handling again (leading ws pattern).
+                        Make selector and procedures reject epsilon
+                        for clarity in the output
+  2022-06-14 : CMSMcQ : revise S handling (tight tags, where possible).
+                        Hide most literals, use pre-terminal symbols.
+  2018-08-10 : CMSMcQ : correct syntax errors found by DCG parser
+  2018-08-09 : CMSMcQ : made first transcription; needs testing, since
+      the translation from Wirth's EBNF is error-prone.
+&lt;/comment&gt;
+   &lt;comment&gt; We move the rule for module to the front, since it is the
+start symbol. &lt;/comment&gt;
+   &lt;rule name="module"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;literal tmark="-" string="MODULE"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;nonterminal mark="@" name="ident"/&gt;
+         &lt;literal tmark="-" string=";"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="declarations"/&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;literal tmark="-" string="BEGIN"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="StatementSequence"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;literal tmark="-" string="END"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;nonterminal mark="@" name="ident_close"/&gt;
+         &lt;literal tmark="-" string="."/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ident"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="letter"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="letter"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="digit"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ident_close"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="integer"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="digit"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="digit"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="selector"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="member"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="subscript"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="member"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="."/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="ident"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="subscript"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="["/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="EXPRESSION"/&gt;
+         &lt;literal tmark="-" string="]"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt;selector = (".", S?, ident; "[", S?, expression, "]", S?)*.&lt;/comment&gt;
+   &lt;rule mark="-" name="number"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="integer"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="FACTOR"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="number"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="("/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="EXPRESSION"/&gt;
+         &lt;literal tmark="-" string=")"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="factor"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="factor"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+         &lt;nonterminal name="selector"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;literal string="~"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="FACTOR"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="TERM"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="FACTOR"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="term"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="term"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="FACTOR"/&gt;
+         &lt;alts&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="TIMES"/&gt;
+            &lt;/alt&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="DIV"/&gt;
+            &lt;/alt&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="MOD"/&gt;
+            &lt;/alt&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="AND"/&gt;
+            &lt;/alt&gt;
+         &lt;/alts&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="FACTOR"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="TIMES"/&gt;
+                  &lt;/alt&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="DIV"/&gt;
+                  &lt;/alt&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="MOD"/&gt;
+                  &lt;/alt&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="AND"/&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt;term = factor++(TIMES; DIV; MOD; AND).&lt;/comment&gt;
+   &lt;rule mark="-" name="SIMPLEEXPRESSION"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="PLUS"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="MINUS"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="TERM"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SimpleExpression"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SimpleExpression"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="PLUS"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="MINUS"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="TERM"/&gt;
+         &lt;alts&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="PLUS"/&gt;
+            &lt;/alt&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="MINUS"/&gt;
+            &lt;/alt&gt;
+            &lt;alt&gt;
+               &lt;nonterminal name="OR"/&gt;
+            &lt;/alt&gt;
+         &lt;/alts&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="TERM"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="PLUS"/&gt;
+                  &lt;/alt&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="MINUS"/&gt;
+                  &lt;/alt&gt;
+                  &lt;alt&gt;
+                     &lt;nonterminal name="OR"/&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt;SimpleExpression =  (PLUS; MINUS)?, term++(PLUS; MINUS; OR).&lt;/comment&gt;
+   &lt;comment&gt; N.B. Simplexpression allows 1, -1, 1 + 1,
+      -1 + 1, but not 1 + -1.
+      I expect that's intentional.
+      I've made it also forbid white space between sign and term.
+    &lt;/comment&gt;
+   &lt;rule mark="-" name="EXPRESSION"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SIMPLEEXPRESSION"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="expression"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="expression"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SIMPLEEXPRESSION"/&gt;
+         &lt;nonterminal mark="-" name="COMPARATOR"/&gt;
+         &lt;nonterminal name="SIMPLEEXPRESSION"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt;expression = SimpleExpression, (-COMPARATOR, SimpleExpression)?.&lt;/comment&gt;
+   &lt;rule mark="-" name="COMPARATOR"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="EQL"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="NEQ"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="LSS"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="LEQ"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="GTR"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="GEQ"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="assignment"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="selector"/&gt;
+         &lt;/option&gt;
+         &lt;literal tmark="-" string=":="/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="EXPRESSION"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ActualParameters"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="("/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="EXPRESSION"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal tmark="-" string=","/&gt;
+                     &lt;option&gt;
+                        &lt;nonterminal name="S"/&gt;
+                     &lt;/option&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat0&gt;
+         &lt;literal tmark="-" string=")"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ProcedureCall"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="selector"/&gt;
+         &lt;/option&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="ActualParameters"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="IfStatement"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="IF"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="condition"/&gt;
+         &lt;literal tmark="-" string="THEN"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="then-stmts"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;literal tmark="-" string="ELSIF"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="condition"/&gt;
+                  &lt;literal tmark="-" string="THEN"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="then-stmts"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;literal tmark="-" string="ELSE"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="else-stmts"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;literal tmark="-" string="END"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="condition"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal mark="-" name="EXPRESSION"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="then-stmts"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal mark="-" name="StatementSequence"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="else-stmts"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal mark="-" name="StatementSequence"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="WhileStatement"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="WHILE"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="condition"/&gt;
+         &lt;literal tmark="-" string="DO"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="do-statements"/&gt;
+         &lt;literal tmark="-" string="END"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="do-statements"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal mark="-" name="StatementSequence"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="statement"&gt;
+      &lt;comment/&gt;
+      &lt;alt/&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="assignment"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ProcedureCall"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="IfStatement"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="WhileStatement"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="StatementSequence"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="statement"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal tmark="-" string=";"/&gt;
+                     &lt;option&gt;
+                        &lt;nonterminal name="S"/&gt;
+                     &lt;/option&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt; Wirth's formulation is closer to the following, but that complicates whitespace
+   handling. 
+
+         statement = (assignment; ProcedureCall; IfStatement; WhileStatement)?.
+ StatementSequence = statement++SEMI.
+ &lt;/comment&gt;
+   &lt;rule name="IdentList"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="ident"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal tmark="-" string=","/&gt;
+                     &lt;option&gt;
+                        &lt;nonterminal name="S"/&gt;
+                     &lt;/option&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ArrayType"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="ARRAY"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="EXPRESSION"/&gt;
+         &lt;literal tmark="-" string="OF"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="type"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="FieldList"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="IdentList"/&gt;
+                  &lt;literal tmark="-" string=":"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="type"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="RecordType"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="RECORD"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="FieldList"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal tmark="-" string=";"/&gt;
+                     &lt;option&gt;
+                        &lt;nonterminal name="S"/&gt;
+                     &lt;/option&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat1&gt;
+         &lt;literal tmark="-" string="END"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="type"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ident"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ArrayType"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="RecordType"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="FPSection"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;literal tmark="-" string="VAR"/&gt;
+                  &lt;nonterminal name="S"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="IdentList"/&gt;
+         &lt;literal tmark="-" string=":"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="type"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="FormalParameters"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="("/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="FPSection"/&gt;
+            &lt;sep&gt;
+               &lt;alts&gt;
+                  &lt;alt&gt;
+                     &lt;literal tmark="-" string=";"/&gt;
+                     &lt;option&gt;
+                        &lt;nonterminal name="S"/&gt;
+                     &lt;/option&gt;
+                  &lt;/alt&gt;
+               &lt;/alts&gt;
+            &lt;/sep&gt;
+         &lt;/repeat0&gt;
+         &lt;literal tmark="-" string=")"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ProcedureHeading"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="PROCEDURE"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;nonterminal name="ident"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="FormalParameters"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ProcedureBody"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="declarations"/&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;literal tmark="-" string="BEGIN"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="StatementSequence"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+         &lt;literal tmark="-" string="END"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;nonterminal mark="@" name="ident"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ProcedureDeclaration"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ProcedureHeading"/&gt;
+         &lt;literal tmark="-" string=";"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+         &lt;nonterminal name="ProcedureBody"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="declarations"&gt;
+      &lt;alt&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="constants"/&gt;
+         &lt;/option&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="types"/&gt;
+         &lt;/option&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="variables"/&gt;
+         &lt;/option&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="procedures"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="constants"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="CONST"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="ident"/&gt;
+                  &lt;literal tmark="-" string="="/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="EXPRESSION"/&gt;
+                  &lt;literal tmark="-" string=";"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="types"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="TYPE"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="IdentList"/&gt;
+                  &lt;literal tmark="-" string="="/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="type"/&gt;
+                  &lt;literal tmark="-" string=";"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="variables"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="VAR"/&gt;
+         &lt;nonterminal name="S"/&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="IdentList"/&gt;
+                  &lt;literal tmark="-" string=":"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+                  &lt;nonterminal name="type"/&gt;
+                  &lt;literal tmark="-" string=";"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="procedures"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="ProcedureDeclaration"/&gt;
+                  &lt;literal tmark="-" string=";"/&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="S"/&gt;
+                  &lt;/option&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt; S and comment added here to make the grammar usable without
+  a scanner. N.B. Comments nest. &lt;/comment&gt;
+   &lt;rule mark="-" name="S"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="ws"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="comment"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="ws"&gt;
+      &lt;alt&gt;
+         &lt;inclusion tmark="-"&gt;
+            &lt;member string=" "/&gt;
+            &lt;member hex="09"/&gt;
+            &lt;member hex="0A"/&gt;
+            &lt;member hex="0D"/&gt;
+         &lt;/inclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="comment"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="(*"/&gt;
+         &lt;nonterminal name="comment-body"/&gt;
+         &lt;literal tmark="-" string="*)"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="comment-body"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="comment-chars"/&gt;
+         &lt;option&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;alts&gt;
+                     &lt;alt&gt;
+                        &lt;repeat1&gt;
+                           &lt;nonterminal name="comment"/&gt;
+                           &lt;sep&gt;
+                              &lt;nonterminal name="comment-chars"/&gt;
+                           &lt;/sep&gt;
+                        &lt;/repeat1&gt;
+                     &lt;/alt&gt;
+                  &lt;/alts&gt;
+                  &lt;option&gt;
+                     &lt;nonterminal name="comment-chars"/&gt;
+                  &lt;/option&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="comment-chars"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="cc1"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="cc2"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="cc3"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat1&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="star"/&gt;
+         &lt;/repeat0&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="lpar"/&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="star"/&gt;
+         &lt;/repeat1&gt;
+         &lt;repeat0&gt;
+            &lt;nonterminal name="lpar"/&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="lpar"/&gt;
+         &lt;/repeat1&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="cc1"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="not-star-or-lpar"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="cc2"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="lpar"/&gt;
+         &lt;/repeat1&gt;
+         &lt;nonterminal name="not-star-or-lpar"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="cc3"&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="star"/&gt;
+         &lt;/repeat1&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="lpar"/&gt;
+         &lt;/repeat1&gt;
+         &lt;nonterminal name="not-star-or-lpar"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;repeat1&gt;
+            &lt;nonterminal name="star"/&gt;
+         &lt;/repeat1&gt;
+         &lt;nonterminal name="not-star-or-lrpar"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="not-star-or-lpar"&gt;
+      &lt;alt&gt;
+         &lt;exclusion&gt;
+            &lt;member string="*("/&gt;
+         &lt;/exclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="not-star-or-lrpar"&gt;
+      &lt;alt&gt;
+         &lt;exclusion&gt;
+            &lt;member string="(*)"/&gt;
+         &lt;/exclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="lpar"&gt;
+      &lt;alt&gt;
+         &lt;literal string="("/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="star"&gt;
+      &lt;alt&gt;
+         &lt;literal string="*"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="digit"&gt;
+      &lt;alt&gt;
+         &lt;inclusion&gt;
+            &lt;member from="0" to="9"/&gt;
+         &lt;/inclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="letter"&gt;
+      &lt;alt&gt;
+         &lt;inclusion&gt;
+            &lt;member from="a" to="z"/&gt;
+            &lt;member from="A" to="Z"/&gt;
+         &lt;/inclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="TIMES"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="*"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DIV"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="DIV"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="MOD"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="MOD"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="AND"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="AND"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="PLUS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="+"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="MINUS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="-"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="OR"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="OR"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="EQL"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="="/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="NEQ"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="#"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="LSS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="&amp;lt;"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="LEQ"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="&amp;lt;="/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="GTR"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="&amp;gt;"/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="GEQ"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" string="&amp;gt;="/&gt;
+         &lt;option&gt;
+            &lt;nonterminal name="S"/&gt;
+         &lt;/option&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;comment&gt; Separators &lt;/comment&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

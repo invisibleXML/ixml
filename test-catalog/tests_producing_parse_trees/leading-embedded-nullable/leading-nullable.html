@@ -1,0 +1,31 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../tests_producing_parse_trees">Tests producing parse trees</a>&nbsp;/&nbsp;<a href="../../tests_producing_parse_trees/leading-embedded-nullable">leading-embedded-nullable</a>&nbsp;/&nbsp;leading-nullable</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Tests producing parse trees</h2><details><summary>17&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+
+  </div></details><h3 class="title">leading-embedded-nullable</h3><div class="description">
+      <p>Test that repeated nullable nonterminals are handled correctly.</p>
+    </div><p>Created 17&nbsp;Jun&nbsp;2022 by ndw</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>
+      S = B, B, 'a'.
+      B = C .
+      C = .
+    </code></pre></div><h1>Test case: leading-nullable</h1><details><p>Repository URI: <code>…/tests/correct/test-catalog.xml</code></p></details>
+      <p>Created 17&nbsp;Jun&nbsp;2022 by ndw</p>
+      <div class="test-string"><h4>Input string (1 character)</h4><pre><code>a</code></pre></div>
+      <div class="result"><h4>Expected result</h4>
+	<div class="xml-result"><pre><code>&lt;S&gt;
+   &lt;B&gt;
+      &lt;C/&gt;
+   &lt;/B&gt;
+   &lt;B&gt;
+      &lt;C/&gt;
+   &lt;/B&gt;a&lt;/S&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

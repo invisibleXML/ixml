@@ -1,0 +1,444 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../error_tests">Error tests</a>&nbsp;/&nbsp;<a href="../../error_tests/non-xml-char-in-input-output-clear">non-XML-char-in-input-output-clear</a>&nbsp;/&nbsp;Grammar test</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Error tests</h2><details><summary>28&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests intended to demonstrate errors that processors are required
+    to raise.</p>
+  </div></details><h3 class="title">non-XML-char-in-input-output-clear</h3><p>Created 20&nbsp;Jun&nbsp;2022 by MSM</p><div class="description">
+      <p>Followup to invalid-char.  Tests for serialization of non-XML
+      characters in a different way.</p>
+      <p>This test set is for sanity checking the inputs of the
+      following test set: the grammar accepts a range of non-XML
+      characters but hides all of them, indicating in the output
+      where they were.  When the outputs of these tests are as
+      expected, we can have some confidence about exactly which
+      invisible characters are where in the test-case inputs.  We
+      can then use the same test-case inputs with a grammar that
+      does not hide all of the non-XML characters but tries instead
+      to serialize them.</p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{ Grammar for experiments with non-XML characters in input.
+
+  In this grammar, non-XML characters are accepted in the
+  input but are not shown in the output.  It's used for
+  sanity-checking the inputs for tests of the companion
+  grammar in which not all control characters are hidden.
+
+  Since we need non-XML characters in the input, and the only 
+  non-XML characters we can make are in the C0 range, the 
+  input and output are likely to be challenging to check.
+  
+  You have been warned.
+}
+S: (show; hide; printable)*.
+
+NUL: -#00 { null }.
+SOH: -#01 { start of header }.
+STX: -#02 { start of text }.
+ETX: -#03 { end of text }.
+EOT: -#04 { end of transmission }.
+ENQ: -#05 { enquiry ('are you there?') }.
+ACK: -#06 { acknowledgement ('yes i am here') }.
+BEL: -#07 { bell }.
+BS:  -#08 { backspace }.
+HT:  -#09 { horizontal tab, an XML character, but 
+           not a prime, so it's in the 'hide' category }.
+LF:  -#0A { linefeed, also an XML character }.
+VT:  -#0B { vertical tabulation }.
+FF:  -#0C { form feed }.
+CR:  -#0D { carriage return (an XML character) }.
+SO:  -#0E { shift out (to alternate character set }.
+SI:  -#0F { shift in (from alternate character set }.
+DLE: -#10 { data link escape }.
+DC1: -#11 { device-control 1 / XON }.
+DC2: -#12 { device-control 2 }.
+DC3: -#13 { device-control 3 / XOFF }.
+DC4: -#14 { device-control 4 }.
+NAK: -#15 { negative acknowledgement }.
+SYN: -#16 { synchronous idle }.
+ETB: -#17 { end of transmission block / end of paragraph }.
+CAN: -#18 { cancel }.
+EM:  -#19 { end of medium / em-space / beginning of paragraph }.
+SUB: -#1A { substitute (often used for end of file) }.
+ESC: -#1B { escape }.
+FS:  -#1C { file separator }.
+GS:  -#1D { group separator }.
+RS:  -#1E { record separator }.
+US:  -#1F { unit separator }.
+
+show: STX; ETX; ENQ; BEL; VT; CR; DC1; DC3; ETB; GS; US.
+hide:  NUL; SOH; EOT; ACK; BS; HT; LF; FF; SO; SI; DLE; DC2;
+        DC4; NAK; SYN; CAN; EM; SUB; ESC; FS; RS.
+
+-printable: [#20 - #7E].
+</code></pre></div><h1>Test case: Grammar test</h1><details><p>Repository URI: <code>…/tests/error/test-catalog.xml</code></p></details>
+      <div class="result"><h4>Expected result</h4>
+	<div class="xml-result"><pre><code>&lt;ixml&gt;
+   &lt;comment&gt; Grammar for experiments with non-XML characters in input.
+
+  In this grammar, non-XML characters are accepted in the
+  input but are not shown in the output.  It's used for
+  sanity-checking the inputs for tests of the companion
+  grammar in which not all control characters are hidden.
+
+  Since we need non-XML characters in the input, and the only 
+  non-XML characters we can make are in the C0 range, the 
+  input and output are likely to be challenging to check.
+  
+  You have been warned.
+&lt;/comment&gt;
+   &lt;rule name="S"&gt;
+      &lt;alt&gt;
+         &lt;repeat0&gt;
+            &lt;alts&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="show"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="hide"/&gt;
+               &lt;/alt&gt;
+               &lt;alt&gt;
+                  &lt;nonterminal name="printable"/&gt;
+               &lt;/alt&gt;
+            &lt;/alts&gt;
+         &lt;/repeat0&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="NUL"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="00"&gt;
+            &lt;comment&gt; null &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SOH"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="01"&gt;
+            &lt;comment&gt; start of header &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="STX"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="02"&gt;
+            &lt;comment&gt; start of text &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ETX"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="03"&gt;
+            &lt;comment&gt; end of text &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="EOT"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="04"&gt;
+            &lt;comment&gt; end of transmission &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ENQ"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="05"&gt;
+            &lt;comment&gt; enquiry ('are you there?') &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ACK"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="06"&gt;
+            &lt;comment&gt; acknowledgement ('yes i am here') &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="BEL"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="07"&gt;
+            &lt;comment&gt; bell &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="BS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="08"&gt;
+            &lt;comment&gt; backspace &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="HT"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="09"&gt;
+            &lt;comment&gt; horizontal tab, an XML character, but 
+           not a prime, so it's in the 'hide' category &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="LF"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0A"&gt;
+            &lt;comment&gt; linefeed, also an XML character &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="VT"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0B"&gt;
+            &lt;comment&gt; vertical tabulation &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="FF"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0C"&gt;
+            &lt;comment&gt; form feed &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="CR"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0D"&gt;
+            &lt;comment&gt; carriage return (an XML character) &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SO"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0E"&gt;
+            &lt;comment&gt; shift out (to alternate character set &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SI"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="0F"&gt;
+            &lt;comment&gt; shift in (from alternate character set &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DLE"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="10"&gt;
+            &lt;comment&gt; data link escape &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DC1"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="11"&gt;
+            &lt;comment&gt; device-control 1 / XON &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DC2"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="12"&gt;
+            &lt;comment&gt; device-control 2 &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DC3"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="13"&gt;
+            &lt;comment&gt; device-control 3 / XOFF &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="DC4"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="14"&gt;
+            &lt;comment&gt; device-control 4 &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="NAK"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="15"&gt;
+            &lt;comment&gt; negative acknowledgement &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SYN"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="16"&gt;
+            &lt;comment&gt; synchronous idle &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ETB"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="17"&gt;
+            &lt;comment&gt; end of transmission block / end of paragraph &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="CAN"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="18"&gt;
+            &lt;comment&gt; cancel &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="EM"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="19"&gt;
+            &lt;comment&gt; end of medium / em-space / beginning of paragraph &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="SUB"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1A"&gt;
+            &lt;comment&gt; substitute (often used for end of file) &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ESC"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1B"&gt;
+            &lt;comment&gt; escape &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="FS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1C"&gt;
+            &lt;comment&gt; file separator &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="GS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1D"&gt;
+            &lt;comment&gt; group separator &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="RS"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1E"&gt;
+            &lt;comment&gt; record separator &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="US"&gt;
+      &lt;alt&gt;
+         &lt;literal tmark="-" hex="1F"&gt;
+            &lt;comment&gt; unit separator &lt;/comment&gt;
+         &lt;/literal&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="show"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="STX"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ETX"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ENQ"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="BEL"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="VT"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="CR"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="DC1"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="DC3"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ETB"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="GS"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="US"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="hide"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="NUL"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SOH"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="EOT"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ACK"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="BS"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="HT"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="LF"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="FF"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SO"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SI"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="DLE"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="DC2"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="DC4"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="NAK"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SYN"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="CAN"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="EM"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="SUB"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ESC"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="FS"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="RS"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule mark="-" name="printable"&gt;
+      &lt;alt&gt;
+         &lt;inclusion&gt;
+            &lt;member from="#20" to="#7E"/&gt;
+         &lt;/inclusion&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

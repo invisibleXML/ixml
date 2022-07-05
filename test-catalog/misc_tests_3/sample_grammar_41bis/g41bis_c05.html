@@ -1,0 +1,229 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../misc_tests_3">Misc tests 3</a>&nbsp;/&nbsp;<a href="../../misc_tests_3/sample_grammar_41bis">sample.grammar.41bis</a>&nbsp;/&nbsp;g41bis.c05</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Misc tests 3</h2><details><summary>21&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Grammars 41-60.</p>
+    <p>Tests compiled manually in 2018 and 2019, re-packaged and
+    extended (supplying test cases where needed) in 2022.</p>
+  </div><div class="description">
+    <p>Note that some tests have alternate results for processors
+    operating in non-standard modes, in particular modes in which
+    they tolerate multiple definitions and undefined nonterminals
+    or in which they do not tolerate non-productive nonterminals
+    or unreachable nonterminals.</p>
+    <p>For a description of the form in which alternate results
+    are recorded, see tests/misc-grammar/test-catalog.xml.</p>
+  </div></details><h3 class="title">sample.grammar.41bis</h3><p>Created 08&nbsp;Feb&nbsp;2022 by cmsmcq</p><div class="description">
+      <p>
+	Sample grammar from Niklaus Wirth, Grundlagen und Techniken des
+	Compilerbaus (Bonn: Addison-Wesley, 1996), pp. 36-37.
+      </p>
+      <p>	
+	Same grammar as sample.grammar.41 except for whitespace
+	handling.  This grammar experiments with a pattern in which
+	every low-level token ends with optional whitespace; it's the
+	same pattern shown in the ixml specification grammar.  (A
+	different style is shown in sample.grammar.41bis.)
+      </p>
+      <p>
+	(For what it's worth: in some ways the raw parse tree produced
+	by this grammar feels off -- trailing whitespace is NOT part
+	of an identifier or number!  But this approach can be done
+	more or less mechanically and does not have trouble with
+	optional nonterminals or nonterminals which can produce the
+	empty string.  So unless whitespace must be exposed in the
+	result, this approach to whitespace appears preferable.)
+      </p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{ Sample grammar from Niklaus Wirth, Grundlagen und Techniken des
+Compilerbaus (Bonn: Addison-Wesley, 1996), pp. 36-37.
+
+Oberon-0.
+
+Rules for ws added for convenience; Wirth assumes the lexer
+eats whitespace. }
+
+{ Revisions:
+  2022-06-15 : CMSMcQ : revise S handling again (leading ws pattern).
+                        Make selector and procedures reject epsilon
+                        for clarity in the output
+  2022-06-14 : CMSMcQ : revise S handling (tight tags, where possible).
+                        Hide most literals, use pre-terminal symbols.
+  2018-08-10 : CMSMcQ : correct syntax errors found by DCG parser
+  2018-08-09 : CMSMcQ : made first transcription; needs testing, since
+      the translation from Wirth's EBNF is error-prone.
+}
+
+{ We move the rule for module to the front, since it is the
+start symbol. }
+
+            module = S?, -"MODULE", S, @ident, -";", S?,
+                     declarations,
+                     (-"BEGIN", S?, StatementSequence)?,
+                     -"END", S, @ident_close, -".", S?.
+    
+             ident = letter, (letter; digit)*, S?.
+       ident_close = ident.
+           integer = digit, (digit)*, S?.
+          selector = (member; subscript)+.
+	    member = -".", S?, ident.
+	 subscript = -"[", S?, expression, -"]", S?.
+         {selector = (".", S?, ident; "[", S?, expression, "]", S?)*.}
+            number = integer.
+            factor = ident, selector?
+	           ; number
+		   ; -"(", S?, expression, -")", S?
+		   ; "~", S?, factor
+		   .
+              term = factor++(TIMES; DIV; MOD; AND).
+	      
+  SimpleExpression =  (PLUS; MINUS)?, term++(PLUS; MINUS; OR).
+
+    { N.B. Simplexpression allows 1, -1, 1 + 1,
+      -1 + 1, but not 1 + -1.
+      I expect that's intentional.
+      I've made it also forbid white space between sign and term.
+    }    
+ 
+        expression = SimpleExpression, (-COMPARATOR, SimpleExpression)?.
+       -COMPARATOR = EQL; NEQ; LSS; LEQ; GTR; GEQ.
+        assignment = ident, selector?, -":=", S?, expression.
+  ActualParameters = -"(", S?, expression**(-",", S?), -")", S?.
+     ProcedureCall = ident, selector?, ActualParameters?.
+       IfStatement = -"IF", S?, condition, 
+                     -"THEN", S?, then-stmts,
+                     (-"ELSIF", S?, condition, 
+		     -"THEN", S?, then-stmts)*,
+                     (-"ELSE", S?, else-stmts)?,
+		     -"END", S?.
+         condition = -expression.
+        then-stmts = -StatementSequence.
+        else-stmts = -StatementSequence.
+    WhileStatement = -"WHILE", S?, condition, 
+                     -"DO", S?, do-statements,
+		     -"END", S?.
+     do-statements = -StatementSequence.
+
+         statement = {}
+	 	   ; assignment
+		   ; ProcedureCall
+		   ; IfStatement
+		   ; WhileStatement
+		   .
+ StatementSequence = statement++(-";", S?).
+ 
+ { Wirth's formulation is closer to the following, but that complicates whitespace
+   handling. 
+
+         statement = (assignment; ProcedureCall; IfStatement; WhileStatement)?.
+ StatementSequence = statement++SEMI.
+ }
+
+         IdentList = ident++(-",", S?).
+         ArrayType = -"ARRAY", S?, expression, -"OF", S?, type.
+         FieldList = (IdentList, -":", S?, type)?.
+        RecordType = -"RECORD", S?, FieldList++(-";", S?), -"END", S?.
+              type = ident
+	           ; ArrayType
+		   ; RecordType
+		   .
+         FPSection = (-"VAR", S)?, IdentList, -":", S?, type.
+  FormalParameters = -"(", S?, FPSection**(-";", S?), -")", S?.
+  ProcedureHeading = -"PROCEDURE", S, ident, FormalParameters?.
+     ProcedureBody = declarations, 
+                     (-"BEGIN", S?, StatementSequence)?,
+		     -"END", S, @ident.
+ProcedureDeclaration
+                   = ProcedureHeading, -";", S?, ProcedureBody.
+      declarations = constants?, types?, variables?, procedures?.
+         constants = -"CONST", S, (ident, -"=", S?, expression, -";", S?)*.
+             types = -"TYPE", S, (IdentList, -"=", S?, type, -";", S?)*.
+         variables = -"VAR", S, (IdentList, -":", S?, type, -";", S?)*.
+        procedures = (ProcedureDeclaration, -";", S?)+.
+
+{ S and comment added here to make the grammar usable without
+  a scanner. N.B. Comments nest. }
+                -S = (ws; comment)+.
+               -ws = -[" "; #09; #0A; #0D].
+
+           comment = -"(*", comment-body, -"*)".
+      comment-body = comment-chars, ((comment++comment-chars), comment-chars?)?.
+    -comment-chars = (cc1; cc2; cc3)+, star*, lpar* | star+, lpar* | lpar+.
+              -cc1 = not-star-or-lpar.
+              -cc2 = lpar+, not-star-or-lpar.
+	      -cc3 = star+, lpar+, not-star-or-lpar
+                   | star+, not-star-or-lrpar.
+ -not-star-or-lpar = ~["*("].
+-not-star-or-lrpar = ~["(*)"].
+             -lpar = "(".
+	     -star = "*".
+
+            -digit = ['0'-'9'].
+           -letter = ['a'-'z'; 'A'-'Z'].
+
+             TIMES = -"*", S?.
+	       DIV = -"DIV", S?.
+	       MOD = -"MOD", S?.
+	       AND = -"AND", S?.
+	      PLUS = -"+", S?.
+	     MINUS = -"-", S?.
+	        OR = -"OR", S?.
+               EQL = -"=", S?.
+	       NEQ = -"#", S?.
+	       LSS = -"&lt;", S?.
+	       LEQ = -"&lt;=", S?.
+	       GTR = -"&gt;", S?.
+	       GEQ = -"&gt;=", S?.
+
+{ Separators }
+
+</code></pre></div><h1>Test case: g41bis.c05</h1><details><p>Repository URI: <code>…/tests/misc/misc-041-060-catalog.xml</code></p></details>
+      <p>Created 15&nbsp;Jun&nbsp;2022 by cmsmcq</p>
+      <div class="description">
+	<p>Error case generated by random modification of g41.c00.</p>
+	<p>In the Divide routine, the procedure call Write(y) was
+	modified by replacing the expresssion 'y' with an
+	instance of nonterminal NEQ.</p>
+      </div>
+      <div class="test-string"><h4>Input string (889 characters)</h4><pre><code>MODULE Samples;
+(* Wirth 1995, pp. 37-38 *)
+
+PROCEDURE Multiply;
+  VAR x, y, z: INTEGER;
+BEGIN Read(x); Read(y); z := 0;
+  WHILE x &gt; 0 DO
+    IF x MOD 2 = 1 THEN z := z + y END ;
+    y := 2*y; x := x DIV 2
+  END ;
+  Write(x); Write(y); Write(z); WriteLn
+END Multiply;
+
+PROCEDURE Divide;
+  VAR x, y, r, q, w: INTEGER;
+BEGIN Read(x); Read(y); r := x; q := 0; w := y;
+  WHILE w &lt;= r DO w := 2*w END ;
+  WHILE w &gt; y DO
+    q := 2*q; w := w DIV 2;
+    IF w &lt;= r THEN r := r - w; q := q + 1 END
+  END ;
+  Write(x); Write(#); Write(q); Write(r); WriteLn
+END Divide;
+
+PROCEDURE BinSearch;
+  VAR i, j, k, n: INTEGER;
+    a: ARRAY 32 OF INTEGER;
+BEGIN Read(n); k := 0;
+  WHILE k &lt; n DO Read(a[k]); k := k + 1 END ;
+  i := 0; j := n;
+  WHILE i &lt; j DO
+    k := (i+j) DIV 2;
+    IF x &lt; a[k] THEN j := k ELSE i := k + 1 END
+  END ;
+  Write(i); Write(j); Write(a[j]); WriteLn
+END BinSearch;
+
+END Samples.</code></pre></div>
+      <div class="result unsuccessful"><h4>Expected result</h4><p class="not-a-sentence">The input does not match the grammar.</p></div>
+    </main></body></html>

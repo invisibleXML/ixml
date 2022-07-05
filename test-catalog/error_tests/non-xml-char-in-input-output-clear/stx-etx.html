@@ -1,0 +1,96 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../error_tests">Error tests</a>&nbsp;/&nbsp;<a href="../../error_tests/non-xml-char-in-input-output-clear">non-XML-char-in-input-output-clear</a>&nbsp;/&nbsp;STX-ETX</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Error tests</h2><details><summary>28&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests intended to demonstrate errors that processors are required
+    to raise.</p>
+  </div></details><h3 class="title">non-XML-char-in-input-output-clear</h3><p>Created 20&nbsp;Jun&nbsp;2022 by MSM</p><div class="description">
+      <p>Followup to invalid-char.  Tests for serialization of non-XML
+      characters in a different way.</p>
+      <p>This test set is for sanity checking the inputs of the
+      following test set: the grammar accepts a range of non-XML
+      characters but hides all of them, indicating in the output
+      where they were.  When the outputs of these tests are as
+      expected, we can have some confidence about exactly which
+      invisible characters are where in the test-case inputs.  We
+      can then use the same test-case inputs with a grammar that
+      does not hide all of the non-XML characters but tries instead
+      to serialize them.</p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>{ Grammar for experiments with non-XML characters in input.
+
+  In this grammar, non-XML characters are accepted in the
+  input but are not shown in the output.  It's used for
+  sanity-checking the inputs for tests of the companion
+  grammar in which not all control characters are hidden.
+
+  Since we need non-XML characters in the input, and the only 
+  non-XML characters we can make are in the C0 range, the 
+  input and output are likely to be challenging to check.
+  
+  You have been warned.
+}
+S: (show; hide; printable)*.
+
+NUL: -#00 { null }.
+SOH: -#01 { start of header }.
+STX: -#02 { start of text }.
+ETX: -#03 { end of text }.
+EOT: -#04 { end of transmission }.
+ENQ: -#05 { enquiry ('are you there?') }.
+ACK: -#06 { acknowledgement ('yes i am here') }.
+BEL: -#07 { bell }.
+BS:  -#08 { backspace }.
+HT:  -#09 { horizontal tab, an XML character, but 
+           not a prime, so it's in the 'hide' category }.
+LF:  -#0A { linefeed, also an XML character }.
+VT:  -#0B { vertical tabulation }.
+FF:  -#0C { form feed }.
+CR:  -#0D { carriage return (an XML character) }.
+SO:  -#0E { shift out (to alternate character set }.
+SI:  -#0F { shift in (from alternate character set }.
+DLE: -#10 { data link escape }.
+DC1: -#11 { device-control 1 / XON }.
+DC2: -#12 { device-control 2 }.
+DC3: -#13 { device-control 3 / XOFF }.
+DC4: -#14 { device-control 4 }.
+NAK: -#15 { negative acknowledgement }.
+SYN: -#16 { synchronous idle }.
+ETB: -#17 { end of transmission block / end of paragraph }.
+CAN: -#18 { cancel }.
+EM:  -#19 { end of medium / em-space / beginning of paragraph }.
+SUB: -#1A { substitute (often used for end of file) }.
+ESC: -#1B { escape }.
+FS:  -#1C { file separator }.
+GS:  -#1D { group separator }.
+RS:  -#1E { record separator }.
+US:  -#1F { unit separator }.
+
+show: STX; ETX; ENQ; BEL; VT; CR; DC1; DC3; ETB; GS; US.
+hide:  NUL; SOH; EOT; ACK; BS; HT; LF; FF; SO; SI; DLE; DC2;
+        DC4; NAK; SYN; CAN; EM; SUB; ESC; FS; RS.
+
+-printable: [#20 - #7E].
+</code></pre></div><h1>Test case: STX-ETX</h1><details><p>Repository URI: <code>…/tests/error/test-catalog.xml</code></p></details>
+      <p>Created 20&nbsp;Jun&nbsp;2022 by MSM</p>
+      <div class="test-string"><h4>Input string</h4><pre><code><p><em><a href="https://github.com/invisibleXML/ixml/blob/master/tests/error/STX_and_ETX.txt">String value</a> cannot be inlined in web page.</em></p></code></pre></div>
+      <div class="description">
+        <p>Input contains STX and ETX control characters.</p>
+      </div>
+      <div class="result"><h4>Expected result</h4>
+        <div class="xml-result"><pre><code>&lt;S&gt;
+   &lt;show&gt;
+      &lt;STX/&gt;
+   &lt;/show&gt;This file begins with a start-of-text (STX, ^B) character,&lt;hide&gt;
+      &lt;LF/&gt;
+   &lt;/hide&gt;followed by some lines of text, and it ends&lt;hide&gt;
+      &lt;LF/&gt;
+   &lt;/hide&gt;with an end-of-text (ETX, ^C) character.&lt;show&gt;
+      &lt;ETX/&gt;
+   &lt;/show&gt;
+&lt;/S&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../misc_tests">Misc tests</a>&nbsp;/&nbsp;<a href="../../misc_tests/sample_grammar_17">sample.grammar.17</a>&nbsp;/&nbsp;Grammar test</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Misc tests</h2><details><summary>13&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Grammars 1-20.</p>
+    <p>Tests compiled manually in 2018 and 2019, re-packaged in 2022.</p>
+    <p>Moved to ixml test collection, June 2022.</p>
+  </div></details><h3 class="title">sample.grammar.17</h3><p>Created 08&nbsp;Feb&nbsp;2022 by cmsmcq</p><div class="description">
+	<p>From Grune and Jacobs p. 217; grammar to illustrate the
+	Aycock/Horspool optimization of Earley. Cf. grammar 2, but
+	this one is shorter. Grune and Jacobs are pretty good at code
+	golf for grammars!</p>
+      </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>S: A, A, "x". A: .</code></pre></div><h1>Test case: Grammar test</h1><details><p>Repository URI: <code>…/tests/misc/misc-001-020-catalog.xml</code></p></details>
+	<div class="result"><h4>Expected result</h4>
+	  <div class="xml-result"><pre><code>&lt;ixml xmlns:ixml="http://invisiblexml.org/NS"
+       xmlns:tc="https://github.com/invisibleXML/ixml/test-catalog"&gt;
+   &lt;rule name="S"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="A"/&gt;
+         &lt;nonterminal name="A"/&gt;
+         &lt;literal string="x"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="A"&gt;
+      &lt;alt/&gt;
+   &lt;/rule&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+	</div>
+      </main></body></html>

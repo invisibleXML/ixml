@@ -1,0 +1,42 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../error_tests">Error tests</a>&nbsp;/&nbsp;<a href="../../error_tests/non-ncname-not-hidden">non-NCName-not-hidden</a>&nbsp;/&nbsp;Grammar test</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (28&nbsp;Jun&nbsp;2022)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Error tests</h2><details><summary>28&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests intended to demonstrate errors that processors are required
+    to raise.</p>
+  </div></details><h3 class="title">non-NCName-not-hidden</h3><p>Created 20&nbsp;Jun&nbsp;2022 by MSM</p><div class="description">
+      <p>This grammar does not raise a dynamic error; it's here
+      to check that processors do allow nonterminals which are not
+      NCNames, if they are not in fact serialized.</p>
+      <p>Actually, processors are allowed to reject this grammar
+      because a static analysis will show that the non-NCName could be
+      serialized.  So the prescribed result of this grammar test does
+      not exhaust all possibilities.</p>
+    </div><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>S: ª; B. ª: 'a'. B: 'b'.</code></pre></div><h1>Test case: Grammar test</h1><details><p>Repository URI: <code>…/tests/error/test-catalog.xml</code></p></details>
+      <div class="result"><h4>Expected result</h4>
+	<div class="xml-result"><pre><code>&lt;ixml&gt;
+   &lt;rule name="S"&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="ª"/&gt;
+      &lt;/alt&gt;
+      &lt;alt&gt;
+         &lt;nonterminal name="B"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="ª"&gt;
+      &lt;alt&gt;
+         &lt;literal string="a"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+   &lt;rule name="B"&gt;
+      &lt;alt&gt;
+         &lt;literal string="b"/&gt;
+      &lt;/alt&gt;
+   &lt;/rule&gt;
+&lt;/ixml&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>
