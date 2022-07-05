@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css?family=B612+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif&display=swap");
+
+:root {
+    --symbol-fonts: "Arial Unicode", "Apple Symbols", "Symbol", "Symbola_hint";
+    --body-family: "Noto Serif", serif, var(--symbol-fonts);
+    --title-family: "Noto Sans", sans-serif, var(--symbol-fonts);
+    --mono-family: "B612 Mono", monospace, var(--symbol-fonts);
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 14pt;
+    font-family: var(--body-family);
+    line-height: 150%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-family);
+}
+
+code {
+    font-family: var(--mono-family);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin-top: 0;
+    padding-top: 2.5rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 1in;
+}
+
+.logo {
+    float: right;
+    width: 300px;
+    padding-right: 2em;
+    margin-left: 2rem;
+    padding-top: 1.5rem;
+}
+
+.logosm {
+    float: right;
+    width: 200px;
+    padding-right: 2em;
+    margin-left: 2rem;
+    padding-top: 1.5rem;
+}
+
+.logotype {
+    margin-right: 0.15rem;
+    height: 1.5rem;
+}
+
+.breadcrumbs {
+    display: flex;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    padding-left: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-right: 1em;
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: var(--title-family);
+    font-weight: bold;
+    height: 1.5rem;
+}
+
+.breadcrumbs a,
+.breadcrumbs a:visited {
+    color: white;
+}
+
+.check-ok {
+    color: #308030;
+}
+
+.check-fail {
+    color: #ff7f7f;
+}
+
+.note {
+    width: 32rem;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.test-set .test-set {
+    margin-top: 1em;
+    margin-left: 2em;
+}
+
+.grammar {
+    background-color: #cfdfff;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.test-string {
+    background-color: #cfdfff;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-top: 0.25em;
+    margin-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.grammar pre,
+.test-string pre {
+    background-color: #cfefff;
+}
+
+.result {
+    background-color: #cfffdf;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.result pre {
+    background-color: #efffef;
+}
+
+.unsuccessful {
+    background-color: #ffcfcf;
+}
+
+.unsuccessful pre {
+    background-color: #ffefef;
+}
+
+.not-a-grammar, .not-a-sentence, .dynamic-error {
+    background-color: #ffcfcf;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 0.5em;
+}
+
+pre {
+    border-radius: 0.5em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-right: 1em;
+}
+
+.app-info-options {
+    background-color: #dfdfdf;
+    border-radius: 0.5em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.toc {
+}
+
+.toc h4 {
+    margin-bottom: 0;
+}
+
+.toc ul {
+    margin-top: 0.25em;
+}
+
+.toc ul ul {
+    padding-left: 2em;
+    margin-top: 0;
+}
+
+.index a, .index a:visited,
+.toc a, .toc a:visited {
+    color: inherit;
+}
+
+.index ul {
+    column-count: 3;
+}
