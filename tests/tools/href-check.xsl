@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:c="https://github.com/cmsmcq/ixml-tests"
+                xmlns:old-c="https://github.com/cmsmcq/ixml-tests"
+                xmlns:c="https://github.com/invisibleXML/ixml/test-catalog"
                 exclude-result-prefixes="#all"
                 expand-text="yes"
                 version="3.0">
