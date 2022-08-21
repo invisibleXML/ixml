@@ -1,9 +1,7 @@
 <test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
 	      xmlns:ixml="http://invisiblexml.org/NS"
-	      xmlns:jwL="https://lists.w3.org/Archives/Public/public-ixml/2022May/0099.html"
 	      release-date="2022-06-01"
-	      name="Insertion tests"
-	      >
+	      name="Insertion tests">
 
   <description>
     <p>This test set collects some grammars that use textual insertion.</p>
@@ -188,7 +186,8 @@
     </description>
     <ixml-grammar> S: [L]++(+':';+'='). </ixml-grammar>
     <test-case name="iSepAlt-1">
-      <test-string jwL:showStates="">abc</test-string>
+      <test-string xmlns:jwL="https://lists.w3.org/Archives/Public/public-ixml/2022May/0099.html"
+                   jwL:showStates="">abc</test-string>
       <result>
         <assert-xml>
           <S xmlns="" ixml:state="ambiguous">a:b:c</S>
@@ -220,6 +219,26 @@
         </assert-xml>
         <assert-xml>
           <S xmlns="" ixml:state="ambiguous">B</S>
+        </assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="insert-special">
+    <created by="SP" on="2022-08-20"/>
+    <description>
+      <p>A grammar that parses and inserts special characters. From an email message.</p>
+    </description>
+    <ixml-grammar>element: @attribute, -content.
+attribute: -content.
+content:   +#26, +#22, +#27, +#3C, +#3E,
+            #26,  #22,  #27,  #3C,  #3E.</ixml-grammar>
+    <test-case name="insert-special">
+      <test-string>&amp;"'&lt;&gt;&amp;"'&lt;&gt;</test-string>
+      <result>
+        <assert-xml>
+          <element xmlns=""
+                   attribute="&amp;&quot;'&lt;>&amp;&quot;'&lt;>">&amp;"'&lt;>&amp;"'&lt;></element>
         </assert-xml>
       </result>
     </test-case>
