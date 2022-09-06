@@ -2,7 +2,7 @@
 		 xmlns:ixml="http://invisiblexml.org/NS"
 		 xmlns:ap="http://blackmesatech.com/2019/iXML/Aparecium"		 
 		 name="Misc tests 3"
-		 release-date="2022-06-21"
+		 release-date="2022-06-28"
 		 >
   <tc:description>
     <tc:p>Grammars 41-60.</tc:p>
@@ -4162,6 +4162,13 @@
              >a<B>b</B></S></B></B></S></B><B>b</B
              ></B><B>b</B></B
           ></S>
+	</tc:assert-xml>
+	<tc:assert-xml>
+	  <S ixml:state="ambiguous"
+	     >a<B>a<B>a<B>b<S>a<B>a<B>b</B><B>b</B
+	     ></B></S></B><B>a<B>b</B><B>b</B></B
+	     ></B><B>b</B></B
+	  ></S>
 	</tc:assert-xml>
       </tc:result>
     </tc:test-case>
