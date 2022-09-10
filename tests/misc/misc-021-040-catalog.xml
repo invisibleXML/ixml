@@ -525,6 +525,13 @@
 	      /><A/><B/><C/><D/><E/><F/><G
 	    /></S>
 	  </tc:assert-xml>
+	  <tc:assert-xml>
+            <!-- produced by NineML using the GLL parser. -->
+	    <S ixml:state="ambiguous"
+               ><A/><B/><C/><D/><C/><D/><E
+               /><F/><B/><C/><D/><E/><F/><G
+            /></S>
+	  </tc:assert-xml>
 	  <!-- ... and others ... -->
 	</tc:result>
       </tc:test-case>
@@ -771,6 +778,11 @@
             /><W/><A/><B/><C/><D/><E/><F/><G
             /></S>
 	</tc:assert-xml>
+	<tc:assert-xml>
+          <!-- produced by NineML using the GLL parser. -->
+          <S ixml:state="ambiguous"><A/><B/><C/><D/><E/><Y/><B
+          /><C/><D/><Z/><C/><D/><E/><F/><G/></S>
+        </tc:assert-xml>
 	<!-- and many more ... -->
       </tc:result>
     </tc:test-case>
@@ -1188,7 +1200,15 @@
              ></B></Y></E></D></C></Z></D></C></B></A
           ></S>	  
 	</tc:assert-xml>
-	
+
+	<tc:assert-xml>
+          <S ixml:state="ambiguous"
+             ><A><B><C><D><E><F><B><C><D><Z><C><D><E><Y><B
+             ><C><D><Z><C><D><E><F><G/></F></E></D></C></Z
+             ></D></C></B></Y></E></D></C></Z></D></C></B
+             ></F></E></D></C></B></A
+          ></S>
+        </tc:assert-xml>
 	<!--* and many many more *-->
       </tc:result>
     </tc:test-case>
