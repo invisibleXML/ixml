@@ -7,38 +7,53 @@ Invisible XML EBNF grammar into BNF.
 
 ## Background
 
-Invisible XML is defined with an
-[extended Backus-Naur](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)
-syntax. Most, perhaps all, of the commonly identified parsing techniques that
-can be used to implement an Invisible XML parser are defined in terms of a simpler
-[Backus-Naur](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
-syntax. “Plain old BNF” (henceforth “BNF”) lacks many of the syntactic conveniences
-present in Invisible XML: optionality, repetition, and repetition with
-separators, for example.
+Notations for context-free grammars are a little like mathematical
+notations in that usage varies somewhat in different communities and
+different groups. Some variations affect only the choice of
+delimiters; others involve larger changes which can make a big
+difference in the compactness of the grammar, though the set of
+languages they can describe is the same. Some variations increase the
+expressive power of the notation, but then the languages they can
+describe are no longer always context-free.
 
-EBNF syntaxes are a little like mathematical notations in that
-different communities and different groups use slightly different
-variations. These change both the synax and the expressive power of
-the format.
+Broadly speaking, most notations for context-free grammars fall into
+two groups.
 
-Broadly speaking, a BNF grammar provides rewrite rules that have no
-syntactic conveniences beyond sequences and alternatives.
+* [Backus-Naur Form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) (or
+  BNF) and related notations allow nothing on the right-hand side of a
+  production rule but a sequence of symbols, or a top-level choice
+  among sequences of symbols.
 
-If you want to implement Invisible XML using a parsing technique
-that’s only defined for BNF grammars, you have to convert the
-Invisible XML EBNF grammar into BNF.
+* [Extended Backus-Naur](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) (or
+  EBNF) notations provide a number of syntactic conveniences: markings
+  to make nonterminals or subexpressions optional, or repeatable, or
+  both, and nested choices. Invisible XML falls into this class, and
+  goes beyond some other EBNF notations in providing syntax for
+  textual insertions and for repetition with separators.
+
+Most standard parsing algorithms that can be used to implement an
+Invisible XML parser are defined for BNF grammars. Unless you want to
+extend the algorithm to handle EBNF constructs, you will need to
+convert the input grammar supplied by the user into an equivalent BNF
+form by eliminating the opeators for repetition, optionality, and
+alternation (except at the top level), doing so in such a way that the
+BNF grammar you construct accepts the same language as the input
+grammar supplied by the user, and in such a way that you can produce
+the correct XML representation of the input.
 
 Converting the grammar means replacing EBNF rules that use syntactic
 conveniences not present in BNF with different rules that do not use
-those conveniences. This can be done in a variety of different ways
-and it turns out that the precise rewriting used can have a
-significant impact on the resulting parser.
+those conveniences.
 
 The rest of this document explores what it means to rewrite a grammar
 and enumerates different rewriting rules that can be used for
-Invisible XML. No set of rewriting rules is “more correct” or “better”
-than the others except in as much as an implementor may find some work
-better than others in their particular implementation.
+Invisible XML. There are many ways to rewrite an EBNF grammar into an
+equivalent BNF grammar; any rewriting rules that produce an equivalent
+grammar are equally correct, and the choice of rewriting rules is up
+to the implementor. However, experience has shown that different
+approaches to rewriting Invisible XML grammars may have dramatic
+effects on parser performance, so implementors may find it helpful to
+experiment with different sets of rewriting rules.
 
 ### Examples of converting EBNF to BNF
 
