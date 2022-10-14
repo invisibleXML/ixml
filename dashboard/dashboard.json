@@ -1,0 +1,39 @@
+{
+  "web-root": "https://invisiblexml.org",
+  "main-branch-name": "master",
+  "main-branch-prefix": "/current",
+  "branch-prefix": "/branch",
+  "branch-suffix": "",
+  "pr-path": "/pr",
+  "branches": {
+    "invisiblexml": {
+      "ixml": {
+        "master": "#IGNORE",
+        "gh-pages": "#IGNORE",
+        "proposal-pragmas": "#IGNORE"
+      }
+    }
+  },
+  "ignore": {
+    "invisiblexml": {
+      "ixml": {
+        "pulls": [10, 146]
+      }
+    }
+  },
+  "documents": {
+    "invisiblexml": {
+      "ixml": [""]
+    }
+  },
+  "indexes": {
+    "invisiblexml": {
+      "ixml": {
+        "": {
+          "index.html": "Invisible XML",
+          "autodiff.html": "DeltaXML diff"
+        }
+      }
+    }
+  }
+}
