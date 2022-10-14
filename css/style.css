@@ -7,6 +7,13 @@
     --body-family: "Noto Serif", serif, var(--symbol-fonts);
     --title-family: "Noto Sans", sans-serif, var(--symbol-fonts);
     --mono-family: "B612 Mono", monospace, var(--symbol-fonts);
+
+    --background-color: #f8f8f8;
+    --foreground-color: #000000;
+    --faded-color: #7f7f7f;
+    --quote-color: #dddddd;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
 }
 
 html {
@@ -21,10 +28,26 @@ body {
     margin-top: 1em;
     margin-left: 0;
     margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
     margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
     padding-bottom: 0;
+}
+
+header {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(52rem + 300px);
+}
+
+main {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(52rem + 300px);
+}
+
+main > div {
+    max-width: 50rem;
 }
 
 div {
@@ -36,6 +59,13 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--title-family);
 }
 
+h1 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: 1.25em;
+    margin-bottom: 0;
+}
+
 code {
     font-family: var(--mono-family);
 }
@@ -43,9 +73,8 @@ code {
 .logo {
     float: right;
     width: 300px;
-    padding-right: 2em;
+    margin-right: 2rem;
     margin-left: 2rem;
-    padding-top: 2.5rem;
 }
 
 .logotype {
@@ -180,6 +209,10 @@ pre {
     margin-top: 0;
 }
 
+a, a:visited, a:link {
+    color: blue;
+}
+
 .index a, .index a:visited,
 .toc a, .toc a:visited {
     color: inherit;
@@ -190,11 +223,9 @@ pre {
 }
 
 .bibliography {
-    background: linear-gradient(rgba(255,255,255,1) 50%, rgba(255,255,255,1) 1%, rgba(200,200,200,1) 100%);
-    border-bottom: solid 1px red;
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 8em;
+    padding-bottom: 4em;
 }
 
 .bibliography div {
@@ -210,4 +241,54 @@ pre {
 
 .bibliography ul li {
     margin-top: 0.5em;
+}
+
+.branch, .pull-request {
+    padding-left: 2rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.pull-request div {
+    margin-left: 2rem;
+}
+
+.prdesc {
+    background-color: var(--quote-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+ul.changed-files {
+    font-family: var(--mono-family);
+}
+
+details summary {
+    cursor: pointer;
+}
+
+details summary span {
+    text-decoration: underline;
+}    
+
+@media screen and (max-width: 1200px) {
+    .logo {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logo {
+        display: none;
+    }
 }
