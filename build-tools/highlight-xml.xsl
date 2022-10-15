@@ -151,9 +151,9 @@
   <span class="attr">
     <span class="aname">{local-name(.)}</span>
     <span class="eq">=</span>
-    <span class="q">"</span>
-    <span class="avalue">{.}</span>
-    <span class="q">"</span>
+    <span class="q">'</span>
+    <span class="avalue">{replace(., "'", "&amp;apos;")}</span>
+    <span class="q">'</span>
   </span>
 </xsl:template>
 
