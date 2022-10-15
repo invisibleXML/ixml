@@ -633,7 +633,8 @@ errors are errors that can be identified by inspecting the grammar.</p><dl id="s
       code-point range.</dd><dt id="err-s08"><a href="#ref-s08" shape="rect">S08</a></dt><dd>It is an error if an encoded character denotes a Unicode noncharacter
       or surrogate code point.</dd><dt id="err-s09"><a href="#ref-s09" shape="rect">S09</a></dt><dd>It is an error if the first character in a range has a code point value
       greater than the second character in the range.</dd><dt id="err-s10"><a href="#ref-s10" shape="rect">S10</a></dt><dd>It is an error to use a Unicode character category that is not defined
-      in the Unicode specification.</dd><dt id="err-s11"><a href="#ref-s11" shape="rect">S11</a></dt><dd>It is an error if a string contains a line break<span class="deltaxml-new"> or a C0 or C1 control character</span>.</dd><dt id="err-s12"><a href="#ref-s12" shape="rect">S12</a></dt><dd>It is an error if the grammar does not conform to the implied or
+      in the Unicode specification.</dd><dt id="err-s11"><a href="#ref-s11" shape="rect">S11</a></dt><dd>It is an error if a string contains a <span class="deltaxml-new">C0 or C1 control character,
+    including a </span>line break.</dd><dt id="err-s12"><a href="#ref-s12" shape="rect">S12</a></dt><dd>It is an error if the grammar does not conform to the implied or
       declared version.</dd></dl><p>Dynamic errors arise when a particular input is processed with a grammar.</p><dl id="dynamic-errors"><dt id="err-d01"><a href="#ref-d01" shape="rect">D01</a></dt><dd>It is an error if the parse tree produced by a grammar cannot be
       represented as well-formed XML.</dd><dt id="err-d02"><a href="#ref-d02" shape="rect">D02</a></dt><dd>It is an error if two or more attributes with the same name would be
       serialized on the same element.</dd><dt id="err-d03"><a href="#ref-d03" shape="rect">D03</a></dt><dd>It is an error if the name of any element or attribute is not a valid
