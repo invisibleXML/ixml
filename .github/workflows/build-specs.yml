@@ -49,9 +49,6 @@ jobs:
       - name: Checkout the ixml repository
         uses: actions/checkout@v3
 
-      - name: what is ulimit?
-        run: ulimit
-
       - name: Build
         run: |
           ./gradlew
