@@ -34,7 +34,7 @@ div {
     padding-right: 1rem;
 }
 
-.toc {
+.toc, .box {
     border: thin solid red;
 }
 
