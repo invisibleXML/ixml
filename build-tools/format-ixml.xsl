@@ -31,7 +31,7 @@
       It is also available <a href="ixml.xml.html">in XML</a>.</p>
       <div class="listing">
         <div id="toggle-buttons">
-          <a class="button" href="ixml.xml" download="ixml.xml">Download</a>
+          <a class="button" href="ixml.ixml" download="ixml.ixml">Download</a>
         </div>
         <pre id="ixml">
           <xsl:sequence select="f:highlight-ixml($text)"/>
