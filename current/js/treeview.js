@@ -29,10 +29,10 @@
     const close = toggle.querySelector(".close");
 
     open.style.display = "none";
-    open.innerHTML = "⯈";
+    open.innerHTML = "▸";
 
     close.style.display = "inline-block";
-    close.innerHTML = "⯆";
+    close.innerHTML = "▾";
 
     toggle.addEventListener("click", (event) => {
       event.preventDefault();

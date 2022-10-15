@@ -12,12 +12,10 @@
 }
 
 body {
-    margin-left: 1rem;
-    margin-right: 1rem;
     color: var(--text-color);
 }
 
-.button {
+a.button {
     background-color: rgb(233, 233, 233);
     border:1px solid black;
     border-radius:5px;
@@ -29,7 +27,7 @@ body {
     font-size: 80%;
 }
 
-.button:hover {
+a.button:hover {
     background-color: rgb(208, 208, 214);
 }
 
@@ -63,6 +61,13 @@ body {
     opacity: 0;
     transition: opacity 2s;
 }
+
+#copyok {
+    display: inline-block;
+    width: 2rem;
+    font-size: 150%;
+    color: green;
+}
  
 pre {
     font-family: monospace;
@@ -73,13 +78,13 @@ pre {
     display: inline-block;
     width: 1rem;
     display: none;
+    color: black;
 }
 
 .open, .close {
     cursor: pointer;
 }
 
-.open, .close,
 .com, .text {
     color: var(--comment-color);
 }
