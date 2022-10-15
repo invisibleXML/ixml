@@ -68,10 +68,10 @@ additional changes to the specification after publication.</p>
 <pre>{"temperature": {"scale": "C", "value": 21}}</pre>
 
 <p>and an equivalent XML</p>
-<pre>&lt;temperature scale="C" value="21"/&gt;</pre>
+<pre class="xml">&lt;temperature scale="C" value="21"/&gt;</pre>
 
 <p>or</p>
-<pre>&lt;temperature&gt;
+<pre class="xml">&lt;temperature&gt;
    &lt;scale&gt;C&lt;/scale&gt;
    &lt;value&gt;21&lt;/value&gt;
 &lt;/temperature&gt;</pre>
@@ -92,7 +92,7 @@ example, it can turn CSS code like</p>
 <pre>body {color: blue; font-weight: bold}</pre>
 
 <p>into XML like</p>
-<pre>&lt;css&gt;
+<pre class="xml">&lt;css&gt;
    &lt;rule&gt;
       &lt;selector&gt;body&lt;/selector&gt;
       &lt;block&gt;
@@ -109,7 +109,7 @@ example, it can turn CSS code like</p>
 &lt;/css&gt;</pre>
 
 <p>or, if preferred, as:</p>
-<pre>&lt;css&gt;
+<pre class="xml">&lt;css&gt;
    &lt;rule&gt;
       &lt;simple-selector name="body"/&gt;
       &lt;property name="color" value="blue"/&gt;
@@ -121,7 +121,7 @@ example, it can turn CSS code like</p>
 <pre>pi×(10+b)</pre>
 
 <p>can result in the XML</p>
-<pre>&lt;prod&gt;
+<pre class="xml">&lt;prod&gt;
    &lt;id&gt;pi&lt;/id&gt;
    &lt;sum&gt;
       &lt;number&gt;10&lt;/number&gt;
@@ -130,7 +130,7 @@ example, it can turn CSS code like</p>
 &lt;/prod&gt;</pre>
 
 <p>or</p>
-<pre>&lt;prod&gt;
+<pre class="xml">&lt;prod&gt;
    &lt;id name='pi'/&gt;
    &lt;sum&gt;
       &lt;number value='10'/&gt;
@@ -142,7 +142,7 @@ example, it can turn CSS code like</p>
 <pre>http://www.w3.org/TR/1999/xhtml.html</pre>
 
 <p>can give</p>
-<pre>&lt;url&gt;
+<pre class="xml">&lt;url&gt;
    &lt;scheme name='http'/&gt;
    &lt;authority&gt;
       &lt;host&gt;
@@ -159,7 +159,7 @@ example, it can turn CSS code like</p>
 &lt;/url&gt;</pre>
 
 <p>or</p>
-<pre>&lt;url scheme='http'&gt;
+<pre class="xml">&lt;url scheme='http'&gt;
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
 &lt;/url&gt;</pre>
@@ -168,7 +168,7 @@ example, it can turn CSS code like</p>
 <pre>{"name": "pi", "value": 3.145926}</pre>
 
 <p>can give</p>
-<pre>&lt;json&gt;
+<pre class="xml">&lt;json&gt;
    &lt;object&gt;
       &lt;pair string='name'&gt;
          &lt;string&gt;pi&lt;/string&gt;
@@ -187,7 +187,7 @@ in the grammar affect details of this serialization, for example excluding
 parts of the tree, or serializing parts as attributes instead of elements.</p>
 
 <p>As an example, consider this simplified grammar for URLs:</p>
-<pre>url: scheme, ":", authority, path.
+<pre class="ixml">url: scheme, ":", authority, path.
 
 scheme: letter+.
 
@@ -212,7 +212,7 @@ letter, an uppercase letter, or a digit. A fletter is a letter or a point.</p>
 <p>So, given the input string
 <code>http://www.w3.org/TR/1999/xhtml.html</code>, this would produce the
 serialization</p>
-<pre>&lt;url&gt;
+<pre class="xml">&lt;url&gt;
    &lt;scheme&gt;http&lt;/scheme&gt;:
    &lt;authority&gt;//
       &lt;host&gt;
@@ -233,50 +233,50 @@ legibility.)</p>
 
 <p>If the rule for <code>letter</code> had not had a "-" before it, the
 serialization for <code>scheme</code>, for instance, would have been:</p>
-<pre>&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
+<pre class="xml">&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
 
 <p>Changing the rule for <code>scheme</code> to</p>
-<pre>scheme: name.
+<pre class="ixml">scheme: name.
 @name: letter+.</pre>
 
 <p>would change the serialization for <code>scheme</code> to:</p>
-<pre>&lt;scheme name="http"/&gt;:</pre>
+<pre class="xml">&lt;scheme name="http"/&gt;:</pre>
 
 <p>Changing the rule for <code>scheme</code> instead to:</p>
-<pre>@scheme: letter+.</pre>
+<pre class="ixml">@scheme: letter+.</pre>
 
 <p>would change the serialization for <code>url</code> to:</p>
-<pre>&lt;url scheme="http"&gt;</pre>
+<pre class="xml">&lt;url scheme="http"&gt;</pre>
 
 <p>Changing the definitions of <code>sub</code> and <code>seg</code> from</p>
-<pre>sub: letter+.
+<pre class="ixml">sub: letter+.
 seg: fletter*.</pre>
 
 <p>to</p>
-<pre>-sub: letter+.
+<pre class="ixml">-sub: letter+.
 -seg: fletter*.</pre>
 
 <p>would prevent the <code>sub</code> and <code>seg</code> elements appearing
 in the serialized result, giving:</p>
-<pre>&lt;url scheme='http'&gt;://
+<pre class="xml">&lt;url scheme='http'&gt;://
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
 &lt;/url&gt;</pre>
 
 <p>Changing the rule </p>
-<pre>url: scheme, ":", authority, path.</pre>
+<pre class="ixml">url: scheme, ":", authority, path.</pre>
 
 <p>to </p>
-<pre>url: scheme, -":", authority, path.</pre>
+<pre class="ixml">url: scheme, -":", authority, path.</pre>
 
 <p>and</p>
-<pre>authority: "//", host.</pre>
+<pre class="ixml">authority: "//", host.</pre>
 
 <p>to </p>
-<pre>authority: -"//", host.</pre>
+<pre class="ixml">authority: -"//", host.</pre>
 
 <p>would remove the spurious characters from the serialization:</p>
-<pre>&lt;url scheme='http'&gt;
+<pre class="xml">&lt;url scheme='http'&gt;
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
 &lt;/url&gt;</pre>
@@ -291,13 +291,13 @@ rules, surrounded and separated by spacing and comments. Spacing and comments
 are entirely optional, except that rules <span id="ref-s01"
 class="conform">must</span> be separated by at least one of either (<a
 class="error" href="#err-s01">error S01</a>).</p>
-<pre class="frag">ixml: s, prolog?, rule++RS, s.</pre>
+<pre class="frag ixml">ixml: s, prolog?, rule++RS, s.</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
 braces, and can included nested comments, to enable commenting out parts of a
 grammar:</p>
-<pre class="frag">         -s: (whitespace; comment)*. {Optional spacing}
+<pre class="frag ixml">         -s: (whitespace; comment)*. {Optional spacing}
         -RS: (whitespace; comment)+. {Required spacing}
 -whitespace: -[Zs]; tab; lf; cr.
        -tab: -#9.
@@ -312,7 +312,7 @@ grammar:</p>
 version 1.0 is assumed. A grammar <span id="ref-s12"
 class="conform">must</span> conform to the syntax and semantics of the version
 declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
-<pre class="frag">        prolog: version, s.
+<pre class="frag ixml">        prolog: version, s.
        version: -"ixml", RS, -"version", RS, string, s, -'.' .</pre>
 
 <p>If an implementation recognizes the version string, it <span
@@ -335,14 +335,14 @@ attribute named <code>ixml:state</code>, with the word
 <p>A rule consists of an optional mark, a name, and one or more alternatives.
 The grammar here uses colons to define rules; an equals sign is also
 allowed.</p>
-<pre class="frag">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
+<pre class="frag ixml">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
 indicates whether the item so marked will be serialized as an element with its
 children (<code>^</code>) which is the default, as an attribute
 (<code>@</code>), or deleted, so that only its children are serialized
 (<code>-</code>).</p>
-<pre class="frag">@mark: ["@^-"].</pre>
+<pre class="frag ixml">@mark: ["@^-"].</pre>
 
 <p>A name starts with a letter or underscore, and continues with a letter,
 digit, underscore, a small number of punctuation characters, and the Unicode
@@ -351,27 +351,27 @@ used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialized names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
-<pre class="frag">        @name: namestart, namefollower*.
+<pre class="frag ixml">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p>
-<pre class="frag">alts: alt++(-[";|"], s).</pre>
+<pre class="frag ixml">alts: alt++(-[";|"], s).</pre>
 
 <p>An alternative is zero or more terms, separated by commas:</p>
-<pre class="frag">alt: term**(-",", s).</pre>
+<pre class="frag ixml">alt: term**(-",", s).</pre>
 
 <p>A term is a singleton factor, an optional factor, or a repeated factor,
 repeated zero or more times, or one or more times.</p>
-<pre class="frag">-term: factor;
+<pre class="frag ixml">-term: factor;
        option;
        repeat0;
        repeat1.</pre>
 
 <p>A factor is a terminal, a nonterminal, an insertion, or a bracketed series
 of alternatives:</p>
-<pre class="frag">-factor: terminal;
+<pre class="frag ixml">-factor: terminal;
          nonterminal;
          insertion;
          -"(", s, alts, -")", s.</pre>
@@ -380,29 +380,29 @@ of alternatives:</p>
 by a double asterisk and a separator, e.g. <code>abc*</code> and
 <code>abc**","</code>. For instance <code>"a"**"#"</code> would match the empty
 string, <code>a</code>, <code>a#a</code>, <code>a#a#a</code> etc.</p>
-<pre class="frag">repeat0: factor, (-"*", s; -"**", s, sep).</pre>
+<pre class="frag ixml">repeat0: factor, (-"*", s; -"**", s, sep).</pre>
 
 <p>Similarly, a factor repeated one or more times is followed by a plus, or a
 double plus and a separator, e.g. <code>abc+</code> and <code>abc++","</code>.
 For instance <code>"a"++"#"</code> would match <code>a</code>,
 <code>a#a</code>, <code>a#a#a</code> etc., but not the empty string.</p>
-<pre class="frag">repeat1: factor, (-"+", s; -"++", s, sep).</pre>
+<pre class="frag ixml">repeat1: factor, (-"+", s; -"++", s, sep).</pre>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
 For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p>
-<pre class="frag">option: factor, -"?", s.</pre>
+<pre class="frag ixml">option: factor, -"?", s.</pre>
 
 <p>A separator can be any factor, for example <code>abc**def</code> or
 <code>abc**(","; ".")</code>. For instance <code>"a"++("#"; "!")</code> would
 match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
 <code>a!a#a</code>, <code>a#a#a</code> etc.</p>
-<pre class="frag">sep: factor.</pre>
+<pre class="frag ixml">sep: factor.</pre>
 
 <h3 id="nonterminals">Nonterminals</h3>
 
 <p>A nonterminal is an optionally marked name:</p>
-<pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
+<pre class="frag ixml">nonterminal: (mark, s)?, name, s.</pre>
 
 <p>This name refers to the rule that defines this name, which <span
 id="ref-s02" class="conform">must</span> exist (<a class="error"
@@ -414,12 +414,12 @@ href="#err-s03">error S03</a>).</p>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
 input. A terminal marked as deleted (-) serializes to the empty string.</p>
-<pre class="frag">-terminal: literal; 
+<pre class="frag ixml">-terminal: literal; 
            charset.</pre>
 
 <p>A literal is either a quoted string, or a hexadecimally encoded
 character:</p>
-<pre class="frag">  literal: quoted;
+<pre class="frag ixml">  literal: quoted;
            encoded.</pre>
 
 <p>A quoted string is an optionally marked string of one or more characters,
@@ -431,7 +431,7 @@ href="#err-s11">error S11</a>). The enclosing quote is represented in a string
 by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
 <code>'He said "Don''t!"'</code>.</p>
-<pre class="frag"> -quoted: (tmark, s)?, string, s.
+<pre class="frag ixml"> -quoted: (tmark, s)?, string, s.
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
@@ -451,7 +451,7 @@ id="ref-s08" class="conform">must not</span> denote a Noncharacter or Surrogate
 code point (<a class="error" href="#err-s08">error S08</a>).</p>
 
 <p>An encoded character matches that one character in the input.</p>
-<pre class="frag">-encoded: (tmark, s)?, -"#", hex, s.
+<pre class="frag ixml">-encoded: (tmark, s)?, -"#", hex, s.
     @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
 
 <h3 id="characters">Character sets</h3>
@@ -475,7 +475,7 @@ closing brace.</p>
 <p>Note that the empty inclusion <code>[]</code> will fail to match any
 character in the input; on the other hand <code>~[]</code> will match any one
 character, whatever it is.</p>
-<pre class="frag"> -charset: inclusion; 
+<pre class="frag ixml"> -charset: inclusion; 
            exclusion.
 inclusion: (tmark, s)?,          set.
 exclusion: (tmark, s)?, -"~", s, set.
@@ -490,12 +490,12 @@ character to the <code>to</code> character, inclusive, using the Unicode
 ordering. The <code>from</code> character <span id="ref-s09"
 class="conform">must not</span> be later in the ordering than the
 <code>to</code> character (<a class="error" href="#err-s09">error S09</a>).</p>
-<pre class="frag">-range: from, s, -"-", s, to.
+<pre class="frag ixml">-range: from, s, -"-", s, to.
  @from: character.
    @to: character.</pre>
 
 <p>A character is a string of length one, or a hex encoded character:</p>
-<pre class="frag">-character: -'"', dchar, -'"';
+<pre class="frag ixml">-character: -'"', dchar, -'"';
             -"'", schar, -"'";
             "#", hex.</pre>
 
@@ -514,7 +514,7 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
 <p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
 serialization.</p>
-<pre>insertion: -"+", s, (string; -"#", hex), s.</pre>
+<pre class="ixml">insertion: -"+", s, (string; -"#", hex), s.</pre>
 
 <h2 id="parsing">Parsing</h2>
 
@@ -602,7 +602,7 @@ D06</a>).</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
 rules is:</p>
-<pre>    expr: open, -arith, @close, -";".
+<pre class="ixml">    expr: open, -arith, @close, -";".
    @open: "(".
    close: ")".
    arith: left, op, ^right.
@@ -615,7 +615,7 @@ rules is:</p>
    @sign: "+"; "-".</pre>
 
 <p>Applied to the string <code>(a+1);</code> it yields the serialization</p>
-<pre>&lt;expr open='(' sign='+' close=')'&gt;
+<pre class="xml">&lt;expr open='(' sign='+' close=')'&gt;
    &lt;left name='a'/&gt;
    &lt;right&gt;1&lt;/right&gt;
 &lt;/expr&gt;</pre>
@@ -630,7 +630,7 @@ some attributes can appear earlier in the serialization than in the input.</p>
 
 <p>Insertions allow characters to be inserted into the serialization that were
 not present in the input. For instance, the grammar</p>
-<pre>  data: value++-",", @source.
+<pre class="ixml">  data: value++-",", @source.
 source: +"ixml".
  value: pos; neg.
   -pos: +"+", digit+.
@@ -641,7 +641,7 @@ source: +"ixml".
 <pre>100,200,(300),400</pre>
 
 <p>would produce</p>
-<pre>&lt;data source="ixml"&gt;
+<pre class="xml">&lt;data source="ixml"&gt;
    &lt;value&gt;+100&lt;/value&gt;
    &lt;value&gt;+200&lt;/value&gt;
    &lt;value&gt;-300&lt;/value&gt;
@@ -774,7 +774,7 @@ generated nonterminals.</p>
 -f-star-sep: (f++sep)?.</pre>
 
 <h2 id="complete">Complete Grammar</h2>
-<pre>         ixml: s, prolog?, rule++RS, s.
+<pre class="ixml">         ixml: s, prolog?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
           -RS: (whitespace; comment)+. {Required spacing}
