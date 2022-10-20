@@ -1,6 +1,56 @@
 window.onload = function() {
   document.querySelector("html").className = "js";
 
+  let pstarted = 0;
+  let pfinished = 0;
+  let pcount = 0;
+  let pclose = false;
+
+  function checkProgress() {
+    let started = 0;
+    let finished = 0;
+    document.querySelectorAll("html head meta").forEach(meta => {
+      let name = meta.getAttribute("name");
+      let value = meta.getAttribute("content");
+      if (name && name.startsWith("tid-")) {
+        if (value === "started") {
+          started++;
+        } else {
+          finished++;
+        }
+      }
+    });
+
+    let bar = document.querySelector("#progress-bar");
+    if (bar && !pclose) {
+      let x = document.querySelector(".js .popup-header .popup-close");
+      let popup = document.querySelector("#loading");
+      if (x && popup) {
+        pclose = true;
+        x.addEventListener("click", (event) => {
+          popup.style.display = "none";
+        });
+      }
+    }
+
+    if (pstarted === started && pfinished === finished) {
+      pcount++;
+    } else {
+      pstarted = started;
+      pfinished = finished;
+      pcount = 0;
+    }
+
+    if (pcount > 20 && bar) {
+      bar.removeAttribute("id");
+      bar.innerHTML = "Oops, something appears to have gone wrong...";
+    } else {
+      if (started > 0) {
+        setTimeout(checkProgress, 250);
+      }
+    }
+  }
+
   // Work out the protocol and hostname of our source...
   let location = window.location.href;
   let webroot = "";
@@ -21,6 +71,8 @@ window.onload = function() {
   if (webroot.indexOf("localhost") > 0) {
     uid = new Date().getTime();
   }
+
+  setTimeout(checkProgress, 1000);
 
   const configJson = `${webroot}/dashboard/dashboard.json?ts=${uid}`;
   SaxonJS.getResource({"location": configJson,

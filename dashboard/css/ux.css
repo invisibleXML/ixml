@@ -1,7 +1,104 @@
+:root {
+    --popup-color: #fffff8;
+    --on-popup-color: #000000;;
+    --popup-border-color: #7f7f7f;
+    --popup-border-style: 1px solid var(--popup-border-color);
+    --modal-overlay-color: rgba(255,255,255,0.85);
+
+    --popup-header-color: rgb(73,123,60);
+    --on-popup-header-color: #f8f8f8;
+    --popup-header-separator-border-style: 1px solid var(--popup-border-color);
+}
+
 #prdesc {
     display: none;
 }
 
 #prasc {
     display: inline;
+}
+
+.js .js-explain {
+    display: none;
+}
+
+.no-js .js-explain {
+    border: 2px solid var(--popup-header-color);
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.no-js .popup-wrapper,
+.no-js .pull-requests,
+.no-js .branches {
+    display: none;
+}
+
+.js .popup-wrapper {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--modal-overlay-color);
+}
+
+.js .popup-body {
+    background-color: var(--popup-color);
+    color: var(--on-popup-color);
+    border: var(--popup-border-style);
+    width: 50%;
+    min-height: 40%;
+    max-height: 50%;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0.15em;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 100%;
+}
+
+.js .popup-header {
+    height: 2em;
+    background-color: var(--popup-header-color);
+    color: var(--on-popup-header-color);
+    padding-left: 1em;
+    padding-right: 0.5em;
+    border-bottom: var(--popup-header-separator-border-style);
+}
+
+.js .popup-header .popup-close {
+    padding-right: 0;
+    float: right;
+    cursor: pointer;
+    font-size: 125%;
+    padding-top: 4px;
+    font-family: sans-serif;
+}
+
+.js .popup-header .title {
+    padding-top: 0.25em;
+    padding-left: 0;
+    padding-right: 0;
+    font-family: var(--title-family);
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18pt;
+}
+
+.js .popup-content {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    overflow: scroll;
 }

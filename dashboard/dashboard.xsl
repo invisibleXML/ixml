@@ -54,8 +54,92 @@
       </xsl:apply-templates>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:apply-templates
-          select="ixsl:page()//section[contains-token(@class, 'community') and @x-name]"/>
+      <xsl:apply-templates select="ixsl:page()/html/body"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+<xsl:template match="body">
+  <xsl:result-document href="?.">
+    <aside id="loading" class="popup-wrapper">
+      <div class="popup-body">
+        <div class="popup-header">
+          <div class="popup-close">X</div>
+          <div class="title">Loading…</div>
+        </div>
+        <div class="popup-content">
+          <p>One moment, please. Collecting pull requests and branches.</p>
+          <p id="progress-bar"></p>
+        </div>
+      </div>
+    </aside>
+  </xsl:result-document>
+
+  <xsl:result-document href="#load-from-github" method="ixsl:replace-content">
+    <section class="repository" x-name="ixml">
+      <h2>Repository Dashboard</h2>
+      <p>Open pull requests contain proposals for changes that are still being
+      discussed. Where possible, a summary of the
+      changes between the pull request and the current draft is
+      provided with a <a href="deltaxml.html">DeltaXML</a> pipeline.
+      </p>
+      <div class="pull-requests">Loading pull requests…</div>
+      <div class="branches">Loading branches…</div>
+    </section>
+  </xsl:result-document>
+
+  <xsl:apply-templates
+      select="ixsl:page()//section[contains-token(@class, 'community') and @x-name]"/>
+
+  <ixsl:schedule-action wait="1000">
+    <xsl:call-template name="wait-for-threads">
+      <xsl:with-param name="count" select="0"/>
+    </xsl:call-template>
+  </ixsl:schedule-action>
+</xsl:template>
+
+<xsl:template name="wait-for-threads">
+  <xsl:param name="count" as="xs:integer" select="0"/>
+
+  <xsl:choose>
+    <xsl:when test="f:thread-count() = 0">
+      <!-- and scroll to the fragment, if applicable -->
+      <!-- Hat tip to Gerrit Imsieke for this solution -->
+      <xsl:variable name="fragid"
+                    select="if (contains(ixsl:location(), '#'))
+                            then substring-after(ixsl:location(), '#')
+                            else ()"/>
+
+      <xsl:variable name="target"
+                    select="if (empty($fragid))
+                            then ()
+                            else (ixsl:page()//*[@id=$fragid])[1]"/>
+
+      <xsl:choose>
+        <xsl:when test="exists($fragid) and empty($target)">
+          <xsl:result-document href="#progress-bar" method="ixsl:replace-content">
+            <xsl:text>Cannot jump to #{$fragid}; that anchor doesn’t exist.</xsl:text>
+          </xsl:result-document>
+        </xsl:when>
+        <xsl:otherwise>
+          <!-- Turn off the "Loading" dialog -->
+          <ixsl:set-style name="display" select="'none'"
+                          object="ixsl:page()//aside[@id='loading']"/>
+          <xsl:if test="exists($target)">
+            <xsl:sequence select="ixsl:call($target, 'scrollIntoView', [])"/>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:result-document href="#progress-bar">
+        <xsl:text>█</xsl:text>
+      </xsl:result-document>
+      <ixsl:schedule-action wait="100">
+        <xsl:call-template name="wait-for-threads">
+          <xsl:with-param name="count" select="$count + 1"/>
+        </xsl:call-template>
+      </ixsl:schedule-action>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
@@ -77,6 +161,10 @@
 <xsl:template match="div" mode="collect-branches">
   <xsl:param name="community" as="xs:string"/>
 
+  <xsl:apply-templates select="ixsl:page()/html/head"
+                       mode="thread-start">
+    <xsl:with-param name="id" select="'find-all-branches'"/>
+  </xsl:apply-templates>
   <ixsl:schedule-action
       http-request="map {
                       'method': 'GET',
@@ -96,6 +184,8 @@
   <xsl:param name="community" as="xs:string"/>
   <xsl:param name="repository" as="xs:string"/>
   <xsl:param name="context" as="element()"/>
+
+  <xsl:sequence select="f:thread-stop('find-all-branches')"/>
 
   <xsl:choose>
     <xsl:when test=".?status = 200 and starts-with(.?headers?content-type, 'application/json')">
@@ -300,6 +390,10 @@
   </xsl:variable>
 
   <xsl:if test="exists($documents)">
+    <xsl:apply-templates select="ixsl:page()/html/head"
+                         mode="thread-start">
+      <xsl:with-param name="id" select="generate-id($context)"/>
+    </xsl:apply-templates>
     <ixsl:schedule-action
         http-request="map {
                         'method': 'GET',
@@ -324,6 +418,8 @@
   <xsl:param name="documents" as="map(*)*"/>
   <xsl:param name="found" as="map(*)*" select="()"/>
 
+  <xsl:sequence select="f:thread-stop(generate-id($context))"/>
+
   <xsl:variable name="current"
                 select="if (.?status = 200)
                         then ($found, $document)
@@ -331,6 +427,10 @@
 
   <xsl:choose>
     <xsl:when test="exists($documents)">
+      <xsl:apply-templates select="ixsl:page()/html/head"
+                           mode="thread-start">
+        <xsl:with-param name="id" select="generate-id($context)"/>
+      </xsl:apply-templates>
       <ixsl:schedule-action
           http-request="map {
                           'method': 'GET',
@@ -449,6 +549,10 @@
 <xsl:template match="div" mode="collect-pull-requests">
   <xsl:param name="community" as="xs:string"/>
 
+  <xsl:apply-templates select="ixsl:page()/html/head"
+                       mode="thread-start">
+    <xsl:with-param name="id" select="'find-all-pull-requests'"/>
+  </xsl:apply-templates>
   <ixsl:schedule-action
       http-request="map {
                       'method': 'GET',
@@ -468,6 +572,8 @@
   <xsl:param name="community" as="xs:string"/>
   <xsl:param name="repository" as="xs:string"/>
   <xsl:param name="context" as="element()"/>
+
+  <xsl:sequence select="f:thread-stop('find-all-pull-requests')"/>
 
   <xsl:choose>
     <xsl:when test=".?status = 200 and starts-with(.?headers?content-type, 'application/json')">
@@ -645,6 +751,10 @@
                         || $community || '/' || $repository || '/compare/'
                         || ../@x-base || '...' || ../@x-head"/>
 
+  <xsl:apply-templates select="ixsl:page()/html/head"
+                       mode="thread-start">
+    <xsl:with-param name="id" select="generate-id(.)"/>
+  </xsl:apply-templates>
   <ixsl:schedule-action
       http-request="map {
                       'method': 'GET',
@@ -659,6 +769,9 @@
 <xsl:template name="f-show-changed-files">
   <xsl:context-item as="map(*)" use="required"/>
   <xsl:param name="context" as="element()"/>
+
+  <xsl:sequence select="f:thread-stop(generate-id($context))"/>
+
   <xsl:apply-templates select="$context" mode="f-show-changed-files">
     <xsl:with-param name="context" select="."/>
   </xsl:apply-templates>
@@ -747,5 +860,27 @@
 </xsl:template>
 
 <!-- ============================================================ -->
+
+<xsl:template match="head" mode="thread-start">
+  <xsl:param name="id" as="xs:string"/>
+  <xsl:result-document href="?.">
+    <meta name="tid-{$id}" content="started"/>
+  </xsl:result-document>
+</xsl:template>
+
+<xsl:function name="f:thread-stop" as="empty-sequence()">
+  <xsl:param name="id" as="xs:string"/>
+  <xsl:variable name="meta"
+                select="ixsl:page()/html/head/meta[@name='tid-'||$id and @content='started']"/>
+  <xsl:if test="$meta">
+    <ixsl:set-attribute name="content" select="'finished'" object="$meta[1]"/>
+  </xsl:if>
+</xsl:function>
+
+<xsl:function name="f:thread-count" as="xs:integer">
+  <xsl:sequence
+      select="count(ixsl:page()/html/head/meta
+                    [starts-with(@name, 'tid-') and @content='started'])"/>
+</xsl:function>
 
 </xsl:stylesheet>
