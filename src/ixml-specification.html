@@ -426,7 +426,9 @@ character:</p>
 enclosed with single or double quotes. A string matches only the exact same
 string in the input. Examples: <code>"yes" 'yes'</code>.</p>
 
-<p id="ref-s11">A string cannot extend over a line-break (<a class="error"
+<p id="ref-s11">A string cannot contain any of
+the <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 or C1 control
+characters</a>, including a line-break (<a class="error"
 href="#err-s11">error S11</a>). The enclosing quote is represented in a string
 by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
@@ -435,10 +437,10 @@ by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
-   dchar: ~['"'; #a; #d];
-          '"', -'"'. {all characters except line breaks; quotes must be doubled}
-   schar: ~["'"; #a; #d];
-          "'", -"'". {all characters except line breaks; quotes must be doubled}</pre>
+   dchar: ~['"'; #0-#1f; #7f-#9f];
+          '"', -'"'. {all characters except controls; quotes must be doubled}
+   schar: ~["'"; #0-#1f; #7f-#9f];
+          "'", -"'". {all characters except controls; quotes must be doubled}</pre>
 
 <p id="ref-s06">An encoded character is an optionally marked hexadecimal
 number. It starts with a hash symbol, followed by any number of hexadecimal
@@ -1023,7 +1025,8 @@ errors are errors that can be identified by inspecting the grammar.</p>
     <dd>It is an error to use a Unicode character category that is not defined
       in the Unicode specification.</dd>
   <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
-    <dd>It is an error if a string contains a line break.</dd>
+    <dd>It is an error if a string contains a C0 or C1 control character,
+    including a line break.</dd>
   <dt id="err-s12"><a href="#ref-s12">S12</a></dt>
     <dd>It is an error if the grammar does not conform to the implied or
       declared version.</dd>
