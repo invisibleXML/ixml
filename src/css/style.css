@@ -120,7 +120,7 @@ code {
 }
 
 .aname, .eq, .q,
-.str {
+.str, .hex {
     color: var(--name-color);
 }
 
