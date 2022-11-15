@@ -146,7 +146,8 @@
   </div>
 </xsl:template>
 
-<xsl:template match="html:pre[contains-token(@class, 'ixml')]">
+<xsl:template match="html:pre[contains-token(@class, 'ixml')
+                             or contains-token(@class, 'frag')]">
   <xsl:copy>
     <xsl:apply-templates select="@*"/>
     <xsl:sequence select="f:highlight-ixml(string(.))"/>
@@ -160,6 +161,62 @@
   </xsl:copy>
 </xsl:template>
 
+<xsl:template match="html:pre[@class = 'complete']">
+  <xsl:variable name="lines"
+                select="unparsed-text('../build/current/ixml.ixml')
+                        =&gt; tokenize('&#10;')"/>
+  <!-- skip the version comment -->
+  <pre>
+    <xsl:value-of select="string-join($lines[position() gt 1], '&#10;')"/>
+  </pre>
+</xsl:template>
+
+<xsl:template match="html:pre[@class = 'completexml']">
+  <xsl:variable name="grammar"
+                select="doc('../build/current/ixml.xml')"/>
+
+  <xsl:variable name="transformed">
+    <xsl:apply-templates select="$grammar" mode="trim"/>
+  </xsl:variable>
+
+  <xsl:variable name="serialized" as="xs:string">
+    <xsl:sequence select="serialize($transformed, map{'method':'xml','indent':true()})"/>
+  </xsl:variable>
+
+  <pre>
+    <xsl:sequence select="f:highlight-xml($transformed)"/>
+  </pre>
+</xsl:template>
+
 <xsl:template match="@xml:space"/>
+
+<xsl:mode name="trim" on-no-match="shallow-copy"/>
+
+<xsl:template match="*" mode="trim">
+  <xsl:copy>
+    <xsl:apply-templates select="@*, node()" mode="trim"/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="ixml/*[position() = 15]" mode="trim">
+  <xsl:copy>
+    <xsl:apply-templates select="@*, node()" mode="trim"/>
+  </xsl:copy>
+  <xsl:comment> Many more rules here… </xsl:comment>
+</xsl:template>
+
+<xsl:template match="ixml/*[position() gt 15]" mode="trim"/>
+
+<xsl:template match="comment[starts-with(., 'version ')]"
+              mode="trim" priority="10"/>
+
+<xsl:template match="text()[preceding-sibling::node()[1]
+                            /self::comment[starts-with(., 'version ')]]"
+              mode="trim">
+</xsl:template>
+
+<xsl:template match="ixml/text()[position() gt 15]"
+              mode="trim">
+</xsl:template>
 
 </xsl:stylesheet>

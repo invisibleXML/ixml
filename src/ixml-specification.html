@@ -291,7 +291,8 @@ rules, surrounded and separated by spacing and comments. Spacing and comments
 are entirely optional, except that rules <span id="ref-s01"
 class="conform">must</span> be separated by at least one of either (<a
 class="error" href="#err-s01">error S01</a>).</p>
-<pre class="frag">ixml: s, prolog?, rule++RS, s.</pre>
+<pre class="frag">ixml: s, prolog?, rule++RS, s.
+</pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
@@ -304,7 +305,8 @@ grammar:</p>
         -lf: -#a.
         -cr: -#d.
     comment: -"{", (cchar; comment)*, -"}".
-     -cchar: ~["{}"].</pre>
+     -cchar: ~["{}"].
+</pre>
 
 <h3 id="L3041">Prolog</h3>
 
@@ -312,8 +314,9 @@ grammar:</p>
 version 1.0 is assumed. A grammar <span id="ref-s12"
 class="conform">must</span> conform to the syntax and semantics of the version
 declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
-<pre class="frag">        prolog: version, s.
-       version: -"ixml", RS, -"version", RS, string, s, -'.' .</pre>
+<pre class="frag">       prolog: version, s.
+      version: -"ixml", RS, -"version", RS, string, s, -'.' .
+</pre>
 
 <p>If an implementation recognizes the version string, it <span
 class="conform">must</span> process the grammar using the syntax and semantics
@@ -353,7 +356,8 @@ ensure that all serialized names match the requirements for an XML name [<a
 href="#xml">XML</a>].</p>
 <pre class="frag">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
--namefollower: namestart; ["-.·‿⁀"; Nd; Mn].</pre>
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
+</pre>
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p>
@@ -402,7 +406,8 @@ match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
 <h3 id="nonterminals">Nonterminals</h3>
 
 <p>A nonterminal is an optionally marked name:</p>
-<pre class="frag">nonterminal: (mark, s)?, name, s.</pre>
+<pre class="frag">nonterminal: (mark, s)?, name, s.
+</pre>
 
 <p>This name refers to the rule that defines this name, which <span
 id="ref-s02" class="conform">must</span> exist (<a class="error"
@@ -432,6 +437,7 @@ by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
 <code>'He said "Don''t!"'</code>.</p>
 <pre class="frag"> -quoted: (tmark, s)?, string, s.
+
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
@@ -452,7 +458,8 @@ code point (<a class="error" href="#err-s08">error S08</a>).</p>
 
 <p>An encoded character matches that one character in the input.</p>
 <pre class="frag">-encoded: (tmark, s)?, -"#", hex, s.
-    @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.</pre>
+    @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
+</pre>
 
 <h3 id="characters">Character sets</h3>
 
@@ -514,7 +521,7 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
 <p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
 serialization.</p>
-<pre>insertion: -"+", s, (string; -"#", hex), s.</pre>
+<pre class="frag">insertion: -"+", s, (string; -"#", hex), s.</pre>
 
 <h2 id="parsing">Parsing</h2>
 
@@ -774,224 +781,21 @@ generated nonterminals.</p>
 -f-star-sep: (f++sep)?.</pre>
 
 <h2 id="complete">Complete Grammar</h2>
-<pre>         ixml: s, prolog?, rule++RS, s.
 
-           -s: (whitespace; comment)*. {Optional spacing}
-          -RS: (whitespace; comment)+. {Required spacing}
-  -whitespace: -[Zs]; tab; lf; cr.
-         -tab: -#9.
-          -lf: -#a.
-          -cr: -#d.
-      comment: -"{", (cchar; comment)*, -"}".
-       -cchar: ~["{}"].
-
-       prolog: version, s.
-      version: -"ixml", RS, -"version", RS, string, s, -'.' .
-
-         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
-        @mark: ["@^-"].
-         alts: alt++(-[";|"], s).
-          alt: term**(-",", s).
-        -term: factor;
-               option;
-               repeat0;
-               repeat1.
-      -factor: terminal;
-               nonterminal;
-               insertion;
-               -"(", s, alts, -")", s.
-      repeat0: factor, (-"*", s; -"**", s, sep).
-      repeat1: factor, (-"+", s; -"++", s, sep).
-       option: factor, -"?", s.
-          sep: factor.
-  nonterminal: (mark, s)?, name, s.
-
-        @name: namestart, namefollower*.
-   -namestart: ["_"; L].
--namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
-
-    -terminal: literal; 
-               charset.
-      literal: quoted;
-               encoded.
-      -quoted: (tmark, s)?, string, s.
-
-       @tmark: ["^-"].
-      @string: -'"', dchar+, -'"';
-               -"'", schar+, -"'".
-        dchar: ~['"'; #a; #d];
-               '"', -'"'. {all characters except line breaks; quotes must be doubled}
-        schar: ~["'"; #a; #d];
-               "'", -"'". {all characters except line breaks; quotes must be doubled}
-     -encoded: (tmark, s)?, -"#", hex, s.
-         @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
-
-     -charset: inclusion; 
-               exclusion.
-    inclusion: (tmark, s)?,          set.
-    exclusion: (tmark, s)?, -"~", s, set.
-         -set: -"[", s,  (member, s)**(-[";|"], s), -"]", s.
-       member: string;
-               -"#", hex;
-               range;
-               class.
-       -range: from, s, -"-", s, to.
-        @from: character.
-          @to: character.
-   -character: -'"', dchar, -'"';
-               -"'", schar, -"'";
-               "#", hex.
-       -class: code.
-        @code: capital, letter?.
-     -capital: ["A"-"Z"].
-      -letter: ["a"-"z"].
-    insertion: -"+", s, (string; -"#", hex), s.</pre>
+<pre class="complete">The complete grammar is
+inserted here by the build process.</pre>
 
 <h2 id="ixml">IXML in IXML</h2>
 
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
 serializing. Note that all semantically significant terminals are recorded in
-attributes, and non-significant characters are not serialized. The
-serialization begins as below, but the <a href="ixml.xml">entire
+attributes, and non-significant characters are not serialized. An
+abbreviated serialization is shown below, but the <a href="ixml.xml.html">entire
 serialization</a> is available:</p>
-<pre>&lt;ixml&gt;
-   &lt;rule name='ixml'&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;option&gt;
-            &lt;nonterminal name='prolog'/&gt;
-         &lt;/option&gt;
-         &lt;repeat1&gt;
-            &lt;nonterminal name='rule'/&gt;
-            &lt;sep&gt;
-               &lt;nonterminal name='RS'/&gt;
-            &lt;/sep&gt;
-         &lt;/repeat1&gt;
-         &lt;nonterminal name='s'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='s'&gt;
-      &lt;alt&gt;
-         &lt;repeat0&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='whitespace'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat0&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;comment&gt;Optional spacing&lt;/comment&gt;
-   &lt;rule mark='-' name='RS'&gt;
-      &lt;alt&gt;
-         &lt;repeat1&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='whitespace'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat1&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;comment&gt;Required spacing&lt;/comment&gt;
-   &lt;rule mark='-' name='whitespace'&gt;
-      &lt;alt&gt;
-         &lt;inclusion tmark='-'&gt;
-            &lt;member code='Zs'/&gt;
-         &lt;/inclusion&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='tab'/&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='lf'/&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='cr'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='tab'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='9'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='lf'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='a'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='cr'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='d'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='comment'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' string='{'/&gt;
-         &lt;repeat0&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='cchar'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat0&gt;
-         &lt;literal tmark='-' string='}'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='cchar'&gt;
-      &lt;alt&gt;
-         &lt;exclusion&gt;
-            &lt;member string='{}'/&gt;
-         &lt;/exclusion&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='prolog'&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='version'/&gt;
-         &lt;nonterminal name='s'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='version'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' string='ixml'/&gt;
-         &lt;nonterminal name='RS'/&gt;
-         &lt;literal tmark='-' string='version'/&gt;
-         &lt;nonterminal name='RS'/&gt;
-         &lt;nonterminal name='string'/&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;literal tmark='-' string='.'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='rule'&gt;
-      &lt;alt&gt;
-         &lt;option&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='mark'/&gt;
-                  &lt;nonterminal name='s'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/option&gt;
-         &lt;nonterminal name='name'/&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;inclusion tmark='-'&gt;
-            &lt;member string='=:'/&gt;
-         &lt;/inclusion&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;nonterminal mark='-' name='alts'/&gt;
-         &lt;literal tmark='-' string='.'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;</pre>
+
+<pre class="completexml">A summary of the XML grammar is
+inserted here by the build process.</pre>
 
 <h2 id="errors">Errors</h2>
 
