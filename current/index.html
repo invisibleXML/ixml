@@ -187,17 +187,19 @@ input. A terminal marked as deleted (-) serializes to the empty string.</p><pre 
 character:</p><pre class="frag">  literal: quoted;
            encoded.</pre><p>A quoted string is an optionally marked string of one or more characters,
 enclosed with single or double quotes. A string matches only the exact same
-string in the input. Examples: <code>"yes" 'yes'</code>.</p><p id="ref-s11">A string cannot extend over a line-break (<a class="error" href="#err-s11" shape="rect">error S11</a>). The enclosing quote is represented in a string
+string in the input. Examples: <code>"yes" 'yes'</code>.</p><p id="ref-s11">A string cannot contain any of
+the <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" shape="rect">C0 or C1 control
+characters</a>, including a line-break (<a class="error" href="#err-s11" shape="rect">error S11</a>). The enclosing quote is represented in a string
 by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
 <code>'He said "Don''t!"'</code>.</p><pre class="frag"> -quoted: (tmark, s)?, string, s.
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
-   dchar: ~['"'; #a; #d];
-          '"', -'"'. {all characters except line breaks; quotes must be doubled}
-   schar: ~["'"; #a; #d];
-          "'", -"'". {all characters except line breaks; quotes must be doubled}</pre><p id="ref-s06">An encoded character is an optionally marked hexadecimal
+   dchar: ~['"'; #0-#1f; #7f-#9f];
+          '"', -'"'. {all characters except controls; quotes must be doubled}
+   schar: ~["'"; #0-#1f; #7f-#9f];
+          "'", -"'". {all characters except controls; quotes must be doubled}</pre><p id="ref-s06">An encoded character is an optionally marked hexadecimal
 number. It starts with a hash symbol, followed by any number of hexadecimal
 digits, for example <code>#a0</code>. The digits are interpreted as a number in
 hexadecimal (<a class="error" href="#err-s06" shape="rect">error S06</a>) , and the
@@ -597,7 +599,8 @@ errors are errors that can be identified by inspecting the grammar.</p><dl id="s
       code-point range.</dd><dt id="err-s08"><a href="#ref-s08" shape="rect">S08</a></dt><dd>It is an error if an encoded character denotes a Unicode noncharacter
       or surrogate code point.</dd><dt id="err-s09"><a href="#ref-s09" shape="rect">S09</a></dt><dd>It is an error if the first character in a range has a code point value
       greater than the second character in the range.</dd><dt id="err-s10"><a href="#ref-s10" shape="rect">S10</a></dt><dd>It is an error to use a Unicode character category that is not defined
-      in the Unicode specification.</dd><dt id="err-s11"><a href="#ref-s11" shape="rect">S11</a></dt><dd>It is an error if a string contains a line break.</dd><dt id="err-s12"><a href="#ref-s12" shape="rect">S12</a></dt><dd>It is an error if the grammar does not conform to the implied or
+      in the Unicode specification.</dd><dt id="err-s11"><a href="#ref-s11" shape="rect">S11</a></dt><dd>It is an error if a string contains a C0 or C1 control character,
+    including a line break.</dd><dt id="err-s12"><a href="#ref-s12" shape="rect">S12</a></dt><dd>It is an error if the grammar does not conform to the implied or
       declared version.</dd></dl><p>Dynamic errors arise when a particular input is processed with a grammar.</p><dl id="dynamic-errors"><dt id="err-d01"><a href="#ref-d01" shape="rect">D01</a></dt><dd>It is an error if the parse tree produced by a grammar cannot be
       represented as well-formed XML.</dd><dt id="err-d02"><a href="#ref-d02" shape="rect">D02</a></dt><dd>It is an error if two or more attributes with the same name would be
       serialized on the same element.</dd><dt id="err-d03"><a href="#ref-d03" shape="rect">D03</a></dt><dd>It is an error if the name of any element or attribute is not a valid
@@ -628,4 +631,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #3 for invisibleXML/ixml at <time datetime="2022-11-15T15:28:11GMT+00:00" title="2022-11-15T15:28:11GMT+00:00">15:28 on 15 November 2022</time></span> <span class="bh"><span title="0f069e2e4fff186fffabacf81db249e991d159d0">0f069e2e</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #4 for invisibleXML/ixml at <time datetime="2022-11-15T15:31:25GMT+00:00" title="2022-11-15T15:31:25GMT+00:00">15:31 on 15 November 2022</time></span> <span class="bh"><span title="6cd0cccbaf962f6ca2f68f0a04ae2c20666011e8">6cd0cccb</span></span></p></footer></body></html>
