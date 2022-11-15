@@ -318,7 +318,7 @@ grammar:</p>
 version 1.0 is assumed. A grammar <span id="ref-s12"
 class="conform">must</span> conform to the syntax and semantics of the version
 declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
-<pre class="frag ixml">       prolog: version, s.
+<pre class="frag ixml">        prolog: version, s.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 </pre>
 
@@ -443,6 +443,7 @@ by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
 <code>'He said "Don''t!"'</code>.</p>
 <pre class="frag ixml"> -quoted: (tmark, s)?, string, s.
+
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
@@ -797,8 +798,8 @@ inserted here by the build process.</pre>
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
 serializing. Note that all semantically significant terminals are recorded in
-attributes, and non-significant characters are not serialized. The
-serialization begins as below, but the <a href="ixml.xml.html">entire
+attributes, and non-significant characters are not serialized. An
+abbreviated serialization is shown below, but the <a href="ixml.xml.html">entire
 serialization</a> is available:</p>
 
 <pre class="completexml">A summary of the XML grammar is
