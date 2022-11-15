@@ -10,21 +10,12 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification Errata</title>
-  <style type="text/css">
-      body {margin-left: auto; margin-right:auto; max-width: 50em;}
-      h1, h2 {font-family: sans-serif; clear: both}
-      pre {margin-left: 2em; padding: 0.5em 0 0.5em 1em; background-color: #ddf}
-      code {color: #A00}
-      div {border: thin red solid; padding-left: 1em; padding-right: 1em;}
-      span.todo {background: yellow} 
-      img {float: right; width: 25%; margin-left: 1em; border: thin black solid}
-      span.conform {font-weight: bold}
- </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <h1>Invisible XML Specification Errata</h1>
 
-<p>Version: <!--$date=-->2022-09-29<!--$--></p>
+<p>Version: <!--$date=-->2022-10-15<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -33,13 +24,25 @@
 
 <h2 id="proposed">Proposed errata</h2>
 
+<p>None at this time.</p>
+
+<h2 id="accepted">Accepted errata</h2>
+
+<p>None at this time.</p>
+
+<h2 id="resolved">Resolved errata</h2>
+
 <h3>E001: The Unicode character class “LC”</h3>
+
+<p><a href="https://www.w3.org/2022/10/11-ixml-minutes#t04">Accepted</a> as
+an erratum against 1.0 at the meeting of 11 October 2022. Resolved in the current
+specification on 15 October 2022.</p>
 
 <p>The definition of the nonterminal <code>letter</code> is changed to
 <code>["A"-"Z" | "a"-"z"]</code> to address the fact that recent versions of Unicode
 include the class “LC”.</p>
 
-<div class="revised">
+<div class="box revised">
 <p>A class is one or two letters, representing any character from the Unicode
 character category [<a href="#categories">Categories</a>] of that name, which
 <span id="ref-s10" class="conform">must</span> exist (<a class="error"
@@ -50,10 +53,6 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
  -capital: ["A"-"Z"].
   -letter: ["A"-"Z" | "a"-"z"].</pre>
 </div>
-
-<h2 id="accepted">Accepted errata</h2>
-
-<p>None at this time.</p>
 
 </body>
 </html>
