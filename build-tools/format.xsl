@@ -167,7 +167,7 @@
                         =&gt; tokenize('&#10;')"/>
   <!-- skip the version comment -->
   <pre>
-    <xsl:value-of select="string-join($lines[position() gt 1], '&#10;')"/>
+    <xsl:sequence select="f:highlight-ixml(string-join($lines[position() gt 1], '&#10;'))"/>
   </pre>
 </xsl:template>
 
