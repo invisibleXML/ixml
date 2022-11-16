@@ -44,10 +44,10 @@
        @tmark: ["^-"].
       @string: -'"', dchar+, -'"';
                -"'", schar+, -"'".
-        dchar: ~['"'; #a; #d];
-               '"', -'"'. {all characters except line breaks; quotes must be doubled}
-        schar: ~["'"; #a; #d];
-               "'", -"'". {all characters except line breaks; quotes must be doubled}
+        dchar: ~['"'; #0-#1f; #7f-#9f];
+               '"', -'"'. {all characters except controls; quotes must be doubled}
+        schar: ~["'"; #0-#1f; #7f-#9f];
+               "'", -"'". {all characters except controls; quotes must be doubled}
      -encoded: (tmark, s)?, -"#", hex, s.
          @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
 
