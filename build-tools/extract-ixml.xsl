@@ -36,9 +36,8 @@
 </xsl:template>
 
 <xsl:template match="h:p[starts-with(., 'Version:')]">
-  <xsl:variable name="date" select="substring-after(., '20')"/>
-  <xsl:text>{version 20</xsl:text>
-  <xsl:value-of select="substring($date, 1, 8)"/>
+  <xsl:text>{version </xsl:text>
+  <xsl:sequence select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
   <xsl:text>}&#10;</xsl:text>
 </xsl:template>
 
