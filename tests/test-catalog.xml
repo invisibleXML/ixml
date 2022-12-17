@@ -32,4 +32,5 @@
   <test-set-ref href="misc/misc-001-020-catalog.xml"/>
   <test-set-ref href="misc/misc-021-040-catalog.xml"/>
   <test-set-ref href="misc/misc-041-060-catalog.xml"/>
+  <test-set-ref href="chars/test-catalog.xml"/>
 </test-catalog>
