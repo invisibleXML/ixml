@@ -60,11 +60,11 @@ experiment with different sets of rewriting rules.
 It will be easiest to describe what we mean by “converting EBNF into
 BNF” if we first look at a couple of examples.
 
-Consider this grammar fragment expressed with the conventions of the
+Consider this small grammar expressed with the conventions of the
 Invisible XML EBNF:
 
 ```
-S = 'a', 'b'?
+S = 'a', 'b'? .
 ```
 
 An “S” is an “a” followed optionally by a single “b”. The syntactic
@@ -73,7 +73,7 @@ need to rewrite. We can easily rewrite this rule using only sequences
 and choices as follows:
 
 ```
-S = 'a' | 'a', 'b'
+S = 'a' | 'a', 'b' .
 ```
 
 An “S” is an “a” or an “a” followed by a single “b”. That’s a
@@ -82,19 +82,27 @@ reformulation of the original rule that matches the same inputs.
 Now consider this rule:
 
 ```
-S = 'a', 'b'*
+S = 'a', 'b'* .
 ```
 
 An “S” is an “a” followed by zero or more “b”s. The syntactic shortcut
 “zero or more” (`*`) is also not present in BNF. In order to rewrite
-this one, it will be necessary to introduce a new nonterminal symbol.
-The name of the nonterminal is irrelevant as long as it isn’t a name
-used elsewhere by the grammar author.
-In an Invisible XML context, we can always mark the rule with “`-`” so
-that it never appears in the serialization.
+this one, it will be convenient to introduce a new nonterminal symbol.
+
+The new nonterminal isn’t strictly necessary. The following BNF
+grammar accepts the same inputs as the original:
 
 ```
-S = 'a', b-star
+S = ('a' | -S), 'b' .
+```
+
+However, the specification introduces a nonterminal. The name of the
+nonterminal is irrelevant as long as it isn’t a name used elsewhere by
+the grammar author. In an Invisible XML context, we can always mark
+the rule with “`-`” so that it never appears in the serialization.
+
+```
+S = 'a', b-star .
 -b-star = 'b', b-star | () .
 ```
 
@@ -111,6 +119,22 @@ Consider how this matches the same inputs as our original:
   by a “b-star” where the (third) “b-star” is empty.
 * And so on.
 
+To ensure that an iXML processor can produce the required XML output
+from a rewritten grammar, it is helpful to adopt some general
+principles in our rewrites:
+
+* Every nonterminal in the input grammar will reappear in the
+  rewritten grammar and matches the same input strings. (Exception: if
+  the nonterminal is marked hidden, this is not important.)
+* It is often helpful to add new nonterminals as part of rewriting the
+  grammar, often (as in the example above) adding a nonterminal to
+  replace exactly one `repeat0` or `repeat1` construct in the input
+  grammar.
+* Every nonterminal added in the rewritein the input grammar will be
+  marked hidden. (Since the new nonterminal does not appear in the
+  input grammar, it can never be correct for it to produce an element
+  or an attribute in the XML output.)
+
 The first example, rewriting optionality, didn’t introduce a new
 nonterminal because that example was simpler to explain without doing
 so. However, in practice, the factor that is optional may be an
@@ -118,7 +142,7 @@ expression in parenthesis that’s much more complicated than just “b”.
 We could have rewritten it using a new nonterminal as shown here:
 
 ```
-S = 'a' | 'a', b-option
+S = 'a' | 'a', b-option .
 -b-option = 'b' | () .
 ```
 
