@@ -1,0 +1,143 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+      url "https://dev.saxonica.com/maven"
+    }
+  }
+
+  dependencies {
+    classpath group: "net.sf.saxon", name: "Saxon-HE", version: "11.4"
+  }
+}
+
+plugins {
+  id "java"
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven {
+    url "https://dev.saxonica.com/maven"
+  }
+}
+
+configurations.all {
+  resolutionStrategy {
+    force 'xml-apis:xml-apis:1.4.01'
+  }
+}
+
+configurations {
+  saxon.extendsFrom(implementation)
+}
+
+dependencies {
+  implementation (
+    [group: "net.sf.saxon", name: "Saxon-HE", version: "11.4"],
+    [group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30']
+  )
+}
+
+def getenv(String name) {
+  if (System.getenv(name) == null) {
+    return ""
+  } else {
+    return System.getenv(name)
+  }
+}
+
+println("Building with Java version ${System.getProperty('java.version')}")
+if (getenv('CIWORKFLOW') != '') {
+  println("Building for CI commit ${getenv('CI_SHA1')}");
+  println("Building for CI branch ${getenv('CI_BRANCH')}");
+} else {
+  println("Building locally...")
+}
+
+defaultTasks 'publish'
+
+task publish(
+  group: "publish",
+  dependsOn: ["formatSpec", "copyResources", "ixmlInXml", "ixmlInIxml"],
+  description: "Publish the current specification") {
+}
+
+task formatSpec(
+  type: JavaExec,
+  description: "Copy the specification into the build directory"
+) {
+  inputs.files fileTree(dir: "${projectDir}/src")
+  outputs.file "${buildDir}/current/index.html"
+
+  classpath = configurations.saxon
+  mainClass = "net.sf.saxon.Transform"
+  args "-s:${projectDir}/src/ixml-specification.html",
+    "-xsl:${projectDir}/build-tools/format.xsl",
+    "-o:${buildDir}/current/index.html",
+    "ci-sha1=${getenv('CI_SHA1')}",
+    "ci-build-num=${getenv('CI_BUILD_NUM')}",
+    "ci-project-username=${getenv('CI_PROJECT_USERNAME')}",
+    "ci-project-reponame=${getenv('CI_PROJECT_REPONAME')}",
+    "ci-branch=${getenv('CI_BRANCH')}",
+    "ci-tag=${getenv('CI_TAG')}",
+    "ci-pull=${getenv('CI_PULL')}"
+}
+
+task copyResources(
+  description: "Copy the other resources into the build directory"
+) {
+  inputs.files fileTree(dir: "${projectDir}/src/js")
+  inputs.files fileTree(dir: "${projectDir}/src/css")
+  outputs.files fileTree(dir: "${buildDir}/current/js")
+  outputs.files fileTree(dir: "${buildDir}/current/css")
+  outputs.file "${buildDir}/current/ixml.ixml"
+  outputs.file "${buildDir}/current/ixml.xml"
+  outputs.file "${buildDir}/current/errata.html"
+
+  doLast {
+    copy {
+      into "${buildDir}/current"
+      from "${projectDir}/src"
+      include "css/**"
+      include "js/**"
+      include "ixml.ixml"
+      include "ixml.xml"
+      include "errata.html"
+    }
+  }
+}
+
+task ixmlInXml(
+  type: JavaExec,
+  description: "Format ixml.xml for the web"
+) {
+  inputs.files fileTree(dir: "${projectDir}/build-tools")
+  inputs.file "${projectDir}/src/ixml.xml"
+  outputs.file "${buildDir}/current/ixml.xml.html"
+
+  classpath = configurations.saxon
+  mainClass = "net.sf.saxon.Transform"
+  args "-s:${projectDir}/src/ixml.xml",
+    "-xsl:${projectDir}/build-tools/format-xml.xsl",
+    "-o:${buildDir}/current/ixml.xml.html"
+}
+
+task ixmlInIxml(
+  type: JavaExec,
+  description: "Format ixml.ixml for the web"
+) {
+  inputs.files fileTree(dir: "${projectDir}/build-tools")
+  inputs.file "${projectDir}/src/ixml.ixml"
+  outputs.file "${buildDir}/current/ixml.ixml.html"
+
+  classpath = configurations.saxon
+  mainClass = "net.sf.saxon.Transform"
+  args "-it",
+    "-xsl:${projectDir}/build-tools/format-ixml.xsl",
+    "-o:${buildDir}/current/ixml.ixml.html",
+    "ixml.ixml=${projectDir}/src/ixml.ixml"
+}
+    
