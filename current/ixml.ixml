@@ -1,4 +1,4 @@
-{version 2022-06-07}
+{version 2023-01-10}
          ixml: s, prolog?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
@@ -69,5 +69,5 @@
        -class: code.
         @code: capital, letter?.
      -capital: ["A"-"Z"].
-      -letter: ["a"-"z"].
+      -letter: ["A"-"Z"; "a"-"z"].
     insertion: -"+", s, (string; -"#", hex), s.

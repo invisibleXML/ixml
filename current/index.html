@@ -132,7 +132,8 @@ in the serialized result, giving:</p><pre class="xml"><span><span class="text"><
 <span class="etag">&lt;/</span><span class="gi">url</span><span class="etag">&gt;</span></span></span></pre><h2 id="grammar">The Grammar</h2><p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p><p>A grammar is an optional prolog, followed by a sequence of one or more
 rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.</span></pre><p>An <code>s</code> stands for an optional sequence of spacing and comments;
+are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+</span></pre><p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
 braces, and can included nested comments, to enable commenting out parts of a
 grammar:</p><pre class="frag ixml"><span>         <span class="mark">-</span><span class="nt">s</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>. <span class="com"><span class="comdel">{</span>Optional spacing<span class="comdel">}</span></span>
@@ -142,10 +143,12 @@ grammar:</p><pre class="frag ixml"><span>         <span class="mark">-</span><sp
         <span class="mark">-</span><span class="nt">lf</span><span class="col">:</span> <span class="mark">-</span><span class="hex"><span class="hexdel">#</span>a</span>.
         <span class="mark">-</span><span class="nt">cr</span><span class="col">:</span> <span class="mark">-</span><span class="hex"><span class="hexdel">#</span>d</span>.
     <span class="nt">comment</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>{<span class="strdel">"</span></span>, (<span class="nt">cchar</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>}<span class="strdel">"</span></span>.
-     <span class="mark">-</span><span class="nt">cchar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">"</span>{}<span class="strdel">"</span></span><span class="setdel">]</span></span>.</span></pre><h3 id="L3041">Prolog</h3><p>The optional prolog declares the version of ixml being used. If absent,
+     <span class="mark">-</span><span class="nt">cchar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">"</span>{}<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+</span></pre><h3 id="L3041">Prolog</h3><p>The optional prolog declares the version of ixml being used. If absent,
 version 1.0 is assumed. A grammar <span id="ref-s12" class="conform">must</span> conform to the syntax and semantics of the version
-declared or assumed (<a class="error" href="#err-s12" shape="rect">error S12</a>).</p><pre class="frag ixml"><span>        <span class="nt">prolog</span><span class="col">:</span> <span class="nt">version</span>, <span class="nt">s</span>.
-       <span class="nt">version</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>ixml<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>version<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="nt">string</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>.<span class="strdel">'</span></span> .</span></pre><p>If an implementation recognizes the version string, it <span class="conform">must</span> process the grammar using the syntax and semantics
+declared or assumed (<a class="error" href="#err-s12" shape="rect">error S12</a>).</p><pre class="frag ixml"><span>       <span class="nt">prolog</span><span class="col">:</span> <span class="nt">version</span>, <span class="nt">s</span>.
+      <span class="nt">version</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>ixml<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>version<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="nt">string</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>.<span class="strdel">'</span></span> .
+</span></pre><p>If an implementation recognizes the version string, it <span class="conform">must</span> process the grammar using the syntax and semantics
 of that version.</p><p>If it does not recognize the version string, it <span class="conform">must</span> nevertheless attempt to process the grammar. If it
 finds a syntactically valid interpretation of the grammar, it <span class="conform">must</span> proceed using the semantics of the version under
 which it found a valid interpretation, otherwise it <span class="conform">must</span> reject the grammar. In either case, the document
@@ -165,7 +168,8 @@ used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialized names match the requirements for an XML name [<a href="#xml" shape="rect">XML</a>].</p><pre class="frag ixml"><span>        <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="nt">namestart</span>, <span class="nt">namefollower</span><span class="rep">*</span>.
    <span class="mark">-</span><span class="nt">namestart</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>_<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">L</span><span class="setdel">]</span></span>.
-<span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.</span></pre><p>Alternatives are separated by a semicolon or a vertical bar. The grammar
+<span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.
+</span></pre><p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p><pre class="frag ixml"><span><span class="nt">alts</span><span class="col">:</span> <span class="nt">alt</span><span class="reps">++</span>(<span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>;|<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>).</span></pre><p>An alternative is zero or more terms, separated by commas:</p><pre class="frag ixml"><span><span class="nt">alt</span><span class="col">:</span> <span class="nt">term</span><span class="reps">**</span>(<span class="mark">-</span><span class="str"><span class="strdel">"</span>,<span class="strdel">"</span></span>, <span class="nt">s</span>).</span></pre><p>A term is a singleton factor, an optional factor, or a repeated factor,
 repeated zero or more times, or one or more times.</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">term</span><span class="col">:</span> <span class="nt">factor</span><span class="alt">;</span>
        <span class="nt">option</span><span class="alt">;</span>
@@ -185,7 +189,8 @@ For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p><pre class="frag ixml"><span><span class="nt">option</span><span class="col">:</span> <span class="nt">factor</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>?<span class="strdel">"</span></span>, <span class="nt">s</span>.</span></pre><p>A separator can be any factor, for example <code>abc**def</code> or
 <code>abc**(","; ".")</code>. For instance <code>"a"++("#"; "!")</code> would
 match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
-<code>a!a#a</code>, <code>a#a#a</code> etc.</p><pre class="frag ixml"><span><span class="nt">sep</span><span class="col">:</span> <span class="nt">factor</span>.</span></pre><h3 id="nonterminals">Nonterminals</h3><p>A nonterminal is an optionally marked name:</p><pre class="frag ixml"><span><span class="nt">nonterminal</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>.</span></pre><p>This name refers to the rule that defines this name, which <span id="ref-s02" class="conform">must</span> exist (<a class="error" href="#err-s02" shape="rect">error S02</a>), and there <span id="ref-s03" class="conform">must</span> only be one such rule (<a class="error" href="#err-s03" shape="rect">error S03</a>).</p><h3 id="terminals">Terminals</h3><p>A terminal is a literal or a set of characters. It matches characters in the
+<code>a!a#a</code>, <code>a#a#a</code> etc.</p><pre class="frag ixml"><span><span class="nt">sep</span><span class="col">:</span> <span class="nt">factor</span>.</span></pre><h3 id="nonterminals">Nonterminals</h3><p>A nonterminal is an optionally marked name:</p><pre class="frag ixml"><span><span class="nt">nonterminal</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>.
+</span></pre><p>This name refers to the rule that defines this name, which <span id="ref-s02" class="conform">must</span> exist (<a class="error" href="#err-s02" shape="rect">error S02</a>), and there <span id="ref-s03" class="conform">must</span> only be one such rule (<a class="error" href="#err-s03" shape="rect">error S03</a>).</p><h3 id="terminals">Terminals</h3><p>A terminal is a literal or a set of characters. It matches characters in the
 input. A terminal marked as deleted (-) serializes to the empty string.</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">terminal</span><span class="col">:</span> <span class="nt">literal</span><span class="alt">;</span> 
            <span class="nt">charset</span>.</span></pre><p>A literal is either a quoted string, or a hexadecimally encoded
 character:</p><pre class="frag ixml"><span>  <span class="nt">literal</span><span class="col">:</span> <span class="nt">quoted</span><span class="alt">;</span>
@@ -197,6 +202,7 @@ characters</a>, including a line-break (<a class="error" href="#err-s11" shape="
 by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
 <code>'He said "Don''t!"'</code>.</p><pre class="frag ixml"><span> <span class="mark">-</span><span class="nt">quoted</span><span class="col">:</span> (<span class="nt">tmark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">string</span>, <span class="nt">s</span>.
+
   <span class="mark">@</span><span class="nt">tmark</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>^-<span class="strdel">"</span></span><span class="setdel">]</span></span>.
  <span class="mark">@</span><span class="nt">string</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>, <span class="nt">dchar</span><span class="rep">+</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span><span class="alt">;</span>
           <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>, <span class="nt">schar</span><span class="rep">+</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>.
@@ -211,7 +217,8 @@ character at that Unicode code-point is used [<a href="#unicode" shape="rect">Un
 The number <span id="ref-s07" class="conform">must</span> be within the Unicode
 code-point range (<a class="error" href="#err-s07" shape="rect">error S07</a>), and <span id="ref-s08" class="conform">must not</span> denote a Noncharacter or Surrogate
 code point (<a class="error" href="#err-s08" shape="rect">error S08</a>).</p><p>An encoded character matches that one character in the input.</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">encoded</span><span class="col">:</span> (<span class="nt">tmark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>, <span class="nt">s</span>.
-    <span class="mark">@</span><span class="nt">hex</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>0<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>9<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>f<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>F<span class="strdel">"</span></span><span class="setdel">]</span></span><span class="rep">+</span>.</span></pre><h3 id="characters">Character sets</h3><p>A character set is an inclusion or an exclusion: an inclusion matches one
+    <span class="mark">@</span><span class="nt">hex</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>0<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>9<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>f<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>F<span class="strdel">"</span></span><span class="setdel">]</span></span><span class="rep">+</span>.
+</span></pre><h3 id="characters">Character sets</h3><p>A character set is an inclusion or an exclusion: an inclusion matches one
 character in the input that is in the set, an exclusion matches one character
 <em>not</em> in the set.</p><p>An inclusion is enclosed in square brackets, and represents the set of
 characters defined by any combination of literal characters, a range of
@@ -241,12 +248,12 @@ ordering. The <code>from</code> character <span id="ref-s09" class="conform">mus
             <span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>.</span></pre><p>A class is one or two letters, representing any character from the Unicode
 character category [<a href="#categories" shape="rect">Categories</a>] of that name, which
 <span id="ref-s10" class="conform">must</span> exist (<a class="error" href="#err-s10" shape="rect">error S10</a>). E.g. <code>[Ll]</code> matches any lower-case
-letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p><pre class="frag">   -class: code.
-    @code: capital, letter?.
- -capital: ["A"-"Z"].
-  -letter: ["A"-"Z"; "a"-"z"].</pre><h3 id="L649">Insertions</h3><p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
+letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p><pre class="frag"><span>   <span class="mark">-</span><span class="nt">class</span><span class="col">:</span> <span class="nt">code</span>.
+    <span class="mark">@</span><span class="nt">code</span><span class="col">:</span> <span class="nt">capital</span>, <span class="nt">letter</span><span class="rep">?</span>.
+ <span class="mark">-</span><span class="nt">capital</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>Z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+  <span class="mark">-</span><span class="nt">letter</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>Z<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.</span></pre><h3 id="L649">Insertions</h3><p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
-serialization.</p><pre class="ixml"><span><span class="nt">insertion</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span>, (<span class="nt">string</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>), <span class="nt">s</span>.</span></pre><h2 id="parsing">Parsing</h2><p>The root symbol of the grammar is the name of the first rule in the
+serialization.</p><pre class="frag ixml"><span><span class="nt">insertion</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span>, (<span class="nt">string</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>), <span class="nt">s</span>.</span></pre><h2 id="parsing">Parsing</h2><p>The root symbol of the grammar is the name of the first rule in the
 grammar.</p><p>Processors <span class="conform">must</span> accept and parse any conforming
 grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
@@ -382,7 +389,7 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre class="ixml"><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+-f-star-sep: (f++sep)?.</pre><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
            <span class="mark">-</span><span class="nt">s</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>. <span class="com"><span class="comdel">{</span>Optional spacing<span class="comdel">}</span></span>
           <span class="mark">-</span><span class="nt">RS</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">+</span>. <span class="com"><span class="comdel">{</span>Required spacing<span class="comdel">}</span></span>
@@ -427,10 +434,10 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
        <span class="mark">@</span><span class="nt">tmark</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>^-<span class="strdel">"</span></span><span class="setdel">]</span></span>.
       <span class="mark">@</span><span class="nt">string</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>, <span class="nt">dchar</span><span class="rep">+</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span><span class="alt">;</span>
                <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>, <span class="nt">schar</span><span class="rep">+</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>.
-        <span class="nt">dchar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>a</span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>d</span><span class="setdel">]</span></span><span class="alt">;</span>
-               <span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>. <span class="com"><span class="comdel">{</span>all characters except line breaks; quotes must be doubled<span class="comdel">}</span></span>
-        <span class="nt">schar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>a</span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>d</span><span class="setdel">]</span></span><span class="alt">;</span>
-               <span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>. <span class="com"><span class="comdel">{</span>all characters except line breaks; quotes must be doubled<span class="comdel">}</span></span>
+        <span class="nt">dchar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>0</span><span class="mark">-</span><span class="hex"><span class="hexdel">#</span>1f</span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>7f</span><span class="mark">-</span><span class="hex"><span class="hexdel">#</span>9f</span><span class="setdel">]</span></span><span class="alt">;</span>
+               <span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>"<span class="strdel">'</span></span>. <span class="com"><span class="comdel">{</span>all characters except controls; quotes must be doubled<span class="comdel">}</span></span>
+        <span class="nt">schar</span><span class="col">:</span> <span class="set"><span class="setdel">~[</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>0</span><span class="mark">-</span><span class="hex"><span class="hexdel">#</span>1f</span><span class="alt">;</span> <span class="hex"><span class="hexdel">#</span>7f</span><span class="mark">-</span><span class="hex"><span class="hexdel">#</span>9f</span><span class="setdel">]</span></span><span class="alt">;</span>
+               <span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>'<span class="strdel">"</span></span>. <span class="com"><span class="comdel">{</span>all characters except controls; quotes must be doubled<span class="comdel">}</span></span>
      <span class="mark">-</span><span class="nt">encoded</span><span class="col">:</span> (<span class="nt">tmark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>, <span class="nt">s</span>.
          <span class="mark">@</span><span class="nt">hex</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>0<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>9<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>f<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>F<span class="strdel">"</span></span><span class="setdel">]</span></span><span class="rep">+</span>.
 
@@ -452,149 +459,152 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
        <span class="mark">-</span><span class="nt">class</span><span class="col">:</span> <span class="nt">code</span>.
         <span class="mark">@</span><span class="nt">code</span><span class="col">:</span> <span class="nt">capital</span>, <span class="nt">letter</span><span class="rep">?</span>.
      <span class="mark">-</span><span class="nt">capital</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>Z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
-      <span class="mark">-</span><span class="nt">letter</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
-    <span class="nt">insertion</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span>, (<span class="nt">string</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>), <span class="nt">s</span>.</span></pre><h2 id="ixml">IXML in IXML</h2><p>Since the ixml grammar is expressed in its own notation, the above grammar
+      <span class="mark">-</span><span class="nt">letter</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>Z<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+    <span class="nt">insertion</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span>, (<span class="nt">string</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>), <span class="nt">s</span>.
+</span></pre><h2 id="ixml">IXML in IXML</h2><p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
 serializing. Note that all semantically significant terminals are recorded in
-attributes, and non-significant characters are not serialized. The
-serialization begins as below, but the <a href="ixml.xml.html" shape="rect">entire
-serialization</a> is available:</p><pre>&lt;ixml&gt;
-   &lt;rule name='ixml'&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;option&gt;
-            &lt;nonterminal name='prolog'/&gt;
-         &lt;/option&gt;
-         &lt;repeat1&gt;
-            &lt;nonterminal name='rule'/&gt;
-            &lt;sep&gt;
-               &lt;nonterminal name='RS'/&gt;
-            &lt;/sep&gt;
-         &lt;/repeat1&gt;
-         &lt;nonterminal name='s'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='s'&gt;
-      &lt;alt&gt;
-         &lt;repeat0&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='whitespace'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat0&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;comment&gt;Optional spacing&lt;/comment&gt;
-   &lt;rule mark='-' name='RS'&gt;
-      &lt;alt&gt;
-         &lt;repeat1&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='whitespace'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat1&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;comment&gt;Required spacing&lt;/comment&gt;
-   &lt;rule mark='-' name='whitespace'&gt;
-      &lt;alt&gt;
-         &lt;inclusion tmark='-'&gt;
-            &lt;member code='Zs'/&gt;
-         &lt;/inclusion&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='tab'/&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='lf'/&gt;
-      &lt;/alt&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='cr'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='tab'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='9'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='lf'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='a'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='cr'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' hex='d'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='comment'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' string='{'/&gt;
-         &lt;repeat0&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='cchar'/&gt;
-               &lt;/alt&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='comment'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/repeat0&gt;
-         &lt;literal tmark='-' string='}'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule mark='-' name='cchar'&gt;
-      &lt;alt&gt;
-         &lt;exclusion&gt;
-            &lt;member string='{}'/&gt;
-         &lt;/exclusion&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='prolog'&gt;
-      &lt;alt&gt;
-         &lt;nonterminal name='version'/&gt;
-         &lt;nonterminal name='s'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='version'&gt;
-      &lt;alt&gt;
-         &lt;literal tmark='-' string='ixml'/&gt;
-         &lt;nonterminal name='RS'/&gt;
-         &lt;literal tmark='-' string='version'/&gt;
-         &lt;nonterminal name='RS'/&gt;
-         &lt;nonterminal name='string'/&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;literal tmark='-' string='.'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;
-   &lt;rule name='rule'&gt;
-      &lt;alt&gt;
-         &lt;option&gt;
-            &lt;alts&gt;
-               &lt;alt&gt;
-                  &lt;nonterminal name='mark'/&gt;
-                  &lt;nonterminal name='s'/&gt;
-               &lt;/alt&gt;
-            &lt;/alts&gt;
-         &lt;/option&gt;
-         &lt;nonterminal name='name'/&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;inclusion tmark='-'&gt;
-            &lt;member string='=:'/&gt;
-         &lt;/inclusion&gt;
-         &lt;nonterminal name='s'/&gt;
-         &lt;nonterminal mark='-' name='alts'/&gt;
-         &lt;literal tmark='-' string='.'/&gt;
-      &lt;/alt&gt;
-   &lt;/rule&gt;</pre><h2 id="errors">Errors</h2><p>This section summarizes errors identified in this specification. Static
+attributes, and non-significant characters are not serialized. An
+abbreviated serialization is shown below, but the <a href="ixml.xml.html" shape="rect">entire
+serialization</a> is available:</p><pre><span><span class="text"><span class="stag">&lt;</span><span class="gi">ixml</span><span class="stag">&gt;</span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">ixml</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">option</span><span class="stag">&gt;</span>
+            <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">prolog</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">option</span><span class="etag">&gt;</span></span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">repeat1</span><span class="stag">&gt;</span>
+            <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">rule</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+            <span class="text"><span class="stag">&lt;</span><span class="gi">sep</span><span class="stag">&gt;</span>
+               <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">RS</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+            <span class="etag">&lt;/</span><span class="gi">sep</span><span class="etag">&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">repeat1</span><span class="etag">&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">repeat0</span><span class="stag">&gt;</span>
+            <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">whitespace</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">comment</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+            <span class="etag">&lt;/</span><span class="gi">alts</span><span class="etag">&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">repeat0</span><span class="etag">&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span>Optional spacing<span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">RS</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">repeat1</span><span class="stag">&gt;</span>
+            <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">whitespace</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">comment</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+            <span class="etag">&lt;/</span><span class="gi">alts</span><span class="etag">&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">repeat1</span><span class="etag">&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span>Required spacing<span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">whitespace</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">inclusion</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span><span class="stag">&gt;</span>
+            <span class="empty"><span class="stag">&lt;</span><span class="gi">member</span> <span class="attr"><span class="aname">code</span><span class="eq">=</span><span class="q">'</span><span class="avalue">Zs</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">inclusion</span><span class="etag">&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">tab</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">lf</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">cr</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">tab</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">hex</span><span class="eq">=</span><span class="q">'</span><span class="avalue">9</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">lf</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">hex</span><span class="eq">=</span><span class="q">'</span><span class="avalue">a</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">cr</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">hex</span><span class="eq">=</span><span class="q">'</span><span class="avalue">d</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">comment</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">{</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">repeat0</span><span class="stag">&gt;</span>
+            <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">cchar</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">comment</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+            <span class="etag">&lt;/</span><span class="gi">alts</span><span class="etag">&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">repeat0</span><span class="etag">&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">}</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">cchar</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">exclusion</span><span class="stag">&gt;</span>
+            <span class="empty"><span class="stag">&lt;</span><span class="gi">member</span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">{}</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">exclusion</span><span class="etag">&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">prolog</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">version</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">version</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">ixml</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">RS</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">version</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">RS</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">string</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">.</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">rule</span><span class="q">'</span></span><span class="stag">&gt;</span>
+      <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">option</span><span class="stag">&gt;</span>
+            <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
+               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">mark</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+            <span class="etag">&lt;/</span><span class="gi">alts</span><span class="etag">&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">option</span><span class="etag">&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">name</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="text"><span class="stag">&lt;</span><span class="gi">inclusion</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span><span class="stag">&gt;</span>
+            <span class="empty"><span class="stag">&lt;</span><span class="gi">member</span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">=:</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="etag">&lt;/</span><span class="gi">inclusion</span><span class="etag">&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">mark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">alts</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">.</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+      <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
+   <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
+   &lt;!--  Many more rules here… --&gt;
+<span class="etag">&lt;/</span><span class="gi">ixml</span><span class="etag">&gt;</span></span></span></pre><h2 id="errors">Errors</h2><p>This section summarizes errors identified in this specification. Static
 errors are errors that can be identified by inspecting the grammar.</p><dl id="static-errors"><dt id="err-s01"><a href="#ref-s01" shape="rect">S01</a></dt><dd>It is an error if two rules are not separated by at least one
       whitespace character or comment.</dd><dt id="err-s02"><a href="#ref-s02" shape="rect">S02</a></dt><dd>It is an error to use a nonterminal name that is not defined by a rule
       in the grammar.</dd><dt id="err-s03"><a href="#ref-s03" shape="rect">S03</a></dt><dd>It is an error if the grammar contains more than one rule for a given
@@ -635,4 +645,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #9 for invisibleXML/ixml at <time datetime="2023-01-10T18:10:54GMT+00:00" title="2023-01-10T18:10:54GMT+00:00">18:10 on 10 January 2023</time></span> <span class="bh"><span title="a21df3d8a9b73bc685bde2ed32a7152904266cc6">a21df3d8</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #10 for invisibleXML/ixml at <time datetime="2023-01-10T18:12:11GMT+00:00" title="2023-01-10T18:12:11GMT+00:00">18:12 on 10 January 2023</time></span> <span class="bh"><span title="859822a0fb24e83f855bf6cb54fddcf56b5c181c">859822a0</span></span></p></footer></body></html>

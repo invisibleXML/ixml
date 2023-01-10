@@ -1,558 +1,559 @@
 <ixml>
-   <comment>version 2022-06-07</comment>
-   <rule name='ixml'>
+   <comment>version 2023-01-10</comment>
+   <rule name="ixml">
       <alt>
-         <nonterminal name='s'/>
+         <nonterminal name="s"/>
          <option>
-            <nonterminal name='prolog'/>
+            <nonterminal name="prolog"/>
          </option>
          <repeat1>
-            <nonterminal name='rule'/>
+            <nonterminal name="rule"/>
             <sep>
-               <nonterminal name='RS'/>
+               <nonterminal name="RS"/>
             </sep>
          </repeat1>
-         <nonterminal name='s'/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule mark='-' name='s'>
+   <rule mark="-" name="s">
       <alt>
          <repeat0>
             <alts>
                <alt>
-                  <nonterminal name='whitespace'/>
+                  <nonterminal name="whitespace"/>
                </alt>
                <alt>
-                  <nonterminal name='comment'/>
+                  <nonterminal name="comment"/>
                </alt>
             </alts>
          </repeat0>
       </alt>
    </rule>
    <comment>Optional spacing</comment>
-   <rule mark='-' name='RS'>
+   <rule mark="-" name="RS">
       <alt>
          <repeat1>
             <alts>
                <alt>
-                  <nonterminal name='whitespace'/>
+                  <nonterminal name="whitespace"/>
                </alt>
                <alt>
-                  <nonterminal name='comment'/>
+                  <nonterminal name="comment"/>
                </alt>
             </alts>
          </repeat1>
       </alt>
    </rule>
    <comment>Required spacing</comment>
-   <rule mark='-' name='whitespace'>
+   <rule mark="-" name="whitespace">
       <alt>
-         <inclusion tmark='-'>
-            <member code='Zs'/>
+         <inclusion tmark="-">
+            <member code="Zs"/>
          </inclusion>
       </alt>
       <alt>
-         <nonterminal name='tab'/>
+         <nonterminal name="tab"/>
       </alt>
       <alt>
-         <nonterminal name='lf'/>
+         <nonterminal name="lf"/>
       </alt>
       <alt>
-         <nonterminal name='cr'/>
-      </alt>
-   </rule>
-   <rule mark='-' name='tab'>
-      <alt>
-         <literal tmark='-' hex='9'/>
+         <nonterminal name="cr"/>
       </alt>
    </rule>
-   <rule mark='-' name='lf'>
+   <rule mark="-" name="tab">
       <alt>
-         <literal tmark='-' hex='a'/>
+         <literal tmark="-" hex="9"/>
       </alt>
    </rule>
-   <rule mark='-' name='cr'>
+   <rule mark="-" name="lf">
       <alt>
-         <literal tmark='-' hex='d'/>
+         <literal tmark="-" hex="a"/>
       </alt>
    </rule>
-   <rule name='comment'>
+   <rule mark="-" name="cr">
       <alt>
-         <literal tmark='-' string='{'/>
+         <literal tmark="-" hex="d"/>
+      </alt>
+   </rule>
+   <rule name="comment">
+      <alt>
+         <literal tmark="-" string="{"/>
          <repeat0>
             <alts>
                <alt>
-                  <nonterminal name='cchar'/>
+                  <nonterminal name="cchar"/>
                </alt>
                <alt>
-                  <nonterminal name='comment'/>
+                  <nonterminal name="comment"/>
                </alt>
             </alts>
          </repeat0>
-         <literal tmark='-' string='}'/>
+         <literal tmark="-" string="}"/>
       </alt>
    </rule>
-   <rule mark='-' name='cchar'>
+   <rule mark="-" name="cchar">
       <alt>
          <exclusion>
-            <member string='{}'/>
+            <member string="{}"/>
          </exclusion>
       </alt>
    </rule>
-   <rule name='prolog'>
+   <rule name="prolog">
       <alt>
-         <nonterminal name='version'/>
-         <nonterminal name='s'/>
+         <nonterminal name="version"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule name='version'>
+   <rule name="version">
       <alt>
-         <literal tmark='-' string='ixml'/>
-         <nonterminal name='RS'/>
-         <literal tmark='-' string='version'/>
-         <nonterminal name='RS'/>
-         <nonterminal name='string'/>
-         <nonterminal name='s'/>
-         <literal tmark='-' string='.'/>
+         <literal tmark="-" string="ixml"/>
+         <nonterminal name="RS"/>
+         <literal tmark="-" string="version"/>
+         <nonterminal name="RS"/>
+         <nonterminal name="string"/>
+         <nonterminal name="s"/>
+         <literal tmark="-" string="."/>
       </alt>
    </rule>
-   <rule name='rule'>
+   <rule name="rule">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='mark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="mark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <nonterminal name='name'/>
-         <nonterminal name='s'/>
-         <inclusion tmark='-'>
-            <member string='=:'/>
+         <nonterminal name="name"/>
+         <nonterminal name="s"/>
+         <inclusion tmark="-">
+            <member string="=:"/>
          </inclusion>
-         <nonterminal name='s'/>
-         <nonterminal mark='-' name='alts'/>
-         <literal tmark='-' string='.'/>
+         <nonterminal name="s"/>
+         <nonterminal mark="-" name="alts"/>
+         <literal tmark="-" string="."/>
       </alt>
    </rule>
-   <rule mark='@' name='mark'>
+   <rule mark="@" name="mark">
       <alt>
          <inclusion>
-            <member string='@^-'/>
+            <member string="@^-"/>
          </inclusion>
       </alt>
    </rule>
-   <rule name='alts'>
+   <rule name="alts">
       <alt>
          <repeat1>
-            <nonterminal name='alt'/>
+            <nonterminal name="alt"/>
             <sep>
                <alts>
                   <alt>
-                     <inclusion tmark='-'>
-                        <member string=';|'/>
+                     <inclusion tmark="-">
+                        <member string=";|"/>
                      </inclusion>
-                     <nonterminal name='s'/>
+                     <nonterminal name="s"/>
                   </alt>
                </alts>
             </sep>
          </repeat1>
       </alt>
    </rule>
-   <rule name='alt'>
+   <rule name="alt">
       <alt>
          <repeat0>
-            <nonterminal name='term'/>
+            <nonterminal name="term"/>
             <sep>
                <alts>
                   <alt>
-                     <literal tmark='-' string=','/>
-                     <nonterminal name='s'/>
+                     <literal tmark="-" string=","/>
+                     <nonterminal name="s"/>
                   </alt>
                </alts>
             </sep>
          </repeat0>
       </alt>
    </rule>
-   <rule mark='-' name='term'>
+   <rule mark="-" name="term">
       <alt>
-         <nonterminal name='factor'/>
+         <nonterminal name="factor"/>
       </alt>
       <alt>
-         <nonterminal name='option'/>
+         <nonterminal name="option"/>
       </alt>
       <alt>
-         <nonterminal name='repeat0'/>
+         <nonterminal name="repeat0"/>
       </alt>
       <alt>
-         <nonterminal name='repeat1'/>
-      </alt>
-   </rule>
-   <rule mark='-' name='factor'>
-      <alt>
-         <nonterminal name='terminal'/>
-      </alt>
-      <alt>
-         <nonterminal name='nonterminal'/>
-      </alt>
-      <alt>
-         <nonterminal name='insertion'/>
-      </alt>
-      <alt>
-         <literal tmark='-' string='('/>
-         <nonterminal name='s'/>
-         <nonterminal name='alts'/>
-         <literal tmark='-' string=')'/>
-         <nonterminal name='s'/>
+         <nonterminal name="repeat1"/>
       </alt>
    </rule>
-   <rule name='repeat0'>
+   <rule mark="-" name="factor">
       <alt>
-         <nonterminal name='factor'/>
+         <nonterminal name="terminal"/>
+      </alt>
+      <alt>
+         <nonterminal name="nonterminal"/>
+      </alt>
+      <alt>
+         <nonterminal name="insertion"/>
+      </alt>
+      <alt>
+         <literal tmark="-" string="("/>
+         <nonterminal name="s"/>
+         <nonterminal name="alts"/>
+         <literal tmark="-" string=")"/>
+         <nonterminal name="s"/>
+      </alt>
+   </rule>
+   <rule name="repeat0">
+      <alt>
+         <nonterminal name="factor"/>
          <alts>
             <alt>
-               <literal tmark='-' string='*'/>
-               <nonterminal name='s'/>
+               <literal tmark="-" string="*"/>
+               <nonterminal name="s"/>
             </alt>
             <alt>
-               <literal tmark='-' string='**'/>
-               <nonterminal name='s'/>
-               <nonterminal name='sep'/>
+               <literal tmark="-" string="**"/>
+               <nonterminal name="s"/>
+               <nonterminal name="sep"/>
             </alt>
          </alts>
       </alt>
    </rule>
-   <rule name='repeat1'>
+   <rule name="repeat1">
       <alt>
-         <nonterminal name='factor'/>
+         <nonterminal name="factor"/>
          <alts>
             <alt>
-               <literal tmark='-' string='+'/>
-               <nonterminal name='s'/>
+               <literal tmark="-" string="+"/>
+               <nonterminal name="s"/>
             </alt>
             <alt>
-               <literal tmark='-' string='++'/>
-               <nonterminal name='s'/>
-               <nonterminal name='sep'/>
+               <literal tmark="-" string="++"/>
+               <nonterminal name="s"/>
+               <nonterminal name="sep"/>
             </alt>
          </alts>
       </alt>
    </rule>
-   <rule name='option'>
+   <rule name="option">
       <alt>
-         <nonterminal name='factor'/>
-         <literal tmark='-' string='?'/>
-         <nonterminal name='s'/>
+         <nonterminal name="factor"/>
+         <literal tmark="-" string="?"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule name='sep'>
+   <rule name="sep">
       <alt>
-         <nonterminal name='factor'/>
+         <nonterminal name="factor"/>
       </alt>
    </rule>
-   <rule name='nonterminal'>
+   <rule name="nonterminal">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='mark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="mark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <nonterminal name='name'/>
-         <nonterminal name='s'/>
+         <nonterminal name="name"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule mark='@' name='name'>
+   <rule mark="@" name="name">
       <alt>
-         <nonterminal name='namestart'/>
+         <nonterminal name="namestart"/>
          <repeat0>
-            <nonterminal name='namefollower'/>
+            <nonterminal name="namefollower"/>
          </repeat0>
       </alt>
    </rule>
-   <rule mark='-' name='namestart'>
+   <rule mark="-" name="namestart">
       <alt>
          <inclusion>
-            <member string='_'/>
-            <member code='L'/>
+            <member string="_"/>
+            <member code="L"/>
          </inclusion>
       </alt>
    </rule>
-   <rule mark='-' name='namefollower'>
+   <rule mark="-" name="namefollower">
       <alt>
-         <nonterminal name='namestart'/>
+         <nonterminal name="namestart"/>
       </alt>
       <alt>
          <inclusion>
-            <member string='-.·‿⁀'/>
-            <member code='Nd'/>
-            <member code='Mn'/>
+            <member string="-.·‿⁀"/>
+            <member code="Nd"/>
+            <member code="Mn"/>
          </inclusion>
       </alt>
    </rule>
-   <rule mark='-' name='terminal'>
+   <rule mark="-" name="terminal">
       <alt>
-         <nonterminal name='literal'/>
+         <nonterminal name="literal"/>
       </alt>
       <alt>
-         <nonterminal name='charset'/>
-      </alt>
-   </rule>
-   <rule name='literal'>
-      <alt>
-         <nonterminal name='quoted'/>
-      </alt>
-      <alt>
-         <nonterminal name='encoded'/>
+         <nonterminal name="charset"/>
       </alt>
    </rule>
-   <rule mark='-' name='quoted'>
+   <rule name="literal">
+      <alt>
+         <nonterminal name="quoted"/>
+      </alt>
+      <alt>
+         <nonterminal name="encoded"/>
+      </alt>
+   </rule>
+   <rule mark="-" name="quoted">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='tmark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="tmark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <nonterminal name='string'/>
-         <nonterminal name='s'/>
+         <nonterminal name="string"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule mark='@' name='tmark'>
+   <rule mark="@" name="tmark">
       <alt>
          <inclusion>
-            <member string='^-'/>
+            <member string="^-"/>
          </inclusion>
       </alt>
    </rule>
-   <rule mark='@' name='string'>
+   <rule mark="@" name="string">
       <alt>
-         <literal tmark='-' string='"'/>
+         <literal tmark="-" string="&quot;"/>
          <repeat1>
-            <nonterminal name='dchar'/>
+            <nonterminal name="dchar"/>
          </repeat1>
-         <literal tmark='-' string='"'/>
+         <literal tmark="-" string="&quot;"/>
       </alt>
       <alt>
-         <literal tmark='-' string='&apos;'/>
+         <literal tmark="-" string="'"/>
          <repeat1>
-            <nonterminal name='schar'/>
+            <nonterminal name="schar"/>
          </repeat1>
-         <literal tmark='-' string='&apos;'/>
+         <literal tmark="-" string="'"/>
       </alt>
    </rule>
-   <rule name='dchar'>
+   <rule name="dchar">
       <alt>
          <exclusion>
-            <member string='"'/>
-            <member hex='a'/>
-            <member hex='d'/>
+            <member string="&quot;"/>
+            <member from="#0" to="#1f"/>
+            <member from="#7f" to="#9f"/>
          </exclusion>
       </alt>
       <alt>
-         <literal string='"'/>
-         <literal tmark='-' string='"'/>
+         <literal string="&quot;"/>
+         <literal tmark="-" string="&quot;"/>
       </alt>
    </rule>
-   <comment>all characters except line breaks; quotes must be doubled</comment>
-   <rule name='schar'>
+   <comment>all characters except controls; quotes must be doubled</comment>
+   <rule name="schar">
       <alt>
          <exclusion>
-            <member string='&apos;'/>
-            <member hex='a'/>
-            <member hex='d'/>
+            <member string="'"/>
+            <member from="#0" to="#1f"/>
+            <member from="#7f" to="#9f"/>
          </exclusion>
       </alt>
       <alt>
-         <literal string='&apos;'/>
-         <literal tmark='-' string='&apos;'/>
+         <literal string="'"/>
+         <literal tmark="-" string="'"/>
       </alt>
    </rule>
-   <comment>all characters except line breaks; quotes must be doubled</comment>
-   <rule mark='-' name='encoded'>
+   <comment>all characters except controls; quotes must be doubled</comment>
+   <rule mark="-" name="encoded">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='tmark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="tmark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <literal tmark='-' string='#'/>
-         <nonterminal name='hex'/>
-         <nonterminal name='s'/>
+         <literal tmark="-" string="#"/>
+         <nonterminal name="hex"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule mark='@' name='hex'>
+   <rule mark="@" name="hex">
       <alt>
          <repeat1>
             <inclusion>
-               <member from='0' to='9'/>
-               <member from='a' to='f'/>
-               <member from='A' to='F'/>
+               <member from="0" to="9"/>
+               <member from="a" to="f"/>
+               <member from="A" to="F"/>
             </inclusion>
          </repeat1>
       </alt>
    </rule>
-   <rule mark='-' name='charset'>
+   <rule mark="-" name="charset">
       <alt>
-         <nonterminal name='inclusion'/>
+         <nonterminal name="inclusion"/>
       </alt>
       <alt>
-         <nonterminal name='exclusion'/>
+         <nonterminal name="exclusion"/>
       </alt>
    </rule>
-   <rule name='inclusion'>
+   <rule name="inclusion">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='tmark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="tmark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <nonterminal name='set'/>
+         <nonterminal name="set"/>
       </alt>
    </rule>
-   <rule name='exclusion'>
+   <rule name="exclusion">
       <alt>
          <option>
             <alts>
                <alt>
-                  <nonterminal name='tmark'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="tmark"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
          </option>
-         <literal tmark='-' string='~'/>
-         <nonterminal name='s'/>
-         <nonterminal name='set'/>
+         <literal tmark="-" string="~"/>
+         <nonterminal name="s"/>
+         <nonterminal name="set"/>
       </alt>
    </rule>
-   <rule mark='-' name='set'>
+   <rule mark="-" name="set">
       <alt>
-         <literal tmark='-' string='['/>
-         <nonterminal name='s'/>
+         <literal tmark="-" string="["/>
+         <nonterminal name="s"/>
          <repeat0>
             <alts>
                <alt>
-                  <nonterminal name='member'/>
-                  <nonterminal name='s'/>
+                  <nonterminal name="member"/>
+                  <nonterminal name="s"/>
                </alt>
             </alts>
             <sep>
                <alts>
                   <alt>
-                     <inclusion tmark='-'>
-                        <member string=';|'/>
+                     <inclusion tmark="-">
+                        <member string=";|"/>
                      </inclusion>
-                     <nonterminal name='s'/>
+                     <nonterminal name="s"/>
                   </alt>
                </alts>
             </sep>
          </repeat0>
-         <literal tmark='-' string=']'/>
-         <nonterminal name='s'/>
+         <literal tmark="-" string="]"/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
-   <rule name='member'>
+   <rule name="member">
       <alt>
-         <nonterminal name='string'/>
+         <nonterminal name="string"/>
       </alt>
       <alt>
-         <literal tmark='-' string='#'/>
-         <nonterminal name='hex'/>
+         <literal tmark="-" string="#"/>
+         <nonterminal name="hex"/>
       </alt>
       <alt>
-         <nonterminal name='range'/>
+         <nonterminal name="range"/>
       </alt>
       <alt>
-         <nonterminal name='class'/>
-      </alt>
-   </rule>
-   <rule mark='-' name='range'>
-      <alt>
-         <nonterminal name='from'/>
-         <nonterminal name='s'/>
-         <literal tmark='-' string='-'/>
-         <nonterminal name='s'/>
-         <nonterminal name='to'/>
+         <nonterminal name="class"/>
       </alt>
    </rule>
-   <rule mark='@' name='from'>
+   <rule mark="-" name="range">
       <alt>
-         <nonterminal name='character'/>
+         <nonterminal name="from"/>
+         <nonterminal name="s"/>
+         <literal tmark="-" string="-"/>
+         <nonterminal name="s"/>
+         <nonterminal name="to"/>
       </alt>
    </rule>
-   <rule mark='@' name='to'>
+   <rule mark="@" name="from">
       <alt>
-         <nonterminal name='character'/>
+         <nonterminal name="character"/>
       </alt>
    </rule>
-   <rule mark='-' name='character'>
+   <rule mark="@" name="to">
       <alt>
-         <literal tmark='-' string='"'/>
-         <nonterminal name='dchar'/>
-         <literal tmark='-' string='"'/>
-      </alt>
-      <alt>
-         <literal tmark='-' string='&apos;'/>
-         <nonterminal name='schar'/>
-         <literal tmark='-' string='&apos;'/>
-      </alt>
-      <alt>
-         <literal string='#'/>
-         <nonterminal name='hex'/>
+         <nonterminal name="character"/>
       </alt>
    </rule>
-   <rule mark='-' name='class'>
+   <rule mark="-" name="character">
       <alt>
-         <nonterminal name='code'/>
+         <literal tmark="-" string="&quot;"/>
+         <nonterminal name="dchar"/>
+         <literal tmark="-" string="&quot;"/>
+      </alt>
+      <alt>
+         <literal tmark="-" string="'"/>
+         <nonterminal name="schar"/>
+         <literal tmark="-" string="'"/>
+      </alt>
+      <alt>
+         <literal string="#"/>
+         <nonterminal name="hex"/>
       </alt>
    </rule>
-   <rule mark='@' name='code'>
+   <rule mark="-" name="class">
       <alt>
-         <nonterminal name='capital'/>
+         <nonterminal name="code"/>
+      </alt>
+   </rule>
+   <rule mark="@" name="code">
+      <alt>
+         <nonterminal name="capital"/>
          <option>
-            <nonterminal name='letter'/>
+            <nonterminal name="letter"/>
          </option>
       </alt>
    </rule>
-   <rule mark='-' name='capital'>
+   <rule mark="-" name="capital">
       <alt>
          <inclusion>
-            <member from='A' to='Z'/>
+            <member from="A" to="Z"/>
          </inclusion>
       </alt>
    </rule>
-   <rule mark='-' name='letter'>
+   <rule mark="-" name="letter">
       <alt>
          <inclusion>
-            <member from='a' to='z'/>
+            <member from="A" to="Z"/>
+            <member from="a" to="z"/>
          </inclusion>
       </alt>
    </rule>
-   <rule name='insertion'>
+   <rule name="insertion">
       <alt>
-         <literal tmark='-' string='+'/>
-         <nonterminal name='s'/>
+         <literal tmark="-" string="+"/>
+         <nonterminal name="s"/>
          <alts>
             <alt>
-               <nonterminal name='string'/>
+               <nonterminal name="string"/>
             </alt>
             <alt>
-               <literal tmark='-' string='#'/>
-               <nonterminal name='hex'/>
+               <literal tmark="-" string="#"/>
+               <nonterminal name="hex"/>
             </alt>
          </alts>
-         <nonterminal name='s'/>
+         <nonterminal name="s"/>
       </alt>
    </rule>
 </ixml>
