@@ -11,11 +11,15 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Invisible XML Specification Errata</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    add { background-color: #ccffcc; }
+    del { background-color: #ffcccc; }
+  </style>
 </head>
 <body>
 <h1>Invisible XML Specification Errata</h1>
 
-<p>Version: <!--$date=-->2022-10-15<!--$--></p>
+<p>Version: <!--$date=-->2023-01-10<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -28,7 +32,33 @@
 
 <h2 id="accepted">Accepted errata</h2>
 
-<p>None at this time.</p>
+<h3>E002: A string cannot contain C0 or C1 control characters</h3>
+
+<p><a href="https://www.w3.org/2023/01/10-ixml-minutes.html">Accepted</a> as
+an erratum against 1.0 at the meeting of 10 January 2023.</p>
+
+<p>The definition of a quoted string is changed to exclude the C0 and C1
+control characters.</p>
+
+<div class="box revised">
+<p id="ref-s11">A string cannot <add>contain any of
+the <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 or C1 control
+characters</a>, including</add><del>extend over</del> a line-break (<a class="error"
+href="#err-s11">error S11</a>). The enclosing quote is represented in a string
+by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
+<code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
+<code>'He said "Don''t!"'</code>.</p>
+</div>
+
+<p>The error S11 is amended to include the C0 and C1 control characters.</p>
+
+<div class="box revised">
+<dd>
+  <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
+    <dd>It is an error if a string contains a <add>C0 or C1 control character,
+    including a</add> line break.</dd>
+</dd>
+</div>
 
 <h2 id="resolved">Resolved errata</h2>
 
