@@ -146,6 +146,13 @@
   </xsl:choose>
 </xsl:template>
 
+<!-- A hack for the ixml grammar! -->
+<xsl:template match="comment()">
+  <xsl:text>&#10;   &lt;!-- </xsl:text>
+  <xsl:value-of select="."/>
+  <xsl:text>--&gt;&#10;</xsl:text>
+</xsl:template>
+
 <xsl:template match="@*">
   <xsl:text> </xsl:text>
   <span class="attr">

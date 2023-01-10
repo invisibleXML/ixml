@@ -37,7 +37,8 @@ configurations {
 dependencies {
   implementation (
     [group: "net.sf.saxon", name: "Saxon-HE", version: "11.4"],
-    [group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30']
+    [group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'],
+    [group: 'org.nineml', name: 'coffeepot', version: '1.99.11']
   )
 }
 
@@ -65,11 +66,44 @@ task publish(
   description: "Publish the current specification") {
 }
 
+task extractIxmlInIxml(
+  type: JavaExec,
+  description: "Extract the iXML Grammar in iXML"
+) {
+  inputs.files fileTree(dir: "${projectDir}/src")
+  outputs.file "${buildDir}/current/ixml.ixml"
+
+  classpath = configurations.saxon
+  mainClass = "net.sf.saxon.Transform"
+  args "-s:${projectDir}/src/ixml-specification.html",
+    "-xsl:${projectDir}/build-tools/extract-ixml.xsl",
+    "-o:${buildDir}/current/ixml.ixml"
+}
+
+task extractIxmlInXml(
+  type: JavaExec,
+  dependsOn: ['extractIxmlInIxml', 'copyResources'],
+  description: "Extract the iXML Grammar in XML"
+) {
+  inputs.files fileTree(dir: "${buildDir}/current/ixml.ixml")
+  outputs.file "${buildDir}/current/ixml.xml"
+
+  classpath = configurations.saxon
+  mainClass = "org.nineml.coffeepot.Main"
+  args "-i:${buildDir}/current/ixml.ixml",
+    "-o:${buildDir}/current/ixml.xml",
+    '-pp'
+}
+
 task formatSpec(
   type: JavaExec,
+  dependsOn: ['extractIxmlInIxml', 'extractIxmlInXml', 'copyResources'],
   description: "Copy the specification into the build directory"
 ) {
   inputs.files fileTree(dir: "${projectDir}/src")
+  inputs.files fileTree(dir: "${projectDir}/build-tools")
+  inputs.file extractIxmlInIxml.outputs.getFiles().getSingleFile()
+  inputs.file extractIxmlInXml.outputs.getFiles().getSingleFile()
   outputs.file "${buildDir}/current/index.html"
 
   classpath = configurations.saxon
@@ -103,8 +137,6 @@ task copyResources(
       from "${projectDir}/src"
       include "css/**"
       include "js/**"
-      include "ixml.ixml"
-      include "ixml.xml"
       include "errata.html"
     }
   }
@@ -112,25 +144,27 @@ task copyResources(
 
 task ixmlInXml(
   type: JavaExec,
+  dependsOn: ['extractIxmlInXml'],
   description: "Format ixml.xml for the web"
 ) {
   inputs.files fileTree(dir: "${projectDir}/build-tools")
-  inputs.file "${projectDir}/src/ixml.xml"
+  inputs.file "${buildDir}/current/ixml.xml"
   outputs.file "${buildDir}/current/ixml.xml.html"
 
   classpath = configurations.saxon
   mainClass = "net.sf.saxon.Transform"
-  args "-s:${projectDir}/src/ixml.xml",
+  args "-s:${buildDir}/current/ixml.xml",
     "-xsl:${projectDir}/build-tools/format-xml.xsl",
     "-o:${buildDir}/current/ixml.xml.html"
 }
 
 task ixmlInIxml(
   type: JavaExec,
+  dependsOn: ['extractIxmlInIxml', 'copyResources'],
   description: "Format ixml.ixml for the web"
 ) {
   inputs.files fileTree(dir: "${projectDir}/build-tools")
-  inputs.file "${projectDir}/src/ixml.ixml"
+  inputs.file extractIxmlInIxml.outputs.getFiles().getSingleFile()
   outputs.file "${buildDir}/current/ixml.ixml.html"
 
   classpath = configurations.saxon
@@ -138,6 +172,6 @@ task ixmlInIxml(
   args "-it",
     "-xsl:${projectDir}/build-tools/format-ixml.xsl",
     "-o:${buildDir}/current/ixml.ixml.html",
-    "ixml.ixml=${projectDir}/src/ixml.ixml"
+    "ixml.ixml=${extractIxmlInIxml.outputs.getFiles().getSingleFile()}"
 }
     
