@@ -67,7 +67,7 @@ same input as the “date” nonterminal in *dates.ixml*.
 
 ### NT-VISIBILITY. Define the visibility of nonterminals
 
-The author of a grammar like *dates.ixml” might wish to limit the
+The author of a grammar like *dates.ixml* might wish to limit the
 nonterminals visible when it’s combined with other grammars. In other
 words, the author might wish to stipulate that the nonterminals
 “date”, “year”, “month”, and “day” are exposed, but to keep the
