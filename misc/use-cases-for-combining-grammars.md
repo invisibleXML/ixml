@@ -58,6 +58,16 @@ the same nonterminal names in different ways. A user might, for example,
 wish to combine *dates.ixml* into a grammar even though that grammar
 has a different, and independent, nonterminal named “day”.
 
+### NT-COMBINE. Define an alternative for a nonterminal
+
+Sometimes, it will be useful if the host grammar can override a nonterminal
+(OVERRIDE-NT). Sometimes, it will be useful if the nonterminal can be
+brought in without a collision (AVOID-COLLISION).
+
+Another possibility is that the grammar author may want the imported
+nonterminal to be taken as an alternative for a nonterminal already
+defined in the host grammar.
+
 ### RENAME-NT. Rename a nonterminal
 
 A user might wish to combine a grammar with *dates.ixml* but to
@@ -65,7 +75,7 @@ A user might wish to combine a grammar with *dates.ixml* but to
 arrange for a nonterminal named “prose-date” that matches the
 same input as the “date” nonterminal in *dates.ixml*.
 
-### NT-VISIBILITY. Define the visibility of nonterminals
+### NT-VISIBILITY-EXPORT. Define the visibility of nonterminals
 
 The author of a grammar like *dates.ixml* might wish to limit the
 nonterminals visible when it’s combined with other grammars. In other
@@ -79,5 +89,8 @@ a module author to make explicit commitments about a public API while
 keeping implementation details hidden so that they may be changed
 without breaking code that uses them.
 
+### NT-VISIBILITY-ACCEPT. Define the visibility of nonterminals
 
-
+An author importing a grammar like *dates.ixml* might want to
+limit the nonterminals that are visible. Pulling all of the (exported)
+nonterminals into the host grammar may be undesirable.
