@@ -288,18 +288,11 @@
       <result>
 	<assert-xml>
           <S xmlns="" xmlns:ixml="http://invisiblexml.org/NS"
-             ixml:state="ambiguous">
-            <A>a</A>
-            <B>b</B>
-            <C>c</C>
-          </S>
+             ixml:state="ambiguous"><A>a</A><B>b</B><C>c</C></S>
         </assert-xml>
 	<assert-xml>
           <S xmlns="" xmlns:ixml="http://invisiblexml.org/NS"
-             ixml:state="ambiguous" B="b">
-            <A>a</A>
-            <C>c</C>
-          </S>
+             ixml:state="ambiguous" B="b"><A>a</A><C>c</C></S>
         </assert-xml>
       </result>
     </test-case>
