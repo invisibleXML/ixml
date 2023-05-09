@@ -279,10 +279,13 @@
     <ixml-grammar>S = A, B, C | A, @B, C . A = 'a' . B = 'b' . C = 'c' .</ixml-grammar>
     <test-case name="Battr">
       <created by="ndw" on="2023-05-05"/>
+      <modified by="ndw" on="2023-05-09"
+		change="Attempted to improve the description."/>
       <description>
-	<p>This grammar is ambiguous only in its marks. That is, it matches
-        exactly “abc”, but it does so in two ways that differ only in
-        the serialization of B.</p>
+	<p>This grammar is ambiguous. That is, it matches exactly
+	“abc”, but it does so in two different ways. This difference
+        is visible in the selection of B as either an element or
+        an attribute.</p>
       </description>
       <test-string>abc</test-string>
       <result>
@@ -293,6 +296,29 @@
 	<assert-xml>
           <S xmlns="" xmlns:ixml="http://invisiblexml.org/NS"
              ixml:state="ambiguous" B="b"><A>a</A><C>c</C></S>
+        </assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="ambiguous-without-marks">
+    <created by="ndw" on="2023-05-09"/>
+    <ixml-grammar>S = A, B, C | A, B, C . A = 'a' . B = 'b' . C = 'c' .</ixml-grammar>
+    <test-case name="B-or-B">
+      <created by="ndw" on="2023-05-09"/>
+      <description>
+	<p>This grammar is ambiguous only if the processor does not
+        remove duplicate rules. But there’s nothing in the specification
+        that says a processor must.</p>
+      </description>
+      <test-string>abc</test-string>
+      <result>
+	<assert-xml>
+          <S xmlns="" xmlns:ixml="http://invisiblexml.org/NS"
+             ixml:state="ambiguous"><A>a</A><B>b</B><C>c</C></S>
+        </assert-xml>
+	<assert-xml>
+          <S xmlns=""><A>a</A><B>b</B><C>c</C></S>
         </assert-xml>
       </result>
     </test-case>
