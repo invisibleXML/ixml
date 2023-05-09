@@ -128,3 +128,12 @@ code {
 .nt {
     color: var(--value-color);
 }
+
+add {
+    background-color: #ccffcc;
+}
+
+del {
+    background-color: #ffcccc;
+    text-decoration: line-through;
+}
