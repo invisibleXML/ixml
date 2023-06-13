@@ -594,12 +594,16 @@ nonterminal.</p>
 of the serialization are explicitly insignificant, such as the order
 of attributes on an element, whether single or double quotes are used
 to delimit attributes, or whether numeric character references use
-decimal or hexadecimal numbers. Some aspects of the serialization will
-impact whether or not the document can be perfectly reconstruced by
-the XML parser. For a more comprehensive discussion, see
-[<a href="#serialization">Serialization</a>]. A conformant Invisible XML processor
-is only required to produce well-formed XML output, it is not otherwise
-constrained.</add></p>
+decimal or hexadecimal numbers.
+Some aspects of the serialization will impact whether or not all
+characters of the input (e.g. <code>#a#d</code> as a line separator, or either of
+those characters within attribute values) are retained after the
+serialized XML is parsed with a conforming XML parser.
+For a more comprehensive discussion, see
+[<a href="#serialization">Serialization</a>].
+A conformant Invisible XML processor is required to produce
+well-formed XML output, but its choices in serializing the XML
+are not otherwise constrained.</add></p>
 
 <p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
 any serialization of a parse tree produced from the grammar is well-formed XML
@@ -797,13 +801,22 @@ generated nonterminals.</p>
 <pre>f**sep ⇒ f-star-sep
 -f-star-sep: (f++sep)?.</pre>
 
-<p><add>An application has some latitude when serializing XML. Particular attention should
-be paid to serializing whitespace and other control characters. As described in
-[<a href="#serialization">Serialization</a>], the ability to round-trip XML data may require
-control characters (such as <code>#a</code> and <code>#d</code>) to be
-serialized as numeric character references. For example, a <code>#a</code> in an attribute
-value will be replaced by a space during attribute-value normalization unless
-it is encoded as a numeric character reference.</add></p>
+<p><add>An application has some latitude when serializing XML.
+Particular attention should be paid to serializing whitespace and
+other control characters. Consider, for example, the case where the
+characters <code>#a</code> or <code>#d</code> appear in a value
+serialized as an attribute. When that serialized XML is parsed, the
+XML parser will replace <code>#a</code> and <code>#d</code> characters
+with spaces when it performs whitespace normalization on the attribute
+value. Similarly, the sequence <code>#d#a</code> will be translated to
+a single <code>#a</code> by standard XML parsing. If the user of the
+grammar expects to see the original characters in the XML output, it
+will be necessary to encode them using numeric character references
+when serializing the XML output. If on the other hand the user of does
+<em>not</em> expect to see the original characters in the output, then
+carefully preserving them using numeric character references is likely
+to be unhelpful. See [<a href="#serialization">Serialization</a>] for
+detailed discussions.</add></p>
 
 <h2 id="complete">Complete Grammar</h2>
 
