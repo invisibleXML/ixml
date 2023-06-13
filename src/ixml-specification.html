@@ -801,8 +801,7 @@ generated nonterminals.</p>
 <pre>f**sep ⇒ f-star-sep
 -f-star-sep: (f++sep)?.</pre>
 
-<p><add>An application has some latitude when serializing XML.
-Particular attention should be paid to serializing whitespace and
+<p><add>Implementers should pay particular attention to serializing whitespace and
 other control characters. Consider, for example, the case where the
 characters <code>#a</code> or <code>#d</code> appear in a value
 serialized as an attribute. When that serialized XML is parsed, the
