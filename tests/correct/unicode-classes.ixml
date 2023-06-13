@@ -1,3 +1,8 @@
+{ Unicode classes test}
+{Each input line starts with the one or two letter name of the class it is testing, a space, and a list of unicode characters that are in that class.
+
+The output is an element of that classname for each line of input, with the characters as content, with the exception of the control characters, for which the element content is a "." for each character in the input.}
+
 classes: line+.
 -line: ( C; Cc; Cf; Cn; Co; Cs; L; LC; Ll; Lm; Lo; Lt; Lu; M; Mc; Me; Mn; N; Nd; Nl; No; P; Pc; Pd; Pe; Pf; Pi; Po; Ps; S; Sc; Sk; Sm; So; Z; Zl; Zp; Zs), newline.
 -newline: (-#a; -#d)+.
