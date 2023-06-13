@@ -421,8 +421,7 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><p><add><span class="deltaxml-new">An application has some latitude when serializing XML.
-Particular attention should be paid to serializing whitespace and
+-f-star-sep: (f++sep)?.</pre><p><add><span class="deltaxml-new">Implementers should pay particular attention to serializing whitespace and
 other control characters. Consider, for example, the case where the
 characters </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> or </span><code><span class="deltaxml-new">#d</span></code><span class="deltaxml-new"> appear in a value
 serialized as an attribute. When that serialized XML is parsed, the

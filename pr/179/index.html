@@ -402,8 +402,7 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><p><add>An application has some latitude when serializing XML.
-Particular attention should be paid to serializing whitespace and
+-f-star-sep: (f++sep)?.</pre><p><add>Implementers should pay particular attention to serializing whitespace and
 other control characters. Consider, for example, the case where the
 characters <code>#a</code> or <code>#d</code> appear in a value
 serialized as an attribute. When that serialized XML is parsed, the
@@ -675,4 +674,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #34 with PR #179 for invisibleXML/ixml at <time datetime="2023-06-13T12:38:59GMT+00:00" title="2023-06-13T12:38:59GMT+00:00">12:38 on 13 June 2023</time></span> <span class="bh"><span title="90236ce67d1035b4a9c6eaadd9713f2a5428d1cb">90236ce6</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #35 with PR #179 for invisibleXML/ixml at <time datetime="2023-06-13T12:56:28GMT+00:00" title="2023-06-13T12:56:28GMT+00:00">12:56 on 13 June 2023</time></span> <span class="bh"><span title="90236ce67d1035b4a9c6eaadd9713f2a5428d1cb">90236ce6</span></span></p></footer></body></html>
