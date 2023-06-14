@@ -19,7 +19,7 @@
 <body>
 <h1>Invisible XML Specification Errata</h1>
 
-<p>Version: <!--$date=-->2023-05-09<!--$--></p>
+<p>Version: <!--$date=-->2023-06-14<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -28,7 +28,14 @@
 
 <h2 id="proposed">Proposed errata</h2>
 
+<p>None at this time.</p>
+
+<h2 id="accepted">Accepted errata</h2>
+
 <h3>E003: Ignore UTF-8 BOM</h3>
+
+<p><a href="https://www.w3.org/2023/06/13-ixml-minutes.html">Accepted</a> as
+an erratum against 1.0 at the meeting of 13 June 2023.</p>
 
 <p>The second paragraph of the section titled “The Grammar” is changed
 to indicate that a UTF-8 BOM must be ignored.</p>
@@ -52,12 +59,14 @@ section titled “Parsing”.</p>
 <span class="conform">should</span> be ignored.</add></p>
 </div>
 
-<h2 id="accepted">Accepted errata</h2>
+<h2 id="resolved">Resolved errata</h2>
 
 <h3>E002: A string cannot contain C0 or C1 control characters</h3>
 
 <p><a href="https://www.w3.org/2023/01/10-ixml-minutes.html">Accepted</a> as
-an erratum against 1.0 at the meeting of 10 January 2023.</p>
+an erratum against 1.0 at the meeting of 10 January 2023. This erratum was
+resolved into the current working draft on 15 November 2022, before being proposed
+as an erratum against 1.0.</p>
 
 <p>The definition of a quoted string is changed to exclude the C0 and C1
 control characters.</p>
@@ -82,13 +91,11 @@ by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 </dd>
 </div>
 
-<h2 id="resolved">Resolved errata</h2>
-
 <h3>E001: The Unicode character class “LC”</h3>
 
 <p><a href="https://www.w3.org/2022/10/11-ixml-minutes#t04">Accepted</a> as
 an erratum against 1.0 at the meeting of 11 October 2022. Resolved in the current
-specification on 15 October 2022.</p>
+working draft on 15 October 2022.</p>
 
 <p>The definition of the nonterminal <code>letter</code> is changed to
 <code>["A"-"Z" | "a"-"z"]</code> to address the fact that recent versions of Unicode
