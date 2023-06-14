@@ -19,7 +19,7 @@
 <body>
 <h1>Invisible XML Specification Errata</h1>
 
-<p>Version: <!--$date=-->2023-01-10<!--$--></p>
+<p>Version: <!--$date=-->2023-05-09<!--$--></p>
 
 <h2 id="status">Status</h2>
 
@@ -28,7 +28,29 @@
 
 <h2 id="proposed">Proposed errata</h2>
 
-<p>None at this time.</p>
+<h3>E003: Ignore UTF-8 BOM</h3>
+
+<p>The second paragraph of the section titled “The Grammar” is changed
+to indicate that a UTF-8 BOM must be ignored.</p>
+
+<div class="box revised">
+<p>A grammar is an optional prolog, followed by a sequence of one or more
+rules, surrounded and separated by spacing and comments. Spacing and comments
+are entirely optional, except that rules <span id="ref-s01"
+class="conform">must</span> be separated by at least one of either (<a
+class="error" href="#err-s01">error S01</a>).
+<add>If an input grammar encoded in UTF-8 begins with a byte order mark (BOM),
+the BOM <span class="conform">must</span> be ignored.</add>
+</p>
+</div>
+
+<p>A new paragraph is added between the second and third paragraphs of the
+section titled “Parsing”.</p>
+
+<div class="box revised">
+<p><add>If an input encoded in UTF-8 begins with a BOM, the BOM
+<span class="conform">should</span> be ignored.</add></p>
+</div>
 
 <h2 id="accepted">Accepted errata</h2>
 
