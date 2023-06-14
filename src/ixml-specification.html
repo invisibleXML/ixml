@@ -596,14 +596,17 @@ of attributes on an element, whether single or double quotes are used
 to delimit attributes, or whether numeric character references use
 decimal or hexadecimal numbers.
 Some aspects of the serialization will impact whether or not all
-characters of the input (e.g. <code>#a#d</code> as a line separator, or either of
-those characters within attribute values) are retained after the
-serialized XML is parsed with a conforming XML parser.
+characters of the input are retained after the
+serialized XML is parsed with a conforming XML parser (e.g. <code>#a#d</code> as a line separator, or either of
+those characters within attribute values) .
 For a more comprehensive discussion, see
-[<a href="#serialization">Serialization</a>].
+[<a href="#serialization">XML Serialization</a>].
 A conformant Invisible XML processor is required to produce
-well-formed XML output, but its choices in serializing the XML
+well-formed XML output, but its choices in serializing the selected parse tree
 are not otherwise constrained.</add></p>
+
+say explicitly that processors may offer the kinds of options defined in the serialization spaec
+indentation is a problem, make it a should
 
 <p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
 any serialization of a parse tree produced from the grammar is well-formed XML
@@ -947,7 +950,7 @@ practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
 978-0-387-20248-8. <a
 href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p>
 
-<p id="serialization"><add>[Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+<p id="serialization"><add>[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
 <em>XSLT and XQuery Serialization 3.1</em>. W3C, 2017,
 <a href="https://www.w3.org/TR/xslt-xquery-serialization-31/"
 >https://www.w3.org/TR/xslt-xquery-serialization-31/</a></add></p>
