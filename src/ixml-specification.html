@@ -292,9 +292,12 @@ that it is in its own format, and therefore describes itself.</p>
 
 <p>A grammar is an optional prolog, followed by a sequence of one or more
 rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules <span id="ref-s01"
-class="conform">must</span> be separated by at least one of either (<a
-class="error" href="#err-s01">error S01</a>).</p>
+are entirely optional, except that rules
+<span id="ref-s01" class="conform">must</span> be separated by at least one of either
+(<a class="error" href="#err-s01">error S01</a>). If an input grammar
+encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
+ignored.</p>
+
 <pre class="frag ixml">ixml: s, prolog?, rule++RS, s.
 </pre>
 
@@ -546,6 +549,9 @@ not. Known algorithms that accept and parse any context-free grammar include
 [<a href="#earley">Earley</a>], [<a href="#unger">Unger</a>], [<a
 href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
 see also [<a href="#grune">Grune</a>].</p>
+
+<p>If an input encoded in UTF-8 begins with a BOM, the BOM 
+<span class="conform">should</span> be ignored.</p>
 
 <p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
