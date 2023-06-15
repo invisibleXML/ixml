@@ -622,6 +622,22 @@
     </test-set>
 
 
+    <test-set name="unicode-classes">
+      <created by="SP" on="2023-06-13"/>
+      <modified by="NDW" on="2023-06-15"
+		change="Added to the test catalog"/>
+      <ixml-grammar-ref href="unicode-classes.ixml"/>
+      <test-case name="unicode-classes">
+        <created by="SP" on="2023-06-13"/>
+	<modified by="NDW" on="2023-06-15"
+		  change="supplied expected output"/>
+	<test-string-ref href="unicode-classes.inp"/>
+	<result>
+	  <assert-xml-ref href="unicode-classes.output.xml"/>
+	</result>
+      </test-case>
+    </test-set>
+
     <test-set name="vcard">
       <created by="SP" on="2021-12-16"/>
       <ixml-grammar-ref href="vcard.ixml"/>
