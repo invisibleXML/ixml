@@ -50,4 +50,18 @@
     </test-case>
   </test-set>
 
+  <test-set name="chars.astral">
+    <created by="NW" on="2023-06-20"/>
+    <ixml-grammar-ref href="chars-astral.ixml"/>
+    <test-case name="chars.astral.1">
+      <created by="NW" on="2023-06-20"/>
+      <test-string>Happy 😼</test-string>
+      <result>
+        <assert-xml>
+          <S xmlns=""><A>Happy</A><B>😼</B></S>
+        </assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
 </test-catalog>
