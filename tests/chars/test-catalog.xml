@@ -58,7 +58,7 @@
       <test-string>Happy 😼</test-string>
       <result>
         <assert-xml>
-          <S xmlns=""><A>Happy</A><B>😼</B></S>
+          <S><A>Happy</A><B>😸</B><C D="🙀">😾</C></S>
         </assert-xml>
       </result>
     </test-case>
