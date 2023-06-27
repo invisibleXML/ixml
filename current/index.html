@@ -132,7 +132,11 @@ in the serialized result, giving:</p><pre class="xml"><span><span class="text"><
 <span class="etag">&lt;/</span><span class="gi">url</span><span class="etag">&gt;</span></span></span></pre><h2 id="grammar">The Grammar</h2><p>Here we describe the format of the grammar used to describe documents. Note
 that it is in its own format, and therefore describes itself.</p><p>A grammar is an optional prolog, followed by a sequence of one or more
 rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+are entirely optional, except that rules
+<span id="ref-s01" class="conform">must</span> be separated by at least one of either
+(<a class="error" href="#err-s01" shape="rect">error S01</a>). If an input grammar
+encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
+ignored.</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 </span></pre><p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
 braces, and can included nested comments, to enable commenting out parts of a
@@ -263,7 +267,8 @@ serialization <span class="conform">should</span> include the attribute
 word <code>ambiguous</code>. Different processors <span class="conform">may</span> vary in whether input is detected as ambiguous or
 not. Known algorithms that accept and parse any context-free grammar include
 [<a href="#earley" shape="rect">Earley</a>], [<a href="#unger" shape="rect">Unger</a>], [<a href="#cyk" shape="rect">CYK</a>], [<a href="#glr" shape="rect">GLR</a>], and [<a href="#gll" shape="rect">GLL</a>];
-see also [<a href="#grune" shape="rect">Grune</a>].</p><p>If the parse fails, some XML document <span class="conform">must</span> be
+see also [<a href="#grune" shape="rect">Grune</a>].</p><p>If an input encoded in UTF-8 begins with a BOM, the BOM 
+<span class="conform">should</span> be ignored.</p><p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
@@ -645,4 +650,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #18 for invisibleXML/ixml at <time datetime="2023-06-27T14:06:21GMT+00:00" title="2023-06-27T14:06:21GMT+00:00">14:06 on 27 June 2023</time></span> <span class="bh"><span title="20e65d5e7afb2ce9579a925fa403e87dbdb21b09">20e65d5e</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #19 for invisibleXML/ixml at <time datetime="2023-06-27T14:11:29GMT+00:00" title="2023-06-27T14:11:29GMT+00:00">14:11 on 27 June 2023</time></span> <span class="bh"><span title="a33681ffa1e6fae5b57542caf71cbfcdc4c519ab">a33681ff</span></span></p></footer></body></html>

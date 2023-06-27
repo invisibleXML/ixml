@@ -20,7 +20,7 @@
     <a href="https://www.deltaxml.com/">DeltaXML</a> to identify changes
     from the current version. You can view the old version, the new version,
     or both versions with styled <span class="show-old">old text</span>
-    and <span class="show-new">new text</span>.</p></div><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: 2023-06-<span class="deltaxml-old">23</span><span class="deltaxml-new">27</span></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+    and <span class="show-new">new text</span>.</p></div><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: 2023-06-27</p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html" shape="rect">is available</a>. Change markup shows
     the differences between <a href="index.html" shape="rect">this version</a> of the
@@ -149,9 +149,21 @@ in the serialized result, giving:</p><pre class="xml"><span><span class="text"><
    <span class="text"><span class="stag">&lt;</span><span class="gi">host</span><span class="stag">&gt;</span>www.w3.org<span class="etag">&lt;/</span><span class="gi">host</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">path</span><span class="stag">&gt;</span>/TR/1999/xhtml.html<span class="etag">&lt;/</span><span class="gi">path</span><span class="etag">&gt;</span></span>
 <span class="etag">&lt;/</span><span class="gi">url</span><span class="etag">&gt;</span></span></span></pre><h2 id="grammar">The Grammar</h2><p>Here we describe the format of the grammar used to describe documents. Note
-that it is in its own format, and therefore describes itself.</p><p>A grammar is an optional prolog, followed by a sequence of one or more
+that it is in its own format, and therefore describes itself.</p><p><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="delete_version">A grammar is an optional prolog, followed by a sequence of one or more
 rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="add_version">A grammar is an optional prolog, followed by a sequence of one or more
+rules, surrounded and separated by spacing and comments. Spacing and comments
+are entirely optional, except that rules
+<span id="ref-s01" class="conform">must</span> be separated by at least one of either
+(<a class="error" href="#err-s01" shape="rect">error S01</a>). If an input grammar
+encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
+ignored.</span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" class="modify_version">A grammar is an optional prolog, followed by a sequence of one or more
+rules, surrounded and separated by spacing and comments. Spacing and comments
+are entirely optional, except that rules<span class="deltaxml-old"> </span><span class="deltaxml-new">
+</span><span id="ref-s01" class="conform">must</span> be separated by at least one of either<span class="deltaxml-old"> </span><span class="deltaxml-new">
+</span>(<a class="error" href="#err-s01" shape="rect">error S01</a>).<span class="deltaxml-new"> If an input grammar
+encoded in UTF-8 begins with a byte order mark (BOM), the BOM </span><span class="conform"><span class="deltaxml-new">must</span></span><span class="deltaxml-new"> be
+ignored.</span></span></p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 </span></pre><p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
 braces, and can included nested comments, to enable commenting out parts of a
@@ -282,7 +294,8 @@ serialization <span class="conform">should</span> include the attribute
 word <code>ambiguous</code>. Different processors <span class="conform">may</span> vary in whether input is detected as ambiguous or
 not. Known algorithms that accept and parse any context-free grammar include
 [<a href="#earley" shape="rect">Earley</a>], [<a href="#unger" shape="rect">Unger</a>], [<a href="#cyk" shape="rect">CYK</a>], [<a href="#glr" shape="rect">GLR</a>], and [<a href="#gll" shape="rect">GLL</a>];
-see also [<a href="#grune" shape="rect">Grune</a>].</p><p>If the parse fails, some XML document <span class="conform">must</span> be
+see also [<a href="#grune" shape="rect">Grune</a>].</p><p><span class="deltaxml-new">If an input encoded in UTF-8 begins with a BOM, the BOM 
+</span><span class="conform"><span class="deltaxml-new">should</span></span><span class="deltaxml-new"> be ignored.</span></p><p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
