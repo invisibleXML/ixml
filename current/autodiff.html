@@ -149,21 +149,13 @@ in the serialized result, giving:</p><pre class="xml"><span><span class="text"><
    <span class="text"><span class="stag">&lt;</span><span class="gi">host</span><span class="stag">&gt;</span>www.w3.org<span class="etag">&lt;/</span><span class="gi">host</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">path</span><span class="stag">&gt;</span>/TR/1999/xhtml.html<span class="etag">&lt;/</span><span class="gi">path</span><span class="etag">&gt;</span></span>
 <span class="etag">&lt;/</span><span class="gi">url</span><span class="etag">&gt;</span></span></span></pre><h2 id="grammar">The Grammar</h2><p>Here we describe the format of the grammar used to describe documents. Note
-that it is in its own format, and therefore describes itself.</p><p><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="delete_version">A grammar is an optional prolog, followed by a sequence of one or more
-rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules <span id="ref-s01" class="conform">must</span> be separated by at least one of either (<a class="error" href="#err-s01" shape="rect">error S01</a>).</span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="add_version">A grammar is an optional prolog, followed by a sequence of one or more
+that it is in its own format, and therefore describes itself.</p><p>A grammar is an optional prolog, followed by a sequence of one or more
 rules, surrounded and separated by spacing and comments. Spacing and comments
 are entirely optional, except that rules
 <span id="ref-s01" class="conform">must</span> be separated by at least one of either
 (<a class="error" href="#err-s01" shape="rect">error S01</a>). If an input grammar
 encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
-ignored.</span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" class="modify_version">A grammar is an optional prolog, followed by a sequence of one or more
-rules, surrounded and separated by spacing and comments. Spacing and comments
-are entirely optional, except that rules<span class="deltaxml-old"> </span><span class="deltaxml-new">
-</span><span id="ref-s01" class="conform">must</span> be separated by at least one of either<span class="deltaxml-old"> </span><span class="deltaxml-new">
-</span>(<a class="error" href="#err-s01" shape="rect">error S01</a>).<span class="deltaxml-new"> If an input grammar
-encoded in UTF-8 begins with a byte order mark (BOM), the BOM </span><span class="conform"><span class="deltaxml-new">must</span></span><span class="deltaxml-new"> be
-ignored.</span></span></p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+ignored.</p><pre class="frag ixml"><span><span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 </span></pre><p>An <code>s</code> stands for an optional sequence of spacing and comments;
 <code>RS</code> for at least one space or comment. A comment is enclosed in
 braces, and can included nested comments, to enable commenting out parts of a
@@ -294,8 +286,8 @@ serialization <span class="conform">should</span> include the attribute
 word <code>ambiguous</code>. Different processors <span class="conform">may</span> vary in whether input is detected as ambiguous or
 not. Known algorithms that accept and parse any context-free grammar include
 [<a href="#earley" shape="rect">Earley</a>], [<a href="#unger" shape="rect">Unger</a>], [<a href="#cyk" shape="rect">CYK</a>], [<a href="#glr" shape="rect">GLR</a>], and [<a href="#gll" shape="rect">GLL</a>];
-see also [<a href="#grune" shape="rect">Grune</a>].</p><p><span class="deltaxml-new">If an input encoded in UTF-8 begins with a BOM, the BOM 
-</span><span class="conform"><span class="deltaxml-new">should</span></span><span class="deltaxml-new"> be ignored.</span></p><p>If the parse fails, some XML document <span class="conform">must</span> be
+see also [<a href="#grune" shape="rect">Grune</a>].</p><p>If an input encoded in UTF-8 begins with a BOM, the BOM 
+<span class="conform">should</span> be ignored.</p><p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
@@ -314,7 +306,23 @@ nonterminal.</p><ul><li><strong>Unmarked or included</strong>: the node is seria
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of the marking
     of intermediate nonterminals), if any, in order.</li></ul><p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as its
-    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
+    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p><add><span class="deltaxml-new">An application has some latitude when serializing XML. Some aspects
+of the serialization are explicitly insignificant, such as the order
+of attributes on an element, whether single or double quotes are used
+to delimit attributes, or whether numeric character references use
+decimal or hexadecimal numbers.
+Some aspects of the serialization will impact whether or not all
+characters of the input are retained after the
+serialized XML is parsed with a conforming XML parser (e.g. </span><code><span class="deltaxml-new">#a#d</span></code><span class="deltaxml-new"> as a line separator, or either of
+those characters within attribute values) .
+For a more comprehensive discussion, see
+[</span><a href="#serialization" shape="rect"><span class="deltaxml-new">XML Serialization</span></a><span class="deltaxml-new">].
+A conformant Invisible XML processor is required to produce
+well-formed XML output, but its choices in serializing the selected parse tree
+are not otherwise constrained.</span></add></p><span class="deltaxml-new">
+
+say explicitly that processors may offer the kinds of options defined in the serialization spaec
+indentation is a problem, make it a should</span><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
 any serialization of a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01" shape="rect">error D01</a>).</p><p>Note: This requirement means for instance that names of serialized elements
 and attributes <span id="ref-d03" class="conform">must</span> match the XML
@@ -421,7 +429,21 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+-f-star-sep: (f++sep)?.</pre><p><add><span class="deltaxml-new">Implementers should pay particular attention to serializing whitespace and
+other control characters. Consider, for example, the case where the
+characters </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> or </span><code><span class="deltaxml-new">#d</span></code><span class="deltaxml-new"> appear in a value
+serialized as an attribute. When that serialized XML is parsed, the
+XML parser will replace </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> and </span><code><span class="deltaxml-new">#d</span></code><span class="deltaxml-new"> characters
+with spaces when it performs whitespace normalization on the attribute
+value. Similarly, the sequence </span><code><span class="deltaxml-new">#d#a</span></code><span class="deltaxml-new"> will be translated to
+a single </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> by standard XML parsing. If the user of the
+grammar expects to see the original characters in the XML output, it
+will be necessary to encode them using numeric character references
+when serializing the XML output. If on the other hand the user does
+</span><em><span class="deltaxml-new">not</span></em><span class="deltaxml-new"> expect to see the original characters in the output, then
+carefully preserving them using numeric character references is likely
+to be unhelpful. See [</span><a href="#serialization" shape="rect"><span class="deltaxml-new">Serialization</span></a><span class="deltaxml-new">] for
+detailed discussions.</span></add></p><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
            <span class="mark">-</span><span class="nt">s</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>. <span class="com"><span class="comdel">{</span>Optional spacing<span class="comdel">}</span></span>
           <span class="mark">-</span><span class="nt">RS</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">+</span>. <span class="com"><span class="comdel">{</span>Required spacing<span class="comdel">}</span></span>
@@ -670,7 +692,9 @@ Electronic Notes in Theoretical Computer Science, Volume 253, Issue 7, 17
 September 2010, pages 177-189. <a href="doi:10.1016/j.entcs.2010.08.041" shape="rect">doi:10.1016/j.entcs.2010.08.041</a></p><p id="glr">[GLR] Masaru Tomita. <em>Generalized LR Parsing</em>. Springer
 Science &amp; Business Media. ISBN 978-1-4615-4034-2. <a href="doi:10.1007/978-1-4615-4034-2" shape="rect">doi:10.1007/978-1-4615-4034-2</a></p><p id="grune">[Grune] Grune, D. and Jacobs, C. <em>Parsing techniques : a
 practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
-978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
+978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="serialization"><add><span class="deltaxml-new">[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+</span><em><span class="deltaxml-new">XSLT and XQuery Serialization 3.1</span></em><span class="deltaxml-new">. W3C, 2017,
+</span><a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect"><span class="deltaxml-new">https://www.w3.org/TR/xslt-xquery-serialization-31/</span></a></add></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
 structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 1968, <a href="doi:10.1145/362991.363001" shape="rect">doi:10.1145/362991.363001</a></p><h2 id="acknowledgments">Acknowledgements</h2><p>This specification was produced by members of the W3C ixml community group:
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
