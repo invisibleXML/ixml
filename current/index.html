@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="XHTML+RDFa 1.0"><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /></head><body><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2023-06-30<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="XHTML+RDFa 1.0"><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /></head><body><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2023-07-25<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html">is available</a>. Change markup shows
     the differences between <a href="index.html">this version</a> of the
@@ -287,7 +287,7 @@ nonterminal.</p><ul><li><strong>Unmarked or included</strong>: the node is seria
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of the marking
     of intermediate nonterminals), if any, in order.</li></ul><p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as its
-    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p><add>An application has some latitude when serializing XML. Some aspects
+    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p>An application has some latitude when serializing XML. Some aspects
 of the serialization are explicitly insignificant, such as the order
 of attributes on an element, whether single or double quotes are used
 to delimit attributes, or whether numeric character references use
@@ -300,7 +300,7 @@ For a more comprehensive discussion, see
 [<a href="#serialization" shape="rect">XML Serialization</a>].
 A conformant Invisible XML processor is required to produce
 well-formed XML output, but its choices in serializing the selected parse tree
-are not otherwise constrained.</add></p>
+are not otherwise constrained.</p>
 
 say explicitly that processors may offer the kinds of options defined in the serialization spaec
 indentation is a problem, make it a should<p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
@@ -410,7 +410,7 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><p><add>Implementers should pay particular attention to serializing whitespace and
+-f-star-sep: (f++sep)?.</pre><p>Implementers should pay particular attention to serializing whitespace and
 other control characters. Consider, for example, the case where the
 characters <code>#a</code> or <code>#d</code> appear in a value
 serialized as an attribute. When that serialized XML is parsed, the
@@ -424,7 +424,7 @@ when serializing the XML output. If on the other hand the user does
 <em>not</em> expect to see the original characters in the output, then
 carefully preserving them using numeric character references is likely
 to be unhelpful. See [<a href="#serialization" shape="rect">Serialization</a>] for
-detailed discussions.</add></p><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+detailed discussions.</p><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
            <span class="mark">-</span><span class="nt">s</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>. <span class="com"><span class="comdel">{</span>Optional spacing<span class="comdel">}</span></span>
           <span class="mark">-</span><span class="nt">RS</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">+</span>. <span class="com"><span class="comdel">{</span>Required spacing<span class="comdel">}</span></span>
@@ -674,12 +674,12 @@ Electronic Notes in Theoretical Computer Science, Volume 253, Issue 7, 17
 September 2010, pages 177-189. <a href="doi:10.1016/j.entcs.2010.08.041" shape="rect">doi:10.1016/j.entcs.2010.08.041</a></p><p id="glr">[GLR] Masaru Tomita. <em>Generalized LR Parsing</em>. Springer
 Science &amp; Business Media. ISBN 978-1-4615-4034-2. <a href="doi:10.1007/978-1-4615-4034-2" shape="rect">doi:10.1007/978-1-4615-4034-2</a></p><p id="grune">[Grune] Grune, D. and Jacobs, C. <em>Parsing techniques : a
 practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
-978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="serialization"><add>[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="serialization">[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
 <em>XSLT and XQuery Serialization 3.1</em>. W3C, 2017,
-<a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></add></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
+<a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
 structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 1968, <a href="doi:10.1145/362991.363001" shape="rect">doi:10.1145/362991.363001</a></p><h2 id="acknowledgments">Acknowledgements</h2><p>This specification was produced by members of the W3C ixml community group:
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #22 for invisibleXML/ixml at <time datetime="2023-06-30T07:21:37GMT+00:00" title="2023-06-30T07:21:37GMT+00:00">07:21 on 30 June 2023</time></span> <span class="bh"><span title="25577b815dc368cbf526c13c426cc92d90a1c62e">25577b81</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #23 for invisibleXML/ixml at <time datetime="2023-07-25T11:02:27GMT+00:00" title="2023-07-25T11:02:27GMT+00:00">11:02 on 25 July 2023</time></span> <span class="bh"><span title="da01812e5c6d3dd959fbd6202d11378f31fc6a4b">da01812e</span></span></p></footer></body></html>

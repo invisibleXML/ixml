@@ -20,7 +20,7 @@
     <a href="https://www.deltaxml.com/">DeltaXML</a> to identify changes
     from the current version. You can view the old version, the new version,
     or both versions with styled <span class="show-old">old text</span>
-    and <span class="show-new">new text</span>.</p></div><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: 2023-06-<span class="deltaxml-old">27</span><span class="deltaxml-new">30</span></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+    and <span class="show-new">new text</span>.</p></div><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: 2023-<span class="deltaxml-old">06-30</span><span class="deltaxml-new">07-25</span></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html" shape="rect">is available</a>. Change markup shows
     the differences between <a href="index.html" shape="rect">this version</a> of the
@@ -306,20 +306,33 @@ nonterminal.</p><ul><li><strong>Unmarked or included</strong>: the node is seria
     whose name is the name of the node, and whose value is the serialization of
     all non-deleted terminal descendants of the node (regardless of the marking
     of intermediate nonterminals), if any, in order.</li></ul><p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as its
-    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p><add>An application has some latitude when serializing XML. Some aspects
+    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p><add><span class="deltaxml-old">An application has some latitude when serializing XML. Some aspects
 of the serialization are explicitly insignificant, such as the order
 of attributes on an element, whether single or double quotes are used
 to delimit attributes, or whether numeric character references use
 decimal or hexadecimal numbers.
 Some aspects of the serialization will impact whether or not all
 characters of the input are retained after the
-serialized XML is parsed with a conforming XML parser (e.g. <code>#a#d</code> as a line separator, or either of
+serialized XML is parsed with a conforming XML parser (e.g. </span><code><span class="deltaxml-old">#a#d</span></code><span class="deltaxml-old"> as a line separator, or either of
 those characters within attribute values) .
 For a more comprehensive discussion, see
-[<a href="#serialization" shape="rect">XML Serialization</a>].
+[</span><a href="#serialization" shape="rect"><span class="deltaxml-old">XML Serialization</span></a><span class="deltaxml-old">].
 A conformant Invisible XML processor is required to produce
 well-formed XML output, but its choices in serializing the selected parse tree
-are not otherwise constrained.</add></p><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
+are not otherwise constrained.</span></add></p><p><span class="deltaxml-new">An application has some latitude when serializing XML. Some aspects
+of the serialization are explicitly insignificant, such as the order
+of attributes on an element, whether single or double quotes are used
+to delimit attributes, or whether numeric character references use
+decimal or hexadecimal numbers.
+Some aspects of the serialization will impact whether or not all
+characters of the input are retained after the
+serialized XML is parsed with a conforming XML parser (e.g. </span><code><span class="deltaxml-new">#a#d</span></code><span class="deltaxml-new"> as a line separator, or either of
+those characters within attribute values) .
+For a more comprehensive discussion, see
+[</span><a href="#serialization" shape="rect"><span class="deltaxml-new">XML Serialization</span></a><span class="deltaxml-new">].
+A conformant Invisible XML processor is required to produce
+well-formed XML output, but its choices in serializing the selected parse tree
+are not otherwise constrained.</span></p><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
 any serialization of a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01" shape="rect">error D01</a>).</p><p>Note: This requirement means for instance that names of serialized elements
 and attributes <span id="ref-d03" class="conform">must</span> match the XML
@@ -426,21 +439,35 @@ generated nonterminals.</p><p>Optional factor:</p><pre>f? ⇒ f-option
 -f-star: (f, f-star)?.</pre><p>One or more repetitions:</p><pre>f+ ⇒ f-plus
 -f-plus: f, f*.</pre><p>One or more repetitions with separator:</p><pre>f++sep ⇒ f-plus-sep
 -f-plus-sep: f, (sep, f)*.</pre><p>Zero or more repetitions with separator:</p><pre>f**sep ⇒ f-star-sep
--f-star-sep: (f++sep)?.</pre><p><add>Implementers should pay particular attention to serializing whitespace and
+-f-star-sep: (f++sep)?.</pre><p><add><span class="deltaxml-old">Implementers should pay particular attention to serializing whitespace and
 other control characters. Consider, for example, the case where the
-characters <code>#a</code> or <code>#d</code> appear in a value
+characters </span><code><span class="deltaxml-old">#a</span></code><span class="deltaxml-old"> or </span><code><span class="deltaxml-old">#d</span></code><span class="deltaxml-old"> appear in a value
 serialized as an attribute. When that serialized XML is parsed, the
-XML parser will replace <code>#a</code> and <code>#d</code> characters
+XML parser will replace </span><code><span class="deltaxml-old">#a</span></code><span class="deltaxml-old"> and </span><code><span class="deltaxml-old">#d</span></code><span class="deltaxml-old"> characters
 with spaces when it performs whitespace normalization on the attribute
-value. Similarly, the sequence <code>#d#a</code> will be translated to
-a single <code>#a</code> by standard XML parsing. If the user of the
+value. Similarly, the sequence </span><code><span class="deltaxml-old">#d#a</span></code><span class="deltaxml-old"> will be translated to
+a single </span><code><span class="deltaxml-old">#a</span></code><span class="deltaxml-old"> by standard XML parsing. If the user of the
 grammar expects to see the original characters in the XML output, it
 will be necessary to encode them using numeric character references
 when serializing the XML output. If on the other hand the user does
-<em>not</em> expect to see the original characters in the output, then
+</span><em><span class="deltaxml-old">not</span></em><span class="deltaxml-old"> expect to see the original characters in the output, then
 carefully preserving them using numeric character references is likely
-to be unhelpful. See [<a href="#serialization" shape="rect">Serialization</a>] for
-detailed discussions.</add></p><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
+to be unhelpful. See [</span><a href="#serialization" shape="rect"><span class="deltaxml-old">Serialization</span></a><span class="deltaxml-old">] for
+detailed discussions.</span></add></p><p><span class="deltaxml-new">Implementers should pay particular attention to serializing whitespace and
+other control characters. Consider, for example, the case where the
+characters </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> or </span><code><span class="deltaxml-new">#d</span></code><span class="deltaxml-new"> appear in a value
+serialized as an attribute. When that serialized XML is parsed, the
+XML parser will replace </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> and </span><code><span class="deltaxml-new">#d</span></code><span class="deltaxml-new"> characters
+with spaces when it performs whitespace normalization on the attribute
+value. Similarly, the sequence </span><code><span class="deltaxml-new">#d#a</span></code><span class="deltaxml-new"> will be translated to
+a single </span><code><span class="deltaxml-new">#a</span></code><span class="deltaxml-new"> by standard XML parsing. If the user of the
+grammar expects to see the original characters in the XML output, it
+will be necessary to encode them using numeric character references
+when serializing the XML output. If on the other hand the user does
+</span><em><span class="deltaxml-new">not</span></em><span class="deltaxml-new"> expect to see the original characters in the output, then
+carefully preserving them using numeric character references is likely
+to be unhelpful. See [</span><a href="#serialization" shape="rect"><span class="deltaxml-new">Serialization</span></a><span class="deltaxml-new">] for
+detailed discussions.</span></p><h2 id="complete">Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span>         <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, <span class="nt">prolog</span><span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
            <span class="mark">-</span><span class="nt">s</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">*</span>. <span class="com"><span class="comdel">{</span>Optional spacing<span class="comdel">}</span></span>
           <span class="mark">-</span><span class="nt">RS</span><span class="col">:</span> (<span class="nt">whitespace</span><span class="alt">;</span> <span class="nt">comment</span>)<span class="rep">+</span>. <span class="com"><span class="comdel">{</span>Required spacing<span class="comdel">}</span></span>
@@ -689,9 +716,15 @@ Electronic Notes in Theoretical Computer Science, Volume 253, Issue 7, 17
 September 2010, pages 177-189. <a href="doi:10.1016/j.entcs.2010.08.041" shape="rect">doi:10.1016/j.entcs.2010.08.041</a></p><p id="glr">[GLR] Masaru Tomita. <em>Generalized LR Parsing</em>. Springer
 Science &amp; Business Media. ISBN 978-1-4615-4034-2. <a href="doi:10.1007/978-1-4615-4034-2" shape="rect">doi:10.1007/978-1-4615-4034-2</a></p><p id="grune">[Grune] Grune, D. and Jacobs, C. <em>Parsing techniques : a
 practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
-978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="serialization"><add>[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+978-0-387-20248-8. <a href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf" shape="rect">https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf</a></p><p id="serialization"><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="delete_version"><add>[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
 <em>XSLT and XQuery Serialization 3.1</em>. W3C, 2017,
-<a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></add></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
+<a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></add></span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="display: none;" class="add_version">[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+<em>XSLT and XQuery Serialization 3.1</em>. W3C, 2017,
+<a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></span><span xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" class="modify_version"><add><span class="deltaxml-old">[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+</span><em><span class="deltaxml-old">XSLT and XQuery Serialization 3.1</span></em><span class="deltaxml-old">. W3C, 2017,
+</span><a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect"><span class="deltaxml-old">https://www.w3.org/TR/xslt-xquery-serialization-31/</span></a></add><span class="deltaxml-new">[XML Serialization] Andrew Coleman and C. M. Sperberg-McQueen (eds.)
+</span><em><span class="deltaxml-new">XSLT and XQuery Serialization 3.1</span></em><span class="deltaxml-new">. W3C, 2017,
+</span><a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect"><span class="deltaxml-new">https://www.w3.org/TR/xslt-xquery-serialization-31/</span></a></span></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
 structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 1968, <a href="doi:10.1145/362991.363001" shape="rect">doi:10.1145/362991.363001</a></p><h2 id="acknowledgments">Acknowledgements</h2><p>This specification was produced by members of the W3C ixml community group:
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
