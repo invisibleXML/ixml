@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css?family=B612+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif&display=swap");
+
+:root {
+    --symbol-fonts: "Arial Unicode", "Apple Symbols", "Symbol", "Symbola_hint";
+    --body-family: "Noto Serif", serif, var(--symbol-fonts);
+    --title-family: "Noto Sans", sans-serif, var(--symbol-fonts);
+    --mono-family: "B612 Mono", monospace, var(--symbol-fonts);
+    --text-color: rgb(0,0,0);
+    --comment-color: rgb(86,180,233);
+    --value-color: rgb(0,114,178);
+    --name-color: rgb(0,158,115);
+    --mark-color: rgb(213,94,0);
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 14pt;
+    font-family: var(--body-family);
+    line-height: 150%;
+}
+
+body {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50em;
+}
+
+div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.toc, .box {
+    border: thin solid red;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-family);
+}
+
+h1, h2 {
+    clear: both;
+}
+
+pre {
+    margin-left: 2em;
+    padding: 0.5em 0 0.5em 1em;
+    border: 3px solid #ddf;
+    border-radius: 0.5em;
+    overflow: scroll;
+}
+
+span.todo {
+    background: yellow
+}
+
+span.conform {
+    font-weight: bold
+}
+
+a, a:visited, a:link {
+    color: blue;
+}
+
+a.button {
+    color: black;
+}
+
+img {
+    float: right;
+    width: 25%; margin-left: 1em;
+    border: thin solid black;
+}
+
+code {
+     color: #A00;
+     font-family: var(--mono-family);
+}
+
+.docid {
+    padding-top: 1in;
+    padding-bottom: 0.5in;
+    color: #7f7f7f;
+    font-size: 75%;
+    font-family: var(--title-family);
+}
+
+.docid .bh {
+    float: right;
+}
+
+/* ============================================================ */
+
+.open, .close, .space {
+    display: inline-block;
+    width: 1rem;
+    display: none;
+}
+
+.open, .close {
+    cursor: pointer;
+}
+
+.open, .close,
+.com {
+    color: var(--comment-color);
+}
+
+.text {
+    color: var(--mark-color);
+}
+
+.avalue, 
+.mark, .rep, .reps {
+    color: var(--mark-color);
+}
+
+.aname, .eq, .q,
+.str, .hex {
+    color: var(--name-color);
+}
+
+.stag, .etag, .gi,
+.nt {
+    color: var(--value-color);
+}
+
+add {
+    background-color: #ccffcc;
+}
+
+del {
+    background-color: #ffcccc;
+    text-decoration: line-through;
+}
