@@ -6,7 +6,8 @@ have been reformulated to use ixml idioms.  The definition of ABNF has
 no analogue to ixml marks for guiding XML serialization; the marks
 used here have been supplied by the transcriber.
 
-Transcribed into ixml by C. M. Sperberg-McQueen, February 2022. }
+Transcribed into ixml by C. M. Sperberg-McQueen, February 2022.
+Updated by Norm Tovey-Walsh to incorporate errata, July 2023. }
 
 rulelist      = (rule | (c-wsp*, c-nl))+.
 
@@ -20,7 +21,7 @@ defined-as    = c-wsp*, ("=" | "=/"), c-wsp*.
                      {  basic rules definition and 
                         incremental alternatives }
 
-elements      = alternation, c-wsp*.
+elements      = alternation, WSP*.
 
 c-wsp         = WSP | (c-nl, WSP).
 
