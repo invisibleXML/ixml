@@ -72,7 +72,8 @@ BIT           = "0"; "1".
 
 CR            = #0D. { carriage return }
 
-CRLF          = CR, LF. { Internet standard newline }
+CRLF          = CR, LF { Internet standard newline }
+              | LF .   { Extension: support single LF convention for newlines }
 
 DIGIT         = ["0"-"9"]. { #30 - #39 }
 
