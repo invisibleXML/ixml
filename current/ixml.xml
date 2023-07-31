@@ -1,5 +1,5 @@
 <ixml>
-   <comment>version 2023-07-25</comment>
+   <comment>version 2023-07-31</comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
