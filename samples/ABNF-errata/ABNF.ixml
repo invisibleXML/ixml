@@ -9,7 +9,7 @@ used here have been supplied by the transcriber.
 Transcribed into ixml by C. M. Sperberg-McQueen, February 2022.
 Updated by Norm Tovey-Walsh to incorporate errata, July 2023. }
 
-rulelist      = (rule | (c-wsp*, c-nl))+.
+rulelist      = (rule | (WSP*, c-nl))+.
 
 rule          = rulename, defined-as, elements, c-nl.
                      { continues if next line starts 
