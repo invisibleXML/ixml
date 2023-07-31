@@ -28,7 +28,7 @@ c-nl          = comment | CRLF.  { comment or newline }
 
 comment       = ";", (WSP | VCHAR)*, CRLF.
 
-alternation   = concatenation ** (c-wsp*, "/", c-wsp).
+alternation   = concatenation ** (c-wsp*, "/", c-wsp*).
 
 concatenation = repetition ** (c-wsp+).
 
