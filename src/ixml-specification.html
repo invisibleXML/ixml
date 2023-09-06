@@ -438,9 +438,8 @@ character:</p>
 enclosed with single or double quotes. A string matches only the exact same
 string in the input. Examples: <code>"yes" 'yes'</code>.</p>
 
-<p id="ref-s11">A string cannot contain any of
-the <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 or C1 control
-characters</a>, including a line-break (<a class="error"
+<p id="ref-s11">A string cannot contain any characters from the control code character
+class (<code>Cc</code>), including a line-break (<a class="error"
 href="#err-s11">error S11</a>). The enclosing quote is represented in a string
 by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
 <code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
@@ -450,9 +449,9 @@ by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
   @tmark: ["^-"].
  @string: -'"', dchar+, -'"';
           -"'", schar+, -"'".
-   dchar: ~['"'; #0-#1f; #7f-#9f];
+   dchar: ~['"'; Cc];
           '"', -'"'. {all characters except controls; quotes must be doubled}
-   schar: ~["'"; #0-#1f; #7f-#9f];
+   schar: ~["'"; Cc];
           "'", -"'". {all characters except controls; quotes must be doubled}</pre>
 
 <p id="ref-s06">An encoded character is an optionally marked hexadecimal
