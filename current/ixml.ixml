@@ -1,4 +1,4 @@
-{version 2023-09-04}
+{version 2023-09-06}
          ixml: s, prolog?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
@@ -44,9 +44,9 @@
        @tmark: ["^-"].
       @string: -'"', dchar+, -'"';
                -"'", schar+, -"'".
-        dchar: ~['"'; #0-#1f; #7f-#9f];
+        dchar: ~['"'; Cc];
                '"', -'"'. {all characters except controls; quotes must be doubled}
-        schar: ~["'"; #0-#1f; #7f-#9f];
+        schar: ~["'"; Cc];
                "'", -"'". {all characters except controls; quotes must be doubled}
      -encoded: (tmark, s)?, -"#", hex, s.
          @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.

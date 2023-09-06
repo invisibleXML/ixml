@@ -1,5 +1,5 @@
 <ixml>
-   <comment>version 2023-09-04</comment>
+   <comment>version 2023-09-06</comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
@@ -350,8 +350,7 @@
       <alt>
          <exclusion>
             <member string="&quot;"/>
-            <member from="#0" to="#1f"/>
-            <member from="#7f" to="#9f"/>
+            <member code="Cc"/>
          </exclusion>
       </alt>
       <alt>
@@ -364,8 +363,7 @@
       <alt>
          <exclusion>
             <member string="'"/>
-            <member from="#0" to="#1f"/>
-            <member from="#7f" to="#9f"/>
+            <member code="Cc"/>
          </exclusion>
       </alt>
       <alt>
