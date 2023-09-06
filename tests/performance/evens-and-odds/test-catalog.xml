@@ -25,7 +25,7 @@
       <created on="2022-07-10" by="cmsmcq"/>
       <test-string-ref href="input/P00000e.txt"/>
       <result>
-	<assert-xml-ref href="trees/P00002e.xml"/>
+	<assert-xml-ref href="trees/P00000e.xml"/>
       </result>
     </test-case>
     <test-case name="N-0">
@@ -39,7 +39,7 @@
       <created on="2022-07-10" by="cmsmcq"/>
       <test-string-ref href="input/P00001o.txt"/>
       <result>
-	<assert-xml-ref href="trees/P00003o.xml"/>
+	<assert-xml-ref href="trees/P00001o.xml"/>
       </result>
     </test-case>
     <test-case name="N-1">
