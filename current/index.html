@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="XHTML+RDFa 1.0"><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /></head><body><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2023-09-06<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="XHTML+RDFa 1.0"><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /></head><body><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2023-10-04<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html">is available</a>. Change markup shows
     the differences between <a href="index.html">this version</a> of the
@@ -159,9 +159,9 @@ which it found a valid interpretation, otherwise it <span class="conform">must</
 element of the serialization <span class="conform">must</span> include an
 attribute named <code>ixml:state</code>, with the word
 '<code>version-mismatch</code>' in its value. The ixml namespace URI is
-"<code>http://invisiblexml.org/NS</code>".</p><h3 id="rules">Rules</h3><p>A rule consists of an optional mark, a name, and one or more alternatives.
-The grammar here uses colons to define rules; an equals sign is also
-allowed.</p><pre class="frag ixml"><span><span class="nt">rule</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.</span></pre><p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
+"<code>http://invisiblexml.org/NS</code>".</p><h3 id="rules">Rules</h3><p><add>A rule consists of a naming, and one or more alternatives.</add> The
+grammar here uses colons to define rules; an equals sign is also allowed.</p><pre class="frag ixml"><span><span class="nt">rule</span><span class="col">:</span> <span class="nt">naming</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.</span></pre><p><add>A naming consists of an optional mark, a name, and an optional
+alias:</add></p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.</span></pre><p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
 indicates whether the item so marked will be serialized as an element with its
 children (<code>^</code>) which is the default, as an attribute
 (<code>@</code>), or deleted, so that only its children are serialized
@@ -173,7 +173,8 @@ with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialized names match the requirements for an XML name [<a href="#xml" shape="rect">XML</a>].</p><pre class="frag ixml"><span>        <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="nt">namestart</span>, <span class="nt">namefollower</span><span class="rep">*</span>.
    <span class="mark">-</span><span class="nt">namestart</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>_<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">L</span><span class="setdel">]</span></span>.
 <span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.
-</span></pre><p>Alternatives are separated by a semicolon or a vertical bar. The grammar
+</span></pre><p><add>An alias is just a substitute name for the rule to be used at
+serialization:</add></p><pre class="frag ixml"><span><span class="mark">@</span><span class="nt">alias</span><span class="col">:</span> <span class="nt">name</span>.</span></pre><p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p><pre class="frag ixml"><span><span class="nt">alts</span><span class="col">:</span> <span class="nt">alt</span><span class="reps">++</span>(<span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>;|<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>).</span></pre><p>An alternative is zero or more terms, separated by commas:</p><pre class="frag ixml"><span><span class="nt">alt</span><span class="col">:</span> <span class="nt">term</span><span class="reps">**</span>(<span class="mark">-</span><span class="str"><span class="strdel">"</span>,<span class="strdel">"</span></span>, <span class="nt">s</span>).</span></pre><p>A term is a singleton factor, an optional factor, or a repeated factor,
 repeated zero or more times, or one or more times.</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">term</span><span class="col">:</span> <span class="nt">factor</span><span class="alt">;</span>
        <span class="nt">option</span><span class="alt">;</span>
@@ -193,8 +194,10 @@ For instance <code>"a"?</code> would match <code>a</code> or the empty
 string.</p><pre class="frag ixml"><span><span class="nt">option</span><span class="col">:</span> <span class="nt">factor</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>?<span class="strdel">"</span></span>, <span class="nt">s</span>.</span></pre><p>A separator can be any factor, for example <code>abc**def</code> or
 <code>abc**(","; ".")</code>. For instance <code>"a"++("#"; "!")</code> would
 match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
-<code>a!a#a</code>, <code>a#a#a</code> etc.</p><pre class="frag ixml"><span><span class="nt">sep</span><span class="col">:</span> <span class="nt">factor</span>.</span></pre><h3 id="nonterminals">Nonterminals</h3><p>A nonterminal is an optionally marked name:</p><pre class="frag ixml"><span><span class="nt">nonterminal</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>.
-</span></pre><p>This name refers to the rule that defines this name, which <span id="ref-s02" class="conform">must</span> exist (<a class="error" href="#err-s02" shape="rect">error S02</a>), and there <span id="ref-s03" class="conform">must</span> only be one such rule (<a class="error" href="#err-s03" shape="rect">error S03</a>).</p><h3 id="terminals">Terminals</h3><p>A terminal is a literal or a set of characters. It matches characters in the
+<code>a!a#a</code>, <code>a#a#a</code> etc.</p><pre class="frag ixml"><span><span class="nt">sep</span><span class="col">:</span> <span class="nt">factor</span>.</span></pre><h3 id="nonterminals">Nonterminals</h3><p><add>A nonterminal is a naming:</add></p><pre class="frag ixml"><span><span class="nt">nonterminal</span><span class="col">:</span> <span class="nt">naming</span>.</span></pre><p><add>The name of the naming (but not the optional alias) refers to the rule
+that defines this name,</add> which <span id="ref-s02" class="conform">must</span> exist (<a class="error" href="#err-s02" shape="rect">error
+S02</a>), and there <span id="ref-s03" class="conform">must</span> only be one
+such rule (<a class="error" href="#err-s03" shape="rect">error S03</a>).</p><h3 id="terminals">Terminals</h3><p>A terminal is a literal or a set of characters. It matches characters in the
 input. A terminal marked as deleted (-) serializes to the empty string.</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">terminal</span><span class="col">:</span> <span class="nt">literal</span><span class="alt">;</span> 
            <span class="nt">charset</span>.</span></pre><p>A literal is either a quoted string, or a hexadecimally encoded
 character:</p><pre class="frag ixml"><span>  <span class="nt">literal</span><span class="col">:</span> <span class="nt">quoted</span><span class="alt">;</span>
@@ -272,21 +275,30 @@ produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
 includes parts of the parse that succeeded.</p><h2 id="serialisation">Serialization</h2><p>If the parse succeeds, the resulting parse-tree is serialized as XML by
-serializing the root node of the parse tree.</p><p>A parse node is a nonterminal, which has a name and children, a terminal,
-which has a string, or an insertion, which has a string.</p><p>A nonterminal can be unmarked, or marked as included (^), as an attribute
-(@), or as deleted (-). The mark comes from the use of the nonterminal in a
-rule if present, otherwise, from the definition of the rule for that
-nonterminal.</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as an XML
-    element whose name is the name of the node, whose attributes are the
-    serializations of all exposed attribute descendants, if any, and whose
-    content is the serialization of all its non-attribute children in order, if
-    any. An attribute node is exposed if it is an attribute child, or an
-    exposed attribute node of a deleted child (note this is recursive).</li><li><strong>Deleted</strong>: all its non-attribute children, if any, are
-    serialized in order.</li><li><strong>Attribute</strong>: the node is serialized as an XML attribute
-    whose name is the name of the node, and whose value is the serialization of
-    all non-deleted terminal descendants of the node (regardless of the marking
-    of intermediate nonterminals), if any, in order.</li></ul><p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as its
-    string.</li><li><strong>Deleted</strong>: the node is not serialized.</li></ul><p>An insertion is serialized as its string.</p><p>An application has some latitude when serializing XML. Some aspects
+serializing the root node of the parse tree.</p><p>A parse node is one of:</p><ul><li><add>a nonterminal, which has a name, an optional alias, and
+    children,</add></li><li><add>a terminal, which has a string,</add></li><li><add>an insertion, which has a string.</add></li></ul><p>A <strong>nonterminal</strong> can be unmarked, or marked as included (^),
+as an attribute (@), or as deleted (-). The mark comes from the use of the
+nonterminal in a rule if present, and otherwise from the definition of the rule
+for that nonterminal if it has a mark.</p><ul><li><add><strong>Unmarked or included</strong>: the node is serialized as an
+    XML element whose: </add> 
+    <ul><li><add>name is the alias of the node if present, or the alias of the
+        referred-to rule, if it has one, and otherwise the name of the node,
+        </add></li><li><add>attributes are the serializations of all exposed attribute
+        descendants, if any. An attribute node is exposed if it is an attribute
+        child, or an exposed attribute node of a deleted child (note this is
+        recursive).</add></li><li><add>content is the serialization of all its non-attribute children
+        in order, if any.</add></li></ul>
+  </li><li><add><strong>Deleted</strong>: all its non-attribute children, if any,
+    are serialized in order.</add></li><li><add><strong>Attribute</strong>: the node is serialized as an XML
+    attribute whose: </add> 
+    <ul><li><add>name is the alias of the node if present, or the alias of the
+        referred-to rule, if it has one, and otherwise the name of the node,
+        </add></li><li><add>value is the serialization of all non-deleted terminal
+        descendants of the node (regardless of the marking of intermediate
+        nonterminals), if any, in order.</add></li></ul>
+  </li></ul><p><add>A <strong>terminal</strong> can be unmarked, or marked as included (^),
+or as deleted (-).</add></p><ul><li><add><strong>Unmarked or included</strong>: the node is serialized as its
+    string.</add></li><li><add><strong>Deleted</strong>: the node is not serialized.</add></li></ul><p>An <strong>insertion</strong> is serialized as its string.</p><p>An application has some latitude when serializing XML. Some aspects
 of the serialization are explicitly insignificant, such as the order
 of attributes on an element, whether single or double quotes are used
 to delimit attributes, or whether numeric character references use
@@ -318,26 +330,28 @@ all of its productions <span id="ref-d06" class="conform">must</span> produce
 exactly one non-hidden non-attribute nonterminal and no non-hidden terminals
 before or after that nonterminal (<a class="error" href="#err-d06" shape="rect">error
 D06</a>).</p><p>A (necessarily contrived) example grammar that illustrates serialization
-rules is:</p><pre class="ixml"><span>    <span class="nt">expr</span><span class="col">:</span> <span class="nt">open</span>, <span class="mark">-</span><span class="nt">arith</span>, <span class="mark">@</span><span class="nt">close</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>;<span class="strdel">"</span></span>.
-   <span class="mark">@</span><span class="nt">open</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>(<span class="strdel">"</span></span>.
-   <span class="nt">close</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>)<span class="strdel">"</span></span>.
-   <span class="nt">arith</span><span class="col">:</span> <span class="nt">left</span>, <span class="nt">op</span>, <span class="mark">^</span><span class="nt">right</span>.
-    <span class="nt">left</span><span class="col">:</span> <span class="nt">operand</span>.
-  <span class="mark">-</span><span class="nt">right</span><span class="col">:</span> <span class="nt">operand</span>.
-<span class="mark">-</span><span class="nt">operand</span><span class="col">:</span> <span class="nt">name</span><span class="alt">;</span> <span class="mark">-</span><span class="nt">number</span>.
-   <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
- <span class="mark">@</span><span class="nt">number</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>0<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>9<span class="strdel">"</span></span><span class="setdel">]</span></span>.
-     <span class="mark">-</span><span class="nt">op</span><span class="col">:</span> <span class="nt">sign</span>.
-   <span class="mark">@</span><span class="nt">sign</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>-<span class="strdel">"</span></span>.</span></pre><p>Applied to the string <code>(a+1);</code> it yields the serialization</p><pre class="xml"><span><span class="text"><span class="stag">&lt;</span><span class="gi">expr</span> <span class="attr"><span class="aname">open</span><span class="eq">=</span><span class="q">'</span><span class="avalue">(</span><span class="q">'</span></span> <span class="attr"><span class="aname">sign</span><span class="eq">=</span><span class="q">'</span><span class="avalue">+</span><span class="q">'</span></span> <span class="attr"><span class="aname">close</span><span class="eq">=</span><span class="q">'</span><span class="avalue">)</span><span class="q">'</span></span><span class="stag">&gt;</span>
-   <span class="empty"><span class="stag">&lt;</span><span class="gi">left</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">a</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
-   <span class="text"><span class="stag">&lt;</span><span class="gi">right</span><span class="stag">&gt;</span>1<span class="etag">&lt;/</span><span class="gi">right</span><span class="etag">&gt;</span></span>
+rules is:</p><pre class="ixml"><span>          <span class="nt">expr</span><span class="col">:</span> <span class="nt">open</span>, <span class="mark">-</span><span class="nt">arith</span>, <span class="mark">@</span><span class="nt">close</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>;<span class="strdel">"</span></span>.
+         <span class="mark">@</span><span class="nt">open</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>(<span class="strdel">"</span></span>.
+         <span class="nt">close</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>)<span class="strdel">"</span></span>.
+         <span class="nt">arith</span><span class="col">:</span> <span class="nt">left</span>, <span class="nt">op</span>, <span class="mark">^</span><span class="nt">right</span>&gt;<span class="nt">second</span>.
+    <span class="nt">left</span>&gt;<span class="nt">first</span><span class="col">:</span> <span class="nt">operand</span>.
+        <span class="mark">-</span><span class="nt">right</span><span class="col">:</span> <span class="nt">operand</span>.
+      <span class="mark">-</span><span class="nt">operand</span><span class="col">:</span> <span class="nt">name</span><span class="alt">;</span> <span class="mark">-</span><span class="nt">number</span>.
+         <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+       <span class="mark">@</span><span class="nt">number</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>0<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>9<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+           <span class="mark">-</span><span class="nt">op</span><span class="col">:</span> <span class="nt">sign</span>.
+<span class="mark">@</span><span class="nt">sign</span>&gt;<span class="nt">operator</span><span class="col">:</span> <span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>-<span class="strdel">"</span></span>.</span></pre><p>Applied to the string <code>(a+1);</code> it yields the serialization</p><pre class="xml"><span><span class="text"><span class="stag">&lt;</span><span class="gi">expr</span> <span class="attr"><span class="aname">open</span><span class="eq">=</span><span class="q">'</span><span class="avalue">(</span><span class="q">'</span></span> <span class="attr"><span class="aname">operator</span><span class="eq">=</span><span class="q">'</span><span class="avalue">+</span><span class="q">'</span></span> <span class="attr"><span class="aname">close</span><span class="eq">=</span><span class="q">'</span><span class="avalue">)</span><span class="q">'</span></span><span class="stag">&gt;</span>
+   <span class="empty"><span class="stag">&lt;</span><span class="gi">first</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">a</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">second</span><span class="stag">&gt;</span>1<span class="etag">&lt;/</span><span class="gi">second</span><span class="etag">&gt;</span></span>
 <span class="etag">&lt;/</span><span class="gi">expr</span><span class="etag">&gt;</span></span></span></pre><p>Points to note: how the semicolon is suppressed from the serialization; the
 two ways <code>open</code> and <code>close</code> have been defined as
 attributes; similarly the two ways <code>left</code> and <code>right</code>
-have been defined as elements; how <code>number</code> appears as content and
-not as an attribute; and how <code>sign</code> being an exposed attribute
-appears on its nearest non-hidden ancestor. Also of note is how the content of
-some attributes can appear earlier in the serialization than in the input.</p><p>Insertions allow characters to be inserted into the serialization that were
+have been defined as elements, <add>and the two ways they have been
+renamed</add>; how <code>number</code> appears as content and not as an
+attribute; and how <code>sign</code> being an exposed attribute appears on its
+nearest non-hidden ancestor, <add>and has been renamed</add>. Also of note is
+how the content of some attributes can appear earlier in the serialization than
+in the input.</p><p>Insertions allow characters to be inserted into the serialization that were
 not present in the input. For instance, the grammar</p><pre class="ixml"><span>  <span class="nt">data</span><span class="col">:</span> <span class="nt">value</span><span class="reps">++</span><span class="mark">-</span><span class="str"><span class="strdel">"</span>,<span class="strdel">"</span></span>, <span class="mark">@</span><span class="nt">source</span>.
 <span class="nt">source</span><span class="col">:</span> <span class="rep">+</span><span class="str"><span class="strdel">"</span>ixml<span class="strdel">"</span></span>.
  <span class="nt">value</span><span class="col">:</span> <span class="nt">pos</span><span class="alt">;</span> <span class="nt">neg</span>.
@@ -437,8 +451,13 @@ detailed discussions.</p><h2 id="complete">Complete Grammar</h2><p>The <a href="
        <span class="nt">prolog</span><span class="col">:</span> <span class="nt">version</span>, <span class="nt">s</span>.
       <span class="nt">version</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>ixml<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>version<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="nt">string</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>.<span class="strdel">'</span></span> .
 
-         <span class="nt">rule</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.
-        <span class="mark">@</span><span class="nt">mark</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>@^-<span class="strdel">"</span></span><span class="setdel">]</span></span>.
+         <span class="nt">rule</span><span class="col">:</span> <span class="nt">naming</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.
+      <span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.
+        <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="nt">namestart</span>, <span class="nt">namefollower</span><span class="rep">*</span>.
+   <span class="mark">-</span><span class="nt">namestart</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>_<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">L</span><span class="setdel">]</span></span>.
+<span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.
+
+       <span class="mark">@</span><span class="nt">alias</span><span class="col">:</span> <span class="nt">name</span>.
          <span class="nt">alts</span><span class="col">:</span> <span class="nt">alt</span><span class="reps">++</span>(<span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>;|<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>).
           <span class="nt">alt</span><span class="col">:</span> <span class="nt">term</span><span class="reps">**</span>(<span class="mark">-</span><span class="str"><span class="strdel">"</span>,<span class="strdel">"</span></span>, <span class="nt">s</span>).
         <span class="mark">-</span><span class="nt">term</span><span class="col">:</span> <span class="nt">factor</span><span class="alt">;</span>
@@ -452,13 +471,9 @@ detailed discussions.</p><h2 id="complete">Complete Grammar</h2><p>The <a href="
       <span class="nt">repeat0</span><span class="col">:</span> <span class="nt">factor</span>, (<span class="mark">-</span><span class="str"><span class="strdel">"</span>*<span class="strdel">"</span></span>, <span class="nt">s</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>**<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">sep</span>).
       <span class="nt">repeat1</span><span class="col">:</span> <span class="nt">factor</span>, (<span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>++<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">sep</span>).
        <span class="nt">option</span><span class="col">:</span> <span class="nt">factor</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>?<span class="strdel">"</span></span>, <span class="nt">s</span>.
+        <span class="mark">@</span><span class="nt">mark</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>@^-<span class="strdel">"</span></span><span class="setdel">]</span></span>.
           <span class="nt">sep</span><span class="col">:</span> <span class="nt">factor</span>.
-  <span class="nt">nonterminal</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>.
-
-        <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="nt">namestart</span>, <span class="nt">namefollower</span><span class="rep">*</span>.
-   <span class="mark">-</span><span class="nt">namestart</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>_<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">L</span><span class="setdel">]</span></span>.
-<span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.
-
+  <span class="nt">nonterminal</span><span class="col">:</span> <span class="nt">naming</span>.
     <span class="mark">-</span><span class="nt">terminal</span><span class="col">:</span> <span class="nt">literal</span><span class="alt">;</span> 
                <span class="nt">charset</span>.
       <span class="nt">literal</span><span class="col">:</span> <span class="nt">quoted</span><span class="alt">;</span>
@@ -619,16 +634,7 @@ serialization</a> is available:</p><pre><span><span class="text"><span class="st
    <span class="etag">&lt;/</span><span class="gi">rule</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">rule</span><span class="q">'</span></span><span class="stag">&gt;</span>
       <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
-         <span class="text"><span class="stag">&lt;</span><span class="gi">option</span><span class="stag">&gt;</span>
-            <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
-               <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
-                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">mark</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
-                  <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
-               <span class="etag">&lt;/</span><span class="gi">alt</span><span class="etag">&gt;</span></span>
-            <span class="etag">&lt;/</span><span class="gi">alts</span><span class="etag">&gt;</span></span>
-         <span class="etag">&lt;/</span><span class="gi">option</span><span class="etag">&gt;</span></span>
-         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">name</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
-         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+         <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">naming</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
          <span class="text"><span class="stag">&lt;</span><span class="gi">inclusion</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span><span class="stag">&gt;</span>
             <span class="empty"><span class="stag">&lt;</span><span class="gi">member</span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">=:</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
          <span class="etag">&lt;/</span><span class="gi">inclusion</span><span class="etag">&gt;</span></span>
@@ -677,8 +683,9 @@ practical guide (2nd ed.)</em>. New York: Springer, 2008. ISBN
 <em>XSLT and XQuery Serialization 3.1</em>. W3C, 2017,
 <a href="https://www.w3.org/TR/xslt-xquery-serialization-31/" shape="rect">https://www.w3.org/TR/xslt-xquery-serialization-31/</a></p><p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
 structure grammars</em>. Communications of the ACM, 11(4):240–247, April
-1968, <a href="doi:10.1145/362991.363001" shape="rect">doi:10.1145/362991.363001</a></p><h2 id="acknowledgments">Acknowledgements</h2><p>This specification was produced by members of the W3C ixml community group:
+1968, <a href="doi:10.1145/362991.363001" shape="rect">doi:10.1145/362991.363001</a></p><p id="control"><add>[Control] Wikipedia, <em>C0 and C1 control codes</em>,
+<a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" shape="rect">https://en.wikipedia.org/wiki/C0_and_C1_control_codes</a>.</add></p><h2 id="acknowledgments">Acknowledgements</h2><p>This specification was produced by members of the W3C ixml community group:
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #31 for invisibleXML/ixml at <time datetime="2023-09-06T17:14:18GMT+00:00" title="2023-09-06T17:14:18GMT+00:00">17:14 on 06 September 2023</time></span> <span class="bh"><span title="8c36fc32fa8956809b2c071cb70dfea91f363159">8c36fc32</span></span></p></footer></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #32 for invisibleXML/ixml at <time datetime="2023-10-04T16:33:33GMT+00:00" title="2023-10-04T16:33:33GMT+00:00">16:33 on 04 October 2023</time></span> <span class="bh"><span title="49c47ed8a2244f6d9f0eb0e1bd1106c52a7ba4aa">49c47ed8</span></span></p></footer></body></html>

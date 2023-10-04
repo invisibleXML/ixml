@@ -54,11 +54,11 @@ pre {
     overflow: scroll;
 }
 
-span.todo {
+span.todo, ins {
     background: yellow
 }
 
-span.conform {
+.conform {
     font-weight: bold
 }
 
@@ -131,6 +131,10 @@ code {
 
 add {
     background-color: #ccffcc;
+}
+
+chg {
+    background-color: #ffffcc;
 }
 
 del {

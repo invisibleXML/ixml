@@ -1,5 +1,5 @@
 <ixml>
-   <comment>version 2023-09-06</comment>
+   <comment>version 2023-10-04</comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
@@ -118,6 +118,17 @@
    </rule>
    <rule name="rule">
       <alt>
+         <nonterminal name="naming"/>
+         <inclusion tmark="-">
+            <member string="=:"/>
+         </inclusion>
+         <nonterminal name="s"/>
+         <nonterminal mark="-" name="alts"/>
+         <literal tmark="-" string="."/>
+      </alt>
+   </rule>
+   <rule mark="-" name="naming">
+      <alt>
          <option>
             <alts>
                <alt>
@@ -128,19 +139,49 @@
          </option>
          <nonterminal name="name"/>
          <nonterminal name="s"/>
-         <inclusion tmark="-">
-            <member string="=:"/>
-         </inclusion>
-         <nonterminal name="s"/>
-         <nonterminal mark="-" name="alts"/>
-         <literal tmark="-" string="."/>
+         <option>
+            <alts>
+               <alt>
+                  <literal string=">"/>
+                  <nonterminal name="s"/>
+                  <nonterminal name="alias"/>
+                  <nonterminal name="s"/>
+               </alt>
+            </alts>
+         </option>
       </alt>
    </rule>
-   <rule mark="@" name="mark">
+   <rule mark="@" name="name">
+      <alt>
+         <nonterminal name="namestart"/>
+         <repeat0>
+            <nonterminal name="namefollower"/>
+         </repeat0>
+      </alt>
+   </rule>
+   <rule mark="-" name="namestart">
       <alt>
          <inclusion>
-            <member string="@^-"/>
+            <member string="_"/>
+            <member code="L"/>
          </inclusion>
+      </alt>
+   </rule>
+   <rule mark="-" name="namefollower">
+      <alt>
+         <nonterminal name="namestart"/>
+      </alt>
+      <alt>
+         <inclusion>
+            <member string="-.·‿⁀"/>
+            <member code="Nd"/>
+            <member code="Mn"/>
+         </inclusion>
+      </alt>
+   </rule>
+   <rule mark="@" name="alias">
+      <alt>
+         <nonterminal name="name"/>
       </alt>
    </rule>
    <rule name="alts">
@@ -246,6 +287,13 @@
          <nonterminal name="s"/>
       </alt>
    </rule>
+   <rule mark="@" name="mark">
+      <alt>
+         <inclusion>
+            <member string="@^-"/>
+         </inclusion>
+      </alt>
+   </rule>
    <rule name="sep">
       <alt>
          <nonterminal name="factor"/>
@@ -253,44 +301,7 @@
    </rule>
    <rule name="nonterminal">
       <alt>
-         <option>
-            <alts>
-               <alt>
-                  <nonterminal name="mark"/>
-                  <nonterminal name="s"/>
-               </alt>
-            </alts>
-         </option>
-         <nonterminal name="name"/>
-         <nonterminal name="s"/>
-      </alt>
-   </rule>
-   <rule mark="@" name="name">
-      <alt>
-         <nonterminal name="namestart"/>
-         <repeat0>
-            <nonterminal name="namefollower"/>
-         </repeat0>
-      </alt>
-   </rule>
-   <rule mark="-" name="namestart">
-      <alt>
-         <inclusion>
-            <member string="_"/>
-            <member code="L"/>
-         </inclusion>
-      </alt>
-   </rule>
-   <rule mark="-" name="namefollower">
-      <alt>
-         <nonterminal name="namestart"/>
-      </alt>
-      <alt>
-         <inclusion>
-            <member string="-.·‿⁀"/>
-            <member code="Nd"/>
-            <member code="Mn"/>
-         </inclusion>
+         <nonterminal name="naming"/>
       </alt>
    </rule>
    <rule mark="-" name="terminal">

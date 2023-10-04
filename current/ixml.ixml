@@ -1,4 +1,4 @@
-{version 2023-09-06}
+{version 2023-10-04}
          ixml: s, prolog?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
@@ -13,8 +13,13 @@
        prolog: version, s.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
-         rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".
-        @mark: ["@^-"].
+         rule: naming, -["=:"], s, -alts, -".".
+      -naming: (mark, s)?, name, s, (">", s, alias, s)?.
+        @name: namestart, namefollower*.
+   -namestart: ["_"; L].
+-namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
+
+       @alias: name.
          alts: alt++(-[";|"], s).
           alt: term**(-",", s).
         -term: factor;
@@ -28,13 +33,9 @@
       repeat0: factor, (-"*", s; -"**", s, sep).
       repeat1: factor, (-"+", s; -"++", s, sep).
        option: factor, -"?", s.
+        @mark: ["@^-"].
           sep: factor.
-  nonterminal: (mark, s)?, name, s.
-
-        @name: namestart, namefollower*.
-   -namestart: ["_"; L].
--namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
-
+  nonterminal: naming.
     -terminal: literal; 
                charset.
       literal: quoted;
