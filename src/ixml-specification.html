@@ -19,7 +19,7 @@
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2022-06-20<!--$--></p>
+<p>Version: <!--$date=-->2023-07-24<!--$--></p>
 
 <p>Please consult the <a href="errata.html">errata page</a> for
 additional changes to the specification after publication.</p>
@@ -342,10 +342,15 @@ attribute named <code>ixml:state</code>, with the word
 
 <h3 id="rules">Rules</h3>
 
-<p>A rule consists of an optional mark, a name, and one or more alternatives.
-The grammar here uses colons to define rules; an equals sign is also
-allowed.</p>
-<pre class="frag ixml">rule: (mark, s)?, name, s, -["=:"], s, -alts, -".".</pre>
+<p><add>A rule consists of a naming, and one or more alternatives.</add> The
+grammar here uses colons to define rules; an equals sign is also allowed.</p>
+
+<pre class="frag ixml">rule: naming, -["=:"], s, -alts, -".".</pre>
+
+<p><add>A naming consists of an optional mark, a name, and an optional
+alias:</add></p>
+
+<pre class="frag ixml"><add>-naming: (mark, s)?, name, s, ("&gt;", s, alias, s)?.</add></pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
 indicates whether the item so marked will be serialized as an element with its
@@ -365,6 +370,10 @@ href="#xml">XML</a>].</p>
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 </pre>
+
+<p><add>An alias is just a substitute name for the rule to be used at
+serialization:</add></p>
+<pre class="frag ixml"><add>@alias: name.</add></pre>
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
 here uses semicolons.</p>
@@ -412,15 +421,14 @@ match <code>a#a</code>, <code>a!a</code>, <code>a#a!a</code>,
 
 <h3 id="nonterminals">Nonterminals</h3>
 
-<p>A nonterminal is an optionally marked name:</p>
-<pre class="frag ixml">nonterminal: (mark, s)?, name, s.
-</pre>
+<p><add>A nonterminal is a naming:</add></p>
+<pre class="frag ixml"><add>nonterminal: naming.</add></pre>
 
-<p>This name refers to the rule that defines this name, which <span
-id="ref-s02" class="conform">must</span> exist (<a class="error"
-href="#err-s02">error S02</a>), and there <span id="ref-s03"
-class="conform">must</span> only be one such rule (<a class="error"
-href="#err-s03">error S03</a>).</p>
+<p><add>The name of the naming (but not the optional alias) refers to the rule
+that defines this name,</add> which <span id="ref-s02"
+class="conform">must</span> exist (<a class="error" href="#err-s02">error
+S02</a>), and there <span id="ref-s03" class="conform">must</span> only be one
+such rule (<a class="error" href="#err-s03">error S03</a>).</p>
 
 <h3 id="terminals">Terminals</h3>
 
@@ -564,36 +572,57 @@ includes parts of the parse that succeeded.</p>
 <p>If the parse succeeds, the resulting parse-tree is serialized as XML by
 serializing the root node of the parse tree.</p>
 
-<p>A parse node is a nonterminal, which has a name and children, a terminal,
-which has a string, or an insertion, which has a string.</p>
-
-<p>A nonterminal can be unmarked, or marked as included (^), as an attribute
-(@), or as deleted (-). The mark comes from the use of the nonterminal in a
-rule if present, otherwise, from the definition of the rule for that
-nonterminal.</p>
+<p>A parse node is one of:</p>
 <ul>
-  <li><strong>Unmarked or included</strong>: the node is serialized as an XML
-    element whose name is the name of the node, whose attributes are the
-    serializations of all exposed attribute descendants, if any, and whose
-    content is the serialization of all its non-attribute children in order, if
-    any. An attribute node is exposed if it is an attribute child, or an
-    exposed attribute node of a deleted child (note this is recursive).</li>
-  <li><strong>Deleted</strong>: all its non-attribute children, if any, are
-    serialized in order.</li>
-  <li><strong>Attribute</strong>: the node is serialized as an XML attribute
-    whose name is the name of the node, and whose value is the serialization of
-    all non-deleted terminal descendants of the node (regardless of the marking
-    of intermediate nonterminals), if any, in order.</li>
+  <li><add>a nonterminal, which has a name, an optional alias, and
+    children,</add></li>
+  <li><add>a terminal, which has a string,</add></li>
+  <li><add>an insertion, which has a string.</add></li>
 </ul>
 
-<p>A terminal can be unmarked, or marked as included (^), or as deleted (-).</p>
+<p>A <strong>nonterminal</strong> can be unmarked, or marked as included (^),
+as an attribute (@), or as deleted (-). The mark comes from the use of the
+nonterminal in a rule if present, and otherwise from the definition of the rule
+for that nonterminal if it has a mark.</p>
 <ul>
-  <li><strong>Unmarked or included</strong>: the node is serialized as its
-    string.</li>
-  <li><strong>Deleted</strong>: the node is not serialized.</li>
+  <li><add><strong>Unmarked or included</strong>: the node is serialized as an
+    XML element whose: </add> 
+    <ul>
+      <li><add>name is the alias of the node if present, or the alias of the
+        referred-to rule, if it has one, and otherwise the name of the node,
+        </add></li>
+      <li><add>attributes are the serializations of all exposed attribute
+        descendants, if any. An attribute node is exposed if it is an attribute
+        child, or an exposed attribute node of a deleted child (note this is
+        recursive).</add></li>
+      <li><add>content is the serialization of all its non-attribute children
+        in order, if any.</add></li>
+    </ul>
+  </li>
+  <li><add><strong>Deleted</strong>: all its non-attribute children, if any,
+    are serialized in order.</add></li>
+  <li><add><strong>Attribute</strong>: the node is serialized as an XML
+    attribute whose: </add> 
+    <ul>
+      <li><add>name is the alias of the node if present, or the alias of the
+        referred-to rule, if it has one, and otherwise the name of the node,
+        </add></li>
+      <li><add>value is the serialization of all non-deleted terminal
+        descendants of the node (regardless of the marking of intermediate
+        nonterminals), if any, in order.</add></li>
+    </ul>
+  </li>
 </ul>
 
-<p>An insertion is serialized as its string.</p>
+<p><add>A <strong>terminal</strong> can be unmarked, or marked as included (^),
+or as deleted (-).</add></p>
+<ul>
+  <li><add><strong>Unmarked or included</strong>: the node is serialized as its
+    string.</add></li>
+  <li><add><strong>Deleted</strong>: the node is not serialized.</add></li>
+</ul>
+
+<p>An <strong>insertion</strong> is serialized as its string.</p>
 
 <p>An application has some latitude when serializing XML. Some aspects
 of the serialization are explicitly insignificant, such as the order
@@ -638,31 +667,35 @@ D06</a>).</p>
 
 <p>A (necessarily contrived) example grammar that illustrates serialization
 rules is:</p>
-<pre class="ixml">    expr: open, -arith, @close, -";".
-   @open: "(".
-   close: ")".
-   arith: left, op, ^right.
-    left: operand.
-  -right: operand.
--operand: name; -number.
-   @name: ["a"-"z"].
- @number: ["0"-"9"].
-     -op: sign.
-   @sign: "+"; "-".</pre>
+
+<pre class="ixml">          expr: open, -arith, @close, -";".
+         @open: "(".
+         close: ")".
+         arith: left, op, ^right&gt;second.
+    left&gt;first: operand.
+        -right: operand.
+      -operand: name; -number.
+         @name: ["a"-"z"].
+       @number: ["0"-"9"].
+           -op: sign.
+@sign&gt;operator: "+"; "-".</pre>
 
 <p>Applied to the string <code>(a+1);</code> it yields the serialization</p>
-<pre class="xml">&lt;expr open='(' sign='+' close=')'&gt;
-   &lt;left name='a'/&gt;
-   &lt;right&gt;1&lt;/right&gt;
+
+<pre class="xml">&lt;expr open='(' <add>operator</add>='+' close=')'&gt;
+   &lt;<add>first</add> name='a'/&gt;
+   &lt;<add>second</add>&gt;1&lt;/second&gt;
 &lt;/expr&gt;</pre>
 
 <p>Points to note: how the semicolon is suppressed from the serialization; the
 two ways <code>open</code> and <code>close</code> have been defined as
 attributes; similarly the two ways <code>left</code> and <code>right</code>
-have been defined as elements; how <code>number</code> appears as content and
-not as an attribute; and how <code>sign</code> being an exposed attribute
-appears on its nearest non-hidden ancestor. Also of note is how the content of
-some attributes can appear earlier in the serialization than in the input.</p>
+have been defined as elements, <add>and the two ways they have been
+renamed</add>; how <code>number</code> appears as content and not as an
+attribute; and how <code>sign</code> being an exposed attribute appears on its
+nearest non-hidden ancestor, <add>and has been renamed</add>. Also of note is
+how the content of some attributes can appear earlier in the serialization than
+in the input.</p>
 
 <p>Insertions allow characters to be inserted into the serialization that were
 not present in the input. For instance, the grammar</p>
@@ -963,6 +996,10 @@ href="https://dickgrune.com/Books/PTAPG_2nd_Edition/CompleteList.pdf">https://di
 <p id="unger">[Unger] Unger, S. H. <em>A global parser for context-free phrase
 structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 1968, <a href="doi:10.1145/362991.363001">doi:10.1145/362991.363001</a></p>
+
+<p id="control"><add>[Control] Wikipedia, <em>C0 and C1 control codes</em>,
+<a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes"
+>https://en.wikipedia.org/wiki/C0_and_C1_control_codes</a>.</add></p>
 
 <h2 id="acknowledgments">Acknowledgements</h2>
 
