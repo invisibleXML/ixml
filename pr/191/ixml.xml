@@ -1,5 +1,5 @@
 <ixml>
-   <comment>version 2023-07-25</comment>
+   <comment>version 2023-10-04</comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
@@ -361,32 +361,28 @@
       <alt>
          <exclusion>
             <member string="&quot;"/>
-            <member from="#0" to="#1f"/>
-            <member from="#7f" to="#9f"/>
+            <member code="Cc"/>
          </exclusion>
       </alt>
-      <comment>All characters except control characters</comment>
       <alt>
          <literal string="&quot;"/>
          <literal tmark="-" string="&quot;"/>
       </alt>
    </rule>
-   <comment>Quotes must be doubled</comment>
+   <comment>all characters except controls; quotes must be doubled</comment>
    <rule name="schar">
       <alt>
          <exclusion>
             <member string="'"/>
-            <member from="#0" to="#1f"/>
-            <member from="#7f" to="#9f"/>
+            <member code="Cc"/>
          </exclusion>
       </alt>
-      <comment>All characters except control characters</comment>
       <alt>
          <literal string="'"/>
          <literal tmark="-" string="'"/>
       </alt>
    </rule>
-   <comment>Quotes must be doubled</comment>
+   <comment>all characters except controls; quotes must be doubled</comment>
    <rule mark="-" name="encoded">
       <alt>
          <option>
