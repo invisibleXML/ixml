@@ -62,7 +62,7 @@ defaultTasks 'publish'
 
 task publish(
   group: "publish",
-  dependsOn: ["formatSpec", "copyResources", "ixmlInXml", "ixmlInIxml"],
+  dependsOn: ["formatSpec", "copyResources", "ixmlInXml", "ixmlInIxml", "publishTests"],
   description: "Publish the current specification") {
 }
 
@@ -175,3 +175,36 @@ task ixmlInIxml(
     "ixml.ixml=${extractIxmlInIxml.outputs.getFiles().getSingleFile()}"
 }
     
+// ============================================================
+
+task publishTests(
+  description: "Format the test suite for the web"
+) {
+  doFirst {
+    mkdir "${buildDir}/test-catalog"
+  }
+  
+  doLast {
+    javaexec {
+      classpath = configurations.saxon
+      mainClass = "net.sf.saxon.Transform"
+      args "-s:${projectDir}/tests/test-catalog.xml",
+        "-xsl:${projectDir}/tests/tools/to-html.xsl",
+        "-o:${buildDir}/test-catalog/index.html"
+    }
+  }
+
+  doLast {
+    copy {
+      into "${buildDir}/test-catalog/css/"
+      from "${projectDir}/tools/css/"
+    }
+  }
+
+  doLast {
+    copy {
+      into "${buildDir}/test-catalog/img/"
+      from "${projectDir}/tools/img/"
+    }
+  }
+}
