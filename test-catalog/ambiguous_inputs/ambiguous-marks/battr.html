@@ -1,0 +1,34 @@
+<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Invisible XML Test Suite Catalog</title><link rel="stylesheet" href="../../css/catalog.css"></head><body><div class="breadcrumbs"><a href="../../"><img class="logotype" src="../..//img/logotype_white.png"></a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs">Ambiguous inputs</a>&nbsp;/&nbsp;<a href="../../ambiguous_inputs/ambiguous-marks">ambiguous-marks</a>&nbsp;/&nbsp;Battr</div><main><img class="logosm" src="../../img/logo_gradient.png"><h1 class="title">iXML Community Group Test Suite</h1><details><summary>21&nbsp;Jun&nbsp;2022 (20&nbsp;Jun&nbsp;2023)</summary><div class="description">
+    <p>Top-level catalog for tests in the iXML Community Group
+    Test Suite.</p>
+    <p>Tests have been contributed from several sources, but
+    the core of the test collection are the tests contributed
+    by Steven Pemberton in December 2021.</p>
+  </div></details><h2 class="title">Ambiguous inputs</h2><details><summary>01&nbsp;Jun&nbsp;2022</summary><div class="description">
+    <p>Tests provided by Steven Pemberton in December 2021, with
+    corrections of 21 December. Reorganized by Norm Tovey-Walsh,
+    February 2022.</p>
+  </div></details><h3 class="title">ambiguous-marks</h3><p>Created 05&nbsp;May&nbsp;2023 by ndw</p><div class="grammar"><h4>Invisible XML Grammar</h4><pre><code>S = A, B, C | A, @B, C . A = 'a' . B = 'b' . C = 'c' .</code></pre></div><h1>Test case: Battr</h1><details><p>Repository URI: <code>…/tests/ambiguous/test-catalog.xml</code></p></details>
+      <p>Created 05&nbsp;May&nbsp;2023 by ndw</p>
+      <details><summary>Updated 09&nbsp;May&nbsp;2023 by ndw</summary><p>Attempted to improve the description.</p></details>
+      <div class="description">
+	<p>This grammar is ambiguous. That is, it matches exactly
+	“abc”, but it does so in two different ways. This difference
+        is visible in the selection of B as either an element or
+        an attribute.</p>
+      </div>
+      <div class="test-string"><h4>Input string (3 characters)</h4><pre><code>abc</code></pre></div>
+      <div class="result"><h4>Expected results (one of)</h4>
+	<div class="xml-result"><pre><code>&lt;S xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous"&gt;
+   &lt;A&gt;a&lt;/A&gt;
+   &lt;B&gt;b&lt;/B&gt;
+   &lt;C&gt;c&lt;/C&gt;
+&lt;/S&gt;
+</code></pre></div>
+	<div class="xml-result"><pre><code>&lt;S xmlns:ixml="http://invisiblexml.org/NS" ixml:state="ambiguous" B="b"&gt;
+   &lt;A&gt;a&lt;/A&gt;
+   &lt;C&gt;c&lt;/C&gt;
+&lt;/S&gt;
+</code></pre></div>
+      </div>
+    </main></body></html>
