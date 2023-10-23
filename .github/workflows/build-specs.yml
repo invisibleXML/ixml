@@ -51,7 +51,7 @@ jobs:
 
       - name: Build
         run: |
-          ./gradlew
+          ./gradlew publish
 
       - name: Setup DeltaXML
         if: ${{ env.AUTODIFF == 'true' }}
@@ -85,3 +85,12 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
           target-folder: /branch/${{ github.ref_name }}
+
+      - name: Deploy test-catalog
+        if: ${{ env.HAVE_ACCESS_TOKEN == 'true' && github.ref_name == 'master' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/test-catalog
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages
+          target-folder: /test-catalog
