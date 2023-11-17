@@ -608,12 +608,14 @@
     <test-set name="unicode-range2">
       <created by="SP" on="2021-12-21"/>
       <ixml-grammar-ref href="unicode-range2.ixml"/>
-      <test-case name="unicode-range1">
+      <test-case name="unicode-range2">
 	<created by="SP" on="2021-12-21"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="supplied expected output"/>
 	<modified by="MSM" on="2021-12-30"
 		  change="stripped trailing whitespace from input"/>
+	<modified by="MSM" on="2023-11-15"
+		  change="rename using 2 not 1"/>
 	<test-string-ref href="unicode-range2.inp"/>
 	<result>
 	  <assert-xml-ref href="unicode-range2.output.xml"/>
@@ -626,6 +628,11 @@
       <created by="SP" on="2023-06-13"/>
       <modified by="NDW" on="2023-06-15"
 		change="Added to the test catalog"/>
+      <modified by="MSM" on="2023-11-16"
+		change="Added dependencies to mark this as requiring Unicode 14.0 or later"/>
+      <dependencies Unicode-version="14.0"/>
+      <dependencies Unicode-version="15.0"/>
+      <dependencies Unicode-version="15.1"/>
       <ixml-grammar-ref href="unicode-classes.ixml"/>
       <test-case name="unicode-classes">
         <created by="SP" on="2023-06-13"/>
@@ -637,6 +644,103 @@
 	</result>
       </test-case>
     </test-set>
+
+    <test-set name="unicode-version-check">
+      <created by="MSM" on="2023-11-15"/>
+      <ixml-grammar-ref href="unicode-version-diagnostic.ixml"/>
+      
+      <test-case name="unicode-v06.0-diagnostic">
+        <dependencies Unicode-version="6.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v6.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v06.1-diagnostic">
+        <dependencies Unicode-version="6.1"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v06.1.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v06.2-diagnostic">
+        <dependencies Unicode-version="6.2"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v06.2.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v06.3-diagnostic">
+        <dependencies Unicode-version="6.3"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v06.3.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v07-diagnostic">
+        <dependencies Unicode-version="7.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v7.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v08-diagnostic">
+        <dependencies Unicode-version="8.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v08.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-v09-diagnostic">
+        <dependencies Unicode-version="9.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v09.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-10-diagnostic">
+        <dependencies Unicode-version="10.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v10.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-11-diagnostic">
+        <dependencies Unicode-version="11.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v11.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-12-diagnostic">
+        <dependencies Unicode-version="12.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v12.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-12.1-diagnostic">
+        <dependencies Unicode-version="12.1"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v12.1.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-13-diagnostic">
+        <dependencies Unicode-version="13.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v13.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-14-diagnostic">
+        <dependencies Unicode-version="14.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v14.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-15-diagnostic">
+        <dependencies Unicode-version="15.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v15.0.xml"/></result>
+      </test-case>
+      
+      <test-case name="unicode-version-15.1-diagnostic">
+        <dependencies Unicode-version="15.1"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode-v15.1.xml"/></result>
+      </test-case>
+      
+    </test-set>
+               
 
     <test-set name="vcard">
       <created by="SP" on="2021-12-16"/>
