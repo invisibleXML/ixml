@@ -382,8 +382,8 @@
     <!-- tell the user what we know -->
     <xsl:if test="false()">
     <xsl:message>
-      <xsl:text>    </xsl:text>
-      <xsl:value-of select="$command"/>
+      <xsl:text>    - Test case </xsl:text>
+      <xsl:value-of select="$idTC"/>
     </xsl:message>
     </xsl:if>
     
@@ -392,6 +392,10 @@
     <xsl:value-of select="$idTC"/>
     <xsl:text> : </xsl:text>
     <!-- <xsl:value-of select="$command"/> -->
+    
+    <xsl:text>&#xA;echo "    - Test case </xsl:text>
+    <xsl:value-of select="$idTC"/>
+    <xsl:text>"</xsl:text>
     
     <!-- Add invocation of the command to the bash file -->
     <xsl:variable name="time-format" as="xs:string"
@@ -428,7 +432,7 @@
                 mode="write-to-file">
     <xsl:param name="uri" required="yes"/>
 
-    <xsl:result-document href="$uri">
+    <xsl:result-document href="{$uri}">
       <xsl:sequence select="string(.)"/>
     </xsl:result-document>
   </xsl:template>
