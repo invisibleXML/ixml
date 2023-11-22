@@ -1,5 +1,5 @@
 <test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
-              release-date="2022-06-17"
+              release-date="2022-11-22"
 	      name="Tests producing parse trees">
 
   <description>
@@ -1228,6 +1228,56 @@
     <test-case name="leading-nullable-fail">
       <created by="ndw" on="2022-06-19"/>
       <test-string>aa</test-string>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="shared-nullable-prefix">
+    <description>
+      <p>Test that leading nullable nonterminals in multiple
+      right-hand sides are handled correctly.</p>
+    </description>
+    <created by="cmsmcq" on="2023-11-22"/>
+    <ixml-grammar>
+      S = A; B; C.
+      A = s, 'a'.
+      B = s, 'b'.
+      C = s, 'c'.
+      -s = -[Zs; #9; #A; #D]*.
+    </ixml-grammar>
+    <test-case name="snp-1">
+      <created by="cmsmcq" on="2023-11-22"/>
+      <test-string>a</test-string>
+      <result>
+	<assert-xml><S xmlns=""><A>a</A></S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="snp-2">
+      <created by="cmsmcq" on="2023-11-22"/>
+      <test-string>   b</test-string>
+      <result>
+	<assert-xml><S xmlns=""><B>b</B></S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="snp-3">
+      <created by="cmsmcq" on="2023-11-22"/>
+      <test-string>&#x9;c</test-string>
+      <result>
+	<assert-xml><S xmlns=""><C>c</C></S></assert-xml>
+      </result>
+    </test-case>
+    <test-case name="snp-4">
+      <created by="cmsmcq" on="2023-11-22"/>
+      <test-string>d</test-string>
+      <result>
+	<assert-not-a-sentence/>
+      </result>
+    </test-case>
+    <test-case name="snp-5">
+      <created by="cmsmcq" on="2023-11-22"/>
+      <test-string>&#x9;c </test-string>
       <result>
 	<assert-not-a-sentence/>
       </result>
