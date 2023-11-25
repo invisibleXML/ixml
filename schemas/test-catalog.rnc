@@ -259,7 +259,7 @@ grammar {
         # In the results file, we may omit the grammar, or include
 	# it, possibly both reproducing the reference and giving
 	# the grammar inline. 
-	Grammar-results = (Grammar-data*, grammar-result?)
+	Grammar-results = (Grammar-data*, grammar-result*)
 
         # Q. Why is the grammar optional?
 	# A. Because in a nested test set we may want to inherit the
