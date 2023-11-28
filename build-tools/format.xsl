@@ -44,73 +44,104 @@
   <xsl:next-match/>
 </xsl:template>
 
+<xsl:template match="html:html">
+  <xsl:copy>
+    <xsl:sequence select="@* except @class"/>
+    <xsl:attribute name="class" select="'informal no-js ' || @class"/>
+    <xsl:apply-templates/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="html:head">
+  <xsl:copy>
+    <xsl:apply-templates select="@*, node()"/>
+    <script>(function(H){{H.className=H.className.replace(/\bno-js\b/,'js')}})(document.documentElement)</script>
+    <script defer="defer" src="js/features.js"/>
+  </xsl:copy>
+</xsl:template>
+
 <xsl:template match="html:body">
   <body>
-    <xsl:apply-templates select="@*,node()"/>
-    <footer class="docid">
-      <p>
-        <xsl:choose>
-          <xsl:when test="$ci-pull != ''">
-            <span class="dt">
-              <xsl:text>Document build #{$ci-build-num} with PR #{$ci-pull} </xsl:text>
-              <xsl:text>for {$ci-project-username}/{$ci-project-reponame} at </xsl:text>
-              <time datetime="{format-dateTime(current-dateTime(),
-                               '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
-                    title="{format-dateTime(current-dateTime(),
-                            '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
-                <xsl:text>{format-dateTime(current-dateTime(),
-                           '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
-              </time>
-            </span>
-            <xsl:text> </xsl:text>
-            <span class="bh">
-              <xsl:if test="$ci-tag != '' or $ci-branch ne 'master'">
-                <xsl:sequence select="$ci-tag||$ci-branch||'/'"/>
-              </xsl:if>
-              <span title="{$ci-sha1}">{substring($ci-sha1, 1, 8)}</span>
-            </span>
-          </xsl:when>
-          <xsl:when test="$ci-sha1 = ''">
-            <span class="dt">
-              <xsl:text>Published at </xsl:text>
-              <time datetime="{format-dateTime(current-dateTime(),
-                               '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
-                    title="{format-dateTime(current-dateTime(),
-                            '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
-                <xsl:text>{format-dateTime(current-dateTime(),
-                           '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
-              </time>
-            </span>
-          </xsl:when>
-          <xsl:otherwise>
-            <span class="dt">
-              <xsl:text>Document build #{$ci-build-num} </xsl:text>
-              <xsl:text>for {$ci-project-username}/{$ci-project-reponame} at </xsl:text>
-              <time datetime="{format-dateTime(current-dateTime(),
-                               '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
-                    title="{format-dateTime(current-dateTime(),
-                            '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
-                <xsl:text>{format-dateTime(current-dateTime(),
-                           '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
-              </time>
-            </span>
-            <xsl:text> </xsl:text>
-            <span class="bh">
-              <xsl:if test="$ci-tag != '' or $ci-branch ne 'master'">
-                <xsl:sequence select="$ci-tag||$ci-branch||'/'"/>
-              </xsl:if>
-              <span title="{$ci-sha1}">{substring($ci-sha1, 1, 8)}</span>
-            </span>
-          </xsl:otherwise>
-        </xsl:choose>
-      </p>
-    </footer>
+    <xsl:apply-templates select="@*"/>
+  
+
+    <main>
+      <xsl:apply-templates select="node()"/>
+
+      <footer class="docid">
+        <p>
+          <xsl:choose>
+            <xsl:when test="$ci-pull != ''">
+              <span class="dt">
+                <xsl:text>Document build #{$ci-build-num} with PR #{$ci-pull} </xsl:text>
+                <xsl:text>for {$ci-project-username}/{$ci-project-reponame} at </xsl:text>
+                <time datetime="{format-dateTime(current-dateTime(),
+                                '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
+                      title="{format-dateTime(current-dateTime(),
+                             '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
+                  <xsl:text>{format-dateTime(current-dateTime(),
+                  '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
+                </time>
+              </span>
+              <xsl:text> </xsl:text>
+              <span class="bh">
+                <xsl:if test="$ci-tag != '' or $ci-branch ne 'master'">
+                  <xsl:sequence select="$ci-tag||$ci-branch||'/'"/>
+                </xsl:if>
+                <span title="{$ci-sha1}">{substring($ci-sha1, 1, 8)}</span>
+              </span>
+            </xsl:when>
+            <xsl:when test="$ci-sha1 = ''">
+              <span class="dt">
+                <xsl:text>Published at </xsl:text>
+                <time datetime="{format-dateTime(current-dateTime(),
+                                '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
+                      title="{format-dateTime(current-dateTime(),
+                             '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
+                  <xsl:text>{format-dateTime(current-dateTime(),
+                  '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
+                </time>
+              </span>
+            </xsl:when>
+            <xsl:otherwise>
+              <span class="dt">
+                <xsl:text>Document build #{$ci-build-num} </xsl:text>
+                <xsl:text>for {$ci-project-username}/{$ci-project-reponame} at </xsl:text>
+                <time datetime="{format-dateTime(current-dateTime(),
+                                '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}"
+                      title="{format-dateTime(current-dateTime(),
+                             '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][z,6-6]')}">
+                  <xsl:text>{format-dateTime(current-dateTime(),
+                  '[H01]:[m01] on [D01] [MNn] [Y0001]')}</xsl:text>
+                </time>
+              </span>
+              <xsl:text> </xsl:text>
+              <span class="bh">
+                <xsl:if test="$ci-tag != '' or $ci-branch ne 'master'">
+                  <xsl:sequence select="$ci-tag||$ci-branch||'/'"/>
+                </xsl:if>
+                <span title="{$ci-sha1}">{substring($ci-sha1, 1, 8)}</span>
+              </span>
+            </xsl:otherwise>
+          </xsl:choose>
+        </p>
+      </footer>
+    </main>
   </body>
 </xsl:template>
 
 <xsl:template match="html:div[@class='toc']">
   <div>
     <xsl:apply-templates select="@*"/>
+
+    <div class="checkboxes">
+      <xsl:text>Show section numbers </xsl:text>
+      <label class="switch" for="sectnum">
+        <input type="checkbox" id="sectnum" />
+        <div class="slider round"></div>
+      </label>
+    </div>
+
     <ul>
       <xsl:for-each-group select="/html:html/html:body/*" group-starting-with="html:h2">
         <xsl:if test="position() gt 2"> <!-- skip premable and status section -->
@@ -119,6 +150,7 @@
             <xsl:message select="'Warning: No ID on h2 for ' || string($h2)"/>
           </xsl:if>
           <li>
+            <xsl:apply-templates select="$h2" mode="section-number"/>
             <a href="#{if ($h2/@id) then $h2/@id/string() else generate-id($h2)}">
               <xsl:sequence select="$h2/node()"/>
             </a>
@@ -131,6 +163,7 @@
                       <xsl:message select="'Warning: No ID on h3 for ' || string($h3)"/>
                     </xsl:if>
                     <li>
+                      <xsl:apply-templates select="$h3" mode="section-number"/>
                       <a href="#{if ($h3/@id) then $h3/@id/string() else generate-id($h3)}">
                         <xsl:sequence select="$h3/node()"/>
                       </a>
@@ -144,6 +177,41 @@
       </xsl:for-each-group>
     </ul>
   </div>
+</xsl:template>
+
+<xsl:template match="html:h2|html:h3">
+  <xsl:copy>
+    <xsl:sequence select="@*"/>
+    <xsl:if test="not(@id)">
+      <xsl:attribute name="id" select="generate-id(.)"/>
+    </xsl:if>
+    <xsl:apply-templates select="." mode="section-number"/>
+    <xsl:apply-templates/>
+  </xsl:copy>
+</xsl:template>
+
+<xsl:template match="html:h4">
+  <xsl:message>Warning: h4 and below are not numbered</xsl:message>
+  <xsl:next-match/>
+</xsl:template>
+
+<xsl:template match="html:h2" mode="section-number">
+  <!-- Don't number the status section -->
+  <xsl:if test="preceding::html:h2">
+    <span class="sectnum">
+      <xsl:sequence select="count(preceding::html:h2)"/>
+      <xsl:text>. </xsl:text>
+    </span>
+  </xsl:if>
+</xsl:template>
+
+<xsl:template match="html:h3" mode="section-number">
+  <span class="sectnum">
+    <xsl:sequence select="count(preceding::html:h2)-1"/>
+    <xsl:text>.</xsl:text>
+    <xsl:number from="html:h2"/>
+    <xsl:text>. </xsl:text>
+  </span>
 </xsl:template>
 
 <xsl:template match="html:pre[contains-token(@class, 'ixml')
