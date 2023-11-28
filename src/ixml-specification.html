@@ -298,7 +298,7 @@ are entirely optional, except that rules
 encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
 ignored.</p>
 
-<pre class="frag ixml">ixml: s, prolog?, rule++RS, s.
+<pre class="frag ixml">ixml: s, (prolog, RS)?, rule++RS, s.
 </pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments;
