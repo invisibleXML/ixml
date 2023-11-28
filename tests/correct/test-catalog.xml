@@ -1,4 +1,4 @@
-<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog"
+<test-catalog xmlns="https://github.com/invisibleXML/ixml/test-catalog
               release-date="2022-11-22"
 	      name="Tests producing parse trees">
 
@@ -1280,6 +1280,83 @@
       <test-string>&#x9;c </test-string>
       <result>
 	<assert-not-a-sentence/>
+        
+  <test-set name="naming-elements">
+    <description>
+      <p>Test renaming an element.</p>
+    </description>
+    <created by="ndw" on="2023-10-23"/>
+    <ixml-grammar>
+      ixml version "1.1".
+      S = A, B.
+      A = 'a' .
+      B>X = 'b' .
+    </ixml-grammar>
+    <test-case name="naming-elements">
+      <created by="ndw" on="2023-10-23"/>
+      <test-string>ab</test-string>
+      <result>
+	<assert-xml><S xmlns=""><A>a</A><X>b</X></S></assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="naming-elements-rhs">
+    <description>
+      <p>Test renaming an element.</p>
+    </description>
+    <created by="ndw" on="2023-10-23"/>
+    <ixml-grammar>
+      ixml version "1.1".
+      S = A, B>C.
+      A = 'a' .
+      B = 'b' .
+    </ixml-grammar>
+    <test-case name="naming-elements-rhs">
+      <created by="ndw" on="2023-10-23"/>
+      <test-string>ab</test-string>
+      <result>
+	<assert-xml><S xmlns=""><A>a</A><C>b</C></S></assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="naming-attributes">
+    <description>
+      <p>Test renaming an attribute.</p>
+    </description>
+    <created by="ndw" on="2023-10-23"/>
+    <ixml-grammar>
+      ixml version "1.1".
+      S = A, @B.
+      A = 'a' .
+      B>X = 'b' .
+    </ixml-grammar>
+    <test-case name="naming-attributes">
+      <created by="ndw" on="2023-10-23"/>
+      <test-string>ab</test-string>
+      <result>
+	<assert-xml><S xmlns="" X='b'><A>a</A></S></assert-xml>
+      </result>
+    </test-case>
+  </test-set>
+
+  <test-set name="naming-attributes-rhs">
+    <description>
+      <p>Test renaming an attribute.</p>
+    </description>
+    <created by="ndw" on="2023-10-23"/>
+    <ixml-grammar>
+      ixml version "1.1".
+      S = A, @B>C.
+      A = 'a' .
+      B>X = 'b' .
+    </ixml-grammar>
+    <test-case name="naming-attributes-rhs">
+      <created by="ndw" on="2023-10-23"/>
+      <test-string>ab</test-string>
+      <result>
+	<assert-xml><S xmlns="" C='b'><A>a</A></S></assert-xml>
       </result>
     </test-case>
   </test-set>
