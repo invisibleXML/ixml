@@ -98,6 +98,7 @@
       </tc:test-string>     
       <tc:result>
 	<tc:assert-xml-ref href="out/xsltforms-3.xml"/>
+	<tc:assert-xml-ref href="out/xsltforms-3-alt.xml"/>
       </tc:result>
     </tc:test-case>
 
