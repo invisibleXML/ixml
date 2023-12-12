@@ -10,7 +10,7 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-       prolog: version, s.
+       prolog: version.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
          rule: naming, -["=:"], s, -alts, -".".

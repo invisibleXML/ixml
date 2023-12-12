@@ -107,7 +107,6 @@
    <rule name="prolog">
       <alt>
          <nonterminal name="version"/>
-         <nonterminal name="s"/>
       </alt>
    </rule>
    <rule name="version">
