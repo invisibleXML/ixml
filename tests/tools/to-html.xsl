@@ -336,6 +336,43 @@
   </details>
 </xsl:template>
 
+<xsl:template match="t:dependencies[not(preceding-sibling::t:dependencies)]">
+  <xsl:variable name="uver" as="xs:string*">
+    <xsl:for-each select="../t:dependencies/@Unicode-version/string()">
+      <xsl:sort select="." data-type="number"/>
+      <xsl:sequence select="."/>
+    </xsl:for-each>
+  </xsl:variable>
+  <xsl:variable name="other" select="../t:dependencies/@* except ../t:dependencies/@Unicode-version"/>
+
+  <xsl:if test="not(empty($other))">
+    <xsl:message select="'Unexpected attributes on t:dependencies element'"/>
+  </xsl:if>
+
+  <xsl:choose expand-text="yes">
+    <xsl:when test="empty($uver)"/>
+    <xsl:when test="count($uver) = 1">
+      <p>Depends on Unicode version {$uver}.</p>
+    </xsl:when>
+    <xsl:when test="count($uver) = 2">
+      <p>Depends on Unicode version {$uver[1]} or {$uver[2]}.</p>
+    </xsl:when>
+    <xsl:otherwise>
+      <p>
+        <xsl:text>Depends on Unicode version </xsl:text>
+        <xsl:for-each select="$uver">
+          <xsl:if test="position() gt 1">, </xsl:if>
+          <xsl:if test="position() eq last()">or </xsl:if>
+          <xsl:sequence select="."/>
+        </xsl:for-each>
+        <xsl:text>.</xsl:text>
+      </p>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+<xsl:template match="t:dependencies[preceding-sibling::t:dependencies]"/>
+
 <xsl:template match="t:ixml-grammar-ref">
   <div class="grammar">
     <h4>Invisible XML Grammar</h4>
