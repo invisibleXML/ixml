@@ -39,7 +39,7 @@ Most standard parsing algorithms that can be used to implement an
 Invisible XML parser are defined for BNF grammars. Unless you want to
 extend the algorithm to handle EBNF constructs, you will need to
 convert the input grammar supplied by the user into an equivalent BNF
-form by eliminating the opeators for repetition, optionality, and
+form by eliminating the operators for repetition, optionality, and
 alternation (except at the top level), doing so in such a way that the
 BNF grammar you construct accepts the same language as the input
 grammar supplied by the user, and in such a way that you can produce
@@ -131,7 +131,7 @@ principles in our rewrites:
 * Every nonterminal in the input grammar will reappear in the
   rewritten grammar and matches the same input strings. (Exception: if
   the nonterminal is marked hidden, this principle can be fudged.  But
-  most peoplf find it less confusing to follow it anyway.)
+  most people find it less confusing to follow it anyway.)
   
 * It is often helpful to add new nonterminals as part of rewriting the
   grammar, often (as in the example above) adding a nonterminal to
@@ -186,14 +186,14 @@ gathered from several sources:
     
   * The rules given in the Invisible XML 1.0 specification: 02a, S2a, P2a, 
   
-  * Some variations on those rules suggested by membes of the ixml
+  * Some variations on those rules suggested by members of the ixml
     community group, notably S1a, S2a, P3a
     
   * An EBNF-to-BNF translation in the Gingersnap tools for working
     with ixml grammars (used in generating test cases):  O2b, S4b, P4aw
     
   * Pete Jinks, "BNF/EBNF variants) (web page at
-    http://www.cs.man.ac.uk/~pjj/bnf/ebnf.html).  Jenks does not
+    http://www.cs.man.ac.uk/~pjj/bnf/ebnf.html).  Jinks does not
     explicitly discuss translation into BNF but supplies descriptions
     of ways to handle optionality and repetition in BNF which can be
     taken as implicitly defining rules for that translation.
@@ -204,7 +204,7 @@ gathered from several sources:
     diversity of notation for syntactic definitions?" CACM (1977)
     20.11:822f.  Wirth does not discuss rules translation into BNF but
     his glosses on constructs in his proposed EBNF can be taken as
-    impliclitly defining such rules.
+    implicitly defining such rules.
 
 In the discussion below, we illustrate the rewrite rules by
 translating ixml grammars and fragments into ixml grammars which have
@@ -245,7 +245,7 @@ S = A, opt-B, C.
 opt-B = B; ().
 ```
 
-Note: Here and elsewhere, we assume that names beging `opt-` and
+Note: Here and elsewhere, we assume that names beginning `opt-` and
 similar do not collide with any nonterminals already present in the
 grammar.
 
@@ -312,12 +312,12 @@ components in The rule for `star-B`.
 star-B = (B, star-B)?.
 ```
 
-(S2b) `star-B = (star-B, B)?.
+(S2b) `star-B = (star-B, B)?.`
 
 The new optional expression must be rewritten in any of the ways
 illustrated above.
 
-(S3a) Rewrite as optional `repeat0`.
+(S3a) Rewrite as optional `repeat1`.
 ```
 star-B = B+ | ().
 ```
@@ -596,7 +596,7 @@ systematic ways:
   all the examples above) more than once; others do not avoid this.
   
   Similarly (and possibly related) some rewrite rules introduce
-  disjunctions in which multiple disjucts have the same prefix
+  disjunctions in which multiple disjuncts have the same prefix
   (as in `plus-B = B | B, plus-B.`); other rewrite rules avoid this.
 
 These variations suggest a sort of multi-dimensional space in which
