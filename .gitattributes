@@ -1,0 +1,5 @@
+# Prevent the automatic normalization of line endings in order to keep the exact
+# line endings in all files. This is important under Windows to preserve the 
+# relationship between test input and expected test output.
+
+* -text
