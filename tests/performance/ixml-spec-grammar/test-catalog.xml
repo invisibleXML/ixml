@@ -95,9 +95,9 @@
         172 rules,
         797 symbols.</p>
       </description>
-      <test-string-ref href="../../../samples/XPath/XPath.ixml"/>
+      <test-string-ref href="../../../samples/XPath/XPath.reducedTree.ixml"/>
       <result>
-	<assert-xml-ref href="trees/XPath.xml"/>
+	<assert-xml-ref href="trees/XPath.reducedTree.xml"/>
       </result>
     </test-case>
     
