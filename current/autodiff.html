@@ -16,7 +16,7 @@
               Previous
             </a><a class="button" onclick="scroll_to('next')">
               Next
-            </a><span id="__autodiff__"></span></p></div><main><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: 2023-<span class="deltaxml-old">11-28</span><span class="deltaxml-new">12-12</span></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+            </a><span id="__autodiff__"></span></p></div><main><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <span class="deltaxml-old">2023-12-12</span><span class="deltaxml-new">2024-03-06</span></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html" shape="rect">is available</a>. Change markup shows
     the differences between <a href="index.html" shape="rect">this version</a> of the
@@ -326,10 +326,7 @@ For a more comprehensive discussion, see
 [<a href="#serialization" shape="rect">XML Serialization</a>].
 A conformant Invisible XML processor is required to produce
 well-formed XML output, but its choices in serializing the selected parse tree
-are not otherwise constrained.</p><span class="deltaxml-old">
-
-say explicitly that processors may offer the kinds of options defined in the serialization spaec
-indentation is a problem, make it a should</span><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
+are not otherwise constrained.</p><p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
 any serialization of a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01" shape="rect">error D01</a>).</p><p>Note: This requirement means for instance that names of serialized elements
 and attributes <span id="ref-d03" class="conform">must</span> match the XML
