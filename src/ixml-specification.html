@@ -298,7 +298,7 @@ are entirely optional, except that rules
 encoded in UTF-8 begins with a byte order mark (BOM), the BOM <span class="conform">must</span> be
 ignored.</p>
 
-<pre class="frag ixml">ixml: s, prolog?, rule++RS, s.
+<pre class="frag ixml">ixml: s, (prolog, RS)?, rule++RS, s.
 </pre>
 
 <p>An <code>s</code> stands for an optional sequence of spacing and comments;
@@ -321,7 +321,7 @@ grammar:</p>
 version 1.0 is assumed. A grammar <span id="ref-s12"
 class="conform">must</span> conform to the syntax and semantics of the version
 declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
-<pre class="frag ixml">       prolog: version, s.
+<pre class="frag ixml">       prolog: version.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 </pre>
 
