@@ -1,10 +1,15 @@
 <ixml>
-   <comment>version 2024-03-06</comment>
+   <comment>version 2024-03-19</comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
          <option>
-            <nonterminal name="prolog"/>
+            <alts>
+               <alt>
+                  <nonterminal name="prolog"/>
+                  <nonterminal name="RS"/>
+               </alt>
+            </alts>
          </option>
          <repeat1>
             <nonterminal name="rule"/>
@@ -102,7 +107,6 @@
    <rule name="prolog">
       <alt>
          <nonterminal name="version"/>
-         <nonterminal name="s"/>
       </alt>
    </rule>
    <rule name="version">
