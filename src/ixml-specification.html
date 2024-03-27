@@ -330,8 +330,10 @@ class="conform">must</span> process the grammar using the syntax and semantics
 of that version.</p>
 
 <p>If it does not recognize the version string, it <span
-class="conform">must</span> nevertheless attempt to process the grammar. If it
-finds a syntactically valid interpretation of the grammar, it <span
+class="conform">must</span> nevertheless attempt to process the grammar.
+In this case, it is implementation-defined which version or versions the
+implementation uses when it attempts to parse the grammar.
+If it finds a syntactically valid interpretation of the grammar, it <span
 class="conform">must</span> proceed using the semantics of the version under
 which it found a valid interpretation, otherwise it <span
 class="conform">must</span> reject the grammar. In either case, the document
