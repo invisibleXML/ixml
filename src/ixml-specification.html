@@ -557,6 +557,16 @@ not. Known algorithms that accept and parse any context-free grammar include
 href="#cyk">CYK</a>], [<a href="#glr">GLR</a>], and [<a href="#gll">GLL</a>];
 see also [<a href="#grune">Grune</a>].</p>
 
+<p>Invisible XML processors normalize line endings when they read grammar and
+input files. They apply the same rules as [<a href="#xml">XML</a>]: every
+occurrence of the two character sequence <code>#D #A</code>, and any
+<code>#D</code> not immediately followed by a <code>#A</code>, are translated
+into a single <code>#A</code> in the input. This assures that the single
+character <code>#A</code> can always be used to match an end of line,
+irrespective of the conventions of the system where the files were created. It
+follows that the iXML exclusion <code>~[#A]*</code> will always match all of the
+characters on a line.</p>
+
 <p>If an input encoded in UTF-8 begins with a BOM, the BOM 
 <span class="conform">should</span> be ignored.</p>
 
