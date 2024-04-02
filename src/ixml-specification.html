@@ -470,7 +470,11 @@ character at that Unicode code-point is used [<a href="#unicode">Unicode</a>].
 The number <span id="ref-s07" class="conform">must</span> be within the Unicode
 code-point range (<a class="error" href="#err-s07">error S07</a>), and <span
 id="ref-s08" class="conform">must not</span> denote a Noncharacter or Surrogate
-code point (<a class="error" href="#err-s08">error S08</a>).</p>
+code point (<a class="error" href="#err-s08">error S08</a>).
+The version of Unicode cited is the one current at the time the initial version
+of this specification was published. Processors may support any version of
+Unicode; it is implementation-defined which version(s) they support.
+</p>
 
 <p>An encoded character matches that one character in the input.</p>
 <pre class="frag ixml">-encoded: (tmark, s)?, -"#", hex, s.
@@ -776,7 +780,7 @@ ixml form, and <span class="conform">should</span> accept grammars in XML form;
 it <span class="conform">must not</span> accept non-conforming grammars. Both
 grammars and input <span class="conform">must</span> be accepted in UTF-8
 encoding, and <span class="conform">may</span> be accepted in other
-encodings. There is no conformance requirement on which version of Unicode is used.</p>
+encodings.</p>
 
 <p>For any conforming grammar and any input, under normal operation: </p>
 <ul>
