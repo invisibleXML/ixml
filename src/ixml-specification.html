@@ -317,30 +317,33 @@ grammar:</p>
 
 <h3 id="prolog">Prolog</h3>
 
-<p>The optional prolog declares the version of ixml being used. If absent,
-version 1.0 is assumed. A grammar <span id="ref-s12"
-class="conform">must</span> conform to the syntax and semantics of the version
-declared or assumed (<a class="error" href="#err-s12">error S12</a>).</p>
+<p>The optional prolog declares the version of ixml being used.</p>
+
 <pre class="frag ixml">       prolog: version.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 </pre>
 
-<p>If an implementation recognizes the version string, it <span
-class="conform">must</span> process the grammar using the syntax and semantics
-of that version.</p>
+<p>If a version string is provided and the implementation recognizes the version
+string, it <span class="conform">must</span> process the grammar using the
+syntax and semantics of that version.</p>
 
-<p>If it does not recognize the version string, it <span
-class="conform">must</span> nevertheless attempt to process the grammar.
-In this case, it is implementation-defined which version or versions the
-implementation uses when it attempts to parse the grammar.
-If it finds a syntactically valid interpretation of the grammar, it <span
+<p>If the version is not provided, or the implementation does not recognize the
+version string provided, it <span class="conform">must</span> nevertheless attempt to
+process the grammar. In this case, it is implementation-defined which version or
+versions the implementation uses when it attempts to parse the grammar. If it
+finds a syntactically valid interpretation of the grammar, it <span
 class="conform">must</span> proceed using the semantics of the version under
-which it found a valid interpretation, otherwise it <span
-class="conform">must</span> reject the grammar. In either case, the document
-element of the serialization <span class="conform">must</span> include an
-attribute named <code>ixml:state</code>, with the word
-'<code>version-mismatch</code>' in its value. The ixml namespace URI is
-"<code>http://invisiblexml.org/NS</code>".</p>
+which it found a valid interpretation, otherwise it
+<span class="conform">must</span> reject the grammar.</p>
+
+<p>A grammar <span id="ref-s12" class="conform">must</span> conform to the
+syntax and semantics of the version declared or assumed (<a class="error"
+href="#err-s12">error S12</a>).</p>
+
+<p>If the version is absent or unrecognized, the document element of the
+serialization <span class="conform">must</span> include an attribute named
+<code>ixml:state</code>, with the word '<code>version-mismatch</code>' in its
+value. The ixml namespace URI is "<code>http://invisiblexml.org/NS</code>".</p>
 
 <h3 id="rules">Rules</h3>
 
