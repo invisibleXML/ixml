@@ -271,12 +271,12 @@ not. Known algorithms that accept and parse any context-free grammar include
 [<a href="#earley" shape="rect">Earley</a>], [<a href="#unger" shape="rect">Unger</a>], [<a href="#cyk" shape="rect">CYK</a>], [<a href="#glr" shape="rect">GLR</a>], and [<a href="#gll" shape="rect">GLL</a>];
 see also [<a href="#grune" shape="rect">Grune</a>].</p><p>Invisible XML processors normalize line endings when they read grammar and
 input files. They apply the same rules as [<a href="#xml" shape="rect">XML</a>]: every
-occurrence of the two character sequence <code>#D #A</code>, and any
-<code>#D</code> not immediately followed by a <code>#A</code>, are translated
-into a single <code>#A</code> in the input. This assures that the single
-character <code>#A</code> can always be used to match an end of line,
+occurrence of the two character sequence <code>#d #a</code>, and any
+<code>#d</code> not immediately followed by a <code>#a</code>, are translated
+into a single <code>#a</code> in the input. This assures that the single
+character <code>#a</code> can always be used to match an end of line,
 irrespective of the conventions of the system where the files were created. It
-follows that the iXML exclusion <code>~[#A]*</code> will always match all of the
+follows that the iXML exclusion <code>~[#a]*</code> will always match all of the
 characters to the end of a line.</p><p>If an input encoded in UTF-8 begins with a BOM, the BOM 
 <span class="conform">should</span> be ignored.</p><p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
@@ -697,4 +697,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #101 with PR #242 for invisibleXML/ixml at <time datetime="2024-04-02T06:21:45GMT+00:00" title="2024-04-02T06:21:45GMT+00:00">06:21 on 02 April 2024</time></span> <span class="bh"><span title="21e9891af977e47fefbf65f46c73e5adad4ce932">21e9891a</span></span></p></footer></main></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #102 with PR #242 for invisibleXML/ixml at <time datetime="2024-04-02T14:38:58GMT+00:00" title="2024-04-02T14:38:58GMT+00:00">14:38 on 02 April 2024</time></span> <span class="bh"><span title="345e5942ea538bbc09ec92e49952a6bc86c52621">345e5942</span></span></p></footer></main></body></html>
