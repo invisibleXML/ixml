@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve" version="XHTML+RDFa 1.0" class="informal no-js "><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /><script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script><script defer="defer" src="js/features.js"></script></head><body><main><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2024-03-27<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve" version="XHTML+RDFa 1.0" class="informal no-js "><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /><script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script><script defer="defer" src="js/features.js"></script></head><body><main><h1>Invisible XML Specification</h1><p>Editor: Steven Pemberton, CWI, Amsterdam</p><p>Version: <!--$date=-->2024-04-02<!--$--></p><p>Please consult the <a href="errata.html" shape="rect">errata page</a> for
 additional changes to the specification after publication.</p><p>A version with automatically generated change
     markup <a href="autodiff.html">is available</a>. Change markup shows
     the differences between <a href="index.html">this version</a> of the
@@ -277,7 +277,7 @@ into a single <code>#A</code> in the input. This assures that the single
 character <code>#A</code> can always be used to match an end of line,
 irrespective of the conventions of the system where the files were created. It
 follows that the iXML exclusion <code>~[#A]*</code> will always match all of the
-characters on a line.</p><p>If an input encoded in UTF-8 begins with a BOM, the BOM 
+characters to the end of a line.</p><p>If an input encoded in UTF-8 begins with a BOM, the BOM 
 <span class="conform">should</span> be ignored.</p><p>If the parse fails, some XML document <span class="conform">must</span> be
 produced with <code>ixml:state</code> on the document element with a value that
 includes the word <code>failed</code>. The document <span class="conform">should</span> provide helpful information about where and why
@@ -697,4 +697,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #99 with PR #242 for invisibleXML/ixml at <time datetime="2024-03-27T15:57:49GMT+00:00" title="2024-03-27T15:57:49GMT+00:00">15:57 on 27 March 2024</time></span> <span class="bh"><span title="21e9891af977e47fefbf65f46c73e5adad4ce932">21e9891a</span></span></p></footer></main></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #101 with PR #242 for invisibleXML/ixml at <time datetime="2024-04-02T06:21:45GMT+00:00" title="2024-04-02T06:21:45GMT+00:00">06:21 on 02 April 2024</time></span> <span class="bh"><span title="21e9891af977e47fefbf65f46c73e5adad4ce932">21e9891a</span></span></p></footer></main></body></html>
