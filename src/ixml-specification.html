@@ -15,11 +15,11 @@
 </head>
 
 <body>
-<h1>Invisible XML Specification</h1>
+<h1 id="specification">Invisible XML Specification</h1>
 
 <p>Editor: Steven Pemberton, CWI, Amsterdam</p>
 
-<p>Version: <!--$date=-->2023-07-24<!--$--></p>
+<p>Version: <!--$date=-->2024-03-19<!--$--></p>
 
 <p>Please consult the <a href="errata.html">errata page</a> for
 additional changes to the specification after publication.</p>
@@ -315,7 +315,7 @@ grammar:</p>
      -cchar: ~["{}"].
 </pre>
 
-<h3 id="L3041">Prolog</h3>
+<h3 id="prolog">Prolog</h3>
 
 <p>The optional prolog declares the version of ixml being used. If absent,
 version 1.0 is assumed. A grammar <span id="ref-s12"
@@ -365,7 +365,7 @@ combiner characters; Unicode classes are used to define the sets of characters
 used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
 ensure that all serialized names match the requirements for an XML name [<a
-href="#xml">XML</a>].</p>
+href="#xml">XML</a>]. Names are case-sensitive.</p>
 <pre class="frag ixml">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
@@ -470,7 +470,11 @@ character at that Unicode code-point is used [<a href="#unicode">Unicode</a>].
 The number <span id="ref-s07" class="conform">must</span> be within the Unicode
 code-point range (<a class="error" href="#err-s07">error S07</a>), and <span
 id="ref-s08" class="conform">must not</span> denote a Noncharacter or Surrogate
-code point (<a class="error" href="#err-s08">error S08</a>).</p>
+code point (<a class="error" href="#err-s08">error S08</a>).
+The version of Unicode cited is the one current at the time the initial version
+of this specification was published. Processors may support any version of
+Unicode; it is implementation-defined which version(s) they support.
+</p>
 
 <p>An encoded character matches that one character in the input.</p>
 <pre class="frag ixml">-encoded: (tmark, s)?, -"#", hex, s.
@@ -532,7 +536,7 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
  -capital: ["A"-"Z"].
   -letter: ["A"-"Z"; "a"-"z"].</pre>
 
-<h3 id="L649">Insertions</h3>
+<h3 id="insertions">Insertions</h3>
 
 <p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
@@ -970,7 +974,7 @@ href="http://www.fileformat.info/info/unicode/category/index.htm">http://www.fil
 Language (XML) 1.0 (Fifth Edition)</em>, W3C, 2008, <a
 href="https://www.w3.org/TR/xml/">https://www.w3.org/TR/xml/</a></p>
 
-<h2 id="L3425">Informational References</h2>
+<h2 id="informational">Informational References</h2>
 
 <p id="cyk">[CYK] Sakai, Itiroo. <em>Syntax in universal translation</em>. In
 1961 International Conference on Machine Translation of Languages and Applied
