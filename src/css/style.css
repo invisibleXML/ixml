@@ -110,6 +110,10 @@ code {
     float: right;
 }
 
+.nobreak {
+    white-space: nowrap;
+}
+
 /* ============================================================ */
 
 .open, .close, .space {
