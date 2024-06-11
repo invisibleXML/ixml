@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+ xmlns:owl="http://www.w3.org/2002/07/owl#"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Invisible XML Specification Errata</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    add { background-color: #ccffcc; }
+    del { background-color: #ffcccc; }
+  </style>
+</head>
+<body>
+<h1>Invisible XML Specification Errata</h1>
+
+<p>Version: <!--$date=-->2023-06-27<!--$--></p>
+
+<h2 id="status">Status</h2>
+
+<p>This document lists errata on the
+<a href="index.html">Invisible XML 1.0 Specification</a>.</p>
+
+<h2 id="proposed">Proposed errata</h2>
+
+<p>None at this time.</p>
+
+<h2 id="accepted">Accepted errata</h2>
+
+<h3>E003: Ignore UTF-8 BOM</h3>
+
+<p><a href="https://www.w3.org/2023/06/13-ixml-minutes#t05">Accepted</a> as
+an erratum against 1.0 at the meeting of 13 June 2023.</p>
+
+<p>The second paragraph of the section titled “The Grammar” is changed
+to indicate that a UTF-8 BOM must be ignored.</p>
+
+<div class="box revised">
+<p>A grammar is an optional prolog, followed by a sequence of one or more
+rules, surrounded and separated by spacing and comments. Spacing and comments
+are entirely optional, except that rules <span id="ref-s01"
+class="conform">must</span> be separated by at least one of either (<a
+class="error" href="#err-s01">error S01</a>).
+<add>If an input grammar encoded in UTF-8 begins with a byte order mark (BOM),
+the BOM <span class="conform">must</span> be ignored.</add>
+</p>
+</div>
+
+<p>A new paragraph is added between the second and third paragraphs of the
+section titled “Parsing”.</p>
+
+<div class="box revised">
+<p><add>If an input encoded in UTF-8 begins with a BOM, the BOM
+<span class="conform">should</span> be ignored.</add></p>
+</div>
+
+<h3>E002: A string cannot contain C0 or C1 control characters</h3>
+
+<p><a href="https://www.w3.org/2023/01/10-ixml-minutes.html">Accepted</a> as
+an erratum against 1.0 at the meeting of 10 January 2023.</p>
+
+<p>The definition of a quoted string is changed to exclude the C0 and C1
+control characters.</p>
+
+<div class="box revised">
+<p id="ref-s11">A string cannot <add>contain any of
+the <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 or C1 control
+characters</a>, including</add><del>extend over</del> a line-break (<a class="error"
+href="#err-s11">error S11</a>). The enclosing quote is represented in a string
+by doubling it; these two strings are identical: <code>'Isn''t it?'</code> and
+<code>"Isn't it?"</code>, as are these: <code>"He said ""Don't!"""</code> and
+<code>'He said "Don''t!"'</code>.</p>
+</div>
+
+<p>The error S11 is amended to include the C0 and C1 control characters.</p>
+
+<div class="box revised">
+<dd>
+  <dt id="err-s11"><a href="#ref-s11">S11</a></dt>
+    <dd>It is an error if a string contains a <add>C0 or C1 control character,
+    including a</add> line break.</dd>
+</dd>
+</div>
+
+<h2 id="resolved">Resolved errata</h2>
+
+<h3>E001: The Unicode character class “LC”</h3>
+
+<p><a href="https://www.w3.org/2022/10/11-ixml-minutes#t04">Accepted</a> as
+an erratum against 1.0 at the meeting of 11 October 2022. Resolved in the current
+specification on 15 October 2022.</p>
+
+<p>The definition of the nonterminal <code>letter</code> is changed to
+<code>["A"-"Z" | "a"-"z"]</code> to address the fact that recent versions of Unicode
+include the class “LC”.</p>
+
+<div class="box revised">
+<p>A class is one or two letters, representing any character from the Unicode
+character category [<a href="#categories">Categories</a>] of that name, which
+<span id="ref-s10" class="conform">must</span> exist (<a class="error"
+href="#err-s10">error S10</a>). E.g. <code>[Ll]</code> matches any lower-case
+letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
+<pre class="frag">   -class: code.
+    @code: capital, letter?.
+ -capital: ["A"-"Z"].
+  -letter: ["A"-"Z" | "a"-"z"].</pre>
+</div>
+
+</body>
+</html>
