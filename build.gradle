@@ -74,6 +74,7 @@ task publish(
     println("CI_PROJECT_REPONAME: ${System.getenv('CI_PROJECT_REPONAME')}")
     println("CI_BRANCH: ${System.getenv('CI_BRANCH')}")
     println("CI_TAG: ${System.getenv('CI_TAG')}")
+    println("CI_PULL: ${System.getenv('CI_PULL')}")
     println("CI_PR: ${System.getenv('CI_PR')}")
   }
 }
