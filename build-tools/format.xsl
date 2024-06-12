@@ -46,6 +46,9 @@
       <xsl:when test="$ci-project-username = 'invisibleXML'">
         <xsl:text>https://invisiblexml.org/pr/{$ci-pull}/</xsl:text>
       </xsl:when>
+      <xsl:when test="$ci-project-username = ''">
+        <xsl:sequence select="resolve-uri('../build/current/index.html', static-base-uri())"/>
+      </xsl:when>
       <xsl:otherwise>
         <xsl:text>https://{$ci-project-username}.github.io/{$ci-project-reponame}/branch/{$ci-branch}/</xsl:text>
       </xsl:otherwise>
