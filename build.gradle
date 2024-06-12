@@ -71,13 +71,21 @@ task extractIxmlInIxml(
   description: "Extract the iXML Grammar in iXML"
 ) {
   inputs.files fileTree(dir: "${projectDir}/src")
+  inputs.files fileTree(dir: "${projectDir}/build-tools")
   outputs.file "${buildDir}/current/ixml.ixml"
 
   classpath = configurations.saxon
   mainClass = "net.sf.saxon.Transform"
   args "-s:${projectDir}/src/ixml-specification.html",
     "-xsl:${projectDir}/build-tools/extract-ixml.xsl",
-    "-o:${buildDir}/current/ixml.ixml"
+    "-o:${buildDir}/current/ixml.ixml",
+    "ci-sha1=${getenv('CI_SHA1')}",
+    "ci-build-num=${getenv('CI_BUILD_NUM')}",
+    "ci-project-username=${getenv('CI_PROJECT_USERNAME')}",
+    "ci-project-reponame=${getenv('CI_PROJECT_REPONAME')}",
+    "ci-branch=${getenv('CI_BRANCH')}",
+    "ci-tag=${getenv('CI_TAG')}",
+    "ci-pull=${getenv('CI_PULL')}"
 }
 
 task extractIxmlInXml(
