@@ -49,6 +49,7 @@ jobs:
       CI_BRANCH: ${{ needs.check_branch.outputs.branch }}
       CI_TAG: ${{ needs.check_branch.outputs.tag }}
       CI_PULL: ${{ github.event.number }}
+      CI_PR: "true"
 
     steps:
       - name: Get the pull request
