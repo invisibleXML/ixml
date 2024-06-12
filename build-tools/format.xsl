@@ -29,7 +29,29 @@
 
 <xsl:template match="text()[preceding-sibling::node()[1]/self::comment()
                             and preceding-sibling::node()[1]/string() = '$date=']">
-  <xsl:sequence select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
+  <span title="Commit: {substring($ci-sha1, 1, 8)}">
+    <xsl:sequence select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
+  </span>
+</xsl:template>
+
+<xsl:template match="comment()[contains(., '$version-uri')]"
+              expand-text="yes">
+  <!-- Ok, now we have to make some heuristic choices ... -->
+  <xsl:variable name="uri" as="xs:string">
+    <xsl:choose>
+      <xsl:when test="$ci-project-username = 'invisibleXML'
+                      and $ci-pull = 'null'">
+        <xsl:text>https://invisiblexml.org/current/</xsl:text>
+      </xsl:when>
+      <xsl:when test="$ci-project-username = 'invisibleXML'">
+        <xsl:text>https://invisiblexml.org/pr/{$ci-pull}/</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>https://{$ci-project-username}.github.io/{$ci-project-reponame}/branch/{$ci-branch}/</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+  <a href="{$uri}">{$uri}</a>
 </xsl:template>
 
 <xsl:template match="html:h2[@id='status']">
@@ -63,7 +85,6 @@
 <xsl:template match="html:body">
   <body>
     <xsl:apply-templates select="@*"/>
-  
 
     <main>
       <xsl:apply-templates select="node()"/>
@@ -128,6 +149,26 @@
       </footer>
     </main>
   </body>
+</xsl:template>
+
+<xsl:template match="html:body/html:header/html:dl">
+  <xsl:variable name="items" as="element()*">
+    <xsl:apply-templates/>
+  </xsl:variable>
+  
+  <dl>
+    <xsl:sequence select="@*"/>
+
+    <xsl:choose>
+      <xsl:when test="$ci-project-username = 'invisibleXML'
+                      and $ci-pull = 'null'">
+        <xsl:sequence select="$items except $items[contains-token(@class, 'h-current')]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$items"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </dl>
 </xsl:template>
 
 <xsl:template match="html:div[@class='toc']">
