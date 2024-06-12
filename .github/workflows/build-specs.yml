@@ -18,10 +18,10 @@ jobs:
         run: |
           raw=${{ github.repository }}
           reponame=${raw##*/}
-          echo "::set-output name=reponame::$reponame"
+          echo "reponame=$reponame" >> $GITHUB_OUTPUT
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
-          echo "::set-output name=branch::$branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
           tag=""
           if [ ${{ github.ref_type }} = "tag" ]; then
             tag=${{ github.ref_name }}
@@ -29,7 +29,7 @@ jobs:
           else
             echo "Running in $reponame on $branch"
           fi
-          echo "::set-output name=tag::$tag"
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -45,6 +45,8 @@ jobs:
       CI_PROJECT_REPONAME: ${{ needs.check_branch.outputs.reponame }}
       CI_BRANCH: ${{ needs.check_branch.outputs.branch }}
       CI_TAG: ${{ needs.check_branch.outputs.tag }}
+      CI_PR: "false"
+
     steps:
       - name: Checkout the ixml repository
         uses: actions/checkout@v3
