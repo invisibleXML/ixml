@@ -12,7 +12,7 @@ fi
 curl -s -o /tmp/A.$PID.html https://invisiblexml.org/$SPEC/index.html
 
 # Make the diff version
-java -jar tools/deltaxml/command-14.1.0.jar compare xhtml-patch \
+java -jar tools/deltaxml/command-15.0.2.jar compare xhtml-patch \
      /tmp/A.$PID.html build/current/index.html /tmp/autodiff.$PID.html
 
 # Patch the diff version and make it HTML5
