@@ -3,520 +3,697 @@ namespace unqualified = ""
 
 grammar {
 
-	# RNC grammar for test catalog.
-	#
-	# Revisions:
-	# 2023-03-13 : CMSMcQ : Add metadata for dependencies (and correct typos)
-	# 2022-05-31 : CMSMcQ : Make 'error' attribute obligatory,
-	#                       add 'wrong-error' as result.
-	# 2022-04-12 : CMSMcQ : Move base version of this to ixml repo
-	# 2022-04-11 : CMSMcQ : Add dynamic-error as expected result
-	# 2022-02-14 : CMSMcQ : Move metadata from attributes to elements
-	# 2022-02-06 : CMSMcQ : Add a quick and dirty report format.
-	# 2021-12-22 : CMSMcQ : Make 'created' optional on individual tests;
-	#                       notionally, let it be inherited from test set.
-	# 2021-11-11 : CMSMcQ : Revamp result to allow multiple results
-	#                       and include assert-not-a-grammar.
-	#                       Rewrite some comments.
-	# 2021-10-31 : CMSMcQ : Commit some changes:  @name on test-case,
-	#                       allow at most one grammar for each test
-	#                       set (grammars may be inherited from ancestor
-	#                       test sets).
-	# 2021-01-25 : CMSMcQ : Sketch this out by hand.
-        #
-	# To do:
-	# - rewrite test-set to allow test cases only if a grammar is
-	#   specified on the test-set or some ancestor.
-	# - allow description to be (p+ | xhtml:div+) HTML
-	# - supply types for tokenized attributes?
-	#
+         # RNC grammar for test catalog.
+         #
+         # Revisions:
+         # 2024-05-01 : CMSMcQ : re-indent, use div for grouping, add
+         #                       double-hash comments for elements and
+         #                       important patterns
+         # 2023-03-13 : CMSMcQ : Add metadata for dependencies (and
+         #                       correct typos)
+         # 2022-05-31 : CMSMcQ : Make 'error' attribute obligatory,
+         #                       add 'wrong-error' as result.
+         # 2022-04-12 : CMSMcQ : Move base version of this to ixml
+         #                       repo
+         # 2022-04-11 : CMSMcQ : Add dynamic-error as expected result
+         # 2022-02-14 : CMSMcQ : Move metadata from attributes to
+         #                       elements
+         # 2022-02-06 : CMSMcQ : Add a quick and dirty report format.
+         # 2021-12-22 : CMSMcQ : Make 'created' optional on individual
+         #                       tests; notionally, let it be
+         #                       inherited from test set.
+         # 2021-11-11 : CMSMcQ : Revamp result to allow multiple
+         #                       results and include
+         #                       assert-not-a-grammar.  Rewrite some
+         #                       comments.
+         # 2021-10-31 : CMSMcQ : Commit some changes: @name on
+         #                       test-case, allow at most one grammar
+         #                       for each test set (grammars may be
+         #                       inherited from ancestor test sets).
+         # 2021-01-25 : CMSMcQ : Sketch this out by hand.
+         #
+         # To do:
+         # - allow description to be (p+ | xhtml:div+) HTML
+         # - supply types for tokenized attributes?
+         #
+    
+         # Notational convention: definitions starting in uppercase
+         # (e.g.  Metadata, Grammar-spec) are for content-model
+         # expressions.  Definitions starting in lowercase
+         # (e.g. test-catalog) are for individual elements, usually
+         # with the same name as the element.
+         #
+         # (Exception: element test-set has two definitions,
+         # test-set-0 and test-set-1.)
+    
+         # The normal starting points are test-catalog and
+         # test-report.  But to allow individual test sets and tests
+         # to be reported separately, we also allow lower-level result
+         # elements as the start symbol: test-set-results,
+         # grammar-rule, test-result.
 
-# Notational convention:  definitions starting in uppercase (e.g.
-# Metadata, Grammar-spec) are for content-model expressions.
-# Definitions starting in lowercase (e.g. test-catalog) are for
-# individual elements, usually with the same name as the element.
-#
-# (Exception:  element test-set has two definitions, test-set-0
-# and test-set-1.)
+    start = test-catalog | test-report 
+          | test-set-results | grammar-result | test-result
 
-# The normal starting points are test-catalog and test-report.
-# But to allow individual test sets and tests to be reported
-# separately, we also allow lower-level result elements as the
-# start symbol.
+    div {
+    
+         # test-catalog, test-report
 
-	start = test-catalog | test-report 
-              | test-set-results | grammar-result | test-result
+         ## test-catalog:  A test catalog is a collection of test 
+         ## sets, with common metadata.
+         test-catalog = element test-catalog {
+ 	                    attribute name { text },
+ 	                    attribute release-date { xsd:date },
+ 	                    external-atts,
+	                    (Metadata
+	                    &
+	                    (test-set-0 | test-set-ref)*)
+	                }
+         
+         ## test-report:  A test report is a collection of test set
+         ## reports, with common metadata.
+	 test-report = element test-report {
+                           element metadata { 
+    	                       (element name { text },
+	                        element report-date {
+                                    xsd:date | xsd:dateTime
+                                },
+	                        element processor { text },
+	    	                element processor-version { text }?,
+	    	                element catalog-uri { text },
+	    	                element catalog-date { text }?)
+                           & 
+                           Metadata
+                           },
+	                   external-atts,
+	                   (Metadata
+	                   &
+	                   test-set-results*)
+	               }
+    }
+    div {
 
-# test-catalog, test-report
+         # Metadata
+    
+         # At various levels we allow metadata: prose descriptions,
+ 	 # pointers to external documentation, or arbitrary XML
+ 	 # elements ('application-specific information'), and
+ 	 # miscellaneous technical details about dependencies of a
+ 	 # test (or, usually, of the test result) and for a test
+ 	 # result the environment within which a test was run.
 
-	# A test catalog is a collection of test sets, with common
-	# metadata.
-	test-catalog = element test-catalog {
-	    attribute name { text },
-	    attribute release-date { xsd:date },
-	    external-atts,
-	    (Metadata
-	    &
-	    (test-set-0 | test-set-ref)*)
-	}
+         ## Metadata: descriptions, documentation, dependencies,
+         ## or application-specific information
+         Metadata = (description | app-info | doc | dependencies)*
 
-	# A test report is a collection of test set reports, with common
-	# metadata.
-	test-report = element test-report {
-            element metadata { 
-    	        (element name { text },
-	        element report-date { xsd:date | xsd:dateTime },
-	        element processor { text },
-	    	element processor-version { text }?,
-	    	element catalog-uri { text },
-	    	element catalog-date { text }?)
-                & 
-                Metadata
-            },
-	    external-atts,
-	    (Metadata
-	    &
-	    test-set-results*)
-	}
+         ## description: a prose description of the item.
+         ## Say what you think needs saying.
+         description = element description {
+	                   external-atts,
+	                   p*
+	               }
 
-# Metadata
+         ## doc: pointer to documentation relevant to the item.
+         ## The 'href' attribute gives the URI.
+         doc = element doc {
+	           external-atts,
+	           attribute href { xsd:anyURI }
+	       }
 
-        # At various levels we allow metadata: prose descriptions,
-	# pointers to external documentation, or arbitrary XML
-	# elements ('application-specific information'), and
-	# miscellaneous technical details about dependencies of a test
-	# (or, usually, of the test result) and for a test result the
-	# environment within which a test was run.
-	
-        Metadata = (description | app-info | doc | dependencies)*
+	 ## app-info: The 'app-info' element is an escape hatch which
+	 ## can contain any XML at all.  It can be used for
+	 ## processor-specific information.  (Please document what you
+	 ## do!)
+         app-info = element app-info {
+	                external-atts,
+	                any-element*
+	            }
 
-        # The 'description' element contains a prose description.
-        # Say what you think needs saying.
-        description = element description {
-	  external-atts,
-	  p*
-	}
+         ## options: The 'options' element is embedded within app-info
+         ## to mark results which depend (for a given processor) on
+         ## the options with which the processor was invoked.                  
+         options = element options {
+                       external-atts,
+                       empty
+                       
+                       # N.B. The 'options' element is in the
+                       # test-catalog namespace, but it is allowed
+                       # only within app-info.
 
-        # The 'doc' element carries an 'href' attribute pointing to
-        # relevant external documentation.
-        doc = element doc {
-	  external-atts,
-	  attribute href { xsd:anyURI }
-	}
+                       # Options are assumed describable with
+                       # name/value pairs encoded as
+                       # namespace-qualified attributes.  Typically
+                       # the attribute name names the option, and the
+                       # value says how to set it.
+                       
+                       # Examples and some discussion are in
+                       # ../tests/grammar-misc/test-catalog.xml
+                       
+                       # If all the option/setting pairs on any
+                       # options element in the app-info element
+                       # apply, then any of the results specified in
+                       # that app-info element is acceptable.
+                       
+                       # So: for both the options elements and the
+                       # results in the app-info there is an implicit
+                       # disjunction: if any of the options elements
+                       # applies, then any of the results is OK.  For
+                       # the various name/value pairs on an options
+                       # element, there is an implicit conjunction:
+                       # the options element applies if ALL of the
+                       # name/value pairs apply.
+                       
+                       # N.B. The options element, and the method of
+                       # handling options it represents, is to be
+                       # regarded as experimental.
+                       
+                   }
 
-	# The 'app-info' is an escape hatch which can contain any XML
-	# at all.  It can be used for processor-specific information.
-	# (Please document what you do!)
-        app-info = element app-info {
-	  external-atts,
-	  any-element*
-	}
+         
+         ## environment: describes possible dependency of a test result
+         ## on the environment within which the test is run.
+         environment = element environment {
+                           external-atts,
+                           empty
+                         
+                               # The 'environment' element works much
+                               # the same way as the options element;
+                               # when results reported for a test
+                               # depend on the environment (e.g. which
+                               # version of Java is used, or which
+                               # browser an in-browser processor uses,
+                               # or ...), then the relevant
+                               # information should be given on an
+                               # 'environment' element wrapped in an
+                               # 'app-info' element at the appropriate
+                               # level of the test results.  (Top
+                               # level if applicable to all, test set
+                               # if applicable only to that test set,
+                               # test result if applicable to that
+                               # result.)
+         
 
-        # The 'options' element (in the test-catalog namespace, but
-        # allowed only within app-info) is used to mark results which
-        # depend (for a given processor) on the options with which the
-        # processor was invoked.  Options are assumed describable with
-        # name/value pairs encoded as namespace-qualified attributes.
-        # Typically the attribute name names the option, and the value
-        # says how to set it.  Examples and some discussion are in
-        # ../tests/grammar-misc/test-catalog.xml
+                       }
+                  
+         # The difference between options and environment is that
+         # options are assumed to be settable at parse time by whoever
+         # calls the ixml processor, and the environment is less
+         # likely to be settable that way.  In case of gray areas,
+         # explain your usage in the test catalog.
+         
+         ## dependencies: identifies conditions that must hold for the
+         ## results given for a test to hold.
+         dependencies = element dependencies {
+                            attribute Unicode-version { text }, 
+                            external-atts,
+                            empty
+                          
+                                # Like 'options' and 'environment', it
+                                # allows an arbitrary set of
+                                # name/value pairs
+                                # (namespace-qualified attributes).
+                                # If all of them apply, the test
+                                # result given is applicable.
+         
+                                # Some dependencies are standardized:
+                                # any processor must conform to some
+                                # version of Unicode but we don't
+                                # specify which, so the processor must
+                                # specify.  Test results must be
+                                # labeled with the appropriate Unicode
+                                # version(s).
+                          
+                        }
+         
+         # The differences among these three elements for describing
+         # when a test or a result is relevant are:
 
-        # If all the option/setting pairs on any options element in
-        # the app-info element apply, then any of the results
-        # specified in that app-info element is acceptable.
+         # options - implementation-defined, typically settable by
+         #           caller at parse time.  Wrap in app-info to label
+         #           results (often non-standard) which depend on how
+         #           the processor was invoked.
 
-        # So: for both the options elements and the results in the
-        # app-info there is an implicit disjunction: if any of the
-        # options elements applies, then any of the results is OK.
-        # For the various name/value pairs on an options element,
-        # there is an implicit conjunction: the options element
-        # applies if ALL of the name/value pairs apply.
+         # environment - relevant but not under implementation
+         #           control.  Wrap in app-info, use to label results
+         #           which depend on the environment within which the
+         #           processor is running (or within which a test
+         #           result was obtained).
 
-        # N.B. The options element, and the method of handling options
-        # it represents, is to be regarded as experimental.
-        
-        options = element options {
-          external-atts,
-          empty
-        }
-        
-        # The environment element works much the same way as the
-        # options element; when results reported for a test depend on
-        # the environment (e.g. which version of Java is used, or
-        # which browser an in-browser processor uses, or ...), then
-        # the relevant information should be given on an 'environment'
-        # element wrapped in an 'app-info' element at the appropriate
-        # level of the test results.  (Top level if applicable to all,
-        # test set if applicable only to that test set, test result if
-        # applicable to that result.)
+         # dependencies - used to label test cases whose results
+         #           depend on which version of another spec is
+         #           applicable.
 
-        # The difference between options and environment is that
-        # options are assumed to be settable at parse time by whoever
-        # calls the ixml processor, and the environment is less likely
-        # to be settable that way.  In case of gray areas, explain
-        # your usage in the test catalog.
+    }
+    div {
 
-        environment = element environment {
-          external-atts,
-          empty
-        }
+         # test-set, test-set-results
 
-        # The difference between options and environment is that
-        # options are assumed to be settable at parse time by whoever
-        # calls the ixml processor, and the environment is less likely
-        # to be settable that way.  In case of gray areas, explain
-        # your usage in the test catalog.
+         # A test set is a collection of tests (or possibly
+	 # subordinate test sets, or both) with common metadata and a
+	 # common grammar.
+    
+         # Test cases are allowed only after a grammar is specified.
+    
+         # We keep track of whether an ancestor has specified a
+	 # grammar by having two nonterminals for test sets:
+	 # test-set-0 is used when no ancestor has specified a
+	 # grammar, test-set-1 when at least one grammar has been
+	 # specified.
+    
+         # If no ancestor has specified a grammar, test cases are
+	 # allowed in this test set only if this test set does specify
+	 # a grammar.  Use test-set-0 or -1 to pass the news along.
 
-        # The 'dependencies' element identifies conditions that must
-        # hold for the results given for a test to hold.  Like
-        # 'options' and 'environment', it allows an arbitrary set of
-        # name/value pairs (namespace-qualified attributes).  If all
-        # of them apply, the test result given is applicable.
+         ## test-set (pattern test-set-0):  a test set with no
+         ## grammar inherited from any ancestor.
+         test-set-0 = element test-set {
+	                  attribute name { text },
+	                  external-atts,
+	                  (Metadata
+	                  &
+	                  (History,
+	                   ( (test-set-0 | test-set-ref)*
+	                   | (Grammar-spec,
+                              (test-set-1
+                              | test-set-ref
+                              | test-case)*) )))
+	              }
+	 
+         # If an ancestor has specified a grammar, test cases are allowed
+	 # in this test set even if there is no grammar at this level.
+	 
+         ## test-set (pattern test-set-1): a test set with a grammar
+         ## inherited from an ancestor.           
+         test-set-1 = element test-set {
+	                  attribute name { text },
+	                  external-atts,
+	                  (Metadata
+	                  &
+	                  (History,
+	                   Grammar-spec?,
+	                   (test-set-1 | test-set-ref | test-case)*))
+	              }
 
-        # Some dependencies are standardized:  any processor must
-        # conform to some version of Unicode but we don't specify which,
-        # so the processor must specify.  Test results must be labeled
-        # with the appropriate Unicode version(s).
-        
-        dependencies = element dependencies {
-          attribute Unicode-version { text }, 
-          external-atts,
-          empty
-        }
-        
-        # The differences are:
-        # options - implementation-defined, typically settable by caller
-        #           at parse time.  Wrap in app-info to label results
-        #           (often non-standard) which depend on how the
-        #           processor was invoked.
-        # environment - relevant but not under implementation control.
-        #           Wrap in app-info, use to label results which depend
-        #           on the environment within which the processor is
-        #           running (or within which a test result was obtained).
-        # dependencies - used to label test cases whose results 
-        #           depend on which version of another spec is applicable.
-        
-# test-set, test-set-results
+         ## test-set-ref:  a reference to a test set located in
+         ## another test catalog; the 'href' attribute gives the URI.
+	 test-set-ref = element test-set-ref {
+	                    external-atts,
+	                    attribute href { xsd:anyURI }
+	                }
+         
+         ## test-set-results:  contains reports of results from running
+         ## the test cases of a given test set.
+         test-set-results = element test-set-results {
+	                        attribute name { text },
+	                        external-atts,
+	                        (Metadata
+	                        &
+	                        (Grammar-results?,
+	                         (test-set-results | test-result)*))
+	                    }
 
-        # A test set is a collection of tests (or possibly subordinate
-	# test sets, or both) with common metadata and a common
-	# grammar.
+    }
+    div {
 
-        # Test cases are allowed only after a grammar is specified.
-	
-        # We keep track of whether an ancestor has specified a grammar
-	# by having two nonterminals for test sets:  test-set-0 is used
-	# when no ancestor has specified a grammar, test-set-1 when
-	# at least one grammar has been specified.
+         # Specifying the grammar for a set of tests
 
-        # If no ancestor has specified a grammar, test cases are allowed
-	# in this test set only if this test set does specify a grammar.
-	# Use test-set-0 or -1 to pass the news along.
-	
-        test-set-0 = element test-set {
-	    attribute name { text },
-	    external-atts,
-	    (Metadata
-	    &
-	    (History,
-	    ( (test-set-0 | test-set-ref)*
-	    | (Grammar-spec, (test-set-1 | test-set-ref | test-case)*) )))
-	}
-	
-        # If an ancestor has specified a grammar, test cases are allowed
-	# in this test set even if there is no grammar at this level.
-	
-        test-set-1 = element test-set {
-	    attribute name { text },
-	    external-atts,
-	    (Metadata
-	    &
-	    (History,
-	    Grammar-spec?,
-	    (test-set-1 | test-set-ref | test-case)*))
-	}
+         # Grammars can be in invisible XML or in visible XML.  They
+	 # can be inline or external.  They can be marked as a grammar
+	 # test or not.
 
-        test-set-results = element test-set-results {
-	    attribute name { text },
-	    external-atts,
-	    (Metadata
-	    &
-	    (Grammar-results?,
-	    (test-set-results | test-result)*))
-	}
+         ## Grammar-data: four ways to specify the grammar for a test
+         ## set.
+	 Grammar-data = (ixml-grammar
+	                | vxml-grammar
+	                | ixml-grammar-ref
+	                | vxml-grammar-ref)
+	 
+         ## Grammar-spec: specification of the grammar for a test set,
+         ## optionally treating the grammar itself as a test case to
+         ## be parsed against the specification grammar.
+	 Grammar-spec = (Grammar-data, grammar-test?)
+         
+         # In the results file, we may omit the grammar, or include
+	 # it, possibly both reproducing the reference and giving
+	 # the grammar inline.
 
-        # Grammars can be in invisible XML or in visible XML.
-	# They can be inline or external.  They can be marked
-	# as a grammar test or not.
-	
-	Grammar-data = (ixml-grammar
-	    | vxml-grammar
-	    | ixml-grammar-ref
-	    | vxml-grammar-ref)
-	    
-	Grammar-spec = (Grammar-data, grammar-test?)
+         ## Grammar-results: optional reproduction of the grammar used
+         ## for the test set, and reports of any grammar tests.
+	 Grammar-results = (Grammar-data*, grammar-result*)
 
-        # In the results file, we may omit the grammar, or include
-	# it, possibly both reproducing the reference and giving
-	# the grammar inline. 
-	Grammar-results = (Grammar-data*, grammar-result*)
+         # Q. Why is the grammar optional?
+	 # A. Because in a nested test set we may want to inherit the
+	 #    grammar from the parent test set.  In a top-level test
+	 #    set with no direct test-case children, we may just be
+	 #    pointing to multiple test sets which each provide their
+	 #    own grammar.  By the time we reach a test case we must
+	 #    have at least one grammar, but we don't need one at
+	 #    every level.
+         
+         # Q. Why can't there be multiple grammars?
+         # A. First, it's error prone: it would work only if all of
+	 #    them were guaranteed equivalent.  We don't want to have
+	 #    to check that, and we don't want the mess that will
+	 #    result if it turns out not to be true.  Second, it
+	 #    complicates reporting unnecessarily.  It's simpler when
+	 #    one test case is one grammar + input + result triple.
+         
+	 ## ixml-grammar: a grammar in invisible-XML form, given
+	 ## inline in the test catalog.         
+	 ixml-grammar = element ixml-grammar {
+	                    external-atts,
+	                    text
+	                }
+	 
+	 ## ixml-grammar-ref: a reference to a grammar in
+         ## invisible-XML form located elsewhere.  The 'href'
+         ## attribute says where.         
+	 ixml-grammar-ref = element ixml-grammar-ref {
+	                        external-atts,
+	                        attribute href { xsd:anyURI }
+	                    }
+         
+	 ## vxml-grammar: grammar in visible-XML form (either a parsed
+	 ## ixml grammar, translated into XML, or something created in
+	 ## XML), given inline in the test catalog.
+	 vxml-grammar = element vxml-grammar {
+	                    external-atts,
+	                    any-element
+	                }
 
-        # Q. Why is the grammar optional?
-	# A. Because in a nested test set we may want to inherit the
-	#    grammar from the parent test set.  In a top-level test
-	#    set with no direct test-case children, we may just be
-	#    pointing to multiple test sets which each provide their
-	#    own grammar.  By the time we reach a test case we must
-	#    have at least one grammar, but we don't need on at every
-	#    level.
-        # Q. Why can't there be multiple grammars?
-        # A. First, it's error prone:  it would work only if all of them
-	#    were guaranteed equivalent.  We don't want to have to check
-	#    that, and we don't want the mess that will result if it
-	#    turns out not to be true.  Second, it complicates reporting
-	#    unnecessarily.  It's simpler when one test case is one
-	#    grammar + input + result triple.
+	 # N.B. It is tempting to embed a schema for ixml grammars here
+	 # to enforce the correct XML form.  But we do not require a
+	 # legal ixml grammar, because it may be a negative test case.
+	 
+	 ## vxml-grammar-ref: reference to a grammar in visible-XML
+	 ## form (either a parsed ixml grammar, translated into XML,
+	 ## or something created in XML), given elsewhere (as
+	 ## indicated by the 'href' attribute).
+	 vxml-grammar-ref = element vxml-grammar-ref {
+	                        external-atts,
+	                        attribute href { xsd:anyURI }
+	                    }
+         
+	 ## grammar-test:  signals that this grammar should be checked
+	 ## and either accepted or declined as a grammar.	 
+	 grammar-test = element grammar-test {
+	                    external-atts,
+	                    (Metadata & (History?, result))
+	                }
 
-	test-set-ref = element test-set-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
+	 ## grammar-result:  reports the result of a grammar test.
+	 grammar-result = element grammar-result {
+	                      attribute result { result-type }, 
+	                      external-atts,
+	                      (Metadata & (result-report?))
+	                  }
+    }
+    div { 
+         # test-case
 
-	# ixml-grammar:  grammar in invisible-XML form
-	ixml-grammar = element ixml-grammar {
-	    external-atts,
-	    text
-	}
-	
-	ixml-grammar-ref = element ixml-grammar-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
+         ## test-case: describes one test case, with metadata,
+	 ## history, and expected result.
+         test-case = element test-case {
+	                 attribute name { text }, 
+	                 external-atts,
+	                 (Metadata & (History?, Test-string, result))
+	             }
 
-	# vxml-grammar:  grammar in visible-XML form (either a parsed
-	# ixml grammar, translated into XML, or something created in
-	# XML)
-	#
-	# N.B. It is tempting to embed a schema for ixml grammars here
-	# to enforce the correct XML form.  But we do not require a
-	# legal ixml grammar, because it may be a negative test case.
-	
-	vxml-grammar = element vxml-grammar {
-	    external-atts,
-	    any-element
-	}
-	
-	vxml-grammar-ref = element vxml-grammar-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
+         ## test-result:  reports the result of one test case.
+         test-result = element test-result {
+	                   attribute name { text }, 
+	                   attribute result { result-type }, 
+	                   external-atts,
+	                   (Metadata & 
+                            (Grammar-data*,
+                             (Test-string)*,
+                             result-report?)
+                           )
+	               }
 
-	# grammar-test:  signals that this grammar should be checked
-	# and either accepted or declined as a grammar.
-	
-	grammar-test = element grammar-test {
-	    external-atts,
-	    (Metadata & (History?, result))
-	}
+         ## result-type:  keyword description of test result
+	 result-type = ## results are as expected
+                       'pass' 
+	             | ## results not as expected
+                       'fail' 
+	             | ## right overall result, wrong error code
+                       'wrong-error' 
+	             | ## right overall result, wrong ixml:state value(s)
+                       'wrong-state' 
+    	             | ## test case was not run (explain!)
+                       'not-run' 
+	             | ## none of the above
+                       'other' 
 
-	grammar-result = element grammar-result {
-	    attribute result { result-type }, 
-	    external-atts,
-	    (Metadata & (result-report?))
-	}
+         ## Test-string:  input string, in-line or external
+         Test-string = (test-string | test-string-ref)
 
+         ## test-string:  this element contains the input string
+         ## for the test case.
+	 test-string = element test-string {
+	                   external-atts,
+	                   text
+	               }
 
-# test-case
+         ## test-string-ref: this element carries a point to an
+         ## external resource which contains the input string for the
+         ## test case.
+	 test-string-ref = element test-string-ref {
+	                       external-atts,
+	                       attribute href { xsd:anyURI }
+	                   }
+    }
+    div {
+         # result
 
-        # test-case:  describes one test case, with metadata, history,
-	# and expected result.
-	
-        test-case = element test-case {
-	    attribute name { text }, 
-	    external-atts,
-	    (Metadata & (History?, Test-string, result))
-	}
-	
-        test-result = element test-result {
-	    attribute name { text }, 
-	    attribute result { result-type }, 
-	    external-atts,
-	    (Metadata & 
-            (Grammar-data*, (Test-string)*, result-report?)
-            )
-	}
-	
-	result-type = 'pass' # results are as expected
-	            | 'fail' # results not as expected
-		    | 'wrong-error' # right overall result, wrong error code
-		    | 'wrong-state' # right overall result, wrong ixml:state value(s)
-		    | 'not-run' 
-		    | 'other' 
+         ## result: specifies the expected result of a test; contains
+	 ## an assertion of some kind.
+         result = element result {
+	              external-atts,
+	              Assertion
+	          }
 
-        # Test-string:  in-line or external
+         ## result-report: specifies the observed result of running a
+         ## test case.  May repeat the assertion describing the
+         ## expected result, and may report what was actually observed
+         ## when the test was run.
+         result-report = element result {
+	                     external-atts,
+	                     Assertion?,
+	                     Observation?
+	                 }
 
-        Test-string = (test-string | test-string-ref)
-	
-	test-string = element test-string {
-	    external-atts,
-	    text
-	}
+    }
+    div {
+         # Test assertions
 
-	test-string-ref = element test-string-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
+         # Several kinds of result are possible.
+	 #
+	 # - In the common case we will have one expected XML result.
+	 #   We specify it with assert-xml or assert-xml-ref (inline
+	 #   or external).
+	 #
+	 # - For ambiguous sentences, we may and should specify
+	 #   several XML results, any of which is acceptable.  So the
+	 #   XML assertions can repeat, with an implicit OR as their
+	 #   meaning.
+	 #
+	 # - In the case of infinite ambiguity, we can and should
+	 #   specify a finite subset of the expected results, which we
+	 #   add to as needed.
+	 #
+	 # - If the input is not be a sentence in the language defined
+	 #   by the grammar, we use assert-not-a-sentence.
+	 #
+	 # - If the grammar specified is not a conforming ixml
+	 #   grammar, then we use assert-not-a-grammar.
+	 #
+	 # - If the particular grammar + input pair would produce
+	 #   ill-formed output if the normal rules were followed, then
+	 #   we use assert-dynamic-error.
+	 #
+	 # Logically speaking, in the case of a grammar-test, there is
+	 # no useful distinction between assert-not-a-sentence and
+	 # assert-not-a-grammar.  Casuists can argue over which makes
+	 # more sense, but in practice they should be treated as
+	 # equivalent.  The two assertions are usefully different only
+	 # for normal test cases.
+	 #
+	 # Since dynamic errors are allowed to be caught statically,
+	 # some processors may return assert-not-a-grammar when the
+	 # test catalog expects assert-dynamic-error.
+	 #
+	 # Errors in the grammar and dynamic errors may be associated
+	 # with error codes.  These are now required.
 
-# result
+         ## Assertion: things a catalog can say about an expected test
+         ## result.
+         Assertion = ((assert-xml-ref | assert-xml)+
+	             | assert-not-a-sentence
+	             | assert-not-a-grammar
+		     | assert-dynamic-error)
 
-        # result: specifies the expected result of a test;
-	# contains an assertion of some kind.
-        result = element result {
-	    external-atts,
-	    Assertion
-	}
+         ## Error-Code:  an attribute for specifying an error code
+         ## expected for a test case, or observed in a test.
+         Error-Code = attribute error-code { text }
 
-        result-report = element result {
-	    external-atts,
-	    Assertion?,
-	    Observation?
-	}
+         ## assert-xml-ref: asserts that the result of the test case
+         ## is expected to match the external XML document pointed to
+         ## by the 'href' attribute.
+         assert-xml-ref = element assert-xml-ref {
+	                      external-atts,
+	                      attribute href { xsd:anyURI }
+	                  }
 
+         ## assert-xml: asserts that the result of the test case is
+         ## expected to match the XML contained.
+         assert-xml = element assert-xml {
+	                  external-atts,
+	                  any-element+
+	              }
+         
+         ## assert-not-a-sentence: asserts that the input string is
+         ## not a sentence in the language defined by the input
+         ## grammar.
+         assert-not-a-sentence = element assert-not-a-sentence {
+	                             external-atts,
+	                             Metadata
+	                         }
+         
+         ## assert-not-a-grammar: asserts that the input grammar given
+         ## is not a conforming ixml grammar.  This may be because
+         ## it's not a sentence in the language defined by the ixml
+         ## specification grammar, or for other reasons.
+         assert-not-a-grammar = element assert-not-a-grammar {
+	                            Error-Code,
+	                            external-atts,
+	                            Metadata
+	                        }
+         
+         ## assert-dynamic-error: asserts that when the input grammar
+         ## is parsed against the input grammar and written out as
+         ## XML, a dynamic error is expected to result.  Note that
+         ## processors are allowed to detect dynamic errors statically
+         ## and report with a 'reported-not-a-grammar'.
+         assert-dynamic-error = element assert-dynamic-error {
+	                            Error-Code,
+	                            external-atts,
+	                            Metadata
+	                        }
 
-# Test assertions
+         ## Observation:  things a test report can say about
+         ## an observed test result.
+         Observation = ((reported-xml-ref | reported-xml)+
+	               | reported-not-a-sentence
+	               | reported-not-a-grammar
+		       | reported-dynamic-error)
 
-        # Several kinds of result are possible.
-	#
-	# - In the common case we will have one expected XML result.  We
-	#   specify it with assert-xml or assert-xml-ref (inline or
-	#   external).
-	#
-	# - For ambiguous sentences, we may and should specify several 
-	#   XML results, any of which is acceptable.  So the XML
-	#   assertions can repeat, with an implicit OR as their meaning.
-	#
-	# - In the case of infinite ambiguity, we can and should specify
-	#   a finite subset of the expected results, which we add to as
-	#   needed.
-	#
-	# - If the input is not be a sentence in the language defined
-	#   by the grammar, we use assert-not-a-sentence.
-	#
-	# - If the grammar specified is not a conforming ixml grammar, 
-	#   then we use assert-not-a-grammar.
-	#
-	# - If the particular grammar + input pair would produce 
-	#   ill-formed output if the normal rules were followed, then
-	#   we use assert-dynamic-error.
-	#
-	# Logically speaking, in the case of a grammar-test, there is no
-	# useful distinction between assert-not-a-sentence and
-	# assert-not-a-grammar.  Casuists can argue over which makes
-	# more sense, but in practice they should be treated as
-	# equivalent.  They are usefully different only for normal
-	# test cases.
-	#
-	# Since dynamic errors are allowed to be caught statically,
-	# some processors may return assert-not-a-grammar when the test
-	# catalog expects assert-dynamic-error.
-	#
-	# Errors in the grammar and dynamic errors may be associated
-	# with error codes.  These are now required.
+         ## reported-xml-ref:  reports that when the test case
+         ## was run, the processor produced the XML document
+         ## pointed to by the 'href' attribute.
+         reported-xml-ref = element reported-xml-ref {
+	                        external-atts,
+	                        attribute href { xsd:anyURI }
+	                    }
+         
+         ## reported-xml: reports that when the test case was run, the
+         ## processor produced the XML output contained in the
+         ## element.
+         reported-xml = element reported-xml {
+	                    external-atts,
+	                    any-element+
+	                }
+         
+         ## reported-not-a-sentence: reports that when the test case
+         ## was run, the processor reported that parsing failed (i.e.
+         ## that the input string is not a sentence in the language
+         ## defined by the input grammar).
+         reported-not-a-sentence = element reported-not-a-sentence {
+	                               external-atts,
+	                               Metadata
+	                           }
 
-        Assertion = ((assert-xml-ref | assert-xml)+
-	            | assert-not-a-sentence
-	            | assert-not-a-grammar
-		    | assert-dynamic-error)
-
-        Error-Code = attribute error-code { text }
-
-        assert-xml-ref = element assert-xml-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
-        assert-xml = element assert-xml {
-	    external-atts,
-	    any-element+
-	}
-        assert-not-a-sentence = element assert-not-a-sentence {
-	    external-atts,
-	    Metadata
-	}
-        assert-not-a-grammar = element assert-not-a-grammar {
-	    Error-Code,
-	    external-atts,
-	    Metadata
-	}
-        assert-dynamic-error = element assert-dynamic-error {
-	    Error-Code,
-	    external-atts,
-	    Metadata
-	}
-
-        Observation = ((reported-xml-ref | reported-xml)+
-	            | reported-not-a-sentence
-	            | reported-not-a-grammar
-		    | reported-dynamic-error)
+         ## reported-not-a-grammar: reports that when the test case
+         ## was run, the processor reported that the input grammar
+         ## was not a conforming ixml grammar.
+         ## Note that this may be reported when the processor
+         ## detects that serializing the result would raise a
+         ## dynamic error.         
+         reported-not-a-grammar = element reported-not-a-grammar {
+	                              Error-Code,
+	                              external-atts,
+	                              Metadata
+	                          }
+         
+         ## reported-dynamic-error: reports that when the test case
+         ## was run, the processor reported a dynamic error.
+         reported-dynamic-error = element reported-dynamic-error {
+	                              Error-Code,
+	                              external-atts,
+	                              Metadata
+	                          }
 		    
-        reported-xml-ref = element reported-xml-ref {
-	    external-atts,
-	    attribute href { xsd:anyURI }
-	}
-        reported-xml = element reported-xml {
-	    external-atts,
-	    any-element+
-	}
-        reported-not-a-sentence = element reported-not-a-sentence {
-	    external-atts,
-	    Metadata
-	}
-        reported-not-a-grammar = element reported-not-a-grammar {
-	    Error-Code,
-	    external-atts,
-	    Metadata
-	}
-        reported-dynamic-error = element reported-dynamic-error {
-	    Error-Code,
-	    external-atts,
-	    Metadata
-	}
-		    
+    }
+    div {
+         # Common constructs
 
-# Common constructs
+         ## History:  creation and modification history
+	 History = (created, modified*)
 
-        # History:  creation and modification history
-	History = (created, modified*)
-	
-        who-when = attribute by { text },
-	    	   attribute on { xsd:date }
+         ## who-when:  attributes for reporting who did
+         ## something and when they did it.
+         who-when = attribute by { text },
+	    	    attribute on { xsd:date }
 
-        created = element created {
-	    who-when
-	}
-	
-        modified = element modified {
-	    who-when,
-	    attribute change { text }
-	}
+         ## created: reports who created the item (test catalog, test
+         ## set, test case, ...) and when.
+         created = element created {
+	               who-when
+	           }
+	 
+         ## modified: reports who changed the item (test catalog, test
+         ## set, test case, ...) and when.
+         modified = element modified {
+	                who-when,
+	                attribute change { text }
+	            }
 
-        # Elements for simple prose.
-	
-	p = element p { phrases }
-	
-	phrases = (text | emph | code)*
+         # Elements for simple prose.
 
-	emph = element emph { phrases }
+         ## p:  a paragraph of simple prose.
+	 p = element p { phrases }
 
-        code = element code { text }
+         ## phrases:  possible content of a paragraph.
+	 phrases = (text | emph | code)*
 
-        # Arbitrary XML
+         ## emph: marks a phrased emphasized either rhetorically or
+         ## typographically or both.  (Expected rendering: italic.)
+	 emph = element emph { phrases }
 
-	anything = (any-element | any-attribute | text)* 
-	any-element = element * { anything }
-	any-attribute = attribute * { text }
+         ## code: marks material from a machine-processable language
+         ## of some kind (e.g. a program). (Expected rendering:
+         ## monospaced.)
+         code = element code { text }
 
-        external-atts = nsq-att*
+         # Arbitrary XML
 
-	nsq-att = attribute (* - unqualified:*) { text }
+         ## anything:  a pattern matching arbitrary XML
+	 anything = (any-element | any-attribute | text)*
 
+         ## any-element: a pattern matching one well-formed XML
+         ## element.
+	 any-element = element * { anything }
+         
+         ## any-element: a pattern matching one XML attribute.
+	 any-attribute = attribute * { text }
+
+         ## external-atts: a pattern matchine zero or more
+         ## namespace-qualified attributes.
+         external-atts = nsq-att*
+
+         ## nsq-att: a pattern matching one namespace-qualified
+         ## attribute.
+	 nsq-att = attribute (* - unqualified:*) { text }
+
+    }
 }
