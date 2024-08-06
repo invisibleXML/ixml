@@ -340,10 +340,13 @@ which it found a valid interpretation, otherwise it
 syntax and semantics of the version declared or assumed (<a class="error"
 href="#err-s12">error S12</a>).</p>
 
-<p>If the version is absent or unrecognized, the document element of the
+<p>The document element of the serialization <span class="conform">should</span>
+include an attribute named <code>ixml:version</code> that identifies the version
+of the iXML grammar used for the parse.
+If the prolog specifies a version that is unrecognized, the document element of the
 serialization <span class="conform">must</span> include an attribute named
 <code>ixml:state</code>, with the word '<code>version-mismatch</code>' in its
-value. The ixml namespace URI is "<code>http://invisiblexml.org/NS</code>".</p>
+value. The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p>
 
 <h3 id="rules">Rules</h3>
 
