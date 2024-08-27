@@ -1,5 +1,4 @@
-{version 2024-08-27}
-         ixml: s, prolog?, rule++RS, s.
+         ixml: s, (prolog, RS)?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
           -RS: (whitespace; comment)+. {Required spacing}
@@ -10,7 +9,7 @@
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
 
-       prolog: version, RS.
+       prolog: version.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
          rule: naming, -["=:"], s, -alts, -".".
