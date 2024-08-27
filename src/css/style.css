@@ -51,7 +51,7 @@ pre {
     padding: 0.5em 0 0.5em 1em;
     border: 3px solid #ddf;
     border-radius: 0.5em;
-    overflow: scroll;
+    overflow: auto;
 }
 
 span.todo, ins {
@@ -68,6 +68,10 @@ a, a:visited, a:link {
 
 a.button {
     color: black;
+}
+
+h1 a:link, h2 a:link, h1 a:visited, h2 a:visited {
+    text-decoration: none; color: black
 }
 
 img {
