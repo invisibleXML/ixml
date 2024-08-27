@@ -62,7 +62,7 @@ defaultTasks 'publish'
 
 task publish(
   group: "publish",
-  dependsOn: ["formatSpec", "copyResources", "ixmlInXml", "ixmlInIxml"],
+  dependsOn: ["formatSpec", "copyResources", "ixmlInXml", "ixmlInIxml", "publishTests"],
   description: "Publish the current specification") {
 }
 
@@ -71,13 +71,21 @@ task extractIxmlInIxml(
   description: "Extract the iXML Grammar in iXML"
 ) {
   inputs.files fileTree(dir: "${projectDir}/src")
+  inputs.files fileTree(dir: "${projectDir}/build-tools")
   outputs.file "${buildDir}/current/ixml.ixml"
 
   classpath = configurations.saxon
   mainClass = "net.sf.saxon.Transform"
   args "-s:${projectDir}/src/ixml-specification.html",
     "-xsl:${projectDir}/build-tools/extract-ixml.xsl",
-    "-o:${buildDir}/current/ixml.ixml"
+    "-o:${buildDir}/current/ixml.ixml",
+    "ci-sha1=${getenv('CI_SHA1')}",
+    "ci-build-num=${getenv('CI_BUILD_NUM')}",
+    "ci-project-username=${getenv('CI_PROJECT_USERNAME')}",
+    "ci-project-reponame=${getenv('CI_PROJECT_REPONAME')}",
+    "ci-branch=${getenv('CI_BRANCH')}",
+    "ci-tag=${getenv('CI_TAG')}",
+    "ci-pull=${getenv('CI_PULL')}"
 }
 
 task extractIxmlInXml(
@@ -175,3 +183,36 @@ task ixmlInIxml(
     "ixml.ixml=${extractIxmlInIxml.outputs.getFiles().getSingleFile()}"
 }
     
+// ============================================================
+
+task publishTests(
+  description: "Format the test suite for the web"
+) {
+  doFirst {
+    mkdir "${buildDir}/test-catalog"
+  }
+  
+  doLast {
+    javaexec {
+      classpath = configurations.saxon
+      mainClass = "net.sf.saxon.Transform"
+      args "-s:${projectDir}/tests/test-catalog.xml",
+        "-xsl:${projectDir}/tests/tools/to-html.xsl",
+        "-o:${buildDir}/test-catalog/index.html"
+    }
+  }
+
+  doLast {
+    copy {
+      into "${buildDir}/test-catalog/css/"
+      from "${projectDir}/tools/css/"
+    }
+  }
+
+  doLast {
+    copy {
+      into "${buildDir}/test-catalog/img/"
+      from "${projectDir}/tools/img/"
+    }
+  }
+}

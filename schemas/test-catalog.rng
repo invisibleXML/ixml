@@ -4,6 +4,7 @@
     RNC grammar for test catalog.
     
     Revisions:
+    2023-03-13 : CMSMcQ : Add metadata for dependencies (and correct typos)
     2022-05-31 : CMSMcQ : Make 'error' attribute obligatory,
                           add 'wrong-error' as result.
     2022-04-12 : CMSMcQ : Move base version of this to ixml repo
@@ -30,7 +31,7 @@
   -->
   <!--
     Notational convention:  definitions starting in uppercase (e.g.
-    Metadata, Grammar-spec are for content-model expressions.
+    Metadata, Grammar-spec) are for content-model expressions.
     Definitions starting in lowercase (e.g. test-catalog) are for
     individual elements, usually with the same name as the element.
     
@@ -124,10 +125,12 @@
   </define>
   <!-- Metadata -->
   <!--
-    At various levels we allow metadata:
-    prose descriptions, pointers to external
-    documentation, or arbitrary XML elements
-    ('application-specific information').
+    At various levels we allow metadata: prose descriptions,
+    pointers to external documentation, or arbitrary XML
+    elements ('application-specific information'), and
+    miscellaneous technical details about dependencies of a test
+    (or, usually, of the test result) and for a test result the
+    environment within which a test was run.
   -->
   <define name="Metadata">
     <zeroOrMore>
@@ -135,9 +138,14 @@
         <ref name="description"/>
         <ref name="app-info"/>
         <ref name="doc"/>
+        <ref name="dependencies"/>
       </choice>
     </zeroOrMore>
   </define>
+  <!--
+    The 'description' element contains a prose description.
+    Say what you think needs saying.
+  -->
   <define name="description">
     <element name="description">
       <ref name="external-atts"/>
@@ -146,14 +154,10 @@
       </zeroOrMore>
     </element>
   </define>
-  <define name="app-info">
-    <element name="app-info">
-      <ref name="external-atts"/>
-      <zeroOrMore>
-        <ref name="any-element"/>
-      </zeroOrMore>
-    </element>
-  </define>
+  <!--
+    The 'doc' element carries an 'href' attribute pointing to
+    relevant external documentation.
+  -->
   <define name="doc">
     <element name="doc">
       <ref name="external-atts"/>
@@ -162,6 +166,116 @@
       </attribute>
     </element>
   </define>
+  <!--
+    The 'app-info' is an escape hatch which can contain any XML
+    at all.  It can be used for processor-specific information.
+    (Please document what you do!)
+  -->
+  <define name="app-info">
+    <element name="app-info">
+      <ref name="external-atts"/>
+      <zeroOrMore>
+        <ref name="any-element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!--
+    The 'options' element (in the test-catalog namespace, but
+    allowed only within app-info) is used to mark results which
+    depend (for a given processor) on the options with which the
+    processor was invoked.  Options are assumed describable with
+    name/value pairs encoded as namespace-qualified attributes.
+    Typically the attribute name names the option, and the value
+    says how to set it.  Examples and some discussion are in
+    ../tests/grammar-misc/test-catalog.xml
+  -->
+  <!--
+    If all the option/setting pairs on any options element in
+    the app-info element apply, then any of the results
+    specified in that app-info element is acceptable.
+  -->
+  <!--
+    So: for both the options elements and the results in the
+    app-info there is an implicit disjunction: if any of the
+    options elements applies, then any of the results is OK.
+    For the various name/value pairs on an options element,
+    there is an implicit conjunction: the options element
+    applies if ALL of the name/value pairs apply.
+  -->
+  <!--
+    N.B. The options element, and the method of handling options
+    it represents, is to be regarded as experimental.
+  -->
+  <define name="options">
+    <element name="options">
+      <ref name="external-atts"/>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    The environment element works much the same way as the
+    options element; when results reported for a test depend on
+    the environment (e.g. which version of Java is used, or
+    which browser an in-browser processor uses, or ...), then
+    the relevant information should be given on an 'environment'
+    element wrapped in an 'app-info' element at the appropriate
+    level of the test results.  (Top level if applicable to all,
+    test set if applicable only to that test set, test result if
+    applicable to that result.)
+  -->
+  <!--
+    The difference between options and environment is that
+    options are assumed to be settable at parse time by whoever
+    calls the ixml processor, and the environment is less likely
+    to be settable that way.  In case of gray areas, explain
+    your usage in the test catalog.
+  -->
+  <define name="environment">
+    <element name="environment">
+      <ref name="external-atts"/>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    The difference between options and environment is that
+    options are assumed to be settable at parse time by whoever
+    calls the ixml processor, and the environment is less likely
+    to be settable that way.  In case of gray areas, explain
+    your usage in the test catalog.
+  -->
+  <!--
+    The 'dependencies' element identifies conditions that must
+    hold for the results given for a test to hold.  Like
+    'options' and 'environment', it allows an arbitrary set of
+    name/value pairs (namespace-qualified attributes).  If all
+    of them apply, the test result given is applicable.
+  -->
+  <!--
+    Some dependencies are standardized:  any processor must
+    conform to some version of Unicode but we don't specify which,
+    so the processor must specify.  Test results must be labeled
+    with the appropriate Unicode version(s).
+  -->
+  <define name="dependencies">
+    <element name="dependencies">
+      <attribute name="Unicode-version"/>
+      <ref name="external-atts"/>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    The differences are:
+    options - implementation-defined, typically settable by caller
+              at parse time.  Wrap in app-info to label results
+              (often non-standard) which depend on how the
+              processor was invoked.
+    environment - relevant but not under implementation control.
+              Wrap in app-info, use to label results which depend
+              on the environment within which the processor is
+              running (or within which a test result was obtained).
+    dependencies - used to label test cases whose results 
+              depend on which version of another spec is applicable.
+  -->
   <!-- test-set, test-set-results -->
   <!--
     A test set is a collection of tests (or possibly subordinate
@@ -284,9 +398,9 @@
     <zeroOrMore>
       <ref name="Grammar-data"/>
     </zeroOrMore>
-    <optional>
+    <zeroOrMore>
       <ref name="grammar-result"/>
-    </optional>
+    </zeroOrMore>
   </define>
   <!--
     Q. Why is the grammar optional?

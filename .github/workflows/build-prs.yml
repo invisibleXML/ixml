@@ -22,10 +22,10 @@ jobs:
         run: |
           raw=${{ github.repository }}
           reponame=${raw##*/}
-          echo "::set-output name=reponame::$reponame"
+          echo "reponame=$reponame" >> $GITHUB_OUTPUT
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
-          echo "::set-output name=branch::$branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
           tag=""
           if [ ${{ github.ref_type }} = "tag" ]; then
             tag=${{ github.ref_name }}
@@ -33,7 +33,7 @@ jobs:
           else
             echo "Running in $reponame on $branch"
           fi
-          echo "::set-output name=tag::$tag"
+          echo "tag=$tag" >> $GITHUB_OUTPUT
 
   build-and-deploy-pr:
     runs-on: ubuntu-latest
@@ -49,6 +49,8 @@ jobs:
       CI_BRANCH: ${{ needs.check_branch.outputs.branch }}
       CI_TAG: ${{ needs.check_branch.outputs.tag }}
       CI_PULL: ${{ github.event.number }}
+      CI_PR: "true"
+
     steps:
       - name: Get the pull request
         uses: actions/checkout@v3
