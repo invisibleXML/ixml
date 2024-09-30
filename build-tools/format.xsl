@@ -277,9 +277,8 @@
   <xsl:variable name="lines"
                 select="unparsed-text('../build/current/ixml.ixml')
                         =&gt; tokenize('&#10;')"/>
-  <!-- skip the version comment -->
   <pre>
-    <xsl:sequence select="f:highlight-ixml(string-join($lines[position() gt 1], '&#10;'))"/>
+    <xsl:sequence select="f:highlight-ixml(string-join($lines, '&#10;'))"/>
   </pre>
 </xsl:template>
 
