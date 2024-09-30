@@ -40,7 +40,7 @@
   <xsl:variable name="uri" as="xs:string">
     <xsl:choose>
       <xsl:when test="$ci-project-username = 'invisibleXML'
-                      and $ci-pull = 'null'">
+                      and $ci-pull = ''">
         <xsl:text>https://invisiblexml.org/current/</xsl:text>
       </xsl:when>
       <xsl:when test="$ci-project-username = 'invisibleXML'">
