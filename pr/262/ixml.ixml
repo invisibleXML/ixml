@@ -1,4 +1,3 @@
-{version 2024-08-02}
          ixml: s, (prolog, RS)?, rule++RS, s.
 
            -s: (whitespace; comment)*. {Optional spacing}
