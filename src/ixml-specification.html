@@ -374,13 +374,16 @@ which it found a valid interpretation, otherwise it
 syntax and semantics of the version declared or assumed (<a class="error"
 href="#err-s12">error S12</a>).</p>
 
-<p>The document element of the serialization <span class="conform">should</span>
-include an attribute named <code>ixml:version</code> that identifies the version
-of the iXML grammar used for the parse.
-If the prolog specifies a version that is unrecognized, the document element of the
-serialization <span class="conform">must</span> include an attribute named
-<code>ixml:state</code>, with the word '<code>version-mismatch</code>' in its
-value. The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p>
+<p>If the grammar specifies a particular version of iXML and the processor uses
+a different version, the document element of the serialization
+<span class="conform">must</span> include an attribute named <code>ixml:version</code>
+that identifies the version of the iXML grammar used for the parse.
+If the grammar does not specify a particular version, an implementation
+<span class="conform">may</span> include an <code>ixml:version</code> attribute
+that identifies the version of the iXML grammar used for the parse.
+If the grammar specifies a particular version and the processor uses that version,
+it <span class="conform">should not</span> include an <code>ixml:version</code> attribute.
+The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p>
 
 <h3 id="rules">Rules</h3>
 
@@ -856,9 +859,10 @@ encodings.</p>
     described above, or to serialize the resulting parse tree with the
     attribute <code>ixml:state</code> containing the word <code>prefix</code>,
     or if the parse is ambiguous, the words <code>ambiguous prefix</code>.</li>
-  <li>If the input was processed as a different version of ixml than that
-    required by the prolog, the <code>ixml:state</code> attribute must include
-    the word <code>version-mismatch</code>. </li>
+  <li>If the input was processed as a different version of iXML than that
+    requested by the prolog, the document element of the serialization
+    <span class="conform">must</span> have an <code>ixml:version</code> attribute
+    that identifies the version of iXML actually used for the parse.</li>
   <li>The form in which XML documents are produced is not constrained by this
     specification; processors <span class="conform">should</span> be capable of
     producing serialized XML as a character stream, but other forms (e.g. DOM
