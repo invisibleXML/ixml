@@ -95,7 +95,7 @@ a.button {
     color: black;
 }
 
-h1 a:link, h2 a:link, h1 a:visited, h2 a:visited {
+h1 a:link, h1 a:visited, h2 a:link, h2 a:visited, h3 a:link, h3 a:visited {
     text-decoration: none; color: black
 }
 

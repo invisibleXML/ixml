@@ -57,9 +57,11 @@ of the specification is available
 in <a href="ixml.ixml" download="ixml.ixml">ixml</a> or
 <a href="ixml.xml" download="ixml.xml">XML</a> format.</p>
 
+<p><em>Dedicated to the memory of C. Michael Sperberg-McQueen</em></p>
+
 </header>
 
-<h2 id="status">Status</h2>
+<h2 id="status"><a href="#status">Status</a></h2>
 
 <p>This document describes ixml version 1.0++, a work in progress.
 It reflects corrections to errata found in the published text of ixml
@@ -393,7 +395,7 @@ grammar here uses colons to define rules; an equals sign is also allowed.</p>
 <p>A naming consists of an optional mark, a name, and an optional
 alias:</p>
 
-<pre class="frag ixml">-naming: (mark, s)?, name, s, ("&gt;", s, alias, s)?.</pre>
+<pre class="frag ixml">-naming: (mark, s)?, name, s, (-"&gt;", s, alias, s)?.</pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
 indicates whether the item so marked will be serialized as an element with its
@@ -665,7 +667,7 @@ for that nonterminal if it has a mark.</p>
         referred-to rule, if it has one, and otherwise the name of the node,
         </li>
       <li>value is the serialization of all non-deleted terminal
-        descendants of the node (regardless of the marking of intermediate
+        descendants, and all insertion descendents, of the node (regardless of the marking of intermediate
         nonterminals), if any, in order.</li>
     </ul>
   </li>
