@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve" version="XHTML+RDFa 1.0" class="informal no-js "><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /><script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script><script defer="defer" src="js/features.js"></script></head><body><main><header>
 <h1 id="specification">Invisible XML Specification</h1>
-<h2 xml:space="preserve" id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: faf6ed50">2024-10-29</span><!--$--></h2>
+<h2 xml:space="preserve" id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: b0c97802">2024-10-29</span><!--$--></h2>
 <dl xml:space="preserve"><div class="h-version">
 <dt>This version:</dt>
 <dd><a href="https://invisiblexml.org/current/">https://invisiblexml.org/current/</a></dd>
@@ -306,7 +306,9 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p><pr
   <span class="mark">-</span><span class="nt">letter</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>A<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>Z<span class="strdel">"</span></span><span class="alt">;</span> <span class="str"><span class="strdel">"</span>a<span class="strdel">"</span></span><span class="mark">-</span><span class="str"><span class="strdel">"</span>z<span class="strdel">"</span></span><span class="setdel">]</span></span>.</span></pre><h3 id="insertions" xml:space="preserve"><span class="sectnum">4.6. </span>Insertions</h3><p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
 serialization.</p><pre class="frag ixml"><span><span class="nt">insertion</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>+<span class="strdel">"</span></span>, <span class="nt">s</span>, (<span class="nt">string</span><span class="alt">;</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>#<span class="strdel">"</span></span>, <span class="nt">hex</span>), <span class="nt">s</span>.</span></pre><h2 id="parsing" xml:space="preserve"><span class="sectnum">5. </span>Parsing</h2><p>The root symbol of the grammar is the name of the first rule in the
-grammar.</p><p>Processors <span class="conform">must</span> accept and parse any conforming
+grammar. Processors <span class="conform">may</span> provide a user option
+that selects a different root symbol for a particular parse.
+</p><p>Processors <span class="conform">must</span> accept and parse any conforming
 grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
@@ -491,7 +493,7 @@ carefully preserving them using numeric character references is likely
 to be unhelpful. See [<a href="#serialization" shape="rect">Serialization</a>] for
 detailed discussions.</p><h2 id="complete" xml:space="preserve"><span class="sectnum">9. </span>Complete Grammar</h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span><span class="com"><span class="comdel">{</span> Invisible XML specification grammar, 2024-10-29 <span class="comdel">}</span></span>
 <span class="com"><span class="comdel">{</span> Published in https://invisiblexml.org/current/ <span class="comdel">}</span></span>
-<span class="com"><span class="comdel">{</span> Commit hash faf6ed50b0f2 <span class="comdel">}</span></span>
+<span class="com"><span class="comdel">{</span> Commit hash b0c97802c6c6 <span class="comdel">}</span></span>
 
          <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, (<span class="nt">prolog</span>, <span class="nt">RS</span>)<span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
@@ -574,7 +576,7 @@ abbreviated serialization is shown below, but the <a href="ixml.xml.html" shape=
 serialization</a> is available:</p><pre><span><span class="text"><span class="stag">&lt;</span><span class="gi">ixml</span><span class="stag">&gt;</span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Invisible XML specification grammar, 2024-10-29 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Published in https://invisiblexml.org/current/ <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
-   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Commit hash faf6ed50b0f2 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Commit hash b0c97802c6c6 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">ixml</span><span class="q">'</span></span><span class="stag">&gt;</span>
       <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
          <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
@@ -729,4 +731,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #73 for invisibleXML/ixml at <time datetime="2024-10-29T15:51:37GMT+00:00" title="2024-10-29T15:51:37GMT+00:00">15:51 on 29 October 2024</time></span> <span class="bh"><span title="faf6ed50b0f297b036d35d30761435d1e8869486">faf6ed50</span></span></p></footer></main></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #74 for invisibleXML/ixml at <time datetime="2024-10-29T15:51:57GMT+00:00" title="2024-10-29T15:51:57GMT+00:00">15:51 on 29 October 2024</time></span> <span class="bh"><span title="b0c97802c6c6dce34697fe3578e1f28c3825c3c0">b0c97802</span></span></p></footer></main></body></html>
