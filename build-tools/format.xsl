@@ -40,7 +40,7 @@
   <xsl:variable name="uri" as="xs:string">
     <xsl:choose>
       <xsl:when test="$ci-project-username = 'invisibleXML'
-                      and $ci-pull = 'null'">
+                      and $ci-pull = ''">
         <xsl:text>https://invisiblexml.org/current/</xsl:text>
       </xsl:when>
       <xsl:when test="$ci-project-username = 'invisibleXML'">
@@ -277,9 +277,8 @@
   <xsl:variable name="lines"
                 select="unparsed-text('../build/current/ixml.ixml')
                         =&gt; tokenize('&#10;')"/>
-  <!-- skip the version comment -->
   <pre>
-    <xsl:sequence select="f:highlight-ixml(string-join($lines[position() gt 1], '&#10;'))"/>
+    <xsl:sequence select="f:highlight-ixml(string-join($lines, '&#10;'))"/>
   </pre>
 </xsl:template>
 

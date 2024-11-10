@@ -95,7 +95,7 @@ The current official version is
   </li>
   <li><a href="#hints">Hints for Implementers</a></li>
   <li><a href="#complete">Complete Grammar</a></li>
-  <li><a href="#ixml">IXML in IXML</a></li>
+  <li><a href="#ixml">IXML in XML</a></li>
   <li><a href="#errors">Errors</a></li>
   <li><a href="#references">References</a></li>
   <li><a href="#L3425">Informational References</a></li>
@@ -377,13 +377,16 @@ which it found a valid interpretation, otherwise it
 syntax and semantics of the version declared or assumed (<a class="error"
 href="#err-s12">error S12</a>).</p>
 
-<p>The document element of the serialization <span class="conform">should</span>
-include an attribute named <code>ixml:version</code> that identifies the version
-of the iXML grammar used for the parse.
-If the prolog specifies a version that is unrecognized, the document element of the
-serialization <span class="conform">must</span> include an attribute named
-<code>ixml:state</code>, with the word '<code>version-mismatch</code>' in its
-value. The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p>
+<p>If the grammar specifies a particular version of iXML and the processor uses
+a different version, the document element of the serialization
+<span class="conform">must</span> include an attribute named <code>ixml:version</code>
+that identifies the version of the iXML grammar used for the parse.
+If the grammar does not specify a particular version, an implementation
+<span class="conform">may</span> include an <code>ixml:version</code> attribute
+that identifies the version of the iXML grammar used for the parse.
+If the grammar specifies a particular version and the processor uses that version,
+it <span class="conform">should not</span> include an <code>ixml:version</code> attribute.
+The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p>
 
 <h3 id="rules"><a href="#rules">Rules</a></h3>
 
@@ -591,7 +594,9 @@ serialization.</p>
 <h2 id="parsing"><a href="#parsing">Parsing</a></h2>
 
 <p>The root symbol of the grammar is the name of the first rule in the
-grammar.</p>
+grammar. Processors <span class="conform">may</span> provide a user option
+that selects a different root symbol for a particular parse.
+</p>
 
 <p>Processors <span class="conform">must</span> accept and parse any conforming
 grammar, and produce at least one parse of supplied input that matches the
@@ -859,9 +864,10 @@ encodings. There is no conformance requirement on which version of Unicode is us
     described above, or to serialize the resulting parse tree with the
     attribute <code>ixml:state</code> containing the word <code>prefix</code>,
     or if the parse is ambiguous, the words <code>ambiguous prefix</code>.</li>
-  <li>If the input was processed as a different version of ixml than that
-    required by the prolog, the <code>ixml:state</code> attribute must include
-    the word <code>version-mismatch</code>. </li>
+  <li>If the input was processed as a different version of iXML than that
+    requested by the prolog, the document element of the serialization
+    <span class="conform">must</span> have an <code>ixml:version</code> attribute
+    that identifies the version of iXML actually used for the parse.</li>
   <li>The form in which XML documents are produced is not constrained by this
     specification; processors <span class="conform">should</span> be capable of
     producing serialized XML as a character stream, but other forms (e.g. DOM
@@ -921,7 +927,7 @@ detailed discussions.</p>
 <pre class="complete">The complete grammar is
 inserted here by the build process.</pre>
 
-<h2 id="ixml"><a href="#ixml">IXML in IXML</a></h2>
+<h2 id="ixml">IXML in XML</h2>
 
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
