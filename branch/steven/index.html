@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:space="preserve" version="XHTML+RDFa 1.0" class="informal no-js "><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /><script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script><script defer="defer" src="js/features.js"></script></head><body><main><header>
 <h1 id="specification">Invisible XML Specification</h1>
-<h2 xml:space="preserve" id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: f5e6139b">2024-08-27</span><!--$--></h2>
+<h2 xml:space="preserve" id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: 3c03ea54">2024-11-10</span><!--$--></h2>
 <dl xml:space="preserve"><div class="h-version">
 <dt>This version:</dt>
 <dd><a href="https://invisiblexml.org/pr//">https://invisiblexml.org/pr//</a></dd>
@@ -35,12 +35,14 @@ of the specification is available
 in <a href="ixml.ixml" download="ixml.ixml" shape="rect">ixml</a> or
 <a href="ixml.xml" download="ixml.xml" shape="rect">XML</a> format.</p>
 
+<p><em>Dedicated to the memory of C. Michael Sperberg-McQueen</em></p>
+
 </header><p>A version with automatically generated change
     markup <a href="autodiff.html">is available</a>. Change markup shows
     the differences between <a href="index.html">this version</a> of the
     specification and the
     <a href="https://invisiblexml.org/current/">current version</a> (at the
-    time of publication).</p><h2 id="status" xml:space="preserve"><span class="sectnum">1. </span>Status</h2><p>This document describes ixml version 1.0++, a work in progress.
+    time of publication).</p><h2 id="status" xml:space="preserve"><span class="sectnum">1. </span><a href="#status" shape="rect">Status</a></h2><p>This document describes ixml version 1.0++, a work in progress.
 It reflects corrections to errata found in the published text of ixml
 1.0, and may in due course be published as an updated specification.
 The current official version is
@@ -200,7 +202,7 @@ serialization <span class="conform">must</span> include an attribute named
 <code>ixml:state</code>, with the word '<code>version-mismatch</code>' in its
 value. The ixml namespace URI is "<code class="nobreak">http://invisiblexml.org/NS</code>".</p><h3 id="rules" xml:space="preserve"><span class="sectnum">4.2. </span><a href="#rules" shape="rect">Rules</a></h3><p>A rule consists of a naming, and one or more alternatives. The
 grammar here uses colons to define rules; an equals sign is also allowed.</p><pre class="frag ixml"><span><span class="nt">rule</span><span class="col">:</span> <span class="nt">naming</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.</span></pre><p>A naming consists of an optional mark, a name, and an optional
-alias:</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.</span></pre><p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
+alias:</p><pre class="frag ixml"><span><span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="mark">-</span><span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.</span></pre><p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
 indicates whether the item so marked will be serialized as an element with its
 children (<code>^</code>) which is the default, as an attribute
 (<code>@</code>), or deleted, so that only its children are serialized
@@ -345,7 +347,7 @@ for that nonterminal if it has a mark.</p><ul><li><strong>Unmarked or included</
     <ul><li>name is the alias of the node if present, or the alias of the
         referred-to rule, if it has one, and otherwise the name of the node,
         </li><li>value is the serialization of all non-deleted terminal
-        descendants of the node (regardless of the marking of intermediate
+        descendants, and all insertion descendents, of the node (regardless of the marking of intermediate
         nonterminals), if any, in order.</li></ul>
   </li></ul><p>A <strong>terminal</strong> can be unmarked, or marked as included (^),
 or as deleted (-).</p><ul><li><strong>Unmarked or included</strong>: the node is serialized as its
@@ -499,7 +501,7 @@ detailed discussions.</p><h2 id="complete" xml:space="preserve"><span class="sec
       <span class="nt">version</span><span class="col">:</span> <span class="mark">-</span><span class="str"><span class="strdel">"</span>ixml<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>version<span class="strdel">"</span></span>, <span class="nt">RS</span>, <span class="nt">string</span>, <span class="nt">s</span>, <span class="mark">-</span><span class="str"><span class="strdel">'</span>.<span class="strdel">'</span></span> .
 
          <span class="nt">rule</span><span class="col">:</span> <span class="nt">naming</span>, <span class="mark">-</span><span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>=:<span class="strdel">"</span></span><span class="setdel">]</span></span>, <span class="nt">s</span>, <span class="mark">-</span><span class="nt">alts</span>, <span class="mark">-</span><span class="str"><span class="strdel">"</span>.<span class="strdel">"</span></span>.
-      <span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.
+      <span class="mark">-</span><span class="nt">naming</span><span class="col">:</span> (<span class="nt">mark</span>, <span class="nt">s</span>)<span class="rep">?</span>, <span class="nt">name</span>, <span class="nt">s</span>, (<span class="mark">-</span><span class="str"><span class="strdel">"</span>&gt;<span class="strdel">"</span></span>, <span class="nt">s</span>, <span class="nt">alias</span>, <span class="nt">s</span>)<span class="rep">?</span>.
         <span class="mark">@</span><span class="nt">name</span><span class="col">:</span> <span class="nt">namestart</span>, <span class="nt">namefollower</span><span class="rep">*</span>.
    <span class="mark">-</span><span class="nt">namestart</span><span class="col">:</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>_<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">L</span><span class="setdel">]</span></span>.
 <span class="mark">-</span><span class="nt">namefollower</span><span class="col">:</span> <span class="nt">namestart</span><span class="alt">;</span> <span class="set"><span class="setdel">[</span><span class="str"><span class="strdel">"</span>-.·‿⁀<span class="strdel">"</span></span><span class="alt">;</span> <span class="nt">Nd</span><span class="alt">;</span> <span class="nt">Mn</span><span class="setdel">]</span></span>.
@@ -709,7 +711,7 @@ serialization</a> is available:</p><pre><span><span class="text"><span class="st
          <span class="text"><span class="stag">&lt;</span><span class="gi">option</span><span class="stag">&gt;</span>
             <span class="text"><span class="stag">&lt;</span><span class="gi">alts</span><span class="stag">&gt;</span>
                <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
-                  <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">&gt;</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
+                  <span class="empty"><span class="stag">&lt;</span><span class="gi">literal</span> <span class="attr"><span class="aname">tmark</span><span class="eq">=</span><span class="q">'</span><span class="avalue">-</span><span class="q">'</span></span> <span class="attr"><span class="aname">string</span><span class="eq">=</span><span class="q">'</span><span class="avalue">&gt;</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
                   <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
                   <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">alias</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
                   <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
@@ -763,4 +765,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #68 for invisibleXML/ixml at <time datetime="2024-08-27T14:19:08GMT+00:00" title="2024-08-27T14:19:08GMT+00:00">14:19 on 27 August 2024</time></span> <span class="bh">steven/<span title="f5e6139b96f520b4704e6bb0a581d71e6df20ca1">f5e6139b</span></span></p></footer></main></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #75 for invisibleXML/ixml at <time datetime="2024-11-10T17:25:46GMT+00:00" title="2024-11-10T17:25:46GMT+00:00">17:25 on 10 November 2024</time></span> <span class="bh">steven/<span title="3c03ea54270eda9ebda2ae89e108f8c36307ca13">3c03ea54</span></span></p></footer></main></body></html>

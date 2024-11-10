@@ -13,7 +13,7 @@
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
          rule: naming, -["=:"], s, -alts, -".".
-      -naming: (mark, s)?, name, s, (">", s, alias, s)?.
+      -naming: (mark, s)?, name, s, (-">", s, alias, s)?.
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].

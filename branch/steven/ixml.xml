@@ -145,7 +145,7 @@
          <option>
             <alts>
                <alt>
-                  <literal string=">"/>
+                  <literal tmark="-" string=">"/>
                   <nonterminal name="s"/>
                   <nonterminal name="alias"/>
                   <nonterminal name="s"/>
