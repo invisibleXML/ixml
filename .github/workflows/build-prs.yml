@@ -76,6 +76,8 @@ jobs:
         if: ${{ env.AUTODIFF == 'true' }}
         run: |
             cd tools && curl -s ${{ secrets.DIFFURI }} | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k ${{ secrets.DIFFPW }} | tar zxf -
+            ls
+            ls tools
 
       - name: Look around
         run: |
