@@ -1,5 +1,5 @@
 <ixml>
-   <comment> Invisible XML specification grammar, 2024-11-10 </comment>
+   <comment> Invisible XML specification grammar, 2024-11-11 </comment>
    <comment> Published in https://invisiblexml.org/pr/278/ </comment>
    <comment> Commit hash b0c97802c6c6 </comment>
    <rule name="ixml">
