@@ -13,7 +13,7 @@ jobs:
       tag: ${{ steps.check_step.outputs.tag }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Get the pull request
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -63,7 +63,7 @@ jobs:
           rsync -ar ./src/ /tmp/pr-sources/
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update sources
         run: rsync -var /tmp/pr-sources/ ./src/
@@ -75,7 +75,12 @@ jobs:
       - name: Setup DeltaXML
         if: ${{ env.AUTODIFF == 'true' }}
         run: |
-            curl -s ${{ secrets.DIFFURI }} | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k ${{ secrets.DIFFPW }} | tar zxf -
+            cd tools && curl -s ${{ secrets.DIFFURI }} | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k ${{ secrets.DIFFPW }} | tar zxf -
+
+      - name: Look around
+        run: |
+            ls
+            ls tools
 
       - name: Make DeltaXML diffs
         if: ${{ env.AUTODIFF == 'true' }}
