@@ -15,6 +15,8 @@ curl -s -o /tmp/A.$PID.html https://invisiblexml.org/$SPEC/index.html
 java -jar tools/deltaxml/command-15.0.2.jar compare xhtml-patch \
      /tmp/A.$PID.html build/current/index.html /tmp/autodiff.$PID.html
 
+ls tools
+
 # Patch the diff version and make it HTML5
 java -jar tools/deltaxml/saxon9pe.jar \
      -s:/tmp/autodiff.$PID.html -xsl:build-tools/patchdiff.xsl -o:build/current/autodiff.html \
