@@ -1,6 +1,6 @@
-{ Invisible XML specification grammar, 2024-11-11 }
+{ Invisible XML specification grammar, 2024-11-12 }
 { Published in https://invisiblexml.org/current/ }
-{ Commit hash 7293a891e447 }
+{ Commit hash 686a8b4f25a9 }
 
          ixml: s, (prolog, RS)?, rule++RS, s.
 
@@ -17,7 +17,7 @@
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
 
          rule: naming, -["=:"], s, -alts, -".".
-      -naming: (mark, s)?, name, s, (">", s, alias, s)?.
+      -naming: (mark, s)?, name, s, (-">", s, alias, s)?.
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
