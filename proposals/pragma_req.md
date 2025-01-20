@@ -5,15 +5,26 @@
 ### *Note on first draft*
 The requirements/desiderata listed here are drawn from members of the iXML Community Group (CG). All items submitted in time for inclusion have been included. Items with essentially the same meaning coming from different contributors have been combined. There has been no attempt to reconcile potentially incompatible items. 
 
+----
+
 ## Notes on terms
 ***Annotate*** - a pragma annotates some construct in an iXML grammar, which means that the construct provides the scope for the pragma’s effect.
+
 ***Attach*** - In an iXML grammar, a pragma is always "attached" to some syntactic construct  (which may be the grammar as a whole). A pragma annotates the construct to which it is attached.
+
 ***Recognize*** - a processor “recognizes” a pragma when it identifies the pragma name as the trigger for a behaviour, the details of which are defined by the implementation. 
+
 ***Remove*** - A pragma is "removed" from a grammar either a) in fact, by deleting the characters representing the pragma from the grammar itself; or b) in effect, as when the pragma is ignored by a processor because it is unrecognized. 
 
+----
+
 ***must (not)*** - indicates a requirement: a proposal for adding pragmas to iXML cannot be accepted if it does something it “must not” do, or leaves undone something that it “must” do, according to the list of requirements accepted by the CG. 
+
 ***should (not)*** - indicates a desideratum: failure to satisfy a desideratum is not sufficient reason to reject a proposal for adding pragmas, but competing proposals may be judged in part on how well they satisfy the list of desiderata accepted by the CG. 
+
 ***need not*** - a behaviour or feature that “need not” be present is not prohibited, and neither its presence nor its absence affects the validity of an iXML grammar or the conformance of an iXML processor. However, the presence or the absence of such a behaviour or feature is irrelevant in adjudicating between differing proposals for adding pragmas.
+
+----
 
 ## Preliminary notes
 - The points below are phrased as requirements or as desiderata based on the preference of the person who proposed them for inclusion in this list.
