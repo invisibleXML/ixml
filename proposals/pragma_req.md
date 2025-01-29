@@ -1,5 +1,5 @@
 # iXML Pragma Requirements
-*First draft - 2025-01-20*
+*Updated draft - 2025-01-29*
 ##### Bethan Tovey-Walsh
 
 ### *Note on first draft*
@@ -8,9 +8,9 @@ The requirements/desiderata listed here are drawn from members of the iXML Commu
 ----
 
 ## Notes on terms
-***Annotate*** - a pragma annotates some construct in an iXML grammar, which means that the construct provides the scope for the pragma’s effect.
+***Annotate*** - a pragma annotates some construct in an iXML grammar, which means that the construct provides the scope for the pragma’s effect. 
 
-***Attach*** - In an iXML grammar, a pragma is always "attached" to some syntactic construct  (which may be the grammar as a whole). A pragma annotates the construct to which it is attached.
+***Attach*** - In an iXML grammar, a pragma is always "attached" to some syntactic construct  (which may be the grammar as a whole).
 
 ***Recognize*** - a processor “recognizes” a pragma when it identifies the pragma name as the trigger for a behaviour, the details of which are defined by the implementation. 
 
@@ -31,7 +31,7 @@ The requirements/desiderata listed here are drawn from members of the iXML Commu
 - The CG might therefore make the decision either a) to adopt one of the numbered items as is; or b) to adopt the item with amendments, which might include changing its status from requirement to desideratum or vice versa; or c) to reject the item.
 
 ## Foundational rules for pragma behaviour
-1. A pragma must not change the semantics of an iXML grammar - that is, it must not cause the processor to produce a parse tree which could never be produced using the same grammar if the pragma were removed.
+1. A pragma must not change the semantics of an iXML grammar - that is, it must not cause the processor to produce a parse tree which could never be produced, using the same grammar according to the specification, if the pragma were removed.
    - Examples:
      - A pragma providing dynamic attribute values ***would not*** be conformant. 
      - A pragma to translate all element names into another language ***would not*** be conformant. 
@@ -46,7 +46,7 @@ The requirements/desiderata listed here are drawn from members of the iXML Commu
 ## Requirements and desiderata: theoretical principles
 
 ### Status of pragmas
-3. Pragmas must not be an important part of iXML. 
+3. Support for pragmas must be optional.
 4. Pragmas must only be used for communicating with software.
 5. Pragmas must be defined in the iXML specification without consideration of, or reference to, the needs of any particular processing software. 
 
