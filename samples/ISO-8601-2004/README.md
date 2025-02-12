@@ -122,5 +122,5 @@ Two string formats are ambiguous in ISO 8601:
 * `20` is either the 20th century or 8pm.
 * `2022-04` is either _April, 2022_ or it’s 22 minutes past 8pm in the time zone GMT-04:00.
 
-The time forms can be unambigously written by preceding them with a ‘T’: `T20` or `T2022-04`
+The time forms can be unambiguously written by preceding them with a ‘T’: `T20` or `T2022-04`
 but there’s no unambiguous form for the date forms, as far as I can tell.
