@@ -1,16 +1,13 @@
 # iXML Pragma Requirements
-*Updated draft - 2025-01-29*
+*Updated draft - 2025-02-18*
 ##### Bethan Tovey-Walsh
-
-### *Note on first draft*
-The requirements/desiderata listed here are drawn from members of the iXML Community Group (CG). All items submitted in time for inclusion have been included. Items with essentially the same meaning coming from different contributors have been combined. There has been no attempt to reconcile potentially incompatible items. 
 
 ----
 
 ## Notes on terms
 ***Annotate*** - a pragma annotates some construct in an iXML grammar, which means that the construct provides the scope for the pragma’s effect. 
 
-***Attach*** - In an iXML grammar, a pragma is always "attached" to some syntactic construct  (which may be the grammar as a whole).
+***Attach*** - In an iXML grammar, a pragma is always "attached" to some syntactic construct  (which may be the grammar as a whole). This is reflected in the XML version of the same grammar, where the pragma  becomes the child of the construct to which it is attached.
 
 ***Recognize*** - a processor “recognizes” a pragma when it identifies the pragma name as the trigger for a behaviour, the details of which are defined by the implementation. 
 
@@ -56,11 +53,11 @@ The requirements/desiderata listed here are drawn from members of the iXML Commu
 8. A pragma must be distinguishable as such from all other grammar constructs, even if the processor in question does not recognize the specific pragma. 
 
 ### Attachment
-9. Pragmas must be able to annotate an iXML grammar as a whole, individual rules in a grammar, and nonterminals. 
-10. Pragmas should also be able to annotate any grammar constructs for which robust use cases can be put forward, bearing in mind the importance of balancing succinctness, expressive power, and readability of grammars. 
+9. Pragmas must be able to attach to an iXML grammar as a whole, individual rules in a grammar, and nonterminals. 
+10. Pragmas should also be able to attach to any grammar constructs for which robust use cases can be put forward, bearing in mind the importance of balancing succinctness, expressive power, and readability of grammars. 
 
 ### Pragma structure
-11. A pragma must minimally be composed of a pragma name (a string by which the processor can recognize the pragma). 
+11. A pragma must have a name (a string by which the processor can recognize the pragma). 
 12. A pragma must also permit optional pragma data (a string which can be provided as an input to the code block which the processor will attempt to execute in response to recognizing the pragma name).
 13. The legal form of a pragma name must be defined in the specification. 
 14. The structure of the optional pragma data following the pragma name must not be defined in the specification.
