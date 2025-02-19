@@ -86,7 +86,7 @@ The current official version is
     </ul>
   </li>
   <li><a href="#parsing">Parsing</a></li>
-  <li><a href="#serialisation">Serialization</a></li>
+  <li><a href="#serialisation">Constructing XML</a></li>
   <li><a href="#conformance">Conformance</a> 
     <ul>
       <li><a href="#grammarconformance">Conformance of grammars</a></li>
@@ -223,9 +223,9 @@ example, it can turn CSS code like</p>
 <h2 id="works"><a href="#works">How it works</a></h2>
 
 <p>A grammar is used to describe the input format. An input is parsed using
-this grammar, and the resulting parse tree is serialized as XML. Special marks
-in the grammar affect details of this serialization, for example excluding
-parts of the tree, or serializing parts as attributes instead of elements.</p>
+this grammar, and the resulting parse tree is used to construct an XML representation. Special marks
+in the grammar affect details of this process, for example excluding
+parts of the tree, or rendering parts as attributes instead of elements.</p>
 
 <p>As an example, consider this simplified grammar for URLs:</p>
 <pre class="ixml">url: scheme, ":", authority, path.
@@ -252,7 +252,7 @@ letter, an uppercase letter, or a digit. A fletter is a letter or a point.</p>
 
 <p>So, given the input string
 <code>http://www.w3.org/TR/1999/xhtml.html</code>, this would produce the
-serialization</p>
+XML</p>
 <pre class="xml">&lt;url&gt;
    &lt;scheme&gt;http&lt;/scheme&gt;:
    &lt;authority&gt;//
@@ -273,20 +273,20 @@ serialization</p>
 legibility.)</p>
 
 <p>If the rule for <code>letter</code> had not had a "-" before it, the
-serialization for <code>scheme</code>, for instance, would have been:</p>
+output for <code>scheme</code>, for instance, would have been:</p>
 <pre class="xml">&lt;scheme&gt;&lt;letter&gt;h&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;t&lt;/letter&gt;&lt;letter&gt;p&lt;/letter&gt;&lt;/scheme&gt;</pre>
 
 <p>Changing the rule for <code>scheme</code> to</p>
 <pre class="ixml">scheme: name.
 @name: letter+.</pre>
 
-<p>would change the serialization for <code>scheme</code> to:</p>
+<p>would change the output for <code>scheme</code> to:</p>
 <pre class="xml">&lt;scheme name="http"/&gt;:</pre>
 
 <p>Changing the rule for <code>scheme</code> instead to:</p>
 <pre class="ixml">@scheme: letter+.</pre>
 
-<p>would change the serialization for <code>url</code> to:</p>
+<p>would change the output for <code>url</code> to:</p>
 <pre class="xml">&lt;url scheme="http"&gt;</pre>
 
 <p>Changing the definitions of <code>sub</code> and <code>seg</code> from</p>
@@ -298,7 +298,7 @@ seg: fletter*.</pre>
 -seg: fletter*.</pre>
 
 <p>would prevent the <code>sub</code> and <code>seg</code> elements appearing
-in the serialized result, giving:</p>
+in the XML, giving:</p>
 <pre class="xml">&lt;url scheme='http'&gt;://
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
@@ -316,7 +316,7 @@ in the serialized result, giving:</p>
 <p>to </p>
 <pre class="ixml">authority: -"//", host.</pre>
 
-<p>would remove the spurious characters from the serialization:</p>
+<p>would remove the spurious characters from the XML:</p>
 <pre class="xml">&lt;url scheme='http'&gt;
    &lt;host&gt;www.w3.org&lt;/host&gt;
    &lt;path&gt;/TR/1999/xhtml.html&lt;/path&gt;
@@ -378,7 +378,7 @@ syntax and semantics of the version declared or assumed (<a class="error"
 href="#err-s12">error S12</a>).</p>
 
 <p>If the grammar specifies a particular version of iXML and the processor uses
-a different version, the document element of the serialization
+a different version, the document element of the XML result
 <span class="conform">must</span> include an attribute named <code>ixml:version</code>
 that identifies the version of the iXML grammar used for the parse.
 If the grammar does not specify a particular version, an implementation
@@ -401,9 +401,9 @@ alias:</p>
 <pre class="frag ixml">-naming: (mark, s)?, name, s, (-"&gt;", s, alias, s)?.</pre>
 
 <p>A mark is one of <code></code><code>^, @</code> or <code>-</code>, and
-indicates whether the item so marked will be serialized as an element with its
+indicates whether the item so marked will be output as an element with its
 children (<code>^</code>) which is the default, as an attribute
-(<code>@</code>), or deleted, so that only its children are serialized
+(<code>@</code>), or deleted, so that only its children are output
 (<code>-</code>).</p>
 <pre class="frag ixml">@mark: ["@^-"].</pre>
 
@@ -412,15 +412,15 @@ digit, underscore, a small number of punctuation characters, and the Unicode
 combiner characters; Unicode classes are used to define the sets of characters
 used, for instance, for letters and digits. This is close to, but not identical
 with the XML definition of a name; it is the grammar author's responsibility to
-ensure that all serialized names match the requirements for an XML name [<a
+ensure that all output names match the requirements for an XML name [<a
 href="#xml">XML</a>]. Names are case-sensitive.</p>
 <pre class="frag ixml">        @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
 </pre>
 
-<p>An alias is just a substitute name for the rule to be used at
-serialization:</p>
+<p>An alias is just a substitute name for the rule to be used when
+constructing XML:</p>
 <pre class="frag ixml">@alias: name.</pre>
 
 <p>Alternatives are separated by a semicolon or a vertical bar. The grammar
@@ -481,7 +481,7 @@ such rule (<a class="error" href="#err-s03">error S03</a>).</p>
 <h3 id="terminals"><a href="#terminals">Terminals</a></h3>
 
 <p>A terminal is a literal or a set of characters. It matches characters in the
-input. A terminal marked as deleted (-) serializes to the empty string.</p>
+input. A terminal marked as deleted (-) adds nothing to the XML output.</p>
 <pre class="frag ixml">-terminal: literal; 
            charset.</pre>
 
@@ -588,7 +588,7 @@ letter, <code>[Ll; Lu]</code> matches any upper- or lower-case character.</p>
 
 <p>An insertion is a string or hex proceeded by a plus <code>+</code>. An
 insertion matches zero characters in the input, and only appears in the
-serialization.</p>
+XML output.</p>
 <pre class="frag ixml">insertion: -"+", s, (string; -"#", hex), s.</pre>
 
 <h2 id="parsing"><a href="#parsing">Parsing</a></h2>
@@ -602,7 +602,7 @@ that selects a different root symbol for a particular parse.
 grammar, and produce at least one parse of supplied input that matches the
 grammar starting at the root symbol. If more than one parse results, one is
 chosen; it is not defined how this choice is made, but the resulting
-serialization <span class="conform">should</span> include the attribute
+XML <span class="conform">should</span> include the attribute
 <code>ixml:state</code> on the document element with a value that includes the
 word <code>ambiguous</code>. Different processors <span
 class="conform">may</span> vary in whether input is detected as ambiguous or
@@ -631,10 +631,10 @@ class="conform">should</span> provide helpful information about where and why
 it failed; it <span class="conform">may</span> be a partial parse tree that
 includes parts of the parse that succeeded.</p>
 
-<h2 id="serialisation"><a href="#serialisation">Serialization</a></h2>
+<h2 id="serialisation"><a href="#serialisation">Constructing XML</a></h2>
 
-<p>If the parse succeeds, the resulting parse-tree is serialized as XML by
-serializing the root node of the parse tree.</p>
+<p>If the parse succeeds, the resulting parse is used to construct XML,
+starting at the root node of the parse.</p>
 
 <p>A parse node is one of:</p>
 <ul>
@@ -649,30 +649,30 @@ as an attribute (@), or as deleted (-). The mark comes from the use of the
 nonterminal in a rule if present, and otherwise from the definition of the rule
 for that nonterminal if it has a mark.</p>
 <ul>
-  <li><strong>Unmarked or included</strong>: the node is serialized as an
+  <li><strong>Unmarked or included</strong>: the node is output as an
     XML element whose:  
     <ul>
       <li>name is the alias of the node if present, or the alias of the
         referred-to rule, if it has one, and otherwise the name of the node,
         </li>
-      <li>attributes are the serializations of all exposed attribute
+      <li>attributes are constructed for all exposed attribute
         descendants, if any. An attribute node is exposed if it is an attribute
         child, or an exposed attribute node of a deleted child (note this is
         recursive).</li>
-      <li>content is the serialization of all its non-attribute children
+      <li>content is constructed from all its non-attribute children
         in order, if any.</li>
     </ul>
   </li>
   <li><strong>Deleted</strong>: all its non-attribute children, if any,
-    are serialized in order.</li>
-  <li><strong>Attribute</strong>: the node is serialized as an XML
+    are constructed in order.</li>
+  <li><strong>Attribute</strong>: the node is an XML
     attribute whose:  
     <ul>
       <li>name is the alias of the node if present, or the alias of the
         referred-to rule, if it has one, and otherwise the name of the node,
         </li>
-      <li>value is the serialization of all non-deleted terminal
-        descendants, and all insertion descendents, of the node (regardless of the marking of intermediate
+      <li>value is the concatentation of all non-deleted terminal
+        descendants, and all insertion descendants, of the node (regardless of the marking of intermediate
         nonterminals), if any, in order.</li>
     </ul>
   </li>
@@ -681,33 +681,18 @@ for that nonterminal if it has a mark.</p>
 <p>A <strong>terminal</strong> can be unmarked, or marked as included (^),
 or as deleted (-).</p>
 <ul>
-  <li><strong>Unmarked or included</strong>: the node is serialized as its
+  <li><strong>Unmarked or included</strong>: the node is constructed from its
     string.</li>
-  <li><strong>Deleted</strong>: the node is not serialized.</li>
+  <li><strong>Deleted</strong>: the node is not output.</li>
 </ul>
 
-<p>An <strong>insertion</strong> is serialized as its string.</p>
-
-<p>An application has some latitude when serializing XML. Some aspects
-of the serialization are explicitly insignificant, such as the order
-of attributes on an element, whether single or double quotes are used
-to delimit attributes, or whether numeric character references use
-decimal or hexadecimal numbers.
-Some aspects of the serialization will impact whether or not all
-characters of the input are retained after the
-serialized XML is parsed with a conforming XML parser (e.g. <code>#a#d</code> as a line separator, or either of
-those characters within attribute values) .
-For a more comprehensive discussion, see
-[<a href="#serialization">XML Serialization</a>].
-A conformant Invisible XML processor is required to produce
-well-formed XML output, but its choices in serializing the selected parse tree
-are not otherwise constrained.</p>
+<p>An <strong>insertion</strong> is a text node constructed from its string.</p>
 
 <p>Grammars <span id="ref-d01" class="conform">must</span> be written so that
-any serialization of a parse tree produced from the grammar is well-formed XML
+any XML constructed from a parse tree produced from the grammar is well-formed XML
 (<a class="error" href="#err-d01">error D01</a>).</p>
 
-<p>Note: This requirement means for instance that names of serialized elements
+<p>Note: This requirement means for instance that names of elements
 and attributes <span id="ref-d03" class="conform">must</span> match the XML
 requirements (<a class="error" href="#err-d03">error D03</a>); an element <span
 id="ref-d02" class="conform">must not</span> contain more than one attribute of
@@ -716,8 +701,8 @@ id="ref-d07" class="conform">must not</span> contain an attribute named
 “xmlns” (<a class="error" href="#err-d07">error D07</a>); the names of all
 elements and attributes <span id="ref-d03" class="conform">must</span> conform
 to the requirements for XML names; non-XML characters <span id="ref-d04"
-class="conform">must not</span> be serialized (<a class="error"
-href="#err-d04">error D04</a>); a nonterminal being serialized as root element
+class="conform">must not</span> be added to the constructed XML (<a class="error"
+href="#err-d04">error D04</a>); a nonterminal being output as the root element
 <span id="ref-d05" class="conform">must not</span> be marked as an attribute
 (<a class="error" href="#err-d05">error D05</a>); in order to match the XML
 requirement of a single-rooted document, if the root rule is marked as hidden,
@@ -726,7 +711,7 @@ exactly one non-hidden non-attribute nonterminal and no non-hidden terminals
 before or after that nonterminal (<a class="error" href="#err-d06">error
 D06</a>).</p>
 
-<p>A (necessarily contrived) example grammar that illustrates serialization
+<p>A (necessarily contrived) example grammar that illustrates construction
 rules is:</p>
 
 <pre class="ixml">          expr: open, -arith, @close, -";".
@@ -741,24 +726,24 @@ rules is:</p>
            -op: sign.
 @sign&gt;operator: "+"; "-".</pre>
 
-<p>Applied to the string <code>(a+1);</code> it yields the serialization</p>
+<p>Applied to the string <code>(a+1);</code> it yields the XML</p>
 
 <pre class="xml">&lt;expr open='(' operator='+' close=')'&gt;
    &lt;first name='a'/&gt;
    &lt;second&gt;1&lt;/second&gt;
 &lt;/expr&gt;</pre>
 
-<p>Points to note: how the semicolon is suppressed from the serialization; the
+<p>Points to note: how the semicolon is suppressed from the XML; the
 two ways <code>open</code> and <code>close</code> have been defined as
 attributes; similarly the two ways <code>left</code> and <code>right</code>
 have been defined as elements, and the two ways they have been
 renamed; how <code>number</code> appears as content and not as an
 attribute; and how <code>sign</code> being an exposed attribute appears on its
 nearest non-hidden ancestor, and has been renamed. Also of note is
-how the content of some attributes can appear earlier in the serialization than
+how the content of some attributes can appear earlier in the XML than
 in the input.</p>
 
-<p>Insertions allow characters to be inserted into the serialization that were
+<p>Insertions allow characters to be inserted into the XML that were
 not present in the input. For instance, the grammar</p>
 <pre class="ixml">  data: value++-",", @source.
 source: +"ixml".
@@ -777,6 +762,44 @@ source: +"ixml".
    &lt;value&gt;-300&lt;/value&gt;
    &lt;value&gt;+400&lt;/value&gt;
 &lt;/data&gt;</pre>
+
+<h3 id="x-serialisation"><a href="#x-serialisation">Serialization</a></h3>
+
+<p>A conformant Invisible XML processor is required to produce well-formed XML
+output, but its choices in constructing the XML are not otherwise onstrained.
+Processors <span class="conform">should</span> be capable of producing
+serialized XML as a character stream, but other forms (e.g. DOM instances or XDM
+instances) <span class="conform">may</span> also be used.</p>
+
+<p>Where practical, serialization should follow the rules outlined for
+XML serialization in <a href="#serialization">XML Serialization</a>
+version 3.1 or later.</p>
+
+<p>An application has some latitude when serializing XML. Some aspects
+of the serialization are explicitly insignificant, such as the order
+of attributes on an element, whether single or double quotes are used
+to delimit attributes, or whether numeric character references use
+decimal or hexadecimal numbers.
+Some aspects of the serialization will effect whether or not all
+characters of the input are retained after the
+serialized XML is parsed with a conforming XML parser (e.g. <code>#a#d</code> as a line separator, or either of
+those characters within attribute values).</p>
+
+<p>Implementers should pay particular attention to whitespace and
+other control characters in constructed XML. Consider, for example, the case where the
+characters <code>#a</code> or <code>#d</code> appear in an attribute value.
+When that serialized XML is parsed, the
+XML parser will replace <code>#a</code> and <code>#d</code> characters
+with spaces when it performs whitespace normalization on the attribute
+value. Similarly, the sequence <code>#d#a</code> will be translated to
+a single <code>#a</code> by standard XML parsing. If the user of the
+grammar expects to see the original characters in the XML output, it
+will be necessary to encode them using numeric character references
+when serializing the XML output. If on the other hand the user does
+<em>not</em> expect to see the original characters in the output, then
+carefully preserving them using numeric character references is likely
+to be unhelpful. See [<a href="#serialization">XML Serialization</a>] for
+detailed discussions.</p>
 
 <h2 id="conformance"><a href="#conformance">Conformance</a></h2>
 
@@ -819,7 +842,7 @@ conformance requirement.)</p>
   <li>The <code>from</code> character of a range <span class="conform">must
     not</span> be later in the Unicode ordering than the <code>to</code>
     character.</li>
-  <li>Any serialization of a parse tree produced from the grammar <span
+  <li>Any XML constructed from a parse tree produced from the grammar <span
     class="conform">must</span> be well-formed XML.</li>
 </ul>
 
@@ -842,11 +865,11 @@ encodings. There is no conformance requirement on which version of Unicode is us
     by the grammar, or supporting invocation with input streams of
     indeterminate length.</li>
   <li>If the input is unambiguously described by the grammar, the resulting
-    parse tree <span class="conform">must</span> be serialized to an XML
+    parse tree <span class="conform">must</span> be used to construct an XML
     document.</li>
   <li>If more than one parse tree describes the input, the processor <span
-    class="conform">must</span> serialize one of them. It is not defined how
-    this choice is made, but the resulting serialization <span
+    class="conform">must</span> construct XML from one of them. It is not defined how
+    this choice is made, but the resulting XML <span
     class="conform">should</span> by default include the attribute
     <code>ixml:state</code> on the document element with a value that includes
     the word <code>ambiguous</code>. Processors <span
@@ -861,11 +884,11 @@ encodings. There is no conformance requirement on which version of Unicode is us
     includes parts of the parse that succeeded.</li>
   <li>If a prefix of the input is described by the grammar, processors <span
     class="conform">may</span> choose either to produce a failure document as
-    described above, or to serialize the resulting parse tree with the
+    described above, or to construct XML from the resulting parse tree with the
     attribute <code>ixml:state</code> containing the word <code>prefix</code>,
     or if the parse is ambiguous, the words <code>ambiguous prefix</code>.</li>
   <li>If the input was processed as a different version of iXML than that
-    requested by the prolog, the document element of the serialization
+    requested by the prolog, the document element of the XML constructed
     <span class="conform">must</span> have an <code>ixml:version</code> attribute
     that identifies the version of iXML actually used for the parse.</li>
   <li>The form in which XML documents are produced is not constrained by this
@@ -904,22 +927,6 @@ generated nonterminals.</p>
 <pre>f**sep ⇒ f-star-sep
 -f-star-sep: (f++sep)?.</pre>
 
-<p>Implementers should pay particular attention to serializing whitespace and
-other control characters. Consider, for example, the case where the
-characters <code>#a</code> or <code>#d</code> appear in a value
-serialized as an attribute. When that serialized XML is parsed, the
-XML parser will replace <code>#a</code> and <code>#d</code> characters
-with spaces when it performs whitespace normalization on the attribute
-value. Similarly, the sequence <code>#d#a</code> will be translated to
-a single <code>#a</code> by standard XML parsing. If the user of the
-grammar expects to see the original characters in the XML output, it
-will be necessary to encode them using numeric character references
-when serializing the XML output. If on the other hand the user does
-<em>not</em> expect to see the original characters in the output, then
-carefully preserving them using numeric character references is likely
-to be unhelpful. See [<a href="#serialization">Serialization</a>] for
-detailed discussions.</p>
-
 <h2 id="complete"><a href="#complete">Complete Grammar</a></h2>
 
 <p>The <a href="ixml.ixml.html">complete grammar</a> for ixml:</p>
@@ -931,10 +938,10 @@ inserted here by the build process.</pre>
 
 <p>Since the ixml grammar is expressed in its own notation, the above grammar
 can be processed into an XML document by parsing it using itself, and then
-serializing. Note that all semantically significant terminals are recorded in
-attributes, and non-significant characters are not serialized. An
-abbreviated serialization is shown below, but the <a href="ixml.xml.html">entire
-serialization</a> is available:</p>
+constructing XML. Note that all semantically significant terminals are recorded in
+attributes, and non-significant characters are not in the XML. An
+abbreviated version is shown below, but the <a href="ixml.xml.html">entire
+XML representation</a> is available:</p>
 
 <pre class="completexml">A summary of the XML grammar is
 inserted here by the build process.</pre>
@@ -983,15 +990,15 @@ errors are errors that can be identified by inspecting the grammar.</p>
       represented as well-formed XML.</dd>
   <dt id="err-d02"><a href="#ref-d02">D02</a></dt>
     <dd>It is an error if two or more attributes with the same name would be
-      serialized on the same element.</dd>
+      added to the same element.</dd>
   <dt id="err-d03"><a href="#ref-d03">D03</a></dt>
     <dd>It is an error if the name of any element or attribute is not a valid
       XML name.</dd>
   <dt id="err-d04"><a href="#ref-d04">D04</a></dt>
-    <dd>It is an error to attempt to serialize as XML any characters that are
+    <dd>It is an error to attempt to output in XML any characters that are
       not permitted in XML.</dd>
   <dt id="err-d05"><a href="#ref-d05">D05</a></dt>
-    <dd>It is an error to attempt to serialize an attribute as the root node of
+    <dd>It is an error to attempt to use an attribute as the root node of
       an XML document.</dd>
   <dt id="err-d06"><a href="#ref-d06">D06</a></dt>
     <dd>It is an error if the parse tree does not contain exactly one top-level
