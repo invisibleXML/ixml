@@ -74,7 +74,7 @@
 
 ### Attachment
 19. A pragma’s attachment to a specific syntactic construct must be unambiguous to software for parsing iXML grammars.
-20. The relationship between a pragma and the construct it annotates should be clear and unambiguous to human readers, in both iXML and XML notation. 
+20. The relationship between a pragma and the construct it attaches to should be clear and unambiguous to human readers, in both iXML and XML notation. 
 
 
 
