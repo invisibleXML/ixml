@@ -1,6 +1,6 @@
-{ Invisible XML specification grammar, 2024-11-10 }
+{ Invisible XML specification grammar, 2025-08-19 }
 { Published in https://invisiblexml.org/current/ }
-{ Commit hash 6d2922495dc2 }
+{ Commit hash 9d4b5176b8f4 }
 
          ixml: s, (prolog, RS)?, rule++RS, s.
 
