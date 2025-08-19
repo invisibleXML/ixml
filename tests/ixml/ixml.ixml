@@ -1,3 +1,4 @@
+{THIS IS AN OLDER VERSION OF THE ixml GRAMMAR, NOT THE OFFICIAL VERSION}
          ixml: s, rule++s, s.
 
            -s: (whitespace; comment)*.

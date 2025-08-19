@@ -1,4 +1,6 @@
- ixml  :  S  ,  rule  ++  S  ,  S  . 
+{THIS IS AN OLDER VERSION OF THE ixml GRAMMAR, NOT THE OFFICIAL VERSION}
+{spaces everywhere they are allowed}'
+ixml  :  S  ,  rule  ++  S  ,  S  . 
  - S :  ( whitespace ; comment )  *  . 
  - whitespace :  -  [ Zs ]  ; tab ;  lf ;  cr . 
  - tab :  - #9 . 

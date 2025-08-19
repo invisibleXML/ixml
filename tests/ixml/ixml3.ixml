@@ -1,3 +1,4 @@
+{THIS IS AN OLDER VERSION OF THE ixml GRAMMAR, NOT THE OFFICIAL VERSION}
 {A test for what happens with comments in nonterminal attributes}
 ixml: S, rule+.
 rule: mark?, name, ["=:"], S, -alts, ".", S.

@@ -1,3 +1,5 @@
+{THIS IS AN OLDER VERSION OF THE ixml GRAMMAR, NOT THE OFFICIAL VERSION}
+{spaces nowhere}
 ixml:S,rule++S,S.
 -S:(whitespace;comment)*.
 -whitespace:-[Zs];tab;lf;cr.

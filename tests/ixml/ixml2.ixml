@@ -1,3 +1,4 @@
+{THIS IS AN OLDER VERSION OF THE ixml GRAMMAR, NOT THE OFFICIAL VERSION}
 ixml: S, rule+.
 rule: mark?, name, ["=:"], S, -alts, ".", S.
 alts: alt++([";|"], S).
