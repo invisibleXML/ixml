@@ -73,7 +73,8 @@
 18. Recognized but ill-formed pragmas need not cause the parse to fail, or cause the processor to issue a warning. That is, if a processor recognizes a pragma identifier, but the pragma data cannot be parsed successfully as input to the relevant code block, the response is wholly a matter for the implementer. 
 
 ### Attachment
-19. A pragma’s attachment to a specific syntactic construct must be unambiguous to software for parsing iXML grammars.
+
+19. Given an iXML grammar that includes a pragma, all conformant iXML processors must share the same interpretation of the pragma's position in the grammar hierarchy, meaning that they will produce a consistent XML representation of that grammar. Specifically, a pragma must be understood as attached (see definition above) to a specific syntactic construct in the grammar, resulting in its representation as a child of the element representing that syntactic construct in the XML version of the grammar. 
 20. The relationship between a pragma and the construct it attaches to should be clear and unambiguous to human readers, in both iXML and XML notation. 
 
 
