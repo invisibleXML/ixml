@@ -71,7 +71,7 @@
 
 <xsl:template match="html:html">
   <xsl:copy>
-    <xsl:sequence select="@* except @class"/>
+    <xsl:sequence select="@* except (@class|@xml:space)"/>
     <xsl:attribute name="class" select="'informal no-js ' || @class"/>
     <xsl:apply-templates/>
   </xsl:copy>
@@ -79,8 +79,17 @@
 
 <xsl:template match="html:head">
   <xsl:copy>
-    <xsl:apply-templates select="@*, node()"/>
+    <xsl:apply-templates select="@* except @xml:space, node()"/>
     <script>(function(H){{H.className=H.className.replace(/\bno-js\b/,'js')}})(document.documentElement)</script>
+
+    <xsl:if test="empty(html:link[contains-token(@rel, 'icon')])">
+      <link rel="shortcut icon" href="/img/favicon.png" />
+      <link rel="apple-touch-icon" sizes="64x64" href="/img/favicon_64.png" type="image/png" />
+      <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon_76.png" type="image/png" />
+      <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon_120.png" type="image/png" />
+      <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon_152.png" type="image/png" />
+    </xsl:if>
+
     <script defer="defer" src="js/features.js"/>
   </xsl:copy>
 </xsl:template>
@@ -225,7 +234,7 @@
 
 <xsl:template match="html:h2|html:h3">
   <xsl:copy>
-    <xsl:sequence select="@*"/>
+    <xsl:sequence select="@* except @xml:space"/>
     <xsl:if test="not(@id)">
       <xsl:attribute name="id" select="generate-id(.)"/>
     </xsl:if>
@@ -305,13 +314,13 @@
 
 <xsl:template match="*" mode="trim">
   <xsl:copy>
-    <xsl:apply-templates select="@*, node()" mode="trim"/>
+    <xsl:apply-templates select="@* except @xml:space, node()" mode="trim"/>
   </xsl:copy>
 </xsl:template>
 
 <xsl:template match="ixml/*[position() = 15]" mode="trim">
   <xsl:copy>
-    <xsl:apply-templates select="@*, node()" mode="trim"/>
+    <xsl:apply-templates select="@* except @xml:space, node()" mode="trim"/>
   </xsl:copy>
   <xsl:comment> Many more rules here… </xsl:comment>
 </xsl:template>
