@@ -1,0 +1,29 @@
+h1 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+header h2 {
+    padding-left: 1rem;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header {
+    margin-left: 1rem;
+}
+
+footer {
+    font-size: 80%;
+    margin-left: 3rem;
+    padding-bottom: 1rem;
+}
