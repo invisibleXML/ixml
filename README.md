@@ -64,10 +64,10 @@ parsable format as if it were XML, without the need for markup. </p>
 
 <h2>Resources</h2>
 <ul>
-<li>The (draft) <a href="ixml-specification.html">Specification for Invisible XML</a> formally describes the language.</li>
+<li>The (draft) <a href="https://invisiblexml.org/1.0/">Specification for Invisible XML</a> formally describes the language.</li>
 <li>The <a href="http://www.cwi.nl/~steven/ixml/tutorial/">hands-on tutorial</a> shows you how to use it.</li>
-<li>The ixml grammar <a href="ixml.ixml">in ixml serialization</a>.</li>
-<li>The ixml grammar <a href="ixml.xml">in XML serialization</a>.</li>
+<li>The ixml grammar <a href="https://invisiblexml.org/1.0/ixml.ixml.html">in ixml serialization</a>.</li>
+<li>The ixml grammar <a href="https://invisiblexml.org/1.0/ixml.xml.html">in XML serialization</a>.</li>
 </ul>
 
 <p>There are five papers on the development:</p>
