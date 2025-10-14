@@ -269,6 +269,12 @@ details summary span {
     text-decoration: underline;
 }    
 
+.announcement {
+    border-left: 1em solid rgb(213,94,0);
+    border-top-left-radius: 0.25em;
+    border-bottom-left-radius: 0.25em;
+}
+
 @media screen and (max-width: 1200px) {
     .logo {
         width: 200px;
