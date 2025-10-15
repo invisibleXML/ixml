@@ -17,6 +17,10 @@ that are not feasible in a pure context-free grammar.  So do not
 assume without checking that the language accepted by the ixml grammar
 here matches exactly the language defined by the relevant source.
 
+The samples are free to use, they are [licensed](LICENSE) under
+the [Creative Commons CC0](https://creativecommons.org/public-domain/cc0/)
+license.
+
 Samples in this directory include:
 
 * ISBN: a grammar for International Standard Book Numbers and
