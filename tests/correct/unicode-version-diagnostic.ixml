@@ -35,6 +35,9 @@
   14.0 U+2E54 Po Medieval question mark
   15.0 U+11B00 Po Devanagari head mark
   15.1 U+2FFC So ideographic desc char surround from right
+  16.0 U+10D40 Nd Garay digit zero
+
+  17.0 U+11DE0 Nd Tolong Siki digit zero
 
   For the record, earlier versions had:
   13.0 U+08BE Lo Arabic ... PAH with small v
@@ -57,6 +60,8 @@
                 | unicode-14.0
                 | unicode-15.0
                 | unicode-15.1
+                | unicode-16.0
+                | unicode-17.0
                 .
 
 unicode-6.0  = -[So], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
@@ -67,8 +72,10 @@ unicode-6.0  = -[So], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 {1f086   2cf3    20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-6.1  = -[Po], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -78,8 +85,10 @@ unicode-6.1  = -[Po], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-6.2  = -[Po], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -89,8 +98,10 @@ unicode-6.2  = -[Po], -[Sm], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-6.3  = -[Po], -[Ps], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -100,8 +111,10 @@ unicode-6.3  = -[Po], -[Ps], -[Ps], -[Pe], -[Lo], -[Lo], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-7.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lo], -[Lo], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -111,8 +124,10 @@ unicode-7.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lo], -[Lo], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-8.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Lo], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -122,8 +137,10 @@ unicode-8.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Lo], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -~[Lo], -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-9.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -133,8 +150,10 @@ unicode-9.0  = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -~[Lo], -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-10.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -144,8 +163,10 @@ unicode-10.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -~[Ll], -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-11.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -155,8 +176,10 @@ unicode-11.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -~[Po], -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-12.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -166,8 +189,10 @@ unicode-12.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -~[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-12.1 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -177,8 +202,10 @@ unicode-12.1 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -~[Nd], -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -~[Nd], -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-13.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -188,8 +215,10 @@ unicode-13.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -[Nd],  -~[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -[Nd],  -~[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-14.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -199,8 +228,10 @@ unicode-14.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -[Nd],  -[Po], -~[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -[Nd],  -[Po], -~[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc   10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-15.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -210,8 +241,10 @@ unicode-15.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -[Nd],  -[Po],  -[Po], -~[So], s.
-                {1fbf7   2e54    11b00   2ffc }
+               -[Nd],  -[Po],  -[Po], -~[So], -~[Nd], s,
+                {1fbf7   2e54    11b00   2ffc   10d40 }
+               -~[Nd], s.
+                {11de0 }
 
 unicode-15.1 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 { A7   2308   FD3E , FD3F   13DD   1886 }
@@ -221,8 +254,36 @@ unicode-15.1 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
                 {1f086  2cf3     20ba    052b    13f5 }
                -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
                 {1715c   0860    0560    0c77    32ff }
-               -[Nd],  -[Po],  -[Po],  -[So], s.
-                {1fbf7   2e54    11b00  2ffc }
+               -[Nd],  -[Po],  -[Po],  -[So], -~[Nd], s,
+                {1fbf7   2e54    11b00  2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
+
+unicode-16.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
+                { A7   2308   FD3E , FD3F   13DD   1886 }
+               -[Ll], -[So], -[Mc], s,
+                {10d0  166d   1734 }
+               -[So],  -[Ll],  -[Sc],  -[Ll],  -[Lu], s,
+                {1f086  2cf3     20ba    052b    13f5 }
+               -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
+                {1715c   0860    0560    0c77    32ff }
+               -[Nd],  -[Po],  -[Po],  -[So],  -[Nd], s,
+                {1fbf7   2e54    11b00  2ffc    10d40 }
+               -~[Nd], s.
+                {11de0 }
+
+unicode-17.0 = -[Po], -[Ps], -[Pe], -[Ps], -[Lu], -[Mn], s,
+                { A7   2308   FD3E , FD3F   13DD   1886 }
+               -[Ll], -[So], -[Mc], s,
+                {10d0  166d   1734 }
+               -[So],  -[Ll],  -[Sc],  -[Ll],  -[Lu], s,
+                {1f086  2cf3     20ba    052b    13f5 }
+               -[Lo],  -[Lo],  -[Ll],  -[Po],  -[So], s,
+                {1715c   0860    0560    0c77    32ff }
+               -[Nd],  -[Po],  -[Po],  -[So],  -[Nd], s,
+                {1fbf7   2e54    11b00  2ffc    10d40 }
+               -[Nd], s.
+                {11de0 }
 
 
 -s = -[Zs; #9; #A; #D]+.
