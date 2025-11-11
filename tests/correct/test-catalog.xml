@@ -739,6 +739,18 @@
         <result><assert-xml-ref href="unicode.v15.1.xml"/></result>
       </test-case>
       
+      <test-case name="unicode-version-16.0-diagnostic">
+        <dependencies Unicode-version="16.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode.v16.0.xml"/></result>
+      </test-case>
+
+      <test-case name="unicode-version-17.0-diagnostic">
+        <dependencies Unicode-version="17.0"/>
+        <test-string-ref href="unicode-version-diagnostic.txt"/>
+        <result><assert-xml-ref href="unicode.v17.0.xml"/></result>
+      </test-case>
+
     </test-set>
                
 
