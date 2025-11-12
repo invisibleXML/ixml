@@ -35,5 +35,5 @@ functionName = [L]+ ¬ ("if" | "while" ) .
 ```
 
 This example expresses that a function name is any sequence of letters, except
-that ~if~ and ~while~ cannot be function names.
+that `if` and `while` cannot be function names.
 
