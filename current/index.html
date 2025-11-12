@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="XHTML+RDFa 1.0" class="informal no-js "><head profile=""><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Invisible XML Specification</title><link rel="stylesheet" href="css/style.css" /><script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script><link rel="shortcut icon" href="/img/favicon.png" /><link rel="apple-touch-icon" sizes="64x64" href="/img/favicon_64.png" type="image/png" /><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon_76.png" type="image/png" /><link rel="apple-touch-icon" sizes="120x120" href="/img/favicon_120.png" type="image/png" /><link rel="apple-touch-icon" sizes="152x152" href="/img/favicon_152.png" type="image/png" /><script defer="defer" src="js/features.js"></script></head><body><main><header>
 <h1 id="specification">Invisible XML Specification</h1>
-<h2 id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: 4ddeefea">2025-11-11</span><!--$--></h2>
+<h2 id="d4e13">Community Group Editorial Draft, <!--$date=--><span title="Commit: f9516d70">2025-11-12</span><!--$--></h2>
 <dl xml:space="preserve"><div class="h-version">
 <dt>This version:</dt>
 <dd><a href="https://invisiblexml.org/current/">https://invisiblexml.org/current/</a></dd>
@@ -493,9 +493,9 @@ when serializing the XML output. If on the other hand the user does
 <em>not</em> expect to see the original characters in the output, then
 carefully preserving them using numeric character references is likely
 to be unhelpful. See [<a href="#serialization" shape="rect">Serialization</a>] for
-detailed discussions.</p><h2 id="complete"><span class="sectnum">9. </span><a href="#complete" shape="rect">Complete Grammar</a></h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span><span class="com"><span class="comdel">{</span> Invisible XML specification grammar, 2025-11-11 <span class="comdel">}</span></span>
+detailed discussions.</p><h2 id="complete"><span class="sectnum">9. </span><a href="#complete" shape="rect">Complete Grammar</a></h2><p>The <a href="ixml.ixml.html" shape="rect">complete grammar</a> for ixml:</p><pre><span><span class="com"><span class="comdel">{</span> Invisible XML specification grammar, 2025-11-12 <span class="comdel">}</span></span>
 <span class="com"><span class="comdel">{</span> Published in https://invisiblexml.org/current/ <span class="comdel">}</span></span>
-<span class="com"><span class="comdel">{</span> Commit hash 4ddeefea4ebd <span class="comdel">}</span></span>
+<span class="com"><span class="comdel">{</span> Commit hash f9516d70dcf9 <span class="comdel">}</span></span>
 
          <span class="nt">ixml</span><span class="col">:</span> <span class="nt">s</span>, (<span class="nt">prolog</span>, <span class="nt">RS</span>)<span class="rep">?</span>, <span class="nt">rule</span><span class="reps">++</span><span class="nt">RS</span>, <span class="nt">s</span>.
 
@@ -576,9 +576,9 @@ serializing. Note that all semantically significant terminals are recorded in
 attributes, and non-significant characters are not serialized. An
 abbreviated serialization is shown below, but the <a href="ixml.xml.html" shape="rect">entire
 serialization</a> is available:</p><pre><span><span class="text"><span class="stag">&lt;</span><span class="gi">ixml</span><span class="stag">&gt;</span>
-   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Invisible XML specification grammar, 2025-11-11 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Invisible XML specification grammar, 2025-11-12 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Published in https://invisiblexml.org/current/ <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
-   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Commit hash 4ddeefea4ebd <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
+   <span class="text"><span class="stag">&lt;</span><span class="gi">comment</span><span class="stag">&gt;</span> Commit hash f9516d70dcf9 <span class="etag">&lt;/</span><span class="gi">comment</span><span class="etag">&gt;</span></span>
    <span class="text"><span class="stag">&lt;</span><span class="gi">rule</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">ixml</span><span class="q">'</span></span><span class="stag">&gt;</span>
       <span class="text"><span class="stag">&lt;</span><span class="gi">alt</span><span class="stag">&gt;</span>
          <span class="empty"><span class="stag">&lt;</span><span class="gi">nonterminal</span> <span class="attr"><span class="aname">name</span><span class="eq">=</span><span class="q">'</span><span class="avalue">s</span><span class="q">'</span></span><span class="stag">/&gt;</span></span>
@@ -733,4 +733,4 @@ structure grammars</em>. Communications of the ACM, 11(4):240–247, April
 Tomos Hillman, John Lumley, Steven Pemberton, C. M. Sperberg-McQueen, Bethan
 Tovey-Walsh, Norman Tovey-Walsh. Other current and former members of the group
 have also contributed.</p><p>Thanks are due to Hans-Dieter Hiep for an early close reading of the
-specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #91 for invisibleXML/ixml at <time datetime="2025-11-11T15:32:10GMT+00:00" title="2025-11-11T15:32:10GMT+00:00">15:32 on 11 November 2025</time></span> <span class="bh"><span title="4ddeefea4ebd7091ed8c53f7756ea4f9cc9b9c36">4ddeefea</span></span></p></footer></main></body></html>
+specification, and consequent many helpful comments.</p><footer class="docid"><p><span class="dt">Document build #92 for invisibleXML/ixml at <time datetime="2025-11-12T16:52:18GMT+00:00" title="2025-11-12T16:52:18GMT+00:00">16:52 on 12 November 2025</time></span> <span class="bh"><span title="f9516d70dcf94d23dd224c244ec6623d67bfd2b8">f9516d70</span></span></p></footer></main></body></html>
