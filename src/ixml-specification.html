@@ -430,12 +430,16 @@ here uses semicolons.</p>
 <p>An alternative is zero or more terms, separated by commas:</p>
 <pre class="frag ixml">alt: term**(-",", s).</pre>
 
-<p>A term is a singleton factor, an optional factor, or a repeated factor,
-repeated zero or more times, or one or more times.</p>
+<p>A term is a singleton factor, an optional factor, or a repeated factor.
+A repeated factor may be repeated zero or more times, one or more
+times, or “n” times where “n” may be a specific number or a range.
+</p>
+
 <pre class="frag ixml">-term: factor;
        option;
        repeat0;
-       repeat1.</pre>
+       repeat1;
+       repeatn.</pre>
 
 <p>A factor is a terminal, a nonterminal, an insertion, or a bracketed series
 of alternatives:</p>
@@ -455,6 +459,24 @@ double plus and a separator, e.g. <code>abc+</code> and <code>abc++","</code>.
 For instance <code>"a"++"#"</code> would match <code>a</code>,
 <code>a#a</code>, <code>a#a#a</code> etc., but not the empty string.</p>
 <pre class="frag ixml">repeat1: factor, (-"+", s; -"++", s, sep).</pre>
+
+<p>A factor repeated a specified number of times is followed by
+<code>&lt;<em>min</em>,<em>max</em>&gt;</code>,
+or <code>&lt;&lt;<em>min</em>,<em>max</em>&gt;&gt;</code>
+and a separator (where <code><em>max</em></code> may be omitted if <code><em>max</em>=<em>min</em></code>).
+For instance, <code>a&lt;3,5&gt;</code> would match three, four, or five <code>a</code>,
+<code>a&lt;&lt;2,4&gt;&gt;","</code> would match two, three, or four <code>a</code>
+separated by commas, and <code>a&lt;3&gt;</code> would match exactly three <code>a</code>.
+</p>
+
+<pre class="frag ixml">repeatn: factor, (-"&lt;", s, min, s, (-",", s, max, s)?, -">", s;
+                  -"&lt;&lt;", s, min, s, (-",", s, max, s)?, -">>", s, sep).</pre>
+
+<p>In the repetition, the <em>min</em> is an integer greater than or equal to zero.
+The <em>max</em> is an integer greater than or equal to <em>min</em> and strictly
+greater than zero; or it is <code>*</code>, indicating an unbounded number of repetitions;
+or it is omitted, in which case it is effectively equal to the <em>min</em> value.
+</p>
 
 <p>An optional factor is followed by a question mark, e.g. <code>abc?</code>.
 For instance <code>"a"?</code> would match <code>a</code> or the empty
@@ -926,6 +948,32 @@ generated nonterminals.</p>
 <p>Zero or more repetitions with separator:</p>
 <pre>f**sep ⇒ f-star-sep
 -f-star-sep: (f++sep)?.</pre>
+
+<p>Exactly <em>m</em> repetitions:</p>
+<pre>f&lt;m&gt; ⇒ f₁, f₂, f₃ , ..., fₘ</pre>
+
+<p>A range of repetitions:</p>
+<pre>f&lt;m,n&gt; ⇒ f₁, f₂, f₃ , ..., fₘ, (fₘ₊₁, (fₘ₊₂, ..., (fₙ)?, ... )? )?</pre>
+
+<p>For example, <code>f&lt;3,7&gt;</code> is equivalent to <code>f,f,f,(f,(f,(f,(f)?)?)?)?</code>. The
+simpler conversion, <code>f,f,f,f?,f?,f?,f?</code> also matches the input,
+but it will generate many ambiguous parses.</p>
+
+<p>An unbounded range:</p>
+
+<pre>f&lt;m,*&gt; ⇒ f₁, f₂, f₃ , ..., fₘ, f*</pre>
+
+<p>Exactly <em>m</em> repetitions with a separator:</p>
+
+<pre>f &lt;&lt;m&gt;&gt; sep ⇒ f, (sep, f)&lt;m-1&gt;</pre>
+
+<p>A range of repetitions with a separator:</p>
+
+<pre>f &lt;&lt;m,n&gt;&gt; sep ⇒ f, (sep, f)&lt;m-1,n-1&gt;</pre>
+
+<p>An unbounded repeat with a separator:</p>
+
+<pre>f &lt;&lt;m,*&gt;&gt; sep ⇒ f, (sep, f)&lt;m-1,*&gt;</pre>
 
 <h2 id="complete"><a href="#complete">Complete Grammar</a></h2>
 
