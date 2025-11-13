@@ -1,7 +1,7 @@
 <ixml>
    <comment> Invisible XML specification grammar, 2025-11-13 </comment>
    <comment> Published in https://invisiblexml.org/pr/326/ </comment>
-   <comment> Commit hash b5fee455a86a </comment>
+   <comment> Commit hash 5faa2b28f817 </comment>
    <rule name="ixml">
       <alt>
          <nonterminal name="s"/>
