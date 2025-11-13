@@ -75,12 +75,7 @@ jobs:
       - name: Setup DeltaXML
         if: ${{ env.AUTODIFF == 'true' }}
         run: |
-            cd tools && curl -s ${{ secrets.DIFFURI }} | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k ${{ secrets.DIFFPW }} | tar zxf -
-
-      - name: Look around
-        run: |
-            ls
-            ls tools
+            curl -s ${{ secrets.DIFFURI }} | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k ${{ secrets.DIFFPW }} | tar zxf -
 
       - name: Make DeltaXML diffs
         if: ${{ env.AUTODIFF == 'true' }}
