@@ -1,0 +1,27 @@
+digraph tsd_dfd {
+        // sketch of a data flow for managing tag set documentation
+
+    subgraph {
+        node [shape=box];
+
+        rnc [label="RNC schema"];
+        rng [label="RNG\n(auto-generated)"];
+        auto [label="auto-TSD\n(tag-set description\n=Docbook refentry+\nauto-generated)"];
+        manual [label="manual TSD\n(tag-set description\n=Docbook refentry+\neditable)" fontcolor=red];
+        // tsd [label="TSD\n(partly editable)"];
+        tsd [label="TSD\n(tag-set description:\nDocbook refentry+\nprose and auto-generated)"];
+
+        node [shape=oval];
+        // editrnc [label="edit / regen"];
+        edittsd [label="edit"];
+        manual -> edittsd -> manual;
+        tsdxrng [label="auto-generate TSD"];
+        merge [label="merge\nauto- and manual parts"];
+        rnc -> trang -> rng -> tsdxrng -> auto -> merge -> tsd;
+        manual -> merge;
+        subgraph { rank = same; auto; manual; }
+    }
+    // rnc -> editrnc -> rnc [weight=0];
+    tsd ->  manual [style=dotted weight=0 label="Re-use"];
+        
+}

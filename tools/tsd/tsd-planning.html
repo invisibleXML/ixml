@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-05-28 Tue 18:10 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tag set documentation project</title>
+<meta name="author" content="CMSMcQ" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Tag set documentation project</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2d9297a">1. Project overview</a>
+<ul>
+<li><a href="#orgf13b380">1.1. Primary deliverables</a></li>
+<li><a href="#org3c3e9ee">1.2. Requirements</a></li>
+<li><a href="#org9aceaa6">1.3. Workflow</a></li>
+<li><a href="#orgd88ff12">1.4. Secondary deliverables</a></li>
+</ul>
+</li>
+<li><a href="#orgeb0dfc8">2. Vocabulary for tag-set documentation</a></li>
+<li><a href="#orgad10f25">3. Auto-generation of TSD (<i>auto-tsd.xsl</i>)</a></li>
+<li><a href="#org482b3f5">4. Merger of TSDs (<i>tsd-merger.xsl</i>)</a></li>
+<li><a href="#orgc39e422">5. HTML translation and display (<i>tsd-to-html.xsl</i> and <i>tsd.css</i>)</a></li>
+<li><a href="#org2f4bd3e">6. Related work</a></li>
+<li><a href="#org31a1103">7. References</a></li>
+</ul>
+</div>
+</div>
+<p>
+This document outlines a plan for a workflow to create and maintain
+documentation for the XML vocabulary used for the XML form of ixml
+grammars (here called VXML), and the XML vocabulary used for test
+catalogs by the ixml Community Group.
+</p>
+
+<p>
+In its current form this document is not complete and <i>is binding on
+no one</i>.  It is written to serve as a basis for discussion, and to
+record some thoughts and expectations.
+</p>
+
+<div id="outline-container-org2d9297a" class="outline-2">
+<h2 id="org2d9297a"><span class="section-number-2">1.</span> Project overview</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgf13b380" class="outline-3">
+<h3 id="orgf13b380"><span class="section-number-3">1.1.</span> Primary deliverables</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The central deliverables are reference tag-set documentation (TSD) for
+the XML vocabularies in question.
+</p>
+
+<p>
+The tag-set documentation we wish to create consists of some
+expository prose and a reference pages for the element types and
+widely used attributes.
+</p>
+
+<p>
+The crucial delivery format is XHTML; other XML vocabularies may be
+used for maintenance, but is not expected to be of interest to others.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c3e9ee" class="outline-3">
+<h3 id="org3c3e9ee"><span class="section-number-3">1.2.</span> Requirements</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Known requirements and desiderata:
+</p>
+<ul class="org-ul">
+<li>It must be possible to update the documentation more or less
+conveniently as the schemas change.</li>
+<li>When the schema changes, human-supplied prose must be carried
+forward easily.</li>
+<li>Information derivable from the schema should be provided
+automatically.  Specifically:  declarations, lists of parents,
+lists of children, lists of attributes.</li>
+<li>When schema-derived information changes, it is desirable that
+the user be warned, so that any relevant prose can also be
+updated.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9aceaa6" class="outline-3">
+<h3 id="org9aceaa6"><span class="section-number-3">1.3.</span> Workflow</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+The intended workflow is described in this diagram:
+</p>
+
+<div id="org073d3a8" class="figure">
+<p><img src="./images/tsd-workflow.dot.png" alt="tsd-workflow.dot.png" style="width: 40%;"/>
+</p>
+<p><span class="figure-number">Figure 1: </span>Workflow plan</p>
+</div>
+
+<p>
+That is:
+</p>
+<ul class="org-ul">
+<li><p>
+The RNC/RNG schemas are maintained independently.
+</p>
+
+<p>
+The test catalog schema is maintained by hand in RNC; the ixml
+schema is generated automatically in RNG from the ixml grammar,
+which is maintained by hand.  We use trang to make an RNG form of
+the test catalog schema, and an RNC form of the ixml schema.
+</p>
+
+<p>
+Not shown: we use <i>jing -s</i> to create a 'simplified' version of the
+RNG schema.  In some cases, this may require some hand work.  (Jing
+aborts with an error message if asked to simplify some schemas with
+recursive patterns.  The simplified schema also uses some rather
+opaque names for patterns introduced by Jing.))
+</p></li>
+
+<li><p>
+An XSLT stylesheet (<i>rng-to-TSD.xsl</i>) auto-generates tag-set
+documentation for the schema.
+</p>
+
+<p>
+If names and short descriptions are provided in the RNG annotation
+namespace (<i>a:documentation</i> elements), they should be carried over.
+Otherwise, dummies should be provided.
+</p>
+
+<p>
+This stylesheet draws information about the vocabulary from both the
+RNG schema and the simplified RNG schema.
+</p></li>
+
+<li>An XSLT stylesheet (<i>tsd-merger.xsl</i>) reads the auto-generated
+documentation and the previous hand-edited version of the same
+documentation, and produces merged output.
+<ul class="org-ul">
+<li>For schema-derived information, the auto-generated documentation
+is preferred; for other information (basically: the prose),
+the hand-edited documentation is preferred.</li>
+<li>If any schema-derived information differs between the two
+sources, the stylesheet should report the fact to the user.</li>
+</ul></li>
+
+<li>An XSLT stylesheet (<i>tsd-to-html.xsl</i>) reads the merged tag-set
+documentation and generates HTML with an appropriate stylesheet
+(tsd.css).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd88ff12" class="outline-3">
+<h3 id="orgd88ff12"><span class="section-number-3">1.4.</span> Secondary deliverables</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+We have some secondary deliverables, whose purpose is to occupy
+the corresponding positions in the workflow.
+</p>
+
+<ul class="org-ul">
+<li>Specification of the tag-set documentation vocabulary and
+conventions to be used.  Obvious candidates are Docbook, TEI P3, TEI
+P5, and an ad hoc custom vocabulary.</li>
+
+<li><i>auto-tsd.xsl</i></li>
+
+<li><i>tsd-merger.xsl</i></li>
+
+<li><i>tsd-to-html.xsl</i></li>
+
+<li><i>tsd.css</i></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeb0dfc8" class="outline-2">
+<h2 id="orgeb0dfc8"><span class="section-number-2">2.</span> Vocabulary for tag-set documentation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+We will use Docbook for the XML form of the tag-set documentation.
+</p>
+
+<p>
+Because Docbook's reference entries are rather generic, it may be
+helpful to specify the pattern to be followed there in more detail.
+Each <i>refentry</i> element should contain:
+</p>
+
+<ul class="org-ul">
+<li><i>refnamediv</i>
+<ul class="org-ul">
+<li><i>refdescriptor</i> containing either "(element)" or "(attribute)" or
+"(pattern)"</li>
+<li><i>refname</i> with the element type name, attribute name, or pattern
+name</li>
+<li><i>refpurpose</i> containing (a) an unabbreviated form of the element
+type name, (b) a colon, and (c) a short description (typically one line)
+of the meaning or use of the construct</li>
+</ul></li>
+<li><i>refsynopsisdiv</i>
+<ul class="org-ul">
+<li><p>
+<i>synopsis role="rng-raw"</i>
+</p>
+<ul class="org-ul">
+<li><i>info</i> containing the 'raw' Relax NG declaration for the
+construct:
+<ul class="org-ul">
+<li>For elements, the <i>rng:element</i> element.</li>
+<li>For attributes, the <i>rng:attribute</i> element.</li>
+<li>For patterns, the <i>rng:define</i> element.</li>
+</ul></li>
+</ul>
+<p>
+For comparison:  this is similar to inclusion of an element
+declaration from a DTD with parameter entity references
+unexpanded.
+</p></li>
+<li><i>synopsis role="rng-simplified"</i> (for elements and attributes only)
+containing the corresponding declaration from the 'simplified'
+for the construct.
+For comparison:  this is similar to inclusion of an element
+declaration from a DTD with all parameter entity references
+expanded.</li>
+<li>(optional, for elements) <i>synopsis role="structured"</i> containing a
+structured description in English of the content model of the
+element.  Not required, because in the usual case an English
+summary can be generated from the simplified RNG without trouble.
+Not forbidden, because it may be better to do this upstream rather
+than in the creation of the HTML delivery form.</li>
+</ul></li>
+<li>(optional, for elements) <i>refsection</i> entitled "Contents" containing
+a prose description in English of the allowed contents of the
+element.  element.  Not required, because not always useful.</li>
+<li>(for attributes) <i>refsection</i> entitled "Data description"
+with informal prose description of the attribute's datatype.</li>
+<li>(for elements) <i>refsection</i> entitled "Attributes" listing all
+attributes defined for the element.  If the attribute is used on
+more than one element, then we want just the attribute name with a
+hyperlink to the reference entry for the attribute; if the attribute
+is used only on this element, or should be given custom
+documentation for this parent, a version of the documentation
+pattern for attributes (perhaps attenuated) should be given.</li>
+<li>(optional) <i>refsection</i> entitled "Remarks" with prose describing
+relevant information &#x2013; whatever the user will need to know.  For
+elements and attributes this includes recognition criteria,
+distinctions from similar elements or attributes, usage.</li>
+<li><i>refsection</i> entitled "Examples" with prose and examples.  In
+some cases, this may just consist of references to examples
+given in other reference entries.</li>
+<li>(optional) <i>refsection</i> entitled "Processing expectations".</li>
+</ul>
+
+<p>
+For example:
+</p>
+<div class="org-src-container">
+<pre class="src src-Docbook-xml">&lt;refentry xml:id="element.assert-xml"&gt;
+   &lt;refnamediv&gt;
+      &lt;refdescriptor&gt;(element)&lt;/refdescriptor&gt;
+      &lt;refname&gt;assert-xml&lt;/refname&gt;
+      &lt;refpurpose&gt;Assert-xml:  asserts that the expected
+      output of a conforming ixml processor will be (or,
+      in cases of ambiguity, may be) the child element
+      of the /assert-xml/ element.&lt;/refpurpose&gt;
+   &lt;/refnamediv&gt;
+   &lt;refsynopsisdiv&gt;
+     &lt;synopsis role="rng-raw"&gt;
+       &lt;info&gt;
+         &lt;element xmlns="http://relaxng.org/ns/structure/1.0"
+                  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                  name="assert-xml"&gt;
+            &lt;ref name="external-atts"/&gt;
+            &lt;oneOrMore&gt;
+               &lt;ref name="any-element"/&gt;
+            &lt;/oneOrMore&gt;
+         &lt;/element&gt;
+       &lt;/info&gt;
+     &lt;/synopsis&gt;
+     &lt;synopsis role="rng-simplified"&gt;
+       &lt;info&gt;
+         &lt;element xmlns="http://relaxng.org/ns/structure/1.0"
+                  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                  name="assert-xml"&gt;
+           &lt;group&gt;
+             &lt;zeroOrMore&gt;
+               &lt;attribute&gt;
+                 &lt;anyName&gt;
+                   &lt;except&gt;
+                     &lt;nsName ns=""/&gt;
+                   &lt;/except&gt;
+                 &lt;/anyName&gt;
+                 &lt;text/&gt;
+               &lt;/attribute&gt;
+             &lt;/zeroOrMore&gt;
+             &lt;oneOrMore&gt;
+               &lt;ref name="_1"/&gt;
+             &lt;/oneOrMore&gt;
+           &lt;/group&gt;
+         &lt;/element&gt;
+       &lt;/info&gt;
+     &lt;/synopsis&gt;
+   &lt;/refsynopsisdiv&gt;
+   &lt;refsection&gt;
+      &lt;title&gt;Contents&lt;/title&gt;
+      &lt;para&gt;Any well-formed XML&lt;/para&gt;
+   &lt;/refsection&gt;
+   &lt;refsection&gt;
+      &lt;title&gt;Remarks&lt;/title&gt;
+      &lt;para&gt;If the test catalog has a default namespace
+      declaration, it will be necessary to undeclare it in order
+      to avoid namespace capture of the asserted result. (IXML
+      output has no identified namespace.)&lt;/para&gt;
+      &lt;para&gt;When comparing output of an ixml processor to the
+      asserted result, namespace declarations are to be
+      ignored.&lt;/para&gt;
+   &lt;/refsection&gt;
+&lt;/refentry&gt;  
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgad10f25" class="outline-2">
+<h2 id="orgad10f25"><span class="section-number-2">3.</span> Auto-generation of TSD (<i>auto-tsd.xsl</i>)</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+[To be drafted.]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org482b3f5" class="outline-2">
+<h2 id="org482b3f5"><span class="section-number-2">4.</span> Merger of TSDs (<i>tsd-merger.xsl</i>)</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+[To be drafted.]
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc39e422" class="outline-2">
+<h2 id="orgc39e422"><span class="section-number-2">5.</span> HTML translation and display (<i>tsd-to-html.xsl</i> and <i>tsd.css</i>)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+[To be drafted.]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2f4bd3e" class="outline-2">
+<h2 id="org2f4bd3e"><span class="section-number-2">6.</span> Related work</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+There has been reference documentation for SGML and XML tag sets for
+about as long as there have been SGML and XML tag sets intended for
+serious use, but there has been very little standardization on the
+form of such documentation.  Among the examples which have influenced
+this work are:
+</p>
+
+<ul class="org-ul">
+<li><p>
+Formex (1985).  Formex served "formalized exchange of electronic
+publications".  The manual includes expository prose reference
+documentation includes two lists of data elements, one for a format
+called CCF (common communications format, an implementation of
+ISO 2079) and one for an SGML document type definition.  The
+reference page for each element type includes:
+</p>
+<ul class="org-ul">
+<li>A symbolic representation of the element's generic identifier
+(element type name) and attributes e.g. <code>&lt;AB LA = ...&gt;</code> for
+the AB (abstract) element with its LA (language) attribute.</li>
+<li>A definition (or terse prose description) of the element.</li>
+<li>A data description of the element, describing its content and
+format.</li>
+<li>A usage note specifying whether the element is mandatory or
+optional, repeatable or non-repeatable.</li>
+<li>A grouping note specifying what 'groups' the element is part
+of (this appears to be a list of possible parents or possibly
+higher-level containers).</li>
+<li>An example (not always present).</li>
+</ul>
+<p>
+For each attribute, the reference page gives:
+</p>
+<ul class="org-ul">
+<li>A definition (or terse prose description) of the attribute.</li>
+<li>A data description defining the set of possible attribute
+values.</li>
+</ul>
+<p>
+Not listed here but prominent on each page are cross references to
+the corresponding CCF data elements.
+</p></li>
+
+<li>Maler and El Andaloussi (1996).  Maler and El Andaloussi recommend
+the following as the "minimal information" for element reference
+documentation:
+<ul class="org-ul">
+<li>Short name or actual generic identifier (e.g. <code>olist</code>).</li>
+<li>Full name: descriptive phrase that explains the short name
+(e.g. "An ordered list of related items.").</li>
+<li>Synopsis: rules for using the element, perhaps including tree
+diagrams showing possible parents and children.</li>
+<li>Description: purpose, how and where it should be used,
+recognition criteria, etc.</li>
+<li>Attributes: reference description for each attribute.</li>
+<li>Contents and Contexts (if not already present in the description
+and if not clearly conveyed by the synopsis).</li>
+<li>Examples.</li>
+<li>Processing notes, including notes on how to work around
+shortcomings in current tools.</li>
+</ul></li>
+
+<li><p>
+JATS documentation (current).  This is a reasonably typical example
+of the tag-set documentation supplied by at least some commercially
+active SGML and XML consultants.  Reference material for an element
+includes:
+</p>
+<ul class="org-ul">
+<li>Generic identifier / element type name</li>
+<li>Full name</li>
+<li>Annotation (to specify which DTDs in a set contain the element)</li>
+<li>Definition</li>
+<li>Remarks</li>
+<li>Related elements</li>
+<li>Content model</li>
+<li>Content description (prose)</li>
+<li>Presentation information (expected styling)</li>
+<li>Examples (with prose commentary)</li>
+<li>Related resources (pointers to other relevant information)</li>
+<li>Source (if adapted from some other tag set)</li>
+<li>Module (in a multi-module vocabulary)</li>
+<li>Revision history</li>
+</ul>
+<p>
+There are similar structures for attributes and parameter entities.
+</p></li>
+
+<li><p>
+TEI P3 (1994).  The auxiliary document type for 'tag set
+documentation' allows for each element type:
+</p>
+<ul class="org-ul">
+<li>generic identifier</li>
+<li>full name</li>
+<li>short description (typically a one-liner)</li>
+<li>list of attributes (with reference information for each)</li>
+<li>examples (with commentary and explanation)</li>
+<li>remarks</li>
+<li>information on the part of TEI where the element is defined,
+the classes it belongs to, and the file(s) it is defined in</li>
+<li>a data description (in prose)</li>
+<li>a list of parents</li>
+<li>a list of children</li>
+<li>the text of the element's declaration</li>
+<li>the text of the element's attribute-list declaration</li>
+<li>hyperlinks to relevant documentation</li>
+<li>a list of equivalent elements (in other vocabularies)</li>
+</ul>
+<p>
+TEI P5 (current) has modified the tag-set documentation of P3 and
+made many of the elements less specific.
+</p></li>
+</ul>
+
+<p>
+The reference material of Docbook has also had an obvious influence.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org31a1103" class="outline-2">
+<h2 id="org31a1103"><span class="section-number-2">7.</span> References</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li><i>Formex: formalized exchange of electronic publications</i>,
+ed. C. Guittet.  Luxembourg: Office for Official Publications of the
+European Communities, 'New Technologies &#x2013; Project Management'
+Department, 1985.  243 pp.</li>
+
+<li>Maler, Eve, and Jeanne El Andaloussi.  <i>Developing SGML DTDs: from
+text to model to markup.</i> Upper Saddle River, NJ: Prentice Hall PTR,
+<ol class="org-ol">
+<li></li>
+</ol></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 28 May 2024</p>
+<p class="author">Author: CMSMcQ</p>
+<p class="date">Created: 2024-05-28 Tue 18:10</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
