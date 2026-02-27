@@ -1,0 +1,53 @@
+.autohide {
+    visibility: hidden;
+    background-color: white;
+    padding: 2px;
+    font-weight: bold;
+    z-index: 2;
+    opacity: 0;
+    transition: visibility 0s 4s, opacity 4s linear;
+}
+.autoshow {
+    visibility: visible;
+    background-color: white;
+    padding: 2px;
+    font-weight: bold;
+    z-index: 2;
+    opacity: 1;
+}
+.diffinfo {
+    border: 2px solid #777777;
+    background-color: rgb(240,228,66);
+    border-radius: 1em;
+}
+body {
+    margin-top: 1in;
+}
+#_autodiff_buttons {
+    width: 50em;
+    background-color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px dotted black;
+}
+
+.deltaxml-hidden {
+    display: none;
+}
+.deltaxml-old, .deltaxml-old-format, .show-old {
+    color: rgb(213,94,0);
+    text-decoration: line-through;
+    font-weight: bold;
+}
+.deltaxml-old-img {
+    border: 1px solid rgb(230,159,0);
+}
+
+.deltaxml-new, .deltaxml-new-format, .show-new {
+    color: rgb(0,158,115);
+    font-weight: bold;
+}
+.deltaxml-new-img {
+    border: 1px solid rgb(86,180,233);
+}
