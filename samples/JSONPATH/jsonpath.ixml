@@ -1,0 +1,204 @@
+{ Converted from Appendix A of the IETF JSONPath proposed standard RFC9535 }
+{ https://datatracker.ietf.org/doc/rfc9535/ }
+{ Transliterated by Alan Painter for use with CoffeeSacks in 'ajp' }
+{ https://github.com/xmljacquard/ajp/blob/main/src/main/resources/xslt/ajp/jsonpath.ixml }
+
+jsonpath-query          = root-identifier , segments .
+
+-root-identifier        = - "$" .
+
+segments                = ( S , segment )* .
+
+segment                 = child-segment | descendant-segment .
+
+child-segment           =             bracketed-selection       |
+                          ( - "." , ( wildcard-selector |
+                                      member-name-shorthand ) ) .
+
+descendant-segment      =  - ".." , ( bracketed-selection |
+                                      wildcard-selector   |
+                                      member-name-shorthand ) .
+
+-bracketed-selection    = - "[" , S ,
+                                selector ,
+                                ( S , -"," , S , selector )* ,
+                                S ,
+                          - "]" .
+
+-S                      = B* .      { optional blank space  }
+
+-B                      = -#20 |    { Space                 }
+                          -#09 |    { Horizontal tab        }
+                          -#0A |    { Line feed or New line }
+                          -#0D .    { Carriage return       }
+
+-selector               = name-selector     |
+                          wildcard-selector |
+                          slice-selector    |
+                          index-selector    |
+                          filter-selector   .
+
+name-selector           = string-literal  .
+
+wildcard-selector       = "*" .
+
+string-literal          = ( -#22 , double-quoted* , -#22 ) |     { "string" }
+                          ( -#27 , single-quoted* , -#27 ) .     { 'string' }
+
+-double-quoted          = unescaped       |
+                          #27             |       { '  }
+                          ( ESC , #22 )   |       { \" }
+                          single-escaped  |       { \ BS/FF/LF/CR/HT/SLASH/BACKSLASH }
+                          hex-escaped     .       { \ U+XXXX }
+
+
+-single-quoted          = unescaped       |
+                          #22             |       { "  }
+                          ( ESC , #27 )   |       { \' }
+                          single-escaped  |       { ESC BS/FF/LF/CR/HT/SLASH/BACKSLASH }
+                          hex-escaped     .       { \ U+XXXX }
+
+-ESC                    = -#5C .                  { \ backslash }
+
+                                                    { see RFC 8259 }
+-unescaped              = [ #20-#21 ]         |     { omit 0x22 "  }
+                          [ #23-#26 ]         |     { omit 0x27 '  }
+                          [ #28-#5B ]         |     { omit 0x5C \  }
+                          [ #5D-#D7FF ]       |     { skip surrogate code points }
+                          [ #E000-#FFFC ]     |     { omit   #FFFD -   #FFFF }
+                          [ #10000-#10FFFD ]  .     { omit #10FFFE - #10FFFF }
+                                                    { N.B. for RFC9535, should allow #E000-#10FFF }
+
+-single-escaped         = ( ESC , single-escapable ) .
+
+-single-escapable       = BS | FF | LF | CR | HT | SLASH | BACKSLASH .
+
+ BS                     = -"b"        .    { \b BS backspace                U+0008 }
+ FF                     = -"f"        .    { \f FF form feed                U+000C }
+-LF                     = -"n" , +#a  .    { \n LF line feed                U+000A }
+-CR                     = -"r" , +#d  .    { \r CR carriage return          U+000D }
+-HT                     = -"t" , +#9  .    { \t HT horizontal tab           U+0009 }
+-SLASH                  = -"/" , +#2f .    { \/ slash (solidus)             U+002F }
+-BACKSLASH              = -"\" , +#5c .    { \\ backslash (reverse solidus) U+005C }
+
+-hex-escaped            = ( ESC , - "u", hexchar ) .                { uXXXX U+XXXX }
+
+hexchar                 = non-surrogate                                    |
+                          ( high-surrogate , ESC , - "u" , low-surrogate ) .
+
+-non-surrogate          = ( ( DIGIT  |    ["Aa"; "Bb"; "Cc";  "Ee"; "Ff"]  ) , HEXDIG3 ) |
+                          ( ( [ "Dd" ] ,  [ "0"-"7" ]                      ) , HEXDIG2 ) .
+
+high-surrogate          = [ "Dd" ] , [ "8";  "9"; "Aa"; "Bb"] , HEXDIG2 .
+low-surrogate           = [ "Dd" ] , ["Cc"; "Dd"; "Ee"; "Ff"] , HEXDIG2 .
+
+-HEXDIG3                 = HEXDIG , HEXDIG , HEXDIG .
+-HEXDIG2                 = HEXDIG , HEXDIG          .
+-HEXDIG                  = DIGIT | ["A"-"F" ; "a"-"f" ]     .
+
+index-selector          = int .                              { decimal integer }
+
+-int                    = "0" | ( "-"? , DIGIT1 , DIGIT* ) . { - optional }
+
+slice-selector          = ( start,   S )?           ,
+                            -":" ,   S              ,
+                          ( end ,    S )?           ,
+                          ( -":" , ( S , step )? )? .
+
+start                   = int .      { included in selection     }
+end                     = int .      { not included in selection }
+step                    = int .      { default: 1                }
+
+filter-selector         = - "?" , S , logical-expr .
+
+logical-expr            = logical-or-expr          .
+
+logical-or-expr         = logical-and-expr , ( S , - "||" , S , logical-and-expr )* .
+                                     { disjunction                         }
+                                     { binds less tightly than conjunction }
+
+logical-and-expr        = basic-expr       , ( S , - "&&" , S , basic-expr       )* .
+                                     { conjunction                         }
+                                     { binds more tightly than disjunction }
+
+-basic-expr             = paren-expr      |
+                          comparison-expr |
+                          test-expr       .
+
+paren-expr              = ( logical-not-op, S )? , -"(" , S , logical-expr , S , -")" .
+
+test-expr               = ( logical-not-op, S )? , ( filter-query
+                                                     |
+                                                     function-expr ) .  { LogicalType or NodesType }
+
+logical-not-op          = - "!" .
+
+filter-query            = rel-query | jsonpath-query .      { existence / non-existence }
+
+function-expr           = function-name ,
+                          - "(" ,
+                             S  ,
+                             ( function-argument, (S , - "," , S , function-argument )* )? ,
+                             S ,
+                          - ")" .
+
+rel-query               = current-node-identifier , segments .
+
+-current-node-identifier
+                        = - "@" .
+
+comparison-expr         = comparable , S , comparison-op , S , comparable .
+
+literal                 = number | string-literal | true | false | null .
+
+comparable              = literal        |
+                          singular-query | { singular query value }
+                          function-expr  . { ValueType            }
+
+comparison-op           = "==" | "!=" |
+                          "<=" | ">=" |
+                          "<"  | ">"  .
+
+singular-query          = rel-singular-query      | abs-singular-query      .
+rel-singular-query      = current-node-identifier , singular-query-segments .
+abs-singular-query      = root-identifier         , singular-query-segments .
+
+singular-query-segments = ( S , ( name-segment | index-segment ) )* .
+
+name-segment            = ( -"[" , name-selector , -"]"  )  |
+                          ( -"." , member-name-shorthand )  .
+
+index-segment           = -"[" , index-selector , -"]"    .
+
+number                  = ( int | "-0" ) , frac? , exp?  .   { decimal number   }
+frac                    = "."  , DIGIT+                   .  { decimal fraction }
+exp                     = ["Ee"] , ["-" ; "+"]? , DIGIT+  .  { decimal exponent }
+
+true                    = - "true"  .
+false                   = - "false" .
+null                    = - "null"  .
+
+function-name           = function-name-first , function-name-char* .
+-function-name-char     = function-name-first | "_" | DIGIT         .
+-function-name-first    = LCALPHA   .
+-LCALPHA                = ["a"-"z"] .
+
+function-argument       = literal       |
+                          filter-query  |  { includes singular-query }
+                          logical-expr  |
+                          function-expr .
+
+member-name-shorthand   = name-first , name-char* .
+
+-name-char              = name-first | DIGIT .
+
+-name-first             = ALPHA               |
+                          "_"                 |
+                          [ #80-#D7FF      ]  |     { skip surrogate code points }
+                          [ #E000-#FFEF    ]  |     { omit   #FFF0 -   #FFFF }
+                          [ #10000-#10FFEF ]  .     { omit #10FFF0 - #10FFFF }
+                                                    { N.B. for RFC9535, should allow #E000-#10FFF }
+
+-DIGIT1                 = [ #31-#39 ]          .   { 1-9 non-zero digit }
+-DIGIT                  = [ #30-#39 ]          .   { 0-9                }
+-ALPHA                  = [ "A"-"Z"; "a"-"z" ] .   { A-Z ; a-z          }
