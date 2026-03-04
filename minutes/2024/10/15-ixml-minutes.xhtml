@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml – 15 October 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-10-15" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml</h1>
+         
+         <h2>15 October 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/10/15-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>John, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Bethan, David, Nico</dd>
+               
+               <dt>Chair</dt>
+               <dd>-</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#353e">Accept the agenda</a></li>
+               
+               <li><a href="#bb72">Review of action items</a></li>
+               
+               <li><a href="#586e">Status reports</a></li>
+               
+               <li><a href="#933f">Status reporting, issue #271</a></li>
+               
+               <li><a href="#0e76">IXML in IXML, issue #270</a></li>
+               
+               <li><a href="#eee5">When is a letter not a letter, #268</a></li>
+               
+               <li><a href="#92c1">Next meeting</a></li>
+               
+               <li><a href="#a15c">Any other business</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="353e">Accept the agenda</h3>
+            
+            <p id="df0e" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="bb72">Review of action items</h3>
+            
+            <p id="6d62" class="summary">Some discussion of Alain's implementation in Xsltforms. He's implemented the XPath
+               4 function.</p>
+            
+            <p id="b128" class="summary">2024-10-01-b completed</p>
+            
+            <p id="af9d" class="summary">Agreement among those present that it's a good idea.</p>
+            
+            <p id="dafa" class="action"><strong>ACTION:</strong> 2024-10-15-a SP to make a PR for the rename string change.</p>
+            
+            <p id="5c3d" class="summary">Agreement that Norm can merge his XML names document</p>
+            
+            <p id="c02f" class="phone s01"><cite>2024-10-01-e:</cite> Completed.</p>
+            
+            <p id="af27" class="phone s02"><cite>SP:</cite> The tests are like that because that's how iXML used to be.</p>
+            
+            <p id="1432" class="phone s02"><cite>SP:</cite> I suggest we rename them, not fix them.</p>
+            
+            <p id="0b61" class="phone s03"><cite>JWL:</cite> We can have a statement having saying "this is the grammar as of..." that lets people
+               know it may not now be current.<br />
+               <span id="5a4f">… All we need to do is make sure they have good labeling.</span></p>
+            
+            <p id="abdf" class="phone s04"><cite>NW:</cite> Add a label for them?</p>
+            
+            <p id="a4b5" class="phone s02"><cite>SP:</cite> There are two grammars that differ only in spaces.</p>
+            
+            <p id="ac46" class="phone s03"><cite>JWL:</cite> Mark it deprecated?</p>
+            
+            <p id="1f84" class="action"><strong>ACTION:</strong> 2024-10-15-b SP to review the tests again and fix the ones that are invalid.</p>
+            
+            <p id="c75b" class="summary">Actions 2024-10-01-f and 2024-03-05-c are the same action. Remove one for next.</p>
+            
+            <p id="38f3" class="phone s05"><cite>2024-03-19-a:</cite> W3C doesn't want to remove the link.</p>
+            
+            <p id="8516" class="action"><strong>ACTION:</strong> 2024-10-15-c NW to try one more time to reconstruct the earlier draft</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="586e">Status reports</h3>
+            
+            <p id="1337" class="phone s03"><cite>JWL:</cite> I released an update; doing some rewriting in TypeScript</p>
+            
+            <p id="10c1" class="phone s04"><cite>NW:</cite> Nothing from me this week.</p>
+            
+            <p id="84c4" class="phone s02"><cite>SP:</cite> I'm dedicated to Declarative Amsterdam in the short term.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="933f">Status reporting, issue #271</h3>
+            
+            <p id="69d1" class="phone s03"><cite>JWL:</cite> I like splitting it into two parts.</p>
+            
+            <p id="1f07" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/271">invisibleXML/<wbr></wbr>ixml#271</a></p>
+            
+            <p id="4d0a" class="phone s02"><cite>SP:</cite> I think it's a good idea.</p>
+            
+            <p id="4461" class="action"><strong>ACTION:</strong> 2024-10-15-d NW to draft a PR to implement the change proposed in #271</p>
+            
+            <p id="3004" class="summary">Consensus seems to be that ixml:version shouldn't be printed if the version asked
+               for matches the version used.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="0e76">IXML in IXML, issue #270</h3>
+            
+            <p id="3f9f" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/270">invisibleXML/<wbr></wbr>ixml#270</a></p>
+            
+            <p id="7b34" class="phone s06"><cite>Consensus:</cite> we can change that.</p>
+            
+            <p id="2312" class="action"><strong>ACTION:</strong> 2024-10-15-e NW to draft a PR for to fix #270</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="eee5">When is a letter not a letter, #268</h3>
+            
+            <p id="3951" class="phone s02"><cite>SP:</cite> We can close this now that we've agreed to publish the note.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="92c1">Next meeting</h3>
+            
+            <p id="1f98" class="summary">29 October.</p>
+            
+            <p id="e6ad" class="summary">Agreed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="a15c">Any other business</h3>
+            
+            <p id="dd4a" class="summary">None heard.</p>
+            
+            <p id="1340" class="summary">rrsagent draft minutes</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#dafa">2024-10-15-a SP to make a PR for the rename string change.</a></li>
+            
+            <li><a href="#1f84">2024-10-15-b SP to review the tests again and fix the ones that are invalid.</a></li>
+            
+            <li><a href="#8516">2024-10-15-c NW to try one more time to reconstruct the earlier draft</a></li>
+            
+            <li><a href="#4461">2024-10-15-d NW to draft a PR to implement the change proposed in #271</a></li>
+            
+            <li><a href="#2312">2024-10-15-e NW to draft a PR for to fix #270</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 237 (Fri Oct  4 02:31:45 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: norm</p>
+         
+         <p class="warning">Maybe present: 2024-03-19-a, 2024-10-01-e, Consensus, JWL, NW, SP</p>
+         
+         <p class="warning">All speakers: 2024-03-19-a, 2024-10-01-e, Consensus, JWL, NW, SP</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

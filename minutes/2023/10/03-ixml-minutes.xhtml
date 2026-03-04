@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 3 October 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-10-03" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>3 October 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2023/09/05-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Oct/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/10/03-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Issue #199 Require whitespace between prolog and first rule?</a></li>
+               
+               <li><a href="#t05">Issue #197 Remove the Unicode non-character constraint</a></li>
+               
+               <li><a href="#t06">Issue #189 What are the control characters</a></li>
+               
+               <li><a href="#t07">Issue #181 Non-serializable characters in the input</a></li>
+               
+               <li><a href="#t08">Issue #139 Sample grammars for IRIs and URIs</a></li>
+               
+               <li><a href="#t09">Issue #192 Normalizing line endings in ixml inputs</a></li>
+               
+               <li><a href="#t10">Version</a></li>
+               
+               <li><a href="#t11">Issue #13 Renaming proposal (for v.Next)</a></li>
+               
+               <li><a href="#t12">Issue #192 Normalizing line endings in ixml inputs</a></li>
+               
+               <li><a href="#t13">AOB</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x010" class="irc"><cite>&lt;cmsmcq_&gt;</cite> Hmm.  I wonder why I am here twice</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Actions</h3>
+            
+            <p id="x013" class="phone s01"><cite>Michael:</cite> Nothing done, even the easy ones!</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2023-07-25-a: Norm to create an issue w.r.t. end of line</p>
+            
+            <p id="x015" class="phone s02"><cite>normalization:</cite> Done</p>
+            
+            <p id="x016" class="phone s03"><cite>Norm:</cite> All my actions done except publishing the report</p>
+            
+            <p id="x018" class="phone s04"><cite>John:</cite> Done ACTION 2023-07-25-c: JL to redraft his notes on grammar combination</p>
+            
+            <p id="x019" class="summary">                     and send something to the public list.</p>
+            
+            <p id="x020" class="phone s04"><cite>John:</cite> Done ACTION 2023-09-05-g: John to implement the renaming proposal</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x026" class="phone s04"><cite>John:</cite> Added renaming<br />
+               <span id="x027">… works fairly well</span><br />
+               <span id="x028">… Need to talk about "version" later</span><br />
+               <span id="x029">… there are a number of symbols we haven't used, like %</span><br />
+               <span id="x030">… we might want to bear in mind that they are available</span></p>
+            
+            <p id="x031" class="phone s03"><cite>Norm:</cite> Working on improveemts</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x034" class="phone s04"><cite>John:</cite> Are there renaming tests?</p>
+            
+            <p id="x035" class="irc"><cite>&lt;cmsmcq_&gt;</cite> We definitely do need tests for renaming.</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Norm create tests for renaming</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #199 Require whitespace between prolog and first rule?</h3>
+            
+            <p id="x038" class="phone s01"><cite>Michael:</cite> It's not ambiguous, but we should do it for consistency</p>
+            
+            <p id="x039" class="phone s05"><cite>Steven:</cite> So resolved</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Steven to make pull request for grammar for space after prolog</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Issue #197 Remove the Unicode non-character constraint</h3>
+            
+            <p id="x042" class="phone s03"><cite>Norm:</cite> RFC for JSON, and they have a rule that includes non-unicode characters</p>
+            
+            <p id="x043" class="summary">"An encoded character is an optionally marked hexadecimal number. It starts with a
+               hash symbol, followed by any number of hexadecimal digits, for example #a0. The digits
+               are interpreted as a number in hexadecimal (error S06) , and the character at that
+               Unicode code-point is used [Unicode]. The number must be within the Unicode code-point
+               range (error S07), and must not denote a Noncharacter or Surrogate code point (error
+               S08)."</p>
+            
+            <p id="x044" class="phone s03"><cite>Norm:</cite> I'm happy to say that you can't have them in Unicode, and you can't use them.</p>
+            
+            <p id="x045" class="phone s01"><cite>Michael:</cite> the ixml grammar of the JSON grammar can't then be a simple transcription.</p>
+            
+            <p id="x046" class="phone s05"><cite>Steven:</cite> We leave the spec as is then.</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Norm close issue 197 without changes</p>
+            
+            <p id="x048" class="phone s03"><cite>Norm:</cite> Should we have an FAQ?</p>
+            
+            <p id="x049" class="phone s01"><cite>Michael:</cite> A good idea.</p>
+            
+            <p id="x050" class="phone s03"><cite>Norm:</cite> You could create a range that is expressible, but that includes noncharacters...</p>
+            
+            <p id="x051" class="phone s01"><cite>Michael:</cite> But the input still can't contain those characters</p>
+            
+            <p id="x052" class="phone s03"><cite>Norm:</cite> I can live with that</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> Michael draft a FAQ</p>
+            
+            <p id="x054" class="phone s05"><cite>Steven:</cite> The spec requires UTF-8 encoding, but doesn't explicitly restrict noncharacters</p>
+            
+            <p id="x055" class="phone s01"><cite>Michael:</cite> I think that our rules effectively mean that noncharacters are excluded</p>
+            
+            <p id="x059" class="phone s05"><cite>Steven:</cite> Except exclusions<br />
+               <span id="x060">… would allow noncharacters</span><br />
+               <span id="x061">… input: ~[]*.</span><br />
+               <span id="x062">… input: -~[]*, +'.'.</span></p>
+            
+            <p id="x063" class="phone s03"><cite>Norm:</cite> I'd like to see what Michael writes in the FAQ.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #189 What are the control characters</h3>
+            
+            <p id="x065" class="phone s03"><cite>Norm:</cite> This is resolved using character classes. We can close.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #181 Non-serializable characters in the input</h3>
+            
+            <p id="x069" class="phone s03"><cite>Norm:</cite> Has been closed<br />
+               <span id="x070">… raises error D04</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Issue #139 Sample grammars for IRIs and URIs</h3>
+            
+            <p id="x072" class="phone s05"><cite>Steven:</cite> Where are we at?</p>
+            
+            <p id="x073" class="phone s01"><cite>Michael:</cite> Awaiting review</p>
+            
+            <p id="x074" class="phone s05"><cite>Steven:</cite> On the agenda for next time</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Issue #192 Normalizing line endings in ixml inputs</h3>
+            
+            <p id="x076" class="phone s04"><cite>John:</cite> Before that. About version</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Version</h3>
+            
+            <p id="x079" class="phone s04"><cite>John:</cite> Are the version numbers collatable?<br />
+               <span id="x080">… is there a strict ordering?</span></p>
+            
+            <p id="x082" class="phone s06"><cite>Bethan:</cite> It would be good to agree a format</p>
+            
+            <p id="x083" class="phone s03"><cite>Norm:</cite> I'd rather put off the decision till when we have a versionable number</p>
+            
+            <p id="x084" class="phone s01"><cite>Michael:</cite> How about "Tokenise on '.', that is a sequence of keys, if a key is a number, then
+               compare numerically, otherwise lexically"</p>
+            
+            <p id="x086" class="phone s06"><cite>Bethan:</cite> Rather just use numbers</p>
+            
+            <p id="x087" class="phone s01"><cite>Michael:</cite> Are we the only ones to create a version number?</p>
+            
+            <p id="x088" class="phone s06"><cite>Bethan:</cite> Yes.</p>
+            
+            <p id="x089" class="phone s04"><cite>John:</cite> Leave it on the backburner</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">Issue #13 Renaming proposal (for v.Next)</h3>
+            
+            <p id="x091" class="phone s05"><cite>Steven:</cite> Nothing to discuss?</p>
+            
+            <p id="x092" class="phone s03"><cite>Norm:</cite> Merge?</p>
+            
+            <p id="x093" class="phone s07"><cite>All:</cite> Yes</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">Issue #192 Normalizing line endings in ixml inputs</h3>
+            
+            <p id="x096" class="phone s03"><cite>Norm:</cite> 4 options.<br />
+               <span id="x097">… it is a pain</span></p>
+            
+            <p id="x100" class="phone s01"><cite>Michael:</cite> I would like our abstraction to be that we are parsing unicode characters, without
+               an abstraction on top of that.<br />
+               <span id="x101">… normalising default is OK; require it to be disableable</span><br />
+               <span id="x102">… I see uses cases for not normalising</span></p>
+            
+            <p id="x103" class="phone s04"><cite>John:</cite> So what do I write?</p>
+            
+            <p id="x105" class="phone s05"><cite>Steven:</cite> I was thinking of U+2028<br />
+               <span id="x106">… line separator</span></p>
+            
+            <p id="x108" class="phone s06"><cite>Bethan:</cite> I like the idea<br />
+               <span id="x109">… would it be in input anyway</span></p>
+            
+            <p id="x110" class="phone s01"><cite>Michael:</cite> Could be</p>
+            
+            <p id="x111" class="phone s01"><cite>Michael:</cite> We need a written proposal</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t13">AOB</h3>
+            
+            <p id="x113" class="phone s05"><cite>Steven:</cite> Next meeting in 2 weeks</p>
+            
+            <p id="x114" class="phone s04"><cite>John:</cite> Regrets</p>
+            
+            <p id="x115" class="summary">[ADJOURN]</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2023-07-25-a: Norm to create an issue w.r.t. end of line</a></li>
+            
+            <li><a href="#a02">Norm create tests for renaming</a></li>
+            
+            <li><a href="#a03">Steven to make pull request for grammar for space after prolog</a></li>
+            
+            <li><a href="#a04">Norm close issue 197 without changes</a></li>
+            
+            <li><a href="#a05">Michael draft a FAQ</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/reoprt/report/</p>
+         
+         <p class="warning">Succeeded: s/,//</p>
+         
+         <p class="warning">Succeeded: s/TH/Th/</p>
+         
+         <p class="warning">Succeeded: s/ing/ing?</p>
+         
+         <p class="warning">Succeeded: s/lexically/lexically"/</p>
+         
+         <p class="warning">Succeeded: i/Michael: Nothing done, even the easy ones!/Topic: Actions</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: All, normalization</p>
+         
+         <p class="warning">All speakers: All, Bethan, John, Michael, Norm, normalization, Steven</p>
+         
+         <p class="warning">Active on IRC: cmsmcq_, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

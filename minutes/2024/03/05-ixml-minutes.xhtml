@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML CG – 05 March 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-03-05" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML CG</h1>
+         
+         <h2>05 March 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/02/20-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Mar/0007.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/03/05-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan Tovey-Walsh, Jim Saiya, John Lumley, Michael Sperberg-McQueen, Norm Tovey-Walsh,
+                  Steven Pemberton</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven Pemberton</dd>
+               
+               <dt>Scribe</dt>
+               <dd>cmsmcq, Michael Sperberg-McQueen</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of action items</a></li>
+               
+               <li><a href="#t02">Pull request #224 Mitigating ambiguity in mod357</a></li>
+               
+               <li><a href="#t03">Status reports</a></li>
+               
+               <li><a href="#t04">Pull request #224 Mitigating ambiguity in mod357</a></li>
+               
+               <li><a href="#t05">Pull request #225 Fix errors in ixml-spec-grammar performance test for XPath</a></li>
+               
+               <li><a href="#t06">Pull request #226 Additional result for performantce/xpath xsltforms-3</a></li>
+               
+               <li><a href="#t07">Pull request #227 Add .gitattributes</a></li>
+               
+               <li><a href="#t08">Issue #233 There are other things called iXML</a></li>
+               
+               <li><a href="#t09">Issue #139 Sample grammars for IRIs and URIs</a></li>
+               
+               <li><a href="#t10">Issue #236 When must version numbers change?</a></li>
+               
+               <li><a href="#t11">next meeting 19 March.</a></li>
+               
+               <li><a href="#t12">typo in 1.0 spec</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of action items</h3>
+            
+            <p id="x010" class="summary">ACTION 2023-01-10-f continues.</p>
+            
+            <p id="x011" class="summary">ACTION 2023-11-28-a continues.</p>
+            
+            <p id="x012" class="summary">ACTION 2023-11-28-c continues.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2023-11-28-e was done in <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Mar/0009.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2024Mar/<wbr></wbr>0009.html</a></p>
+            
+            <p id="x014" class="summary">ACTION 2024-02-20-a</p>
+            
+            <p id="x015" class="summary">has been done.</p>
+            
+            <p id="x016" class="summary">ACTION 2024-02-20-b continues.</p>
+            
+            <p id="x017" class="summary">ACTION 2024-02-20-c has been done (issues #234 - #236)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Pull request #224 Mitigating ambiguity in mod357</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status reports</h3>
+            
+            <p id="x020" class="summary">JL reports he has done a lot of exploration of generating ixml grammars, with special
+               reference to auto-generation of XPath 4 grammar.</p>
+            
+            <p id="x021" class="summary">You can generate quite big ixml grammars, and the issue of controlling inherent ambiguity
+               really needs to be looked at.</p>
+            
+            <p id="x022" class="summary">Any spec which uses extra-grammatical constraints to resolve ambiguities will exhibit
+               this problem.</p>
+            
+            <p id="x023" class="summary">JL uses an ixml grammar to parse the source code for the specification of the XPath
+               4.0 grammar in the specs, and produces an ixml grammar.</p>
+            
+            <p id="x024" class="summary">NTW has nothing to report.</p>
+            
+            <p id="x025" class="summary">SP is working to prepare for Prague, but has nothing visible to report.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Pull request #224 Mitigating ambiguity in mod357</h3>
+            
+            <p id="x027" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/224">invisibleXML/<wbr></wbr>ixml#224</a></p>
+            
+            <p id="x028" class="summary">We discussed.</p>
+            
+            <p id="x029" class="summary">Ultimately, GR's suggestion is a way to make the test catalog more manageable.</p>
+            
+            <p id="x030" class="summary">We can do that by making the results deterministic, as GR suggests.</p>
+            
+            <p id="x031" class="summary">Or by using only unambiguous test numerals.</p>
+            
+            <p id="x032" class="summary">We reached consensus that we should accept the pull request.</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Norm to confirm correctness of #224 and commit the pr</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Norm to test the correctness of PR #224 and merge if it is correct.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Pull request #225 Fix errors in ixml-spec-grammar performance test for XPath</h3>
+            
+            <p id="x036" class="summary">Yes, accept.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Pull request #226 Additional result for performantce/xpath xsltforms-3</h3>
+            
+            <p id="x038" class="summary">Accept this.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Pull request #227 Add .gitattributes</h3>
+            
+            <p id="x040" class="summary">NTW suggests leaving #227 unresolved until we have resolved issue #192.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Issue #233 There are other things called iXML</h3>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Norm to add a section to the home page pointing to other things named "ixml" or "9ml"
+               or ...</p>
+            
+            <p id="x043" class="summary">Jim mentions another recipeML</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Issue #139 Sample grammars for IRIs and URIs</h3>
+            
+            <p id="x045" class="summary">SP clarifies that he doesn't propose to replace the existing ixml grammars, just to
+               add a new one.</p>
+            
+            <p id="x046" class="summary">NTW says that's fine, just modulate the tone in the README a bit.</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> SP to prepare pull request to resolve issue #139 (new grammars, new README).</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Issue #236 When must version numbers change?</h3>
+            
+            <p id="x049" class="irc"><cite>&lt;norm&gt;</cite> SP: I don't like version numbers.</p>
+            
+            <p id="x050" class="irc"><cite>&lt;norm&gt;</cite> CM: I don't like them either but consider the case of a C program from the mid-eighties
+               that heavily used some extensions...I can't compile it.</p>
+            
+            <p id="x051" class="irc"><cite>&lt;norm&gt;</cite> ... If something claims to be a correct iXML grammar for version 3, I don't need
+               to be surprised if it isn't processable by a 1.1 processor.</p>
+            
+            <p id="x052" class="irc"><cite>&lt;norm&gt;</cite> ... If there's no version number, then, "well, sometimes iXML grammars work and sometimes
+               they don't." A race to the bottom.</p>
+            
+            <p id="x053" class="irc"><cite>&lt;norm&gt;</cite> Some discussion about whether or not a construct that is an error in 1.0 that is
+               then allowed in 1.1 is considered a change of semantics or just a change of syntax.</p>
+            
+            <p id="x054" class="irc"><cite>&lt;norm&gt;</cite> SP asserts strongly that adding new syntax not valid in 1.0 is not a change.</p>
+            
+            <p id="x055" class="summary">MSM asserts strongly that the change from "not a grammar" to "a grammar with a particular
+               meaning" is a change to the semantics of an input.</p>
+            
+            <p id="x056" class="summary">We discussed, without any visible forward progress.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">next meeting 19 March.</h3>
+            
+            <p id="x058" class="summary">Beware time zone shift in US</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">typo in 1.0 spec</h3>
+            
+            <p id="x060" class="summary">Pi should be defined as 3.1415926 not 3.145926</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2023-11-28-e was done in https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2024Mar/<wbr></wbr>0009.html</a></li>
+            
+            <li><a href="#a02">Norm to confirm correctness of #224 and commit the pr</a></li>
+            
+            <li><a href="#a03">Norm to test the correctness of PR #224 and merge if it is correct.</a></li>
+            
+            <li><a href="#a04">Norm to add a section to the home page pointing to other things named "ixml" or "9ml"
+                  or ...</a></li>
+            
+            <li><a href="#a05">SP to prepare pull request to resolve issue #139 (new grammars, new README).</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Active on IRC: cmsmcq, norm</p>
+         </div>
+      
+      
+      </body>
+</html>

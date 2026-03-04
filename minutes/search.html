@@ -1,0 +1,72 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+   
+   
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      
+      
+      <link rel="stylesheet" href="staticSearch/ssSearch.css" id="ssCss"/>
+      
+      
+      <title>Search</title>
+      </head>
+   
+   
+   <body>
+      
+      
+      <div id="staticSearch"><script src="staticSearch/ssSearch.js"></script>
+         <!--
+              Note that if you want to debug a problem with the JavaScript, you can
+              change "ssSearch.js" to "ssSearch-debug.js" to link the uncompressed, 
+              unminified code instead.
+            --><script src="staticSearch/ssInitialize.js"></script><noscript>This page requires JavaScript.</noscript><form accept-charset="UTF-8" id="ssForm" data-allowphrasal="yes" data-allowwildcards="yes" data-minwordlength="2" data-maxkwicstoshow="25" data-scoringalgorithm="raw" data-resultsperpage="0" onsubmit="return false;" data-versionstring="_oxyq53" data-ssfolder="staticSearch" data-kwictruncatestring="…" data-resultslimit="2000"><span class="ssQueryAndButton"><input type="text" id="ssQuery" aria-label="Search"/><button id="ssDoSearch">Search</button></span><span class="clearButton"><button id="ssClear">Clear</button></span><div class="ssDateFilters">
+               <fieldset class="ssFieldset" title="Date of publication" id="ssDate1">
+                  <legend><span>Date of publication: </span></legend><span><label for="ssDate1_from">From: </label><input type="text" maxlength="10" pattern="^\d\d\d\d(-((((01)|(03)|(05)|(07)|(08)|(10)|(12))-((0[1-9])|([12][0-9])|(3[01])))|(((04)|(06)|(09)|(11))-((0[1-9])|([12][0-9])|(30)))|(02-((0[1-9])|([12][0-9]))))|(-((0[123456789])|(1[012]))))?$" title="Date of publication" id="ssDate1_from" class="staticSearch.date staticSearch_date" placeholder="2021-07-06" onchange="this.reportValidity()"/></span><span><label for="ssDate1_to">To: </label><input type="text" maxlength="10" pattern="^\d\d\d\d(-((((01)|(03)|(05)|(07)|(08)|(10)|(12))-((0[1-9])|([12][0-9])|(3[01])))|(((04)|(06)|(09)|(11))-((0[1-9])|([12][0-9])|(30)))|(02-((0[1-9])|([12][0-9]))))|(-((0[123456789])|(1[012]))))?$" title="Date of publication" id="ssDate1_to" class="staticSearch.date staticSearch_date" placeholder="2026-03-03" onchange="this.reportValidity()"/></span></fieldset>
+            </div><span class="postFilterSearchBtn"><button id="ssDoSearch2">Search</button></span></form>
+         <div id="ssSearching">Searching...</div>
+         <div id="ssResults"></div>
+         <div id="ssPoweredBy">
+            <p>Powered by</p><a href="https://github.com/projectEndings/staticSearch" aria-label="Powered by staticSearch"><svg xmlns="http://www.w3.org/2000/svg" id="svg8" version="1.1" viewBox="0 0 266.77068 209.61487" height="30" width="39">
+                  
+                  
+                  
+                  <g transform="translate(2.6856597,-0.17661868)" id="layer1">
+                     
+                     <g style="font-style:normal;font-weight:normal;font-size:38.3821px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#505050;fill-opacity:1;stroke:none;stroke-width:0.29986" id="text835" transform="scale(0.88235593,1.1333295)" aria-label="ʃ">
+                        
+                        <path id="path906" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:179.916px;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';fill:#505050;fill-opacity:1;stroke-width:0.29986" d="m 55.487531,144.77469 q 0,17.13068 -7.906465,26.35489 -7.818615,9.31205 -22.313801,9.31205 H 2.9534645 V 166.73709 H 23.510273 q 7.906465,0 11.859697,-5.53452 3.953233,-5.44668 3.953233,-16.42788 V 37.773868 q 0,-16.164328 7.379367,-23.807244 7.467217,-7.6429163 23.192297,-7.6429163 H 89.309631 V 19.764698 H 70.949062 q -8.697111,0 -12.123246,3.601834 -3.338285,3.513984 -3.338285,12.562494 z"></path>
+                        </g>
+                     
+                     <g style="font-style:normal;font-weight:normal;font-size:36.8315px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#505050;fill-opacity:1;stroke:none;stroke-width:0.287744" id="text839" transform="scale(0.91950664,1.0875397)" aria-label="tatic">
+                        
+                        <path id="path909" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="M 114.48895,9.2723565 V 20.710201 h 13.27222 v 9.207825 h -13.27222 v 17.084831 q 0,2.805509 1.11501,3.812615 1.11501,0.971138 4.42407,0.971138 h 6.61813 v 9.207824 h -11.0422 q -7.62523,0 -10.82639,-3.165189 -3.16519,-3.201158 -3.16519,-10.826388 V 29.918026 h -6.402312 v -9.207825 h 6.402312 V 9.2723565 Z"></path>
+                        
+                        <path id="path911" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 153.69414,42.866529 q -4.02842,0 -6.0786,1.366787 -2.01421,1.366786 -2.01421,4.028423 0,2.445829 1.61856,3.848583 1.65453,1.366787 4.56794,1.366787 3.63278,0 6.11457,-2.589701 2.4818,-2.625669 2.4818,-6.546188 v -1.474691 z m 19.67453,-4.855688 V 60.994434 H 160.3842 v -5.970698 q -2.5897,3.668742 -5.82683,5.359241 -3.23712,1.654531 -7.877,1.654531 -6.25845,0 -10.17897,-3.632774 -3.88455,-3.668743 -3.88455,-9.49557 0,-7.085708 4.85569,-10.39477 4.89166,-3.309062 15.3224,-3.309062 h 7.58926 v -1.007106 q 0,-3.057286 -2.40986,-4.46004 -2.40986,-1.438723 -7.51733,-1.438723 -4.13632,0 -7.69716,0.827266 -3.56084,0.827265 -6.61813,2.481796 v -9.819282 q 4.13633,-1.007106 8.30863,-1.510659 4.17229,-0.53952 8.34459,-0.53952 10.89832,0 15.71804,4.316167 4.85569,4.2802 4.85569,13.95561 z"></path>
+                        
+                        <path id="path913" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="M 199.40955,9.2723565 V 20.710201 h 13.27222 v 9.207825 h -13.27222 v 17.084831 q 0,2.805509 1.11501,3.812615 1.11501,0.971138 4.42407,0.971138 h 6.61813 v 9.207824 h -11.0422 q -7.62523,0 -10.82639,-3.165189 -3.16519,-3.201158 -3.16519,-10.826388 V 29.918026 h -6.40231 v -9.207825 h 6.40231 V 9.2723565 Z"></path>
+                        
+                        <path id="path915" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 220.55877,20.710201 h 12.87657 v 40.284233 h -12.87657 z m 0,-15.6820762 h 12.87657 V 15.5308 h -12.87657 z"></path>
+                        
+                        <path id="path917" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 278.35946,21.969084 v 10.502675 q -2.62567,-1.798404 -5.28731,-2.661637 -2.62567,-0.863234 -5.46715,-0.863234 -5.39521,0 -8.41652,3.16519 -2.98535,3.129222 -2.98535,8.776208 0,5.646986 2.98535,8.812176 3.02131,3.129222 8.41652,3.129222 3.02132,0 5.71893,-0.899202 2.73357,-0.899202 5.03553,-2.661637 v 10.538643 q -3.02132,1.11501 -6.15054,1.654531 -3.09326,0.575489 -6.22248,0.575489 -10.89832,0 -17.04886,-5.57505 -6.15054,-5.611018 -6.15054,-15.574172 0,-9.963154 6.15054,-15.538204 6.15054,-5.611018 17.04886,-5.611018 3.16519,0 6.22248,0.575489 3.09325,0.539521 6.15054,1.654531 z"></path>
+                        </g>
+                     
+                     <g style="font-style:normal;font-weight:normal;font-size:36.8315px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#505050;fill-opacity:1;stroke:none;stroke-width:0.287744" id="text839-4" transform="scale(0.91950666,1.0875397)" aria-label="earch">
+                        
+                        <path id="path920" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 101.49982,103.51761 v 3.66874 H 71.394547 q 0.467585,4.53198 3.273094,6.79797 2.805509,2.26599 7.841038,2.26599 4.064391,0 8.308623,-1.18695 4.2802,-1.22291 8.776208,-3.66874 v 9.92718 q -4.567944,1.72647 -9.135889,2.5897 -4.567944,0.89921 -9.135888,0.89921 -10.934292,0 -17.012895,-5.53909 -6.042635,-5.57505 -6.042635,-15.61014 0,-9.855247 5.934731,-15.502233 5.970699,-5.646986 16.401437,-5.646986 9.49557,0 15.178524,5.718922 5.718925,5.718922 5.718925,15.286427 z M 88.263569,99.237411 q 0,-3.668743 -2.158084,-5.898763 -2.122115,-2.265988 -5.57505,-2.265988 -3.740678,0 -6.078603,2.122116 -2.337924,2.086148 -2.913413,6.042635 z"></path>
+                        
+                        <path id="path922" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 129.30313,105.63973 q -4.02842,0 -6.0786,1.36678 -2.01421,1.36679 -2.01421,4.02843 0,2.44582 1.61856,3.84858 1.65453,1.36679 4.56795,1.36679 3.63277,0 6.11457,-2.5897 2.48179,-2.62567 2.48179,-6.54619 v -1.47469 z m 19.67454,-4.85569 v 22.98359 h -12.98448 v -5.9707 q -2.5897,3.66875 -5.82682,5.35924 -3.23713,1.65454 -7.87701,1.65454 -6.25844,0 -10.17896,-3.63278 -3.88455,-3.66874 -3.88455,-9.49557 0,-7.08571 4.85569,-10.39477 4.89165,-3.309061 15.32239,-3.309061 h 7.58926 v -1.007106 q 0,-3.057286 -2.40986,-4.46004 -2.40986,-1.438723 -7.51732,-1.438723 -4.13633,0 -7.69717,0.827266 -3.56084,0.827265 -6.61812,2.481796 V 84.56244 q 4.13633,-1.007105 8.30862,-1.510658 4.1723,-0.539521 8.34459,-0.539521 10.89833,0 15.71805,4.316168 4.85569,4.280199 4.85569,13.955611 z"></path>
+                        
+                        <path id="path924" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 190.88046,94.453658 q -1.6905,-0.791297 -3.381,-1.150978 -1.65453,-0.395648 -3.34503,-0.395648 -4.96359,0 -7.66119,3.201157 -2.66164,3.16519 -2.66164,9.099921 v 18.55952 H 160.95503 V 83.483398 h 12.87657 v 6.618124 q 2.4818,-3.956487 5.68295,-5.75489 3.23713,-1.834371 7.73314,-1.834371 0.64742,0 1.40275,0.07194 0.75533,0.03597 2.19405,0.215808 z"></path>
+                        
+                        <path id="path926" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 229.83387,84.742281 v 10.502675 q -2.62566,-1.798403 -5.2873,-2.661637 -2.62567,-0.863234 -5.46715,-0.863234 -5.39521,0 -8.41652,3.16519 -2.98535,3.129222 -2.98535,8.776205 0,5.64699 2.98535,8.81218 3.02131,3.12922 8.41652,3.12922 3.02132,0 5.71892,-0.8992 2.73358,-0.8992 5.03553,-2.66164 v 10.53865 q -3.02131,1.11501 -6.15054,1.65453 -3.09325,0.57549 -6.22247,0.57549 -10.89832,0 -17.04886,-5.57505 -6.15054,-5.61102 -6.15054,-15.57418 0,-9.963151 6.15054,-15.538201 6.15054,-5.611018 17.04886,-5.611018 3.16519,0 6.22247,0.575489 3.09326,0.539521 6.15054,1.654531 z"></path>
+                        
+                        <path id="path928" style="font-weight:bold;font-size:73.6626px;fill:#505050;fill-opacity:1;stroke-width:0.287744" d="m 281.44805,99.237411 v 24.530219 h -12.9485 v -3.99245 -14.71094 q 0,-5.287308 -0.25178,-7.265552 -0.2158,-1.978243 -0.79129,-2.913413 -0.75533,-1.258882 -2.05018,-1.942275 -1.29485,-0.719362 -2.94938,-0.719362 -4.02843,0 -6.33038,3.129222 -2.30196,3.093254 -2.30196,8.59637 v 19.8184 H 240.94801 V 67.801322 h 12.87657 v 21.580839 q 2.91341,-3.52487 6.18651,-5.179401 3.27309,-1.690499 7.22958,-1.690499 6.9778,0 10.57461,4.280199 3.63277,4.2802 3.63277,12.444951 z"></path>
+                        </g>
+                     
+                     <path transform="matrix(1.1872613,0,0,0.3883161,603.6843,253.81112)" d="m -371.16805,-123.26338 -87.91103,-143.55491 168.27771,-4.35573 z" id="path1533" style="fill:#a02a2c;stroke-width:3;fill-opacity:1"></path>
+                     </g>
+                  </svg></a></div>
+      </div>
+      </body>
+   </html>

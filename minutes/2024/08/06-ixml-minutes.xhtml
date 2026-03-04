@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 06 August 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-08-06" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>06 August 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/06/11-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Aug/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/08/06-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Nico Verwer, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Michael</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Balisage debriefing</a></li>
+               
+               <li><a href="#t02">Previous Actions</a></li>
+               
+               <li><a href="#t03">Status of implementations</a></li>
+               
+               <li><a href="#t04">Status of testing and test suites</a></li>
+               
+               <li><a href="#t05">broken links on CG and CG Reports pages</a></li>
+               
+               <li><a href="#t06">Issue #263 Serialization of attributes</a></li>
+               
+               <li><a href="#t07">Issue #254 Extend the prolog to support arbitrary metadata</a></li>
+               
+               <li><a href="#t08">next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x014" class="summary">[Nico introduces himself]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Balisage debriefing</h3>
+            
+            <p id="x016" class="phone s01"><cite>Steven:</cite> I was amazed at the amazing range of subjects ixml being used on.</p>
+            
+            <p id="x017" class="phone s02"><cite>John:</cite> It was interesting, and good feedback on what people think they need</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Previous Actions</h3>
+            
+            <p id="x019" class="phone s01"><cite>Steven:</cite> I have done nothing the last month</p>
+            
+            <p id="x020" class="phone s03"><cite>Norm:</cite> Nor I. Let us mark them all as continues</p>
+            
+            <p id="x021" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/255">invisibleXML/<wbr></wbr>ixml#255</a></p>
+            
+            <p id="x022" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://invisiblexml.org/pr/255/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>255/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="x023" class="phone s01"><cite>Steven:</cite> Any objections to merge?</p>
+            
+            <p id="x024" class="summary">[No]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of implementations</h3>
+            
+            <p id="x027" class="phone s02"><cite>John:</cite> I'm revising with addition of subtraction<br />
+               <span id="x028">… to try out</span></p>
+            
+            <p id="x029" class="phone s01"><cite>Steven:</cite> Do we have any specification?</p>
+            
+            <p id="x030" class="phone s02"><cite>John:</cite> You should be able to subtract anything</p>
+            
+            <p id="x031" class="phone s01"><cite>Steven:</cite> I'm still working on round-tripping</p>
+            
+            <p id="x032" class="phone s03"><cite>Norm:</cite> I will read your paper by next meeting</p>
+            
+            <p id="x038" class="phone s04"><cite>Nico:</cite> I'm integrating MarkupBlitz in BaseX and eXist<br />
+               <span id="x039">… I'm also looking at matching instead of parsing</span><br />
+               <span id="x040">… I'll be submitting an API proposal</span><br />
+               <span id="x041">… I have documents up to a gigabyte, and I need to reduce the parts that need to be
+                  parsed.</span><br />
+               <span id="x042">… using a sliding window.</span><br />
+               <span id="x043">… I have a note about an XQuery interface</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Status of testing and test suites</h3>
+            
+            <p id="x046" class="phone s02"><cite>John:</cite> I've noted some tests are old versions.<br />
+               <span id="x047">… I'll dig them out, and send them</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">broken links on CG and CG Reports pages</h3>
+            
+            <p id="x049" class="phone s01"><cite>Steven:</cite> What are we doing?</p>
+            
+            <p id="x050" class="phone s03"><cite>Norm:</cite> That's your job to get sysreq to fix.</p>
+            
+            <p id="x051" class="phone s01"><cite>Steven:</cite> OK</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #263 Serialization of attributes</h3>
+            
+            <p id="x053" class="summary">        <a href="https://github.com/invisibleXML/ixml/issues/263">invisibleXML/<wbr></wbr>ixml#263</a></p>
+            
+            <p id="x054" class="phone s01"><cite>Steven:</cite> Oh, we're missing insertions!</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to add insertions to the serialisation of attributes</p>
+            
+            <p id="x056" class="phone s05"><cite>Bethan:</cite> #250?</p>
+            
+            <p id="x057" class="phone s01"><cite>Steven:</cite> Already an action for me</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #254 Extend the prolog to support arbitrary metadata</h3>
+            
+            <p id="x059" class="summary">        <a href="https://github.com/invisibleXML/ixml/issues/254">invisibleXML/<wbr></wbr>ixml#254</a></p>
+            
+            <p id="x060" class="phone s01"><cite>Steven:</cite> There is also the issue of the format of the prolog, and of pragmas</p>
+            
+            <p id="x061" class="phone s02"><cite>John:</cite> You've introduced chardata, why is that different from string?</p>
+            
+            <p id="x062" class="phone s03"><cite>Norm:</cite> I'll look again.</p>
+            
+            <p id="x064" class="phone s01"><cite>Steven:</cite> I saw people at Balisage using {[...]} for pragmas<br />
+               <span id="x065">… why don't we make the prolog a pragma.</span></p>
+            
+            <p id="x066" class="phone s04"><cite>Nico:</cite> Would we put the version into the pragma?</p>
+            
+            <p id="x067" class="phone s01"><cite>Steven:</cite> That would be a good place</p>
+            
+            <p id="x068" class="phone s03"><cite>Norm:</cite> I will think about it.</p>
+            
+            <p id="x069" class="phone s05"><cite>Bethan:</cite> If there is a version declaration, it would come at the top, right?</p>
+            
+            <p id="x070" class="phone s01"><cite>Steven:</cite> Yes.</p>
+            
+            <p id="x071" class="phone s05"><cite>Bethan:</cite> would it be worth adding an issue that includes a link to pragmas.</p>
+            
+            <p id="x072" class="phone s03"><cite>Norm:</cite> I have created the issue, you can add a link</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">next meeting</h3>
+            
+            <p id="x074" class="phone s03"><cite>Norm:</cite> 20th August?</p>
+            
+            <p id="x076" class="phone s03"><cite>Norm:</cite> we need to work out what to do with September, since Steven is unavailable</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to add insertions to the serialisation of attributes</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 229 (Thu Jul 25 08:38:54 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Norm/Norm:/</p>
+         
+         <p class="warning">Succeeded: s/Preset+Steven//</p>
+         
+         <p class="warning">Succeeded: s/Bethan"/Bethan:</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: Nico</p>
+         
+         <p class="warning">All speakers: Bethan, John, Nico, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

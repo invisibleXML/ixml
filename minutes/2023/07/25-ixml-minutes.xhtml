@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 25 July 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-07-25" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>25 July 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Jul/0006"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/07/25-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, Joel, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Michael, Michael</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Administrivia</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Technical issues</a></li>
+               
+               <li><a href="#t05">Issue 176</a></li>
+               
+               <li><a href="#t06">Issue 181 Non serializable characters in the input</a></li>
+               
+               <li><a href="#t07">C0 and C1</a></li>
+               
+               <li><a href="#t08">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x002" class="irc"><cite>&lt;mjoel&gt;</cite> good morning/afternoon/evening</p>
+            
+            <p id="x003" class="irc"><cite>&lt;norm&gt;</cite> Hello Joel</p>
+            
+            <p id="x009" class="irc"><cite>&lt;Steven&gt;</cite> Previous minutes:</p>
+            
+            <p id="x010" class="irc"><cite>&lt;Steven&gt;</cite> Previous minutes: <a href="https://www.w3.org/2023/06/27-ixml-minutes">https://<wbr></wbr>www.w3.org/<wbr></wbr>2023/<wbr></wbr>06/<wbr></wbr>27-ixml-minutes</a></p>
+            
+            <p id="x011" class="irc"><cite>&lt;mjoel&gt;</cite> AT&amp;T fiber has been down for 5(!) days at my location, so I'm on a shaky tethered
+               mobile internet stream</p>
+            
+            <p id="x015" class="irc"><cite>&lt;mjoel&gt;</cite> is there a backup phone bridge?</p>
+            
+            <p id="x018" class="irc"><cite>&lt;cmsmcq&gt;</cite> No one seems to know of a backup phone bridge.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Administrivia</h3>
+            
+            <p id="x020" class="irc"><cite>&lt;norm&gt;</cite> My attempt at a pubrules-correct community draft is: <a href="https://ixml.nwalsh.com/ixml/CG-FINAL-ixml-20230710/">https://<wbr></wbr>ixml.nwalsh.com/<wbr></wbr>ixml/<wbr></wbr>CG-FINAL-ixml-20230710/</a></p>
+            
+            <p id="x022" class="irc"><cite>&lt;cmsmcq&gt;</cite> ACTION 2023-01-10-b - continued</p>
+            
+            <p id="x023" class="irc"><cite>&lt;cmsmcq&gt;</cite> ACTION 2023-01-10-c - continued</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2023-04-11-a: done, at least a draft.</p>
+            
+            <p id="x025" class="irc"><cite>&lt;cmsmcq&gt;</cite> Everyone has 48 hours to point to errors; if none are reported, NDTW will send it
+               to the publication team</p>
+            
+            <p id="x027" class="irc"><cite>&lt;cmsmcq&gt;</cite> ACTION 2023-04-11-c - partially done in June, but not yet discussed.</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> 2023-05-09-d: done</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> 2023-06-27-a: done (and turned into a PR by NDTW)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x031" class="irc"><cite>&lt;cmsmcq&gt;</cite> 3.0 version of NineML is imminent.</p>
+            
+            <p id="x032" class="irc"><cite>&lt;cmsmcq&gt;</cite> The GLL parser is now consistently a little faster than the Earley parser.</p>
+            
+            <p id="x033" class="irc"><cite>&lt;cmsmcq&gt;</cite> Enumeration of trees in cases of ambiguity has now been implemented.</p>
+            
+            <p id="x034" class="irc"><cite>&lt;cmsmcq&gt;</cite> Renaming proposal implemented (but just found a bug).</p>
+            
+            <p id="x035" class="irc"><cite>&lt;cmsmcq&gt;</cite> Steven:  renaming is half done.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x037" class="irc"><cite>&lt;cmsmcq&gt;</cite> Norm has requested that we merge a test on output ambiguity: see <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Jul/0008.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023Jul/<wbr></wbr>0008.html</a></p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> MSM to add ambiguity as discussion to agenda</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> MSM to add discussion of wording proposal for renaming to agenda for next meeting</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Technical issues</h3>
+            
+            <p id="x041" class="irc"><cite>&lt;cmsmcq&gt;</cite> NDTW suggested that in order to use the new syntax for renaming, the grammar will
+               need to be marked with a version number (e.g. 1.1)</p>
+            
+            <p id="x042" class="irc"><cite>&lt;cmsmcq&gt;</cite> Otherwise, a 1.0 processor may just interpret the grammar as syntactically incorrect
+               and reject it.</p>
+            
+            <p id="x043" class="irc"><cite>&lt;cmsmcq&gt;</cite> Examples need to have a 1.1 version string.</p>
+            
+            <p id="x044" class="irc"><cite>&lt;cmsmcq&gt;</cite> But it may be that nothing further is needed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Issue 176</h3>
+            
+            <p id="x046" class="irc"><cite>&lt;cmsmcq&gt;</cite> This was closed in the last meeting and should be dropped from the agenda.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue 181 Non serializable characters in the input</h3>
+            
+            <p id="x048" class="irc"><cite>&lt;cmsmcq&gt;</cite> Raised by John Cowan</p>
+            
+            <p id="x049" class="irc"><cite>&lt;norm&gt;</cite> Comment in here: <a href="https://github.com/invisibleXML/ixml/issues/176">invisibleXML/<wbr></wbr>ixml#176</a></p>
+            
+            <p id="x050" class="irc"><cite>&lt;mjoel&gt;</cite> EBCEDIC...now there's a name I haven't heard in...</p>
+            
+            <p id="x051" class="irc"><cite>&lt;cmsmcq&gt;</cite> We discussed John Cowan's suggestion that line endings be normalized.</p>
+            
+            <p id="x052" class="irc"><cite>&lt;cmsmcq&gt;</cite> Some sentiment that ixml doesn't now do any normalization, so this would be a change.</p>
+            
+            <p id="x053" class="irc"><cite>&lt;cmsmcq&gt;</cite> Some sentiment that we do have (implicit) normalization to Unicode -- or at least,
+               a processor could without non-conformance handle non-Unicode input by normalizing
+               to Unicode.</p>
+            
+            <p id="x054" class="irc"><cite>&lt;cmsmcq&gt;</cite> JL: the question is, where is our design center?  Text input? or binary input?</p>
+            
+            <p id="x055" class="irc"><cite>&lt;cmsmcq&gt;</cite> JL thinks the design center is clearly text.</p>
+            
+            <p id="x056" class="irc"><cite>&lt;cmsmcq&gt;</cite> SP:  the grammar doesn't now say anything at all about input, or changing it.  We
+               have a sequence of characters, and we do stuff with it.</p>
+            
+            <p id="x058" class="irc"><cite>&lt;cmsmcq&gt;</cite> SP:  line-end normalization could be an option.</p>
+            
+            <p id="x059" class="irc"><cite>&lt;cmsmcq&gt;</cite> But it shouldn't be required.</p>
+            
+            <p id="x060" class="irc"><cite>&lt;cmsmcq&gt;</cite> BTW:  an option would work, but end users will want the default to be normalization,
+               not non-normalization.</p>
+            
+            <p id="x062" class="irc"><cite>&lt;cmsmcq&gt;</cite> SP:  there are three options here.</p>
+            
+            <p id="x063" class="irc"><cite>&lt;cmsmcq&gt;</cite> 1 Leave it as is, and you get Unicode characters for CR etc.</p>
+            
+            <p id="x064" class="irc"><cite>&lt;cmsmcq&gt;</cite> 2 Processors SHOULD offer line-end normalization as an option, with default of no-normalization.</p>
+            
+            <p id="x065" class="irc"><cite>&lt;cmsmcq&gt;</cite> 3 Processors SHOULD offer non-normalization as an option, but with normalization
+               as the default.</p>
+            
+            <p id="x066" class="irc"><cite>&lt;cmsmcq&gt;</cite> JL:  one wrinkle is that really it's not the processor invocation but the grammar
+               that needs to say "this grammar assumes normalized line-ends".</p>
+            
+            <p id="x067" class="irc"><cite>&lt;cmsmcq&gt;</cite> In that case, a run-time option is not quite the right thing.</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> NDTW to make an issue for the question of line-end normalization.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">C0 and C1</h3>
+            
+            <p id="x070" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/189">invisibleXML/<wbr></wbr>ixml#189</a></p>
+            
+            <p id="x071" class="irc"><cite>&lt;cmsmcq&gt;</cite> In the current spec, C0 and C1 control characters are not allowed in literal strings.</p>
+            
+            <p id="x072" class="irc"><cite>&lt;cmsmcq&gt;</cite> Some implementations of ixml treat 7F as a member of C1, some don't.</p>
+            
+            <p id="x073" class="irc"><cite>&lt;cmsmcq&gt;</cite> We seem, after discussion, to have consensus that 7F should be covered by this rule
+               (whether it's part of C1 or not).</p>
+            
+            <p id="x074" class="irc"><cite>&lt;cmsmcq&gt;</cite> SP notes that the Unicode Database classes U+007F as CC (control character, other)</p>
+            
+            <p id="x075" class="irc"><cite>&lt;cmsmcq&gt;</cite> It may be better to recast the rule in terms of the Cc character class.</p>
+            
+            <p id="x076" class="irc"><cite>&lt;cmsmcq&gt;</cite> The range of that class is 00-1F, 7F, and 80-9F.</p>
+            
+            <p id="a07" class="action"><strong>ACTION:</strong> Norm to make PR for recasting the rule.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Next meeting</h3>
+            
+            <p id="x079" class="irc"><cite>&lt;cmsmcq&gt;</cite> We will meet again on 8 August.</p>
+            
+            <p id="x080" class="irc"><cite>&lt;cmsmcq&gt;</cite> JL suggests that we try to spend some time on grammar combination at the next meeting.</p>
+            
+            <p id="a08" class="action"><strong>ACTION:</strong> JL to redraft his notes on grammar combination and send something to the public list/</p>
+            
+            <p id="x082" class="irc"><cite>&lt;cmsmcq&gt;</cite> Adjourned at xx:52.</p>
+            
+            <p id="x090" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/ACTION: 2023/ACTION 2023/</p>
+            
+            <p id="x093" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/ACTION: 2023/ACTION 2023/g</p>
+            
+            <p id="x096" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/ACTION: 2023/ACTION 2023/</p>
+            
+            <p id="x097" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/ACTION: 2023/ACTION 2023/</p>
+            
+            <p id="x098" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/ACTION: 2023/ACTION 2023/</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2023-04-11-a: done, at least a draft.</a></li>
+            
+            <li><a href="#a02">2023-05-09-d: done</a></li>
+            
+            <li><a href="#a03">2023-06-27-a: done (and turned into a PR by NDTW)</a></li>
+            
+            <li><a href="#a04">MSM to add ambiguity as discussion to agenda</a></li>
+            
+            <li><a href="#a05">MSM to add discussion of wording proposal for renaming to agenda for next meeting</a></li>
+            
+            <li><a href="#a06">NDTW to make an issue for the question of line-end normalization.</a></li>
+            
+            <li><a href="#a07">Norm to make PR for recasting the rule.</a></li>
+            
+            <li><a href="#a08">JL to redraft his notes on grammar combination and send something to the public list/</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Warning: ‘s/https://meet.google.com/dfz-rwpj-opq - continued//’ interpreted as replacing
+            ‘https:’ by ‘/meet.google.com/dfz-rwpj-opq - continued/’</p>
+         
+         <p class="warning">Succeeded: s/https://meet.google.com/dfz-rwpj-opq - continued//</p>
+         
+         <p class="warning">Succeeded: s/we do/the grammar does/</p>
+         
+         <p class="warning">Succeeded: s/status of implementations/Status of implementations/</p>
+         
+         <p class="warning">Succeeded: s|/meet.google.com/dfz-rwpj-opq - continued///meet.google.com/dfz-rwpj-opq
+            - continued||</p>
+         
+         <p class="warning">Succeeded: s/coffee*/NineML/</p>
+         
+         <p class="warning">Failed: s/ACTION: 2023/ACTION 2023/</p>
+         
+         <p class="warning">Failed: s/ACTION: 2023/ACTION 2023/g</p>
+         
+         <p class="warning">Failed: s/ACTION: 2023/ACTION 2023/</p>
+         
+         <p class="warning">Failed: s/ACTION: 2023/ACTION 2023/</p>
+         
+         <p class="warning">Failed: s/ACTION: 2023/ACTION 2023/</p>
+         
+         <p class="warning">Unknown option in scribeoptions: --scribe cmsmcq = Michael</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, mjoel, norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

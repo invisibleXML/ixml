@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML CG group call – 13 September 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-09-13" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML CG group call</h1>
+         
+         <h2>13 September 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/07/12-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Sep/0026.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/09/13-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>+Tomos, Tomos</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of action items</a></li>
+               
+               <li><a href="#t02">Status reports</a></li>
+               
+               <li><a href="#t03">Status of implementations</a></li>
+               
+               <li><a href="#t04">Status of testing and test suites</a></li>
+               
+               <li><a href="#t05">Status of Balisage paper</a></li>
+               
+               <li><a href="#t06">Review, discussion, resolution of issues</a></li>
+               
+               <li><a href="#t07">Issue #138, arrange for ixml.xml to be downloaded not displayed in a browser</a></li>
+               
+               <li><a href="#t08">Process for handling errata (issue #142)</a></li>
+               
+               <li><a href="#t09">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of action items</h3>
+            
+            <p id="x019" class="summary">Steven had an action to update the community web page, which he has.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status reports</h3>
+            
+            <p id="x021" class="phone s01"><cite>Steven:</cite> The big news from me is discovering that I could do Unicode. Was also able to delight
+               other ABC users by showing them how to use Unicode</p>
+            
+            <p id="x022" class="phone s01"><cite>Steven:</cite> I'm also writing my advanced iXML tutorial for Declarative Amsterdam (in November)</p>
+            
+            <p id="x023" class="phone s02"><cite>John:</cite> I basically updated my workbench so that you can re-load local files. Working on
+               drag-and-drop.</p>
+            
+            <p id="x024" class="phone s02"><cite>John:</cite> And I've implemented "recordization".</p>
+            
+            <p id="x025" class="phone s03"><cite>Norm:</cite> Yes, I think "recordization" is the only new thing I've done. You can break a file
+               on regular expressions.</p>
+            
+            <p id="x026" class="phone s04"><cite>Michael:</cite> I've been preparing to work on performance by putting together some test examples
+               and trying to make the parser run in additional XQuery engines.</p>
+            
+            <p id="x027" class="phone s04"><cite>Michael:</cite> I've been working on getting it work in eXist DB and filing bug reports. Hoping to
+               come back to it. Will try to make it work with Saxon HE. And then, performance!</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of implementations</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Status of testing and test suites</h3>
+            
+            <p id="x030" class="phone s03"><cite>Norm:</cite> There's an outstanding PR for a new set of test results that I'd like approval for.</p>
+            
+            <p id="x032" class="phone s04"><cite>Michael:</cite> One topic that's related to the test suite, is that since some of the test cases
+               have an infinite number of parse trees, the fact that the test catalog simply lists
+               a finite number of them works fine for parsers that produce trees deterministically.<br />
+               <span id="x033">… It's a little more tedious when the trees change, or when your choice of trees is
+                  not deterministic. For some test cases, the probability that the tree chosen will
+                  be one of the trees listed converges to zero.</span></p>
+            
+            <p id="x034" class="summary">(Some discussion of ambiguity; if you want a particular tree, rewrite your grammar
+               so that it's not ambigous!)</p>
+            
+            <p id="x035" class="phone s04"><cite>Michael:</cite> We could provide schemas for some of the test cases that would offer some confirmation.</p>
+            
+            <p id="x036" class="phone s03"><cite>Norm:</cite> Is conforming to the schema a guarantee that the test passes?</p>
+            
+            <p id="x037" class="phone s04"><cite>Michael:</cite> Some of them, but not all of them.</p>
+            
+            <p id="x038" class="phone s02"><cite>John:</cite> Some of this seems to be impractical; we're spending a lot of time on problems that
+               probably will never occur. Or maybe they will.</p>
+            
+            <p id="x039" class="phone s03"><cite>Norm:</cite> On a small tangent, some BNF translations of EBNF may be faster than others. Michael
+               pointed out that we could reformulate some in iXML simply without using the EBNF features
+               of iXML. That might be worth doing.</p>
+            
+            <p id="x040" class="phone s04"><cite>Michael:</cite> Minimizing the number of non-terminals may produce better results in Earley, for
+               example.</p>
+            
+            <p id="x041" class="phone s02"><cite>John:</cite> That's very true of the rewrites that Bethan proposed. That got rid of one non-terminal
+               for ever repretition. That made a huge difference.</p>
+            
+            <p id="x042" class="phone s02"><cite>John:</cite> I got a performance improvement of about 8 minutes for the whole test suite down
+               to just over a minute. I'll try to do some more investigation.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Norm to finish his document about EBNF to BNF translation</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> John to report how many Earley items are reduced by the changed rewrite rules.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Status of Balisage paper</h3>
+            
+            <p id="x046" class="phone s01"><cite>Steven:</cite> I'd like to amend my section to discuss the fact that I can now do Unicode.</p>
+            
+            <p id="x047" class="phone s04"><cite>Michael:</cite> It's a bit late, but if you can do it this week...</p>
+            
+            <p id="x048" class="phone s03"><cite>Norm:</cite> We have a master DocBook document that Bethan produced for us.</p>
+            
+            <p id="x049" class="phone s05"><cite>Micheal:</cite> I'll wait to see that Steven's changes have come in and I'll nag to get them in.</p>
+            
+            <p id="x050" class="phone s04"><cite>Michael:</cite> If I have time, I'll make one more copy-editing pass. Steven will mention Unicode
+               and then I'll get it in.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Review, discussion, resolution of issues</h3>
+            
+            <p id="x053" class="phone s01"><cite>Steven:</cite> One issue is the errata document.<br />
+               <span id="x054">… we know there's an issue, how shall we fix it?</span></p>
+            
+            <p id="x055" class="summary">Some discussion of the issue, there's a Unicode class that's "LC".</p>
+            
+            <p id="x056" class="phone s02"><cite>John:</cite> You have to check that it's a proper class, but I see no reason to add "LC".</p>
+            
+            <p id="x057" class="phone s01"><cite>Steven:</cite> We don't normatively reference a particular version of Unicode, so there could be
+               more.</p>
+            
+            <p id="x058" class="phone s03"><cite>Norm:</cite> On that basis, I prefer letter-letter.</p>
+            
+            <p id="x059" class="phone s04"><cite>Michael:</cite> Do we have a guarantee that it'll be two letters?</p>
+            
+            <p id="x060" class="summary">General consensus is that it will remain two characters, just because the entire database
+               is built in a way that shows a little bit of awareness of compactness issues and so
+               forth.</p>
+            
+            <p id="x061" class="phone s04"><cite>Michael:</cite> I like letter-letter.</p>
+            
+            <p id="x062" class="phone s01"><cite>Steven:</cite> The first letter is always a capital, so do we say capital letter, letter?</p>
+            
+            <p id="x063" class="phone s03"><cite>Norm:</cite> I think I like capital letter, letter.</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Norm to edit the 1.0 spec "in place" to add the errata document link</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Steve to draft text (in HTML) to resolve the erratum.</p>
+            
+            <p id="x066" class="summary">Issue #145, <a href="https://github.com/invisibleXML/ixml/issues/145">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>145</a> the process issue is #142, <a href="https://github.com/invisibleXML/ixml/issues/142">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>142</a></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #138, arrange for ixml.xml to be downloaded not displayed in a browser</h3>
+            
+            <p id="x068" class="phone s04"><cite>Michael:</cite> Some of us seem to be discussing ixml.xml which is what I raised the issue about
+               and some of us are discussing ixml.ixml. I propose that we try to clarify what we
+               would like to happen with both of them.</p>
+            
+            <p id="x069" class="phone s03"><cite>Norm:</cite> I think ixml.ixml (DOT IXML) always downloads.</p>
+            
+            <p id="x070" class="phone s06"><cite>Bethan:</cite> I'd prefer to have that display as text and have an option to download something.</p>
+            
+            <p id="x071" class="phone s04"><cite>Michael:</cite> I'm a little confused because what I see when I see (in Firefox on Linux) is an XML
+               display.</p>
+            
+            <p id="x072" class="phone s06"><cite>Bethan:</cite> What you get in Safari is an attempt to render that as HTML.</p>
+            
+            <p id="x073" class="summary">Norm observes that it's served as 'application/xml'</p>
+            
+            <p id="x074" class="phone s06"><cite>Bethan:</cite> I think making it work on Safari is also fairly useful.</p>
+            
+            <p id="x075" class="phone s03"><cite>Norm:</cite> I think we can tell browsers to download the document.</p>
+            
+            <p id="x076" class="phone s04"><cite>Michael:</cite> We could add a stylesheet PI. That would cause browsers to display it.</p>
+            
+            <p id="x077" class="summary">Some discussion of what behavior is desirable.</p>
+            
+            <p id="x078" class="phone s03"><cite>Norm:</cite> I thought making it always download was easy and consistent.</p>
+            
+            <p id="x080" class="phone s06"><cite>Bethan:</cite> I think both links should do the same thing.<br />
+               <span id="x081">… I think the best option would be to have the content displayed with a link that
+                  lets you download it.</span></p>
+            
+            <p id="x082" class="phone s02"><cite>John:</cite> The other possibility is that we push the problem off to github.</p>
+            
+            <p id="x083" class="phone s06"><cite>Bethan:</cite> Not everyone is comfortable with GitHub. Having pages that display the ixml and xml
+               shouldn't be hard.</p>
+            
+            <p id="x084" class="phone s03"><cite>Norm:</cite> I could certainly live with that.</p>
+            
+            <p id="x085" class="phone s02"><cite>John:</cite> And would the display effectively be just a PRE or would it be syntax highlighted?</p>
+            
+            <p id="x086" class="phone s06"><cite>Bethan:</cite> I think a bit of syntax highlighting is nice. Making elements collapsible would also
+               be nice as Steven suggested.</p>
+            
+            <p id="x087" class="phone s04"><cite>Michael:</cite> I don't remember this download instead of display behavior that I used Safari.</p>
+            
+            <p id="x088" class="phone s02"><cite>John:</cite> Can we leave this for another week?</p>
+            
+            <p id="x089" class="phone s01"><cite>Steven:</cite> I think that on the page we could have a "download" link: "available in ixml [download]
+               or xml [download]"</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> Norm to try out the stylesheet PI trick on the XML version</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> Norm to create an issue for the question of control characters in ixml grammars</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Process for handling errata (issue #142)</h3>
+            
+            <p id="x093" class="phone s04"><cite>Michael:</cite> Shall we adopt the proposal in #142?</p>
+            
+            <p id="x094" class="summary">Assent all around.</p>
+            
+            <p id="x095" class="phone s03"><cite>Norm:</cite> I'll implement it when I do my action listed above.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Next meeting</h3>
+            
+            <p id="x097" class="summary">Next meeting is 11 October 2022.</p>
+            
+            <p id="x098" class="summary">Scribe for next meeting is John; failing John then Steven.</p>
+            
+            <p id="x099" class="summary">Adjourned.</p>
+            
+            <p id="a07" class="action"><strong>ACTION:</strong> Steven to update the meeting starting time on the community group page.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Norm to finish his document about EBNF to BNF translation</a></li>
+            
+            <li><a href="#a02">John to report how many Earley items are reduced by the changed rewrite rules.</a></li>
+            
+            <li><a href="#a03">Norm to edit the 1.0 spec "in place" to add the errata document link</a></li>
+            
+            <li><a href="#a04">Steve to draft text (in HTML) to resolve the erratum.</a></li>
+            
+            <li><a href="#a05">Norm to try out the stylesheet PI trick on the XML version</a></li>
+            
+            <li><a href="#a06">Norm to create an issue for the question of control characters in ixml grammars</a></li>
+            
+            <li><a href="#a07">Steven to update the meeting starting time on the community group page.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 192 (Tue Jun 28 16:55:30 2022 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Maybe present: Micheal</p>
+         </div>
+      
+      
+      </body>
+</html>

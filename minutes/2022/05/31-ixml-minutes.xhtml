@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml community group – 31 May 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-05-31" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml community group</h1>
+         
+         <h2>31 May 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/05/24-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022May/0095.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/05/31-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>cmsmcq, JL, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>BTW, TH</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>cmsmcq</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous actions</a></li>
+               
+               <li><a href="#t02">Status reports</a></li>
+               
+               <li><a href="#t03">Test suite status</a></li>
+               
+               <li><a href="#t04">Issue #89, what are the conformance requirements for XML grammars?</a></li>
+               
+               <li><a href="#t05">#26 ambiguity</a></li>
+               
+               <li><a href="#t06">issue #63 Optional version declaration.</a></li>
+               
+               <li><a href="#t07">issue #80 Clarify that attributes names xmlns are forbidden.</a></li>
+               
+               <li><a href="#t08">issue #83 tmark on charsets (forbid ^ or +? change grammar?)</a></li>
+               
+               <li><a href="#t09">pull request #84 version declaration</a></li>
+               
+               <li><a href="#t10">issue #90 flaws in ixml schemas</a></li>
+               
+               <li><a href="#t11">pull request #91 additional tests</a></li>
+               
+               <li><a href="#t12">pull request #56 (close as overtaken?)</a></li>
+               
+               <li><a href="#t13">issue #94 integrating error codes into tests</a></li>
+               
+               <li><a href="#t14">Release plan.</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x019" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/runs out for coffee, brb/prepares to scribe./</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous actions</h3>
+            
+            <p id="x022" class="summary">Steven has contacted Prague, will announce at the time of his talk.</p>
+            
+            <p id="x023" class="summary">Prolog syntax has been rewritten.</p>
+            
+            <p id="x024" class="summary">Insertions have been rewritten.</p>
+            
+            <p id="x025" class="summary">NDW's action completed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status reports</h3>
+            
+            <p id="x027" class="summary">JL reports whitespace sensitivity in the test catalog.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Test suite status</h3>
+            
+            <p id="x029" class="summary">JL has offered new tests for insertions and the prolog.</p>
+            
+            <p id="x030" class="summary">MSM will make a pull request.</p>
+            
+            <p id="x031" class="summary">JL asked how many test cases there actually are. NDW will count them.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #89, what are the conformance requirements for XML grammars?</h3>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to add "after removal of namespace-qualified elements and attributes" to the
+               description of xml grammar conformance</p>
+            
+            <p id="x034" class="irc"><cite>&lt;Steven&gt;</cite> After removing namespace qualified elements and attributes, the grammar can be derived
+               from...</p>
+            
+            <p id="x035" class="summary">We had consensus that extension elements and attributes should be allowed in conforming
+               XML-form grammars.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">#26 ambiguity</h3>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven to replace "including" with "include" as needed in Parsing section.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">issue #63 Optional version declaration.</h3>
+            
+            <p id="x039" class="summary">Can be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">issue #80 Clarify that attributes names xmlns are forbidden.</h3>
+            
+            <p id="x041" class="summary">Can be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">issue #83 tmark on charsets (forbid ^ or +? change grammar?)</h3>
+            
+            <p id="x043" class="summary">Can be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">pull request #84 version declaration</h3>
+            
+            <p id="x045" class="summary">Can be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">issue #90 flaws in ixml schemas</h3>
+            
+            <p id="x047" class="summary">Can be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">pull request #91 additional tests</h3>
+            
+            <p id="x049" class="summary">Can be merged.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">pull request #56 (close as overtaken?)</h3>
+            
+            <p id="x051" class="summary">Should be closed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t13">issue #94 integrating error codes into tests</h3>
+            
+            <p id="x053" class="summary">JL suggested putting this off until we are confident the error codes are stable.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t14">Release plan.</h3>
+            
+            <p id="x055" class="summary">SP said:  we need the web page to be ready.</p>
+            
+            <p id="x056" class="summary">Announcement of the spec, pointer to specification, pointers to implementations and
+               other resources.</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Norm to draft new splash page for invisiblexml.org<br />
+               <span id="x058">… Pointers to grammars.</span></p>
+            
+            <p id="x060" class="irc"><cite>&lt;Steven&gt;</cite> An ixml grammar in XML form conforms to this specification if, after removal of namespace
+               qualified elements and attributes, it can be derived from an ixml grammar in ixml
+               form by parsing as described in this specification, and it satisfies all the other
+               requirements specified for ixml grammars.</p>
+            
+            <p id="x064" class="irc"><cite>&lt;cmsmcq&gt;</cite> s/runs out for coffee, brb/</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to add "after removal of namespace-qualified elements and attributes" to the
+                  description of xml grammar conformance</a></li>
+            
+            <li><a href="#a02">Steven to replace "including" with "include" as needed in Parsing section.</a></li>
+            
+            <li><a href="#a03">Norm to draft new splash page for invisiblexml.org<br />
+                  … Pointers to grammars.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 185 (Thu Dec  2 18:51:55 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Failed: s/runs out for coffee, brb/prepares to scribe./</p>
+         
+         <p class="warning">Failed: s/runs out for coffee, brb/</p>
+         
+         <p class="warning">Succeeded: s/in the test catalog/in the test catalog./</p>
+         
+         <p class="warning">Succeeded: i/pull request #56/Can be merged./</p>
+         </div>
+      
+      
+      </body>
+</html>

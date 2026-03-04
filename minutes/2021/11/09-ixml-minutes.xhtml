@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 9 Nov 2021</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2021-11-09" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>9 Nov 2021</h2>
+         
+         
+         <nav id="links">
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2021Nov/0033.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2021/11/09-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>John, MSM, Norm, Steven, Tomos</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Outstanding Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">John's experience</a></li>
+               
+               <li><a href="#t04">Bug reports, change requests, etc.</a></li>
+               
+               <li><a href="#t05">Refactoring of grammar</a></li>
+               
+               <li><a href="#t06">root rule</a></li>
+               
+               <li><a href="#t07">Strings proposal</a></li>
+               
+               <li><a href="#t08">Renaming proposal</a></li>
+               
+               <li><a href="#t09">Removing ^ from tmark</a></li>
+               
+               <li><a href="#t10">Testing and Test Suite</a></li>
+               
+               <li><a href="#t11">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Outstanding Actions</h3>
+            
+            <p id="x008" class="summary">ACTION (2021-08-004): Steven to create list of existing requirements,</p>
+            
+            <p id="x009" class="summary">so that we can identify when a new one comes.</p>
+            
+            <p id="x010" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x011" class="phone s01"><cite>Steven:</cite> Mostly done.</p>
+            
+            <p id="x012" class="summary">ACTION (2021-08-005): Tom and MSM to come with a pragma proposal.</p>
+            
+            <p id="x013" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x014" class="phone s01"><cite>Steven:</cite> Continues, ongoing</p>
+            
+            <p id="x015" class="irc"><cite>&lt;Tom&gt;</cite> Proposal for pragma: <a href="https://github.com/invisibleXML/ixml/pull/10">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>10</a></p>
+            
+            <p id="x016" class="phone s02"><cite>Tom:</cite> The proposal is being worked up on github. Participation and comments are welcome.</p>
+            
+            <p id="x019" class="phone s03"><cite>MSM:</cite> The draft works nicely, I feel worried about complicated cases, with big pragmas.<br />
+               <span id="x020">… I can imagine a better proposal, but I'm not sure any such thing exists, or how
+                  it would work.</span></p>
+            
+            <p id="x021" class="summary">ACTION (2021-10-001): Steven to draft a mediatypes proposal (see</p>
+            
+            <p id="x022" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/6).">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>6).</a></p>
+            
+            <p id="x023" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x025" class="phone s01"><cite>Steven:</cite> I was v happy that the server stayed up during the tutorial</p>
+            
+            <p id="x026" class="phone s01"><cite>Steven:</cite> I have rewritten the bootstrap parser, and am rewriting the Earley one, as prep for
+               the C version.</p>
+            
+            <p id="x027" class="phone s04"><cite>Norm:</cite> I'm working on one, extending a parser that I have found. On a back burner at the
+               moment.</p>
+            
+            <p id="x030" class="phone s02"><cite>Tom:</cite> The same as usual. Thinking about making progress on JayParser, but nothing new to
+               report<br />
+               <span id="x031">… do I rewrite to optimise the levels of recursion, or do I rethink the approach?</span></p>
+            
+            <p id="x035" class="phone s03"><cite>MSM:</cite> Aparecium -- Declarative Amsterdam forced me to work on it. It survived the demos.<br />
+               <span id="x036">… the exercises in the tutorial all worked.</span><br />
+               <span id="x037">… some debugging still needed.</span><br />
+               <span id="x038">… I'm focussing on testing.</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">John's experience</h3>
+            
+            <p id="x044" class="phone s05"><cite>John:</cite> XPath is an interesting and big testcase.<br />
+               <span id="x045">… I'm converting the EBNF to ixml</span><br />
+               <span id="x046">… using grammar adjustment to get rid of unwanted intermediate nonterminals</span><br />
+               <span id="x047">… having a problem with dealing with reserved words.</span><br />
+               <span id="x048">… is XPath too big of a problem?</span></p>
+            
+            <p id="x051" class="phone s03"><cite>MSM:</cite> I think the grammar is unambiguous, because the keywords are not reserved.<br />
+               <span id="x052">… but Pascal where you have reserved words, you may get ambiguity.</span><br />
+               <span id="x053">… but ixml doesn't have that problem.</span></p>
+            
+            <p id="x054" class="phone s03"><cite>MSM:</cite> Question about the ! in your example. Can you describe it's meaning?</p>
+            
+            <p id="x056" class="phone s03"><cite>MSM:</cite> A nice use case for pragmas.</p>
+            
+            <p id="x057" class="phone s05"><cite>John:</cite> It takes the first alt, and won't serialise it, but the second does.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Bug reports, change requests, etc.</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Refactoring of grammar</h3>
+            
+            <p id="x060" class="phone s03"><cite>MSM:</cite> not in github, just a report.</p>
+            
+            <p id="x062" class="phone s01"><cite>Steven:</cite> I didn't make the change since your usecase was convinving.<br />
+               <span id="x063">… I made the other changes.</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">root rule</h3>
+            
+            <p id="x065" class="phone s01"><cite>Steven:</cite> I think we decided to keep it as is.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Strings proposal</h3>
+            
+            <p id="x067" class="phone s01"><cite>Steven:</cite> Not to allow strings to split over lines.</p>
+            
+            <p id="x068" class="phone s03"><cite>MSM:</cite> in favour</p>
+            
+            <p id="x069" class="phone s01"><cite>Steven:</cite> Anyone against?</p>
+            
+            <p id="x070" class="summary">[No}</p>
+            
+            <p id="x071" class="phone s01"><cite>Steven:</cite> Consensus.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Renaming proposal</h3>
+            
+            <p id="x074" class="phone s01"><cite>Steven:</cite> A future change, but I hear that people have the use case.<br />
+               <span id="x075">… You recognise it with one rule, and serialise with a different name</span></p>
+            
+            <p id="x076" class="phone s02"><cite>Tom:</cite> Pragmas.</p>
+            
+            <p id="x077" class="phone s03"><cite>MSM:</cite> A comment on the syntax, (and not with a pragma), the mark being moved to the other
+               end of the nonterminal.</p>
+            
+            <p id="x078" class="phone s01"><cite>Steven:</cite> The ^ is followed by the name that will be used for the serialisation.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Removing ^ from tmark</h3>
+            
+            <p id="x081" class="phone s01"><cite>Steven:</cite> You were against it.<br />
+               <span id="x082">… It does no harm there, I just don't think it will ever be used ever</span></p>
+            
+            <p id="x084" class="phone s02"><cite>Tom:</cite> I can't care about it.<br />
+               <span id="x085">… Don't fix what ain't broke.</span></p>
+            
+            <p id="x086" class="phone s06"><cite>Consensus:</cite> leave as is.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Testing and Test Suite</h3>
+            
+            <p id="x091" class="phone s03"><cite>MSM:</cite> A reminder, when we first discussed testsuites, we are all building testcases, it
+               would be nice to exchange cases and build up a suite.<br />
+               <span id="x092">… We agreed to roll our own, and then compare.</span><br />
+               <span id="x093">… I have some rudimentary documentation.</span><br />
+               <span id="x094">… I fear that ambiguity complicates the issue.</span></p>
+            
+            <p id="x095" class="phone s01"><cite>Steven:</cite> I have a similar problem with testcases for syntax rrors</p>
+            
+            <p id="x098" class="phone s03"><cite>MSM:</cite> My results can have a requirement that the output looks like this, or, there is no
+               parse.<br />
+               <span id="x099">… and there should be another case that the grammar is wrong</span><br />
+               <span id="x100">… and ambiguity should be treated with more machinery</span></p>
+            
+            <p id="x101" class="phone s03"><cite>MSM:</cite> My documentation: <a href="https://lists.w3.org/Archives/Public/public-ixml/2021Nov/0031.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2021Nov/<wbr></wbr>0031.html</a></p>
+            
+            <p id="x102" class="phone s04"><cite>Norm:</cite> What worked for XProc, we assign unique codes to the errors, and then can identify
+               the error output in an unambiguous way.</p>
+            
+            <p id="x103" class="phone s03"><cite>MSM:</cite> How Schema 1.0 was a catastrophe in that respect</p>
+            
+            <p id="x104" class="phone s04"><cite>Norm:</cite> Sure, but it may not be so hard with ixml.</p>
+            
+            <p id="x105" class="phone s05"><cite>John:</cite> I think there are fewer cases for us.</p>
+            
+            <p id="x107" class="phone s04"><cite>Norm:</cite> I volunteer to read the spec, and classify the possible erros</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Norm to classify the error states in the spec</p>
+            
+            <p id="x109" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">Next meeting</h3>
+            
+            <p id="x111" class="phone s07"><cite>Tomos:</cite> A half hour later please.</p>
+            
+            <p id="x112" class="phone s03"><cite>MSM:</cite> 15.30 UTC</p>
+            
+            <p id="x113" class="phone s07"><cite>Tomos:</cite> Permanent please</p>
+            
+            <p id="x114" class="phone s01"><cite>Steven:</cite> Tues 14 dec</p>
+            
+            <p id="x115" class="summary">[ADJOURN]</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Norm to classify the error states in the spec</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 159 (Fri Nov  5 17:37:14 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/TH/Th/</p>
+         
+         <p class="warning">Succeeded: s/TH/Th/</p>
+         
+         <p class="warning">Succeeded: s/escribe/describe/</p>
+         
+         <p class="warning">Succeeded: s/Cam you/Can you/</p>
+         
+         <p class="warning">Succeeded: s/COnsensus/Consensus</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: Consensus, Tom</p>
+         </div>
+      
+      
+      </body>
+</html>

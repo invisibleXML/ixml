@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 29 October 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-10-29" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>29 October 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/10/15-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Oct/0010"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/10/29-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>bethan, john, norm, steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>david</dd>
+               
+               <dt>Chair</dt>
+               <dd>steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>john</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#a32f">Previous Actions</a></li>
+               
+               <li><a href="#3a52">Status Reports</a></li>
+               
+               <li><a href="#8331">Review of change proposals</a></li>
+               
+               <li><a href="#eaf7">Open issues</a>
+                  
+                  <ol>
+                     
+                     <li><a href="#e3b3">Use pragmas for the prolog?</a></li>
+                     </ol>
+                  </li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="4b1d" class="irc"><cite>&lt;john&gt;</cite> s/Invible/Invisible/</p>
+            
+            <p id="88c7" class="irc"><cite>&lt;norm&gt;</cite> John, David gives regrets for today</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="a32f">Previous Actions</h3>
+            
+            <p id="300e" class="summary">2024-08-06-a, SP to draft a PR to address [1]#263</p>
+            
+            <p id="c083" class="summary">       (serialization of attributes) - Continues (access token expired)</p>
+            
+            <p id="a82f" class="phone s01"><cite>2023-01-10-f:</cite> NTW to produce draft documentation of the XML</p>
+            
+            <p id="f1f0" class="summary">       vocabulary (see [2]#137) - see later</p>
+            
+            <p id="b929" class="phone s02"><cite>2024-03-05-c:</cite> SP to prepare pull request to resolve issue</p>
+            
+            <p id="6622" class="summary">       [3]#139 (new grammars, new README). - Work done - pull request outstanding</p>
+            
+            <p id="b95d" class="phone s03"><cite>2024-03-19-a:</cite> SP to contact W3C to get the report links fixed</p>
+            
+            <p id="ffff" class="summary">          + NTW: The broken link no longer appears, AFAICT. I suggest we</p>
+            
+            <p id="25ed" class="summary">            close this issue, and related issues, and back away slowly. - Norm can't
+               find the broken link. CLOSED</p>
+            
+            <p id="dfe7" class="phone s04"><cite>2024-04-30-a:</cite> NTW to propose wording for possible changes to</p>
+            
+            <p id="8ea7" class="summary">       status reporting, with particular respect to reporting of iXML</p>
+            
+            <p id="73f5" class="summary">       version used by processor. DONE</p>
+            
+            <p id="6d28" class="phone s05"><cite>2024-04-30-b:</cite> Bethan to open an issue on whether to adopt a</p>
+            
+            <p id="8561" class="summary">       scheme to distinguish 'major' from 'minor' versions in version</p>
+            
+            <p id="061f" class="summary">       numbers. CONTINUES</p>
+            
+            <p id="1f61" class="phone s06"><cite>2024-10-01-a:</cite> NTW to add XSLT Forms implementation to the</p>
+            
+            <p id="c975" class="summary">       website DONE</p>
+            
+            <p id="eaee" class="phone s07"><cite>2024-10-01-b:</cite> SP to try out renaming as a string NEEDS PR</p>
+            
+            <p id="ed20" class="phone s08"><cite>2024-10-01-c:</cite> NTW to describe the discrepancy between iXML</p>
+            
+            <p id="6da6" class="summary">       names and XML names DONE</p>
+            
+            <p id="6748" class="phone s09"><cite>2024-10-01-d:</cite> NTW to make sure pragmas are on the agenda DONE</p>
+            
+            <p id="0fa7" class="phone s10"><cite>2024-10-01-e:</cite> SP to review ixml tests and correct the grammar CONTINUES</p>
+            
+            <p id="6640" class="phone s11"><cite>2024-10-01-f:</cite> SP to make a PR for both versions of the RFC</p>
+            
+            <p id="bb75" class="summary">       grammar CONTINUES</p>
+            
+            <p id="c68f" class="phone s12"><cite>???:</cite> SP? to make a PR to fix [4]#250, alias delimiter "&gt;"</p>
+            
+            <p id="7e2c" class="summary">       should be hidden CONTINUES</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="3a52">Status Reports</h3>
+            
+            <p id="09d7" class="summary">Implement string renaming. Recasting the implementation in Typscript</p>
+            
+            <p id="61db" class="phone s13"><cite>norm:</cite> fixed a rename attribute bug</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="8331">Review of change proposals</h3>
+            
+            <p id="ee68" class="phone s13"><cite>norm:</cite> iXML version fix for #271 - iXML version attribute replacing @version-mismatch. <a href="https://invisiblexml.org/pr/275/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>275/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="5392" class="summary">Agreed to accept</p>
+            
+            <p id="8ec2" class="phone s13"><cite>norm:</cite> Fix section title: iXML in XML - DONE</p>
+            
+            <p id="59a6" class="phone s13"><cite>norm:</cite> Add prose to allow user selection of start symbol - Accepted DONE</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="eaf7">Open issues</h3>
+            
+            <h4 id="e3b3">Use pragmas for the prolog?</h4>
+            
+            <p id="bdb5" class="phone s14"><cite>steven:</cite> not against and sees some benefit</p>
+            
+            <p id="17ff" class="phone s13"><cite>norm:</cite> pragmas can be used by implementors for experimentation.</p>
+            
+            <p id="d723" class="phone s13"><cite>norm:</cite> pragmas in the spec should not change the behaviour of the grammar and parse</p>
+            
+            <p id="72ca" class="phone s13"><cite>norm:</cite> but it could e.g. alter the performance, such as regular expressions.</p>
+            
+            <p id="a898" class="phone s13"><cite>norm:</cite> what do pragmas apply to - what is their locality of scope. E.g. run very fast for
+               'rule 17' or here is a regex you can use.</p>
+            
+            <p id="3193" class="phone s13"><cite>norm:</cite> can we come to common understanding of the scope of possible pragmas, such as can
+               they be not just applied to a grammar as a whole.</p>
+            
+            <p id="72f9" class="irc"><cite>&lt;norm&gt;</cite> Consider: {[A]} S: a.</p>
+            
+            <p id="90f8" class="irc"><cite>&lt;norm&gt;</cite> The Balisage pragma's proposal uses {[+A]} for the pragma applies to the whole grammar.</p>
+            
+            <p id="308f" class="summary">Agreed to think a bit more about this.</p>
+            
+            <p id="c389" class="action"><strong>ACTION:</strong> john - more detail on subtraction operator</p>
+            
+            <p id="1db9" class="irc"><cite>&lt;john&gt;</cite> next meeting: 12th November</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#c389">john - more detail on subtraction operator</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 238 (Fri Oct 18 20:51:13 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Meeting: ixml Group Teleconference//</p>
+         
+         <p class="warning">Failed: s/Invible/Invisible/</p>
+         
+         <p class="warning">Succeeded: s/Invisble/Invisible/</p>
+         
+         <p class="warning">Succeeded: s/p[/p/</p>
+         
+         <p class="warning">Succeeded: s/Previsous/Previous/</p>
+         
+         <p class="warning">Succeeded: s/ranme/rename/</p>
+         
+         <p class="warning">Succeeded: s/ther/here/</p>
+         
+         <p class="warning">Found 'next meeting:' not followed by a URL: '12th November'.</p>
+         
+         <p class="warning">Maybe present: 2023-01-10-f, 2024-03-05-c, 2024-03-19-a, 2024-04-30-a, 2024-04-30-b,
+            2024-10-01-a, 2024-10-01-b, 2024-10-01-c, 2024-10-01-d, 2024-10-01-e, 2024-10-01-f,
+            ???</p>
+         
+         <p class="warning">All speakers: 2023-01-10-f, 2024-03-05-c, 2024-03-19-a, 2024-04-30-a, 2024-04-30-b,
+            2024-10-01-a, 2024-10-01-b, 2024-10-01-c, 2024-10-01-d, 2024-10-01-e, 2024-10-01-f,
+            ???, norm, steven</p>
+         
+         <p class="warning">Active on IRC: john, norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

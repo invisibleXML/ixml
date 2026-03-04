@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 28 November 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-11-28" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>28 November 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2023/10/17-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Nov/0015.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/11/28-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>john, John Lumley</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Status reports</a></li>
+               
+               <li><a href="#t03">Publication Plans</a></li>
+               
+               <li><a href="#t04">Review and resolution of bug reports and technical issues</a></li>
+               
+               <li><a href="#t05">v.Next issues</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               
+               <li class="app"><a href="#ResolutionSummary">Summary of resolutions</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="x020" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://www.w3.org/2023/11/28-ixml-irc">https://<wbr></wbr>www.w3.org/<wbr></wbr>2023/<wbr></wbr>11/<wbr></wbr>28-ixml-irc</a></p>
+            
+            <p id="x021" class="phone s01"><cite>Michael:</cite> 2023-01-10-b: Michael to take another pass on the EBNF to BNF                   
+               document. COMPLETED</p>
+            
+            <p id="x022" class="phone s02"><cite>2023-01-10-f:</cite> Norm and Michael to do a bit of revision to   improve the draft documentation of
+               the XML  vINUEDcabulary (see #137) for further discussion. - CONTINUEDU</p>
+            
+            <p id="x024" class="phone s03"><cite>2023-10-03-a:</cite> Norm to create tests for renaming                       DONE 23 October 2023</p>
+            
+            <p id="x025" class="phone s03"><cite>2023-10-03-a:</cite> Norm to create tests for renaming                       DONE 23 October 2023</p>
+            
+            <p id="x026" class="summary">Norm close issue 197 without changes                       DONE 4 October 2023.</p>
+            
+            <p id="x027" class="phone s04"><cite>2023-10-03-d:</cite> Michael draft a FAQ, to include discussion of                      Unicode non-characters
+               and non-Unicode characters                       Done.</p>
+            
+            <p id="x028" class="phone s05"><cite>2023-10-17-a:</cite> SP to document the modified IRI/URI grammar to                      make clearer
+               why you might want it / need it, in                      preference to the literal
+               transcription of the                      grammars in the RFCs. Mostly Done -Steven</p>
+            
+            <p id="x029" class="phone s06"><cite>2023-10-17-b:</cite> SP to draft proposed addition to section 3.3                      saying explicitly
+               that nonterminals are                      case-sensitive. DONE - needs discussion</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to add the sentence to the spec.</p>
+            
+            <p id="x031" class="phone s07"><cite>2023-10-17-c:</cite> NTW to do some experiments with dynamic CSS, to                      see if we can
+               turn section numbers on and off. DONE - posted link to version</p>
+            
+            <p id="x032" class="phone s08"><cite>2023-10-17-d:</cite> SP to make each heading hyperlink to the section                      it heads (on
+               the model of the XSLT spec). - DONE</p>
+            
+            <p id="x033" class="phone s09"><cite>2023-10-17-e:</cite> SP to develop tests to detect version of Unicode                      supported.
+               DONE - added to my Michael</p>
+            
+            <p id="x034" class="phone s10"><cite>2023-10-17-f:</cite> MSM to find the tests which currently provide                      different results
+               based on version of Unicode                      supported, and send SP a pointer
+               to them.                       Done.</p>
+            
+            <p id="x035" class="phone s11"><cite>2023-10-17-g:</cite> NTW to develop proposal for #192 (Line endings) with a menu of                  
+               choices                       Done.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status reports</h3>
+            
+            <p id="x037" class="phone s12"><cite>John:</cite> Exploring full-length string matching</p>
+            
+            <p id="x038" class="phone s13"><cite>Norm:</cite> Experimental version 4 being worked on.</p>
+            
+            <p id="x039" class="phone s14"><cite>Steven:</cite> Working on leading empty item bug revealed by Michael's Unicode work.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Publication Plans</h3>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven as group chair has to ask W3C to publish the report</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Review and resolution of bug reports and technical issues</h3>
+            
+            <p id="x043" class="phone s01"><cite>Michael:</cite> Pull request #207 Test of Renaming facility - agreed to merge</p>
+            
+            <p id="x044" class="phone s01"><cite>Michael:</cite> Pull request #211 A linear a-star test catalog and data</p>
+            
+            <p id="x045" class="phone s13"><cite>Norm:</cite> 3000 files a bit big! - Linear rather than exponential intervals</p>
+            
+            <p id="x046" class="irc"><cite>&lt;norm&gt;</cite> If you want to see my graphs, they're in here: <a href="https://so.nwalsh.com/2023/11/05-faster">https://<wbr></wbr>so.nwalsh.com/<wbr></wbr>2023/<wbr></wbr>11/<wbr></wbr>05-faster</a></p>
+            
+            <p id="r01" class="resolution"><strong>RESOLUTION:</strong> This pull request should be merged</p>
+            
+            <p id="x048" class="summary">Pull request #212 Tweak Unicode tests, add version detector - Michael/Norm to resolve
+               merge conflict</p>
+            
+            <p id="x049" class="summary">Pull request #218 Small test catalog update (Norm) - Allows multiple grammar-result
+               elements in a test-set-results         element (needed for processors with support
+               for multiple         Unicode versions or other reasons for multiple results). Agreed
+               to merge</p>
+            
+            <p id="x050" class="summary">Pull request #214 Oberon-based performance tests (Michael) - agreed to merge</p>
+            
+            <p id="x051" class="summary">Pull request #215 XSLT to make Bash script from catalog (Michael) - agreed as a useful
+               tool. Agreed to merge (free of charge!)</p>
+            
+            <p id="x052" class="summary">Pull request #216 ixml grammars for performance testing (Michael) - more real-world
+               cases. (Intended to act as a good basis for comparing various rewrite rules, etc.)
+               . Agreed to merge</p>
+            
+            <p id="x053" class="summary">Pull request #217 Performance tests using XPath (Michael) - reduced-tree grammar.
+               Real-world XPath expressions. Agreed to merge</p>
+            
+            <p id="x054" class="summary">Issue #198 Check that browsable test suite is being updated when tests are added (Norm)
+               - Continue</p>
+            
+            <p id="x055" class="summary">Pull request #204 Toggle section numbers (norm) - Continue</p>
+            
+            <p id="x056" class="phone s01"><cite>Michael:</cite> Explanatory Documentation in the test catalog would be helpful - explaining what
+               features of iXML and the target grammars are being exercised</p>
+            
+            <p id="x059" class="phone s01"><cite>Michael:</cite> Description of EBNF to BNF translation - difficult to check format of the report
+               without merging.</p>
+            
+            <p id="x060" class="irc"><cite>&lt;cmsmcq&gt;</cite> Current EBNF to BNF document is at <a href="https://github.com/invisibleXML/ixml/blob/master/misc/ebnf-to-bnf.md">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>misc/<wbr></wbr>ebnf-to-bnf.md</a></p>
+            
+            <p id="x061" class="summary">Agreed to merge this</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Steven to review the EBNF to BNF document</p>
+            
+            <p id="x063" class="summary">Pull request #204 Toggle section numbers (norm). Agreed to merge</p>
+            
+            <p id="x065" class="summary"> Issue #137 Document the XML tag set of ixml grammars (Norm &amp; Michael) - Continue</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">v.Next issues</h3>
+            
+            <p id="x069" class="summary">Issue #210 Extraneous material in section on Serialization</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Norm to tidy 'Extraneous material in section on Serialization'</p>
+            
+            <p id="x071" class="irc"><cite>&lt;Steven&gt;</cite> S: A. .</p>
+            
+            <p id="x072" class="summary">Some discussion about this subject - some thoughts about suggesting a name cannot/should
+               not end with a '.' (Could be expressed in ixml)</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> Michael - write a proposal regarding Period in names</p>
+            
+            <p id="x074" class="irc"><cite>&lt;john&gt;</cite> Next Meeting: 12th December @1500 UTC</p>
+            
+            <p id="x075" class="phone s14"><cite>Steven:</cite> Dutch government armed forces using iXML</p>
+            
+            <p id="x077" class="irc"><cite>&lt;Steven&gt;</cite> XSLTFOrms is adding ixml to its front end</p>
+            
+            <p id="x078" class="phone s15"><cite>fn:</cite> invisble-ixml() added to QT4 work</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to add the sentence to the spec.</a></li>
+            
+            <li><a href="#a02">Steven as group chair has to ask W3C to publish the report</a></li>
+            
+            <li><a href="#a03">Steven to review the EBNF to BNF document</a></li>
+            
+            <li><a href="#a04">Norm to tidy 'Extraneous material in section on Serialization'</a></li>
+            
+            <li><a href="#a05">Michael - write a proposal regarding Period in names</a></li>
+            </ol>
+         </div>
+      
+      
+      <div id="ResolutionSummary">
+         
+         <h2>Summary of resolutions</h2>
+         
+         <ol>
+            
+            <li><a href="#r01">This pull request should be merged</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/john/John Lumley/</p>
+         
+         <p class="warning">Succeeded: s/rrsagetn, make logs public//</p>
+         
+         <p class="warning">Succeeded: s/rrsagent make log public//</p>
+         
+         <p class="warning">Succeeded: s/Pervious/Previous/</p>
+         
+         <p class="warning">Succeeded: s/CONT/CONTINUED/</p>
+         
+         <p class="warning">Succeeded: s/Agrred/Agreed/</p>
+         
+         <p class="warning">Succeeded: s/(and forces)/armed forces/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: john</p>
+         
+         <p class="warning">Found 'Next meeting:' not followed by a URL: '12th December @1500 UTC'.</p>
+         
+         <p class="warning">Maybe present: 2023-01-10-f, 2023-10-03-a, 2023-10-03-d, 2023-10-17-a, 2023-10-17-b,
+            2023-10-17-c, 2023-10-17-d, 2023-10-17-e, 2023-10-17-f, 2023-10-17-g, fn</p>
+         
+         <p class="warning">All speakers: 2023-01-10-f, 2023-10-03-a, 2023-10-03-d, 2023-10-17-a, 2023-10-17-b,
+            2023-10-17-c, 2023-10-17-d, 2023-10-17-e, 2023-10-17-f, 2023-10-17-g, fn, John, Michael,
+            Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, john, norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 19 August 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-08-19" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>19 August 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/05/27-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://www.w3.org/2025/08/19-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, David, Jim, John, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Nico</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#5ad1">Accept the minutes of the previous meeting</a></li>
+               
+               <li><a href="#0d70">Review of open actions</a></li>
+               
+               <li><a href="#06dd">Status reports</a></li>
+               
+               <li><a href="#cb2b">New open issues</a></li>
+               
+               <li><a href="#2082">Pragma requirements</a></li>
+               
+               <li><a href="#e08f">Modularization</a></li>
+               
+               <li><a href="#4a3a">An unconference...</a></li>
+               
+               <li><a href="#51ec">Next meeting</a></li>
+               
+               <li><a href="#4131">Any other business</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="5ad1">Accept the minutes of the previous meeting</h3>
+            
+            <p id="5f08" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="0d70">Review of open actions</h3>
+            
+            <p id="3238" class="phone s01"><cite>Steven:</cite> I've completed 2023-10-01-e.</p>
+            
+            <p id="0d13" class="phone s01"><cite>Steven:</cite> I've completed 2025-04-29.</p>
+            
+            <p id="e2d7" class="action"><strong>ACTION:</strong> 2025-08-19-a: Steven to review pull request #296.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="06dd">Status reports</h3>
+            
+            <p id="4c92" class="summary">Nothing reported.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="cb2b">New open issues</h3>
+            
+            <p id="b361" class="summary">John opened #303, Using multiple iXML grammars on ‘pre-processed’ input, <a href="https://github.com/invisiblexml/ixml/issues/303">invisiblexml/<wbr></wbr>ixml#303</a></p>
+            
+            <p id="fbf6" class="phone s02"><cite>John:</cite> It's a mechanism for describing grammars that you would include together by burying
+               grammars inside an XML structure<br />
+               <span id="309a">… You can then parse by doing one pass that identifies sections that are then parsed
+                  by the appropriate grammar.</span><br />
+               <span id="be70">… I've done nothing on this since I created the issue.</span></p>
+            
+            <p id="1b94" class="phone s02"><cite>John:</cite> I suggest that everyone read this and I'll see if I can make a version that runs
+               on CoffeePot. I have one that runs on my machine.<br />
+               <span id="97a5">… There's some follow-up from Nico.</span></p>
+            
+            <p id="a826" class="phone s03"><cite>Bethan:</cite> Perhaps we should wait until Nico is able to be here.</p>
+            
+            <p id="4ec7" class="phone s01"><cite>Steven:</cite> I did post an email about an issue.</p>
+            
+            <p id="c0c4" class="phone s02"><cite>John:</cite> If your parse knows about the grammar, I don't see why the processor shouldn't be
+               able to give you a more complete error.</p>
+            
+            <p id="9751" class="phone s02"><cite>John:</cite> If you're treating this as the grammar that's going to be run, then you get this
+               possibility of a more detailed error code.<br />
+               <span id="73de">… But if it's just any general sentence, I'm not sure.</span></p>
+            
+            <p id="e9de" class="phone s02"><cite>John:</cite> There is a dual nature to our grammars, they're a sentence in our grammar and they
+               have other constraints.</p>
+            
+            <p id="0428" class="phone s03"><cite>Bethan:</cite> This is a static errors.</p>
+            
+            <p id="ffff" class="phone s01"><cite>Steven:</cite> We have three categories of errors: syntactic, static, and dynamic.</p>
+            
+            <p id="97c5" class="summary">Some discussion of other errors in the same neighborhood.</p>
+            
+            <p id="bb7a" class="summary">We are discussing: <a href="https://lists.w3.org/Archives/Public/public-ixml/2025Jun/0016.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2025Jun/<wbr></wbr>0016.html</a></p>
+            
+            <p id="f32c" class="phone s01"><cite>Steven:</cite> The grammar excludes this, S06 can never happen.</p>
+            
+            <p id="d457" class="phone s04"><cite>Norm:</cite> I think Steven is right, S06 can't actually occur.</p>
+            
+            <p id="f276" class="action"><strong>ACTION:</strong> 2025-08-19-b Steven to remove S06 from the specification.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="2082">Pragma requirements</h3>
+            
+            <p id="e374" class="phone s03"><cite>Bethan:</cite> We're at the last two points, #19 and #20.</p>
+            
+            <p id="9b42" class="summary">19. A pragma’s attachment to a specific syntactic construct must be unambiguous</p>
+            
+            <p id="07fb" class="summary">    to software for parsing iXML grammars.</p>
+            
+            <p id="945d" class="phone s01"><cite>Steven:</cite> I still don't know what attachment means</p>
+            
+            <p id="1476" class="phone s05"><cite>David:</cite> Attachment is defined at the very top of the requirements document.</p>
+            
+            <p id="d868" class="summary">Requirements document: <a href="https://github.com/invisibleXML/ixml/blob/master/proposals/pragma_req.md">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>proposals/<wbr></wbr>pragma_req.md</a></p>
+            
+            <p id="2d6b" class="phone s04"><cite>Norm:</cite> I think this boils down to saying that if two processors parse the same grammar,
+               they have to put the pragmas in the same place.</p>
+            
+            <p id="330b" class="phone s03"><cite>Bethan:</cite> We need different processors to minimally produce the same XML structure from the
+               grammar.</p>
+            
+            <p id="9bfa" class="phone s04"><cite>Norm:</cite> Attempting to paraphrase #19, any processor that parses an iXML grammar must place
+               all of the pragmas in the same place in the XML version of that grammar.</p>
+            
+            <p id="efae" class="action"><strong>ACTION:</strong> 2025-08-19-c: Bethan to attempt to rewrite #19 so that it's clearer.</p>
+            
+            <p id="4d78" class="phone s05"><cite>David:</cite> One possible source of ambiguity is that two processors could unambiguously believe
+               that the pragmas went in different places.</p>
+            
+            <p id="6e67" class="phone s02"><cite>John:</cite> If we take the XML version of the grammar as definitive, it's very clear where things
+               are. We're getting a little more abstract than the XML structure of the grammar is
+               the definition.<br />
+               <span id="4215">… The relations between every piece can the be based on the structure of that XML.</span></p>
+            
+            <p id="1fcf" class="phone s03"><cite>Bethan:</cite> I don't think there's one that's primary.</p>
+            
+            <p id="083e" class="phone s02"><cite>John:</cite> Making declarations within the XML grammar is very clear.</p>
+            
+            <p id="cbd1" class="phone s03"><cite>Bethan:</cite> The XML version that a processor produces has to be the same.</p>
+            
+            <p id="ec6e" class="phone s01"><cite>Steven:</cite> That's the essense of iXML</p>
+            
+            <p id="1ff3" class="phone s03"><cite>Bethan:</cite> The idea with this requirements document is to nail down the essential things, even
+               the obvious ones.</p>
+            
+            <p id="01d7" class="phone s05"><cite>David:</cite> Pragmas seem different than other aspects in that they necessarily have a processor-specific
+               component. In any other construct, it would be self-evident.</p>
+            
+            <p id="1d7d" class="phone s06"><cite>Consensus:</cite> in principle, this makes sense, but we'd need to see the rewrite.</p>
+            
+            <p id="5d1f" class="phone s01"><cite>Steven:</cite> I still don't know what exactly we've agreed on.</p>
+            
+            <p id="db61" class="summary">Bethan agrees to redrafting along the lines discussed today.</p>
+            
+            <p id="3a76" class="summary">Moving on to #20</p>
+            
+            <p id="a0ec" class="summary">20. The relationship between a pragma and the construct it attaches to should be</p>
+            
+            <p id="467f" class="summary">    clear and unambiguous to human readers, in both iXML and XML notation.</p>
+            
+            <p id="076a" class="phone s06"><cite>Consensus:</cite> that makes sense</p>
+            
+            <p id="b5fe" class="phone s03"><cite>Bethan:</cite> Let's try to sort out #19 in email!</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="e08f">Modularization</h3>
+            
+            <p id="caab" class="phone s01"><cite>Steven:</cite> Any progress, John?</p>
+            
+            <p id="ffa0" class="phone s02"><cite>John:</cite> Some but there's still a ways to go.</p>
+            
+            <p id="ef14" class="phone s01"><cite>Steven:</cite> Since I gave the talk, I haven't done anything.</p>
+            
+            <p id="b9a8" class="phone s04"><cite>Norm:</cite> Steven, can you add the paper to our repo.</p>
+            
+            <p id="ba2e" class="action"><strong>ACTION:</strong> 2025-08-19-d: Steven to add the modularization paper to the Invisible XML repository</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="4a3a">An unconference...</h3>
+            
+            <p id="c3ee" class="phone s01"><cite>Steven:</cite> I was really impressed by the talks at Balisage<br />
+               <span id="5bfd">… I don't think I have the time and energy to organize another whole conference, but
+                  something really light weight seems like it would be doable.</span><br />
+               <span id="a6e9">… I think that would be fun and exciting.</span></p>
+            
+            <p id="4108" class="phone s03"><cite>Bethan:</cite> I think it would be some work, but less than a full conference.</p>
+            
+            <p id="aff1" class="phone s01"><cite>Steven:</cite> We need to write the call, and have some sort of registration system</p>
+            
+            <p id="ad42" class="phone s03"><cite>Bethan:</cite> We'd want a web page, a code of conduct, and that kind of thing.<br />
+               <span id="9b90">… There's a little more behind the scenes work.</span></p>
+            
+            <p id="56db" class="phone s02"><cite>John:</cite> A half day thing?</p>
+            
+            <p id="0cfc" class="phone s01"><cite>Steven:</cite> A half day would allow overlap between America and Europe.</p>
+            
+            <p id="66db" class="phone s04"><cite>Norm:</cite> That seems good to me.</p>
+            
+            <p id="3c91" class="phone s05"><cite>David:</cite> How long would the sessions be?</p>
+            
+            <p id="d161" class="phone s01"><cite>Steven:</cite> I think we should let the speakers ask, up to maybe a maximum of 30 minutes.</p>
+            
+            <p id="6157" class="phone s02"><cite>John:</cite> It's about cross-pollination.<br />
+               <span id="e6de">… We could also let speakers show their grammars and have folks looking over their
+                  shoulder.</span></p>
+            
+            <p id="6e78" class="phone s03"><cite>Bethan:</cite> I think a maximum of 15 minutes makes sense.</p>
+            
+            <p id="5d60" class="phone s04"><cite>Norm:</cite> I think 30 minutes slots would be good.</p>
+            
+            <p id="10000" class="phone s01"><cite>Steven:</cite> I think we might get a lot more than 8 talks, based on what we've seen so far.</p>
+            
+            <p id="048d" class="phone s03"><cite>Bethan:</cite> Maybe two half days?</p>
+            
+            <p id="e5a0" class="phone s01"><cite>Steven:</cite> That also sounds good.</p>
+            
+            <p id="93a8" class="phone s02"><cite>John:</cite> What about January/February?</p>
+            
+            <p id="a870" class="summary">Some regrets about the fact that XML Prague has moved to the summer.</p>
+            
+            <p id="e37a" class="phone s01"><cite>Steven:</cite> Yes, that might work.<br />
+               <span id="0d95">… I'll try to assemble a discussion document for more folks to comment on.</span></p>
+            
+            <p id="d123" class="action"><strong>ACTION:</strong> 2025-08-19-e Steven to assemble a discussion document for the conference.</p>
+            
+            <p id="b23c" class="phone s04"><cite>Norm:</cite> What teleconference service?</p>
+            
+            <p id="a0d4" class="phone s01"><cite>Steven:</cite> I think I can use CWI's business account.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="51ec">Next meeting</h3>
+            
+            <p id="cced" class="summary">Tuesday, 2 September 2025.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="4131">Any other business</h3>
+            
+            <p id="a3b7" class="summary">None heard</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#e2d7">2025-08-19-a: Steven to review pull request #296.</a></li>
+            
+            <li><a href="#f276">2025-08-19-b Steven to remove S06 from the specification.</a></li>
+            
+            <li><a href="#efae">2025-08-19-c: Bethan to attempt to rewrite #19 so that it's clearer.</a></li>
+            
+            <li><a href="#ba2e">2025-08-19-d: Steven to add the modularization paper to the Invisible XML repository</a></li>
+            
+            <li><a href="#d123">2025-08-19-e Steven to assemble a discussion document for the conference.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 244 (Thu Feb 27 01:23:09 2025 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Steven/2025-08-19-a: Steven/</p>
+         
+         <p class="warning">Succeeded: s/review the editorial draft that Norm made earlier/pull request #296/</p>
+         
+         <p class="warning">Succeeded: s/Steven to pull request/Steven to review pull request/</p>
+         
+         <p class="warning">Succeeded: s/WSI/CWI/</p>
+         
+         <p class="warning">Succeeded: s/19-d add the/19-d: Steven to add the/</p>
+         
+         <p class="warning">Maybe present: Consensus</p>
+         
+         <p class="warning">All speakers: Bethan, Consensus, David, John, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

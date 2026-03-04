@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 4 March 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-03-04" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>4 March 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/03/04-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, David, Fredrik, Jim, John, Norm</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Nico, Steven</dd>
+               
+               <dt>Chair</dt>
+               <dd>Norm (pro tem)</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#439e">Accept the minutes of the previous meeting</a></li>
+               
+               <li><a href="#18c4">Review of open actions</a></li>
+               
+               <li><a href="#f59e">Status reports</a></li>
+               
+               <li><a href="#71f3">Issue #294, “parse tree” is not defined in the specification</a></li>
+               
+               <li><a href="#36ca">Perspectives on serialization</a></li>
+               
+               <li><a href="#97ea">Next meeting</a></li>
+               
+               <li><a href="#199a">Any other business</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="439e">Accept the minutes of the previous meeting</h3>
+            
+            <p id="3aa1" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="18c4">Review of open actions</h3>
+            
+            <p id="6037" class="summary">No progress.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="f59e">Status reports</h3>
+            
+            <p id="514c" class="phone s01"><cite>Norm:</cite> I got NineML 3.2.9, includes an attempt to provide better diagnostics on failed parses.</p>
+            
+            <p id="2635" class="phone s02"><cite>John:</cite> I've done something similar with my parser, it shows you the open rules.<br />
+               <span id="7ce8">… The real problem is when you have ambiguity as well.</span></p>
+            
+            <p id="3ace" class="phone s03"><cite>Bethan:</cite> Even when you have ambiguity, the failure comes at a particular point in the parse.
+               You can't be parsing more than one thing.</p>
+            
+            <p id="967b" class="phone s02"><cite>John:</cite> There are two cases, one is a failure in the middle of the input. There's nothing
+               else that can be predicted. That might be under a number of different branches.<br />
+               <span id="4385">… The other one is where you got to the end of the input and there's nothing left.
+                  What was supposed to come next?</span></p>
+            
+            <p id="4202" class="phone s03"><cite>Bethan:</cite> What I'm interested in working on are tools that will treat your grammar as a generator
+               rather than a recognizer.<br />
+               <span id="f695">… So that you can for fairly small grammars generate a sample of what is recognized.</span><br />
+               <span id="320b">… So you can look at that and go "Uh, no, not that!"</span><br />
+               <span id="70e7">… Sometimes it can be very helpful to walk through a regular expression, for example,
+                  and recount what could be matched.</span><br />
+               <span id="6737">… That process of talking through is a process of generating from the regular expression.</span></p>
+            
+            <p id="b15a" class="phone s02"><cite>John:</cite> Can you do this from any grammar without ambiguity?</p>
+            
+            <p id="e3c4" class="summary">Some discussion of generators.</p>
+            
+            <p id="e087" class="phone s03"><cite>Bethan:</cite> I'm also interested in trying to work out what a grammar might be *trying* to match:
+               phone numbers, UK post codes, etc.<br />
+               <span id="15c5">… And then point people to versions of those grammars.</span></p>
+            
+            <p id="2c70" class="phone s04"><cite>Fredrik:</cite> I've been thinking about rendering parts of the graph when a parse fails.</p>
+            
+            <p id="4d02" class="phone s03"><cite>Bethan:</cite> I wonder if we can make something like Gunther's railroad diagrams; or maybe overlapping
+               circles, some way to indicate what belongs to what and what is partial.</p>
+            
+            <p id="53a2" class="phone s02"><cite>John:</cite> Starting to find users finding really weird errors which is nice.</p>
+            
+            <p id="a470" class="summary">Some discussion of the origins of the test case that demonstrated the problem of non-XML
+               output (a single text node)</p>
+            
+            <p id="35ab" class="phone s02"><cite>John:</cite> It's worth making people aware that record-oriented can produce output that isn't
+               well formed.</p>
+            
+            <p id="f4fb" class="phone s04"><cite>Fredrik:</cite> With the current state of the parsers, it's very expensive to parse a huge file.
+               It's more efficient to do it in a record-oriented way.</p>
+            
+            <p id="3d9f" class="phone s03"><cite>Bethan:</cite> One of the things I've been thinking about recently is that we have a bunch of dynamic
+               errors that are things like there not being a single root node, or two attributes
+               with the same name on the same element.<br />
+               <span id="ffff">… Earlier the spec says that conformance is about processors and grammars, not the
+                  combination of a grammar and in input.</span><br />
+               <span id="e01d">… That being the case, I think these should be static errors on the grammar; not errors
+                  that are only thrown if a particular input produces not-well formed XML.</span><br />
+               <span id="c561">… I'm convinced you can do it.</span></p>
+            
+            <p id="8a6e" class="phone s02"><cite>John:</cite> Take the case of duplicated attributes, it depends on the input if that's the case.<br />
+               <span id="6f29">… If you said that it was a static error, that would be a problem.</span></p>
+            
+            <p id="22b8" class="phone s04"><cite>Fredrik:</cite> Do you have an example?</p>
+            
+            <p id="ce35" class="phone s03"><cite>Bethan:</cite> I think a single root element is relatively easy to work out; but suppressed elements
+               make it a little harder.<br />
+               <span id="7b29">… I think we should think about removing the statement from the spec or we should
+                  talk about changing those to static errors.</span></p>
+            
+            <p id="3fe3" class="phone s04"><cite>Fredrik:</cite> I sort of agree, but I think it might be easy to create a grammar that will create
+               a root node or not. And that's entirely dependent on the input.</p>
+            
+            <p id="a871" class="phone s03"><cite>Bethan:</cite> I think the spec implies that if a grammar could produce not well-formed XML, the
+               grammar isn't conformant.</p>
+            
+            <p id="592a" class="phone s02"><cite>John:</cite> Does that not imply that the universe of inputs is infinite?</p>
+            
+            <p id="7fa5" class="summary">Some further discussion of what this analysis would look like.</p>
+            
+            <p id="021b" class="action"><strong>ACTION:</strong> Bethan to review the dynamic errors and see which ones might possibly be resolved
+               statically.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="71f3">Issue #294, “parse tree” is not defined in the specification</h3>
+            
+            <p id="5eb7" class="phone s01"><cite>Norm:</cite> Let's wait for Steven.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="36ca">Perspectives on serialization</h3>
+            
+            <p id="0d82" class="phone s01"><cite>Norm:</cite> Wait for Steven</p>
+            
+            <p id="58a5" class="phone s01"><cite>Norm:</cite> Should I try to improve that though?</p>
+            
+            <p id="d717" class="summary">Thumbs up, consensus that it's worth making another pass to improve it.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="97ea">Next meeting</h3>
+            
+            <p id="26d3" class="summary">18 March. Note that will be 1 hour later in the US. No regrets heard.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="199a">Any other business</h3>
+            
+            <p id="eb46" class="summary">None heard.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#021b">Bethan to review the dynamic errors and see which ones might possibly be resolved
+                  statically.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 244 (Thu Feb 27 01:23:09 2025 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/No regrets given./18 March. Note that will be 1 hour later in the US.
+            No regrets heard./</p>
+         
+         <p class="warning">Succeeded: s/Guther/Gunther/</p>
+         
+         <p class="warning">All speakers: Bethan, Fredrik, John, Norm</p>
+         
+         <p class="warning">Active on IRC: norm</p>
+         </div>
+      
+      
+      </body>
+</html>

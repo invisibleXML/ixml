@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml group call – 12 July 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-07-12" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml group call</h1>
+         
+         <h2>12 July 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/06/21-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Jul/0006"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/07/12-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, JoelDubinko, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Review and resolution of bug reports and technical issues</a></li>
+               
+               <li><a href="#t05">Plans for Balisage</a></li>
+               
+               <li><a href="#t06">AOB</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x008" class="summary">rrssagent, make minutes</p>
+            
+            <p id="x009" class="summary">rssagent, make minutes</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="x022" class="phone s01"><cite>Steven:</cite> All done</p>
+            
+            <p id="x023" class="phone s02"><cite>Norm:</cite> Not ACTION (2022-06-21): Tom to set up a schematron demo</p>
+            
+            <p id="x024" class="phone s03"><cite>Michael:</cite> I didn't find large and unexpected XPath expressions</p>
+            
+            <p id="x028" class="phone s04"><cite>John:</cite> I got all but 11 QT tests running<br />
+               <span id="x029">… they fail on "-" as operator or namecharacter</span><br />
+               <span id="x030">… with lots of ambiguity</span><br />
+               <span id="x031">… whitespace can be very critical</span></p>
+            
+            <p id="x033" class="phone s03"><cite>Michael:</cite> I expect whitespace to be the biggest issue for newcomers<br />
+               <span id="x034">… we need to warn people</span></p>
+            
+            <p id="x035" class="irc"><cite>&lt;mjoel&gt;</cite> offline: I had a low-priority query about the community page <a href="https://www.w3.org/community/ixml/">https://<wbr></wbr>www.w3.org/<wbr></wbr>community/<wbr></wbr>ixml/</a> which is a bit out of date, for example in specifying meeting times ... and how to
+               update it</p>
+            
+            <p id="x036" class="phone s01"><cite>Steven:</cite> I will be handling that in an advanced ixml tutorial for Declarative Amsterdam in
+               November</p>
+            
+            <p id="x037" class="phone s05"><cite>Bethan:</cite> I'm thinking of offering a mode in my implementation to handle whitespace</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x040" class="phone s02"><cite>Norm:</cite> I'm close to v2.0 with GLL parser, but not there yet</p>
+            
+            <p id="x044" class="phone s04"><cite>John:</cite> Close to v1.0 release of workbench<br />
+               <span id="x045">… also a stub library for Saxon</span><br />
+               <span id="x046">… away on hol until Balisage</span></p>
+            
+            <p id="x047" class="phone s03"><cite>Michael:</cite> About John's implementation, is there a direct link?</p>
+            
+            <p id="x048" class="phone s04"><cite>John:</cite> That's the current link</p>
+            
+            <p id="x049" class="phone s03"><cite>Michael:</cite> Apologies</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x053" class="phone s03"><cite>Michael:</cite> I've added a couple of groups of performance tests<br />
+               <span id="x054">… with exponential increasing size input/grammar</span><br />
+               <span id="x055">… to see what happens to response times</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Review and resolution of bug reports and technical issues</h3>
+            
+            <p id="x058" class="summary">[None]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Plans for Balisage</h3>
+            
+            <p id="x060" class="phone s02"><cite>Norm:</cite> I took all inputs and crafted them as docbookml, needs copy editing</p>
+            
+            <p id="x061" class="phone s05"><cite>Bethan:</cite> I'</p>
+            
+            <p id="x062" class="summary">'ll do the copy edit</p>
+            
+            <p id="x063" class="phone s03"><cite>Michael:</cite> I will draft my implementation text by today eob</p>
+            
+            <p id="x064" class="phone s04"><cite>John:</cite> Please list my implementation as working</p>
+            
+            <p id="x065" class="phone s01"><cite>Steven:</cite> Is the total version on github?</p>
+            
+            <p id="x066" class="phone s02"><cite>Norm:</cite> Yes</p>
+            
+            <p id="x067" class="phone s05"><cite>Bethan:</cite> Do people want to do slides for their individual bit, or shall I do slides?</p>
+            
+            <p id="x068" class="irc"><cite>&lt;Steven&gt;</cite> s/DO?Do/</p>
+            
+            <p id="x069" class="irc"><cite>&lt;Steven&gt;</cite> s/DO?Do/</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">AOB</h3>
+            
+            <p id="x075" class="phone s06"><cite>JoelDubinko:</cite> I'm going by "Joel" these days<br />
+               <span id="x076">… I'm unaffiliated.</span><br />
+               <span id="x077">… I'm interested in Rust and ixml, so I want to build a Rust implementation</span><br />
+               <span id="x078">… I've ordered the Dragon book</span></p>
+            
+            <p id="x079" class="phone s04"><cite>John:</cite> What is the plan for the talk?</p>
+            
+            <p id="x080" class="phone s01"><cite>Steven:</cite> Split according to the bits we've written.</p>
+            
+            <p id="x082" class="phone s02"><cite>Norm:</cite> My suggestion is Steven a few slides intro, and then each implementor about their
+               implementations<br />
+               <span id="x083">… then a sort of panel</span></p>
+            
+            <p id="x085" class="phone s04"><cite>John:</cite> I would like to demo the workbench<br />
+               <span id="x086">… three to four minutes</span></p>
+            
+            <p id="x087" class="phone s05"><cite>Bethan:</cite> Four people talking about implementations?</p>
+            
+            <p id="x088" class="phone s02"><cite>Norm:</cite> We have 30+15 minutes</p>
+            
+            <p id="x089" class="phone s03"><cite>Michael:</cite> Let us talk about implementations in the order that they have become publically available
+               - Tom, me, Steven, Norm, John</p>
+            
+            <p id="x090" class="phone s01"><cite>Steven:</cite> Sounds good.</p>
+            
+            <p id="x091" class="phone s05"><cite>Bethan:</cite> How about I do the intro?</p>
+            
+            <p id="x092" class="phone s01"><cite>Steven:</cite> Go for it.</p>
+            
+            <p id="x093" class="summary">s/Go/Go/</p>
+            
+            <p id="x097" class="phone s04"><cite>John:</cite> One of the big developments is that we have taken it through a community group, with
+               a lot of work done. We should mention it</p>
+            
+            <p id="x100" class="phone s05"><cite>Bethan:</cite> Agree</p>
+            
+            <p id="x101" class="phone s01"><cite>Steven:</cite> We should be checking the paper Thursday.</p>
+            
+            <p id="x102" class="phone s02"><cite>Norm:</cite> Meet next Tuesday to discuss the slides</p>
+            
+            <p id="x103" class="phone s05"><cite>Bethan:</cite> Lets make that the 26th</p>
+            
+            <p id="x104" class="phone s04"><cite>John:</cite> I'll be on holiday, so won't be able to do much</p>
+            
+            <p id="x106" class="phone s07"><cite>Joel:</cite> About the community page<br />
+               <span id="x107">… ... needs updating</span></p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven update community page</p>
+            
+            <p id="x109" class="summary">[ADJOURN]</p>
+            
+            <p id="x130" class="summary">S/Go for/Go for/</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven update community page</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 192 (Tue Jun 28 16:55:30 2022 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/whait/white/</p>
+         
+         <p class="warning">Succeeded: s/GLC/GLL/</p>
+         
+         <p class="warning">Succeeded: s/reponse/response/</p>
+         
+         <p class="warning">Failed: s/DO?Do/</p>
+         
+         <p class="warning">Failed: s/DO?Do/</p>
+         
+         <p class="warning">Succeeded: s/DO/Do/</p>
+         
+         <p class="warning">Succeeded: s/GO/Go/</p>
+         
+         <p class="warning">Succeeded: s/rhough/through/</p>
+         
+         <p class="warning">Succeeded: s/ciommunity/community</p>
+         
+         <p class="warning">Succeeded: s/didn;t/didn't/</p>
+         
+         <p class="warning">Succeeded 2 times: s/Micah/JoelDubinko/G</p>
+         
+         <p class="warning">Succeeded: s/whitee/white</p>
+         
+         <p class="warning">Succeeded: s/v1,.0/v1.0</p>
+         
+         <p class="warning">Succeeded: s/or shal I/or shall I</p>
+         
+         <p class="warning">Succeeded: s/workbench'/workbench</p>
+         
+         <p class="warning">Succeeded: s/minutesw/minutes</p>
+         
+         <p class="warning">Succeeded: s/GO for/Go for/</p>
+         
+         <p class="warning">Succeeded: s/GO for/Go for/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: Joel</p>
+         </div>
+      
+      
+      </body>
+</html>

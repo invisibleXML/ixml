@@ -1,0 +1,270 @@
+/*              ssSearch.js                */
+/* Authors: Martin Holmes and Joey Takeda. */
+/*        University of Victoria.          */
+
+/** This file is part of the projectEndings staticSearch
+  * project.
+  *
+  * Free to anyone for any purpose, but
+  * acknowledgement would be appreciated.
+  */
+  
+/* These rulesets control the display of the 
+ * search form elements and search results on 
+ * the search page. */
+
+form#ssForm{
+    display: flex;
+    flex-direction: column;
+}
+span.ssQueryAndButton{
+    display: flex;
+    flex-direction: row;
+    margin: 0.25em auto;
+    width: 100%;
+}
+input#ssQuery{
+    flex: 1;
+}
+input.staticSearch_feat:disabled{
+  cursor: wait;
+}
+
+/* Visually hide elements necessary for accessibility */
+fieldset.ssFieldset > legend.sr-only{
+     position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: circle(0);
+  border: 0; 
+}
+
+
+div.ssDescFilters, div.ssDateFilters, div.ssNumFilters, div.ssBoolFilters, div.ssSearchInFilters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25em;
+}
+div.ssDescFilters fieldset, div.ssDateFilters fieldset, div.ssNumFilters fieldset, div.ssBoolFilters fieldset, div.ssSearchInFilters fieldset{
+    margin: 0.25em auto;
+    padding: 0.25em;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+}
+
+div.ssFeatFilters fieldset{
+    margin: 0.25em auto;
+    padding: 0.25em;
+}
+
+ul.ssDescCheckboxList,
+ul.ssSearchInCheckboxList{
+    list-style-type: none;
+    max-height: 8em;
+    overflow-y: auto;
+    min-width: 90%;
+    padding-left: 0.25em;
+}
+ul.ssDescCheckboxList li,
+ul.ssSearchInCheckboxList li{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+div.ssDateFilters fieldset.ssFieldset span, div.ssNumFilters fieldset.ssFieldset span, div.ssBoolFilters fieldset.ssFieldset span{
+    padding: 0.5em 1em;
+}
+fieldset.ssFieldset > span {
+    background-color: #ddd;
+    border: solid 1px #aaa;
+    margin: 0.2em;
+}
+div.ssNumFilters input[type="number"], div.ssDateFilters input[type="text"], div.ssFeatFilters input[type="text"]{
+    padding: 0.5em;
+}
+
+div#ssResults{
+  min-height: 50vh;
+/* Leaving a bit of space above when scrolling to results. */
+  padding-top: 1rem;
+  margin-top: -1rem;
+}
+div#ssResults>ul>li{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 0.75em;
+}
+div#ssResults>ul>li>a{
+    flex-grow: 0;
+}
+div#ssResults>ul>li>div{
+  flex-grow: 1;
+}
+div#ssResults>ul>li>a>img{
+    max-width: 10em;
+    margin-right: 1em;
+    min-width: 3em;
+    min-height: 3em;
+}
+div#ssResults>ul>li{
+padding: 0.5em 0.25em;
+}
+
+
+/* Pagination trigger to hide all following items */
+div#ssResults>ul>li.ssPaginationEnd ~ li{
+    display:none;
+}
+
+/* Special pagination controls */
+
+div#ssResults > div#ssPagination{
+    text-align:center;
+    margin-top:1rem;
+    margin-bottom:2rem;
+}
+
+div#ssResults > div#ssPagination > button{
+    margin: 0 .5rem;
+}
+
+
+
+/* Alternate bg colour. */
+div#ssResults>ul>li:nth-child(2n) {
+    background-color: rgb(240, 240, 240);
+    transition: background-color .5s;
+    border-top: 1px solid rgb(230, 230, 230);
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+/* Larger document titles */
+div#ssResults>ul>li>div>a{
+    font-size: 1.2em;
+}
+
+/* No list markers for kwics */
+div#ssResults>ul>li>div>ul.kwic{
+    list-style-type: none;
+}
+/* kwics laid out with flex */
+div#ssResults>ul>li>div>ul.kwic>li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5em;
+    border-top: solid 1pt lightgray;
+    padding: 0.2em;
+}
+div#ssResults>ul>li>div>ul.kwic>li>span{
+    display: block;
+}
+
+/* Give fragment image a right margin */
+
+div#ssResults li[data-ss-img] > img{
+    margin-right:1em;
+}
+
+/* Larger and right aligned kwic link. */
+div#ssResults>ul>li>div>ul.kwic>li>a{
+    font-size: 2.0em;
+    line-height: 0.50;
+    margin-left:auto;
+}
+a.fidLink{
+    text-decoration: none;
+}
+/* This div contains the SVG staticSearch logo. */
+div#ssPoweredBy{
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+}
+div#ssPoweredBy>* {
+    margin: 0;
+}
+
+/* Styles for the SSTypeAhead control. */
+div.ssFeatFilters>fieldset.ssFieldset>menu{
+    padding: 0;
+    margin: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    width: min-content;
+    min-width: 12em;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+div.ssFeatFilters>fieldset.ssFieldset>menu>div.select{
+    border: solid 1pt darkgray;
+    cursor: pointer;
+    padding: 0.25em;
+}
+div.ssFeatFilters>fieldset.ssFieldset>menu>div.select:hover, div.ssFeatFilters>fieldset.ssFieldset>menu>div.select:focus{
+    background-color: lightgray;
+}
+/* Only display the menu when the focus is within the fieldset. */
+div.ssFeatFilters>fieldset.ssFieldset:focus-within>menu{
+  display: flex;
+}
+
+div.ssSuggest{
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+div.ssSuggest>span{
+    border: solid 1pt gray;
+    padding: 0.25em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.25em;
+    align-items: center;
+}
+div.ssSuggest>span>button{
+    max-width: 1.5em;
+    padding: 0.25em;
+    text-align: center;
+}
+
+/* Signal that the search page is loading. */
+body.ssLoading{
+  cursor: wait;
+}
+
+body.ssSearching{
+    cursor: wait;
+}
+
+div#ssSplashMessage,
+div#ssSearching{
+  display: none;
+}
+
+body.ssSearching:not(.ssLoading) div#ssSearching, body.ssLoading:not(.ssSearching) div#ssSplashMessage, noscript{
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.25rem 0.25rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}

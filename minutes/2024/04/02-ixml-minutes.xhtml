@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 02 April 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-04-02" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>02 April 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/03/19-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Apr/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/04/02-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Review and resolution of bug reports and technical issues</a>
+                  
+                  <ol>
+                     
+                     <li><a href="#t05">Pull request #227 Add .gitattributes</a></li>
+                     </ol>
+                  </li>
+               
+               <li><a href="#t06">Issue #233 There are other things called iXML</a></li>
+               
+               <li><a href="#t07">Issue #139 Sample grammars for IRIs and URIs</a></li>
+               
+               <li><a href="#t08">Issue #137 Document the XML tag set of ixml grammars</a></li>
+               
+               <li><a href="#t09">Issue #137 Document the XML tag set of ixml grammars</a></li>
+               
+               <li><a href="#t10">Issue #203 Spec should say nonterminals are case-sensitive</a></li>
+               
+               <li><a href="#t11">Issue #192 Normalizing line endings in ixml inputs</a></li>
+               
+               <li><a href="#t12">Issue #237 What would the absence of version number mean?</a></li>
+               
+               <li><a href="#t13">Issue #239  Support simple data types?</a></li>
+               
+               <li><a href="#t14">AOB</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x003" class="phone s01"><cite>Date:</cite> 2024-04-02</p>
+            
+            <p id="x012" class="summary">Github, help</p>
+            
+            <p id="x013" class="irc"><cite>&lt;norm&gt;</cite> Github, help</p>
+            
+            <p id="x014" class="phone s02"><cite>Norm:</cite> While we're waiting, did the 404s on the W3C page get fixed</p>
+            
+            <p id="x015" class="phone s03"><cite>Steven:</cite> Well, the final report link is fine; it's only the draft links to Norm's page that
+               is broken</p>
+            
+            <p id="x016" class="phone s02"><cite>Norm:</cite> Let us remove the drafts link, or otherwise I'll reinstate the link</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2023-01-10-f: continues</p>
+            
+            <p id="x019" class="phone s04"><cite>Michael:</cite> I mailed something to you Norm.</p>
+            
+            <p id="x020" class="phone s02"><cite>Norm:</cite> I will read it</p>
+            
+            <p id="x021" class="summary">ACTION 2023-11-28-a</p>
+            
+            <p id="x022" class="summary">ACTION 2023-11-28-a</p>
+            
+            <p id="x023" class="phone s02"><cite>Norm:</cite> Michael made a suggestion for a change</p>
+            
+            <p id="x024" class="phone s04"><cite>Michael:</cite> This can be closed. We have a pull request for the change</p>
+            
+            <p id="x025" class="summary">ACTION 2024-02-20-b</p>
+            
+            <p id="x026" class="phone s03"><cite>Steven:</cite> CLosed</p>
+            
+            <p id="x027" class="summary">ACTION 2023-11-28-c</p>
+            
+            <p id="x028" class="phone s03"><cite>Steven:</cite> Almost done. Comments due today</p>
+            
+            <p id="x029" class="summary">ACTION 2024-03-05-b</p>
+            
+            <p id="x030" class="phone s02"><cite>Norm:</cite> Ready for review</p>
+            
+            <p id="x031" class="phone s04"><cite>Michael:</cite> Fine</p>
+            
+            <p id="x032" class="phone s05"><cite>John:</cite> Fine</p>
+            
+            <p id="x033" class="summary">ACTION 2024-03-05-c</p>
+            
+            <p id="x034" class="phone s03"><cite>Steven:</cite> Continues</p>
+            
+            <p id="x035" class="summary">ACTION 2024-03-19-a</p>
+            
+            <p id="x036" class="summary">Dealt with above</p>
+            
+            <p id="x037" class="summary">ACTION 2024-03-19-b</p>
+            
+            <p id="x038" class="summary">Closed</p>
+            
+            <p id="x039" class="summary">ACTION 2024-03-19-c</p>
+            
+            <p id="x040" class="summary">Done</p>
+            
+            <p id="x041" class="summary">ACTION 2024-03-19-d</p>
+            
+            <p id="x042" class="summary">Done</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x045" class="phone s02"><cite>Norm:</cite> I have implemented metadata in the prolog proposal<br />
+               <span id="x046">… also the simple datatype checking proposal</span></p>
+            
+            <p id="x049" class="phone s05"><cite>John:</cite> I've implemented metadata proposal too<br />
+               <span id="x050">… also a subtraction operator</span><br />
+               <span id="x051">… that unmatches possible matches</span></p>
+            
+            <p id="x052" class="phone s04"><cite>Michael:</cite> Be interesting to think about performance aspects</p>
+            
+            <p id="x053" class="phone s03"><cite>Steven:</cite> Definitely needs a theoretical underpinning</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x057" class="phone s04"><cite>Michael:</cite> Gunther has added a change to some tests fror space after prolog</p>
+            
+            <p id="x058" class="phone s02"><cite>Norm:</cite> I will merge</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Review and resolution of bug reports and technical issues</h3>
+            
+            <h4 id="t05">Pull request #227 Add .gitattributes</h4>
+            
+            <p id="x061" class="phone s02"><cite>Norm:</cite> I want to skip this week</p>
+            
+            <p id="x062" class="irc"><cite>&lt;cmsmcq&gt;</cite> Depends on newline handling.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #233 There are other things called iXML</h3>
+            
+            <p id="x064" class="summary">Closed</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #139 Sample grammars for IRIs and URIs</h3>
+            
+            <p id="x066" class="summary">Pending action</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Issue #137 Document the XML tag set of ixml grammars</h3>
+            
+            <p id="x068" class="summary">Awaiting action</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Issue #137 Document the XML tag set of ixml grammars</h3>
+            
+            <p id="x071" class="phone s02"><cite>Norm:</cite> There is a PR, and there is a small change from Michael<br />
+               <span id="x072">… [reads change]</span></p>
+            
+            <p id="x073" class="phone s03"><cite>Steven:</cite> Fine</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Issue #203 Spec should say nonterminals are case-sensitive</h3>
+            
+            <p id="x075" class="phone s04"><cite>Michael:</cite> Same</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">Issue #192 Normalizing line endings in ixml inputs</h3>
+            
+            <p id="x077" class="irc"><cite>&lt;Bethan&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/242">invisibleXML/<wbr></wbr>ixml#242</a></p>
+            
+            <p id="x078" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://invisiblexml.org/pr/242/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>242/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="x079" class="summary">"Invisible XML processors normalize line endings when they read grammar and input
+               files. They apply the same rules as [XML]: every occurrence of the two character sequence
+               #D #A, and any #D not immediately followed by a #A, are translated into a single #A
+               in the input. This assures that the single character #A can always be used to match
+               an end of line, irrespective of the conventions of the system where the files were
+               created. It follows[CUT]</p>
+            
+            <p id="x080" class="summary">iXML exclusion ~[#A]* will always match all of the characters to the end of a line."</p>
+            
+            <p id="x081" class="phone s05"><cite>John:</cite> Do we want to add something about making it an option to turn that off?</p>
+            
+            <p id="x084" class="phone s04"><cite>Michael:</cite> I don't think it's necessary<br />
+               <span id="x085">… I'm happy with this version</span><br />
+               <span id="x086">… I do have one residual concern</span></p>
+            
+            <p id="x089" class="phone s04"><cite>Michael:</cite> John Cowan says on Oct 24<br />
+               <span id="x090">… something</span></p>
+            
+            <p id="x091" class="phone s02"><cite>Norm:</cite> We have given him what he wants</p>
+            
+            <p id="x092" class="phone s06"><cite>Bethan:</cite> he is saying that which character we normalise to is a separate issue, and then gives
+               some choices.</p>
+            
+            <p id="x094" class="phone s02"><cite>Norm:</cite> We need to write more tests if we adopt this.</p>
+            
+            <p id="x095" class="phone s06"><cite>Bethan:</cite> Small point. Can we use either #A or #a consistently?</p>
+            
+            <p id="x096" class="phone s02"><cite>Norm:</cite> I will fix</p>
+            
+            <p id="x097" class="phone s03"><cite>Steven:</cite> I think the ixml grammar is fine, and doesn't need any change to reflect this.</p>
+            
+            <p id="x098" class="phone s02"><cite>Norm:</cite> Closing this</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">Issue #237 What would the absence of version number mean?</h3>
+            
+            <p id="x101" class="irc"><cite>&lt;norm&gt;</cite> "In this case, it is implementation-defined which version or versions the implementation
+               uses when it attempts to parse the grammar. "</p>
+            
+            <p id="x102" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://invisiblexml.org/pr/243/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>243/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="x103" class="phone s03"><cite>Steven:</cite> I would like unrecognised and absent version numbers to be treated identically</p>
+            
+            <p id="x104" class="phone s02"><cite>Norm:</cite> I will take another stab at it.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t13">Issue #239  Support simple data types?</h3>
+            
+            <p id="x106" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/239">invisibleXML/<wbr></wbr>ixml#239</a></p>
+            
+            <p id="x111" class="phone s02"><cite>Norm:</cite> You want a grammar for an ISO Date<br />
+               <span id="x112">… it can't limit it to exact dates, and leap years and so on</span><br />
+               <span id="x113">… we already have types for this</span><br />
+               <span id="x114">… I propose we allow XML types be used</span><br />
+               <span id="x115">… I did a test implementation</span></p>
+            
+            <p id="x118" class="phone s05"><cite>John:</cite> I did a similar thing<br />
+               <span id="x119">… using XPath expressions</span><br />
+               <span id="x120">… I'm in an XPath-rich environment</span></p>
+            
+            <p id="x122" class="phone s03"><cite>Steven:</cite> I'm in two minds about this<br />
+               <span id="x123">… it adds a big chunk that solves a tiny part of the computability problem</span></p>
+            
+            <p id="x124" class="phone s03"><cite>Steven:</cite> Is this to identify dates or check them?</p>
+            
+            <p id="x125" class="phone s02"><cite>Norm:</cite> For identifying. It adds to the parsing.</p>
+            
+            <p id="x126" class="phone s04"><cite>Michael:</cite> [A question about whether it's an Oracle or ...]</p>
+            
+            <p id="x127" class="phone s02"><cite>Norm:</cite> I have an oracle in mind. If there's a type that defines prime numbers, it would
+               accept that.</p>
+            
+            <p id="x129" class="phone s04"><cite>Michael:</cite> I need time to think about.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t14">AOB</h3>
+            
+            <p id="x132" class="phone s05"><cite>John:</cite> I'm not here for the next meeting<br />
+               <span id="x133">… and have submitted to Balisage</span></p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2023-01-10-f: continues</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/[None]//</p>
+         
+         <p class="warning">Succeeded: s/ula/ual/</p>
+         
+         <p class="warning">Succeeded: s/Cowen/Cowan/</p>
+         
+         <p class="warning">Succeeded: s/sense/sence/</p>
+         
+         <p class="warning">Succeeded: s/ORacel/Oracle/</p>
+         
+         <p class="warning">Succeeded: s/implmeneted/implemented</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: Date</p>
+         
+         <p class="warning">All speakers: Bethan, Date, John, Michael, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: Bethan, cmsmcq, norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML – 12 December 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-12-12" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML</h1>
+         
+         <h2>12 December 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2023/11/28-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Dec/0001.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/12/12-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Jim Saiya, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Bethan</dd>
+               
+               <dt>Chair</dt>
+               <dd>steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of agenda</a></li>
+               
+               <li><a href="#t02">Previous Actions</a></li>
+               
+               <li><a href="#t03">Status of implementations</a></li>
+               
+               <li><a href="#t04">Status of testing and test suites</a></li>
+               
+               <li><a href="#t05">publication plans</a></li>
+               
+               <li><a href="#t06">Review and resolution of bug reports and technical issues</a></li>
+               
+               <li><a href="#t07">Pull request #224 Mitigating ambiguity in mod357</a></li>
+               
+               <li><a href="#t08">PR #228 Correct several typos in the text of the EBNF/BNF working paper #228</a></li>
+               
+               <li><a href="#t09">Issue #198 Check test suite browser is updated on additions</a></li>
+               
+               <li><a href="#t10">Issue #210 Extraneous material in section on Serialization</a></li>
+               
+               <li><a href="#t11">Problems with the prolog</a></li>
+               
+               <li><a href="#t12">Version number naming</a></li>
+               
+               <li><a href="#t13">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of agenda</h3>
+            
+            <p id="x028" class="summary">The group welcomes Jim.</p>
+            
+            <p id="x029" class="summary">Accepted.</p>
+            
+            <p id="x030" class="summary">If there's time, or for next time, prolog and version changes</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Previous Actions</h3>
+            
+            <p id="x032" class="phone s01"><cite>2023-01-10-f:</cite> Norm and Michael to do a bit of revision to the XML vocabulary</p>
+            
+            <p id="x033" class="summary">Continued</p>
+            
+            <p id="x034" class="phone s02"><cite>2023-10-17-a:</cite> SP to document the modified IRI/URI grammar</p>
+            
+            <p id="x035" class="summary">Continued</p>
+            
+            <p id="x036" class="phone s03"><cite>2023-11-28-a:</cite> SP to make pull request adding his proposed addition to section 3.3 ("Names are case-sensitive.").</p>
+            
+            <p id="x037" class="summary">Continued</p>
+            
+            <p id="x038" class="phone s04"><cite>2023-11-28-b:</cite> SP as group chair to ask W3C to publish the ixml spec as report.</p>
+            
+            <p id="x039" class="summary">Steven reports that he generated the static version and requested a URL from W3C staff
+               contact.</p>
+            
+            <p id="x040" class="summary">Continued.</p>
+            
+            <p id="x041" class="phone s05"><cite>2023-11-28-c:</cite> SP to review the EBNF to BNF document.</p>
+            
+            <p id="x042" class="summary">Continued</p>
+            
+            <p id="x043" class="phone s06"><cite>2023-11-28-d:</cite> Norm to tidy 'Extraneous material in section on Serialization'</p>
+            
+            <p id="x044" class="summary">Done.</p>
+            
+            <p id="x045" class="phone s07"><cite>2023-11-28-e:</cite> MSM to write a proposal regarding full stops in names.</p>
+            
+            <p id="x046" class="phone s08"><cite>MSM:</cite> I wrote a proposal, but several of us wrote proposals that defined the wrong language!</p>
+            
+            <p id="x047" class="phone s08"><cite>MSM:</cite> I'm putting together a test catalog based on the sample names, I'll add a few more.
+               Started but unfinished.</p>
+            
+            <p id="x048" class="summary">Continued.</p>
+            
+            <p id="x050" class="phone s09"><cite>JL:</cite> This is a niggle that came up when you're writing a parser. A name that ends in a
+               full stop causes real problems with lookahead.<br />
+               <span id="x051">… We decided that we'd forbid full stops at the end of names.</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of implementations</h3>
+            
+            <p id="x053" class="phone s10"><cite>Norm:</cite> Nothing exciting to report.</p>
+            
+            <p id="x054" class="phone s09"><cite>JL:</cite> I'm continuing to work on detecting regex and using them in the parser; managed to
+               do it successfully for repeat1, but repeat0 is causing me trouble.</p>
+            
+            <p id="x055" class="phone s11"><cite>Steven:</cite> I have nothing to report.</p>
+            
+            <p id="x056" class="phone s08"><cite>MSM:</cite> No news hear either.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Status of testing and test suites</h3>
+            
+            <p id="x058" class="phone s08"><cite>MSM:</cite> There are pull requests related to the test suite that will come up shortly.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">publication plans</h3>
+            
+            <p id="x060" class="summary">Already discussed.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Review and resolution of bug reports and technical issues</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Pull request #224 Mitigating ambiguity in mod357</h3>
+            
+            <p id="x063" class="summary">These are related to the performance tests.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> MSM to review the open pull requests from Gunther Rademacher and respond to them</p>
+            
+            <p id="x068" class="phone s08"><cite>MSM:</cite> This PR is about the mod357 grammar. Right now, it asks that the parser tell you
+               which number the number is divsible by.<br />
+               <span id="x069">… So it's ambiguous on 15, for example, which is divisible by 3 and 5.</span><br />
+               <span id="x070">… I didn't attempt to filter out ambiguities. The way we've addressed that in the
+                  past is to add your results to the list of acceptable results.</span><br />
+               <span id="x071">… Gunther suggests instead, since the specifics don't matter, and just make it return
+                  "yes" or "no" instead of reporting the reason.</span></p>
+            
+            <p id="x072" class="phone s09"><cite>JL:</cite> Is this an "am I passing the test or not" rather than "what is the parse tree"?</p>
+            
+            <p id="x074" class="phone s08"><cite>MSM:</cite> The purpose of all these performance tests is to provide a simple grammar that demonstrates
+               performance issues.<br />
+               <span id="x075">… It's relatively simple for humans to understand but hard to optimize.</span></p>
+            
+            <p id="x076" class="phone s11"><cite>Steven:</cite> If the only thing is checking performance then it doesn't matter what it produces.</p>
+            
+            <p id="x077" class="phone s08"><cite>MSM:</cite> I will think about it, but I'm coming to believe that he's probably right.</p>
+            
+            <p id="x078" class="phone s11"><cite>Steven:</cite> Gunther is not a member of the group, should we not propose that he join and come
+               to these calls?</p>
+            
+            <p id="x079" class="phone s08"><cite>MSM:</cite> I can certainly ask.</p>
+            
+            <p id="x082" class="phone s09"><cite>JL:</cite> I've been doing lots of stuff on performance; once you know that you're getting the
+               right results, you don't care about the results anymore, you only care about performance.<br />
+               <span id="x083">… What I really want to know is just how long did it take. And, of course, what is
+                  the point at which your parser breaks.</span><br />
+               <span id="x084">… The performance tests are in a slightly different ballpark; we might want to think
+                  about describing them differently.</span></p>
+            
+            <p id="x086" class="phone s08"><cite>MSM:</cite> That's probably worth adding to the README file and the descriptions of the tests
+               in the test catalog.<br />
+               <span id="x087">… It may be worthwhile to tinker with your test harness so that you're only timing
+                  the parsing rather than the parsing and the results.</span></p>
+            
+            <p id="x089" class="phone s09"><cite>JL:</cite> When you're doing a conformance test, your compiling the grammar, parsing against
+               the grammar, serializing, and then comparing that result. In most of my cases, the
+               parsing is the one that takes the time.<br />
+               <span id="x090">… So you're focusing on just trying to get the parsing piece fast.</span></p>
+            
+            <p id="x092" class="phone s08"><cite>MSM:</cite> You might not even want to bother writing the output to a file.<br />
+               <span id="x093">… I compare the XDM instance and then serialize for the record; but I don't serialize
+                  and then do the comparison.</span></p>
+            
+            <p id="x094" class="phone s09"><cite>JL:</cite> I don't either, but I think of the XDM as a serialization of the parse tree.</p>
+            
+            <p id="x095" class="phone s08"><cite>MSM:</cite> Depending on what your parser produces, extracting a parse tree can be part of the
+               performance measurement.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">PR #228 Correct several typos in the text of the EBNF/BNF working paper #228</h3>
+            
+            <p id="x097" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Issue #198 Check test suite browser is updated on additions</h3>
+            
+            <p id="x099" class="phone s10"><cite>Norm:</cite> I'd like the group to accept <a href="https://github.com/invisibleXML/ixml/pull/229">invisibleXML/<wbr></wbr>ixml#229</a> to close the issue.</p>
+            
+            <p id="x100" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Issue #210 Extraneous material in section on Serialization</h3>
+            
+            <p id="x102" class="phone s10"><cite>Norm:</cite> Fixed by <a href="https://github.com/invisibleXML/ixml/pull/221">invisibleXML/<wbr></wbr>ixml#221</a></p>
+            
+            <p id="x103" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">Problems with the prolog</h3>
+            
+            <p id="x105" class="summary"><a href="https://lists.w3.org/Archives/Public/public-ixml/2023Oct/0004">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023Oct/<wbr></wbr>0004</a></p>
+            
+            <p id="x106" class="summary">Steven posts</p>
+            
+            <p id="x108" class="phone s11"><cite>Steven:</cite> I don't like the syntax; it upsets me but I don't have a solution for it.<br />
+               <span id="x109">… The second I think we should fix</span></p>
+            
+            <p id="x110" class="summary">Scribe reports "the second" is: the semantics. The default is version 1.0, but if
+               I say ixml version "I really don't care" you get errors.</p>
+            
+            <p id="x111" class="phone s09"><cite>JL:</cite> Is there a sense that the prolog should be a property table of some form?</p>
+            
+            <p id="x113" class="phone s11"><cite>Steven:</cite> I don't know how to answer that question.<br />
+               <span id="x114">… It's really the potential long lookahead before you know if you're looking at a
+                  rule or a version. The ixml grammar begins with the word "ixml".</span></p>
+            
+            <p id="x115" class="phone s09"><cite>JL:</cite> So you could have a case of "ixml" followed by an arbitrary amount of stuff.</p>
+            
+            <p id="x116" class="phone s11"><cite>Steven:</cite> A simple solution is just to say that "ixml version" has to be two words with a single
+               space.</p>
+            
+            <p id="x119" class="phone s08"><cite>MSM:</cite> I confess that the rhetorical effect of the example is enhanced by the length of
+               the comment, but technically speaking I have "ixml" that could be the beginning of
+               a rule or the prolog<br />
+               <span id="x120">… I might consume a lot of whitespace before the version. It doesn't trouble me that
+                  much. But it's also true that some sort of bracketing around the prolog wouldn't trouble
+                  me very much.</span><br />
+               <span id="x121">… I'm used to SGML and XML documents beginning optionally with metadata.</span></p>
+            
+            <p id="x122" class="phone s10"><cite>Norm:</cite> Why is it special here?</p>
+            
+            <p id="x123" class="phone s08"><cite>MSM:</cite> Because this is the one place where I've read something that could be a name and
+               you don't know if it's a name or the prolog.</p>
+            
+            <p id="x124" class="phone s11"><cite>Steven:</cite> It could be just the quoted version number.</p>
+            
+            <p id="x126" class="phone s08"><cite>MSM:</cite> I want a label to go with the data.</p>
+            
+            <p id="x127" class="phone s11"><cite>Steven:</cite> We don't have to decide this now, but I'd like to let it sink in for a little while.</p>
+            
+            <p id="x128" class="phone s08"><cite>MSM:</cite> Before we go, how do other people feel about the possibility about some sort of bracketing.</p>
+            
+            <p id="x129" class="phone s10"><cite>Norm:</cite> I'm okay with that. I want the prolog to be flexible enough to hold other things
+               but I'm okay with bracketing.</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven to propose alternative syntaxes for the prolog.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">Version number naming</h3>
+            
+            <p id="x132" class="summary">Steven reports <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Oct/0005">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023Oct/<wbr></wbr>0005</a></p>
+            
+            <p id="x134" class="phone s11"><cite>Steven:</cite> If there's no version, it uses 1.0; if it can recognize a version, it uses that,
+               if it doesn't recognize the version, then it'll do whatever it can.<br />
+               <span id="x135">… I think it should be: if it can recognize the number and process it, it should use
+                  that version, otherwise it should use whatever version is available.</span></p>
+            
+            <p id="x136" class="phone s09"><cite>JL:</cite> Don't we report a version mismatch in the state?</p>
+            
+            <p id="x137" class="phone s11"><cite>Steven:</cite> My proposal is that the processor can use any version it wants; if there's a version
+               and it can use that version, I should use that one.</p>
+            
+            <p id="x138" class="phone s08"><cite>MSM:</cite> There is a keyword in the state attribute for version mismatches.</p>
+            
+            <p id="x139" class="phone s09"><cite>JL:</cite> So there's a mechanism to report that it worked but it may not be the version you
+               expected.</p>
+            
+            <p id="x145" class="phone s08"><cite>MSM:</cite> I think I'm sympathetic to this. If you didn't label it with a specific version,
+               let the parser use what it wants. There's an analogy with the XML version declaration
+               and my recollection is that at least some people say no the reason that XML 1.1 was
+               doomed to failure was that the spec required people to assume 1.0.<br />
+               <span id="x146">… A number of very smart people have told me that the reason that turned into a disaster,
+                  we botch the handling of version numbers.</span><br />
+               <span id="x147">… It was botched from the start, but then it was made worse when "you may fail" was
+                  changed to "you must fail".</span><br />
+               <span id="x148">… The advice I disregarded at the time was that a processor be allowed to fail instead
+                  of requiring that it soldier on.</span><br />
+               <span id="x149">… I thought early failure was too important to give up, but that was wrong. I wish
+                  I knew exactly what lessons to draw from that for this case!</span><br />
+               <span id="x150">… If you don't recognize the version number, we should probably say that you have
+                  to try anyway.</span></p>
+            
+            <p id="x151" class="phone s08"><cite>MSM:</cite> The absence of a version number should not be assumed to be 1.0.</p>
+            
+            <p id="x152" class="phone s11"><cite>Steven:</cite> The absence of a version number should mean use the best version you've got.</p>
+            
+            <p id="x153" class="phone s09"><cite>JL:</cite> I agree. If you specify a version, then that's what you want.</p>
+            
+            <p id="x154" class="summary">"Flag the version mismatch but soldier on."</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t13">Next meeting</h3>
+            
+            <p id="x157" class="summary">No meeting on 26 December, 2023. Next meeting is 9 January.</p>
+            
+            <p id="x158" class="summary">MSM gives regrets for 23 January and 6 February.</p>
+            
+            <p id="x159" class="summary">Norm volunteers to handle agendas if MSM can't.</p>
+            
+            <p id="x166" class="irc"><cite>&lt;norm&gt;</cite> s/Scribe: "the/Scribe reports "the/</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">MSM to review the open pull requests from Gunther Rademacher and respond to them</a></li>
+            
+            <li><a href="#a02">Steven to propose alternative syntaxes for the prolog.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/numberr/number/</p>
+         
+         <p class="warning">Succeeded: s/Topic;/Topic:/</p>
+         
+         <p class="warning">Succeeded: s/Scribe: "the/Scribe reports "the</p>
+         
+         <p class="warning">Failed: s/Scribe: "the/Scribe reports "the/</p>
+         
+         <p class="warning">Maybe present: 2023-01-10-f, 2023-10-17-a, 2023-11-28-a, 2023-11-28-b, 2023-11-28-c,
+            2023-11-28-d, 2023-11-28-e, JL, MSM</p>
+         
+         <p class="warning">All speakers: 2023-01-10-f, 2023-10-17-a, 2023-11-28-a, 2023-11-28-b, 2023-11-28-c,
+            2023-11-28-d, 2023-11-28-e, JL, MSM, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>
