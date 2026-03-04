@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>iXML CG – 9 May 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-05-09" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            iXML CG</h1>
+         
+         <h2>9 May 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2023/05/09-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">iXML meeting</a></li>
+               
+               <li><a href="#t02">Review of action items</a></li>
+               
+               <li><a href="#t03">Status reports</a></li>
+               
+               <li><a href="#t04">Publication plans</a></li>
+               
+               <li><a href="#t05">Issues #174 and #175 BOM</a></li>
+               
+               <li><a href="#t06">Issue #176 Encoding CR, NEL, LINE SEPARATOR etc</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">iXML meeting</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Review of action items</h3>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2023-01-10-b continues</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> 2023-01-10-d continues</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> 2023-01-10-f continues</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> 2023-01-10-h continues</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> 2023-02-07-a continues; Steven had trouble logging in</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> 2023-02-07-b continues; merge with 2023-01-10-d</p>
+            
+            <p id="a07" class="action"><strong>ACTION:</strong> 2023-04-11-a continues</p>
+            
+            <p id="a08" class="action"><strong>ACTION:</strong> 2023-04-11-b continues</p>
+            
+            <p id="a09" class="action"><strong>ACTION:</strong> 2023-04-11-c continues</p>
+            
+            <p id="a10" class="action"><strong>ACTION:</strong> 2023-04-11-d completed <a href="https://lists.w3.org/Archives/Public/public-ixml/2023May/0005.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023May/<wbr></wbr>0005.html</a></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status reports</h3>
+            
+            <p id="x019" class="phone s01"><cite>John:</cite> I've added the ability to switch off indentation becuase it interferes with test
+               results</p>
+            
+            <p id="x020" class="phone s01"><cite>John:</cite> The problem isn't the test suite, it's the XML tree to display. The spec uses the
+               term "elide" but doesn't clearly define it. Are you permitted to completely remove
+               whitespace?</p>
+            
+            <p id="x021" class="phone s02"><cite>Steven:</cite> Yes, one of my examples at the web conference has two spaces but they disappear.</p>
+            
+            <p id="x022" class="phone s01"><cite>John:</cite> Right, the serializer uses indentation in the indentation method and my reading is
+               that under those circumstances, it's possible for purely whitespace nodes to be removed.</p>
+            
+            <p id="x023" class="phone s01"><cite>John:</cite> The processor certainly produces two spaces.</p>
+            
+            <p id="x024" class="phone s03"><cite>Bethan:</cite> I'd understand "elide" to mean leave out.</p>
+            
+            <p id="x025" class="phone s01"><cite>John:</cite> I think of it as to shorten.</p>
+            
+            <p id="x026" class="summary">Some discussion of the use of "..." in elided text.</p>
+            
+            <p id="x027" class="phone s04"><cite>Norm:</cite> I published an update that fixed some bugs.</p>
+            
+            <p id="x028" class="phone s02"><cite>Steven:</cite> I haven't made any changes in the last month as I recall.</p>
+            
+            <p id="x029" class="summary">Some discussion of the web conference.</p>
+            
+            <p id="x030" class="phone s02"><cite>Steven:</cite> At the last moment, they moved the tutorial but they didn't tell anyone.</p>
+            
+            <p id="x031" class="summary">Much enthusiasm from a small tutorial audience.</p>
+            
+            <p id="x032" class="phone s02"><cite>Steven:</cite> I also gave a talk on the dev day and that had about 20-25 people.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Publication plans</h3>
+            
+            <p id="x034" class="summary">No discussion this month.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Issues #174 and #175 BOM</h3>
+            
+            <p id="x036" class="phone s02"><cite>Steven:</cite> I think we agree to ignore the BOM at the beginning but not to ignore them in the
+               middle (in the case of concatentated files)</p>
+            
+            <p id="x039" class="phone s05"><cite>Micheal:</cite> I'm puzzled by one thing. I think of operations like recognizing the BOM, setting
+               the endianness, etc. as something that gets handled by a low-level system routine.<br />
+               <span id="x040">… that provides the program with a sequence of characters.</span><br />
+               <span id="x041">… If you're iXML processor is seeing a BOM, you have an OS issue. Am I just spoiled?</span></p>
+            
+            <p id="x042" class="phone s02"><cite>Steven:</cite> I do agree, especially since UTF-8 doesn't need a BOM.</p>
+            
+            <p id="x043" class="phone s04"><cite>Norm:</cite> If you open a UTF-8 file with a BOM in Java, the first two bytes you read are a BOM!</p>
+            
+            <p id="x044" class="phone s06"><cite>Michael:</cite> Can we somehow find a way to say ignore a BOM and also say in passing that you shouldn't
+               be seeing one?</p>
+            
+            <p id="x045" class="phone s04"><cite>Norm:</cite> We could, but it isn't going to change anything.</p>
+            
+            <p id="x048" class="phone s06"><cite>Michael:</cite> Okay, but I would find it useful as a reader. I don't think we should take the position
+               that that's normal.<br />
+               <span id="x049">… I think we should say it about the input string as well.</span><br />
+               <span id="x050">… Otherwise, you have to tell users to write their grammars to ignore the BOM.</span></p>
+            
+            <p id="x051" class="summary">General agreement.</p>
+            
+            <p id="x052" class="phone s06"><cite>Michael:</cite> I think that should be a "should" not a "must".</p>
+            
+            <p id="x053" class="summary">Some discussion of BOMs in UTF-16.</p>
+            
+            <p id="x054" class="summary">Norm asserts that in UTF-16 files, the BOM is stripped off by the OS/library.</p>
+            
+            <p id="x055" class="phone s06"><cite>Michael:</cite> I think it's sufficient to say "if it's UTF-8" and leave it to implementations to
+               document that.</p>
+            
+            <p id="a11" class="action"><strong>ACTION:</strong> 2023-05-09-a: Norm to revise the erratum to include stripping the BOM from UTF-8
+               input strings (as a should)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #176 Encoding CR, NEL, LINE SEPARATOR etc</h3>
+            
+            <p id="x058" class="phone s04"><cite>Norm:</cite> I don't think there's a bug here.</p>
+            
+            <p id="x059" class="summary">Some discussion of the significance of "If you use the XSLT and XQuery Serialization..."</p>
+            
+            <p id="x060" class="phone s06"><cite>Michael:</cite> Can we have a non-binding note somewhere that observes how XSLT and XQuery Serialization
+               works.</p>
+            
+            <p id="x061" class="phone s04"><cite>Norm:</cite> I think we just need a note.</p>
+            
+            <p id="x062" class="phone s06"><cite>Michael:</cite> It will arise for some people, I'm persuaded we should add a note describing it.</p>
+            
+            <p id="x063" class="phone s02"><cite>Steven:</cite> I'm not sure how this effects interoperability. We talk about serialization. To what
+               extent should we more normative than we are?</p>
+            
+            <p id="x064" class="phone s01"><cite>John:</cite> We stop at the point where you've produced an XML tree as a serialization, how you
+               get that into text isn't part of our text.</p>
+            
+            <p id="x065" class="phone s04"><cite>Norm:</cite> I'd be in favor of a normative reference to XSLT/XQuery serialization.</p>
+            
+            <p id="x069" class="phone s06"><cite>Michael:</cite> I'm not sure our requirements are the same. We don't need to be about "round trip"
+               data model instances.<br />
+               <span id="x070">… I wouldn't be at all unhappy if an iXML processor serialized those CRs as literal
+                  characters and not character references because they only reason they're there is
+                  that the OS convention for line beaks.</span><br />
+               <span id="x071">… When they get written out, I want the same convention and encoding them as #d; and
+                  just using line feeds isn't just surprising, I don't like it very much.</span><br />
+               <span id="x072">… This is an example of a case where serialization is attempting to deal with problems
+                  that aren't ours.</span></p>
+            
+            <p id="x073" class="phone s02"><cite>Steven:</cite> There's the related question of what should happen if you output a newline in an
+               attribute.</p>
+            
+            <p id="x074" class="summary">Some discussion of how the email was rendered.</p>
+            
+            <p id="x075" class="summary"><a href="https://lists.w3.org/Archives/Public/public-ixml/2023May/0006.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023May/<wbr></wbr>0006.html</a></p>
+            
+            <p id="x076" class="summary">(It appears that the something went wrong with Steven's mailer's interpretation of
+               &amp;#xA; in the message Norm sent)</p>
+            
+            <p id="x078" class="phone s06"><cite>Michael:</cite> I'm nervous about a normative reference to XSLT and XQuery Serialization because
+               it's a big spec.<br />
+               <span id="x079">… I think an informative reference would be a good idea.</span></p>
+            
+            <p id="x080" class="phone s04"><cite>Norm:</cite> Would you be ok with a literal newline in the attribute value?</p>
+            
+            <p id="x082" class="phone s06"><cite>Michael:</cite> I've been asking myself that question...I'm going to give you two answers: yes and
+               no.<br />
+               <span id="x083">… As a spec lawyer, that would trouble me somewhat, but as a markup practitioner,
+                  I decided years ago that if you care about details like that, use markup to retain
+                  it. Literal whitespace gets rearranged by lots of tools.</span></p>
+            
+            <p id="x084" class="phone s04"><cite>Norm:</cite> Proposal: an informative reference to the XSLT and XQuery Serialization specification
+               and a short discussion somewhere in the specification about the consequences of serialization
+               (attribute values with whitespace, etc.)</p>
+            
+            <p id="x085" class="phone s01"><cite>John:</cite> You also have to be aware of indentation changing the output.</p>
+            
+            <p id="x086" class="phone s06"><cite>Michael:</cite> Our specification doesn't overtly contemplate indentation.</p>
+            
+            <p id="x087" class="phone s06"><cite>Michael:</cite> I think Norm's suggestion is a good one. We have a section on serialization...</p>
+            
+            <p id="x088" class="phone s02"><cite>Steven:</cite> We also have a "hints to the implementor" section that might be a better place.</p>
+            
+            <p id="x089" class="phone s06"><cite>Michael:</cite> I think an informative reference and prose in either or both of those sections would
+               be a good idea.</p>
+            
+            <p id="a12" class="action"><strong>ACTION:</strong> 2023-05-09-b: Norm to make a pass attempting to describe serialization</p>
+            
+            <p id="a13" class="action"><strong>ACTION:</strong> 2023-05-09-c: Steven to produce new sample grammars for issue #139 for discussion
+               in June.</p>
+            
+            <p id="x092" class="phone s02"><cite>Steven:</cite> Let's make sure JSON is on the agenda for next month.</p>
+            
+            <p id="x093" class="phone s02"><cite>Steven:</cite> Do we have a renaming proposal?</p>
+            
+            <p id="x094" class="phone s01"><cite>John:</cite> No, not yet.</p>
+            
+            <p id="a14" class="action"><strong>ACTION:</strong> 2023-05-09-d: Steven to produce a discussion document for renaming (issue #13)</p>
+            
+            <p id="x096" class="phone s07"><cite>Reminder:</cite> everyone should read John's message about dynamic renaming</p>
+            
+            <p id="x097" class="summary">Next meeting is 13 June 2023.</p>
+            
+            <p id="x098" class="summary">Adjourned.</p>
+            
+            <p id="x107" class="summary">rrsange, publish minutes</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2023-01-10-b continues</a></li>
+            
+            <li><a href="#a02">2023-01-10-d continues</a></li>
+            
+            <li><a href="#a03">2023-01-10-f continues</a></li>
+            
+            <li><a href="#a04">2023-01-10-h continues</a></li>
+            
+            <li><a href="#a05">2023-02-07-a continues; Steven had trouble logging in</a></li>
+            
+            <li><a href="#a06">2023-02-07-b continues; merge with 2023-01-10-d</a></li>
+            
+            <li><a href="#a07">2023-04-11-a continues</a></li>
+            
+            <li><a href="#a08">2023-04-11-b continues</a></li>
+            
+            <li><a href="#a09">2023-04-11-c continues</a></li>
+            
+            <li><a href="#a10">2023-04-11-d completed https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023May/<wbr></wbr>0005.html</a></li>
+            
+            <li><a href="#a11">2023-05-09-a: Norm to revise the erratum to include stripping the BOM from UTF-8 input
+                  strings (as a should)</a></li>
+            
+            <li><a href="#a12">2023-05-09-b: Norm to make a pass attempting to describe serialization</a></li>
+            
+            <li><a href="#a13">2023-05-09-c: Steven to produce new sample grammars for issue #139 for discussion
+                  in June.</a></li>
+            
+            <li><a href="#a14">2023-05-09-d: Steven to produce a discussion document for renaming (issue #13)</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 210 (Wed Jan 11 19:21:32 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded 13 times: s/ACTION 2023/ACTION: 2023/g</p>
+         
+         <p class="warning">Maybe present: Micheal, Reminder</p>
+         
+         <p class="warning">All speakers: Bethan, John, Michael, Micheal, Norm, Reminder, Steven</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, norm</p>
+         </div>
+      
+      
+      </body>
+</html>

@@ -1,0 +1,25 @@
+<config xmlns="http://hcmc.uvic.ca/ns/staticSearch" version="2">
+  <params>
+    <searchPage file="search.html"/>
+    <index recurse="true"/>
+    <stopwords file="../../staticSearch/stopwords/stopwords_en.txt"/>
+    <tokenizer minWordLength="2"/>
+    <scoringAlgorithm name="raw"/>
+    <stemmer dir="stemmers/en/"/>
+    <createContexts maxKwicLength="15"
+                    create="true" kwicTruncateString="…"
+                    wildcardSearch="true" phrasalSearch="true"
+                    maxKwicsToHarvest="5"/>
+    <results maxResults="2000"
+             resultsPerPage="0" maxKwicsToShow="25"/>
+    <output dir="staticSearch"/>
+  </params>
+ 
+  <rules>
+    <rule weight="0" match="script | style"/>
+    <rule weight="2"
+          match="h1 | h2 | h3 | h4 | h5 | h6"/>
+  </rules>
+
+  <contexts/>
+</config>

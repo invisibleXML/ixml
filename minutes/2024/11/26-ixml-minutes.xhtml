@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 26 November 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-11-26" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>26 November 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/11/12-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Nov/0012"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/11/26-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Nico, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>David</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#a61c">Review of open actions</a></li>
+               
+               <li><a href="#45ab">Status reports</a></li>
+               
+               <li><a href="#2aec">The subtraction operator</a></li>
+               
+               <li><a href="#0c95">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="a61c">Review of open actions</h3>
+            
+            <p id="77dd" class="phone s01"><cite>2023-01-10-f:</cite> NTW to produce draft documentation of the XML vocabulary, issue #137</p>
+            
+            <p id="7d1d" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/137">invisibleXML/<wbr></wbr>ixml#137</a></p>
+            
+            <p id="f07a" class="summary">Continued.</p>
+            
+            <p id="e132" class="phone s02"><cite>2024-03-05-c:</cite> SP to prepare pull request to resolve issue #139 (new grammars, new README)</p>
+            
+            <p id="f0dc" class="summary">Continued.</p>
+            
+            <p id="27eb" class="phone s03"><cite>2024-10-01-f:</cite> SP to make a PR for both versions of the RFC grammar</p>
+            
+            <p id="6cc2" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/139">invisibleXML/<wbr></wbr>ixml#139</a></p>
+            
+            <p id="f37b" class="summary">Continued.</p>
+            
+            <p id="a85c" class="phone s04"><cite>2024-10-01-e:</cite> SP to review ixml tests and correct the grammar</p>
+            
+            <p id="20d7" class="phone s05"><cite>Steven:</cite> There are some tests that are for an old version of iXML.<br />
+               <span id="cef4">… The strings are treated differently; I don't want to change those tests. They're
+                  of historical interest.</span></p>
+            
+            <p id="4cc0" class="phone s06"><cite>John:</cite> Or add a comment that says it's the old grammar.</p>
+            
+            <p id="e57d" class="phone s05"><cite>Steven:</cite> Okay, I'll do that.</p>
+            
+            <p id="1464" class="irc"><cite>&lt;Steven&gt;</cite> Steven: OK I'll do that</p>
+            
+            <p id="f991" class="summary">Continued.</p>
+            
+            <p id="e3d6" class="phone s07"><cite>2024-04-30-b:</cite> BTW to open an issue on whether to adopt a scheme to distinguish 'major' from 'minor'
+               versions in version numbers.</p>
+            
+            <p id="7570" class="summary">Completed.</p>
+            
+            <p id="ae4f" class="phone s08"><cite>2024-11-12—01:</cite> Norm to ask Gunther about subtractions</p>
+            
+            <p id="8515" class="summary">(Completed, in as much as Gunther followed up before I asked :-) )</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="45ab">Status reports</h3>
+            
+            <p id="96ac" class="phone s09"><cite>Norm:</cite> I have nothing to add.</p>
+            
+            <p id="3968" class="phone s06"><cite>John:</cite> Nope.</p>
+            
+            <p id="aad5" class="phone s05"><cite>Steven:</cite> I'm developing a iXML grammar to parse Finnegan's Wake.<br />
+               <span id="fdd3">… It's a very interesting experience. I'm about half way through Chapter 1, trying
+                  to smoke out the problems.</span></p>
+            
+            <p id="e7a4" class="action"><strong>ACTION:</strong> Steven to review the Balisage paper about pragmas</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="2aec">The subtraction operator</h3>
+            
+            <p id="203b" class="phone s06"><cite>John:</cite> I've been trying to do work on my implementation to get it going.<br />
+               <span id="6dcc">… It's not the standard sort of "these strings unless it's these (constant) strings"
+                  that are problematic.</span><br />
+               <span id="dc8c">… But "a except ~[]" or other things Michael would have produced!</span><br />
+               <span id="d28a">… It becomes very difficult to get sensible results out.</span><br />
+               <span id="f915">… It's going to be one of these cases where the edge cases are going to kill it.</span></p>
+            
+            <p id="92c4" class="phone s05"><cite>Steven:</cite> I've been digging out some papers and I see that at least one of them is written
+               by someone at the CWI. Will try to have a conversation.</p>
+            
+            <p id="8ff8" class="phone s06"><cite>John:</cite> Gunther had some thoughts about the fact that this is sneaking in a lexer layer.<br />
+               <span id="e80f">… Is this something you want to do explicitly.</span></p>
+            
+            <p id="19bb" class="action"><strong>ACTION:</strong> Steven to add the new papers as bibliography material.</p>
+            
+            <p id="2734" class="action"><strong>ACTION:</strong> Norm to make sure there's a section on the website for a bibliography of related
+               papers and papers that report using iXML.</p>
+            
+            <p id="ae7b" class="phone s05"><cite>Steven:</cite> I'm writing a paper for my talk at Declarative Amsterdam and I've collected many
+               papers that quote that they're using iXML. That would also be useful.</p>
+            
+            <p id="a14b" class="phone s05"><cite>Steven:</cite> I like the idea of subtraction, but I'd want it to be generic. I have that with a
+               number of use cases we've discussed in the past.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="0c95">Next meeting</h3>
+            
+            <p id="b731" class="summary">Next meeting is 10 December, then we'll take 24 December off, and we'll meet again
+               on 7 January 2025.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#e7a4">Steven to review the Balisage paper about pragmas</a></li>
+            
+            <li><a href="#19bb">Steven to add the new papers as bibliography material.</a></li>
+            
+            <li><a href="#2734">Norm to make sure there's a section on the website for a bibliography of related papers
+                  and papers that report using iXML.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 238 (Fri Oct 18 20:51:13 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/of related papers/of related papers and papers that report using iXML/</p>
+         
+         <p class="warning">Maybe present: 2023-01-10-f, 2024-03-05-c, 2024-04-30-b, 2024-10-01-e, 2024-10-01-f,
+            2024-11-12—01</p>
+         
+         <p class="warning">All speakers: 2023-01-10-f, 2024-03-05-c, 2024-04-30-b, 2024-10-01-e, 2024-10-01-f,
+            2024-11-12—01, John, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

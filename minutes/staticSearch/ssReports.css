@@ -1,0 +1,39 @@
+ body{
+    font-family: sans-serif;
+    margin: 1em 10%;
+}
+section{
+    padding: 1em;
+    margin: 0.25rem 0;
+    border-radius: 0.5em;
+}
+section:nth-of-type(odd){
+    background-color: #ddddff;
+}
+section:nth-of-type(even){
+    background-color: #ddffdd;
+}
+h1{
+    text-align: center;
+    margin: 1em 5%;
+}
+h2{
+    margin: 0.25em;
+}
+summary{
+    cursor: pointer;
+}
+summary:hover{
+    color: #990000;
+}
+table{
+    border: solid 1pt gray;
+    border-collapse: collapse;
+}
+td, th{
+    border: solid 1pt gray;
+    padding: 0.25em;
+}
+li{
+    margin: 0.25em;
+}

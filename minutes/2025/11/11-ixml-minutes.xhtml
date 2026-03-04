@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 11 November 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-11-11" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/assets/logos/w3c-2025/svg/w3c-white.svg" alt="W3C" border="0" height="60" width="60" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>11 November 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/10/14-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2025Nov/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2025/11/11-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, Fredrik, John, Nico, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>David</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#8c24">Accept the minutes of the previous meeting</a></li>
+               
+               <li><a href="#029a">Review of open actions</a></li>
+               
+               <li><a href="#5dfb">Status reports</a></li>
+               
+               <li><a href="#5f1f">New open issues</a>
+                  
+                  <ol>
+                     
+                     <li><a href="#0ae6">#309 Feature request: Doubled "--" to disable the "-" suppressor marker … for faster
+                           iteration</a></li>
+                     
+                     <li><a href="#85ec">#308 Not possible to specify an exact number of repetitions</a></li>
+                     
+                     <li><a href="#377a">#322 Extend Unicode version test to cover Unicode 16 and 17</a></li>
+                     </ol>
+                  </li>
+               
+               <li><a href="#0582">Next meeting</a></li>
+               
+               <li><a href="#32db">Symposium</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="8c24">Accept the minutes of the previous meeting</h3>
+            
+            <p id="47ab" class="summary">[Approved]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="029a">Review of open actions</h3>
+            
+            <p id="b29b" class="summary">2025-10-14-a NW to add a link to Steven’s modularization paper to the list of papers</p>
+            
+            <p id="5aa2" class="summary">  Completed</p>
+            
+            <p id="77ef" class="summary">2025-10-14-b NW to summarize the design decisions that differ from SP's paper.</p>
+            
+            <p id="6c2e" class="summary">   Completed</p>
+            
+            <p id="4eac" class="summary">2025-10-14-c NW to update the README in the samples to make them CC0 explicitly.</p>
+            
+            <p id="6302" class="summary">  Completed</p>
+            
+            <p id="c026" class="summary">2025-10-14-d SP to reply to Alain.</p>
+            
+            <p id="7362" class="summary">  Completed</p>
+            
+            <p id="6374" class="summary">2025-10-14-e NW to fix the iXML grammar link in the GitHub README.</p>
+            
+            <p id="7363" class="summary">  Completed</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="5dfb">Status reports</h3>
+            
+            <p id="2251" class="phone s01"><cite>Norm:</cite> Modularity implemented</p>
+            
+            <p id="e423" class="phone s02"><cite>Steven:</cite> Oh yes, I need to comment on your email</p>
+            
+            <p id="23f4" class="phone s03"><cite>Fredrik:</cite> I can automatically download a grammar from the command line<br />
+               <span id="11a7">… using an ixml: prefix</span></p>
+            
+            <p id="557a" class="phone s01"><cite>Norm:</cite> I believe my implementation recognises http: as a prefix for downloading grammars</p>
+            
+            <p id="ffff" class="phone s03"><cite>Fredrik:</cite> I am also writing a YAML parser in ixml<br />
+               <span id="af7e">… there is lots of data in YAML, but don't like the format of YAML, so I want to read
+                  the YAML grammars in a different way.</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="5f1f">New open issues</h3>
+            
+            <p id="5461" class="summary">#310 Not possible to set priority on rules</p>
+            
+            <p id="b4a8" class="summary">  <a href="https://github.com/invisiblexml/ixml/issues/310">invisiblexml/<wbr></wbr>ixml#310</a></p>
+            
+            <p id="12a3" class="phone s02"><cite>Steven:</cite> I admit I misunderstood what was being said.</p>
+            
+            <p id="d145" class="phone s02"><cite>Steven:</cite> I now understand it to be part of a larger issue about dealing with ambiguity<br />
+               <span id="773d">… I think there's a higher-level issue "Dealing with ambiguity", including subtraction
+                  and negation.</span></p>
+            
+            <p id="e429" class="phone s04"><cite>Bethan:</cite> I don't think subtraction is about ambiguity, but expressing new things.</p>
+            
+            <p id="cde3" class="phone s05"><cite>John:</cite> I use it to disambiguate<br />
+               <span id="a9f2">… such as keywords.</span></p>
+            
+            <p id="bcdf" class="phone s04"><cite>Bethan:</cite> But it allows you to specify things that aren't otherwise possible.</p>
+            
+            <p id="405d" class="phone s05"><cite>John:</cite> this is one of the places where pragmatics says in order to reduce ambiguity, I have
+               two routes, set theory, or new rules.</p>
+            
+            <p id="ae3c" class="phone s03"><cite>Fredrik:</cite> I agree with John</p>
+            
+            <p id="7c49" class="phone s04"><cite>Bethan:</cite> One big difference that makes me feel they are different, are two use cases</p>
+            
+            <p id="d015" class="phone s01"><cite>Norm:</cite> I characterise the distinction is that one changes how the parser works, the other
+               determines how the serialisation is done</p>
+            
+            <p id="fdb3" class="phone s03"><cite>Fredrik:</cite> I don't think subtraction can be done by a larger grammar</p>
+            
+            <p id="64c7" class="phone s04"><cite>Bethan:</cite> I think most cases of subtraction can be represented in a grammar</p>
+            
+            <p id="5a1a" class="phone s01"><cite>Norm:</cite> It would be useful to see examples</p>
+            
+            <p id="d004" class="phone s02"><cite>Steven:</cite> I do think we need to do comparisons of the different methods</p>
+            
+            <p id="dcba" class="phone s01"><cite>Norm:</cite> I will add a new top-level  discussion item</p>
+            
+            <p id="a719" class="action"><strong>ACTION:</strong> Norm to create new higher-level issue for ambiguity</p>
+            
+            <p id="bdf3" class="action"><strong>ACTION:</strong> Norm to add Symposium to every agenda</p>
+            
+            <h4 id="0ae6">#309 Feature request: Doubled "--" to disable the "-" suppressor marker … for faster
+               iteration</h4>
+            
+            <p id="0f8d" class="summary">  <a href="https://github.com/invisiblexml/ixml/issues/309">invisiblexml/<wbr></wbr>ixml#309</a></p>
+            
+            <p id="a3e2" class="phone s01"><cite>Norm:</cite> I didn't understand what was being asked for</p>
+            
+            <p id="4bb9" class="phone s02"><cite>Steven:</cite> I didn't see what the win would be</p>
+            
+            <p id="cba8" class="phone s05"><cite>John:</cite> I have a flag that says 'ignore marks' so that you get the whole parse.</p>
+            
+            <p id="77be" class="irc"><cite>&lt;norm&gt;</cite> Norm: I have a similar flag.</p>
+            
+            <p id="333a" class="phone s05"><cite>John:</cite> a simpler technique, rather than '--', use "^", which is rarely used.</p>
+            
+            <p id="0060" class="phone s02"><cite>Steven:</cite> Good point</p>
+            
+            <p id="f0df" class="phone s04"><cite>Bethan:</cite> Or use a comment.</p>
+            
+            <p id="8511" class="phone s02"><cite>Steven:</cite> So resolved not to accept</p>
+            
+            <p id="9904" class="action"><strong>ACTION:</strong> Steven to reply to "--" issue</p>
+            
+            <h4 id="85ec">#308 Not possible to specify an exact number of repetitions</h4>
+            
+            <p id="8e8b" class="summary">  <a href="https://github.com/invisiblexml/ixml/issues/308">invisiblexml/<wbr></wbr>ixml#308</a></p>
+            
+            <p id="f42a" class="phone s02"><cite>Steven:</cite> I don't feel there is a sufficient number of use cases</p>
+            
+            <p id="f444" class="phone s04"><cite>Bethan:</cite> I think this is good</p>
+            
+            <p id="6611" class="phone s01"><cite>Norm:</cite> I have sympathy for this.</p>
+            
+            <p id="4943" class="phone s04"><cite>Bethan:</cite> This is just syntactic sugar</p>
+            
+            <p id="2557" class="phone s05"><cite>John:</cite> It might be expensive for 8-22</p>
+            
+            <p id="d904" class="phone s02"><cite>Steven:</cite> We need proposals for syntax then<br />
+               <span id="1056">… and implementation rules</span></p>
+            
+            <p id="2672" class="phone s05"><cite>John:</cite> The rewrites take us from + and * to recursion; for multiples we will end up with
+               a large set of rules.<br />
+               <span id="48d9">… I think it is much deeper to handle number of repetitions.</span></p>
+            
+            <p id="6263" class="phone s06"><cite>Nico:</cite> And how about repetions with separators?</p>
+            
+            <p id="69a1" class="phone s02"><cite>Steven:</cite> We should be consistent</p>
+            
+            <p id="c5b7" class="phone s05"><cite>John:</cite> With exact numbers you can use a logarithmic approach. With ranges, it is harder.</p>
+            
+            <p id="3340" class="phone s06"><cite>Nico:</cite> It would be a way to specify IPv6 addresses</p>
+            
+            <h4 id="377a">#322 Extend Unicode version test to cover Unicode 16 and 17</h4>
+            
+            <p id="27bc" class="summary">  This isn’t an issue, it’s a pull request from Gunther Rademacher</p>
+            
+            <p id="a5be" class="phone s01"><cite>Norm:</cite> It is added tests for new versions of Unicode</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="0582">Next meeting</h3>
+            
+            <p id="b84b" class="phone s01"><cite>Norm:</cite> Regrets, but please meet without me.</p>
+            
+            <p id="6f0b" class="summary">Nov 25th</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="32db">Symposium</h3>
+            
+            <p id="bf4d" class="phone s01"><cite>Norm:</cite> We already have two proposals.</p>
+            
+            <p id="469d" class="phone s04"><cite>Bethan:</cite> Push on Slack!</p>
+            
+            <p id="170e" class="phone s05"><cite>John:</cite> Meeting+1 is 9th December</p>
+            
+            <p id="b8cb" class="phone s01"><cite>Norm:</cite> Let's do symposium business on 16th</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a719">Norm to create new higher-level issue for ambiguity</a></li>
+            
+            <li><a href="#bdf3">Norm to add Symposium to every agenda</a></li>
+            
+            <li><a href="#9904">Steven to reply to "--" issue</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 248 (Mon Oct 27 20:04:16 2025 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/xx/x/</p>
+         
+         <p class="warning">Succeeded: s/Subtopic/Subtopic: /</p>
+         
+         <p class="warning">Succeeded: s/OO/O/</p>
+         
+         <p class="warning">Succeeded: s/AN/An/</p>
+         
+         <p class="warning">Succeeded: s/WI/Wi/</p>
+         
+         <p class="warning">Succeeded: s/symnposium/symposium/</p>
+         
+         <p class="warning">Succeeded: s/THe/The/</p>
+         
+         <p class="warning">Succeeded 4 times: s/Frederik/Fredrik/G</p>
+         
+         <p class="warning">All speakers: Bethan, Fredrik, John, Nico, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

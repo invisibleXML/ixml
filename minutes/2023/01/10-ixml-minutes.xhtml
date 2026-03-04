@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 10 Jan 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-01-10" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>10 Jan 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/12/13-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Jan/0007"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/01/10-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, Joel, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of previous action items</a></li>
+               
+               <li><a href="#t02">Status reports</a></li>
+               
+               <li><a href="#t03">Testing and test suites</a></li>
+               
+               <li><a href="#t04">Issue #147, are control characters allowed?</a></li>
+               
+               <li><a href="#t05">Pull request #146, EBNF</a></li>
+               
+               <li><a href="#t06">Issue #139, continued action on Steven</a></li>
+               
+               <li><a href="#t07">Issue #137, document the XML tag set</a></li>
+               
+               <li><a href="#t08">Combining grammars</a></li>
+               
+               <li><a href="#t09">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of previous action items</h3>
+            
+            <p id="x014" class="summary">ACTION (2022-06-21): Tom isn't here</p>
+            
+            <p id="x015" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x017" class="summary">ACTION (2022-11-15): Completed by Joel.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Norm to put the information about Joel's implementation on the home page</p>
+            
+            <p id="x019" class="summary">Norm ACTION (2022-11-15): Done.</p>
+            
+            <p id="x020" class="irc"><cite>&lt;cmsmcq&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/146/files">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>146/<wbr></wbr>files</a></p>
+            
+            <p id="x021" class="irc"><cite>&lt;john&gt;</cite> <a href="https://github.com/ndw/ixml/blob/ebnf-to-bnf/misc/ebnf-to-bnf.md">https://<wbr></wbr>github.com/<wbr></wbr>ndw/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>ebnf-to-bnf/<wbr></wbr>misc/<wbr></wbr>ebnf-to-bnf.md</a></p>
+            
+            <p id="x022" class="summary">Norm will merge pull request</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Michael to take another pass on the EBNF to BNF document</p>
+            
+            <p id="x024" class="summary">Norm (2022-11-15): completed</p>
+            
+            <p id="x025" class="summary">Norm (2022-12-13): completed</p>
+            
+            <p id="x026" class="summary">Steven (2022-12-13): continued</p>
+            
+            <p id="x027" class="summary">Steven (2022-12-13): continued</p>
+            
+            <p id="x028" class="summary">Steven (2022-12-13): completed</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Steven to expand the tests in PR 169.</p>
+            
+            <p id="x030" class="irc"><cite>&lt;cmsmcq&gt;</cite> combining grammars: <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Jan/0004.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2023Jan/<wbr></wbr>0004.html</a></p>
+            
+            <p id="x031" class="summary">Steven (2022-12-13): PR 167, compelted. Steven agrees.</p>
+            
+            <p id="x032" class="summary">Michael (2022-12-13): completed</p>
+            
+            <p id="x033" class="summary">Norm (2022-12-13) partially completed</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status reports</h3>
+            
+            <p id="x035" class="phone s01"><cite>Joel:</cite> I'd love some help on my implementation.</p>
+            
+            <p id="x036" class="phone s02"><cite>Steven:</cite> How does it do against the test suite?</p>
+            
+            <p id="x037" class="phone s01"><cite>Joel:</cite> It's just about ready to start running tests.</p>
+            
+            <p id="x038" class="phone s03"><cite>John:</cite> When I was implementing my parser, I didn't find the parsing tricky. Threading your
+               way back up to where you started was the hard part.</p>
+            
+            <p id="x039" class="phone s04"><cite>Norm:</cite> I have some quite complicated data structures for managing the state.</p>
+            
+            <p id="x040" class="phone s02"><cite>Steven:</cite> How about you Bethan?</p>
+            
+            <p id="x041" class="phone s05"><cite>Bethan:</cite> My thesis is coming along nicely!</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Testing and test suites</h3>
+            
+            <p id="x043" class="phone s04"><cite>Norm:</cite> I've got PR 169 but Steven's already agreed to extend that.</p>
+            
+            <p id="x044" class="phone s04"><cite>Norm:</cite> How about we commit #169 and you add more?</p>
+            
+            <p id="x045" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/169">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>169</a> : Character set tests (including LC)</p>
+            
+            <p id="x046" class="phone s02"><cite>Steven:</cite> That's ok by me.</p>
+            
+            <p id="x047" class="phone s06"><cite>Michael:</cite> The inventory of characters in any class (and possibly known classes) may vary from
+               version to version of Unicode. Strictly speaking, we ought to label the tests with
+               the versions of Unicode that they pass.</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Michael to work out the metadata for identifying the Unicode version(s) associated
+               with a test.</p>
+            
+            <p id="x049" class="summary">Some discussion of what the parameters of the tests are.</p>
+            
+            <p id="x050" class="phone s02"><cite>Steven:</cite> I want to have one character from each class and each block.</p>
+            
+            <p id="x051" class="phone s06"><cite>Michael:</cite> That's incomplete unless you identify the Unicode version.</p>
+            
+            <p id="x052" class="phone s01"><cite>Joel:</cite> Is it the case that a test we write today would become invalid?</p>
+            
+            <p id="x053" class="phone s06"><cite>Michael:</cite> If anyone can show me a commitment to that kind of stability on the Unicode site,
+               I'll believe they intend that. But they've got it wrong in the past!</p>
+            
+            <p id="x054" class="phone s04"><cite>Norm:</cite> I don't see any problem with having the metadata.</p>
+            
+            <p id="x055" class="phone s06"><cite>Michael:</cite> When any spec refers to another spec, the question arises of what version is referenced.</p>
+            
+            <p id="x056" class="irc"><cite>&lt;mjoel&gt;</cite> <a href="http://www.unicode.org/policies/stability_policy.html">http://<wbr></wbr>www.unicode.org/<wbr></wbr>policies/<wbr></wbr>stability_policy.html</a></p>
+            
+            <p id="x057" class="phone s06"><cite>Michael:</cite> I think our current state is that the version of Unicode is implementation defined,
+               but we don't say that.</p>
+            
+            <p id="x059" class="summary">Some discussion of the stability policy linked above.</p>
+            
+            <p id="x060" class="irc"><cite>&lt;mjoel&gt;</cite> Java 11 looks like it uses Unicode 10.0</p>
+            
+            <p id="x061" class="phone s03"><cite>John:</cite> Can I suggest in two months time we try to get to a position where we can publish
+               test reports.</p>
+            
+            <p id="x062" class="phone s06"><cite>Michael:</cite> The test suite schema also defines a report format.</p>
+            
+            <p id="x063" class="phone s03"><cite>John:</cite> Some of the tests with high ambiguity are problems for my implementation.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #147, are control characters allowed?</h3>
+            
+            <p id="x065" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/147">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>147</a> : Are control characters allowed in an ixml grammar?</p>
+            
+            <p id="x066" class="phone s02"><cite>Steven:</cite> We agreed to the change, but not the errata.</p>
+            
+            <p id="x067" class="phone s06"><cite>Michael:</cite> I've been persuaded that "cannot" is an acceptable verb.</p>
+            
+            <p id="x068" class="phone s06"><cite>Michael:</cite> The erratum is currently listed as proposed.</p>
+            
+            <p id="x069" class="phone s04"><cite>Norm:</cite> If we accept it, I'll move it!</p>
+            
+            <p id="x070" class="phone s06"><cite>Michael:</cite> I propose we accept it.</p>
+            
+            <p id="x071" class="phone s02"><cite>Steven:</cite> Agreed.</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> Norm to merge it and close #147</p>
+            
+            <p id="x073" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/147">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>147</a> : Are control characters allowed in an ixml grammar?</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Pull request #146, EBNF</h3>
+            
+            <p id="x075" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/146">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>146</a> : First draft of EBNF to BNF conversion document</p>
+            
+            <p id="x076" class="phone s04"><cite>Norm:</cite> We've agreed that to merge that and hand it to Michael</p>
+            
+            <p id="x077" class="phone s02"><cite>Steven:</cite> Ok</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #139, continued action on Steven</h3>
+            
+            <p id="x079" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/139">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>139</a> : <a href="https://github.com/invisibleXML/ixml/blob/master/samples/URI/rfc-3987.ixml">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>samples/<wbr></wbr>URI/<wbr></wbr>rfc-3987.ixml</a></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #137, document the XML tag set</h3>
+            
+            <p id="x081" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/137">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>137</a> : We should document the XML tag set that results from parsing an ixml grammar with
+               the ixml specification grammar</p>
+            
+            <p id="x082" class="phone s06"><cite>Michael:</cite> We publish an XML grammar, people including myself use it, so it's useful to document
+               it.</p>
+            
+            <p id="x083" class="phone s06"><cite>Michael:</cite> Norm has produced mock ups and I have not attempted to read them in full. Mostly,
+               the descriptions are elided.</p>
+            
+            <p id="x084" class="phone s06"><cite>Michael:</cite> The formatting looks great.</p>
+            
+            <p id="x085" class="phone s06"><cite>Michael:</cite> With one exception, either the generic identifiers need to be visually distinct,
+               or description needs to be indented more.</p>
+            
+            <p id="x086" class="phone s06"><cite>Michael:</cite> And generally, my instinct is to put the short description and paragraphs before
+               the formal definition.</p>
+            
+            <p id="x087" class="phone s04"><cite>Norm:</cite> I did it that way out of habit; that's the way the DocBook document does it.</p>
+            
+            <p id="x088" class="phone s03"><cite>John:</cite> Is there any sense that this could get out-of-sync?</p>
+            
+            <p id="x089" class="phone s04"><cite>Norm:</cite> No. It's generated from the spec.</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> Norm and Michael to do a bit of revision to improve it for further discussion.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Combining grammars</h3>
+            
+            <p id="x092" class="summary">Norm gives a brief outline of his sketch</p>
+            
+            <p id="x093" class="phone s02"><cite>Steven:</cite> My one main objection is that if you import something and then the author changes
+               the grammar you're importing.</p>
+            
+            <p id="x094" class="phone s04"><cite>Norm:</cite> That's just like any API, surely?</p>
+            
+            <p id="x095" class="phone s02"><cite>Steven:</cite> We could have a mechanism for defining what's exported.</p>
+            
+            <p id="x096" class="phone s04"><cite>Norm:</cite> That's more complex, but sure.</p>
+            
+            <p id="x097" class="phone s06"><cite>Michael:</cite> I think there's going to be a curve where the more complex the needs get, the more
+               complex the syntax.</p>
+            
+            <p id="x098" class="phone s02"><cite>Steven:</cite> A while back, I sent a message with questions about the requirements. Are we importing
+               text, or parsed grammars? There are lots of questions.</p>
+            
+            <p id="x099" class="phone s02"><cite>Steven:</cite> I think a requirements document is necessary.</p>
+            
+            <p id="x100" class="phone s06"><cite>Michael:</cite> Are questions about how the grammar appears in the imported grammar, requirements
+               or implementation details?</p>
+            
+            <p id="x101" class="phone s03"><cite>John:</cite> I think they're implementation details.</p>
+            
+            <p id="x102" class="phone s06"><cite>Michael:</cite> I suppose the fact that if I hand an iXML grammar to a processor as the input string,
+               specifying the iXML spec grammar as the input grammar, the visible XML version is
+               currently just what you'd get for that parse.</p>
+            
+            <p id="x103" class="phone s06"><cite>Michael:</cite> I think an argument that will come up is saying that the imported rules should be
+               included in the XML output requires ad hoc processing for certain elements, so we
+               might want not to do that. It loses the current invariant that processing a grammar
+               as a string produces the expected XML.</p>
+            
+            <p id="x104" class="phone s06"><cite>Michael:</cite> I think Steven has made a good point that we should think hard about whether or not
+               import and export will solve problems we have. I think some capability for overriding
+               is important.</p>
+            
+            <p id="x105" class="phone s06"><cite>Michael:</cite> In some cases, modularity will also be important to avoid name conflicts. I think
+               that a useful set of capabilities is exhibited for us by the rules for imports and
+               inclusions in RELAX NG grammars.</p>
+            
+            <p id="x106" class="irc"><cite>&lt;Steven&gt;</cite> My mail on requirements: <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Sep/0032.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2022Sep/<wbr></wbr>0032.html</a></p>
+            
+            <p id="x107" class="phone s06"><cite>Michael:</cite> Maybe we need to assign some actions for use cases. And I'll take an action to review
+               RELAX NG's rules.</p>
+            
+            <p id="a07" class="action"><strong>ACTION:</strong> Norm to start a use cases and requirements document.</p>
+            
+            <p id="a08" class="action"><strong>ACTION:</strong> Michael to review RELAX NG rules and report back.</p>
+            
+            <p id="a09" class="action"><strong>ACTION:</strong> Michael to close issues #29 and #30.</p>
+            
+            <p id="x111" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/29">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>29</a> : Are there any constraints on how or what a pragma can change in a conforming processor?</p>
+            
+            <p id="x112" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/30">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>30</a> : Can pragmas be nested?</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Next meeting</h3>
+            
+            <p id="x114" class="phone s02"><cite>Steven:</cite> I have a conflict for 14 February.</p>
+            
+            <p id="x115" class="phone s04"><cite>Norm:</cite> I'd prefer 7 to 21.</p>
+            
+            <p id="x116" class="irc"><cite>&lt;Steven&gt;</cite> So agreed</p>
+            
+            <p id="x117" class="summary">The next meeting is 7 February 2023.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Norm to put the information about Joel's implementation on the home page</a></li>
+            
+            <li><a href="#a02">Michael to take another pass on the EBNF to BNF document</a></li>
+            
+            <li><a href="#a03">Steven to expand the tests in PR 169.</a></li>
+            
+            <li><a href="#a04">Michael to work out the metadata for identifying the Unicode version(s) associated
+                  with a test.</a></li>
+            
+            <li><a href="#a05">Norm to merge it and close #147</a></li>
+            
+            <li><a href="#a06">Norm and Michael to do a bit of revision to improve it for further discussion.</a></li>
+            
+            <li><a href="#a07">Norm to start a use cases and requirements document.</a></li>
+            
+            <li><a href="#a08">Michael to review RELAX NG rules and report back.</a></li>
+            
+            <li><a href="#a09">Michael to close issues #29 and #30.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 197 (Tue Nov  8 15:42:48 2022 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded 5 times: s/Micheal/Michael/G</p>
+         
+         <p class="warning">All speakers: Bethan, Joel, John, Michael, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, Github, john, mjoel, norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

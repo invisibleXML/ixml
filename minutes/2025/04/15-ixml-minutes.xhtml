@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 15 April 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-04-15" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>15 April 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/04/01-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://www.w3.org/2025/04/15-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>David, John, Nico, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Bethan</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#27cf">Accept the minutes of the previous meeting</a></li>
+               
+               <li><a href="#1054">Review of open actions</a></li>
+               
+               <li><a href="#f2a7">Status reports</a></li>
+               
+               <li><a href="#44e9">New open issues</a></li>
+               
+               <li><a href="#87ff">Issue #294, “parse tree” is not defined in the specification</a></li>
+               
+               <li><a href="#32f6">Perspectives on serialization</a></li>
+               
+               <li><a href="#aaba">The subraction item</a></li>
+               
+               <li><a href="#9910">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="27cf">Accept the minutes of the previous meeting</h3>
+            
+            <p id="f905" class="summary">Accepted.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="1054">Review of open actions</h3>
+            
+            <p id="a1e5" class="summary">Steven has no progress to report, nor has Norm.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="f2a7">Status reports</h3>
+            
+            <p id="47f9" class="summary">No status reports. (Norm thinks he did something, but can't remember what.)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="44e9">New open issues</h3>
+            
+            <p id="8f2c" class="phone s01"><cite>Steven:</cite> Where is the "iXML" vs. "ixml" distinction? The spec or elsewhere?</p>
+            
+            <p id="064a" class="phone s02"><cite>David:</cite> Both</p>
+            
+            <p id="963e" class="phone s03"><cite>Norm:</cite> We should try to be consistent.</p>
+            
+            <p id="c906" class="phone s02"><cite>David:</cite> We could offer guidance. The problem with "iXML" is we look like an Apple product.</p>
+            
+            <p id="ffff" class="phone s01"><cite>Steven:</cite> The spec uses both; I'm pretty sure I always wrote it in lower case. I guess the
+               mixed version has come from elsewhere.</p>
+            
+            <p id="04c6" class="phone s04"><cite>John:</cite> We write XML in capitals, and since it's closely related, we put the "i" in the front.
+               You wouldn't spell it "xml".<br />
+               <span id="383d">… In the grammar itself, we refer to it in lowercase always; in fact we always use
+                  lowercase in that grammar</span><br />
+               <span id="3887">… There's no reason to change that.</span></p>
+            
+            <p id="3306" class="phone s01"><cite>Steven:</cite> I've always written it lower case.<br />
+               <span id="d385">… I dunno. I don't plan personally to change.</span></p>
+            
+            <p id="ac97" class="phone s03"><cite>Norm:</cite> I propose the answer is, no we can't get consensus on this.</p>
+            
+            <p id="ee0d" class="phone s02"><cite>David:</cite> We can't have inconsistency in the specification.</p>
+            
+            <p id="a389" class="phone s04"><cite>John:</cite> The media product appears to use "iXML".</p>
+            
+            <p id="6765" class="summary">Some discussion; looking at the 'other things named "ixml"' on the Invisible XML home
+               page suggests there are a variety of choices.</p>
+            
+            <p id="2e39" class="phone s03"><cite>Norm:</cite> Shall we put it on the mailing list?</p>
+            
+            <p id="10000" class="phone s02"><cite>David:</cite> Or we could leave it to the discretion of the editor.</p>
+            
+            <p id="4501" class="phone s03"><cite>Norm:</cite> Leave it for a week.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="87ff">Issue #294, “parse tree” is not defined in the specification</h3>
+            
+            <p id="f675" class="phone s01"><cite>Steven:</cite> We discussed this last week and didn't come to a conclusion.</p>
+            
+            <p id="56c5" class="phone s03"><cite>Norm:</cite> I could be persuaded that it isn't unclear, but editorially the spec could be improved.</p>
+            
+            <p id="081a" class="action"><strong>ACTION:</strong> Norm to try to clarify "parse treed" in the specification in a way that is satisfactory
+               to everyone.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="32f6">Perspectives on serialization</h3>
+            
+            <p id="1777" class="summary"> <a href="https://invisiblexml.org/pr/296/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>296/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="44a7" class="phone s01"><cite>Steven:</cite> It's a huge change throughout the whole spec.</p>
+            
+            <p id="6bcc" class="summary">Some discussion of what serialization means.</p>
+            
+            <p id="ec23" class="phone s04"><cite>John:</cite> Consider indentation, that's clearly part of the serialization and not what we mean
+               in most of the places in the spec. Serialization is turning the XML tree into a series
+               of characters.<br />
+               <span id="e43d">… I get an XML tree from the iXML process, but I look at the *serialized* characters
+                  that include entities, whitespaces, etc.</span><br />
+               <span id="a5d5">… That's not part of what we're describing in the formation of the XML from the iXML
+                  parse tree (trees/forest)</span><br />
+               <span id="6321">… Most of the specification is about putting those things into the tree.</span><br />
+               <span id="edb3">… Because we're using XML almost exclusively in an XML environment, we should be very
+                  clear that serialization means XML Serialization.</span></p>
+            
+            <p id="9f2f" class="phone s01"><cite>Steven:</cite> So you're saying that serialization means something specific in XML and you'd prefer
+               not to see some other use of that word in the spec.</p>
+            
+            <p id="490b" class="phone s04"><cite>John:</cite> Yes.</p>
+            
+            <p id="0076" class="phone s01"><cite>Steven:</cite> I don't know what's broken, six people produced implementations without this being
+               a problem.</p>
+            
+            <p id="304c" class="phone s04"><cite>John:</cite> One of the exmaples in the tutorial didn't produce the right answer because I was
+               indenting at serialization time!<br />
+               <span id="8fa9">… So I had to put in a mechanism to not indent.</span></p>
+            
+            <p id="4207" class="summary">(The discussion goes around in a circle for a bit.)</p>
+            
+            <p id="01e1" class="phone s03"><cite>Norm:</cite> To your earlier point, Steven, six people most of whom came to these meetings and
+               discussed things, knew what it meant. Why would we choose to use vocabulary that might
+               confuse readers?</p>
+            
+            <p id="6dda" class="phone s01"><cite>Steven:</cite> Now that I understand the problem, I'd like to have another period to read it and
+               see if I think it's okay.</p>
+            
+            <p id="4f7a" class="phone s03"><cite>Norm:</cite> Okay, we can come back to this next week and finally resolve it.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="aaba">The subraction item</h3>
+            
+            <p id="a085" class="phone s01"><cite>Steven:</cite> We talked about that last week and there are some unrecorded actions.<br />
+               <span id="b54f">… Fredrik or maybe it was John and I agreed to write some use cases.</span></p>
+            
+            <p id="b9a8" class="summary">Some discussion of the importance of use cases and working out what the limitations
+               are wrt the implementation choices.</p>
+            
+            <p id="5299" class="phone s04"><cite>John:</cite> I have to give regrets for next week.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="9910">Next meeting</h3>
+            
+            <p id="a0a5" class="summary">29 April at the usual time.</p>
+            
+            <p id="7131" class="phone s04"><cite>John:</cite> I'll create an issue for tracking it</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#081a">Norm to try to clarify "parse treed" in the specification in a way that is satisfactory
+                  to everyone.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 244 (Thu Feb 27 01:23:09 2025 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/irt/it/</p>
+         
+         <p class="warning">Succeeded: s/Where is this/Where is the "iXML" vs. "ixml" distinction/</p>
+         
+         <p class="warning">All speakers: David, John, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

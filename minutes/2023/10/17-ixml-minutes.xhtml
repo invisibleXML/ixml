@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 17 Oct 2023</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2023-10-17" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>17 Oct 2023</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2023/10/03-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2023Oct/0002.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2023/10/17-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>John</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>cmsmcq</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous actions</a></li>
+               
+               <li><a href="#t02">status of implementations</a></li>
+               
+               <li><a href="#t03">Publication plans</a></li>
+               
+               <li><a href="#t04">Revision to agenda</a></li>
+               
+               <li><a href="#t05">Pull request #201</a></li>
+               
+               <li><a href="#t06">Issue #198 Check that browsable test suite is being updated when tests are added</a></li>
+               
+               <li><a href="#t07">Issue #139 Sample grammars for IRIs and URIs</a></li>
+               
+               <li><a href="#t08">Description of EBNF to BNF translation</a></li>
+               
+               <li><a href="#t09">Issue #137 Document the XML tag set of ixml grammars</a></li>
+               
+               <li><a href="#t10">Issue #13</a></li>
+               
+               <li><a href="#t11">Issue #203 Spec should say explicitly that nonterminals are case-sensitive</a></li>
+               
+               <li><a href="#t12">Issue #202 Version of Unicode supported should be implementation-defined</a></li>
+               
+               <li><a href="#t13">Issue #199 Require whitespace between prolog and first rule?</a></li>
+               
+               <li><a href="#t14">Issue #192 Normalizing line endings in ixml inputs</a></li>
+               
+               <li><a href="#t15">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous actions</h3>
+            
+            <p id="x013" class="summary">MSM has done the easy ones.</p>
+            
+            <p id="x014" class="summary">NTW has done 10-03c but 10-03a continues.</p>
+            
+            <p id="x015" class="summary">SP has come up to the point of clicking the button to submit the pull request, but
+               has not yet overcome resistance from github.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">status of implementations</h3>
+            
+            <p id="x017" class="summary">NTW reports that his implementation now once again passes all tests.</p>
+            
+            <p id="x018" class="phone s01"><cite>SP:</cite> nothing to report.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Publication plans</h3>
+            
+            <p id="x020" class="summary">NTW still kicking the can down the road.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Revision to agenda</h3>
+            
+            <p id="x022" class="summary">NTW asks to add issue #201 to the agenda.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Pull request #201</h3>
+            
+            <p id="x024" class="phone s02"><cite>NTW:</cite> the draft which we made the current working draft next week had SP's change markup.</p>
+            
+            <p id="x025" class="summary">Pull request #201 eliminates that markup, to avoid confusing readers.</p>
+            
+            <p id="x026" class="summary">Permission to merge granted.  Merged.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #198 Check that browsable test suite is being updated when tests are added</h3>
+            
+            <p id="x028" class="summary">Continues.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #139 Sample grammars for IRIs and URIs</h3>
+            
+            <p id="x030" class="summary">MSM requests more documentation of the design choices.</p>
+            
+            <p id="x031" class="summary">SP recalls that we agreed to provide the original grammar and also a grammar that
+               shows the structure.</p>
+            
+            <p id="x032" class="summary">We agreed to provide both, so people could use either, whichever they need.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> SP to document the grammar to make clearer why you might want it / need it.</p>
+            
+            <p id="x034" class="summary">(This won't happen before Declarative Amsterdam and SP's Denmark trip, so mid-November.)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Description of EBNF to BNF translation</h3>
+            
+            <p id="x036" class="summary">Waiting on MSM.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Issue #137 Document the XML tag set of ixml grammars</h3>
+            
+            <p id="x038" class="summary">Waiting on MSM and NTW.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">Issue #13</h3>
+            
+            <p id="x040" class="summary">This has been merged and the issue should be closed.</p>
+            
+            <p id="x041" class="summary">NTW closes #13.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t11">Issue #203 Spec should say explicitly that nonterminals are case-sensitive</h3>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> SP to draft proposed addition to 3.3 saying that nonterminals are case-sensitive.</p>
+            
+            <p id="x044" class="summary">Do we want to add section numbers?  Discussion, feelings on both sides.</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> NTW to do some experiments with dynamic CSS.</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> SP to make each heading hyperlink to the section it heads.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t12">Issue #202 Version of Unicode supported should be implementation-defined</h3>
+            
+            <p id="x048" class="summary">Discussion.  Do we want to specify a floor version?</p>
+            
+            <p id="x049" class="summary">SP points out that the spec has a normative reference to Unicode 13, with no 'or later'
+               mentioned anywhere.</p>
+            
+            <p id="x050" class="phone s02"><cite>NTW:</cite> it's going to be hard to support any version of Unicode other than what our libraries
+               support.</p>
+            
+            <p id="x051" class="phone s03"><cite>MSM:</cite> are all of our libraries in fact up to version 13?</p>
+            
+            <p id="x052" class="phone s01"><cite>SP:</cite> we could write a test to detect that.</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> SP to develop tests to detect version of Unicode supported.</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> MSM to find the tests which currently provide different results based on version
+               of Unicode supported, and send SP a pointer to them.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t13">Issue #199 Require whitespace between prolog and first rule?</h3>
+            
+            <p id="x056" class="summary">Awaiting solution of SP's battle with Github.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t14">Issue #192 Normalizing line endings in ixml inputs</h3>
+            
+            <p id="a07" class="action"><strong>ACTION:</strong> NTW to develop proposal for #192 with a menu of choices</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t15">Next meeting</h3>
+            
+            <p id="x060" class="summary">SP will be available on 31 October and 14 November, so we don't need to cancel those.</p>
+            
+            <p id="x061" class="summary">Next meeting is 31 October.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">SP to document the grammar to make clearer why you might want it / need it.</a></li>
+            
+            <li><a href="#a02">SP to draft proposed addition to 3.3 saying that nonterminals are case-sensitive.</a></li>
+            
+            <li><a href="#a03">NTW to do some experiments with dynamic CSS.</a></li>
+            
+            <li><a href="#a04">SP to make each heading hyperlink to the section it heads.</a></li>
+            
+            <li><a href="#a05">SP to develop tests to detect version of Unicode supported.</a></li>
+            
+            <li><a href="#a06">MSM to find the tests which currently provide different results based on version of
+                  Unicode supported, and send SP a pointer to them.</a></li>
+            
+            <li><a href="#a07">NTW to develop proposal for #192 with a menu of choices</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Maybe present: MSM, NTW, SP</p>
+         
+         <p class="warning">All speakers: MSM, NTW, SP</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, cmsmcq_, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

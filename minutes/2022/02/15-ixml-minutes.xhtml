@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML community group – 15 February 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-02-15" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML community group</h1>
+         
+         <h2>15 February 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/02/08-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Feb/0150.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/02/15-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>-</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Tomos Hillman</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>cmsmcq</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Issue #24 prefix recognition</a></li>
+               
+               <li><a href="#t05">Conformance issue: which grammars to accept and reject (et al.)</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               
+               <li class="app"><a href="#ResolutionSummary">Summary of resolutions</a></li>
+               
+               <li class="app"><a href="#IssueSummary">Summary of issues</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of actions</h3>
+            
+            <p id="x018" class="summary">Tom's action about the repo is done.</p>
+            
+            <p id="x019" class="summary">Steven's action to draft wording on #24 is done.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x021" class="summary">NDW has written a Saxon extension function and should announce it this week.</p>
+            
+            <p id="x022" class="summary">JL, BTW: nothing to report.</p>
+            
+            <p id="x023" class="summary">MSM has made progress:  his test harness is now finding more errors in the test case
+               than in the test harness.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x025" class="summary">MSM working on a new collection of tests based on grammars collected in 2018/2019</p>
+            
+            <p id="x026" class="phone s01"><cite>SP:</cite> I've converted a grammar of Pascal to ixml.</p>
+            
+            <p id="x027" class="phone s02"><cite>NDW:</cite> I'll make a test case out of my grammar for Java property files.</p>
+            
+            <p id="x028" class="summary">Property files are simple at first glance, but there are a lot of complications relating
+               to continuations, escaping, and so on.</p>
+            
+            <p id="x029" class="summary">The description is very procedural, so it has been a challenge to make a declarative
+               version.</p>
+            
+            <p id="x030" class="phone s03"><cite>JL:</cite> would it be helpful to have a number of test cases that are big?  To test size limits,
+               for example.</p>
+            
+            <p id="x031" class="phone s02"><cite>NDW:</cite> Yes.</p>
+            
+            <p id="x032" class="phone s01"><cite>SP:</cite> Pascal has been interesting, in part because the published grammar is ambiguous and
+               has unreachable rules.</p>
+            
+            <p id="x033" class="summary">The ambiguity is due perhaps to Wirth's assumption that the lexer would make appropriate
+               choices.</p>
+            
+            <p id="x037" class="phone s04"><cite>MSM:</cite> I'd propose that we make a collection of grammars of common notations.</p>
+            
+            <p id="x038" class="phone s03"><cite>JL:</cite> like Gunther Rademacher's.</p>
+            
+            <p id="x039" class="summary">The collection of grammars for REx is very useful.</p>
+            
+            <p id="x040" class="summary">MSM proposes ixml/grammars directory</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> MSM to make an ixml/grammars directory for grammars of published notations.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #24 prefix recognition</h3>
+            
+            <p id="x043" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Feb/0149.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2022Feb/<wbr></wbr>0149.html</a></p>
+            
+            <p id="x044" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Feb/0149.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2022Feb/<wbr></wbr>0149.html</a></p>
+            
+            <p id="x045" class="phone s05"><cite>BTW:</cite> Is the clause "determining in the process ..." necessary, or entailed by the word
+               "parse"?</p>
+            
+            <p id="x046" class="summary">We discussed the proposed text point by point.</p>
+            
+            <p id="i01" class="issue"><strong>ISSUE:</strong> Should marking the root symbol with an "@" be an error</p>
+            
+            <p id="x048" class="phone s03"><cite>JL:</cite> is there ever a case in which ixml:state="..." would be part of the prescribed output?</p>
+            
+            <p id="x049" class="phone s04"><cite>MSM:</cite> right now, we cannot generate namespace-qualified attributes at all, so it's an out-of-band
+               signal and no ambiguity is possible.</p>
+            
+            <p id="x050" class="summary">If and when we add namespace support, we can reserve the ixml namespace.</p>
+            
+            <p id="x051" class="phone s02"><cite>NDW:</cite> or another signal could be devised.</p>
+            
+            <p id="x052" class="phone s04"><cite>msm:</cite> perhaps "if the parse failed, but a parse exists for a proper prefix of the input,
+               ..."</p>
+            
+            <p id="x053" class="irc"><cite>&lt;Steven&gt;</cite> * Processors must parse the input using the grammar.</p>
+            
+            <p id="x054" class="irc"><cite>&lt;Steven&gt;</cite> * If the input is unambiguously described by the grammar, the resulting parse tree
+               must be serialized to an XML document.</p>
+            
+            <p id="x055" class="irc"><cite>&lt;Steven&gt;</cite> * If more than one parse tree describes the input, the processor must serialize one
+               of them. It is not defined how this choice is made, but the resulting parse should
+               be marked as ambiguous by including on the document element of the serialisation the
+               attribute ixml:state="ambiguous".</p>
+            
+            <p id="x056" class="irc"><cite>&lt;Steven&gt;</cite> * If the parse fails, the processor must produce some XML document with ixml:state="failed"
+               on the document element, with helpful information about where and why it failed; it
+               may be a partial parse tree that includes parts of the parse that succeeded.</p>
+            
+            <p id="x057" class="irc"><cite>&lt;Steven&gt;</cite> * If the parse succeeded, but without consuming the entirety of the input, processors
+               may choose either to produce a failure document as described above, or to serialize
+               the resulting parse tree with the attribute ixml:state="prefix", or if the parse is
+               ambiguous ixml:state="ambiguous prefix".</p>
+            
+            <p id="x058" class="irc"><cite>&lt;Steven&gt;</cite> * Processors may provide user options for behaviors such as parsing the largest,
+               or smallest, prefix of the input that is described by the grammar, or supporting invocation
+               with input streams of indeterminate length.</p>
+            
+            <p id="x059" class="irc"><cite>&lt;Steven&gt;</cite> * Processors may provide a user option to suppress the ixml:state="ambiguous" attribute;
+               they may also provide a user option to produce more than one parse tree in the case
+               of ambiguity.</p>
+            
+            <p id="x060" class="irc"><cite>&lt;Steven&gt;</cite> * The form in which XML documents are produced is not constrained by this specification;
+               processors should be capable of producing serialized XML as a character stream, but
+               other forms (e.g. DOM instances or XDM instances) may also be used.</p>
+            
+            <p id="x061" class="irc"><cite>&lt;Steven&gt;</cite> * If the root node in the grammar is marked as an attribute, processors must ignore
+               that marking whenever serializing the rule as the root.</p>
+            
+            <p id="x062" class="phone s01"><cite>SP:</cite> the item about prefix matching will be rewritten, but not in real time.</p>
+            
+            <p id="r01" class="resolution"><strong>RESOLUTION:</strong> accept the proposal for issue #24 as revised (and with further revision of the item
+               on prefix matching).</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> SP to integrate resolution of #24 into the spec, and close #24.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Conformance issue: which grammars to accept and reject (et al.)</h3>
+            
+            <p id="x066" class="phone s03"><cite>JL:</cite> for the case of non-XML characters in names, sometimes you can detect the problem
+               statically, sometimes you can statically the *possibility* of such errors, and sometimes
+               you don't know until you see the data.</p>
+            
+            <p id="x067" class="phone s01"><cite>SP:</cite> are we unhappy with the idea of dynamic errors?</p>
+            
+            <p id="x068" class="phone s04"><cite>MSM:</cite> I think we are happy with distinguishing dynamic and static errors,</p>
+            
+            <p id="x069" class="summary">but the current wording that requires conforming processors to reject non-conforming
+               grammar needs to be updated.</p>
+            
+            <p id="x070" class="summary">JL, NDW:  Several classes of errors:</p>
+            
+            <p id="x071" class="summary">(1) nongrammatical against spec grammar.</p>
+            
+            <p id="x072" class="summary">(2) grammatical but statically wrong (e.g. two rules for same nonterminal)</p>
+            
+            <p id="x073" class="summary">(3) statically correct but dynamic error (e.g. non-XML output)</p>
+            
+            <p id="x074" class="summary">msm (And the third item is why I will raise an issue about @root ...)</p>
+            
+            <p id="x075" class="phone s02"><cite>NDW:</cite> if we make multiple same-named attributes illegal, @root should be illegal, too</p>
+            
+            <p id="r02" class="resolution"><strong>RESOLUTION:</strong> we will distinguish static and dynamic errors in grammars, and processors are allowed
+               to detect dynamic errors statically.</p>
+            
+            <p id="x079" class="summary">JL volunteers to scribe next week.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">MSM to make an ixml/grammars directory for grammars of published notations.</a></li>
+            
+            <li><a href="#a02">SP to integrate resolution of #24 into the spec, and close #24.</a></li>
+            </ol>
+         </div>
+      
+      
+      <div id="ResolutionSummary">
+         
+         <h2>Summary of resolutions</h2>
+         
+         <ol>
+            
+            <li><a href="#r01">accept the proposal for issue #24 as revised (and with further revision of the item
+                  on prefix matching).</a></li>
+            
+            <li><a href="#r02">we will distinguish static and dynamic errors in grammars, and processors are allowed
+                  to detect dynamic errors statically.</a></li>
+            </ol>
+         </div>
+      
+      
+      <div id="IssueSummary">
+         
+         <h2>Summary of issues</h2>
+         
+         <ol>
+            
+            <li><a href="#i01">Should marking the root symbol with an "@" be an error</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 185 (Thu Dec  2 18:51:55 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/\me a test comment from john//</p>
+         
+         <p class="warning">Succeeded: s/Consensus:/RESOLVED:/</p>
+         
+         <p class="warning">Succeeded: s/you are allowed/processors are allowed/</p>
+         
+         <p class="warning">Succeeded: s/accept the proposal as revised (and as to be further revised)/accept
+            the proposal for issue #24 as revised (and with further revision of the item on prefix
+            matching)/</p>
+         
+         <p class="warning">Maybe present: BTW, JL, MSM, NDW, SP</p>
+         </div>
+      
+      
+      </body>
+</html>

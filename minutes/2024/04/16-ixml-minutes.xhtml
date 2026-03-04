@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml  community group call – 16 April 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-04-16" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml  community group call</h1>
+         
+         <h2>16 April 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/04/02-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2024Apr/0007"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2024/04/16-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Bethan, John</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of previous actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of tests and test suites</a></li>
+               
+               <li><a href="#t04">Review and resolution of bug reports and technical issues</a></li>
+               
+               <li><a href="#t05">Version numbers (discussion)</a></li>
+               
+               <li><a href="#t06">Adjourned</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of previous actions</h3>
+            
+            <p id="x021" class="summary">2023-01-10-f continues</p>
+            
+            <p id="x022" class="summary">2023-11-28-c completed</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> 2024-04-16-a MSM to incorporate Steven's comments into the EBNF document</p>
+            
+            <p id="x024" class="summary">2024-03-05-c in progress, continues</p>
+            
+            <p id="x026" class="phone s01"><cite>2024-03-19-a:</cite> continues</p>
+            
+            <p id="x027" class="phone s02"><cite>Steven:</cite> W3C says that they'd rather not delete the link</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> 2024-04-16-b Norm to reconstruct the previous W3C-styled draft</p>
+            
+            <p id="x029" class="phone s02"><cite>Steven:</cite> They also report a 404 in the report itself, the "latest published version" link
+               is broken</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> 2024-04-16-c Norm to sort out the broken link</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x032" class="summary">No reports this time.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of tests and test suites</h3>
+            
+            <p id="x034" class="phone s03"><cite>Michael:</cite> At some point in the minutes, we recorded "oh well, if we're adopting the normalization
+               of line breaks on input, we need some test cases."</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> 2024-04-16-d: Michael to open an issue about adding line break normalization tests</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Review and resolution of bug reports and technical issues</h3>
+            
+            <p id="x037" class="phone s02"><cite>Steven:</cite> #245, <a href="https://github.com/invisibleXML/ixml/pull/245">invisibleXML/<wbr></wbr>ixml#245</a></p>
+            
+            <p id="x038" class="phone s03"><cite>Michael:</cite> I've looked at it shallowly.</p>
+            
+            <p id="x039" class="phone s04"><cite>Norm:</cite> Me too.</p>
+            
+            <p id="x040" class="phone s03"><cite>Michael:</cite> The spot checks I did all looked fine. The CRs in the output should go away.</p>
+            
+            <p id="x041" class="phone s04"><cite>Norm:</cite> I think if we're going to add line break tests, I'm happy to accept these changes.</p>
+            
+            <p id="x042" class="phone s03"><cite>Michael:</cite> I'm tempted to say we should merge it.</p>
+            
+            <p id="x043" class="phone s04"><cite>Norm:</cite> I think that's fine.</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> 2024-04-16-e: Norm to merge #245</p>
+            
+            <p id="x045" class="phone s02"><cite>Steven:</cite> I'm inclined to say that we shouldn't resolve normative issues when there are only
+               three of us.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Version numbers (discussion)</h3>
+            
+            <p id="x047" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://www.w3.org/2024/04/02-ixml-minutes.html">https://<wbr></wbr>www.w3.org/<wbr></wbr>2024/<wbr></wbr>04/<wbr></wbr>02-ixml-minutes.html</a></p>
+            
+            <p id="x048" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://www.w3.org/2024/04/02-ixml-minutes.html#t12">https://<wbr></wbr>www.w3.org/<wbr></wbr>2024/<wbr></wbr>04/<wbr></wbr>02-ixml-minutes.html#t12</a></p>
+            
+            <p id="x049" class="phone s03"><cite>Michael:</cite> What's the status of #243?</p>
+            
+            <p id="x050" class="summary">Some discussion ensues. Norm believes he revised the PR to reflect the comments from
+               the last meeting.</p>
+            
+            <p id="x051" class="summary"><a href="https://invisiblexml.org/pr/243/autodiff.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>pr/<wbr></wbr>243/<wbr></wbr>autodiff.html</a></p>
+            
+            <p id="x052" class="summary">General agreement that the PR now reflects what the author was asked to do.</p>
+            
+            <p id="x053" class="summary">Steven expresses reservations about the ixml:state attribute</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Adjourned</h3>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">2024-04-16-a MSM to incorporate Steven's comments into the EBNF document</a></li>
+            
+            <li><a href="#a02">2024-04-16-b Norm to reconstruct the previous W3C-styled draft</a></li>
+            
+            <li><a href="#a03">2024-04-16-c Norm to sort out the broken link</a></li>
+            
+            <li><a href="#a04">2024-04-16-d: Michael to open an issue about adding line break normalization tests</a></li>
+            
+            <li><a href="#a05">2024-04-16-e: Norm to merge #245</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/You're on the hook, but I was here early so I thought I'd do something
+            in the meantime//</p>
+         
+         <p class="warning">Succeeded: s/04-16a/04-16-a/</p>
+         
+         <p class="warning">Maybe present: 2024-03-19-a</p>
+         
+         <p class="warning">All speakers: 2024-03-19-a, Michael, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

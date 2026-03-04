@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 04 February 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-02-04" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>04 February 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/01/21-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://www.w3.org/2025/02/04-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, David, Fredrik, John, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Nico</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>John</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#04d6">Previous Minutes</a></li>
+               
+               <li><a href="#ada8">Status Reports</a></li>
+               
+               <li><a href="#b848">Ambiguity utility</a></li>
+               
+               <li><a href="#dbfd">Use pragmas for the prolog?</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="cb2d" class="irc"><cite>&lt;Steven&gt;</cite> rssagent, make logs public</p>
+            
+            <p id="0f7e" class="irc"><cite>&lt;Steven&gt;</cite> Steven: That link works</p>
+            
+            <p id="958f" class="phone s01"><cite>presnet+:</cite> bethan</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="04d6">Previous Minutes</h3>
+            
+            <p id="7048" class="summary">Accepted</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="ada8">Status Reports</h3>
+            
+            <p id="e2a7" class="phone s02"><cite>bethan:</cite> probably better to work on debugging &amp; support tools rather than another implementation</p>
+            
+            <p id="e534" class="phone s03"><cite>frederik:</cite> Python can link to C so it could be linked from my implementation</p>
+            
+            <p id="136b" class="phone s03"><cite>Frederik:</cite> fixed a bug David reported</p>
+            
+            <p id="8221" class="phone s03"><cite>Frederik:</cite> the implementation does renaming</p>
+            
+            <p id="e717" class="phone s04"><cite>steven:</cite> 14th March MarkupUK deadline - thinking of a paper on modularisation issues</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="b848">Ambiguity utility</h3>
+            
+            <p id="6d66" class="phone s03"><cite>Frederik:</cite> Can be useful in cases such as catchall e.g. protocol decoding. Could be solved by
+               the not or the exclusion operator</p>
+            
+            <p id="229e" class="phone s03"><cite>Frederik:</cite> adding cost to the tree and choose the lowest cost route among the possible trees.</p>
+            
+            <p id="8a80" class="phone s05"><cite>Fredrik:</cite> do the pruning during the serialisation, rather than during the parse</p>
+            
+            <p id="b4dd" class="phone s06"><cite>Norm:</cite> CoffeePot can show the graph for ambiguous solutions</p>
+            
+            <p id="ba7a" class="phone s04"><cite>steven:</cite> we should look at this area on the backburner and possible papers</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="dbfd">Use pragmas for the prolog?</h3>
+            
+            <p id="3d43" class="phone s02"><cite>Bethan:</cite> we have consensus on requirements 1-5  of the document</p>
+            
+            <p id="631a" class="summary">   <a href="https://github.com/invisibleXML/ixml/blob/master/proposals/pragma_req.md">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>proposals/<wbr></wbr>pragma_req.md</a></p>
+            
+            <p id="4151" class="summary">Discussion on Items 6 &amp; 7. Consensus on 6 "It should be straightforward for processors
+               to ignore pragmas they do</p>
+            
+            <p id="fc5d" class="summary">          not recognize."</p>
+            
+            <p id="c446" class="summary">Consensus on 7: "Processors must be able to determine unambiguously whether they</p>
+            
+            <p id="9958" class="summary">Item 8 "A pragma must be distinguishable as such from all other grammar</p>
+            
+            <p id="4916" class="summary">          constructs, even if the processor in question does not recognize the</p>
+            
+            <p id="0b46" class="summary">          specific pragma." - some discussion about presence in the XML and the readability
+               of the presence of a pragma</p>
+            
+            <p id="ce9b" class="phone s04"><cite>Steven:</cite> I feel strongly that the pragma is purely for the processor and not part of iXML</p>
+            
+            <p id="a8e7" class="summary">The argument is about whether iXML should support attachment location for pragmas
+               within its definition.</p>
+            
+            <p id="4903" class="summary">Item 8 is accepted</p>
+            
+            <p id="2418" class="phone s06"><cite>norm:</cite> More discussion on email is probably warranted</p>
+            
+            <p id="5f8d" class="irc"><cite>&lt;john&gt;</cite> Next meeting: 18th February</p>
+            
+            <p id="e6cd" class="summary">n&gt; rrsagent, publish minutes</p>
+            </section>
+         </main>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 242 (Fri Dec 20 18:32:17 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Steven: Previous meeting agenda is not readable, because the notulist
+            forgot the "make logs public" command//</p>
+         
+         <p class="warning">Succeeded: s/mudularisation/modularisation/</p>
+         
+         <p class="warning">Succeeded: s/Frederik/Fredrik/</p>
+         
+         <p class="warning">Succeeded: s/acyclic graph/graph/</p>
+         
+         <p class="warning">Succeeded: s/consensu/consensus/</p>
+         
+         <p class="warning">Succeeded: s/docuemtn/document/</p>
+         
+         <p class="warning">Succeeded: s/prgamas/pragmas/</p>
+         
+         <p class="warning">Found 'Next meeting:' not followed by a URL: '18th February'.</p>
+         
+         <p class="warning">Maybe present: frederik, presnet+</p>
+         
+         <p class="warning">All speakers: bethan, frederik, Fredrik, Norm, presnet+, steven</p>
+         
+         <p class="warning">Active on IRC: john, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

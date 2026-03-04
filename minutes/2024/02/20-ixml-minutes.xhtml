@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML – 20 February 2024</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2024-02-20" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML</h1>
+         
+         <h2>20 February 2024</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/02/20-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Review of agenda</a></li>
+               
+               <li><a href="#t02">Status reports</a></li>
+               
+               <li><a href="#t03">publication of ixml spec as W3C CG Report</a></li>
+               
+               <li><a href="#t04">Issue #139 Sample grammars for IRIs and URIs</a></li>
+               
+               <li><a href="#t05">Issue #202 Spec should say Unicode version is implementation-defined</a></li>
+               
+               <li><a href="#t06">Issue #199 Require whitespace between prolog and first rule?</a></li>
+               
+               <li><a href="#t07">Issue #192 Normalizing line endings in ixml inputs</a></li>
+               
+               <li><a href="#t08">Any other business?</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x008" class="phone s01"><cite>Date:</cite> 2024-02-20</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Review of agenda</h3>
+            
+            <p id="x011" class="summary">ACTION 2023-01-10-f continues</p>
+            
+            <p id="x012" class="summary">ACTION 2023-10-17-a completed</p>
+            
+            <p id="x013" class="summary">ACTION 2023-11-28-a continues</p>
+            
+            <p id="x014" class="summary">ACTION 2023-11-28-c continues</p>
+            
+            <p id="x015" class="summary">ACTION 2023-11-28-e continues</p>
+            
+            <p id="x016" class="summary">ACTION 2024-01-09-a completed</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status reports</h3>
+            
+            <p id="x018" class="phone s02"><cite>John:</cite> I've updated the workbench to fix bugs. Names weren't being recognized unless they
+               were followed by a space.</p>
+            
+            <p id="x019" class="phone s02"><cite>John:</cite> Working on experiments to match strings and regular expression matching. Tidied up
+               the UX a bit.</p>
+            
+            <p id="x020" class="phone s03"><cite>Norm:</cite> No status yet.</p>
+            
+            <p id="x021" class="phone s04"><cite>Bethan:</cite> The PhD is submitted!</p>
+            
+            <p id="x022" class="phone s04"><cite>Bethan:</cite> Have also started working on my implementation again!</p>
+            
+            <p id="x023" class="phone s05"><cite>Michael:</cite> Nothing to report.</p>
+            
+            <p id="x024" class="phone s06"><cite>Steven:</cite> I've staged the next version, but haven't pushed the changes. Time has been focused
+               on paper for Prague.</p>
+            
+            <p id="x025" class="phone s06"><cite>Steven:</cite> Paper is about round-tripping iXML.</p>
+            
+            <p id="x026" class="phone s02"><cite>John:</cite> I'm also doing some experiments on round-tripping. Can you create a stylesheet from
+               the grammar such that if you run it on the output, it will provide a flattened result.</p>
+            
+            <p id="x027" class="phone s04"><cite>Bethan:</cite> My instinct is that the grammar is to some extent a schema for the output XML (or
+               embodies the same information) as at least the part of the schema for the output your
+               producing</p>
+            
+            <p id="x029" class="phone s02"><cite>John:</cite> Things become very complicated where operators are added back into the right places.</p>
+            
+            <p id="x030" class="phone s06"><cite>Steven:</cite> Someone else is submitting an iXML paper at Prague; he wants to use iXML to reparse
+               XML, to extract information from the text nodes and put it back into the XML.</p>
+            
+            <p id="x031" class="phone s02"><cite>John:</cite> This is something like the work I've done parsing XPath out of XSLT.</p>
+            
+            <p id="x032" class="summary">Some additional discussion of the problems of round tripping.</p>
+            
+            <p id="x033" class="phone s04"><cite>Bethan:</cite> Could you leverage a schema to produce a grammar to parse some texts into the grammar?</p>
+            
+            <p id="x034" class="summary">Nods of agreement: there's something interesting about the intersection between grammars
+               and schemas.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">publication of ixml spec as W3C CG Report</h3>
+            
+            <p id="x036" class="phone s06"><cite>Steven:</cite> This is finished, but there are some URL problems.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to contact W3C to get the report links fixed on the report and ixml group
+               pages.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #139 Sample grammars for IRIs and URIs</h3>
+            
+            <p id="x039" class="phone s06"><cite>Steven:</cite> I published something today; we can discuss it next week.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Issue #202 Spec should say Unicode version is implementation-defined</h3>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven to amend the specification to describe how Unicode is version-dependent</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Issue #199 Require whitespace between prolog and first rule?</h3>
+            
+            <p id="x043" class="phone s03"><cite>Norm:</cite> Whitespace is required between rules but not between the prolog and the first rule.</p>
+            
+            <p id="x044" class="phone s03"><cite>Norm:</cite> I think we should be consistent.</p>
+            
+            <p id="x045" class="phone s06"><cite>Steven:</cite> The space is needed between rules to avoid ambiguity; this is a change for the sake
+               of change.</p>
+            
+            <p id="x046" class="phone s02"><cite>John:</cite> If we start to put multiple things in the prolog, things may get ambiguous.</p>
+            
+            <p id="x047" class="phone s03"><cite>Norm:</cite> I'm not going to lie down in the road if we leave this until we need to do it.</p>
+            
+            <p id="x048" class="phone s04"><cite>Bethan:</cite> I think given it's backwards incompatible, we should do it sooner rather than later.</p>
+            
+            <p id="x049" class="phone s06"><cite>Steven:</cite> We also have a larger prolog issue that I raised in email.</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Michael to make sure that Steven's prolog issues are turned into trackable issues.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #192 Normalizing line endings in ixml inputs</h3>
+            
+            <p id="x053" class="phone s06"><cite>Steven:</cite> This is a request from the broader community for a way to specify a line ending that's
+               not platform-dependent.</p>
+            
+            <p id="x054" class="phone s03"><cite>Norm:</cite> That's the issue with a particular spin, I think the user would like us to just normalize
+               to #A and move on.</p>
+            
+            <p id="x055" class="phone s05"><cite>Michael:</cite> I don't know on an IBM mainframe that uses variable length records what they do.
+               I suppose the obvious thing to do is to say that a record boundary turns into a #A.</p>
+            
+            <p id="x056" class="summary">Some discussion of what IBM mainframes actually do for storing text files.</p>
+            
+            <p id="x057" class="phone s05"><cite>Michael:</cite> I think the proposal is that the iXML spec should say that an implementation presents
+               end-of-lines as #A regardless of the platform.</p>
+            
+            <p id="x058" class="phone s06"><cite>Steven:</cite> My problem with that solution is that if I get files over the web, I don't know where
+               they came from.</p>
+            
+            <p id="x059" class="phone s03"><cite>Norm:</cite> I think XML solves this; there's a simple algorithm for deciding if and which sequences
+               of characters are turned into a single #A</p>
+            
+            <p id="x060" class="phone s05"><cite>Michael:</cite> I think it boils down to: when you're reading a character stream, you normalize line
+               feeds. You have some built in understanding understanding of line boundaries and you
+               recognize them.</p>
+            
+            <p id="x061" class="phone s05"><cite>Michael:</cite> The question in my mind is, if you wanted to use iXML to do something a little closer
+               to the metal, how would you do it?</p>
+            
+            <p id="x062" class="phone s03"><cite>Norm:</cite> I think if you want to do that, you want to treat the input of some kind of binary
+               so it's out-of-scope</p>
+            
+            <p id="x063" class="summary">Some discussion of the circumstances when you might want to process "binary" of one
+               sort of another.</p>
+            
+            <p id="x064" class="phone s04"><cite>Bethan:</cite> Why not introduce an end-of-line marker for a non-platform-specific end-of-line?</p>
+            
+            <p id="x065" class="phone s06"><cite>Steven:</cite> That's what I proposed in response to Norm.</p>
+            
+            <p id="x066" class="phone s04"><cite>Bethan:</cite> My suggestion is that the character would be a shortcut for the expansion \n, \n\r\,
+               \r, etc.</p>
+            
+            <p id="x067" class="phone s02"><cite>John:</cite> Would you be able to do that in a member string?</p>
+            
+            <p id="x068" class="phone s06"><cite>Steven:</cite> You can't negate that easily, that was part of my example.</p>
+            
+            <p id="x069" class="phone s05"><cite>Michael:</cite> I may be misunderstanding, but I'm not a big fan of the idea of what Bethan suggests;
+               but I'm not sure the problem Steven identifies is a real one.</p>
+            
+            <p id="x070" class="phone s05"><cite>Michael:</cite> Suppose we choose a single character for abstract "end of line"; NEL. If we said
+               NEL means any linefeed, so when that's in grammar...</p>
+            
+            <p id="x071" class="phone s06"><cite>Steven:</cite> I think what Bethan proposed is a character in the grammar that represents this.</p>
+            
+            <p id="x073" class="phone s05"><cite>Michael:</cite> I can say, give me anything that's not that character.</p>
+            
+            <p id="x074" class="phone s06"><cite>Steven:</cite> But it's not only one character.</p>
+            
+            <p id="x075" class="phone s05"><cite>Michael:</cite> If we do normalize, I think normalizing the same way as XML would be wiser, therefore
+               #A.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Any other business?</h3>
+            
+            <p id="x077" class="phone s02"><cite>John:</cite> I think we should try to keep track of where people are using iXML. I got a bug report
+               from someone using iXML to parse some genetic data.</p>
+            
+            <p id="x078" class="summary">Adjourned.</p>
+            
+            <p id="x081" class="irc"><cite>&lt;cmsmcq&gt;</cite> FWIW, US daylight time starts 10 March.  (Yikes.)</p>
+            
+            <p id="x084" class="irc"><cite>&lt;cmsmcq&gt;</cite> In the UK, it starts 31 March.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to contact W3C to get the report links fixed on the report and ixml group pages.</a></li>
+            
+            <li><a href="#a02">Steven to amend the specification to describe how Unicode is version-dependent</a></li>
+            
+            <li><a href="#a03">Michael to make sure that Steven's prolog issues are turned into trackable issues.</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 221 (Fri Jul 21 14:01:30 2023 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/for output that your're output/for the output your producing/</p>
+         
+         <p class="warning">Succeeded: s/on the agenda for next time/turned into trackable issues/</p>
+         
+         <p class="warning">Succeeded: s/tihs/this/</p>
+         
+         <p class="warning">Maybe present: Date</p>
+         
+         <p class="warning">All speakers: Bethan, Date, John, Michael, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: cmsmcq, norm</p>
+         </div>
+      
+      
+      </body>
+</html>
