@@ -1,0 +1,1 @@
+{"stem":"parse-against-given-grammar","instances":[{"docUri":"2023\/03\/14-ixml-minutes.xhtml","score":1,"contexts":[{"form":"parse-against-given-grammar","weight":"1","pos":162,"context":"…changed implementation of XSLT extension function to return a <mark>parse-against-given-grammar<\/mark> function.","fid":"x029"}]}]}

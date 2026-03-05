@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 14 December 2021</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2021-12-14" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>14 December 2021</h2>
+         
+         
+         <nav id="links">
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2021Dec/0013"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2021/12/14-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Dave Pawson, John Lumley, MSM, Norm, Tom</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Bug reports / change requests</a></li>
+               
+               <li><a href="#t04">Bugs - Strings proposal</a></li>
+               
+               <li><a href="#t05">Bugs - Character ranges</a></li>
+               
+               <li><a href="#t06">Bugs - Conformance issue:   rule names and XML names</a></li>
+               
+               <li><a href="#t07">Bugs - Conformance issue:   one rule per nonterminal</a></li>
+               
+               <li><a href="#t08">AOB</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x009" class="phone s01"><cite>Tom:</cite> Prague is happening in June.<br />
+               <span id="x010">… so do we continue to rush, or aim for June?</span></p>
+            
+            <p id="x011" class="phone s02"><cite>Steven:</cite> The point of doing it for Prague was so there was an audience</p>
+            
+            <p id="x012" class="phone s03"><cite>MSM:</cite> I would prefer to be ready before June</p>
+            
+            <p id="x013" class="phone s04"><cite>Norm:</cite> February seemed like rushing</p>
+            
+            <p id="x014" class="phone s01"><cite>Tom:</cite> Aim for April/May</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="x016" class="summary">ACTION (2021-08-004): Steven to create list of existing requirements,</p>
+            
+            <p id="x017" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x018" class="summary">so that we can identify when a new one comes.</p>
+            
+            <p id="x019" class="phone s02"><cite>Steven:</cite> Done</p>
+            
+            <p id="x020" class="summary">ACTION (2021-08-005): Tom and MSM to come with a pragma proposal.</p>
+            
+            <p id="x021" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x022" class="summary">Done</p>
+            
+            <p id="x023" class="phone s03"><cite>MSM:</cite> Let us discuss later in the meeting, to see if we can endorse</p>
+            
+            <p id="x024" class="summary">ACTION (2021-10-001): Steven to draft a mediatypes proposal (see</p>
+            
+            <p id="x025" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/6).">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>6).</a></p>
+            
+            <p id="x026" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x027" class="phone s02"><cite>Steven:</cite> Continues</p>
+            
+            <p id="x028" class="summary">ACTION (2021-11-001): Norm to classify the error states in the spec,</p>
+            
+            <p id="x029" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x030" class="summary">as a first step towards standard error codes. (Discharged by</p>
+            
+            <p id="x031" class="summary"><a href="https://lists.w3.org/Archives/Public/public-ixml/2021Nov/0035.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2021Nov/<wbr></wbr>0035.html</a> ?)</p>
+            
+            <p id="x032" class="summary">Done</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x035" class="phone s04"><cite>Norm:</cite> I have modified PEP and successfully parsed an ixml grammar<br />
+               <span id="x036">… It parses the ixml grammar!</span></p>
+            
+            <p id="x038" class="summary">github.com/xproc/pep</p>
+            
+            <p id="x042" class="phone s05"><cite>John:</cite> I managed to get a modified version of the ixml grammar working on Steven's server<br />
+               <span id="x043">… with pragmas</span><br />
+               <span id="x044">… I can then transform and serialise back into ixml, and goes through Steven's ixml
+                  processor.</span><br />
+               <span id="x045">… Opens a need for taking the XML form of ixml</span></p>
+            
+            <p id="x046" class="phone s03"><cite>MSM:</cite> That's why there is prose in the pragma's proposal about XML form of pragmas</p>
+            
+            <p id="x047" class="phone s02"><cite>Steven:</cite> I'm working on serialising to memory, so that you can parse straight from that. Adding
+               XML would be the same process, using a different format, since the XML and the parse
+               tree are essentially isomorphic.</p>
+            
+            <p id="x048" class="phone s02"><cite>Steven:</cite> The new version is running, is written in ABC, as a basis for a future C version</p>
+            
+            <p id="x049" class="phone s03"><cite>MSM:</cite> Stasis. Working on the test suite, but not on the ixml system</p>
+            
+            <p id="x050" class="phone s01"><cite>Tom:</cite> Likewise, no change this month.</p>
+            
+            <p id="x052" class="phone s04"><cite>Norm:</cite> What is the state of the test suite?<br />
+               <span id="x053">… for use</span></p>
+            
+            <p id="x054" class="phone s03"><cite>MSM:</cite> I have a relaxing schema for a testsuite catalogue, it allows input and output to
+               be inline or at a URL.</p>
+            
+            <p id="x055" class="phone s02"><cite>Steven:</cite> What should I do with my tests?</p>
+            
+            <p id="x057" class="phone s03"><cite>MSM:</cite> Put them on github, I will develop a catalogue for it<br />
+               <span id="x058">… I do not regard what I'm doing as official, but we can use it as a basis</span></p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to add his tests to github</p>
+            
+            <p id="x060" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x061" class="phone s02"><cite>Steven:</cite> Are we expecting to have implementations when we release?</p>
+            
+            <p id="x062" class="summary">[Yes]</p>
+            
+            <p id="x063" class="phone s03"><cite>MSM:</cite> a list of ongoing implementations and their characteristics</p>
+            
+            <p id="x064" class="phone s03"><cite>MSM:</cite> There's something on CPAN that might count</p>
+            
+            <p id="x065" class="phone s01"><cite>Tom:</cite> Honorable mention</p>
+            
+            <p id="x067" class="phone s03"><cite>MSM:</cite> as long as we can distinguish things that are trying to pass the testsuite<br />
+               <span id="x068">… separately</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Bug reports / change requests</h3>
+            
+            <p id="x070" class="irc"><cite>&lt;cmsmcq&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/12">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>12</a></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Bugs - Strings proposal</h3>
+            
+            <p id="x072" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/12">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>12</a></p>
+            
+            <p id="x073" class="phone s02"><cite>Steven:</cite> It doesn't reduce functionality, it does improve diagnostics</p>
+            
+            <p id="x074" class="summary">RESOLVED</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven to add strings proposal to spec</p>
+            
+            <p id="x076" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Bugs - Character ranges</h3>
+            
+            <p id="x078" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/16">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>16</a></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Bugs - Conformance issue:   rule names and XML names</h3>
+            
+            <p id="x080" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/18">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>18</a></p>
+            
+            <p id="x081" class="phone s02"><cite>Steven:</cite> This is a static vs dynamic issue</p>
+            
+            <p id="x082" class="phone s06"><cite>a:</cite> @b; -"!", c.</p>
+            
+            <p id="x083" class="phone s07"><cite>b:</cite> c.</p>
+            
+            <p id="x084" class="phone s08"><cite>c:</cite> "d".</p>
+            
+            <p id="x087" class="phone s03"><cite>MSM:</cite> I could live with it either way.<br />
+               <span id="x088">… "all names that are serialized must conform to an XML name"</span><br />
+               <span id="x089">… plus implementations may warn statically if a name doesn't conform</span></p>
+            
+            <p id="x090" class="phone s02"><cite>Steven:</cite> Agreed?</p>
+            
+            <p id="x091" class="summary">[Yes]</p>
+            
+            <p id="x092" class="summary">[RESOLVED]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Bugs - Conformance issue:   one rule per nonterminal</h3>
+            
+            <p id="x094" class="summary"><a href="https://github.com/invisibleXML/ixml/issues/19">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>19</a></p>
+            
+            <p id="x095" class="phone s03"><cite>MSM:</cite> It doesn't cover the start rule, because it doesn't occur on any RHS</p>
+            
+            <p id="x096" class="phone s02"><cite>Steven:</cite> Ah,</p>
+            
+            <p id="x097" class="phone s03"><cite>MSM:</cite> "For every nonterminal occurring in the grammar, there must be exactly one rule in
+               the grammar defining that nonterminal."</p>
+            
+            <p id="x098" class="phone s09"><cite>Dave:</cite> "Every nonterminal should be defined by a single rule".</p>
+            
+            <p id="x099" class="phone s03"><cite>MSM:</cite> replace should with must.</p>
+            
+            <p id="x100" class="phone s05"><cite>John:</cite> Modularity, libraries, may have unreachable rules.</p>
+            
+            <p id="x101" class="phone s01"><cite>Tom:</cite> Not a 1.0 feature</p>
+            
+            <p id="x103" class="phone s01"><cite>Tom:</cite> Not sure we cover the start rule</p>
+            
+            <p id="x104" class="phone s03"><cite>MSM:</cite> The LHS name is a nonterminal; if we don't say that, we should.</p>
+            
+            <p id="x105" class="phone s01"><cite>Tom:</cite> I propose keeping both rules in this issue</p>
+            
+            <p id="x106" class="phone s03"><cite>MSM:</cite> I just looked at "nonterminal" in the spec. I thought "of course the name of a rule
+               is a nonterminal". But the spec doesn't say that. So the redundancy of both rules
+               may help.</p>
+            
+            <p id="x107" class="phone s01"><cite>Tom:</cite> Or us "nonterminal" instead of "name".</p>
+            
+            <p id="x109" class="phone s01"><cite>Tom:</cite> Leave both in.<br />
+               <span id="x110">… use new wording though for the 1st</span></p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Steven implement the resolution for issue 19.</p>
+            
+            <p id="x112" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">AOB</h3>
+            
+            <p id="x115" class="phone s01"><cite>Tom:</cite> Move pragmas and release schedule to top of next meeting<br />
+               <span id="x116">… next meeting 11 Jan at 15:30 UTC</span></p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Steven implement resolution for issue 18 on XML names</p>
+            
+            <p id="x125" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to add his tests to github</a></li>
+            
+            <li><a href="#a02">Steven to add strings proposal to spec</a></li>
+            
+            <li><a href="#a03">Steven implement the resolution for issue 19.</a></li>
+            
+            <li><a href="#a04">Steven implement resolution for issue 18 on XML names</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 185 (Thu Dec  2 18:51:55 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/ixnml/ixml/</p>
+         
+         <p class="warning">Succeeded: s/uer/ure/</p>
+         
+         <p class="warning">Succeeded: s/ABC&lt;/ABC,/</p>
+         
+         <p class="warning">Succeeded: s/expec ting/expecting</p>
+         
+         <p class="warning">Succeeded: s/Steve to/Steven to/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: a, b, c, Dave, John, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

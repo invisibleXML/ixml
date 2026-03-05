@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 13 December 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-12-13" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>13 December 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Oct/0010"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Dec/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/12/13-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, MSM, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Joel</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>John</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">previous actions</a></li>
+               
+               <li><a href="#t02">Implementations</a></li>
+               
+               <li><a href="#t03">Issues and bugs</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x009" class="irc"><cite>&lt;Steven&gt;</cite> <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Dec/0000.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2022Dec/<wbr></wbr>0000.html</a></p>
+            
+            <p id="x013" class="irc"><cite>&lt;john&gt;</cite> s/Person_Person//</p>
+            
+            <p id="x018" class="irc"><cite>&lt;john&gt;</cite> s/Person+Person//</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">previous actions</h3>
+            
+            <p id="x028" class="summary">Joel to send details of his implementation to                      Norm, Norm to put
+               it on the web site's splash                      page. - still outstanding</p>
+            
+            <p id="x029" class="summary">MSM to comment on the QT4 issue suggestiong an                      XPath function
+               supporting ixml and possibly                      suggest further function signatures.
+               DONE</p>
+            
+            <p id="x030" class="summary">Norm to update free-standing document on EBNF to                      BNF translation
+               (PR #146) - Outstanding</p>
+            
+            <p id="x031" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/146">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>146</a> : First draft of EBNF to BNF conversion document</p>
+            
+            <p id="x032" class="summary">Norm to prototype an alphabetic reference list of                      elements in
+               the vxml vocabulary, in XHTML, to                      serve as a basis for discussion.
+               Outstanding</p>
+            
+            <p id="x033" class="summary">SP to edit group page to say we meet at 15:00 UTC                      (during the
+               winter, at least). DONE</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Implementations</h3>
+            
+            <p id="x037" class="phone s01"><cite>Steven:</cite> his implementation is more (but not quite) compliant. Lots of work on the Unicode
+               classes - Unicode12 moved to Unicode15<br />
+               <span id="x038">… uses grep and sed to generate the internal tables</span><br />
+               <span id="x039">… Some errors in Unicode spec found (e.g. omega and Ohm)</span></p>
+            
+            <p id="x041" class="summary">No changes to implementations by Norm, John, Bethan, MSM</p>
+            
+            <p id="x042" class="summary">No changes to testsuites</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Issues and bugs</h3>
+            
+            <p id="x044" class="summary">Issue #147- Norm's proposal adopted. Issue an erratum</p>
+            
+            <p id="x045" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/147">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>147</a> : Are control characters allowed in an ixml grammar?</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Norm to  issue an erratum for issue 147</p>
+            
+            <p id="x048" class="irc"><cite>&lt;john&gt;</cite> s/for this/for Issue #147/</p>
+            
+            <p id="x049" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/147">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>147</a> : Are control characters allowed in an ixml grammar?</p>
+            
+            <p id="x050" class="summary">Issue #146 - awaiting Norm's action</p>
+            
+            <p id="x051" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/146">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>146</a> : First draft of EBNF to BNF conversion document</p>
+            
+            <p id="x052" class="summary">Issue #139 - still awaiting more work.</p>
+            
+            <p id="x053" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/139">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>139</a> : <a href="https://github.com/invisibleXML/ixml/blob/master/samples/URI/rfc-3987.ixml">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>samples/<wbr></wbr>URI/<wbr></wbr>rfc-3987.ixml</a></p>
+            
+            <p id="x054" class="phone s01"><cite>Steven:</cite> the specifications aren't really good</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Steven to propose a route forward on Issue #139 (URI/IRI grammar)</p>
+            
+            <p id="x056" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/139">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>139</a> : <a href="https://github.com/invisibleXML/ixml/blob/master/samples/URI/rfc-3987.ixml">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>blob/<wbr></wbr>master/<wbr></wbr>samples/<wbr></wbr>URI/<wbr></wbr>rfc-3987.ixml</a></p>
+            
+            <p id="x057" class="phone s01"><cite>Steven:</cite> the syntax is very loose indeed on some items such as IRIs that aren't valid URIs</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Steven to propose an iXML grammar for IRIs and illustrate the places where it might
+               fail.</p>
+            
+            <p id="x059" class="summary">Issue #137 - open pull request by Norm (#167) awaiting resolution, constucting iXML
+               grammar from sections in the spec.</p>
+            
+            <p id="x060" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/137">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>137</a> : We should document the XML tag set that results from parsing an ixml grammar with
+               the ixml specification grammar</p>
+            
+            <p id="x061" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/pull/167">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>pull/<wbr></wbr>167</a> : Recraft the gen-grammars PR on top of the latest master</p>
+            
+            <p id="x062" class="irc"><cite>&lt;john&gt;</cite> s/contructing/constructing/</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Steven to review Norm's pull request 167</p>
+            
+            <p id="x064" class="summary">Issue #13 - Renaming proposal - MSM not really ready to discuss - perhaps needs a
+               meta-discussion on v.Next?</p>
+            
+            <p id="x065" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/13">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>13</a> : Renaming proposal (for v.Next)</p>
+            
+            <p id="x066" class="phone s01"><cite>Steven:</cite> supporting renaming, but no specific ideas yet, though use cases exist.</p>
+            
+            <p id="x067" class="phone s02"><cite>MSM:</cite> two forms of renaming - static and dynamic. i) Static: The name is given in the grammar
+               but isn't a non-terminal. ii) Dynamic: the name is read from the input (e.g. parsing
+               XML)</p>
+            
+            <p id="x068" class="phone s01"><cite>Steven:</cite> the latter is a case of context-dependency, which is a huge issue.</p>
+            
+            <p id="x071" class="phone s02"><cite>MSM:</cite> If there is a schema, then it's possible, but for general XML we need to extract
+               the name of an element from the input data.</p>
+            
+            <p id="x073" class="phone s01"><cite>Steven:</cite> Use case - recognise as A, but output as B.</p>
+            
+            <p id="a05" class="action"><strong>ACTION:</strong> MSM - open dynamic naming as a separate issue</p>
+            
+            <p id="x075" class="summary">Issue #75 - combining grammars</p>
+            
+            <p id="x076" class="irc"><cite>&lt;Github&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/75">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>75</a> : Combining grammars (for v.Next)</p>
+            
+            <p id="x077" class="phone s03"><cite>Norm:</cite> Doesn't think it is difficult but Steven reports encountering a number of issues,
+               such as scoping, whether it appears in the XML.</p>
+            
+            <p id="x078" class="phone s03"><cite>Norm:</cite> there would have to be decisions on such scoping effects</p>
+            
+            <p id="x079" class="phone s02"><cite>MSM:</cite> Scoping issues: RelaxNG seemed to make a good attempt at such combinations. Perhaps
+               having primitive 'combinators' from RelaxNG analogues</p>
+            
+            <p id="a06" class="action"><strong>ACTION:</strong> Norm to produce a concrete proposal. John offers to assist</p>
+            
+            <p id="x081" class="irc"><cite>&lt;john&gt;</cite> Next meeting: 2023 January 10</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Norm to  issue an erratum for issue 147</a></li>
+            
+            <li><a href="#a02">Steven to propose a route forward on Issue #139 (URI/IRI grammar)</a></li>
+            
+            <li><a href="#a03">Steven to propose an iXML grammar for IRIs and illustrate the places where it might
+                  fail.</a></li>
+            
+            <li><a href="#a04">Steven to review Norm's pull request 167</a></li>
+            
+            <li><a href="#a05">MSM - open dynamic naming as a separate issue</a></li>
+            
+            <li><a href="#a06">Norm to produce a concrete proposal. John offers to assist</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 196 (Thu Oct 27 17:06:44 2022 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Failed: s/Person_Person//</p>
+         
+         <p class="warning">Succeeded: s/Present+Person//</p>
+         
+         <p class="warning">Failed: s/Person+Person//</p>
+         
+         <p class="warning">Succeeded: s/(omega/(e.g. omega/</p>
+         
+         <p class="warning">Succeeded: s/this/issue 147/</p>
+         
+         <p class="warning">Failed: s/for this/for Issue #147/</p>
+         
+         <p class="warning">Failed: s/contructing/constructing/</p>
+         
+         <p class="warning">Succeeded: s/then the/then/</p>
+         
+         <p class="warning">Found 'Next meeting:' not followed by a URL: '2023 January 10'.</p>
+         
+         <p class="warning">All speakers: MSM, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: Github, john, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

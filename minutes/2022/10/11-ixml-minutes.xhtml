@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 11 October 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-10-11" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>11 October 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/09/13-ixml-minutes.html"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Oct/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/10/11-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Actions</a></li>
+               
+               <li><a href="#t02">Status of implementations</a></li>
+               
+               <li><a href="#t03">Status of testing and test suites</a></li>
+               
+               <li><a href="#t04">Issue #145 Character class "LC" doesn't match our grammar</a></li>
+               
+               <li><a href="#t05">Spec build process</a></li>
+               
+               <li><a href="#t06">Implementation reports (version)</a></li>
+               
+               <li><a href="#t07">Issue #147 Are control characters allowed in an ixml grammar?</a></li>
+               
+               <li><a href="#t08">Issue #138 Home page links to ixml.xml and ixml.ixml</a></li>
+               
+               <li><a href="#t09">AOB</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x011" class="irc"><cite>&lt;cmsmcq&gt;</cite> Good morning, all.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Actions</h3>
+            
+            <p id="x013" class="summary">ACTION (2022-06-21): Tom to set up a schematron demo</p>
+            
+            <p id="x014" class="summary">[Continues]</p>
+            
+            <p id="x015" class="summary">ACTION (2022-09-13): John to report how many Earley items are reduced</p>
+            
+            <p id="x016" class="summary">                     by the changed rewrite rules.</p>
+            
+            <p id="x017" class="summary">[Continues]</p>
+            
+            <p id="x018" class="summary">ACTION (2022-09-13): Steve to draft text (in HTML) to resolve the</p>
+            
+            <p id="x019" class="summary">                     erratum in issue #145</p>
+            
+            <p id="x020" class="summary">[Done; please check]</p>
+            
+            <p id="x021" class="summary">ACTION (2022-09-13): Norm to try out the stylesheet PI trick on the</p>
+            
+            <p id="x022" class="summary">                     XML version of the ixml grammar.</p>
+            
+            <p id="x023" class="summary">[Done]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Status of implementations</h3>
+            
+            <p id="x025" class="phone s01"><cite>Steven:</cite> v4 is up. Mostly code cleanup. Some better error messages. Warns about unreachable
+               rules.</p>
+            
+            <p id="x026" class="phone s02"><cite>Norm:</cite> No change</p>
+            
+            <p id="x027" class="phone s03"><cite>MSM:</cite> None</p>
+            
+            <p id="x029" class="phone s01"><cite>Steven:</cite> I also published my code (using ixml)<br />
+               <span id="x030">… also working on my tutorial.</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of testing and test suites</h3>
+            
+            <p id="x032" class="phone s02"><cite>Norm:</cite> There were commits for a couple of additional ambiguous cases</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Issue #145 Character class "LC" doesn't match our grammar</h3>
+            
+            <p id="x034" class="phone s03"><cite>MSM:</cite> We agreed to change. We need to confirm the changes.</p>
+            
+            <p id="x035" class="summary"><a href="https://homepages.cwi.nl/~steven/ixml/ixml-errata.html">https://<wbr></wbr>homepages.cwi.nl/~steven/<wbr></wbr>ixml/<wbr></wbr>ixml-errata.html</a></p>
+            
+            <p id="x036" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://invisiblexml.org/1.0/errata.html">https://<wbr></wbr>invisiblexml.org/<wbr></wbr>1.0/<wbr></wbr>errata.html</a></p>
+            
+            <p id="x037" class="phone s02"><cite>Norm:</cite> Errata is fine</p>
+            
+            <p id="x038" class="phone s01"><cite>Steven:</cite> I'm fine with Norm's version. My action remains to update a future version of the
+               spec.</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Norm to move the erratum from 'Proposed' to 'Accepted'.</p>
+            
+            <p id="x040" class="phone s02"><cite>Norm:</cite> I would like to propiose spec build process</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Spec build process</h3>
+            
+            <p id="x043" class="phone s02"><cite>Norm:</cite> I propose moving sources around, and building our docs automatically, so we get to
+               see diff markups.<br />
+               <span id="x044">… Using DeltaXML, for which I have a licence</span></p>
+            
+            <p id="x045" class="phone s03"><cite>MSM:</cite> Is it possible to inject a paragraph to acknowledge DeltaXML?</p>
+            
+            <p id="x049" class="phone s02"><cite>Norm:</cite> I added a next and previous change button<br />
+               <span id="x050">… all it means is that there will be a source directory</span><br />
+               <span id="x051">… for this change, edit the spec and make a pull request</span><br />
+               <span id="x052">… I'll take the action to incorporate the erratum and explain how it works</span></p>
+            
+            <p id="x053" class="phone s04"><cite>Bethan:</cite> If it's an erratum, it goes into a v1.1?</p>
+            
+            <p id="x054" class="phone s02"><cite>Norm:</cite> Yes, there will be a 1.1 for the change</p>
+            
+            <p id="x055" class="phone s03"><cite>MSM:</cite> 1.0 directory is sacred</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Implementation reports (version)</h3>
+            
+            <p id="x059" class="phone s05"><cite>John:</cite> I've updated and released a v1<br />
+               <span id="x060">… with drag and drop</span></p>
+            
+            <p id="x061" class="phone s05"><cite>John:</cite> Ambiguity can be a problem.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Issue #147 Are control characters allowed in an ixml grammar?</h3>
+            
+            <p id="x064" class="phone s02"><cite>Norm:</cite> Control characters crash my parser.<br />
+               <span id="x065">… Because it goes through the XML</span></p>
+            
+            <p id="x066" class="phone s04"><cite>Bethan:</cite> Don't we already cover this?</p>
+            
+            <p id="x067" class="phone s03"><cite>MSM:</cite> Yes and no.</p>
+            
+            <p id="x068" class="phone s02"><cite>Norm:</cite> If so, can we make it more explicit?</p>
+            
+            <p id="x070" class="phone s03"><cite>MSM:</cite> Or otherwise if it doesn't, do we want to say that?<br />
+               <span id="x071">… I have a bias. My parser won't accept such grammars</span></p>
+            
+            <p id="x072" class="phone s05"><cite>John:</cite> Mine will.</p>
+            
+            <p id="x073" class="irc"><cite>&lt;norm&gt;</cite> <a href="https://github.com/invisibleXML/ixml/issues/147">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>ixml/<wbr></wbr>issues/<wbr></wbr>147</a></p>
+            
+            <p id="x074" class="phone s02"><cite>Norm:</cite> Some ixml grammars have no XML representation</p>
+            
+            <p id="x075" class="phone s05"><cite>John:</cite> Some implementations can, some can't</p>
+            
+            <p id="x078" class="phone s03"><cite>MSM:</cite> I am reluctant to push hard.<br />
+               <span id="x079">… because it gets to talking about implementation choices.</span><br />
+               <span id="x080">… on the other hand, different behaviours is problematic</span></p>
+            
+            <p id="x082" class="phone s03"><cite>MSM:</cite> I don't want to push either way.</p>
+            
+            <p id="x083" class="phone s04"><cite>Bethan:</cite> What is the status of the XML serialisation of the ixml grammar?</p>
+            
+            <p id="x084" class="phone s03"><cite>MSM:</cite> some conforming grammars have no conforming XML representation</p>
+            
+            <p id="x086" class="phone s04"><cite>Bethan:</cite> XML representations are dependent on the ixml syntax?<br />
+               <span id="x087">… so the ixml format is logically prior to the XML format</span></p>
+            
+            <p id="x089" class="phone s03"><cite>MSM:</cite> I would like to check that claim<br />
+               <span id="x090">… yes you are right</span></p>
+            
+            <p id="x092" class="phone s01"><cite>Steven:</cite> Couldn't we just say implementations should warn?<br />
+               <span id="x093">… I would worry that future targets would add new restrictions to ixml</span></p>
+            
+            <p id="x094" class="phone s01"><cite>Steven:</cite> We could warn about grammars that wouldn't have an XML representation</p>
+            
+            <p id="x095" class="phone s03"><cite>MSM:</cite> I could live with that.</p>
+            
+            <p id="x096" class="phone s01"><cite>Steven:</cite> How about demanding that control characters always be  encoded, and not allowed in
+               strings?</p>
+            
+            <p id="x098" class="phone s02"><cite>Norm:</cite> Forbidding tabs would be good anyway, since they are not visible.</p>
+            
+            <p id="x099" class="phone s03"><cite>MSM:</cite> What is the set of Unicode characters that are not XML characters?</p>
+            
+            <p id="x101" class="phone s02"><cite>Norm:</cite> Differs between XML versions.<br />
+               <span id="x102">… 5th ed forbids c0 and c1</span></p>
+            
+            <p id="x104" class="phone s03"><cite>MSM:</cite> No, c1 is allowed<br />
+               <span id="x105">… So proposal: String literals in the ixml grammar should exclude all c0 characters.
+                  (Or or c0 and c1)</span></p>
+            
+            <p id="x108" class="phone s02"><cite>Norm:</cite> I could live with either of those<br />
+               <span id="x109">… I think it would be more consistent to forbid both</span></p>
+            
+            <p id="x110" class="phone s01"><cite>Steven:</cite> I'd like to have time for this to sink in</p>
+            
+            <p id="a02" class="action"><strong>ACTION:</strong> Norm to write a proposal that covers the c0 c1 problem in strings</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Issue #138 Home page links to ixml.xml and ixml.ixml</h3>
+            
+            <p id="x113" class="phone s02"><cite>Norm:</cite> I'd like to have two links, one that displays, and one that downloads</p>
+            
+            <p id="x114" class="phone s03"><cite>MSM:</cite> You wanted the XML to behave similarly to the IE or Firefox behaviour</p>
+            
+            <p id="x115" class="phone s02"><cite>Norm:</cite> I will do this.</p>
+            
+            <p id="a03" class="action"><strong>ACTION:</strong> Norm to make XML displayable in all browsers</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">AOB</h3>
+            
+            <p id="x120" class="phone s03"><cite>MSM:</cite> Next month's meeting raising the question which is our normative timezone</p>
+            
+            <p id="x121" class="summary">Next call 15th November</p>
+            
+            <p id="x122" class="phone s06"><cite>Time:</cite> Same clocktime as this call</p>
+            
+            <p id="x123" class="summary">[ADJOURN]</p>
+            
+            <p id="a04" class="action"><strong>ACTION:</strong> Norm to inform group how build process will work</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Norm to move the erratum from 'Proposed' to 'Accepted'.</a></li>
+            
+            <li><a href="#a02">Norm to write a proposal that covers the c0 c1 problem in strings</a></li>
+            
+            <li><a href="#a03">Norm to make XML displayable in all browsers</a></li>
+            
+            <li><a href="#a04">Norm to inform group how build process will work</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 192 (Tue Jun 28 16:55:30 2022 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/ious/iours/</p>
+         
+         <p class="warning">Succeeded: s/./?/</p>
+         
+         <p class="warning">Succeeded: s/SO/So/</p>
+         
+         <p class="warning">Succeeded: s/[None]//</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: MSM, Time</p>
+         </div>
+      
+      
+      </body>
+</html>

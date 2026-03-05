@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 07 January 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-01-07" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>07 January 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2024/12/10-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2025Jan/0000"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2025/01/07-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, David Birnbaum, Frederik Öhrström, John, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#5a25">Review of open actions</a></li>
+               
+               <li><a href="#feab">Status reports</a></li>
+               
+               <li><a href="#9a62">A subtraction operator</a></li>
+               
+               <li><a href="#161c">Pragmas</a></li>
+               
+               <li><a href="#1d53">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="5a25">Review of open actions</h3>
+            
+            <p id="21e4" class="phone s01"><cite>Steven:</cite> It was holiday holidays<br />
+               <span id="cef0">… nothing done</span></p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="feab">Status reports</h3>
+            
+            <p id="1de1" class="phone s02"><cite>Frederik:</cite> Unicode character sets are on the to do list<br />
+               <span id="cff6">… as is proper error recovery</span></p>
+            
+            <p id="bbdf" class="phone s03"><cite>Norm:</cite> I have used ixml *in production*!</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="9a62">A subtraction operator</h3>
+            
+            <p id="9370" class="phone s03"><cite>Norm:</cite> I need more time to think about the not operator</p>
+            
+            <p id="9b1f" class="phone s04"><cite>John:</cite> It may depend on the parsing algorithm for how much efficiency it gains<br />
+               <span id="829b">… but it's like the subtraction version, but with the arguments reversed</span></p>
+            
+            <p id="b497" class="phone s02"><cite>Frederik:</cite> How about weights on ambiguous parses</p>
+            
+            <p id="95bb" class="phone s03"><cite>Norm:</cite> I have implemented that</p>
+            
+            <p id="f3ae" class="phone s02"><cite>Frederik:</cite> I did too, for tree building.<br />
+               <span id="d71f">… It sees it has multiple trees, and chooses the lowest cost one</span></p>
+            
+            <p id="9f82" class="summary">Norm: Early is easy to implement for 'not', not sure about GLL</p>
+            
+            <p id="1dae" class="phone s02"><cite>Frederik:</cite> I like the 'not' design as easy to understand</p>
+            
+            <p id="0efe" class="phone s01"><cite>Steven:</cite> We definitely need to investigate</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="161c">Pragmas</h3>
+            
+            <p id="bb4d" class="phone s04"><cite>John:</cite> The key issue seems to be about the specifity of pragmas</p>
+            
+            <p id="e9f7" class="phone s05"><cite>Bethan:</cite> We need requirements</p>
+            
+            <p id="7d3a" class="phone s03"><cite>Norm:</cite> The original proposal had requirements</p>
+            
+            <p id="2fe2" class="action"><strong>ACTION:</strong> Bethan to collect requirements for pragmas</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="1d53">Next meeting</h3>
+            
+            <p id="8f24" class="summary">21 January</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#2fe2">Bethan to collect requirements for pragmas</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 242 (Fri Dec 20 18:32:17 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Frederick/Frederik/</p>
+         
+         <p class="warning">Succeeded: s/TH/Th/</p>
+         
+         <p class="warning">Succeeded: s/n g/</p>
+         
+         <p class="warning">Succeeded: s/meeti/meeting/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: Frederik</p>
+         
+         <p class="warning">All speakers: Bethan, Frederik, John, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>
