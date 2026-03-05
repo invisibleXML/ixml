@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>Invisible XML Community Group – 18 February 2025</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2025-02-18" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            Invisible XML Community Group</h1>
+         
+         <h2>18 February 2025</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2025/02/04-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2025Feb/0046"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2025/02/18-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, David, John, Norm, Steven</dd>
+               
+               <dt>Regrets</dt>
+               <dd>Fredrik</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#cf72">Accept the minutes of the previous meeting</a></li>
+               
+               <li><a href="#20e1">Review of open actions</a></li>
+               
+               <li><a href="#7dfd">Status reports</a></li>
+               
+               <li><a href="#f6f8">Serialization</a></li>
+               
+               <li><a href="#f6c0">Pragmas</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="cf72">Accept the minutes of the previous meeting</h3>
+            
+            <p id="5e13" class="summary">We think they're OK</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="20e1">Review of open actions</h3>
+            
+            <p id="fb3d" class="summary">[No news]</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="7dfd">Status reports</h3>
+            
+            <p id="b12e" class="phone s01"><cite>Norm:</cite> Bug fixes</p>
+            
+            <p id="35eb" class="phone s02"><cite>Steven:</cite> I'm writing my MarkupUK paper</p>
+            
+            <p id="62a1" class="phone s01"><cite>Norm:</cite> I updated the references</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="f6f8">Serialization</h3>
+            
+            <p id="3c3c" class="phone s02"><cite>Steven:</cite> We just say "serialization", without detail</p>
+            
+            <p id="a551" class="phone s01"><cite>Norm:</cite> Slippery slope</p>
+            
+            <p id="6db0" class="phone s02"><cite>Steven:</cite> Leave as is?</p>
+            
+            <p id="51f4" class="phone s03"><cite>David:</cite> Perhaps, say that serialization is implementation dependent</p>
+            
+            <p id="baa2" class="phone s01"><cite>Norm:</cite> "Implementation defined"</p>
+            
+            <p id="42ca" class="phone s04"><cite>John:</cite> Serialization is actually translation from parse tree to XML output tree, and serialization
+               is converting that to text, so I think "serialization" is the wrong term.</p>
+            
+            <p id="6044" class="phone s03"><cite>David:</cite> "Serialization" is about ordering.<br />
+               <span id="d28a">… it might be helpful to use another term.</span></p>
+            
+            <p id="84d0" class="phone s04"><cite>John:</cite> So then entities is not part of ixml</p>
+            
+            <p id="e639" class="phone s01"><cite>Norm:</cite> The spec requires serialized characters</p>
+            
+            <p id="bed2" class="phone s05"><cite>Bethan:</cite> I'm not convinced that the spec's "serialization" doesn't really mean serialization.</p>
+            
+            <p id="3701" class="phone s04"><cite>John:</cite> I don't serialize to characters, but to a model</p>
+            
+            <p id="857f" class="phone s02"><cite>Steven:</cite> I think the ixml spec (should) allow serializing to memory</p>
+            
+            <p id="dfc2" class="phone s05"><cite>Bethan:</cite> I think the current spec intends an understanding of XML serialization</p>
+            
+            <p id="f540" class="phone s02"><cite>Steven:</cite> I certainly didn't write it that way, and we don't normatively reference it</p>
+            
+            <p id="1b77" class="phone s03"><cite>David:</cite> Calling it serialization is more than mildly confusing</p>
+            
+            <p id="024b" class="phone s01"><cite>Norm:</cite> I think we should take the character-wise interpretation</p>
+            
+            <p id="f501" class="phone s04"><cite>John:</cite> We've open a small can of worms. It's worth thinking about over a longer period.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="f6c0">Pragmas</h3>
+            
+            <p id="c611" class="phone s05"><cite>Bethan:</cite> There has been a lot of email discussion</p>
+            
+            <p id="dc4d" class="phone s01"><cite>Norm:</cite> Item 9</p>
+            
+            <p id="279e" class="phone s02"><cite>Steven:</cite> I think that the content of pragmas should be able to do that, but not necessary
+               encoding that in the spec.</p>
+            
+            <p id="0ef7" class="phone s05"><cite>Bethan:</cite> Should the spec say what it means when a pragma is in a particular position in the
+               grammar</p>
+            
+            <p id="9ee7" class="irc"><cite>&lt;Steven&gt;</cite> s/Should/</p>
+            
+            <p id="edf2" class="phone s01"><cite>Norm:</cite> The position of a pragma should have a predictable place in the serialization</p>
+            
+            <p id="0f27" class="phone s05"><cite>Bethan:</cite> Pragmas have a syntactical role, but not a semantic role</p>
+            
+            <p id="c25e" class="phone s04"><cite>John:</cite> It provides a well-defined place where it is, which may affect scope<br />
+               <span id="a5bd">… it is defined where it is in the tree, and the semantics of that pragma defines
+                  the scope</span></p>
+            
+            <p id="bc0e" class="phone s05"><cite>Bethan:</cite> I think we agree</p>
+            
+            <p id="ae5f" class="phone s03"><cite>David:</cite> Item 9 doesn't specify that<br />
+               <span id="6993">… I could have a pragma at the beginning, that annotates something deep in the grammar.</span></p>
+            
+            <p id="c3e3" class="phone s05"><cite>Bethan:</cite> I think 9 is a question of attachment and not annotation<br />
+               <span id="a5a6">… to which constructs in the grammar should it be possible to attach a pragma?</span><br />
+               <span id="d9ad">… 9 and 10 should both say attach and not annotate</span></p>
+            
+            <p id="73f9" class="phone s01"><cite>Norm:</cite> What do we mean by 'attach'?</p>
+            
+            <p id="850f" class="phone s05"><cite>Bethan:</cite> Attachment is syntactic, and annotate is semantic.</p>
+            
+            <p id="bbe2" class="phone s04"><cite>John:</cite> Suppose you had a pragma setting a priority; you could put it anywhere in the rule;
+               it depends on the implementation.<br />
+               <span id="f593">… there are others where the pragma has to be very close to the thing it is talking
+                  about</span></p>
+            
+            <p id="0fb0" class="phone s05"><cite>Bethan:</cite> Not sure if that is true. You could put them all at the root, it wouldn't matter.<br />
+               <span id="2426">… I don't see any example where the pragma has to be absolutely attached to anything</span></p>
+            
+            <p id="b02f" class="phone s02"><cite>Steven:</cite> Is 'attached' just placement in the grammar?</p>
+            
+            <p id="813f" class="phone s05"><cite>Bethan:</cite> Yes.</p>
+            
+            <p id="7a98" class="phone s02"><cite>Steven:</cite> I still don't understand what 'attach' means</p>
+            
+            <p id="c4ab" class="phone s03"><cite>David:</cite> Nowhere do we say that annotation and attachment are two sides of the operation</p>
+            
+            <p id="8387" class="phone s05"><cite>Bethan:</cite> It may be best to talk about syntactic scope</p>
+            
+            <p id="a5ab" class="phone s01"><cite>Norm:</cite> I propose that "attach" means 'is a child of'</p>
+            
+            <p id="2175" class="irc"><cite>&lt;norm&gt;</cite> in the XML representation of the grammar</p>
+            
+            <p id="5e0e" class="phone s02"><cite>Steven:</cite> I think then I accept 9 and 10</p>
+            
+            <p id="66ce" class="summary">We agree on a version of 11 without 'minimal', and agree on 12</p>
+            </section>
+         </main>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 242 (Fri Dec 20 18:32:17 2024 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Frederik/Fredrik</p>
+         
+         <p class="warning">Succeeded: s/]//</p>
+         
+         <p class="warning">Succeeded: s/SO/So/</p>
+         
+         <p class="warning">Succeeded: s/;/'/</p>
+         
+         <p class="warning">Succeeded: s/normaticely/normatively</p>
+         
+         <p class="warning">Succeeded: s/donm't/don't/</p>
+         
+         <p class="warning">Succeeded: s/BB/B/</p>
+         
+         <p class="warning">Failed: s/Should/</p>
+         
+         <p class="warning">Succeeded: s/Shoudl/Should/</p>
+         
+         <p class="warning">Succeeded: s/whoudl/should/</p>
+         
+         <p class="warning">Succeeded: s/serialzation/serialization</p>
+         
+         <p class="warning">Succeeded: s/prgram/pragma</p>
+         
+         <p class="warning">Succeeded: s/;/'/</p>
+         
+         <p class="warning">Succeeded: s/it emans/it means/</p>
+         
+         <p class="warning">Succeeded: s/thiing/thing/</p>
+         
+         <p class="warning">Succeeded: s/Iss/Is/</p>
+         
+         <p class="warning">Succeeded: s/wihtout/without/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">All speakers: Bethan, David, John, Norm, Steven</p>
+         
+         <p class="warning">Active on IRC: norm, Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

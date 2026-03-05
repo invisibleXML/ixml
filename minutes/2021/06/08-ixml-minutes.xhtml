@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml monthly meeting – 8 June 2021</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2021-06-08" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml monthly meeting</h1>
+         
+         <h2>8 June 2021</h2>
+         
+         
+         <nav id="links">
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2021Jun/0000.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2021/06/08-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Aleksei, John, Michael, Steven, Tomos</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>Steven</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Namespaces/Text injection</a></li>
+               
+               <li><a href="#t03">Resolving ambiguity</a></li>
+               
+               <li><a href="#t04">Next meeting</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               
+               <li class="app"><a href="#ResolutionSummary">Summary of resolutions</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="a01" class="action"><strong>Action:</strong> Steven to research where to put S for attributes.</p>
+            
+            <p id="x011" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x012" class="summary">Constinues</p>
+            
+            <p id="a02" class="action"><strong>Action:</strong> Michael to comment on conformance section of new draft</p>
+            
+            <p id="x014" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x015" class="summary">Done</p>
+            
+            <p id="a03" class="action"><strong>Action:</strong> Steven to apply Michael's text to spec</p>
+            
+            <p id="x017" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x018" class="summary">[Done]</p>
+            
+            <p id="x019" class="phone s01"><cite>Steven:</cite> Not yet pushed to github</p>
+            
+            <p id="x020" class="summary"><a href="https://homepages.cwi.nl/~steven/ixml/ixml-specification.html">https://<wbr></wbr>homepages.cwi.nl/~steven/<wbr></wbr>ixml/<wbr></wbr>ixml-specification.html</a></p>
+            
+            <p id="x021" class="phone s01"><cite>Steven:</cite> Please check.</p>
+            
+            <p id="x022" class="summary"><a href="https://lists.w3.org/Archives/Public/public-ixml/2021Apr/0040">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2021Apr/<wbr></wbr>0040</a></p>
+            
+            <p id="x024" class="phone s01"><cite>Steven:</cite> I don't think we answered those questions; not added to the spec.<br />
+               <span id="x025">… two questions unanswered there: code points, and grammars</span></p>
+            
+            <p id="x026" class="phone s02"><cite>MSM:</cite> I am confident that the spec should have a story if input doesn't obey the rules,
+               it should be clear if it should be flagged as an error, or be 'undefined'.</p>
+            
+            <p id="x027" class="irc"><cite>&lt;join_subline&gt;</cite> 👋 from toronto canada</p>
+            
+            <p id="x029" class="phone s02"><cite>MSM:</cite> if it must 'raise an error', then it protects us from future changes to the spec.<br />
+               <span id="x030">… I asked what SQL does, they said behaviour is undefined.</span></p>
+            
+            <p id="x031" class="irc"><cite>&lt;join_subline&gt;</cite> found this channel in <a href="https://w3c.github.io/cg-monitor/">https://<wbr></wbr>w3c.github.io/<wbr></wbr>cg-monitor/</a></p>
+            
+            <p id="x032" class="phone s02"><cite>MSM:</cite> which allows processors to add their own features.</p>
+            
+            <p id="x033" class="phone s01"><cite>Steven:</cite> I'm a big fan of letting the user know (i.e. error)</p>
+            
+            <p id="x034" class="phone s02"><cite>MSM:</cite> I'm ok with that.</p>
+            
+            <p id="x035" class="phone s02"><cite>MSM:</cite> hex values MUST indicate an assignable unicode character.</p>
+            
+            <p id="x039" class="phone s01"><cite>Steven:</cite> And that is to protect output from nonsense Unicode sequences</p>
+            
+            <p id="a04" class="action"><strong>Action:</strong> MSM to check conformance text in spec</p>
+            
+            <p id="x043" class="phone s01"><cite>Steven:</cite> All other actions continue</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Namespaces/Text injection</h3>
+            
+            <p id="x045" class="phone s01"><cite>Steven:</cite> Thanks for the new suggestions. I suggest that we create requirements for the next
+               version, just to get a first version out of the door.</p>
+            
+            <p id="x052" class="phone s02"><cite>MSM:</cite> If we provide for declaration of namespaces, then namespace qualified elements and
+               attributes just use a QName<br />
+               <span id="x053">… and then use a pragma/structured comment for the actual binding</span><br />
+               <span id="x054">… not local bindings</span><br />
+               <span id="x055">… NS injection may be easy.</span><br />
+               <span id="x056">… For text injection, the grammar has the same declarative meaning.</span><br />
+               <span id="x057">… it's the mirror image of the minus marker</span><br />
+               <span id="x058">… which gives it a certain appeal</span></p>
+            
+            <p id="x059" class="phone s03"><cite>John:</cite> And that could happen in any rule.</p>
+            
+            <p id="x061" class="phone s02"><cite>MSM:</cite> "Is it possible to create a nondeterministic grammar?"</p>
+            
+            <p id="x062" class="phone s01"><cite>Steven:</cite> Inserted text has no effect on the parse, only on the serialisation</p>
+            
+            <p id="a05" class="action"><strong>Action:</strong> MSM to check conformance text in spec</p>
+            
+            <p id="x064" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x065" class="irc"><cite>&lt;cmsmcq&gt;</cite> <a href="https://lists.w3.org/Archives/Public/public-ixml/2021Jun/0004.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2021Jun/<wbr></wbr>0004.html</a></p>
+            
+            <p id="x066" class="summary"><a href="https://lists.w3.org/Archives/Public/public-ixml/2021Jun/0004.html">https://<wbr></wbr>lists.w3.org/<wbr></wbr>Archives/<wbr></wbr>Public/<wbr></wbr>public-ixml/<wbr></wbr>2021Jun/<wbr></wbr>0004.html</a></p>
+            
+            <p id="x067" class="phone s04"><cite>Tom:</cite> I like suggestion 3.2</p>
+            
+            <p id="x068" class="phone s02"><cite>MSM:</cite> The aim is to target to a particular vocab, except it requires more. Getting &lt;ol&gt;
+               is easy, but &lt;list type="ordered"&gt; is not</p>
+            
+            <p id="x069" class="phone s04"><cite>Tom:</cite> I would like plusses on nonterminals as well as terminal text.</p>
+            
+            <p id="x070" class="phone s02"><cite>MSM:</cite> We don't need it. There is a way to do that.</p>
+            
+            <p id="x071" class="phone s04"><cite>Tom:</cite> If we expect users to understand "+", we should make it do the same thing.</p>
+            
+            <p id="x072" class="phone s01"><cite>Steven:</cite> We dont need plus on a nonterminal, because they are already plussed.</p>
+            
+            <p id="x073" class="phone s02"><cite>MSM:</cite> It is like the ^ symbol.</p>
+            
+            <p id="x074" class="phone s04"><cite>Tom:</cite> Plus feels right.</p>
+            
+            <p id="x075" class="phone s01"><cite>Steven:</cite> We have the QNames, just not the bindings for namespaces</p>
+            
+            <p id="x076" class="phone s05"><cite>Aleksei:</cite> We want to avoid clashes between grammars. If we use qnames in ixml, it will fix
+               the prefix in the grammar</p>
+            
+            <p id="x077" class="irc"><cite>&lt;cmsmcq&gt;</cite> If I’m reading the spec correctly, colon is not currently allowed in names.</p>
+            
+            <p id="x078" class="phone s01"><cite>Steven:</cite> You may be right</p>
+            
+            <p id="x080" class="irc"><cite>&lt;cmsmcq&gt;</cite> Adding it will require some rewriting, to prohibit colon as a final character (if
+               we want to match the rule in xml-names).</p>
+            
+            <p id="x081" class="phone s04"><cite>Tom:</cite> As long as there are bindings, it's ok.</p>
+            
+            <p id="x083" class="phone s02"><cite>MSM:</cite> Let's agree on +<br />
+               <span id="x084">… postpone namespaces</span></p>
+            
+            <p id="x085" class="phone s04"><cite>Tom:</cite> Agree</p>
+            
+            <p id="x086" class="summary">RESOLUTION" adopt 3.2 "Use a + for inserting text"</p>
+            
+            <p id="r01" class="resolution"><strong>Resolution:</strong> adopt 3.2 "Use a + for inserting text"</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Resolving ambiguity</h3>
+            
+            <p id="x089" class="phone s01"><cite>Steven:</cite> You can always fix it by writing an unambiguous grammar.</p>
+            
+            <p id="x090" class="phone s02"><cite>MSM:</cite> We have closed this issue. Steven has an action.</p>
+            
+            <p id="x093" class="phone s02"><cite>MSM:</cite> If there is more than one tree, the processor can return any one and is not obliged
+               to explain its choice</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Next meeting</h3>
+            
+            <p id="x095" class="summary">6 July 2021 usual time</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to research where to put S for attributes.</a></li>
+            
+            <li><a href="#a02">Michael to comment on conformance section of new draft</a></li>
+            
+            <li><a href="#a03">Steven to apply Michael's text to spec</a></li>
+            
+            <li><a href="#a04">MSM to check conformance text in spec</a></li>
+            
+            <li><a href="#a05">MSM to check conformance text in spec</a></li>
+            </ol>
+         </div>
+      
+      
+      <div id="ResolutionSummary">
+         
+         <h2>Summary of resolutions</h2>
+         
+         <ol>
+            
+            <li><a href="#r01">adopt 3.2 "Use a + for inserting text"</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 136 (Thu May 27 13:50:24 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/vv/v/</p>
+         
+         <p class="warning">Succeeded: s/ACTTIN/ACTION/</p>
+         
+         <p class="warning">Succeeded: s/AN/An/</p>
+         
+         <p class="warning">Succeeded: s/YO/Yo/</p>
+         
+         <p class="warning">Succeeded: s/::/</p>
+         
+         <p class="warning">Succeeded: s/MSM/MSM:/</p>
+         
+         <p class="warning">Succeeded: s/DOne/Done/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: Steven</p>
+         
+         <p class="warning">Maybe present: MSM, Tom</p>
+         </div>
+      
+      
+      </body>
+</html>

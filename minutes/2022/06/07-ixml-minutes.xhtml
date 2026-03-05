@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 7 June 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-06-07" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>7 June 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/05/31-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Jun/0010"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/06/07-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, Michael, Norm</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>John</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Previous Actions</a></li>
+               
+               <li><a href="#t02">Implementations</a></li>
+               
+               <li><a href="#t03">Test-suite</a></li>
+               
+               <li><a href="#t04">Review of open issues</a></li>
+               
+               <li><a href="#t05">Prague preparations</a></li>
+               
+               <li><a href="#t06">Plans for Balisage?</a></li>
+               
+               <li class="app"><a href="#ActionSummary">Summary of action items</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section></section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Previous Actions</h3>
+            
+            <p id="x013" class="summary">ACTION (2022-05-31): Steven to add "after removal of        namespace-qualified elements
+               and attributes" to the description        of xml grammar conformance. (DONE)  ACTION
+               (2022-05-31): Steven to replace "including" with "include" as        needed in Parsing
+               section. (DONE)  ACTION (2022-05-31): Norm to draft new splash page for        invisiblexml.org
+               with pointer to implementations, grammars, and        other useful things. DONE</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Implementations</h3>
+            
+            <p id="x015" class="summary">John demonstrated his interactive processor.</p>
+            
+            <p id="x016" class="summary">Norm has his GLL-based parser running now - orders of magnitude faster (e.g. 800-character
+               comment)</p>
+            
+            <p id="x017" class="summary">Norm trying to tackle some very large parse tree problems - mixed progress</p>
+            
+            <p id="x018" class="summary">Michael is the only one not converting into BNF form (e.g. not repetition-expansion)</p>
+            
+            <p id="x019" class="summary">He also uses expansion inline of hidden non-terminals</p>
+            
+            <p id="x020" class="summary">(See his Balisage paper for some details)</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Test-suite</h3>
+            
+            <p id="x022" class="phone s01"><cite>Michael:</cite> some open issues relate to the test suite - S12 catchall error</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Review of open issues</h3>
+            
+            <p id="x024" class="summary">issue #106 Error S05 is an orphan - DONE</p>
+            
+            <p id="x025" class="summary">editorial notes on spec - DONE</p>
+            
+            <p id="x026" class="summary">issue #108 Using S12 as catchall for syntactic errors - DONE</p>
+            
+            <p id="x027" class="summary">No open issues for Version 1.0 spec.    Hurrah!</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Prague preparations</h3>
+            
+            <p id="x031" class="phone s02"><cite>Norm:</cite> draft iXML home page being circulated and discussed</p>
+            
+            <p id="x032" class="phone s03"><cite>Steven:</cite> channel communications - Twitter, LinkedIn? Slack etc.</p>
+            
+            <p id="x033" class="phone s02"><cite>Norm:</cite> action on Twitter XML.com LinkedIn XML.com Slack</p>
+            
+            <p id="x034" class="irc"><cite>&lt;cmsmcq__&gt;</cite> I'll do xml-dev and xmlschema-dev</p>
+            
+            <p id="a01" class="action"><strong>ACTION:</strong> Steven to write on the train!</p>
+            
+            <p id="x036" class="phone s04"><cite>Bethan:</cite> will handle the Twitter announcement</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Plans for Balisage?</h3>
+            
+            <p id="x038" class="summary">Michael - hoping Steven will do the talking there.</p>
+            
+            <p id="x039" class="irc"><cite>&lt;Steven&gt;</cite> Sure</p>
+            
+            <p id="x041" class="phone s01"><cite>Michael:</cite> Could we have published this a year ago? Some rough edges have been smoothed - error
+               codes, insertions, exclusions</p>
+            
+            <p id="x042" class="summary">Steven - meet next week to look at reaction</p>
+            
+            <p id="x043" class="summary">rrs agent,make minutes</p>
+            </section>
+         </main>
+      
+      
+      <div id="ActionSummary">
+         
+         <h2>Summary of action items</h2>
+         
+         <ol>
+            
+            <li><a href="#a01">Steven to write on the train!</a></li>
+            </ol>
+         </div>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 185 (Thu Dec  2 18:51:55 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/Jonh/John/</p>
+         
+         <p class="warning">Maybe present: Steven</p>
+         </div>
+      
+      
+      </body>
+</html>

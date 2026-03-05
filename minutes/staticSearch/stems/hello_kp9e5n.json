@@ -1,0 +1,1 @@
+{"stem":"hello","instances":[{"docUri":"2023\/07\/25-ixml-minutes.xhtml","score":1,"contexts":[{"form":"Hello","weight":"1","pos":53,"context":"&lt;norm&gt; <mark>Hello<\/mark> Joel","fid":"x003"}]},{"docUri":"2021\/10\/12-ixml-minutes.xhtml","score":1,"contexts":[{"form":"Hello","weight":"1","pos":46,"context":"&lt;Tom&gt; <mark>Hello<\/mark> Liam","fid":"x007"}]}]}

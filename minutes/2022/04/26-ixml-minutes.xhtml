@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <title>ixml Group Teleconference – 26 April 2022</title>
+      
+      <meta name="viewport" content="width=device-width" />
+      
+      <link rel="stylesheet" type="text/css" title="2018" href="https://www.w3.org/StyleSheets/scribe2/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/base.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/StyleSheets/public.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="2004" href="https://www.w3.org/2004/02/minutes-style.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Fancy" href="https://www.w3.org/StyleSheets/scribe2/fancy.css" />
+      
+      <link rel="alternate stylesheet" type="text/css" title="Typewriter" href="https://www.w3.org/StyleSheets/scribe2/tt-member.css" />
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2022-04-26" />
+   </head>
+   
+   
+   <body>
+      
+      <header>
+         
+         <p><a href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" border="0" height="48" width="72" /></a></p>
+         
+         
+         <h1>– DRAFT –<br />
+            ixml Group Teleconference</h1>
+         
+         <h2>26 April 2022</h2>
+         
+         
+         <nav id="links">
+            <a href="https://www.w3.org/2022/04/12-ixml-minutes"><img alt="Previous meeting." title="Previous meeting" src="https://www.w3.org/StyleSheets/scribe2/go-previous.png" /></a>
+            <a href="https://lists.w3.org/Archives/Public/public-ixml/2022Apr/0096.html"><img alt="Agenda." title="Agenda" src="https://www.w3.org/StyleSheets/scribe2/chronometer.png" /></a>
+            <a href="https://www.w3.org/2022/04/26-ixml-irc"><img alt="IRC log." title="IRC log" src="https://www.w3.org/StyleSheets/scribe2/text-plain.png" /></a>
+            </nav>
+         </header>
+      
+      
+      <div id="prelims">
+         
+         <div id="attendees">
+            
+            <h2>Attendees</h2>
+            
+            <dl class="intro">
+               
+               <dt>Present</dt>
+               <dd>Bethan, John, Michael, Norm, Steven, Tom</dd>
+               
+               <dt>Regrets</dt>
+               <dd>-</dd>
+               
+               <dt>Chair</dt>
+               <dd>Steven</dd>
+               
+               <dt>Scribe</dt>
+               <dd>norm</dd>
+               </dl>
+            </div>
+         
+         
+         <nav id="toc">
+            
+            <h2>Contents</h2>
+            
+            <ol>
+               
+               <li><a href="#t01">Identify a minute taker</a></li>
+               
+               <li><a href="#t02">Review of action items</a></li>
+               
+               <li><a href="#t03">Status of implementations</a></li>
+               
+               <li><a href="#t04">Status of testing and test suites</a></li>
+               
+               <li><a href="#t05">Review and resolution of bug reports and technical issues</a></li>
+               
+               <li><a href="#t06">Change ~ to ! in character-set exclusions.</a></li>
+               
+               <li><a href="#t07">Use '=' and '|' exclusively.</a></li>
+               
+               <li><a href="#t08">Add a version declaration</a></li>
+               
+               <li><a href="#t09">Change ^ to + in literal insertions.</a></li>
+               
+               <li><a href="#t10">#44 Adopt proposal 3 for error codes.</a></li>
+               </ol>
+            </nav>
+         </div>
+      
+      
+      <main id="meeting" class="meeting">
+         
+         <h2>Meeting minutes</h2>
+         
+         <section>
+            <p id="x010" class="summary">Are you setting up to scribe today?</p>
+            
+            <p id="x011" class="irc"><cite>&lt;Steven&gt;</cite> Was I selected? I was just setting up the channel</p>
+            
+            <p id="x012" class="summary">I thought it was me, and I'm happy to do it. Ok. Cool. Me then. Unless someone else
+               wants to do it :-)</p>
+            
+            <p id="x013" class="irc"><cite>&lt;Steven&gt;</cite> Be my gues ;-)</p>
+            
+            <p id="x014" class="irc"><cite>&lt;Steven&gt;</cite> guest</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t01">Identify a minute taker</h3>
+            
+            <p id="x016" class="summary">Norm is scribe</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t02">Review of action items</h3>
+            
+            <p id="x018" class="summary">ACTION 20220322-001: Michael to update schema for test catalogs to add dynamic error.</p>
+            
+            <p id="x019" class="bot"><cite>&lt;trackbot&gt;</cite> Sorry, but no Tracker is associated with this channel.</p>
+            
+            <p id="x021" class="summary">Ignore that action</p>
+            
+            <p id="x022" class="summary">ACTION 20220405-003: Norm: Add the error code linkages to the spec (for issue #44).</p>
+            
+            <p id="x023" class="phone s01"><cite>Norm:</cite> completed</p>
+            
+            <p id="x024" class="summary">ACTION 20220405-004: Norm: to add prose specifying the namespace to use if error codes
+               are given as qualified names (for issue #61).</p>
+            
+            <p id="x025" class="phone s01"><cite>Norm:</cite> completed</p>
+            
+            <p id="x026" class="summary">ACTION 20220412-001: Steven - to review MSM's proposed text on ambiguity text and
+               where it should end up (for issue #26).</p>
+            
+            <p id="x027" class="phone s02"><cite>Steven:</cite> I moved the text, but I didn't check the proposed change.</p>
+            
+            <p id="x028" class="summary">Continued</p>
+            
+            <p id="x029" class="summary">ACTION 20220412-002: Steven - Steven to review the possibility using the names s and
+               RS for optional and required space, respectively.</p>
+            
+            <p id="x030" class="phone s02"><cite>Steven:</cite> completed</p>
+            
+            <p id="x031" class="summary">ACTION 20220412-003: All - Review of the namespace proposal (for #66).</p>
+            
+            <p id="x032" class="summary">All claim to have reviewed it</p>
+            
+            <p id="x034" class="summary">ACTION 20220412-004: Norm to produce some spec. prose on the version (conformance)
+               issue (#63).</p>
+            
+            <p id="x035" class="phone s01"><cite>Norm:</cite> Completed. Michael proposed a change that I think is an improvement.</p>
+            
+            <p id="x036" class="summary">ACTION 20220412-005: Norm - Improve the README - what format - Markdown or HTML.</p>
+            
+            <p id="x037" class="phone s01"><cite>Norm:</cite> completed</p>
+            
+            <p id="x038" class="summary">ACTION 20220412-006: Tomos to ensure all can see the Balisage papers (<a href="https://github.com/invisibleXML/Balisage2022).">https://<wbr></wbr>github.com/<wbr></wbr>invisibleXML/<wbr></wbr>Balisage2022).</a></p>
+            
+            <p id="x039" class="phone s03"><cite>Tomos:</cite> completed</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t03">Status of implementations</h3>
+            
+            <p id="x045" class="phone s04"><cite>John:</cite> My implementation now handles the ixml spec under the Earley parser in about 300ms.<br />
+               <span id="x046">… It's a set of JavaScript files. It uses a custom parser for the input ixml, then
+                  an Earley parser that I wrote from scratch.</span><br />
+               <span id="x047">… You can get the state chart, etc.</span><br />
+               <span id="x048">… I haven't done serious testing yet or handling ambiguity yet.</span><br />
+               <span id="x049">… Over the next few weeks I'll try to package that up better. I'm using the browser
+                  DOM to build the output.</span></p>
+            
+            <p id="x050" class="summary">Steven asks about the DOM. John says he parses to an internal representation, but
+               uses the DOM to get the XML version.</p>
+            
+            <p id="x051" class="phone s04"><cite>John:</cite> It very much canonicalizes as it goes.</p>
+            
+            <p id="x052" class="phone s01"><cite>Norm:</cite> I’ve updated my processor to the (now current) grammar but I’m eager to see the other
+               proposals adopted so I can update it again before making any sort of announcements
+               about the changes.</p>
+            
+            <p id="x053" class="phone s02"><cite>Steven:</cite> I've updated mine to do the double ** and double ++.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t04">Status of testing and test suites</h3>
+            
+            <p id="x055" class="phone s01"><cite>Norm:</cite> I've updated the tests to the current grammar</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t05">Review and resolution of bug reports and technical issues</h3>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t06">Change ~ to ! in character-set exclusions.</h3>
+            
+            <p id="x060" class="phone s02"><cite>Steven:</cite> I'm ok with adding it, but not replacing it.<br />
+               <span id="x061">… I don't think "!" is a good choice, I don't think it means "not".</span><br />
+               <span id="x062">… In ixml, we're not using "not", we're using "complement of".</span></p>
+            
+            <p id="x063" class="phone s03"><cite>Tomos:</cite> I think it's about familiarity.</p>
+            
+            <p id="x064" class="summary">Some discussion of "^" instead of "!" or "~"</p>
+            
+            <p id="x066" class="phone s05"><cite>Bethan:</cite> The only issue I have with "~" is that it suggests "approximately" and I find it
+               difficult to find "~" useful.<br />
+               <span id="x067">… I imagine that most of our users may be in the same position.</span></p>
+            
+            <p id="x068" class="phone s06"><cite>Conclusion:</cite> there is no consensus to make the change; the status quo remains.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t07">Use '=' and '|' exclusively.</h3>
+            
+            <p id="x071" class="phone s02"><cite>Steven:</cite> I'm of the opinion that different languages are allowed to have different syntaxes.
+               I added them as a sop to users who wanted them.<br />
+               <span id="x072">… "=" doesn't mean "is defined as". It's not an equality relationship where we have
+                  it.</span></p>
+            
+            <p id="x073" class="phone s05"><cite>Bethan:</cite> Wait, you can't say that different languages can use different symbols and simultaneously
+               that "=" doesn't mean something.</p>
+            
+            <p id="x074" class="phone s03"><cite>Tomos:</cite> I think the use case for "=" is less compelling than the use case for "|" because
+               ";" and "," are harder to distinguish</p>
+            
+            <p id="x075" class="phone s05"><cite>Bethan:</cite> There seems to be a lot of support for defining a single character.</p>
+            
+            <p id="x076" class="phone s01"><cite>Norm:</cite> I think that's true. I thought the unnecessary syntactic variation is weird.</p>
+            
+            <p id="x077" class="phone s04"><cite>John:</cite> Does ";" get used as alternates compared to "|"?</p>
+            
+            <p id="x080" class="phone s07"><cite>Michael:</cite> It depends on how you count. The tradition of grammar notations that includes ALGOL-68
+               and friends uses ":" and ";".<br />
+               <span id="x081">… I've always found them appealing on that basis. But I think it's fair to say that
+                  YACC and it's workalikes are more used than any other notation and they tend to use
+                  "|".</span><br />
+               <span id="x082">… I think YACC may well use ":"</span></p>
+            
+            <p id="x083" class="summary">Some discussion of "::=" and it's alternatives.</p>
+            
+            <p id="x084" class="phone s05"><cite>Bethan:</cite> I find the ";" very hard to read as an "or" separator.</p>
+            
+            <p id="x085" class="phone s03"><cite>Tomos:</cite> I think objectively, semicolons are harder to read.</p>
+            
+            <p id="x087" class="phone s02"><cite>Steven:</cite> There are several things going on here. Do we want a single syntax or do we want
+               to allow people to use the things they want to use?<br />
+               <span id="x088">… I personally don't see what's damaging about allowing a choice.</span></p>
+            
+            <p id="x089" class="phone s01"><cite>Norm:</cite> I think that cuts both ways, if authors use different characters it makes the grammar
+               harder for a reader.</p>
+            
+            <p id="x090" class="phone s01"><cite>Norm:</cite> Using two characters instead of four saves us two characters for later</p>
+            
+            <p id="x093" class="phone s04"><cite>John:</cite> It sounds like we could remove "=" without too much objection.<br />
+               <span id="x094">… The advantage of getting that out of the way would allow us to reserve it for later.</span><br />
+               <span id="x095">… I don't think it matters from a performance point of view.</span></p>
+            
+            <p id="x097" class="phone s03"><cite>Tomos:</cite> I don't think it matters too much about the "=" used elsewhere. The characters have
+               meaning contextually.<br />
+               <span id="x098">… I was ready to say that we should standardize on one or the other. But the more
+                  we talk about it, the less convinced I become.</span></p>
+            
+            <p id="x100" class="phone s04"><cite>John:</cite> Equally well, it's not just what the punctuation syntax is. It's the layout of the
+               grammar, etc.<br />
+               <span id="x101">… Style matters as much as the particular punctuation characters.</span></p>
+            
+            <p id="x102" class="phone s02"><cite>Steven:</cite> May I also bring to your attention the whole point of ixml isn't the syntax, it's
+               the data that matters.</p>
+            
+            <p id="x103" class="phone s05"><cite>Bethan:</cite> What I'm talking about isn't the person writing the grammar, it's about using grammars
+               written by others.</p>
+            
+            <p id="x104" class="phone s03"><cite>Tomos:</cite> It should be a small step to normalize it to your preferred representation.</p>
+            
+            <p id="x105" class="phone s05"><cite>Bethan:</cite> Or we could not have to do that!</p>
+            
+            <p id="x106" class="phone s02"><cite>Steven:</cite> The two basic options are, we agree that there should be one representation or we
+               let users do what they want.</p>
+            
+            <p id="x107" class="phone s04"><cite>John:</cite> I think what we should do is permit what we currently have.</p>
+            
+            <p id="x108" class="phone s01"><cite>Norm:</cite> I don't detect consensus forming here.</p>
+            
+            <p id="x109" class="phone s06"><cite>Conclusion:</cite> there is no consensus to make this change.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t08">Add a version declaration</h3>
+            
+            <p id="x111" class="summary">Agreed.</p>
+            
+            <p id="x112" class="phone s08"><cite>ACTION-20220426-01:</cite> Norm to propose spec and grammar changes for a version declaration.</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t09">Change ^ to + in literal insertions.</h3>
+            
+            <p id="x114" class="phone s03"><cite>Tomos:</cite> Could we allow either?</p>
+            
+            <p id="x115" class="summary">Some discussion of how the specification currently describes them.</p>
+            
+            <p id="x117" class="phone s07"><cite>Michael:</cite> I applaud the attempt to make them parallel. I found it very problematic because
+               I find it impossible to relate the behavior of marking tagging a nonterminal as an
+               insertion.<br />
+               <span id="x118">… I think they are conceptually different.</span></p>
+            
+            <p id="x119" class="phone s01"><cite>Norm:</cite> My difficulty is that it removes the explicit mark that is the opposite of "-" for
+               literals.</p>
+            
+            <p id="x121" class="phone s07"><cite>Michael:</cite> I think that having a character to mark the default explicitly is a standard feature
+               of language design.<br />
+               <span id="x122">… You should be able to specify all defaults expicitly.</span></p>
+            
+            <p id="x123" class="phone s02"><cite>Steven:</cite> I don't like the fact that "+" gets two different uses.</p>
+            
+            <p id="x124" class="phone s03"><cite>Tomos:</cite> Grammatically, it's quite distinct because one is a prefix. and one is a postfix</p>
+            
+            <p id="x127" class="phone s02"><cite>Steven:</cite> I can live with it.</p>
+            
+            <p id="x128" class="phone s01"><cite>Norm:</cite> I'd like to do it.</p>
+            
+            <p id="x130" class="phone s02"><cite>Steven:</cite> So a tmark is now ^, -, and +.<br />
+               <span id="x131">… And mark is ^, -, and @</span></p>
+            
+            <p id="x132" class="phone s09"><cite>Consensus:</cite> make this change</p>
+            
+            <p id="x133" class="summary">ACTION 20220426-02 Steven to change ^ to + for insertions.</p>
+            
+            <p id="x134" class="phone s04"><cite>John:</cite> Are insertions limited to strings?</p>
+            
+            <p id="x135" class="phone s02"><cite>Steven:</cite> No, it can be hex as well, but not a charset.</p>
+            
+            <p id="x136" class="phone s07"><cite>Michael:</cite> "literal" but not "charset"</p>
+            </section>
+         
+         
+         <section>
+            
+            <h3 id="t10">#44 Adopt proposal 3 for error codes.</h3>
+            
+            <p id="x139" class="phone s02"><cite>Steven:</cite> Why do the error codes have to be in the spec?</p>
+            
+            <p id="x140" class="phone s01"><cite>Norm:</cite> Because we shouldn't make users go around the houses to find the prose.</p>
+            
+            <p id="x141" class="phone s04"><cite>John:</cite> I'm fine with the index, but I'd still expect to find the error *names* in the prose
+               where they occur.</p>
+            
+            <p id="x143" class="phone s05"><cite>Bethan:</cite> Firstly, if you go from the index to the text, you can't expect users to magically
+               know what sentence is about the error.<br />
+               <span id="x144">… Also, users are going to google the error codes, it would be nice if they got taken
+                  to the right part of the spec.</span></p>
+            
+            <p id="x145" class="phone s02"><cite>Steven:</cite> I'm happy to look up the error codes.</p>
+            
+            <p id="x146" class="phone s03"><cite>Tomos:</cite> Which would would you prefer?</p>
+            
+            <p id="x147" class="phone s02"><cite>Steven:</cite> My preference was the superscript.</p>
+            
+            <p id="x148" class="phone s05"><cite>Bethan:</cite> I'm having trouble understanding what's intrusive about the error codes.</p>
+            
+            <p id="x150" class="phone s02"><cite>Steven:</cite> Why do we want error codes? So that we could make implementations testable.</p>
+            
+            <p id="x151" class="phone s05"><cite>Bethan:</cite> If a user does something wrong, they're going to get back an error code.</p>
+            
+            <p id="x152" class="phone s02"><cite>Steven:</cite> They shouldn't have to, the get a message.</p>
+            
+            <p id="x153" class="summary">John posts an example from the XPath spec.</p>
+            
+            <p id="x154" class="irc"><cite>&lt;Tom&gt;</cite> <a href="https://www.w3.org/TR/xpath-functions-31/#func-numeric-mod">https://<wbr></wbr>www.w3.org/<wbr></wbr>TR/<wbr></wbr>xpath-functions-31/#func-numeric-mod</a></p>
+            
+            <p id="x156" class="phone s04"><cite>John:</cite> I think something like this at each error condition is what we need.<br />
+               <span id="x157">… These kinds of messages give me precision.</span></p>
+            
+            <p id="x158" class="phone s05"><cite>Bethan:</cite> A lot of StackOverflow questions are about the messages.</p>
+            
+            <p id="x159" class="phone s02"><cite>Steven:</cite> I can live with three</p>
+            
+            <p id="x160" class="phone s09"><cite>Consensus:</cite> Adopt positon 3.</p>
+            
+            <p id="x161" class="summary">ACTION-20220426-03 Norm to update the spec with error codes.</p>
+            
+            <p id="x162" class="summary">Adjourned</p>
+            </section>
+         </main>
+      
+      
+      
+      <address>Minutes manually created (not a transcript), formatted by <a href="https://w3c.github.io/scribe2/scribedoc.html">scribe.perl</a> version 185 (Thu Dec  2 18:51:55 2021 UTC).</address>
+      
+      
+      <div class="diagnostics">
+         
+         <h2>Diagnostics</h2>
+         
+         <p class="warning">Succeeded: s/wd it/wed it/</p>
+         
+         <p class="warning">Succeeded: s/fi./fix/</p>
+         
+         <p class="warning">Succeeded: s/fix/fix./</p>
+         
+         <p class="warning">Succeeded: s/heal/hael/</p>
+         
+         <p class="warning">Succeeded: s/coes/codes/</p>
+         
+         <p class="warning">No scribenick or scribe found. Guessed: norm</p>
+         
+         <p class="warning">Maybe present: ACTION-20220426-01, Conclusion, Consensus, Tomos</p>
+         </div>
+      
+      
+      </body>
+</html>
