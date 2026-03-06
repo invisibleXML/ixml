@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      
+      <meta name="generator" content="hypermail 3.0.0, see https://github.com/hypermail-project/hypermail/" />
+      
+      <title>Minutes ixml call 2020-08-27 from Steven Pemberton on 2021-03-17 (public-ixml@w3.org from March 2021)</title>
+      
+      <meta name="Author" content="Steven Pemberton (steven.pemberton@cwi.nl)" />
+      
+      <meta name="Subject" content="Minutes ixml call 2020-08-27" />
+      
+      <meta name="Date" content="2021-03-17" />
+      
+      <link rel="stylesheet" title="Normal view" href="/assets/styles/public.css" />
+      
+      <link rel="help" href="/Help/" />
+      
+      <link rel="start" href="../" title="public-ixml@w3.org archives" />
+      <script defer="defer" src="/assets/js/archives.js"></script>
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2020-08-27" />
+   </head>
+   
+   <body class="message">
+      
+      <header class="head">
+         
+         <nav class="breadcrumb" id="upper">
+            
+            <ul>
+               
+               <li><a href="https://www.w3.org/">W3C home</a></li>
+               
+               <li><a href="/">Mailing lists</a></li>
+               
+               <li><a href="../../">Public</a></li>
+               
+               <li><a href="../" rel="start">public-ixml@w3.org</a></li>
+               
+               <li><a href="./" rel="contents">March 2021</a></li>
+               </ul>
+            </nav>
+         
+         <h1>Minutes ixml call 2020-08-27</h1>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <nav id="navbar">
+            
+            <ul class="links hmenu_container">
+               
+               <li>
+                  <span class="heading">This message</span>: 
+                  <ul class="hmenu">
+                     <li><a href="#start" id="options1">Message body</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-08-27&amp;In-Reply-To=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E&amp;References=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E">Respond</a></li>
+                     
+                     <li><a href="#options3">More options</a></li>
+                     </ul>
+               </li>
+               
+               <li>
+                  <span class="heading">Related messages</span>: 
+                  <ul class="hmenu">
+                     
+                     
+                     <li><a href="0001.html">Next message</a></li>
+                     
+                     <li><a href="https://www.w3.org/mid/op.0p0ku9ndsmjzpq@steven-xps13">In reply to</a></li>
+                     
+                     
+                     </ul>
+               </li>
+               </ul>
+            </nav>
+         </header>
+      
+      
+      <main class="mail">
+         
+         <ul class="headers" aria-label="message headers">
+            
+            <li><span class="from">
+                  <span class="heading">From</span>: Steven Pemberton &lt;<a href="mailto:steven.pemberton@cwi.nl?Subject=Re%3A%20Minutes%20ixml%20call%202020-08-27&amp;In-Reply-To=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E&amp;References=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E">steven.pemberton@cwi.nl</a>&gt;
+                  </span></li>
+            
+            <li><span class="date"><span class="heading">Date</span>: Wed, 17 Mar 2021 15:07:39 +0000</span></li>
+            
+            <li><span class="to"><span class="heading">To</span>: <a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-08-27&amp;In-Reply-To=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E&amp;References=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E">public-ixml@w3.org</a>
+                  </span></li>
+            
+            <li><span class="message-id"><span class="heading">Message-Id</span>: &lt;1615993544553.4064973254.2768051427@cwi.nl&gt;
+                  </span></li>
+            </ul>
+         
+         <pre id="start" class="body">ixml call 27 Aug 2020
+Present: CMSMQ, TH, SP
+
+AGENDA
+
+Specification
+Implementations
+Test Suite
+AOB
+ACTIONS
+
+ACTION: Steven to forbid "." at end of name [wihdrawn]
+ACTION: Steven to specify what happens when a name isn't an XML name
+ACTION: CMSMQ to send augmented grammar
+ACTION: Steven create Github repo
+
+Next call: Thursday 2020-09-24 14:00Z
+<a href="https://meet.google.com/dfz-rwpj-opq">https://meet.google.com/dfz-rwpj-opq</a>
+
+SPECIFICATION
+
+M: Sanity check.
+... version I am working from is dated January
+S: 23 July has corrections from you
+M: A practical instance of ambiguity.
+a: b, c, d, e.
+... a= b c d e.
+.. failed because of nonterminal ending with "."
+... you Steven suggested forbidding a name ending with a dot
+S: I did.
+ACTION: Steven to forbid "." at end of name
+
+T: Should we restrict rule names to XML names?
+S: Not all rules are serialised.
+M: what if you do try to serialise a name that isn't an XML name
+S: Error
+T: Recoverable error
+ACTION: Steven to specify what happens when a name isn't an XML name
+
+M: What works well in XSLT etc is that from SQL people the WG adopted 
+implementation defined and implementation dependent
+... defined is where the implementation defines what happens, at same level 
+of specifity as spec;
+... implementation dependent - no obligation to document more than 
+"something will happen".
+... so the recovery should be implementation defined, not dependent
+T: Sure. Minimum an error.
+S: Do we really want to recover?
+M: More convenient for the user? Required failure works for me.
+T: Fine either way.
+M: One way full stops is not what Tom said. XML names *can* end with a 
+fullstop.
+... otherwise we would have to demand whitespace before the terminal full 
+stop, which would look horrible.
+S: It could mainly be a problem with LL1
+M: I am parsing LL1 (recursive descent).
+... mark and tmark are non LL1
+... and 'member' has to be rewriten
+... it may be just a problem with my parser.
+T: Do we make the assumption in the spec explicit?
+S: You can bootstrap, and then the only problem is the initial 
+bootstrapping parser.
+M: I will withdraw the suggestion of restricting fullstop at the end of a 
+name, and mention it as a requirement of my parser.
+M: I will include it in the testsuite
+T: I would like a link to testsuite in the spec
+... references in the spec as it describes feature.
+M: Maybe multiple views/trails to unclutter the spec.
+T: CSS and/or XForms
+M: Let's come back to this when we have a testsuite.
+M: I will send my augmented grammar
+ACTION: CMSMQ to send augmented grammar
+
+IMPLEMENTATIONS
+
+M: I have finished my rec desc parser. Not yet tested in great detail.
+... generates an XML rep of the grammar
+... an ixml processor restricted to a single grammar
+... written in XSLT
+
+TEST SUITE
+
+T: Alas, no opportunity to work on this since Balisage
+... I want to add a field for ref numbers.
+... a unique ID
+... I'm using cucumber/gherkin
+M: If I use Gherkin, I could convert it to XSpec or shell.
+T: Sure
+... my goal is to write a grammar for gherkin, and parse to XSpec
+S: How about using ixml?
+
+<a href="https://github.com/eXpertML/JayParser/blob/master/src/test/resources/gherkin/ixml.feature">https://github.com/eXpertML/JayParser/blob/master/src/test/resources/gherkin/ixml.feature</a>
+
+T: that's my starter
+... self describing; I don;t like that the table of things to check can't 
+contain grammars or XML fragments - no line breaks allowed
+M: Let's try Gherkin and see what it gives us
+... I like the idea of having a non-XML syntax.
+T: There's no such thing anymore!
+[Laughter]
+S: Where are we going to put all this stuff?
+M: Do we want to create a repo for the three of us, or develop now and 
+merge.
+T: I'd like to have a test suite before I finish the parser
+... I'd like the two of them together in a repository
+... for instance using Git
+... and then we are also ready for contributors
+... they should live together indenpendent from the implementations.
+M: Gitlab or Github?
+T: Little difference
+... Github is a bit friendlier.
+S: Let's use Github
+T: We need some starting point for the tests. We neeed test instances.
+... I have attempted to describe the format in the Gherkin
+S: I'm happy putting the spec there
+T: Initial action then
+ACTION: Steven create Github repo
+
+T: Who is owner? Individual or org.
+... On Github you can create an org.
+Steven: I'll research and do it.
+T: And put minutes there.
+
+AOB
+
+M: Do we want to testsuite as an onion?
+... start minimal and build
+S: Sounds good.
+... good for implementations too
+
+Next call: Thursday 2020-09-24 14:00Z
+</pre>
+         
+         <p class="received"><span class="heading">Received on</span> Wednesday, 17 March 2021 15:07:54 UTC</p>
+         </main>
+      
+      
+      <footer class="foot">
+         
+         <nav id="navbarfoot">
+            
+            <ul class="links hmenu_container">
+               
+               <li><span class="heading">This message</span>: <span class="message_body"><a href="#start">Message body</a></span></li>
+               
+               
+               <li><span class="heading">Next message</span>: <a href="0001.html">Steven Pemberton: "Minutes ixml call 2020-09-24"</a></li>
+               
+               <li><span class="heading">In reply to</span>: <a href="https://www.w3.org/mid/op.0p0ku9ndsmjzpq@steven-xps13">Message archived in another list or period</a></li>
+               
+               
+               </ul>
+            
+            <ul class="links hmenu_container">
+               
+               <li id="options3"><span class="heading">Mail actions</span>: 
+                  <ul class="hmenu">
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-08-27&amp;In-Reply-To=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E&amp;References=%3C1615993544553.4064973254.2768051427%40cwi.nl%3E">respond to this message</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org">mail a new topic</a></li>
+                  </ul>
+               </li>
+               
+               <li><span class="heading">Contemporary messages sorted</span>: 
+                  <ul class="hmenu">
+                     <li><a href="index.html#msg0">by date</a></li>
+                     
+                     <li><a href="thread.html#msg0">by thread</a></li>
+                     
+                     <li><a href="subject.html#msg0">by subject</a></li>
+                     
+                     <li><a href="author.html#msg0">by author</a></li>
+                     </ul>
+               </li>
+               
+               <li><span class="heading">Help</span>: 
+                  <ul class="hmenu">
+                     
+                     <li><a href="/Help/" rel="help">how to use the archives</a></li>
+                     
+                     <li><a href="https://www.w3.org/Search/Mail/Public/search?type-index=public-ixml&amp;index-type=t">search the archives</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         
+         
+         <p class="colophon">
+            This archive was generated by <a href="https://github.com/hypermail-project/hypermail/">hypermail 3.0.0</a>: Thursday, 13 July 2023 17:33:03 UTC
+            </p>
+         </footer>
+      
+      
+      </body>
+</html>

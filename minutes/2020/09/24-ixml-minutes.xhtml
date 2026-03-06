@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      
+      <meta name="generator" content="hypermail 3.0.0, see https://github.com/hypermail-project/hypermail/" />
+      
+      <title>Minutes ixml call 2020-09-24 from Steven Pemberton on 2021-03-17 (public-ixml@w3.org from March 2021)</title>
+      
+      <meta name="Author" content="Steven Pemberton (steven.pemberton@cwi.nl)" />
+      
+      <meta name="Subject" content="Minutes ixml call 2020-09-24" />
+      
+      <meta name="Date" content="2021-03-17" />
+      
+      <link rel="stylesheet" title="Normal view" href="/assets/styles/public.css" />
+      
+      <link rel="help" href="/Help/" />
+      
+      <link rel="start" href="../" title="public-ixml@w3.org archives" />
+      <script defer="defer" src="/assets/js/archives.js"></script>
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2020-09-24" />
+   </head>
+   
+   <body class="message">
+      
+      <header class="head">
+         
+         <nav class="breadcrumb" id="upper">
+            
+            <ul>
+               
+               <li><a href="https://www.w3.org/">W3C home</a></li>
+               
+               <li><a href="/">Mailing lists</a></li>
+               
+               <li><a href="../../">Public</a></li>
+               
+               <li><a href="../" rel="start">public-ixml@w3.org</a></li>
+               
+               <li><a href="./" rel="contents">March 2021</a></li>
+               </ul>
+            </nav>
+         
+         <h1>Minutes ixml call 2020-09-24</h1>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <nav id="navbar">
+            
+            <ul class="links hmenu_container">
+               
+               <li>
+                  <span class="heading">This message</span>: 
+                  <ul class="hmenu">
+                     <li><a href="#start" id="options1">Message body</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-09-24&amp;In-Reply-To=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E&amp;References=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E">Respond</a></li>
+                     
+                     <li><a href="#options3">More options</a></li>
+                     </ul>
+               </li>
+               
+               <li>
+                  <span class="heading">Related messages</span>: 
+                  <ul class="hmenu">
+                     
+                     
+                     <li><a href="0002.html">Next message</a></li>
+                     
+                     <li><a href="0000.html">Previous message</a></li>
+                     
+                     <li><a href="https://www.w3.org/mid/op.0rgex8zwsmjzpq@steven-xps13">In reply to</a></li>
+                     
+                     
+                     </ul>
+               </li>
+               </ul>
+            </nav>
+         </header>
+      
+      
+      <main class="mail">
+         
+         <ul class="headers" aria-label="message headers">
+            
+            <li><span class="from">
+                  <span class="heading">From</span>: Steven Pemberton &lt;<a href="mailto:steven.pemberton@cwi.nl?Subject=Re%3A%20Minutes%20ixml%20call%202020-09-24&amp;In-Reply-To=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E&amp;References=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E">steven.pemberton@cwi.nl</a>&gt;
+                  </span></li>
+            
+            <li><span class="date"><span class="heading">Date</span>: Wed, 17 Mar 2021 15:09:10 +0000</span></li>
+            
+            <li><span class="to"><span class="heading">To</span>: <a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-09-24&amp;In-Reply-To=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E&amp;References=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E">public-ixml@w3.org</a>
+                  </span></li>
+            
+            <li><span class="message-id"><span class="heading">Message-Id</span>: &lt;1615993677613.4033175863.1210494080@cwi.nl&gt;
+                  </span></li>
+            </ul>
+         
+         <section id="start" class="message-body-part">
+            
+            <pre class="body">Agenda
+Previous Actions
+Namespace
+Specification
+Implementations
+Test Suite
+AOB
+Next call
+
+ACTIONS
+ACTION: Steven to specify what happens when a name isn't an XML name
+ACTION: Tom to look for an IXML domain.
+ACTION: Steven to upload the spec to github
+ACTION: Steven to research where to put S for attributes.
+
+Next call
+22 Oct 2020 14:00Z
+
+Present: M, S, T
+
+Previous Actions
+ACTION: Steven to forbid "." at end of name
+[withdrawn]
+ACTION: Steven to specify what happens when a name isn't an XML name
+[Ongoing]
+ACTION: CMSMQ to send augmented grammar
+[Done]
+ACTION: Steven create Github repo
+[Done: <a href="https://github.com/spemberton/ixml">https://github.com/spemberton/ixml</a>]
+
+Namespace
+T: We need a namespace URI
+S: Whose namespace shall we use?
+T: Good question. How about an ixml domain name?
+ACTION: Tom to look for an IXML domain.
+S: .org would be good.
+
+Specification
+ACTION: Steven to upload the spec to github
+M: Whitespace and terminal retention in the resultant XML.
+S: WHat should be returned int he XML for ism?
+M: Yes.
+T: I'm not worried about WH, just the terminals.
+M: I'm not sure either way.
+S: I don't care either way; if we can find justification for either, we 
+should go with it.
+T: Even though I started this discussion, it is not a hill I want to
+die on. Leaving the terminals out makes prettyprinting easier. But
+they aren't meaningful.
+S: I can put both in the spec, and we can make the decision later.
+M: Two arguments: 1) round tripping is easier if we preserve the
+layout 2) there are some places in terminals where they are not marked
+as excluded.
+T: Example?
+M: Whitespace between members of a character set.
+S: The rule for S starts -S. All things in S except for comments are 
+suppressed.
+M: OK. If there were a comment in a range, you couldn't decide where to put 
+it on roundtripping.
+T: We shouldn't guarantee round tripping {something about isotopic}
+M: We're only talking about IXML grammars.
+T: I suppose it would be nice to make them roundtrippable.
+M: We've already lost the whitespace.
+M: But we have ["a"{comment}-"f"]
+S: OK, I'll need to research where to put S for attributes.
+ACTION: Steven to research where to put S for attributes.
+S: Good catch.
+M: Related question - is there a rule n: a1, c1, a2, c2, a3. that says 
+attributes are handled first?
+S: Yes. It's in the first rule for serialisation that attributes are
+done before content; but it doesn't say that attributes are done in
+order.
+M: In XDM attributes are ordered.
+T: I'm fascinated by the idea of reserializing.
+S: It is still work to be done. I sketch a method in one of the papers, but 
+I haven't done the work yet.
+
+Implementations
+S: You're giving a talk about yours in 2 weeks time.
+T: Indeed. I think the rewrite is going to go well :-) [Description of 
+work]
+
+Test Suite
+T: We exchanged some emails. I would like a testsuite that we can
+generate from some self-describing document. Gherkin may not be the
+right answer. xspec maybe. Later deciding on an XML format.
+M: Later a non-XML format.
+S: Use ixml.
+M: I'm going to generate xpec cases; once that's going, I'll share. No 
+progress this month.
+S: It sounds like we each need to experiment, and then compare and merge.
+T: Good plan.
+
+AOB
+[none]
+
+#end
+</pre>
+            </section>
+         
+         <p class="received"><span class="heading">Received on</span> Wednesday, 17 March 2021 15:09:25 UTC</p>
+         </main>
+      
+      
+      <footer class="foot">
+         
+         <nav id="navbarfoot">
+            
+            <ul class="links hmenu_container">
+               
+               <li><span class="heading">This message</span>: <span class="message_body"><a href="#start">Message body</a></span></li>
+               
+               
+               <li><span class="heading">Next message</span>: <a href="0002.html">Steven Pemberton: "Minutes ixml call 2020-11-26"</a></li>
+               
+               <li><span class="heading">Previous message</span>: <a href="0000.html">Steven Pemberton: "Minutes ixml call 2020-08-27"</a></li>
+               
+               <li><span class="heading">In reply to</span>: <a href="https://www.w3.org/mid/op.0rgex8zwsmjzpq@steven-xps13">Message archived in another list or period</a></li>
+               
+               
+               </ul>
+            
+            <ul class="links hmenu_container">
+               
+               <li id="options3"><span class="heading">Mail actions</span>: 
+                  <ul class="hmenu">
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-09-24&amp;In-Reply-To=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E&amp;References=%3C1615993677613.4033175863.1210494080%40cwi.nl%3E">respond to this message</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org">mail a new topic</a></li>
+                  </ul>
+               </li>
+               
+               <li><span class="heading">Contemporary messages sorted</span>: 
+                  <ul class="hmenu">
+                     <li><a href="index.html#msg1">by date</a></li>
+                     
+                     <li><a href="thread.html#msg1">by thread</a></li>
+                     
+                     <li><a href="subject.html#msg1">by subject</a></li>
+                     
+                     <li><a href="author.html#msg1">by author</a></li>
+                     </ul>
+               </li>
+               
+               <li><span class="heading">Help</span>: 
+                  <ul class="hmenu">
+                     
+                     <li><a href="/Help/" rel="help">how to use the archives</a></li>
+                     
+                     <li><a href="https://www.w3.org/Search/Mail/Public/search?type-index=public-ixml&amp;index-type=t">search the archives</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         
+         
+         <p class="colophon">
+            This archive was generated by <a href="https://github.com/hypermail-project/hypermail/">hypermail 3.0.0</a>: Thursday, 13 July 2023 17:33:03 UTC
+            </p>
+         </footer>
+      
+      
+      </body>
+</html>
