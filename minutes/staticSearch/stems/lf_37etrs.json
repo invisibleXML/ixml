@@ -1,0 +1,1 @@
+{"stem":"lf","instances":[{"docUri":"2024\/03\/19-ixml-minutes.xhtml","score":2,"contexts":[{"form":"LF","weight":"1","pos":257,"context":"…same as XML in input normalisation - CR\/<mark>LF<\/mark> -&gt; LF","fid":"x064"},{"form":"LF","weight":"1","pos":258,"context":"…XML in input normalisation - CR\/LF -&gt; <mark>LF<\/mark>","fid":"x064"}]}]}

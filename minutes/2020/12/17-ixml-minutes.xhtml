@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      
+      <meta name="generator" content="hypermail 3.0.0, see https://github.com/hypermail-project/hypermail/" />
+      
+      <title>Minutes ixml call 2020-12-17 from Steven Pemberton on 2021-03-17 (public-ixml@w3.org from March 2021)</title>
+      
+      <meta name="Author" content="Steven Pemberton (steven.pemberton@cwi.nl)" />
+      
+      <meta name="Subject" content="Minutes ixml call 2020-12-17" />
+      
+      <meta name="Date" content="2021-03-17" />
+      
+      <link rel="stylesheet" title="Normal view" href="/assets/styles/public.css" />
+      
+      <link rel="help" href="/Help/" />
+      
+      <link rel="start" href="../" title="public-ixml@w3.org archives" />
+      <script defer="defer" src="/assets/js/archives.js"></script>
+      
+      <meta name="Date of publication" class="staticSearch_date" content="2020-12-17" />
+   </head>
+   
+   <body class="message">
+      
+      <header class="head">
+         
+         <nav class="breadcrumb" id="upper">
+            
+            <ul>
+               
+               <li><a href="https://www.w3.org/">W3C home</a></li>
+               
+               <li><a href="/">Mailing lists</a></li>
+               
+               <li><a href="../../">Public</a></li>
+               
+               <li><a href="../" rel="start">public-ixml@w3.org</a></li>
+               
+               <li><a href="./" rel="contents">March 2021</a></li>
+               </ul>
+            </nav>
+         
+         <h1>Minutes ixml call 2020-12-17</h1>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <nav id="navbar">
+            
+            <ul class="links hmenu_container">
+               
+               <li>
+                  <span class="heading">This message</span>: 
+                  <ul class="hmenu">
+                     <li><a href="#start" id="options1">Message body</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-12-17&amp;In-Reply-To=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E&amp;References=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E">Respond</a></li>
+                     
+                     <li><a href="#options3">More options</a></li>
+                     </ul>
+               </li>
+               
+               <li>
+                  <span class="heading">Related messages</span>: 
+                  <ul class="hmenu">
+                     
+                     
+                     <li><a href="0004.html">Next message</a></li>
+                     
+                     <li><a href="0002.html">Previous message</a></li>
+                     
+                     <li><a href="https://www.w3.org/mid/op.0vr1uyztsmjzpq@steven-xps13">In reply to</a></li>
+                     
+                     
+                     </ul>
+               </li>
+               </ul>
+            </nav>
+         </header>
+      
+      
+      <main class="mail">
+         
+         <ul class="headers" aria-label="message headers">
+            
+            <li><span class="from">
+                  <span class="heading">From</span>: Steven Pemberton &lt;<a href="mailto:steven.pemberton@cwi.nl?Subject=Re%3A%20Minutes%20ixml%20call%202020-12-17&amp;In-Reply-To=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E&amp;References=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E">steven.pemberton@cwi.nl</a>&gt;
+                  </span></li>
+            
+            <li><span class="date"><span class="heading">Date</span>: Wed, 17 Mar 2021 15:12:50 +0000</span></li>
+            
+            <li><span class="to"><span class="heading">To</span>: <a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-12-17&amp;In-Reply-To=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E&amp;References=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E">public-ixml@w3.org</a>
+                  </span></li>
+            
+            <li><span class="message-id"><span class="heading">Message-Id</span>: &lt;1615993912436.2785946117.3760243167@cwi.nl&gt;
+                  </span></li>
+            </ul>
+         
+         <section id="start" class="message-body-part">
+            
+            <pre class="body">Agenda 2020-12-17
+
+
+Previous Actions
+Website
+Namespace
+Specification
+Implementations
+Test Suite
+AOB
+Next call
+
+Present: J, M, S, T.
+
+PREVIOUS ACTIONS
+
+ACTION: Steven to specify what happens when a name isn't an XML name
+[Continues]
+ACTION: Steven to research where to put S for attributes.
+[Continues]
+[ACTION: Steven to start a github org and admins]
+[Done]
+NEW ACTION: Steven to add John
+[ACTION: Tom to set up github pages]
+[Done]
+[ACTION: Tom to point the DNS to the github]
+[Done]
+NEW ACTION: Steven update the readme.md
+
+WEBSITE/GITHUB/NAMESPACE
+
+invisiblexml.org/NS
+
+Steven: How do we create a subpage?
+
+Tom: We can create a website in a directory.
+... just pop it into the repository
+... we can also do it in a more complex way
+
+ACTION: Steven to create the Namespace document
+
+SPECIFICATION
+[no discussion]
+
+
+IMPLEMENTATIONS
+
+Tom: I have done nothing this month...
+John: I got Tomos's implementation running. It ran out of stack space, but 
+it is running.
+
+TEST SUITE
+
+M: Working on automatic production of test cases. I want to generate
+both +ve tests that provide good coverage, and a number of -ve tests
+that also provide coverage.
+
+Steven: That latter is harder to define.
+
+M: I want a grammar for a regular language, a superset of the target
+language, a reasonably good approximation of the target language, take
+the FSA, invert it so that accept becomes reject and VV, with an error
+state that becomes accept, and generate +ve tests for that
+grammar. For every arc, I want a test with that arc as the final arc.
+
+Steven: What I did was recursively walk the grammar, selecting alternatives 
+at random...
+
+M: Or generating one of each...
+
+Steven: and then to generate -ve tests by adding &lt;empty&gt; at every set of 
+alternatives.
+
+M: Problem is, that can also produce +ve tests.
+
+S: and you'd like to guarantee they are -ve. I see.
+
+M: But I have made progress. I have a 100 character regular expression
+of &lt;statement&gt; from the example grammar that doesn't take account of
+matching brackets.
+
+Steven: Should we be putting the tests on the github? ... though we
+haven't agreed on a format yet.
+
+M: We should put them up, and once we have the sense that the
+catalogue is enough, we should agree then a format.
+
+T: In the long run, we should do it in ixml.
+
+J: So we have a grammar, a number of example inputs, with equivalent
+outputs. The bigger bit is the sample grammars. Does that grammar
+compile, and does the result of that respond to the test cases. A two
+level arrangement 'environment' and 'test cases'. What are you trying to 
+test?
+
+T: Defining what the 'features' of ixml grammars are is already
+hairy. But the failure cases are possibly even harder.
+
+M: There aren't additional restrictions on ixml grammars except
+syntax. Q1 is this an ixml grammar? Q2 is the input a string in the
+language? Q3 is the parsetree the correct one? For unambiguous
+grammars, the result is deterministic. For ambiguous grammars...
+
+T: If you roundtrip it twice, and at the end of each roundtrip is the same 
+...
+
+S: The serialisation of a parsetree is not guaranteed to be acceptable
+to the originating grammar a second time.
+
+J: In the tests, does the parsetree matter?
+
+M: I could write a universal grammar, which would accept any string,
+but not produce the required parsetree.
+
+S: Should we put the tests on the github?
+
+T: Are we ready?
+
+M: We should put the tests up but not in the central repo, but in
+individual ones. Later we can merge and put in the central repo.
+
+T: We also need to divide the tests into classes on the basis of which
+part of the process they are attempting to test.
+
+M: 3 classes of test case. 1 is it an ixml grammar; 2. it is, plus a
+valid input, 3. it is, plus an invalid input.
+
+T: We need a vocabulary for producing error messages for users.
+
+S: Errors for an ixml grammar are easier than for the input to that
+grammar. There's not much more than "I was expecting one of these
+characters at this point" ..."
+
+T: I don't want my system to need to check that the XML form of an
+ixml grammar is a correct ixml grammar.
+
+M: Shouldn;t be a problem.
+
+AOB
+
+Next call
+Thursday 2021-01-28, 1500Z
+<a href="https://meet.google.com/dfz-rwpj-opq">https://meet.google.com/dfz-rwpj-opq</a>
+
+Actions
+ACTION: Steven to specify what happens when a name isn't an XML name
+[Continues]
+ACTION: Steven to research where to put S for attributes.
+[Continues]
+ACTION: Steven to add John to org
+ACTION: Steven update the readme.md
+ACTION: Steven to create the Namespace document
+#end
+</pre>
+            </section>
+         
+         <p class="received"><span class="heading">Received on</span> Wednesday, 17 March 2021 15:13:07 UTC</p>
+         </main>
+      
+      
+      <footer class="foot">
+         
+         <nav id="navbarfoot">
+            
+            <ul class="links hmenu_container">
+               
+               <li><span class="heading">This message</span>: <span class="message_body"><a href="#start">Message body</a></span></li>
+               
+               
+               <li><span class="heading">Next message</span>: <a href="0004.html">Steven Pemberton: "Minutes ixml Call 2021-01-28"</a></li>
+               
+               <li><span class="heading">Previous message</span>: <a href="0002.html">Steven Pemberton: "Minutes ixml call 2020-11-26"</a></li>
+               
+               <li><span class="heading">In reply to</span>: <a href="https://www.w3.org/mid/op.0vr1uyztsmjzpq@steven-xps13">Message archived in another list or period</a></li>
+               
+               
+               </ul>
+            
+            <ul class="links hmenu_container">
+               
+               <li id="options3"><span class="heading">Mail actions</span>: 
+                  <ul class="hmenu">
+                     <li><a href="mailto:public-ixml@w3.org?Subject=Re%3A%20Minutes%20ixml%20call%202020-12-17&amp;In-Reply-To=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E&amp;References=%3C1615993912436.2785946117.3760243167%40cwi.nl%3E">respond to this message</a></li>
+                     
+                     <li><a href="mailto:public-ixml@w3.org">mail a new topic</a></li>
+                  </ul>
+               </li>
+               
+               <li><span class="heading">Contemporary messages sorted</span>: 
+                  <ul class="hmenu">
+                     <li><a href="index.html#msg3">by date</a></li>
+                     
+                     <li><a href="thread.html#msg3">by thread</a></li>
+                     
+                     <li><a href="subject.html#msg3">by subject</a></li>
+                     
+                     <li><a href="author.html#msg3">by author</a></li>
+                     </ul>
+               </li>
+               
+               <li><span class="heading">Help</span>: 
+                  <ul class="hmenu">
+                     
+                     <li><a href="/Help/" rel="help">how to use the archives</a></li>
+                     
+                     <li><a href="https://www.w3.org/Search/Mail/Public/search?type-index=public-ixml&amp;index-type=t">search the archives</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         
+         
+         <p class="colophon">
+            This archive was generated by <a href="https://github.com/hypermail-project/hypermail/">hypermail 3.0.0</a>: Thursday, 13 July 2023 17:33:03 UTC
+            </p>
+         </footer>
+      
+      
+      </body>
+</html>
