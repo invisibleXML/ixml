@@ -1,0 +1,1 @@
+{"stem":"idempot","instances":[{"docUri":"2021\/05\/11-ixml-minutes.xhtml","score":1,"contexts":[{"form":"idempotent","weight":"1","pos":435,"context":"John: A double round trip would be <mark>idempotent<\/mark>","fid":"x101"}]}]}
