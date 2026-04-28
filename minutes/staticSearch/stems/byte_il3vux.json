@@ -1,0 +1,1 @@
+{"stem":"byte","instances":[{"docUri":"2023\/05\/09-ixml-minutes.xhtml","score":1,"contexts":[{"form":"bytes","weight":"1","pos":299,"context":"…with a BOM in Java, the first two <mark>bytes<\/mark> you read are a BOM!","fid":"x043"}]}]}
