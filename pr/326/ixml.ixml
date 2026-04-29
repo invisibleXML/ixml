@@ -1,9 +1,8 @@
-{ Invisible XML specification grammar, 2025-12-01 }
+{ Invisible XML specification grammar, 2026-04-29 }
 { Published in https://invisiblexml.org/pr/326/ }
-{ Commit hash 61ade89b0265 }
+{ Commit hash ca938ecd6297 }
 
          ixml: s, (prolog, RS)?, rule++RS, s.
-
            -s: (whitespace; comment)*. {Optional spacing}
           -RS: (whitespace; comment)+. {Required spacing}
   -whitespace: -[Zs]; tab; lf; cr.
@@ -12,16 +11,13 @@
           -cr: -#d.
       comment: -"{", (cchar; comment)*, -"}".
        -cchar: ~["{}"].
-
        prolog: version.
       version: -"ixml", RS, -"version", RS, string, s, -'.' .
-
          rule: naming, -["=:"], s, -alts, -".".
       -naming: (mark, s)?, name, s, (-">", s, alias, s)?.
         @name: namestart, namefollower*.
    -namestart: ["_"; L].
 -namefollower: namestart; ["-.·‿⁀"; Nd; Mn].
-
        @alias: name.
          alts: alt++(-[";|"], s).
           alt: term**(-",", s).
@@ -57,7 +53,6 @@
                "'", -"'". {all characters except controls; quotes must be doubled}
      -encoded: (tmark, s)?, -"#", hex, s.
          @hex: ["0"-"9"; "a"-"f"; "A"-"F"]+.
-
      -charset: inclusion; 
                exclusion.
     inclusion: (tmark, s)?,          set.
