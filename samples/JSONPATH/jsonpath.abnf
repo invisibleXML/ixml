@@ -1,0 +1,149 @@
+; Retrieved from Appendix A of https://datatracker.ietf.org/doc/rfc9535/
+; Retrieved by Alan Painter in 2025
+
+jsonpath-query      = root-identifier segments
+segments            = *(S segment)
+
+B                   = %x20 /    ; Space
+                      %x09 /    ; Horizontal tab
+                      %x0A /    ; Line feed or New line
+                      %x0D      ; Carriage return
+S                   = *B        ; optional blank space
+root-identifier     = "$"
+selector            = name-selector /
+                      wildcard-selector /
+                      slice-selector /
+                      index-selector /
+                      filter-selector
+name-selector       = string-literal
+
+string-literal      = %x22 *double-quoted %x22 /     ; "string"
+                      %x27 *single-quoted %x27       ; 'string'
+
+double-quoted       = unescaped /
+                      %x27      /                    ; '
+                      ESC %x22  /                    ; \"
+                      ESC escapable
+
+single-quoted       = unescaped /
+                      %x22      /                    ; "
+                      ESC %x27  /                    ; \'
+                      ESC escapable
+
+ESC                 = %x5C                           ; \ backslash
+
+unescaped           = %x20-21 /                      ; see RFC 8259
+                         ; omit 0x22 "
+                      %x23-26 /
+                         ; omit 0x27 '
+                      %x28-5B /
+                         ; omit 0x5C \
+                      %x5D-D7FF /
+                         ; skip surrogate code points
+                      %xE000-10FFFF
+
+escapable           = %x62 / ; b BS backspace U+0008
+                      %x66 / ; f FF form feed U+000C
+                      %x6E / ; n LF line feed U+000A
+                      %x72 / ; r CR carriage return U+000D
+                      %x74 / ; t HT horizontal tab U+0009
+                      "/"  / ; / slash (solidus) U+002F
+                      "\"  / ; \ backslash (reverse solidus) U+005C
+                      (%x75 hexchar) ;  uXXXX U+XXXX
+
+hexchar             = non-surrogate /
+                      (high-surrogate "\" %x75 low-surrogate)
+non-surrogate       = ((DIGIT / "A"/"B"/"C" / "E"/"F") 3HEXDIG) /
+                      ("D" %x30-37 2HEXDIG )
+high-surrogate      = "D" ("8"/"9"/"A"/"B") 2HEXDIG
+low-surrogate       = "D" ("C"/"D"/"E"/"F") 2HEXDIG
+
+HEXDIG              = DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
+wildcard-selector   = "*"
+index-selector      = int                        ; decimal integer
+
+int                 = "0" /
+                      (["-"] DIGIT1 *DIGIT)      ; - optional
+DIGIT1              = %x31-39                    ; 1-9 non-zero digit
+slice-selector      = [start S] ":" S [end S] [":" [S step ]]
+
+start               = int       ; included in selection
+end                 = int       ; not included in selection
+step                = int       ; default: 1
+filter-selector     = "?" S logical-expr
+logical-expr        = logical-or-expr
+logical-or-expr     = logical-and-expr *(S "||" S logical-and-expr)
+                        ; disjunction
+                        ; binds less tightly than conjunction
+logical-and-expr    = basic-expr *(S "&&" S basic-expr)
+                        ; conjunction
+                        ; binds more tightly than disjunction
+
+basic-expr          = paren-expr /
+                      comparison-expr /
+                      test-expr
+
+paren-expr          = [logical-not-op S] "(" S logical-expr S ")"
+                                        ; parenthesized expression
+logical-not-op      = "!"               ; logical NOT operator
+test-expr           = [logical-not-op S]
+                      (filter-query / ; existence/non-existence
+                       function-expr) ; LogicalType or NodesType
+filter-query        = rel-query / jsonpath-query
+rel-query           = current-node-identifier segments
+current-node-identifier = "@"
+comparison-expr     = comparable S comparison-op S comparable
+literal             = number / string-literal /
+                      true / false / null
+comparable          = literal /
+                      singular-query / ; singular query value
+                      function-expr    ; ValueType
+comparison-op       = "==" / "!=" /
+                      "<=" / ">=" /
+                      "<"  / ">"
+
+singular-query      = rel-singular-query / abs-singular-query
+rel-singular-query  = current-node-identifier singular-query-segments
+abs-singular-query  = root-identifier singular-query-segments
+singular-query-segments = *(S (name-segment / index-segment))
+name-segment        = ("[" name-selector "]") /
+                      ("." member-name-shorthand)
+index-segment       = "[" index-selector "]"
+number              = (int / "-0") [ frac ] [ exp ] ; decimal number
+frac                = "." 1*DIGIT                  ; decimal fraction
+exp                 = "e" [ "-" / "+" ] 1*DIGIT    ; decimal exponent
+true                = %x74.72.75.65                ; true
+false               = %x66.61.6c.73.65             ; false
+null                = %x6e.75.6c.6c                ; null
+function-name       = function-name-first *function-name-char
+function-name-first = LCALPHA
+function-name-char  = function-name-first / "_" / DIGIT
+LCALPHA             = %x61-7A  ; "a".."z"
+
+function-expr       = function-name "(" S [function-argument
+                         *(S "," S function-argument)] S ")"
+function-argument   = literal /
+                      filter-query / ; (includes singular-query)
+                      logical-expr /
+                      function-expr
+segment             = child-segment / descendant-segment
+child-segment       = bracketed-selection /
+                      ("."
+                       (wildcard-selector /
+                        member-name-shorthand))
+
+bracketed-selection = "[" S selector *(S "," S selector) S "]"
+
+member-name-shorthand = name-first *name-char
+name-first          = ALPHA /
+                      "_"   /
+                      %x80-D7FF /
+                         ; skip surrogate code points
+                      %xE000-10FFFF
+name-char           = name-first / DIGIT
+
+DIGIT               = %x30-39              ; 0-9
+ALPHA               = %x41-5A / %x61-7A    ; A-Z / a-z
+descendant-segment  = ".." (bracketed-selection /
+                            wildcard-selector /
+                            member-name-shorthand)
